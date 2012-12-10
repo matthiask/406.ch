@@ -1,0 +1,16 @@
+*.pyc
+*~
+.*.swp
+\#*#
+/secrets.py
+.DS_Store
+._*
+data.db
+/MANIFEST
+/dist
+/static
+/uploads
+/docs/_build
+/venv
+/reports
+.sass-cache
