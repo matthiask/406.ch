@@ -86,6 +86,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'mkweb',
+    'south',
+    'blog',
 )
 
 # A sample logging configuration. The only tangible logging
