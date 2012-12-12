@@ -2,7 +2,11 @@
 
 {% block content %}
 {% for post in object_list %}
-  <h2><a href="{{ post.get_absolute_url }}">
-    {{ post.title }}</a></h2>
+  {% ifchanged post.published_on.date %}
+    {% if not forloop.first %}<hr>{% endif %}
+    {{ post.published_on.date|date:"d.m.Y" }}
+  {% endifchanged %}
+  <h3><a href="{{ post.get_absolute_url }}">
+    {{ post.title }}</a></h3>
 {% endfor %}
 {% endblock %}

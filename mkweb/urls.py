@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'^mkweb/', include('mkweb.foo.urls')),
 
     url(r'^$', generic.TemplateView.as_view(
-        template_name='base.html',
+        template_name='home.html',
         )),
 
     url(r'^blog/', include('blog.urls')),
