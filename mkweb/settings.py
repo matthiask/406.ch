@@ -2,7 +2,6 @@
 
 import os, sys
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = any(r in sys.argv for r in ('runserver', 'shell', 'dbshell', 'test'))
 TEMPLATE_DEBUG = DEBUG
@@ -55,6 +54,10 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
 )
 
 MIDDLEWARE_CLASSES = (
