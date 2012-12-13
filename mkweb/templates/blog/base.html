@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block sidebar %}
+<h4>{% trans "Categories" %}</h4>
+<ul>
+  {% for category in blog.categories %}
+    <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+  {% endfor %}
+</ul>
+
+<h4>{% trans "Archive" %}</h4>
+<ul>
+  {% for month, count, url in blog.posts_by_month %}
+    <li><a href="{{ url }}">
+      {{ month|date:"F Y" }} ({{ count }})</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

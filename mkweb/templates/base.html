@@ -94,21 +94,7 @@
     </div>
 
     <div class="four columns">
-      <h4>{% trans "Categories" %}</h4>
-      <ul>
-        {% for category in blog.categories %}
-          <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
-        {% endfor %}
-      </ul>
-
-      <h4>{% trans "Archive" %}</h4>
-      <ul>
-        {% for month, count, url in blog.posts_by_month %}
-          <li><a href="{{ url }}">
-            {{ month|date:"F Y" }} ({{ count }})</a></li>
-        {% endfor %}
-      </ul>
-
+      {% block sidebar %}
       <h4>Getting Started</h4>
       <p>We're stoked you want to try Foundation! To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
 
@@ -119,6 +105,7 @@
         <li><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</li>
         <li><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</li>
       </ul>
+      {% endblock %}
     </div>
   </div>
 
