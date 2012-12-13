@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% load i18n %}
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if IE 8]> <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
@@ -94,6 +94,21 @@
     </div>
 
     <div class="four columns">
+      <h4>{% trans "Categories" %}</h4>
+      <ul>
+        {% for category in blog.categories %}
+          <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <h4>{% trans "Archive" %}</h4>
+      <ul>
+        {% for month, count, url in blog.posts_by_month %}
+          <li><a href="{{ url }}">
+            {{ month|date:"F Y" }} ({{ count }})</a></li>
+        {% endfor %}
+      </ul>
+
       <h4>Getting Started</h4>
       <p>We're stoked you want to try Foundation! To get going, this file (index.html) includes some basic styles you can modify, play around with, or totally destroy to get going.</p>
 
