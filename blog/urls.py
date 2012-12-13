@@ -7,4 +7,6 @@ urlpatterns = patterns('',
     url(r'^$', views.ArchiveIndexView.as_view(), name='blog_post_archive'),
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[^/]+)/$',
         views.DateDetailView.as_view(), name='blog_post_detail'),
+    url(r'^category/(?P<slug>[^/]+)/$',
+        views.CategoryArchiveIndexView.as_view(), name='blog_category_detail'),
 )
