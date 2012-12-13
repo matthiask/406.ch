@@ -26,6 +26,9 @@ admin.site.register(models.Post,
     list_display=('title', 'published_on', 'author'),
     list_filter=(
         ('published_on', PublishedOnListFilter),
-        'author'),
+        'author',
+        'categories',
+        ),
     prepopulated_fields={'slug': ('title',)},
+    search_fields=('title', 'content', 'author')
     )
