@@ -1,12 +1,22 @@
 {% extends "blog/base.html" %}
 
+{% load i18n %}
+
 {% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
   <h3>{{ post.title }}</h3>
-  <p><small>
-    {{ post.author }}
-    | {{ post.published_on|date:"d.m.Y" }}
-  </small></p>
   {{ post.html|safe }}
+
+  <p class="author">
+    {% blocktrans with author=post.author published_on=post.published_on|date:"d.m.Y" %}
+      Published by {{ author }} on {{ published_on }}.{% endblocktrans %}
+    | {% for category in post.categories.all %}
+      <a href="{{ category.get_absolute_url }}">{{ category }}</a>{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    {% if user.is_staff %}
+      | <a href="{% url admin:blog_post_change post.pk %}" target="_blank">edit</a>
+    {% endif %}
+  </p>
+
 {% endblock %}
