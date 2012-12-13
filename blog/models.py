@@ -46,7 +46,7 @@ class Post(models.Model):
     slug = models.SlugField(_('slug'), max_length=200)
     content = models.TextField(_('content'), blank=True)
     content_type = models.CharField(_('content type'), max_length=20,
-        choices=CONTENT_TYPE_CHOICES)
+        choices=CONTENT_TYPE_CHOICES, default=CONTENT_TYPE_CHOICES[0][0])
     html = models.TextField(_('HTML'), editable=False)
     author = models.CharField(_('author'), max_length=200, blank=True)
     categories = models.ManyToManyField(Category, related_name='posts',
