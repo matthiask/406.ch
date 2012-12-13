@@ -9,4 +9,17 @@
   <h3><a href="{{ post.get_absolute_url }}">
     {{ post.title }}</a></h3>
 {% endfor %}
+
+{% if page_obj.has_other_pages %}
+  <ul class="pagination">
+    <li class="arrow {% if not page_obj.has_previous %}unavailable{% endif %}">
+      <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% for p in paginator.page_range %}
+      <li {% if p == page_obj.number %}class="current"{% endif %}>
+        <a href="?page={{ p }}">{{ p }}</a></li>
+    {% endfor %}
+    <li class="arrow {% if not page_obj.has_next %}unavailable{% endif %}">
+      <a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+  </ul>
+{% endif %}
 {% endblock %}
