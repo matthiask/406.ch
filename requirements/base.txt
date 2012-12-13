@@ -1,4 +1,4 @@
 Django==1.4.3
 South==0.7.6
-lxml
-markdown2
+lxml==3.0.1
+markdown2==2.1.0
