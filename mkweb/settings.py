@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mkweb.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'data.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -26,7 +26,6 @@ DATABASES = {
 
 TIME_ZONE = 'Europe/Zurich'
 LANGUAGE_CODE = 'de-ch'
-SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -81,7 +80,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
