@@ -133,6 +133,6 @@ LOGGING = {
 }
 
 try:
-    execfile('mkweb.local_settings')
-except:
+    from mkweb.local_settings import *
+except ImportError:
     pass

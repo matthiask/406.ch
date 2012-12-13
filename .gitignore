@@ -14,3 +14,4 @@ data.db
 /venv
 /reports
 .sass-cache
+/mkweb/local_settings.py
