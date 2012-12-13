@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     url(r'^$', generic.TemplateView.as_view(
         template_name='home.html',
         )),
+    url(r'^404/$', generic.TemplateView.as_view(
+        template_name='404.html',
+        )),
 
     url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
