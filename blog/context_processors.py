@@ -17,7 +17,7 @@ class ContextObject(object):
         months = defaultdict(int)
         for date in Post.objects.published().values_list(
                 'published_on', flat=True):
-            months[date.date()] += 1
+            months[date.date().replace(day=1)] += 1
 
         for date, count in sorted(months.items(), reverse=True):
             yield (
@@ -26,7 +26,7 @@ class ContextObject(object):
                 reverse('blog_post_archive_month', kwargs={
                     'year': date.strftime('%Y'),
                     'month': date.strftime('%m'),
-                    })
+                    }),
                 )
 
 
