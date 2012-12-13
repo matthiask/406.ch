@@ -131,3 +131,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    execfile('mkweb.local_settings')
+except:
+    pass
