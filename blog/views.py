@@ -7,6 +7,7 @@ from .models import Category, Post
 class PostMixin(object):
     allow_empty = True
     date_field = 'published_on'
+    make_object_list = True
     month_format = '%m'
     paginate_by = 10
     paginate_orphans = 1
@@ -17,6 +18,18 @@ class PostMixin(object):
 
 class ArchiveIndexView(PostMixin, generic.ArchiveIndexView):
     pass
+
+
+class YearArchiveView(PostMixin, generic.YearArchiveView):
+    template_name_suffix = '_archive'
+
+
+class MonthArchiveView(PostMixin, generic.MonthArchiveView):
+    template_name_suffix = '_archive'
+
+
+class DayArchiveView(PostMixin, generic.DayArchiveView):
+    template_name_suffix = '_archive'
 
 
 class DateDetailView(PostMixin, generic.DateDetailView):
