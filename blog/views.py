@@ -9,7 +9,7 @@ class PostMixin(object):
     date_field = 'published_on'
     make_object_list = True
     month_format = '%m'
-    paginate_by = 10
+    paginate_by = 25
     paginate_orphans = 1
 
     def get_queryset(self):
