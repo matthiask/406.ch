@@ -15,6 +15,6 @@ def deploy():
         run('venv/bin/python manage.py migrate')
         run('venv/bin/python manage.py syncdb')
         with cd('mkweb/static/406'):
-            run('compass compile')
+            run('GEM_HOME=/home/mk/_gems/ /home/mk/_gems/bin/compass compile')
         run('venv/bin/python manage.py collectstatic --noinput')
         run('sudo supervisorctl restart mk_406')
