@@ -36,6 +36,7 @@ class PostManager(models.Manager):
 class Post(models.Model):
     CONTENT_TYPE_CHOICES = (
         ('markdown', _('Markdown')),
+        ('html', _('HTML')),
         )
 
     created_on = models.DateTimeField(_('created on'), default=timezone.now)
