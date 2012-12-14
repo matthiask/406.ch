@@ -12,14 +12,21 @@
 
 {% if page_obj.has_other_pages %}
   <ul class="pagination">
-    <li class="arrow {% if not page_obj.has_previous %}unavailable{% endif %}">
-      <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% if page_obj.has_previous %}
+      <li class="arrow"><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="arrow unavailable"><a>&laquo;</a></li>
+    {% endif %}
     {% for p in paginator.page_range %}
-      <li {% if p == page_obj.number %}class="current"{% endif %}>
-        <a href="?page={{ p }}">{{ p }}</a></li>
+      {% if p == page_obj.number %}<li class="current"><a>{{ p }}</a></li>
+      {% else %}<li><a href="?page={{ p }}">{{ p }}</a></li>
+      {% endif %}
     {% endfor %}
-    <li class="arrow {% if not page_obj.has_next %}unavailable{% endif %}">
-      <a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% if page_obj.has_next %}
+      <li class="arrow"><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="arrow unavailable"><a>&raquo;</a></li>
+    {% endif %}
   </ul>
 {% endif %}
 {% endblock %}
