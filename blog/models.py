@@ -2,6 +2,7 @@ from markdown2 import markdown
 
 from django.db import models
 from django.db.models import signals
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -74,11 +75,9 @@ class Post(models.Model):
             })
 
 
+@receiver(signals.pre_save, sender=Post)
 def render_html(instance, **kwargs):
     if instance.content_type == 'markdown':
         instance.html = markdown(instance.content)
     else:
         instance.html = instance.content
-
-
-signals.pre_save.connect(render_html, sender=Post)
