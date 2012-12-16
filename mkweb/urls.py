@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', generic.RedirectView.as_view(
-        url='/blog/',
+        url='/writing/',
         )),
     url(r'^home/$', generic.TemplateView.as_view(
         template_name='home.html',
@@ -17,9 +17,12 @@ urlpatterns = patterns('',
         template_name='404.html',
         )),
     url(r'^(?P<url>\d{4}/.*)$', generic.RedirectView.as_view(
-        url='/blog/%(url)s',
+        url='/writing/%(url)s',
+        )),
+    url(r'^blog/(?P<url>.*)$', generic.RedirectView.as_view(
+        url='/writing/%(url)s',
         )),
 
-    url(r'^blog/', include('blog.urls')),
+    url(r'^writing/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

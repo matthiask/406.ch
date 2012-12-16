@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
 from .models import Category, Post
@@ -32,10 +32,6 @@ class DayArchiveView(PostMixin, generic.DayArchiveView):
     template_name_suffix = '_archive'
 
 
-class DateDetailView(PostMixin, generic.DateDetailView):
-    pass
-
-
 class CategoryArchiveIndexView(ArchiveIndexView):
     template_name_suffix = '_archive'
 
@@ -48,3 +44,14 @@ class CategoryArchiveIndexView(ArchiveIndexView):
         return super(CategoryArchiveIndexView, self).get_context_data(
             category=self.category,
             **kwargs)
+
+
+def post_detail_redirect(request, year, month, day, slug):
+    return redirect(get_object_or_404(Post.objects.published(), slug=slug))
+
+
+def post_detail(request, slug):
+    instance = get_object_or_404(Post.objects.published(), slug=slug)
+    return render(request, 'blog/post_detail.html', {
+        'post': instance,
+        })
