@@ -45,7 +45,8 @@ class Post(models.Model):
         null=True)
 
     title = models.CharField(_('title'), max_length=200)
-    slug = models.SlugField(_('slug'), max_length=200)
+    slug = models.SlugField(_('slug'), max_length=200,
+        unique=True)
     content = models.TextField(_('content'), blank=True)
     content_type = models.CharField(_('content type'), max_length=20,
         choices=CONTENT_TYPE_CHOICES, default=CONTENT_TYPE_CHOICES[0][0])
