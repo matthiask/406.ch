@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 from django.core.urlresolvers import reverse
-from django.db.models import Sum
+from django.db.models import Count, Sum
 
 from .models import Category, Post
 
@@ -12,6 +12,23 @@ class ContextObject(object):
 
     def categories(self):
         return Category.objects.all()
+
+    def posts_by_category(self):
+        items = Post.categories.through.objects.filter(
+            post__in=Post.objects.published(),
+            ).values(
+            'category__title',
+            'category__slug',
+            ).annotate(Count('post')).order_by('category__title')
+
+        for row in items:
+            yield (
+                row['category__title'],
+                row['post__count'],
+                reverse('blog_category_detail', kwargs={
+                    'slug': row['category__slug'],
+                    }),
+                )
 
     def posts_by_month(self):
         months = defaultdict(int)
