@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', generic.RedirectView.as_view(
         url='/writing/',
+        permanent=False,
         )),
     url(r'^home/$', generic.TemplateView.as_view(
         template_name='home.html',
