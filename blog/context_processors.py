@@ -46,6 +46,9 @@ class ContextObject(object):
                     }),
                 )
 
+    def feed_url(self):
+        return self.request.build_absolute_uri(reverse('blog_post_feed'))
+
 
 def blog(request):
     return {'blog': ContextObject(request)}

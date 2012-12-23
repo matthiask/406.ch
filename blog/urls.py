@@ -1,9 +1,11 @@
 from django.conf.urls import patterns, include, url
 
-from . import views
+from . import feeds, views
 
 
 urlpatterns = patterns('',
+    url(r'^feed/$', feeds.PostFeed(), name='blog_post_feed'),
+
     url(r'^$', views.ArchiveIndexView.as_view(), name='blog_post_archive'),
     url(r'^(?P<year>\d{4})/$',
         views.YearArchiveView.as_view(), name='blog_post_archive_year'),
