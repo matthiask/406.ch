@@ -41,18 +41,20 @@ class Post(models.Model):
         )
 
     created_on = models.DateTimeField(_('created on'), default=timezone.now)
-    published_on = models.DateTimeField(_('published on'), blank=True,
-        null=True)
+    published_on = models.DateTimeField(
+        _('published on'), blank=True, null=True)
 
     title = models.CharField(_('title'), max_length=200)
-    slug = models.SlugField(_('slug'), max_length=200,
-        unique=True)
+    slug = models.SlugField(
+        _('slug'), max_length=200, unique=True)
     content = models.TextField(_('content'), blank=True)
-    content_type = models.CharField(_('content type'), max_length=20,
+    content_type = models.CharField(
+        _('content type'), max_length=20,
         choices=CONTENT_TYPE_CHOICES, default=CONTENT_TYPE_CHOICES[0][0])
     html = models.TextField(_('HTML'), editable=False)
     author = models.CharField(_('author'), max_length=200, blank=True)
-    categories = models.ManyToManyField(Category, related_name='posts',
+    categories = models.ManyToManyField(
+        Category, related_name='posts',
         verbose_name=_('categories'), blank=True)
 
     objects = PostManager()
@@ -70,7 +72,7 @@ class Post(models.Model):
     def get_absolute_url(self):
         return ('blog_post_detail', (), {
             'slug': self.slug,
-            })
+        })
 
 
 @receiver(signals.pre_save, sender=Post)

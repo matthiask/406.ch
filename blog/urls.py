@@ -1,9 +1,10 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
 from . import feeds, views
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^feed/$', feeds.PostFeed(), name='blog_post_feed'),
 
     url(r'^$', views.ArchiveIndexView.as_view(), name='blog_post_archive'),

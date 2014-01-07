@@ -1,6 +1,4 @@
-Django==1.4.3
-South==0.7.6
-django_compressor==1.2
-BeautifulSoup
-lxml==3.0.1
-markdown2==2.1.0
+Django==1.6.1
+South==0.8.4
+django_compressor==dev
+markdown2==2.2.0

@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 from django.core.urlresolvers import reverse
-from django.db.models import Count, Sum
+from django.db.models import Count
 
 from .models import Category, Post
 
@@ -16,10 +16,10 @@ class ContextObject(object):
     def posts_by_category(self):
         items = Post.categories.through.objects.filter(
             post__in=Post.objects.published(),
-            ).values(
+        ).values(
             'category__title',
             'category__slug',
-            ).annotate(Count('post')).order_by('category__title')
+        ).annotate(Count('post')).order_by('category__title')
 
         for row in items:
             yield (
@@ -27,8 +27,8 @@ class ContextObject(object):
                 row['post__count'],
                 reverse('blog_category_detail', kwargs={
                     'slug': row['category__slug'],
-                    }),
-                )
+                }),
+            )
 
     def posts_by_month(self):
         months = defaultdict(int)
@@ -43,8 +43,8 @@ class ContextObject(object):
                 reverse('blog_post_archive_month', kwargs={
                     'year': date.strftime('%Y'),
                     'month': date.strftime('%m'),
-                    }),
-                )
+                }),
+            )
 
     def feed_url(self):
         return self.request.build_absolute_uri(reverse('blog_post_feed'))

@@ -8,7 +8,8 @@ from blog.sitemaps import PostSitemap
 admin.autodiscover()
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', generic.RedirectView.as_view(
         url='/writing/',
         permanent=False,
