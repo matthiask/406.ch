@@ -17,10 +17,10 @@
   {% compress css %}
   {% block css %}
     <link rel="stylesheet" href="{% static 'mkweb/stylesheets/app.css' %}">
-    <link rel="stylesheet" href="{% static 'mkweb/lightbox/css/lightbox.css' %}">
+    {#<!-- <link rel="stylesheet" href="{% static 'mkweb/lightbox/css/lightbox.css' %}"> -->#}
   {% endblock %}
   {% endcompress %}
-  {# <link rel="shortcut icon" href="{% static 'mkweb/images/favicon.ico' %}"> #}
+  {#<!-- <link rel="shortcut icon" href="{% static 'mkweb/images/favicon.ico' %}"> -->#}
   <script src="{% static 'mkweb/javascripts/vendor/custom.modernizr.js' %}"></script>
   <script>onReady = [];</script>
 
