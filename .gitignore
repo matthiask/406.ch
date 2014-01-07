@@ -16,4 +16,4 @@ data.db
 /reports
 .sass-cache
 /mkweb/local_settings.py
-/mkweb/static/406/stylesheets/
+/mkweb/static/mkweb/stylesheets/
