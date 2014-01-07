@@ -2,3 +2,4 @@ Django==1.6.1
 South==0.8.4
 django_compressor==dev
 markdown2==2.2.0
+pytz==2013.9
