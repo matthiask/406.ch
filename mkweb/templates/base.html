@@ -74,9 +74,10 @@
   </div>
   {% endblock %}
 
+  {% comment %}<!--
+
   {% compress js %}
   {% block js %}
-    <!--
     <script src="{% static 'naturnetz/javascripts/vendor/jquery.js' %}"></script>
     <script src="{% static 'naturnetz/javascripts/foundation/foundation.js' %}"></script>
     <script src="{% static 'naturnetz/javascripts/foundation/foundation.abide.js' %}"></script>
@@ -95,7 +96,6 @@
     <script src="{% static 'naturnetz/javascripts/foundation/foundation.joyride.js' %}"></script>
     <script src="{% static 'naturnetz/javascripts/foundation/foundation.placeholder.js' %}"></script>
     <script src="{% static 'naturnetz/lightbox/js/lightbox-2.6.min.js' %}"></script>
-    -->
   {% endblock %}
   {% endcompress %}
   {% block inline-js %}
@@ -116,6 +116,7 @@
     </div>
   {% endif %}
 
+  -->{% endcomment %}
 
 </body>
 </html>
