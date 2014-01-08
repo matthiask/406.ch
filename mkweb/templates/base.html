@@ -37,14 +37,6 @@
         <section class="top-bar-section">
           <ul>
             <li><a href="{% url 'blog_post_archive' %}">Writing</a></li>
-            <li><a href="https://twitter.com/unsocialrider/" target="_blank">
-              Twitter</a></li>
-            <li><a href="https://www.facebook.com/matthias.kestenholz" target="_blank">
-              Facebook</a></li>
-            <li><a href="https://github.com/matthiask/" target="_blank">
-              Github</a></li>
-            <li><a href="https://people.djangoproject.com/matthiask/" target="_blank">
-              Django People</a></li>
           </ul>
         </section>
       </nav>
@@ -65,10 +57,23 @@
     <div class="large-12 columns">
       <hr>
       <p class="author">
-        © 2005-{% now "Y" %} Matthias Kestenholz.
-        <a rel="license" target="_blank"
-            href="http://creativecommons.org/licenses/by/3.0/ch/deed.en_US">
-          Some rights reserved.</a>
+
+        <ul class="inline-list">
+          <li>© 2005-{% now "Y" %} Matthias Kestenholz.</li>
+          <li>
+            <a rel="license" target="_blank"
+                href="http://creativecommons.org/licenses/by/3.0/ch/deed.en_US">
+              Some rights reserved.</a>
+          </li>
+          <li><a href="https://twitter.com/unsocialrider/" target="_blank">
+            Twitter</a></li>
+          <li><a href="https://www.facebook.com/matthias.kestenholz" target="_blank">
+            Facebook</a></li>
+          <li><a href="https://github.com/matthiask/" target="_blank">
+            Github</a></li>
+          <li><a href="https://people.djangoproject.com/matthiask/" target="_blank">
+            Django People</a></li>
+        </ul>
       </p>
     </div>
   </div>
