@@ -1,5 +1,6 @@
 from markdown2 import markdown
 
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import signals
 from django.dispatch import receiver
@@ -19,11 +20,10 @@ class Category(models.Model):
     def __unicode__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('blog_category_detail', (), {
+        return reverse('blog_category_detail', kwargs={
             'slug': self.slug,
-            })
+        })
 
 
 class PostManager(models.Manager):
@@ -31,14 +31,14 @@ class PostManager(models.Manager):
         return self.filter(
             published_on__isnull=False,
             published_on__lte=timezone.now,
-            )
+        )
 
 
 class Post(models.Model):
     CONTENT_TYPE_CHOICES = (
         ('markdown', _('Markdown')),
         ('html', _('HTML')),
-        )
+    )
 
     created_on = models.DateTimeField(_('created on'), default=timezone.now)
     published_on = models.DateTimeField(
@@ -68,9 +68,8 @@ class Post(models.Model):
     def __unicode__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('blog_post_detail', (), {
+        return reverse('blog_post_detail', kwargs={
             'slug': self.slug,
         })
 
