@@ -10,7 +10,7 @@ class PostMixin(object):
     make_object_list = True
     month_format = '%m'
     paginate_by = 25
-    paginate_orphans = 1
+    paginate_orphans = 10
 
     def get_queryset(self):
         return Post.objects.published()
@@ -54,4 +54,4 @@ def post_detail(request, slug):
     instance = get_object_or_404(Post.objects.published(), slug=slug)
     return render(request, 'blog/post_detail.html', {
         'post': instance,
-        })
+    })
