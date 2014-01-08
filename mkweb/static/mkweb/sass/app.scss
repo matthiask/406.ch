@@ -65,3 +65,8 @@ $h1-font-size: $h2-font-size * $f;
 // @import "foundation/components/thumbs";
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
+
+
+h1 a {
+    color: $body-font-color;
+}
