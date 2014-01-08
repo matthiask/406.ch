@@ -4,14 +4,14 @@
 
 {% block sidebar %}
 <h4>{% trans "Categories" %}</h4>
-<ul class="disc">
+<ul class="side-nav">
   {% for title, count, url in blog.posts_by_category %}
     <li><a href="{{ url }}">{{ title }} ({{ count }})</a></li>
   {% endfor %}
 </ul>
 
 <h4>{% trans "Archive" %}</h4>
-<ul class="disc">
+<ul class="side-nav">
   {% for month, count, url in blog.posts_by_month %}
     <li><a href="{{ url }}">
       {{ month|date:"F Y" }} ({{ count }})</a></li>
