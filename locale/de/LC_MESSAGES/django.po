@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-13 15:46+0100\n"
+"POT-Creation-Date: 2014-01-08 18:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,55 +22,59 @@ msgstr ""
 msgid "Not published"
 msgstr "Nicht veröffentlicht"
 
-#: blog/models.py:10 blog/models.py:45
+#: blog/feeds.py:11
+msgid "406 NOT ACCEPTABLE"
+msgstr ""
+
+#: blog/models.py:12 blog/models.py:47
 msgid "title"
 msgstr "Titel"
 
-#: blog/models.py:11 blog/models.py:46
+#: blog/models.py:13 blog/models.py:49
 msgid "slug"
 msgstr "Slug"
 
-#: blog/models.py:15
+#: blog/models.py:17
 msgid "category"
 msgstr "Kategorie"
 
-#: blog/models.py:16 blog/models.py:53
+#: blog/models.py:18 blog/models.py:58
 msgid "categories"
 msgstr "Kategorien"
 
-#: blog/models.py:38
+#: blog/models.py:39
 msgid "Markdown"
 msgstr "Markdown"
 
-#: blog/models.py:41
-msgid "created on"
-msgstr "Erstellt"
-
-#: blog/models.py:42
-msgid "published on"
-msgstr "Veröffentlicht"
-
-#: blog/models.py:47
-msgid "content"
-msgstr "Inhalt"
-
-#: blog/models.py:48
-msgid "content type"
-msgstr "Inhaltstyp"
-
-#: blog/models.py:50
+#: blog/models.py:40 blog/models.py:54
 msgid "HTML"
 msgstr "HTML"
 
-#: blog/models.py:51
+#: blog/models.py:43
+msgid "created on"
+msgstr "Erstellt"
+
+#: blog/models.py:45
+msgid "published on"
+msgstr "Veröffentlicht"
+
+#: blog/models.py:50
+msgid "content"
+msgstr "Inhalt"
+
+#: blog/models.py:52
+msgid "content type"
+msgstr "Inhaltstyp"
+
+#: blog/models.py:55
 msgid "author"
 msgstr "Autor"
 
-#: blog/models.py:60
+#: blog/models.py:65
 msgid "post"
 msgstr "Beitrag"
 
-#: blog/models.py:61
+#: blog/models.py:66
 msgid "posts"
 msgstr "Beiträge"
 
@@ -82,10 +86,11 @@ msgstr "Kategorien"
 msgid "Archive"
 msgstr "Archiv"
 
-#: mkweb/templates/blog/post_detail.html:12
+#: mkweb/templates/blog/post_detail.html:14
 #, python-format
 msgid ""
 "\n"
-"      Published by %(author)s on %(published_on)s."
+"        Published on %(published_on)s"
 msgstr ""
-"\nVon %(author)s am %(published_on)s veröffentlicht."
+"\n"
+"Veröffentlicht am %(published_on)s"

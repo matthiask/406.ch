@@ -9,10 +9,10 @@
   <h2>{{ post.title }}</h2>
   {{ post.html|safe }}
 
-  <p class="author">
+  <p>
     <small>
       {% blocktrans with author=post.author published_on=post.published_on|date:"d.m.Y" %}
-        Published by {{ author }} on {{ published_on }}{% endblocktrans %}
+        Published on {{ published_on }}{% endblocktrans %}
       | {% for category in post.categories.all %}
         <a href="{{ category.get_absolute_url }}">{{ category }}</a>{% if not forloop.last %},{% endif %}
       {% endfor %}
