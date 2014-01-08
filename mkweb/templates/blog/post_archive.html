@@ -8,8 +8,8 @@
       <small>{{ post.published_on.date|date:"F Y" }}</small>
     </p>
   {% endifchanged %}
-  <h3><a href="{{ post.get_absolute_url }}">
-    {{ post.title }}</a></h3>
+  <h2><a href="{{ post.get_absolute_url }}">
+    {{ post.title }}</a></h2>
 {% endfor %}
 
 {% if page_obj.has_other_pages %}

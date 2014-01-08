@@ -7,6 +7,14 @@
 
 $small-font-size: 80%;
 
+$f: 1.2;
+$h6-font-size: 1em;
+$h5-font-size: $h6-font-size * $f;
+$h4-font-size: $h5-font-size * $f;
+$h3-font-size: $h4-font-size * $f;
+$h2-font-size: $h3-font-size * $f;
+$h1-font-size: $h2-font-size * $f;
+
 
 // Comment out this import if you are customizing you imports below
 // @import "foundation";
