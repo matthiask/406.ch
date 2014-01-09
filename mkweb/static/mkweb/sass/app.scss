@@ -33,7 +33,7 @@ $h1-font-size: $h2-font-size * $f;
 //
 
 // @import "foundation/components/visibility";
-// @import "foundation/components/block-grid";
+@import "foundation/components/block-grid";
 @import "foundation/components/type";
 // @import "foundation/components/buttons";
 // @import "foundation/components/forms"; // *requires components/buttons
@@ -47,7 +47,7 @@ $h1-font-size: $h2-font-size * $f;
 // @import "foundation/components/orbit";
 // @import "foundation/components/reveal";
 // @import "foundation/components/joyride";
-// @import "foundation/components/clearing";
+@import "foundation/components/clearing";
 // @import "foundation/components/alert-boxes";
 // @import "foundation/components/breadcrumbs";
 // @import "foundation/components/keystrokes";
@@ -67,6 +67,21 @@ $h1-font-size: $h2-font-size * $f;
 // @import "foundation/components/dropdown";
 
 
+@import "compass/css3/transition";
+
+
 h1 a {
     color: $body-font-color;
+}
+
+.clearing-assembled,
+.clearing-assembled .carousel,
+.clearing-assembled .visible-img {
+    @include transition(background 0.2s ease);
+}
+
+.clearing-blackout.light,
+.clearing-blackout.light .carousel,
+.clearing-blackout.light .visible-img {
+    background-color: #eee;
 }
