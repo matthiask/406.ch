@@ -90,6 +90,7 @@ INSTALLED_APPS = (
     'blog',
     'chet',
     'compressor',
+    'easy_thumbnails',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
