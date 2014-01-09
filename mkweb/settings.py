@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'mkweb',
     'south',
     'blog',
+    'chet',
     'compressor',
 )
 

@@ -1,0 +1,33 @@
+{% extends "chet/base.html" %}
+
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+  <h2>{{ album.title }}</h2>
+  {{ post.html|safe }}
+
+  <ul class="large-block-grid-4">
+    {% for photo in photos %}
+      <li>
+        <img src="{{ photo.file.url }}" alt="">
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p>
+    <small>
+      {% blocktrans with author=post.author published_on=post.published_on|date:"d.m.Y" %}
+        Published on {{ published_on }}{% endblocktrans %}
+      | {% for category in post.categories.all %}
+        <a href="{{ category.get_absolute_url }}">{{ category }}</a>{% if not forloop.last %},{% endif %}
+      {% endfor %}
+      {% if user.is_staff %}
+        | <a href="{% url 'admin:blog_post_change' post.pk as bla %}" target="_blank">edit</a>
+      {% endif %}
+    </small>
+  </p>
+
+{% endblock %}

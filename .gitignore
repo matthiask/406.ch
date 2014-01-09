@@ -17,3 +17,4 @@ data.db
 .sass-cache
 /mkweb/local_settings.py
 /mkweb/static/mkweb/stylesheets/
+/media
