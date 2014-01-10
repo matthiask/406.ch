@@ -123,7 +123,12 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+        },
     },
     'loggers': {
         'django.request': {
@@ -133,6 +138,13 @@ LOGGING = {
         },
     }
 }
+
+if DEBUG:
+    LOGGING['loggers'][''] = {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+        'propagate': False,
+    }
 
 try:
     from mkweb.local_settings import *  # noqa
