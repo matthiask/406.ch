@@ -18,20 +18,27 @@ class PublishedOnListFilter(admin.DateFieldListFilter):
         }
 
 
-admin.site.register(
-    models.Category,
-    prepopulated_fields={'slug': ('title',)},
-)
-admin.site.register(
-    models.Post,
-    date_hierarchy='published_on',
-    filter_horizontal=('categories',),
-    list_display=('title', 'published_on', 'author'),
-    list_filter=(
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'posts')
+    prepopulated_fields = {'slug': ('title',)}
+
+    def posts(self, instance):
+        return instance.posts.count()
+    posts.short_description = _('posts')
+
+
+class PostAdmin(admin.ModelAdmin):
+    date_hierarchy = 'published_on'
+    filter_horizontal = ('categories',)
+    list_display = ('title', 'published_on', 'author')
+    list_filter = (
         ('published_on', PublishedOnListFilter),
         'author',
         'categories',
-    ),
-    prepopulated_fields={'slug': ('title',)},
-    search_fields=('title', 'content', 'author')
-)
+    )
+    prepopulated_fields = {'slug': ('title',)}
+    search_fields = ('title', 'content', 'author')
+
+
+admin.site.register(models.Category, CategoryAdmin)
+admin.site.register(models.Post, PostAdmin)
