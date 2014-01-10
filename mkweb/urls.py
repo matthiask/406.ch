@@ -32,7 +32,7 @@ urlpatterns = patterns(
 
     url(r'^writing/', include('blog.urls')),
     url(r'^photos/', include('chet.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^manage/', include(admin.site.urls)),
 
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {
         'sitemaps': {
