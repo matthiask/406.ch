@@ -28,10 +28,11 @@ class Category(models.Model):
 
 class PostManager(models.Manager):
     def search(self, query):
-        return self.filter(
-            Q(title__icontains=query)
-            | Q(content__icontains=query)
-        )
+        q = Q()
+        for term in query.split():
+            q &= Q(title__icontains=term) | Q(content__icontains=term)
+
+        return self.filter(q)
 
     def published(self):
         return self.filter(
