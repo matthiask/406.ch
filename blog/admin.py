@@ -25,6 +25,7 @@ admin.site.register(
 admin.site.register(
     models.Post,
     date_hierarchy='published_on',
+    filter_horizontal=('categories',),
     list_display=('title', 'published_on', 'author'),
     list_filter=(
         ('published_on', PublishedOnListFilter),
