@@ -3,6 +3,11 @@
 {% load i18n %}
 
 {% block sidebar %}
+<form method="get" action="{% url 'blog_post_archive' %}" class="search">
+  <input type="text" name="q" placeholder="{% trans 'Search' %}"
+    value="{{ request.GET.q }}">
+</form>
+
 <h3>{% trans "Categories" %}</h3>
 <ul class="side-nav">
   {% for title, count, url in blog.posts_by_category %}

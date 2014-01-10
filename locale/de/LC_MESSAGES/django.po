@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 19:12+0100\n"
+"POT-Creation-Date: 2014-01-10 20:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,15 +22,19 @@ msgstr ""
 msgid "Not published"
 msgstr "Nicht veröffentlicht"
 
+#: blog/admin.py:27 blog/models.py:72
+msgid "posts"
+msgstr "Beiträge"
+
 #: blog/feeds.py:11
 msgid "406 NOT ACCEPTABLE"
 msgstr ""
 
-#: blog/models.py:12 blog/models.py:47
+#: blog/models.py:12 blog/models.py:53
 msgid "title"
 msgstr "Titel"
 
-#: blog/models.py:13 blog/models.py:49
+#: blog/models.py:13 blog/models.py:55
 msgid "slug"
 msgstr "Slug"
 
@@ -38,59 +42,59 @@ msgstr "Slug"
 msgid "category"
 msgstr "Kategorie"
 
-#: blog/models.py:18 blog/models.py:58
+#: blog/models.py:18 blog/models.py:64
 msgid "categories"
 msgstr "Kategorien"
 
-#: blog/models.py:39
+#: blog/models.py:45
 msgid "Markdown"
 msgstr "Markdown"
 
-#: blog/models.py:40 blog/models.py:54
+#: blog/models.py:46 blog/models.py:60
 msgid "HTML"
 msgstr "HTML"
 
-#: blog/models.py:43
+#: blog/models.py:49
 msgid "created on"
 msgstr "Erstellt"
 
-#: blog/models.py:45
+#: blog/models.py:51
 msgid "published on"
 msgstr "Veröffentlicht"
 
-#: blog/models.py:50
+#: blog/models.py:56
 msgid "content"
 msgstr "Inhalt"
 
-#: blog/models.py:52
+#: blog/models.py:58
 msgid "content type"
 msgstr "Inhaltstyp"
 
-#: blog/models.py:55
+#: blog/models.py:61
 msgid "author"
 msgstr "Autor"
 
-#: blog/models.py:65
+#: blog/models.py:71
 msgid "post"
 msgstr "Beitrag"
 
-#: blog/models.py:66
-msgid "posts"
-msgstr "Beiträge"
+#: mkweb/templates/blog/base.html:7
+msgid "Search"
+msgstr "Suche"
 
-#: mkweb/templates/blog/base.html:6
+#: mkweb/templates/blog/base.html:11
 msgid "Categories"
 msgstr "Kategorien"
 
-#: mkweb/templates/blog/base.html:13
+#: mkweb/templates/blog/base.html:21
 msgid "Archive"
 msgstr "Archiv"
 
-#: mkweb/templates/blog/post_detail.html:16
+#: mkweb/templates/blog/post_detail.html:18
 #, python-format
 msgid "Published on %(published_on)s"
 msgstr "Veröffentlicht am %(published_on)s"
 
-#: mkweb/templates/blog/post_detail.html:19
+#: mkweb/templates/blog/post_detail.html:21
 msgid "Not published yet"
 msgstr "Noch nicht veröffentlicht"

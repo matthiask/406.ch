@@ -2,7 +2,7 @@ from markdown2 import markdown
 
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import signals
+from django.db.models import Q, signals
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -27,6 +27,12 @@ class Category(models.Model):
 
 
 class PostManager(models.Manager):
+    def search(self, query):
+        return self.filter(
+            Q(title__icontains=query)
+            | Q(content__icontains=query)
+        )
+
     def published(self):
         return self.filter(
             published_on__isnull=False,

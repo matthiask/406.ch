@@ -13,7 +13,10 @@ class PostMixin(object):
     paginate_orphans = 10
 
     def get_queryset(self):
-        return Post.objects.published()
+        posts = Post.objects.published()
+        if self.request.GET.get('q'):
+            posts &= Post.objects.search(self.request.GET['q'])
+        return posts
 
 
 class ArchiveIndexView(PostMixin, generic.ArchiveIndexView):
