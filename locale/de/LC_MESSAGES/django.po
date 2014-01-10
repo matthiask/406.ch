@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 18:05+0100\n"
+"POT-Creation-Date: 2014-01-10 19:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,11 +86,11 @@ msgstr "Kategorien"
 msgid "Archive"
 msgstr "Archiv"
 
-#: mkweb/templates/blog/post_detail.html:14
+#: mkweb/templates/blog/post_detail.html:16
 #, python-format
-msgid ""
-"\n"
-"        Published on %(published_on)s"
-msgstr ""
-"\n"
-"Veröffentlicht am %(published_on)s"
+msgid "Published on %(published_on)s"
+msgstr "Veröffentlicht am %(published_on)s"
+
+#: mkweb/templates/blog/post_detail.html:19
+msgid "Not published yet"
+msgstr "Noch nicht veröffentlicht"
