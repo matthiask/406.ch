@@ -6,7 +6,10 @@
 <h3>{% trans "Categories" %}</h3>
 <ul class="side-nav">
   {% for title, count, url in blog.posts_by_category %}
-    <li><a href="{{ url }}">{{ title }} ({{ count }})</a></li>
+    <li><a href="{{ url }}">
+      <small class="right">{{ count }}</small>
+      {{ title }}
+    </a></li>
   {% endfor %}
 </ul>
 
@@ -19,7 +22,9 @@
       </li>
     {% endifchanged %}
     <li><a href="{{ url }}">
-      {{ month|date:"F" }} ({{ count }})</a></li>
+      <small class="right">{{ count }}</small>
+      {{ month|date:"F" }}
+    </a></li>
   {% endfor %}
 </ul>
 {% endblock %}
