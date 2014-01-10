@@ -18,8 +18,11 @@
       {% else %}
         {% trans "Not published yet" %}
       {% endif %}
-      | {% for category in post.categories.all %}
-        <a href="{{ category.get_absolute_url }}">{{ category }}</a>{% if not forloop.last %},{% endif %}
+
+      {% for category in post.categories.all %}
+        {% if forloop.first %}|{% endif %}
+        <a href="{{ category.get_absolute_url }}">
+          {{ category }}</a>{% if not forloop.last %},{% endif %}
       {% endfor %}
       {% if user.is_staff %}
         | <a href="{% url 'admin:blog_post_change' post.pk %}" target="_blank">edit</a>
