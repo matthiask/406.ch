@@ -11,8 +11,13 @@
 
   <p>
     <small>
-      {% blocktrans with author=post.author published_on=post.published_on|date:"d.m.Y" %}
-        Published on {{ published_on }}{% endblocktrans %}
+      {% if post.published_on %}
+        {% with published_on=post.published_on|date:"d.m.Y" %}
+          {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
+        {% endwith %}
+      {% else %}
+        {% trans "Not published yet" %}
+      {% endif %}
       | {% for category in post.categories.all %}
         <a href="{{ category.get_absolute_url }}">{{ category }}</a>{% if not forloop.last %},{% endif %}
       {% endfor %}
