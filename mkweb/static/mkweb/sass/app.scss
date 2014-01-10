@@ -73,3 +73,9 @@ $h1-font-size: $h2-font-size * $f;
 h1 a {
     color: $body-font-color;
 }
+
+.content {
+    ul, ol {
+        margin-left: 1.5em;
+    }
+}
