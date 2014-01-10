@@ -13,8 +13,13 @@
 <h3>{% trans "Archive" %}</h3>
 <ul class="side-nav">
   {% for month, count, url in blog.posts_by_month %}
+    {% ifchanged month.year %}
+      <li class="active">
+        <a href="{% url 'blog_post_archive_year' year=month.year %}">{{ month.year }}</a>
+      </li>
+    {% endifchanged %}
     <li><a href="{{ url }}">
-      {{ month|date:"F Y" }} ({{ count }})</a></li>
+      {{ month|date:"F" }} ({{ count }})</a></li>
   {% endfor %}
 </ul>
 {% endblock %}
