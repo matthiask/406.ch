@@ -35,6 +35,8 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
 
+THUMBNAIL_BASEDIR = 'thumbs'
+
 STATICFILES_DIRS = (
 )
 
