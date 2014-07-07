@@ -107,6 +107,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'blog.context_processors.blog',
 )
 
+SOUTH_MIGRATION_MODULES = {
+    'easy_thumbnails': 'easy_thumbnails.south_migrations',
+}
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
