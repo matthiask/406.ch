@@ -3,7 +3,7 @@ from fabric.api import cd, env, local, run, task
 
 
 CONFIG = {
-    'host': 'deploy@406.ch',
+    'host': 'www-data@feinheit04.nine.ch',
     'project': 'mkweb',
     'branch': 'master',
 }
@@ -11,8 +11,8 @@ CONFIG = {
 
 CONFIG.update({
     'sass': '{project}/static/{project}'.format(**CONFIG),
-    'service': 'www-mk_406',
-    'folder': 'www/mk/406/',
+    'service': '406.ch:*',
+    'folder': '406.ch/',
 })
 
 
@@ -88,7 +88,7 @@ def deploy_code():
         run('venv/bin/python manage.py syncdb')
         run('venv/bin/python manage.py migrate')
         run('venv/bin/python manage.py collectstatic --noinput')
-        run('sudo service {service} restart')
+        run('sctl restart {service}')
 
 
 @task
