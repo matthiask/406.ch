@@ -75,7 +75,8 @@ def runserver(port=8038):
 def deploy_styles():
     with lcd('{sass}'):
         local('grunt build')
-    local('scp -r {sass}/css {host}:{folder}static/{project}/')
+    local('rsync -avz {sass}/css {host}:{folder}static/{project}/')
+    local('rsync -avz {sass}/bower_components {host}:{folder}static/{project}/')
 
 
 @task
