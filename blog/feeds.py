@@ -10,7 +10,7 @@ class PostFeed(Feed):
     feed_type = Atom1Feed
     title = _('406 NOT ACCEPTABLE')
     link = reverse_lazy('blog_post_feed')
-    #subtitle = ''
+    # subtitle = ''
 
     def items(self):
         return Post.objects.published()[:20]
