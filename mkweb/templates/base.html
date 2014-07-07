@@ -6,7 +6,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>
     {% block title %}
@@ -16,12 +16,11 @@
   </title>
   {% compress css %}
   {% block css %}
-    <link rel="stylesheet" href="{% static 'mkweb/stylesheets/app.css' %}">
-    {#<!-- <link rel="stylesheet" href="{% static 'mkweb/lightbox/css/lightbox.css' %}"> -->#}
+    <link rel="stylesheet" href="{% static 'mkweb/css/app.css' %}">
   {% endblock %}
   {% endcompress %}
   {#<!-- <link rel="shortcut icon" href="{% static 'mkweb/images/favicon.ico' %}"> -->#}
-  <script src="{% static 'mkweb/javascripts/vendor/custom.modernizr.js' %}"></script>
+  <script src="{% static 'mkweb/bower_components/modernizr/modernizr.js' %}"></script>
   <script>onReady = [];</script>
 
   <link rel="alternate" type="application/atom+xml"
@@ -86,31 +85,13 @@
 
   {% compress js %}
   {% block js %}
-    <script src="{% static 'mkweb/javascripts/vendor/jquery.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.js' %}"></script>
-    {% comment %}<!--
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.clearing.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.abide.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.cookie.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.forms.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.section.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.orbit.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.dropdown.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.magellan.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.alerts.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.reveal.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.interchange.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.topbar.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.tooltips.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.joyride.js' %}"></script>
-    <script src="{% static 'mkweb/javascripts/foundation/foundation.placeholder.js' %}"></script>
-    <script src="{% static 'mkweb/lightbox/js/lightbox-2.6.min.js' %}"></script>
-    -->{% endcomment %}
+  <script src="{% static 'mkweb/bower_components/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'mkweb/bower_components/foundation/js/foundation.min.js' %}"></script>
+  <script src="{% static 'mkweb/js/app.js' %}"></script>
   {% endblock %}
   {% endcompress %}
   {% block inline-js %}
     <script>
-      $(document).foundation();
       for (var i=0, l=onReady.length; i<l; ++i) {
         onReady[i].call(null, $);
       }

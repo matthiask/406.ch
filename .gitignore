@@ -3,7 +3,6 @@
 .*.swp
 \#*#
 /secrets.py
-.bundle
 .DS_Store
 ._*
 data.db

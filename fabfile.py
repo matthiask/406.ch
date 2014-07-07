@@ -1,5 +1,5 @@
 import os
-from fabric.api import cd, env, local, run, task
+from fabric.api import cd, env, lcd, local, run, task
 
 
 CONFIG = {
@@ -28,6 +28,7 @@ def _configure(fn):
 
 local = _configure(local)
 cd = _configure(cd)
+lcd = _configure(lcd)
 run = _configure(run)
 
 
@@ -61,7 +62,8 @@ def dev():
 
 @task(alias='ws')
 def watch_styles():
-    local('bundle exec compass watch {sass}')
+    with lcd('{sass}'):
+        local('grunt')
 
 
 @task(alias='rs')
@@ -71,9 +73,9 @@ def runserver(port=8038):
 
 @task
 def deploy_styles():
-    local('bundle exec compass clean {sass}')
-    local('bundle exec compass compile -s compressed {sass}')
-    local('scp -r {sass}/stylesheets {host}:{folder}static/{project}/')
+    with lcd('{sass}'):
+        local('grunt build')
+    local('scp -r {sass}/css {host}:{folder}static/{project}/')
 
 
 @task
