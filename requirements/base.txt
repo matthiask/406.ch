@@ -4,7 +4,7 @@ django_compressor==1.4
 markdown2==2.2.1
 pytz==2014.4
 -e git://github.com/matthiask/django-chet.git#egg=chet-dev
-Pillow==2.5.0
+Pillow==2.5.1
 easy-thumbnails==2.0.1
 six==1.7.3
 psycopg2==2.5.3
