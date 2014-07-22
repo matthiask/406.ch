@@ -28,22 +28,23 @@
 </head>
 <body>
   {% block body %}
-  <div class="row">
-    <div class="large-12 columns">
-      <h1>
-        <a href="/">406 NOT ACCEPTABLE</a>
-      </h1>
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1>
+          <a href="/">406 NOT ACCEPTABLE</a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+    </ul>
 
-      <nav class="top-bar">
-        <section class="top-bar-section">
-          <ul>
-            <li><a href="{% url 'blog_post_archive' %}">Writing</a></li>
-            <li><a href="{% url 'chet_album_archive' %}">Photos</a></li>
-          </ul>
-        </section>
-      </nav>
-    </div>
-  </div>
+    <section class="top-bar-section">
+      <ul class="left">
+        <li><a href="{% url 'blog_post_archive' %}">Writing</a></li>
+        <li><a href="{% url 'chet_album_archive' %}">Photos</a></li>
+      </ul>
+    </section>
+  </nav>
 
   {% block main %}
   <div class="row">
