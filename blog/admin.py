@@ -29,6 +29,21 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_on'
+    fieldsets = [
+        (None, {
+            'fields': (
+                'published_on',
+                ('title', 'author'),
+                'content',
+                'content_type',
+                'categories',
+            ),
+        }),
+        (_('Meta'), {
+            'fields': ('slug', 'created_on'),
+            'classes': ('collapse',),
+        }),
+    ]
     filter_horizontal = ('categories',)
     list_display = ('title', 'published_on', 'author')
     list_filter = (
@@ -38,6 +53,15 @@ class PostAdmin(admin.ModelAdmin):
     )
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('title', 'content', 'author')
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name == 'author' and kwargs.get('request'):
+            kwargs.setdefault(
+                'initial',
+                kwargs.get('request').user.get_full_name())
+
+        return super(PostAdmin, self).formfield_for_dbfield(
+            db_field, **kwargs)
 
 
 admin.site.register(models.Category, CategoryAdmin)
