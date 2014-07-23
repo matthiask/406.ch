@@ -88,7 +88,6 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
 
     'mkweb',
-    'south',
     'blog',
     'chet',
     'compressor',
@@ -107,50 +106,74 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'blog.context_processors.blog',
 )
 
-SOUTH_MIGRATION_MODULES = {
-    'easy_thumbnails': 'easy_thumbnails.south_migrations',
-}
-
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
     'filters': {
         'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'skip_unreadable_post_error': {
+            '()': 'mkweb.utils.SkipUnreadablePostError',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(message)s',
+        },
     },
     'handlers': {
-        'mail_admins': {
+        'sentry': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'raven.contrib.django.handlers.SentryHandler',
+            'filters': [
+                'require_debug_false',
+                # 'skip_unreadable_post_error',
+            ],
         },
-
         'console': {
-            'class': 'logging.StreamHandler',
             'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+        # Root handler.
+        '': {
+            'handlers': ['sentry'],
         },
-    }
+        'django.request': {
+            'handlers': ['sentry'],
+        },
+    },
 }
 
 if DEBUG:
-    LOGGING['loggers'][''] = {
-        'handlers': ['console'],
-        'level': 'DEBUG',
-        'propagate': False,
-    }
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    LOGGING['loggers'].update({
+        'django.db.backends': {
+            'level': 'DEBUG',
+            # 'handlers': ['console'],  # Uncomment to dump SQL statements.
+            'propagate': False,
+        },
+        'django.request': {
+            'level': DEBUG,
+            'handlers': ['console'],  # Dump exceptions to the console.
+            'propagate': False,
+        },
+    })
+    INSTALLED_APPS += (
+        'debug_toolbar',  # Django 1.7: debug_toolbar.apps.DebugToolbarConfig
+    )
+    INTERNAL_IPS = ('127.0.0.1',)
+    MIDDLEWARE_CLASSES = (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ) + MIDDLEWARE_CLASSES
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 try:
     from mkweb.local_settings import *  # noqa
