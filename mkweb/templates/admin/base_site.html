@@ -1,16 +1,17 @@
 {% extends "admin/base.html" %}
 
-{% load i18n %}
+{% load i18n mkadmin_tags %}
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block extrahead %}{{ block.super }}
 <style>
-  #header { overflow: visible; }
+  #header { height: 39px; overflow: visible; }
   #branding h1 { display: inline-block; }
   #branding h1 > a { color: inherit !important; }
   #branding > ul { display: inline; list-style: none; padding: 0; margin: 0; }
-  #branding > ul > li { display: inline-block; padding: 8px; margin: 0; }
+  #branding > ul > li { display: inline-block; padding: 0; margin: 0; }
+  #branding > ul > li > a { display: inline-block; padding: 8px; margin: 0; }
 
   #branding li { position: relative; }
   #branding li ul {
@@ -24,11 +25,15 @@
     list-style: none;
     padding: 10px;
     margin: 0;
-    min-width: 100px;
+    min-width: 200px;
     min-height: 100px; }
   #branding li:hover ul { display: block; }
-  #branding li strong { display: block; padding: 4px 5px; }
+  #branding li strong { display: block; padding: 12px 5px 4px 5px; }
+  #branding li strong:first-child { padding-top: 4px; }
   #branding li li a { display: block; padding: 4px 5px; font-size: 12px; }
+  #branding li ul a:hover {
+    text-decoration: underline;
+  }
 </style>
 {% endblock %}
 
@@ -40,10 +45,18 @@
     </a>
   </h1>
   {% if user.is_active and user.is_staff %}
+    {% admin_app_list as app_list %}
     <ul>
       <li>
         <a href="#">{% trans 'Create' %}</a>
         <ul>
+          {% for app in app_list %}{% for model in app.models %}
+            {% if model.perms.add %}
+              <li>
+                <a href="{{ model.add_url }}">{{ model.name_singular }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}{% endfor %}
           <li><a href="{% url 'admin:blog_post_add' %}">{% trans 'Post' %}</a></li>
           <li><a href="{% url 'admin:chet_album_add' %}">{% trans 'Album' %}</a></li>
         </ul>
@@ -51,15 +64,16 @@
       <li>
         <a href="#">{% trans 'Modules' %}</a>
         <ul>
-          <li><strong>Auth</strong></li>
-          <li><a href="{% url 'admin:auth_user_changelist' %}">Users</a></li>
-          <li><a href="{% url 'admin:auth_group_changelist' %}">Groups</a></li>
-          <li><strong>Blog</strong></li>
-          <li><a href="{% url 'admin:blog_post_changelist' %}">Posts</a></li>
-          <li><a href="{% url 'admin:blog_category_changelist' %}">Categories</a></li>
-          <li><strong>Chet</strong></li>
-          <li><a href="{% url 'admin:chet_album_changelist' %}">Albums</a></li>
-          <li><a href="{% url 'admin:chet_photo_changelist' %}">Photos</a></li>
+          {% for app in app_list %}
+            <li><strong>{{ app.name }}</strong></li>
+            {% for model in app.models %}
+              {% if model.perms.change %}
+                <li>
+                  <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
         </ul>
       </li>
     </ul>
