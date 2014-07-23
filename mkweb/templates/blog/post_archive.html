@@ -14,6 +14,10 @@
   {% endifchanged %}
   <h2><a href="{{ post.get_absolute_url }}">
     {{ post.title }}</a></h2>
+{% empty %}
+  <h2>
+    {% trans 'Nothing here. Sorry!' %}
+  </h2>
 {% endfor %}
 
 {% if page_obj.has_other_pages %}
