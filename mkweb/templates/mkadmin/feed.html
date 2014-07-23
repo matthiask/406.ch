@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="module widget">
+  <h2>{{ widget.title }}</h2>
+  <h3><a href="{{ feed.feed.link }}" target="_blank">
+    {{ feed.feed.title }}
+  </a></h3>
+  <ul>
+    {% for entry in feed.entries %}
+      <li>
+        <a href="{{ entry.link }}" target="_blank">
+          {{ entry.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

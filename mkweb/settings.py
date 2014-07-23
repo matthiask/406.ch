@@ -179,3 +179,24 @@ try:
     from mkweb.local_settings import *  # noqa
 except ImportError:
     pass
+
+MKADMIN_CREATE = [
+    'blog.Post',
+    # 'blog',  # Take all models from the blog app.
+    'chet.Album',
+]
+
+MKADMIN_DASHBOARD = [
+    ('mkweb.mkadmin.AtAGlance', {
+        'models': ['blog.Post', 'chet.Album', 'chet.Photo'],
+    }),
+    ('mkweb.mkadmin.Feed', {
+        'url': 'http://www.feinheit.ch/news/feed/',
+    }),
+    # ('mkweb.mkadmin.AllApps', {
+    # }),
+    # ('mkweb.mkadmin.RecentActions', {
+    # }),
+    ('mkweb.mkadmin.QuickDraft', {
+    }),
+]

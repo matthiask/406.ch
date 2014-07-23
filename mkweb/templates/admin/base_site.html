@@ -45,26 +45,24 @@
     </a>
   </h1>
   {% if user.is_active and user.is_staff %}
-    {% admin_app_list as app_list %}
+    {% mkadmin_topbar as topbar %}
     <ul>
-      <li>
-        <a href="#">{% trans 'Create' %}</a>
-        <ul>
-          {% for app in app_list %}{% for model in app.models %}
-            {% if model.perms.add %}
+      {% if topbar.create %}
+        <li>
+          <a href="{{ topbar.create.0.add_url }}">{% trans 'Create' %}</a>
+          <ul>
+            {% for model in topbar.create %}
               <li>
-                <a href="{{ model.add_url }}">{{ model.name_singular }}</a>
+                <a href="{{ model.add_url }}">{{ model.name }}</a>
               </li>
-            {% endif %}
-          {% endfor %}{% endfor %}
-          <li><a href="{% url 'admin:blog_post_add' %}">{% trans 'Post' %}</a></li>
-          <li><a href="{% url 'admin:chet_album_add' %}">{% trans 'Album' %}</a></li>
-        </ul>
-      </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endif %}
       <li>
         <a href="#">{% trans 'Modules' %}</a>
         <ul>
-          {% for app in app_list %}
+          {% for app in topbar.app_list %}
             <li><strong>{{ app.name }}</strong></li>
             {% for model in app.models %}
               {% if model.perms.change %}

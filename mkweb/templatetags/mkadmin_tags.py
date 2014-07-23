@@ -2,9 +2,11 @@ from __future__ import unicode_literals
 
 from django import template
 from django.apps import apps
+from django.conf import settings
 from django.contrib import admin
 from django.core.urlresolvers import NoReverseMatch, reverse
 from django.utils import six
+from django.utils.importlib import import_module
 from django.utils.text import capfirst
 
 
@@ -12,7 +14,7 @@ register = template.Library()
 
 
 @register.assignment_tag(takes_context=True)
-def admin_app_list(context, site=admin.site):
+def mkadmin_topbar(context, site=admin.site):
     # Almost an exact copy of the code in django.contrib.admin.sites
     request = context['request']
 
@@ -71,4 +73,47 @@ def admin_app_list(context, site=admin.site):
     for app in app_list:
         app['models'].sort(key=lambda x: x['name'])
 
-    return app_list
+    create_models = [
+        apps.get_model(model) for model in settings.MKADMIN_CREATE]
+
+    return {
+        'app_list': app_list,
+        'create': [
+            {
+                'name': capfirst(model._meta.verbose_name),
+                'perms': {'add': True},  # FIXME
+                'add_url': reverse(
+                    'admin:%s_%s_add' % (
+                        model._meta.app_label, model._meta.model_name),
+                    current_app=site.name),
+            } for model in create_models],
+    }
+
+
+@register.simple_tag(takes_context=True)
+def mkadmin_dashboard(context, site=admin.site):
+    widgets = []
+    for widget, config in settings.MKADMIN_DASHBOARD:
+        cls = get_object(widget)
+        instance = cls(**config)
+        widgets.append(instance)
+    return ''.join(widget.render(context=context) for widget in widgets)
+
+
+def get_object(path, fail_silently=False):
+    # Return early if path isn't a string (might already be an callable or
+    # a class or whatever)
+    if not isinstance(path, six.string_types):  # XXX bytes?
+        return path
+
+    try:
+        return import_module(path)
+    except ImportError:
+        try:
+            dot = path.rindex('.')
+            mod, fn = path[:dot], path[dot + 1:]
+
+            return getattr(import_module(mod), fn)
+        except (AttributeError, ImportError):
+            if not fail_silently:
+                raise
