@@ -33,10 +33,10 @@ class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
             'fields': (
-                'published_on',
                 ('title', 'author'),
                 'content',
                 'content_type',
+                'published_on',
                 'categories',
             ),
         }),
