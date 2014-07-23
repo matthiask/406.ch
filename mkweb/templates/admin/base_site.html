@@ -1,0 +1,79 @@
+{% extends "admin/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<style>
+  #header { overflow: visible; }
+  #branding h1 { display: inline-block; }
+  #branding h1 > a { color: inherit !important; }
+  #branding > ul { display: inline; list-style: none; padding: 0; margin: 0; }
+  #branding > ul > li { display: inline-block; padding: 8px; margin: 0; }
+
+  #branding li { position: relative; }
+  #branding li ul {
+    display: none;
+    position: absolute;
+    z-index: 99999;
+    top: 25px;
+    left: 7px;
+    background: #417690;
+    border: 1px solid #fff;
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    min-width: 100px;
+    min-height: 100px; }
+  #branding li:hover ul { display: block; }
+  #branding li strong { display: block; padding: 4px 5px; }
+  #branding li li a { display: block; padding: 4px 5px; font-size: 12px; }
+</style>
+{% endblock %}
+
+
+{% block branding %}
+  <h1>
+    <a href="{% url 'admin:index' %}">
+        {% trans 'Dashboard' %}
+    </a>
+  </h1>
+  {% if user.is_active and user.is_staff %}
+    <ul>
+      <li>
+        <a href="#">{% trans 'Create' %}</a>
+        <ul>
+          <li><a href="{% url 'admin:blog_post_add' %}">{% trans 'Post' %}</a></li>
+          <li><a href="{% url 'admin:chet_album_add' %}">{% trans 'Album' %}</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">{% trans 'Modules' %}</a>
+        <ul>
+          <li><strong>Auth</strong></li>
+          <li><a href="{% url 'admin:auth_user_changelist' %}">Users</a></li>
+          <li><a href="{% url 'admin:auth_group_changelist' %}">Groups</a></li>
+          <li><strong>Blog</strong></li>
+          <li><a href="{% url 'admin:blog_post_changelist' %}">Posts</a></li>
+          <li><a href="{% url 'admin:blog_category_changelist' %}">Categories</a></li>
+          <li><strong>Chet</strong></li>
+          <li><a href="{% url 'admin:chet_album_changelist' %}">Albums</a></li>
+          <li><a href="{% url 'admin:chet_photo_changelist' %}">Photos</a></li>
+        </ul>
+      </li>
+    </ul>
+  {% endif %}
+{% endblock %}
+
+{% block welcome-msg %}
+  {% trans 'Welcome,' %}
+  {% if perms.user.change %}
+    <a href="{% url 'admin:auth_user_change' user.pk %}">
+      <strong>{% firstof user.get_short_name user.get_username %}</strong></a>.
+  {% else %}
+    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+  {% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
