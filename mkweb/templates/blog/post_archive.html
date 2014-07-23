@@ -1,6 +1,10 @@
 {% extends "blog/base.html" %}
 
+{% load i18n %}
+
 {% block content %}
+<h1>{% trans 'Writing' %}</h1>
+
 {% for post in object_list %}
   {% ifchanged post.published_on.date|date:"FY" %}
     <p>

@@ -10,26 +10,19 @@
 
 <h3>{% trans "Categories" %}</h3>
 <ul class="side-nav">
-  {% for title, count, url in blog.posts_by_category %}
-    <li><a href="{{ url }}">
-      <small class="right">{{ count }}</small>
-      {{ title }}
+  {% for category in blog.categories %}
+    <li><a href="{{ category.get_absolute_url }}">
+      {{ category.title }}
     </a></li>
   {% endfor %}
 </ul>
 
 <h3>{% trans "Archive" %}</h3>
 <ul class="side-nav">
-  {% for month, count, url in blog.posts_by_month %}
-    {% ifchanged month.year %}
-      <li class="active">
-        <a href="{% url 'blog_post_archive_year' year=month.year %}">{{ month.year }}</a>
-      </li>
-    {% endifchanged %}
-    <li><a href="{{ url }}">
-      <small class="right">{{ count }}</small>
-      {{ month|date:"F" }}
-    </a></li>
+  {% for year in blog.years_with_posts %}
+    <li>
+      <a href="{% url 'blog_post_archive_year' year=year %}">{{ year }}</a>
+    </li>
   {% endfor %}
 </ul>
 {% endblock %}
