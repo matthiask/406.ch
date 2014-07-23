@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -44,7 +45,6 @@ class PostAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     ]
-    filter_horizontal = ('categories',)
     list_display = ('title', 'published_on', 'author')
     list_filter = (
         ('published_on', PublishedOnListFilter),
@@ -62,6 +62,12 @@ class PostAdmin(admin.ModelAdmin):
 
         return super(PostAdmin, self).formfield_for_dbfield(
             db_field, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
+        if db_field.name == 'categories':
+            kwargs.setdefault('widget', forms.CheckboxSelectMultiple())
+        return super(PostAdmin, self).formfield_for_manytomany(
+            db_field, request=request, **kwargs)
 
 
 admin.site.register(models.Category, CategoryAdmin)
