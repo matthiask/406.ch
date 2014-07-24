@@ -97,4 +97,6 @@ def mkadmin_dashboard(context, site=admin.site):
     html = ''.join(
         widget.render(context=context) for widget in mkadmin.dashboard.widgets)
 
-    return '<script src="%s"></script>' % static('admin/js/jquery.js') + html
+    return '<script src="%s"></script>%s' % (
+        static('admin/js/jquery.min.js'),
+        html)
