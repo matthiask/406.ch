@@ -100,7 +100,7 @@ class Feed(Widget):
 
     def cache_key(self):
         import hashlib
-        cache_key = 'feed:%s' % hashlib.md5(self.url).hexdigest()
+        return 'mkadmin-feed-%s' % hashlib.md5(self.url).hexdigest()
 
     def feed(self, request):
         from django.http import HttpResponse
