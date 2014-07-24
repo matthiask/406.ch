@@ -97,8 +97,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'django.contrib.sitemaps',
+
+    'mkadmin',
+    'django.contrib.admin',
 
     'mkweb',
     'blog',
@@ -200,16 +202,16 @@ MKADMIN_CREATE = [
 ]
 
 MKADMIN_DASHBOARD = [
-    ('mkweb.mkadmin.AtAGlance', {
+    ('mkadmin.dashboard.AtAGlance', {
         'models': ['blog.Post', 'chet.Album', 'chet.Photo'],
     }),
-    ('mkweb.mkadmin.AllApps', {
+    ('mkadmin.dashboard.AllApps', {
     }),
-    ('mkweb.mkadmin.RecentActions', {
+    ('mkadmin.dashboard.RecentActions', {
     }),
-    ('mkweb.mkadmin.QuickDraft', {
+    ('mkadmin.dashboard.QuickDraft', {
     }),
-    ('mkweb.mkadmin.Feed', {
+    ('mkadmin.dashboard.Feed', {
         'url': 'http://www.feinheit.ch/news/feed/',
     }),
 ]

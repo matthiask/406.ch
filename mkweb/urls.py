@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.views import generic
 
 from blog.sitemaps import PostSitemap
-from mkweb import mkadmin
+from mkadmin.dashboard import dashboard
 
 
 admin.autodiscover()
@@ -31,7 +31,7 @@ urlpatterns = patterns(
 
     url(r'^writing/', include('blog.urls')),
     url(r'^photos/', include('chet.urls')),
-    url(r'^manage/mkadmin/', include(mkadmin.dashboard.urls)),
+    url(r'^manage/mkadmin/', include(dashboard.urls)),
     url(r'^manage/', include(admin.site.urls)),
 
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {
