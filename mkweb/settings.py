@@ -203,13 +203,13 @@ MKADMIN_DASHBOARD = [
     ('mkweb.mkadmin.AtAGlance', {
         'models': ['blog.Post', 'chet.Album', 'chet.Photo'],
     }),
+    ('mkweb.mkadmin.AllApps', {
+    }),
+    ('mkweb.mkadmin.RecentActions', {
+    }),
+    ('mkweb.mkadmin.QuickDraft', {
+    }),
     ('mkweb.mkadmin.Feed', {
         'url': 'http://www.feinheit.ch/news/feed/',
-    }),
-    # ('mkweb.mkadmin.AllApps', {
-    # }),
-    # ('mkweb.mkadmin.RecentActions', {
-    # }),
-    ('mkweb.mkadmin.QuickDraft', {
     }),
 ]
