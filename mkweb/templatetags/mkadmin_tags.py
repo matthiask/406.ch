@@ -5,6 +5,7 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib import admin
 from django.core.urlresolvers import NoReverseMatch, reverse
+from django.templatetags.static import static
 from django.utils import six
 from django.utils.text import capfirst
 
@@ -93,5 +94,7 @@ def mkadmin_topbar(context, site=admin.site):
 
 @register.simple_tag(takes_context=True)
 def mkadmin_dashboard(context, site=admin.site):
-    return ''.join(
+    html = ''.join(
         widget.render(context=context) for widget in mkadmin.dashboard.widgets)
+
+    return '<script src="%s"></script>' % static('admin/js/jquery.js') + html
