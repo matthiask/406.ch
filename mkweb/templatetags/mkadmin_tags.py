@@ -6,8 +6,9 @@ from django.conf import settings
 from django.contrib import admin
 from django.core.urlresolvers import NoReverseMatch, reverse
 from django.utils import six
-from django.utils.importlib import import_module
 from django.utils.text import capfirst
+
+from mkweb import mkadmin
 
 
 register = template.Library()
@@ -92,28 +93,5 @@ def mkadmin_topbar(context, site=admin.site):
 
 @register.simple_tag(takes_context=True)
 def mkadmin_dashboard(context, site=admin.site):
-    widgets = []
-    for widget, config in settings.MKADMIN_DASHBOARD:
-        cls = get_object(widget)
-        instance = cls(**config)
-        widgets.append(instance)
-    return ''.join(widget.render(context=context) for widget in widgets)
-
-
-def get_object(path, fail_silently=False):
-    # Return early if path isn't a string (might already be an callable or
-    # a class or whatever)
-    if not isinstance(path, six.string_types):  # XXX bytes?
-        return path
-
-    try:
-        return import_module(path)
-    except ImportError:
-        try:
-            dot = path.rindex('.')
-            mod, fn = path[:dot], path[dot + 1:]
-
-            return getattr(import_module(mod), fn)
-        except (AttributeError, ImportError):
-            if not fail_silently:
-                raise
+    return ''.join(
+        widget.render(context=context) for widget in mkadmin.dashboard.widgets)
