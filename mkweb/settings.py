@@ -12,8 +12,6 @@ ADMINS = (
     ('Matthias Kestenholz', 'mk@406.ch'),
 )
 
-MANAGERS = ADMINS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
