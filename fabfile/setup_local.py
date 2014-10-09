@@ -6,6 +6,7 @@ import platform
 from fabric.api import env, execute, settings, task
 from fabric.colors import green, red
 from fabric.contrib.console import confirm
+from fabric.contrib.project import rsync_project
 
 from fabfile.config import local, get_random_string
 
@@ -137,4 +138,9 @@ def pull_database():
 def pull_mediafiles():
     if not confirm('Completely replace local mediafiles?'):
         return
-    local('rsync -avz --delete %(box_server)s:%(box_domain)s/media .')
+    rsync_project(
+        local_dir='media/',
+        remote_dir='%(box_domain)s/media/' % env,
+        delete=True,
+        upload=False,
+    )

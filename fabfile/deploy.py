@@ -1,6 +1,7 @@
 from __future__ import print_function, unicode_literals
 
-from fabric.api import execute, task
+from fabric.api import env, execute, task
+from fabric.contrib.project import rsync_project
 
 from fabfile.config import local, cd, run
 
@@ -16,9 +17,12 @@ def deploy():
 def styles():
     local('cd %(box_sass)s && grunt build')
     for part in ['bower_components', 'css']:
-        local(
-            'rsync -avz %%(box_sass)s/%s'
-            ' %%(box_server)s:%%(box_domain)s/%%(box_sass)s/' % part)
+        rsync_project(
+            local_dir='%(box_sass)s/%(part)s' % dict(env, part=part),
+            remote_dir='%(box_domain)s/%(box_sass)s/' % env,
+            delete=True,
+            # upload=True,  # It's the default!
+        )
     with cd('%(box_domain)s'):
         run('venv/bin/python manage.py collectstatic --noinput')
 
