@@ -1,15 +1,15 @@
-https://github.com/django/django/archive/stable/1.7.x.zip
 django_compressor==1.4
-django-redis==3.7.0
-hiredis==0.1.4
+django-redis==3.7.2
+hiredis==0.1.5
 feedparser==5.1.3
-markdown2==2.2.1
-redis==2.10.1
-pytz==2014.4
+markdown2==2.3.0
+redis==2.10.3
+pytz==2014.9
 -e git://github.com/matthiask/django-chet.git#egg=chet-dev
 -e git://github.com/matthiask/django-mkadmin.git#egg=mkadmin-dev
-Pillow==2.5.1
-easy-thumbnails==2.0.1
-raven==5.0.0
-six==1.7.3
-psycopg2==2.5.3
+Pillow==2.6.1
+easy-thumbnails==2.2
+raven==5.1.1
+six==1.8.0
+psycopg2==2.5.4
+Django==1.7.1
