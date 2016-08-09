@@ -7,7 +7,7 @@ redis==2.10.3
 pytz==2014.9
 -e git://github.com/matthiask/django-chet.git#egg=chet-dev
 -e git://github.com/matthiask/django-mkadmin.git#egg=mkadmin-dev
-Pillow==2.6.1
+Pillow==3.3.0
 easy-thumbnails==2.2
 raven==5.1.1
 six==1.8.0
