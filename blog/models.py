@@ -37,7 +37,8 @@ class PostManager(models.Manager):
     def published(self):
         return self.filter(
             published_on__isnull=False,
-            published_on__lte=timezone.now,
+            published_on__lte=timezone.now(),
+            is_active=True,
         )
 
 
@@ -47,6 +48,7 @@ class Post(models.Model):
         ('html', _('HTML')),
     )
 
+    is_active = models.BooleanField(_('is active'), default=False)
     created_on = models.DateTimeField(_('created on'), default=timezone.now)
     published_on = models.DateTimeField(
         _('published on'), blank=True, null=True)

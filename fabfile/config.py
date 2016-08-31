@@ -1,38 +1,57 @@
-from functools import wraps
-import random
-import re
+"""
+This file contains the configuration for the fabric scripts.
+The scripts support multiple environments.
 
-from fabric.api import env, cd, local, run
+Within the fabric commands string formatting is applied with the env object
+as argument.
 
+The environment specific values are available as box_<key>
+e.g. '%(box_branch)s'.
 
+Usage::
+    run('git clone -b %(box_branch)s %(box_repository_url)s %(box_domain)s')
+"""
+
+from __future__ import unicode_literals
+
+from fabric.api import env
+
+# env.box_environment contains the currently active environment.
+
+# Default values available in all environments
 env.box_project_name = 'mkweb'
 env.box_domain = '406.ch'
-env.box_server = 'www-data@feinheit04.nine.ch'
-env.box_branch = 'master'
-
-env.box_repository_name = re.sub(r'[^\w]+', '_', env.box_domain)
-env.box_database_name = re.sub(r'[^\w]+', '_', env.box_domain)
-env.box_sass = '%(box_project_name)s/static/%(box_project_name)s' % env
-env.box_server_name = env.box_server.split('@')[-1]
-
+env.box_database_local = '406_ch'
+env.box_staticfiles = '%(box_project_name)s/static/%(box_project_name)s' % env
+env.box_static_src = 'assets'
+env.box_python = 'python3'
 env.forward_agent = True
-env.hosts = [env.box_server]
 
+# Remove this for multi-env support
+env.box_hardwired_environment = 'production'
 
-def get_random_string(length, chars=None):
-    rand = random.SystemRandom()
-    if chars is None:
-        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
-    return ''.join(rand.choice(chars) for i in range(50))
-
-
-def interpolate_with_env(fn):
-    @wraps(fn)
-    def _dec(string, *args, **kwargs):
-        return fn(string % env, *args, **kwargs)
-    return _dec
-
-
-local = interpolate_with_env(local)
-cd = interpolate_with_env(cd)
-run = interpolate_with_env(run)
+# Environment specific values.
+env.box_environments = {
+    'production': {
+        'shortcut': 'p',
+        'domain': '406.ch',
+        'branch': 'master',
+        'servers': [
+            'www-data@feinheit06.nine.ch',
+        ],
+        'remote': 'production',  # git remote alias for the server.
+        'repository': '406',
+        'database': '406_ch',
+    },
+    'staging': {
+        'shortcut': 's',
+        'domain': 'stage.fcz.ch',
+        'branch': 'develop',
+        'servers': [
+            'www-data@feinheit04.nine.ch',
+        ],
+        'remote': 'staging',
+        'repository': 'fcz_ch',
+        'database': 'stage_fcz_ch',
+    },
+}

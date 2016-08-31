@@ -1,0 +1,15 @@
+dj-database-url
+django-admin-sso
+django-cache-url
+django-debug-toolbar
+django-redis
+django-versatileimagefield
+django-webpack-loader
+Django
+flake8
+gunicorn
+hiredis
+markdown2
+psycopg2
+pytz
+raven

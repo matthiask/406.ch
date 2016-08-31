@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from . import feeds, views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^feed/$', feeds.PostFeed(), name='blog_post_feed'),
 
     url(r'^$', views.ArchiveIndexView.as_view(), name='blog_post_archive'),
@@ -22,4 +21,4 @@ urlpatterns = patterns(
         views.post_detail_redirect),
     url(r'^(?P<slug>[^/]+)/$', views.post_detail,
         name='blog_post_detail'),
-)
+]

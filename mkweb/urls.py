@@ -1,21 +1,15 @@
 from django.conf import settings
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
+from django.shortcuts import render
 from django.views import generic
 
 from blog.sitemaps import PostSitemap
-from mkadmin.dashboard import dashboard
 
 
-admin.autodiscover()
-
-
-urlpatterns = patterns(
-    '',
-    url(r'^$', generic.RedirectView.as_view(
-        url='/writing/',
-        permanent=False,
-        )),
+urlpatterns = [
+    url(r'^$', render, {'template_name': 'base.html'}),
     url(r'^home/$', generic.TemplateView.as_view(
         template_name='home.html',
         )),
@@ -30,24 +24,25 @@ urlpatterns = patterns(
         )),
 
     url(r'^writing/', include('blog.urls')),
-    url(r'^photos/', include('chet.urls')),
-    url(r'^manage/mkadmin/', include(dashboard.urls)),
-    url(r'^manage/', include(admin.site.urls)),
+    url(r'^manage/', admin.site.urls),
 
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {
+    url(r'^sitemap\.xml$', sitemap, {
         'sitemaps': {
             'posts': PostSitemap,
         }}),
-)
+]
 
 if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += patterns(
-        '',
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.MEDIA_ROOT}),
-    )
+    try:
+        urlpatterns += [
+            url(r'^__debug__/', __import__('debug_toolbar').urls),
+        ]
+    except ImportError:
+        pass
 
+    from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
     urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

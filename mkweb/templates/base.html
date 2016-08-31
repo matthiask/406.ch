@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-{% load compress i18n staticfiles %}
+{% load i18n staticfiles %}
+{% load render_bundle from webpack_loader %}
 <!--[if IE 8]>
 <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -14,101 +15,17 @@
       406
     {% endblock %}
   </title>
-  {% compress css %}
-  {% block css %}
-    <link rel="stylesheet" href="{% static 'mkweb/css/app.css' %}">
-  {% endblock %}
-  {% endcompress %}
-  {#<!-- <link rel="shortcut icon" href="{% static 'mkweb/images/favicon.ico' %}"> -->#}
-  <script src="{% static 'mkweb/bower_components/modernizr/modernizr.js' %}"></script>
-  <script>onReady = [];</script>
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet">
+  {% if debug %}
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script>
+    {% render_bundle 'main' %}
+  {% else %}
+    {% render_bundle 'styles' 'css' %}
+  {% endif %}
 
   <link rel="alternate" type="application/atom+xml"
     title="406 NOT ACCEPTABLE" href="{{ blog.feed_url }}">
-</head>
-<body>
-  {% block body %}
-  <nav class="top-bar" data-topbar>
-    <ul class="title-area">
-      <li class="name">
-        <h1>
-          <a href="/">406 NOT ACCEPTABLE</a>
-        </h1>
-      </li>
-      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-    </ul>
-
-    <section class="top-bar-section">
-      <ul class="left">
-        <li><a href="{% url 'blog_post_archive' %}">Writing</a></li>
-        <li><a href="{% url 'chet_album_archive' %}">Photos</a></li>
-      </ul>
-    </section>
-  </nav>
-
-  {% block main %}
-  <div class="row">
-    <div class="large-9 columns content">
-      {% block content %}{% endblock %}
-    </div>
-
-    <div class="large-2 large-offset-1 columns">
-      {% block sidebar %}{% endblock %}
-    </div>
-  </div>
-  {% endblock %}
-
-  <div class="row">
-    <div class="large-12 columns">
-      <hr>
-      <p class="author">
-
-        <ul class="inline-list">
-          <li>© 2005-{% now "Y" %} Matthias Kestenholz.</li>
-          <li>
-            <a rel="license" target="_blank"
-                href="http://creativecommons.org/licenses/by/3.0/ch/deed.en_US">
-              Some rights reserved.</a>
-          </li>
-          <li><a href="https://twitter.com/suppensud/" target="_blank">
-            Twitter</a></li>
-          <li><a href="https://www.facebook.com/matthias.kestenholz" target="_blank">
-            Facebook</a></li>
-          <li><a href="https://github.com/matthiask/" target="_blank">
-            Github</a></li>
-          <li><a href="https://keybase.io/matthiask" target="_blank">
-            Keybase.io</a></li>
-          <li><a href="https://people.djangoproject.com/matthiask/" target="_blank">
-            Django People</a></li>
-        </ul>
-      </p>
-    </div>
-  </div>
-  {% endblock %}
-
-  {% compress js %}
-  {% block js %}
-  <script src="{% static 'mkweb/bower_components/jquery/dist/jquery.min.js' %}"></script>
-  <script src="{% static 'mkweb/bower_components/foundation/js/foundation.min.js' %}"></script>
-  <script src="{% static 'mkweb/js/app.js' %}"></script>
-  {% endblock %}
-  {% endcompress %}
-  {% block inline-js %}
-    <script>
-      for (var i=0, l=onReady.length; i<l; ++i) {
-        onReady[i].call(null, $);
-      }
-    </script>
-  {% endblock %}
-
-  {% if request.user.is_staff and feincms_page %}
-    <div class="edit-tools">
-      {% block edit-tools %}
-      <a href="/admin/page/page/{{ feincms_page.id }}/"
-        class="button tiny">Edit page</a>
-      {% endblock %}
-    </div>
-  {% endif %}
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -121,5 +38,60 @@
 
   </script>
 
+</head>
+<body>
+<div class="wrappy">
+
+  {% block body %}
+  <header>
+    <h1><a href="/">406 NOT ACCEPTABLE</a></h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="{% url 'blog_post_archive' %}">Writing</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    <h2>Companies</h2>
+    <ul class="links">
+      <li><a href="http://www.feinheit.ch/" target="_blank">
+        Feinheit AG
+      </a></li>
+      <li><a href="http://diebruchpiloten.com/" target="_blank">
+        Die Bruchpiloten AG
+      </a></li>
+    </ul>
+    <h2>Platforms</h2>
+    <ul class="links">
+      <li><a href="https://github.com/matthiask/" target="_blank">
+        Github</a></li>
+      <li><a href="https://twitter.com/suppensud/" target="_blank">
+        Twitter</a></li>
+      <li><a href="https://www.facebook.com/matthias.kestenholz" target="_blank">
+        Facebook</a></li>
+      <li><a href="https://keybase.io/matthiask" target="_blank">
+        Keybase.io</a></li>
+      <li><a href="https://people.djangoproject.com/matthiask/" target="_blank">
+        Django People</a></li>
+      <li><a href="https://www.linkedin.com/in/matthiaskestenholz" target="_blank">
+        LinkedIn
+      </a></li>
+      <li><a href="https://www.xing.com/profile/Matthias_Kestenholz" target="_blank">
+        XING
+      </a></li>
+    </ul>
+    {% endblock %}
+  </main>
+  {% endblock %}
+
+  {% comment %}
+	{% if not debug %}
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script>
+	{% render_bundle 'main' %}
+	{% endif %}
+  {% endcomment %}
+
+</div>
 </body>
 </html>

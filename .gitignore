@@ -17,3 +17,7 @@ data.db
 /mkweb/local_settings.py
 /mkweb/static/mkweb/stylesheets/
 /media
+/node_modules
+/.env
+/assets/dist
+/tmp

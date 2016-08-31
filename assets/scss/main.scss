@@ -1,0 +1,51 @@
+@import '_reset';
+
+body { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+$grey: #888;
+
+body {
+  font-family: 'Source Serif Pro', serif;
+}
+
+.wrappy {
+  max-width: 50rem;
+  margin: 2rem auto;
+}
+
+header {
+  border-bottom: 1px solid $grey;
+  margin: 0 0 2rem 0;
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 2rem 0 1.5rem 0;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-around;
+    font-size: 2rem;
+    padding: 1rem;
+  }
+
+}
+
+main {
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .links {
+    margin: 0 0 2rem 0;
+
+    a {
+      display: block;
+      font-size: 2rem;
+      margin: 1rem;
+      text-align: center;
+    }
+  }
+}
