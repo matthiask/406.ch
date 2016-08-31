@@ -113,4 +113,11 @@ header {
   small {
     font-size: 70%;
   }
+
+  .text {
+    a {
+      box-shadow: inset 0 0px 0 white, inset 0 -1px 0 $grey;
+    }
+  }
+
 }
