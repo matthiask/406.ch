@@ -7,7 +7,7 @@
 ._*
 data.db
 /MANIFEST
-/dist
+dist
 /static
 /uploads
 /docs/_build
@@ -19,5 +19,4 @@ data.db
 /media
 /node_modules
 /.env
-/assets/dist
 /tmp
