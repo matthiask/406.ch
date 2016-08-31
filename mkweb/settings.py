@@ -67,6 +67,7 @@ STATICFILES_FINDERS = (
 )
 
 MIDDLEWARE_CLASSES = [m for m in [
+    'mkweb.middleware.ForceDomainMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware' if DEBUG_TOOLBAR else '',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
