@@ -47,8 +47,8 @@ TIME_ZONE = 'Europe/Zurich'
 LANGUAGE_CODE = 'de'
 LANGUAGES = (
     ('de', _('German')),
-    ('fr', _('French')),
-    ('en', _('English')),
+    # ('fr', _('French')),
+    # ('en', _('English')),
 )
 
 USE_I18N = True
@@ -91,6 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.blog',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',

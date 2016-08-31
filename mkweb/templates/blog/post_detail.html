@@ -5,7 +5,9 @@
 {% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
-  <h2>{{ post.title }}</h2>
+<main class="writing">
+
+  <h1>{{ post.title }}</h1>
   <div class="text">
     {{ post.html|safe }}
   </div>
@@ -25,10 +27,8 @@
         <a href="{{ category.get_absolute_url }}">
           {{ category }}</a>{% if not forloop.last %},{% endif %}
       {% endfor %}
-      {% if user.is_staff %}
-        | <a href="{% url 'admin:blog_post_change' post.pk %}" target="_blank">edit</a>
-      {% endif %}
     </small>
   </p>
 
+</main>
 {% endblock %}

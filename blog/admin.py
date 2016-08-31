@@ -36,6 +36,7 @@ class PostAdmin(admin.ModelAdmin):
                 ('title', 'author'),
                 'content',
                 'content_type',
+                'is_active',
                 'published_on',
                 'categories',
             ),
@@ -45,9 +46,10 @@ class PostAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     ]
-    list_display = ('title', 'published_on', 'author')
+    list_display = ('title', 'is_active', 'published_on', 'author')
     list_filter = (
         ('published_on', PublishedOnListFilter),
+        'is_active',
         'author',
         'categories',
     )
