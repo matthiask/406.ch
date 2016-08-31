@@ -20,12 +20,12 @@ class PublishedOnListFilter(admin.DateFieldListFilter):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'posts')
+    list_display = ('title', 'post_count')
     prepopulated_fields = {'slug': ('title',)}
 
-    def posts(self, instance):
-        return instance.posts.count()
-    posts.short_description = _('posts')
+    def post_count(self, instance):
+        return instance.posts.published().count()
+    post_count.short_description = _('posts')
 
 
 class PostAdmin(admin.ModelAdmin):
