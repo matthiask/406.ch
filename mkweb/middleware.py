@@ -1,19 +1,20 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
-from django.core.exceptions import MiddlewareNotUsed
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
+from django.utils.deprecation import MiddlewareMixin
+
+from debug_toolbar.middleware import DebugToolbarMiddleware
 
 
-class ForceDomainMiddleware(object):
-    def __init__(self):
-        if settings.DEBUG or not settings.FORCE_DOMAIN:
-            raise MiddlewareNotUsed
+def force_domain(get_response):
+    if settings.DEBUG or not settings.FORCE_DOMAIN:
+        return get_response
 
-    def process_request(self, request):
+    def middleware(request):
         if request.method != 'GET':
-            return
+            return get_response(request)
 
         if request.META.get('HTTP_HOST') != settings.FORCE_DOMAIN:
             target = 'http%s://%s%s' % (
@@ -22,16 +23,27 @@ class ForceDomainMiddleware(object):
                 request.get_full_path())
             return HttpResponsePermanentRedirect(target)
 
+        return get_response(request)
 
-class OnlyStaffMiddleware(object):
-    def __init__(self):
-        if settings.DEBUG or settings.TESTING:
-            raise MiddlewareNotUsed
+    return middleware
 
-    def process_request(self, request):
+
+def only_staff(get_response):
+    if settings.DEBUG or settings.TESTING:
+        return get_response
+
+    def middleware(request):
         if request.path.startswith('/admin'):
-            pass
+            return get_response(request)
         elif not request.user.is_staff:
             response = render_to_response('only_staff.html', {})
             response.status_code = 403
             return response
+
+        return get_response(request)
+
+    return middleware
+
+
+class WorkingDebugToolbarMiddleware(MiddlewareMixin, DebugToolbarMiddleware):
+    pass

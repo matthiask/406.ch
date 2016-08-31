@@ -66,16 +66,16 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-MIDDLEWARE_CLASSES = [m for m in [
-    'mkweb.middleware.ForceDomainMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware' if DEBUG_TOOLBAR else '',
+MIDDLEWARE = [m for m in [
+    'mkweb.middleware.force_domain',
+    'mkweb.middleware.WorkingDebugToolbarMiddleware' if DEBUG_TOOLBAR else '',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    # '' if LIVE else 'app.middleware.OnlyStaffMiddleware',
+    # '' if LIVE else 'app.middleware.only_staff',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ] if m]
