@@ -85,6 +85,31 @@ header {
     line-height: 1.5;
   }
 
+  ul {
+    list-style-type: disc;
+    margin-left: 1.25rem;
+
+    li {
+      display: list-item;
+    }
+  }
+
+  blockquote {
+    font-style: italic;
+    margin-left: 2rem;
+    position: relative;
+  }
+
+  blockquote::before {
+    content: open-quote;
+    display: block;
+    position: absolute;
+    left: -3rem;
+    top: -4.5rem;
+    font-size: 6rem;
+    color: rgba(0, 0, 30, .4);
+  }
+
   small {
     font-size: 70%;
   }
