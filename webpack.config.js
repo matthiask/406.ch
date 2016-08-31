@@ -86,7 +86,7 @@ var config = {
   ],
   // dev server not working yet. Have to not extract css during development.
   devServer: {
-    contentBase: path.join(__dirname, 'app', 'static', 'app', 'build'),
+    contentBase: path.join(__dirname, 'mkweb', 'static', 'mkweb', 'build'),
     inline: true,
     colors: true,
     quiet: false,

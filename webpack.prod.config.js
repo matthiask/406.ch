@@ -22,7 +22,7 @@ config.module.loaders = [
     //uflifying, which then solves the problem
     //see https://webpack.github.io/docs/configuration.html#module-loaders
     include: [
-      path.resolve(__dirname, 'app/static'),
+      path.resolve(__dirname, 'mkweb/static'),
       path.resolve(__dirname, 'assets/js'),
       path.resolve(__dirname, 'node_modules/foundation-sites/js'),
     ],
@@ -55,7 +55,7 @@ config.module.loaders = [
 ];
 config.output = {
   path: path.resolve('./assets/dist/'),
-  publicPath: '/static/app/dist/',
+  publicPath: '/static/mkweb/dist/',
   filename: '[name]-[hash].js',
 };
 
