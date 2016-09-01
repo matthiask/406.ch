@@ -21,7 +21,7 @@ pyasn1-modules==0.0.8
 pycodestyle==2.0.0
 pyflakes==1.2.3
 pytz==2016.6.1
-raven==5.25.0
+raven==5.26.0
 redis==2.10.5
 rsa==3.4.2
 six==1.10.0

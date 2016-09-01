@@ -122,6 +122,7 @@ INSTALLED_APPS = [app for app in [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.sitemaps',
 
     'mkweb',
     'blog',
