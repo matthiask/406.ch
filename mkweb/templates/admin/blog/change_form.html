@@ -7,4 +7,15 @@
     min-height: 450px;
   }
 </style>
+<script>
+  django.jQuery(function($) {
+    $(document).keydown(function handleKeys(event) {
+      // Ctrl-s or Cmd-s
+      if (event.which == 83 && (event.metaKey || event.ctrlKey)) {
+        $('form input[name=_continue]').click();
+        return false;
+      }
+    });
+  });
+</script>
 {% endblock %}
