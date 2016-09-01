@@ -86,6 +86,8 @@ class Post(models.Model):
 @receiver(signals.pre_save, sender=Post)
 def render_html(instance, **kwargs):
     if instance.content_type == 'markdown':
-        instance.html = markdown(instance.content)
+        instance.html = markdown(instance.content, extras=(
+            'smarty-pants',
+        ))
     else:
         instance.html = instance.content
