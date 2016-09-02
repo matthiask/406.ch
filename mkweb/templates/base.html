@@ -3,10 +3,10 @@
 {% load render_bundle from webpack_loader %}
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% block title %}406{% endblock %}</title>
+  <meta name="description" content="The digital home of Matthias Kestenholz">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet">
   {% if debug %}
@@ -35,7 +35,6 @@
 <div class="wrappy">
 
   <header>
-    <h1><a href="/">406 NOT ACCEPTABLE</a></h1>
     <nav>
       <a href="/">Home</a>
       <a href="{% url 'blog_post_archive' %}">Writing</a>
@@ -45,9 +44,12 @@
 
   {% block content %}
   <main class="links">
+    <p>Hey! I am Matthias. I work at <a href="https://www.feinheit.ch/">Feinheit</a>
+    and I like family time, open source development and biking.</p>
+
     <h2>Companies</h2>
     <ul>
-      <li><a href="http://www.feinheit.ch/" target="_blank">
+      <li><a href="https://www.feinheit.ch/" target="_blank">
         Feinheit AG
       </a></li>
       <li><a href="http://diebruchpiloten.com/" target="_blank">
@@ -77,6 +79,8 @@
     </ul>
   </main>
   {% endblock %}
+
+  <small class="copy">&copy; 2005 - {% now 'Y' %} Matthias Kestenholz</small>
 
   {% comment %}
     {% if not debug %}
