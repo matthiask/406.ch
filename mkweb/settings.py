@@ -9,9 +9,14 @@ import os
 from speckenv import env
 import sys
 
-DEBUG = any(r in sys.argv for r in ('runserver', 'shell', 'dbshell'))
+DEBUG = env(
+    'DEBUG',
+    default=any(r in sys.argv for r in ('runserver', 'shell', 'dbshell')))
 TESTING = any(r in sys.argv for r in ('test',))
 LIVE = env('LIVE', default=False)
+FORCE_SSL = env('FORCE_SSL', default=False)
+FORCE_DOMAIN = env('FORCE_DOMAIN')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS', required=True)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,8 +45,6 @@ CACHES = {
 }
 
 SECRET_KEY = env('SECRET_KEY', required=True)
-FORCE_DOMAIN = env('FORCE_DOMAIN')
-ALLOWED_HOSTS = env('ALLOWED_HOSTS', required=True)
 
 TIME_ZONE = 'Europe/Zurich'
 LANGUAGE_CODE = 'de'
@@ -67,8 +70,11 @@ STATICFILES_FINDERS = (
 )
 
 MIDDLEWARE = [m for m in [
-    'mkweb.middleware.force_domain',
     'debug_toolbar.middleware.DebugToolbarMiddleware' if DEBUG_TOOLBAR else '',
+    (
+        'django.middleware.security.SecurityMiddleware' if FORCE_SSL
+        else 'app.middleware.force_domain'
+    ),
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -187,6 +193,20 @@ if DEBUG:
 
     # DEFAULT_FILE_STORAGE = 'http_fallback_storage.FallbackStorage'
     # FALLBACK_STORAGE_URL = 'http://fcz.ch.fcz01.nine.ch/media/'
+
+if FORCE_SSL:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    if FORCE_DOMAIN:
+        SECURE_SSL_REDIRECT = True
+        SECURE_SSL_HOST = FORCE_DOMAIN
+    # SECURE_HSTS_SECONDS = 30 * 86400
+    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+else:
+    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 # Avoid a problem with PIL's too small blocksize when decoding really big
 # JPEGs.
