@@ -73,7 +73,7 @@ MIDDLEWARE = [m for m in [
     'debug_toolbar.middleware.DebugToolbarMiddleware' if DEBUG_TOOLBAR else '',
     (
         'django.middleware.security.SecurityMiddleware' if FORCE_SSL
-        else 'app.middleware.force_domain'
+        else 'mkweb.middleware.force_domain'
     ),
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,7 +81,7 @@ MIDDLEWARE = [m for m in [
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    # '' if LIVE else 'app.middleware.only_staff',
+    # '' if LIVE else 'mkweb.middleware.only_staff',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ] if m]
