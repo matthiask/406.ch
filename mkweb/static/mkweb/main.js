@@ -12,6 +12,8 @@
 // require('imports?jQuery=jquery!foundation-sites/js/foundation.responsiveToggle');
 // require('imports?jQuery=jquery!foundation-sites/js/foundation.sticky');
 
+import './main.scss';
+
 import 'blissfuljs';
 // import debounce from 'lodash/debounce';
 // import {SwipeDetector} from './swipedetector';

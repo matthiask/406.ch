@@ -3,9 +3,6 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
-from django.utils.deprecation import MiddlewareMixin
-
-from debug_toolbar.middleware import DebugToolbarMiddleware
 
 
 def force_domain(get_response):
@@ -43,7 +40,3 @@ def only_staff(get_response):
         return get_response(request)
 
     return middleware
-
-
-class WorkingDebugToolbarMiddleware(MiddlewareMixin, DebugToolbarMiddleware):
-    pass

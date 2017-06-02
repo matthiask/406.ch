@@ -13,3 +13,4 @@ markdown2
 psycopg2
 pytz
 raven
+speckenv

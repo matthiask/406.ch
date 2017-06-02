@@ -2,11 +2,11 @@
 
 from __future__ import absolute_import, unicode_literals
 
-from env import env
 import dj_database_url
 import django_cache_url
 from django.utils.translation import ugettext_lazy as _
 import os
+from speckenv import env
 import sys
 
 DEBUG = any(r in sys.argv for r in ('runserver', 'shell', 'dbshell'))
@@ -68,7 +68,7 @@ STATICFILES_FINDERS = (
 
 MIDDLEWARE = [m for m in [
     'mkweb.middleware.force_domain',
-    'mkweb.middleware.WorkingDebugToolbarMiddleware' if DEBUG_TOOLBAR else '',
+    'debug_toolbar.middleware.DebugToolbarMiddleware' if DEBUG_TOOLBAR else '',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,7 +84,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'app', 'templates'),
+            os.path.join(BASE_DIR, 'mkweb', 'templates'),
         ],
         'OPTIONS': {
             'context_processors': [
@@ -136,14 +136,10 @@ INSTALLED_APPS = [app for app in [
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'build/' if DEBUG else 'dist/',
         'STATS_FILE': os.path.join(
-            BASE_DIR,
-            'tmp',
-            'webpack-stats.json' if DEBUG else 'webpack-stats-prod.json',
+            BASE_DIR, 'static',
+            'webpack-stats-%s.json' % ('dev' if DEBUG else 'prod')
         ),
-        'POLL_DELAY': 0.2,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
     },
 }
 

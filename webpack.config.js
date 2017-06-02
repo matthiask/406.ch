@@ -2,95 +2,115 @@
 var path = require('path');
 var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
-var autoprefixer = require('autoprefixer');
-var nodeModulesDir = path.join(__dirname, 'node_modules');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
-var host = process.env.HOST || '127.0.0.1';
+var HOST = process.env.HOST || '127.0.0.1';
+var DEBUG = (process.env.NODE_ENV !== 'production');
+var HTTPS = !!process.env.HTTPS;
 
-var config = {
-  context: path.join(__dirname, 'assets'),
-  debug: true,
+function cssLoader(firstLoader) {
+  return ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: ['css-loader?sourceMap', 'postcss-loader?sourceMap'].concat(firstLoader || []),
+  });
+}
+
+module.exports = {
+  context: path.join(__dirname, 'mkweb', 'static', 'mkweb'),
+  devtool: 'source-map',
   entry: {
-    main: [
-      'webpack-dev-server/client?http://' + host + ':4000',
-      'webpack/hot/dev-server',
-      './js/main',
-      './scss/main.scss',
-    ],
+    main: './main.js',
   },
   output: {
-    path: path.resolve('./assets/build/'),
-    publicPath: 'http://' + host + ':4000/assets/build/',
+    path: path.resolve('./static/mkweb/'),
+    publicPath: DEBUG ? 'http' + (HTTPS ? 's' : '') + '://' + HOST + ':4000/' : '/static/mkweb/',
     filename: '[name]-[hash].js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: [
-          'babel?presets[]=es2015,cacheDirectory=' + path.resolve(__dirname, 'tmp'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['es2015', {modules: false}],
+              ],
+              cacheDirectory: path.resolve(__dirname, 'tmp'),
+            },
+          },
         ],
       },
       {
         test: /\.css$/,
-        loader: 'style!css',
+        use: cssLoader(),
       },
-      // Optionally extract less files
-      // or any other compile-to-css language
       {
         test: /\.scss$/,
-        loader: 'style!css!postcss!sass',
+        use: cssLoader({
+          loader: 'sass-loader',
+          options: {
+            includePaths: [path.resolve(path.join(__dirname, 'node_modules'))],
+            outputStyle: 'expanded',
+            sourceMap: true,
+          },
+        }),
       },
       {
-        test: /\.less/,
-        loader: 'style-loader!css-loader!less-loader?relative-urls',
+        test: /\.less$/,
+        use: cssLoader('less-loader'),
       },
       {
-        test: /\.(png|woff|woff2|svg|eot|ttf)$/,
-        loader: 'url-loader?limit=20000',
-      },
-      {
-        test: /\.(jpg)$/,
-        loader: 'file?relative-urls',
+        test: /\.(png|woff|woff2|svg|eot|ttf|gif|jpe?g)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1000,
+              // ManifestStaticFilesStorage reuse.
+              name: '[path][name].[md5:hash:hex:12].[ext]',
+              // No need to emit files in production, collectstatic does it.
+              emitFile: DEBUG,
+            },
+          },
+        ],
       },
     ],
-    noParse: [],
-  },
-  postcss: [
-    autoprefixer({
-      browsers: ['last 2 versions', 'ie >= 9'],
-    }),
-  ],
-  sassLoader: {
-    includePaths: [path.resolve(nodeModulesDir)],
-    outputStyle: 'expanded',
-    sourceMap: true,
   },
   resolve: {
-    // Allow require('./blah') to require blah.jsx
-    extensions: ['', '.js', '.jsx'],
-    modulesDirectories: [
-      'assets/js',
-      'assets/scss',
-      'assets/img',
+    extensions: ['.js', '.jsx'],
+    modules: [
+      'mkweb/static/mkweb/',
       'node_modules',
     ],
     alias: {},
   },
-  // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(), // don't reload if there is an error
-    new BundleTracker({filename: './tmp/webpack-stats.json'}),
-  ],
-  // dev server not working yet. Have to not extract css during development.
+    new CleanWebpackPlugin([path.resolve('./static/mkweb/')]),
+    new ExtractTextPlugin({
+      filename: '[name]-[hash].css',
+      disable: DEBUG,
+      allChunks: true,
+    }),
+    new BundleTracker({
+      filename: './static/webpack-stats-' + (DEBUG ? 'dev' : 'prod') + '.json',
+    }),
+    DEBUG ? new webpack.NamedModulesPlugin() : null,
+  ].filter(function(el) { return !!el; }),
   devServer: {
-    contentBase: path.join(__dirname, 'mkweb', 'static', 'mkweb', 'build'),
+    contentBase: false,
     inline: true,
-    colors: true,
     quiet: false,
+    https: HTTPS,
+    disableHostCheck: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+  },
+  performance: {
+    // No point warning in development, since HMR / CSS bundling blows up
+    // the asset / entrypoint size anyway.
+    hints: DEBUG ? false : 'warning',
   },
 };
-
-module.exports = config;

@@ -13,7 +13,7 @@
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script>
     {% render_bundle 'main' %}
   {% else %}
-    {% render_bundle 'styles' 'css' %}
+    {% render_bundle 'main' 'css' %}
   {% endif %}
 
   <link rel="alternate" type="application/atom+xml"
@@ -46,6 +46,10 @@
   <main class="links">
     <p>Hey! I am Matthias. I work at <a href="https://www.feinheit.ch/">Feinheit</a>
     and I like family time, open source development and biking.</p>
+    <p>
+      <a href="http://tinyletter.com/matthiask" target="_blank">Subscribe here</a>
+      for sporadic updates about my open source work.
+    </p>
 
     <h2>Companies</h2>
     <ul>
@@ -85,7 +89,7 @@
   {% comment %}
     {% if not debug %}
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script>
-    {% render_bundle 'main' %}
+    {% render_bundle 'main' 'js' %}
     {% endif %}
   {% endcomment %}
 

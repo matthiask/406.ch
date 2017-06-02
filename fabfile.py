@@ -15,6 +15,7 @@ Usage::
 from __future__ import unicode_literals
 
 from fabric.api import env
+import fh_fablib
 
 # env.box_environment contains the currently active environment.
 
@@ -23,7 +24,7 @@ env.box_project_name = 'mkweb'
 env.box_domain = '406.ch'
 env.box_database_local = '406_ch'
 env.box_staticfiles = '%(box_project_name)s/static/%(box_project_name)s' % env
-env.box_static_src = 'assets'
+env.box_static_src = env.box_staticfiles
 env.box_python = 'python3'
 env.forward_agent = True
 
@@ -55,3 +56,6 @@ env.box_environments = {
         'database': 'stage_fcz_ch',
     },
 }
+
+
+fh_fablib.init(globals())
