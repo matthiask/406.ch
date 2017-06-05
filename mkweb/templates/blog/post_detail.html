@@ -14,7 +14,7 @@
     <p>
       <small>
         {% if post.published_on %}
-          {% with published_on=post.published_on|date:"d.m.Y" %}
+          {% with published_on=post.published_on|date:"Y-m-d" %}
             {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
           {% endwith %}
         {% else %}
@@ -22,7 +22,7 @@
         {% endif %}
 
         {% for category in post.categories.all %}
-          {% if forloop.first %}|{% endif %}
+          {% if forloop.first %}in{% endif %}
           <a href="{{ category.get_absolute_url }}">
             {{ category }}</a>{% if not forloop.last %},{% endif %}
         {% endfor %}

@@ -7,17 +7,6 @@
 
 <h1>{% trans 'Writing' %}</h1>
 
-<p>
-  <small>
-  {% for category in blog.categories %}
-    <a
-      {% if category.get_absolute_url in request.path %}class="active"{% endif %}
-      href="{{ category.get_absolute_url }}"
-    >{{ category.title }}</a>{% if not forloop.last %},{% endif %}
-  {% endfor %}
-  </small>
-</p>
-
 {% for post in object_list %}
   {% ifchanged post.published_on.date|date:"Y" %}
     <small>{{ post.published_on.date|date:"Y" }}</small>
@@ -49,6 +38,18 @@
     {% endif %}
   </ul>
 {% endif %}
+
+<p>
+  <small>
+    <strong>Categories:</strong>
+  {% for category in blog.categories %}
+    <a
+      {% if category.get_absolute_url in request.path %}class="active"{% endif %}
+      href="{{ category.get_absolute_url }}"
+    >{{ category.title }}</a>{% if not forloop.last %},{% endif %}
+  {% endfor %}
+  </small>
+</p>
 
 </main>
 {% endblock %}
