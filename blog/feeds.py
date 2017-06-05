@@ -13,7 +13,9 @@ class PostFeed(Feed):
     # subtitle = ''
 
     def items(self):
-        return Post.objects.published()[:20]
+        return Post.objects.published().filter(
+            published_on__year__gte=2014,
+        )[:20]
 
     def item_title(self, item):
         return item.title
