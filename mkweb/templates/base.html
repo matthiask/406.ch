@@ -36,9 +36,9 @@
 
   <header>
     <nav>
-      <a href="/">About me</a>
-      <a href="/projects/">Projects</a>
-      <a href="{% url 'blog_post_archive' %}">Writing</a>
+      <a {% if request.path == '/' %}class="active"{% endif %} href="/">About me</a>
+      <a {% if '/projects/' in request.path %}class="active"{% endif %} href="/projects/">Projects</a>
+      <a {% if '/writing/' in request.path %}class="active"{% endif %} href="{% url 'blog_post_archive' %}">Writing</a>
     </nav>
   </header>
 
