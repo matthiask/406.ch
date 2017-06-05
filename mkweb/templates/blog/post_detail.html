@@ -10,25 +10,31 @@
   <h1>{{ post.title }}</h1>
   <div class="text">
     {{ post.html|safe }}
+
+    <p>
+      <small>
+        {% if post.published_on %}
+          {% with published_on=post.published_on|date:"d.m.Y" %}
+            {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
+          {% endwith %}
+        {% else %}
+          {% trans "Not published yet" %}
+        {% endif %}
+
+        {% for category in post.categories.all %}
+          {% if forloop.first %}|{% endif %}
+          <a href="{{ category.get_absolute_url }}">
+            {{ category }}</a>{% if not forloop.last %},{% endif %}
+        {% endfor %}
+        <br>
+        Subscribe to the
+        <a href="http://tinyletter.com/matthiask" target="_blank">Newsletter</a>
+        or the <a href="/writing/feed/">RSS feed</a> if you want to be kept up
+        to date.
+      </small>
+    </p>
+
   </div>
-
-  <p>
-    <small>
-      {% if post.published_on %}
-        {% with published_on=post.published_on|date:"d.m.Y" %}
-          {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
-        {% endwith %}
-      {% else %}
-        {% trans "Not published yet" %}
-      {% endif %}
-
-      {% for category in post.categories.all %}
-        {% if forloop.first %}|{% endif %}
-        <a href="{{ category.get_absolute_url }}">
-          {{ category }}</a>{% if not forloop.last %},{% endif %}
-      {% endfor %}
-    </small>
-  </p>
 
 </main>
 {% endblock %}
