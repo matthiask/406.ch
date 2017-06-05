@@ -4,7 +4,7 @@ from __future__ import absolute_import, unicode_literals
 
 import dj_database_url
 import django_cache_url
-from django.utils.translation import ugettext_lazy as _
+# from django.utils.translation import ugettext_lazy as _
 import os
 from speckenv import env
 import sys
@@ -47,9 +47,9 @@ CACHES = {
 SECRET_KEY = env('SECRET_KEY', required=True)
 
 TIME_ZONE = 'Europe/Zurich'
-LANGUAGE_CODE = 'de'
+LANGUAGE_CODE = 'en'
 LANGUAGES = (
-    ('de', _('German')),
+    # ('de', _('German')),
     # ('fr', _('French')),
     # ('en', _('English')),
 )
