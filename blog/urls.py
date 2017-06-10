@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.http import HttpResponseRedirect
 
 from . import feeds, views
 
@@ -24,4 +25,15 @@ urlpatterns = [
         views.post_detail_redirect),
     url(r'^(?P<slug>[^/]+)/$', views.post_detail,
         name='blog_post_detail'),
+
+    url(
+        r'^category/([^/]+)/$',
+        lambda r, slug: HttpResponseRedirect(
+            '../../category-%s/' % slug),
+    ),
+    url(
+        r'^category/([^/]+)/feed/$',
+        lambda r, slug: HttpResponseRedirect(
+            '../../../category-%s/feed/' % slug),
+    ),
 ]
