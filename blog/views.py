@@ -9,16 +9,15 @@ class PostMixin(object):
     date_field = 'published_on'
     make_object_list = True
     month_format = '%m'
-    recent = False
-    archive = False
+    archive = None
 
     def get_queryset(self):
         posts = Post.objects.published()
         if self.request.GET.get('q'):
             posts &= Post.objects.search(self.request.GET['q'])
-        if self.recent:
+        if self.archive is False:
             posts = posts.filter(published_on__year__gte=2014)
-        elif self.archive:
+        elif self.archive is True:
             posts = posts.filter(published_on__year__lt=2014)
         return posts
 

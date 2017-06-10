@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^feed/$', feeds.PostFeed(), name='blog_post_feed'),
 
     url(r'^$',
-        views.ArchiveIndexView.as_view(recent=True),
+        views.ArchiveIndexView.as_view(archive=False),
         name='blog_post_archive'),
     url(r'^archive/$',
         views.ArchiveIndexView.as_view(archive=True)),
