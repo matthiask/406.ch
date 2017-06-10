@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=200)
-    slug = models.SlugField(_('slug'), max_length=200)
+    slug = models.SlugField(_('slug'), max_length=200, unique=True)
 
     class Meta:
         ordering = ['title']
