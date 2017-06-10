@@ -48,6 +48,14 @@
       href="{{ category.get_absolute_url }}"
     >{{ category.title }}</a>{% if not forloop.last %},{% endif %}
   {% endfor %}
+
+    <br>
+    <strong>RSS feeds:</strong>
+    <a href="{% url 'blog_post_feed' %}">All posts</a>,
+    {% for category in blog.categories %}
+      <a href="{% url 'blog_category_feed' slug=category.slug %}">
+        {{ category }}</a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
   </small>
 </p>
 

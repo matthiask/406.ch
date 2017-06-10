@@ -1,16 +1,19 @@
 from django.contrib.syndication.views import Feed
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils.feedgenerator import Atom1Feed
-from django.utils.translation import ugettext_lazy as _
 
-from .models import Post
+from .models import Category, Post
 
 
 class PostFeed(Feed):
     feed_type = Atom1Feed
-    title = _('406 NOT ACCEPTABLE')
-    link = reverse_lazy('blog_post_feed')
-    # subtitle = ''
+
+    def title(self):
+        return '406'
+
+    def link(self):
+        return reverse('blog_post_feed')
 
     def items(self):
         return Post.objects.published().filter(
@@ -22,3 +25,20 @@ class PostFeed(Feed):
 
     def item_description(self, item):
         return item.html
+
+
+class CategoryFeed(PostFeed):
+    def get_object(self, request, slug):
+        return get_object_or_404(Category, slug=slug)
+
+    def title(self, obj):
+        return '406: Posts about %s' % obj
+
+    def link(self, obj):
+        return reverse('blog_category_feed', kwargs={'slug': obj.slug})
+
+    def items(self, obj):
+        return Post.objects.published().filter(
+            categories=obj,
+            published_on__year__gte=2014,
+        )[:20]
