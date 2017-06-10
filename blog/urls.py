@@ -7,7 +7,11 @@ from . import feeds, views
 urlpatterns = [
     url(r'^feed/$', feeds.PostFeed(), name='blog_post_feed'),
 
-    url(r'^$', views.ArchiveIndexView.as_view(), name='blog_post_archive'),
+    url(r'^$',
+        views.ArchiveIndexView.as_view(recent=True),
+        name='blog_post_archive'),
+    url(r'^archive/$',
+        views.ArchiveIndexView.as_view(archive=True)),
     url(r'^(?P<year>\d{4})/$',
         views.YearArchiveView.as_view(), name='blog_post_archive_year'),
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$',

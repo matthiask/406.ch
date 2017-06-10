@@ -19,6 +19,14 @@
   </h2>
 {% endfor %}
 
+{% if view.recent %}
+<p>
+  <small>
+    <a href="/writing/archive/">Find older posts in the <strong>archive</strong>.</a>
+  </small>
+</p>
+{% endif %}
+
 {% if page_obj.has_other_pages %}
   <ul class="pagination">
     {% if page_obj.has_previous %}
