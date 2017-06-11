@@ -1,30 +1,62 @@
-/*eslint no-unused-vars: ["error", { "vars": "local" }]*/
-/* global $, $$ */  /* Bliss */
-// var $ = require('jquery');
-// require('foundation-sites');
-// require('jquery');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.core');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.util.triggers');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.util.mediaQuery');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.util.keyboard');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.util.box');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.util.nest');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.responsiveToggle');
-// require('imports?jQuery=jquery!foundation-sites/js/foundation.sticky');
-
 import './main.scss';
 
 import 'blissfuljs';
-// import debounce from 'lodash/debounce';
-// import {SwipeDetector} from './swipedetector';
-// import smoothScroll from 'smoothscroll';
+const {$, $$} = window;
+
+import {EditorState} from 'prosemirror-state';
+import {EditorView} from 'prosemirror-view';
+import {schema} from 'prosemirror-schema-basic';
+import {DOMParser} from 'prosemirror-model';
+// import {keymap} from 'prosemirror-keymap';
+// import {baseKeymap} from 'prosemirror-commands';
+// import {history} from 'prosemirror-history';
+import {exampleSetup} from 'prosemirror-example-setup';
+
+import 'prosemirror-example-setup/style/style.css';
+import 'prosemirror-view/style/prosemirror.css';
+import 'prosemirror-menu/style/menu.css';
 
 
-document.addEventListener('DOMContentLoaded', function initializeFooter() {
-  /*
-  $('footer .lid').addEventListener(
-    'click', () => document.body.classList.toggle('footer-open'));
-  */
+document.addEventListener('DOMContentLoaded', function() {
+  $$('.content').forEach((element) => {
+
+    let editor = $.after($.create('div', {
+      className: 'editor',
+    }), element);
+
+    const state = EditorState.create({
+      doc: DOMParser.fromSchema(schema).parse(element),
+      plugins: exampleSetup({
+        schema: schema,
+      }),
+    });
+    const view = new EditorView(editor, {
+      state: state,
+      dispatchTransaction(tr) {
+        view.updateState(view.state.apply(tr));
+        window.console.log(tr);
+      },
+    });
+
+    element.style.display = 'none';
+
+    /*
+    import {DOMSerializer} from 'prosemirror-model';
+
+    const xs = new XMLSerializer(),
+      ds = DOMSerializer.fromSchema(schema);
+
+    window.serialize = function() {
+      let html = xs.serializeToString(ds.serializeFragment(state.doc.content));
+      window.console.log(html);
+    };
+    */
+
+    window.serialize = function() {
+      window.console.log($('.editor [contenteditable]').innerHTML);
+    };
+
+  });
 });
 
 

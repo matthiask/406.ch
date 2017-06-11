@@ -615,17 +615,7 @@ babel-runtime@^6.18.0, babel-runtime@^6.22.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
-babel-template@^6.24.1:
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.24.1.tgz#04ae514f1f93b3a2537f2a0f60a5a45fb8308333"
-  dependencies:
-    babel-runtime "^6.22.0"
-    babel-traverse "^6.24.1"
-    babel-types "^6.24.1"
-    babylon "^6.11.0"
-    lodash "^4.2.0"
-
-babel-template@^6.25.0:
+babel-template@^6.24.1, babel-template@^6.25.0:
   version "6.25.0"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.25.0.tgz#665241166b7c2aa4c619d71e192969552b10c071"
   dependencies:
@@ -635,21 +625,7 @@ babel-template@^6.25.0:
     babylon "^6.17.2"
     lodash "^4.2.0"
 
-babel-traverse@^6.23.1, babel-traverse@^6.24.1:
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/babel-traverse/-/babel-traverse-6.24.1.tgz#ab36673fd356f9a0948659e7b338d5feadb31695"
-  dependencies:
-    babel-code-frame "^6.22.0"
-    babel-messages "^6.23.0"
-    babel-runtime "^6.22.0"
-    babel-types "^6.24.1"
-    babylon "^6.15.0"
-    debug "^2.2.0"
-    globals "^9.0.0"
-    invariant "^2.2.0"
-    lodash "^4.2.0"
-
-babel-traverse@^6.25.0:
+babel-traverse@^6.23.1, babel-traverse@^6.24.1, babel-traverse@^6.25.0:
   version "6.25.0"
   resolved "https://registry.yarnpkg.com/babel-traverse/-/babel-traverse-6.25.0.tgz#2257497e2fcd19b89edc13c4c91381f9512496f1"
   dependencies:
@@ -663,16 +639,7 @@ babel-traverse@^6.25.0:
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@^6.19.0, babel-types@^6.23.0, babel-types@^6.24.1:
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.24.1.tgz#a136879dc15b3606bda0d90c1fc74304c2ff0975"
-  dependencies:
-    babel-runtime "^6.22.0"
-    esutils "^2.0.2"
-    lodash "^4.2.0"
-    to-fast-properties "^1.0.1"
-
-babel-types@^6.25.0:
+babel-types@^6.19.0, babel-types@^6.23.0, babel-types@^6.24.1, babel-types@^6.25.0:
   version "6.25.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.25.0.tgz#70afb248d5660e5d18f811d91c8303b54134a18e"
   dependencies:
@@ -681,7 +648,7 @@ babel-types@^6.25.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babylon@^6.11.0, babylon@^6.15.0, babylon@^6.17.0, babylon@^6.17.2:
+babylon@^6.17.0, babylon@^6.17.2:
   version "6.17.2"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.17.2.tgz#201d25ef5f892c41bae49488b08db0dd476e9f5c"
 
@@ -1163,6 +1130,10 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+crel@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/crel/-/crel-3.0.1.tgz#0b8d181950d1933aa8cdfd3944daba805af9f38a"
 
 cross-spawn@^3.0.0:
   version "3.0.1"
@@ -2945,6 +2916,10 @@ optionator@^0.8.2:
     type-check "~0.3.2"
     wordwrap "~1.0.0"
 
+orderedmap@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/orderedmap/-/orderedmap-1.0.0.tgz#d90fc2ba1ed085190907d601dec6e6a53f8d41ba"
+
 original@>=0.0.5:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/original/-/original-1.0.0.tgz#9147f93fa1696d04be61e01bd50baeaca656bd3b"
@@ -3399,6 +3374,114 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
+prosemirror-commands@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-commands/-/prosemirror-commands-0.21.0.tgz#74fdc07e7ddecad62cab3479e8fbb880289f2729"
+  dependencies:
+    prosemirror-model "^0.21.0"
+    prosemirror-state "^0.21.0"
+    prosemirror-transform "^0.21.0"
+
+prosemirror-dropcursor@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-dropcursor/-/prosemirror-dropcursor-0.21.0.tgz#93a9234944d5403349aa25f0314f7c42660ba4d7"
+  dependencies:
+    prosemirror-state "^0.21.0"
+    prosemirror-view "^0.21.0"
+
+prosemirror-example-setup@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-example-setup/-/prosemirror-example-setup-0.21.0.tgz#4fa4c2d9702e1200e348e129042258567c0e36ce"
+  dependencies:
+    prosemirror-commands "^0.21.0"
+    prosemirror-dropcursor "^0.21.0"
+    prosemirror-history "^0.21.0"
+    prosemirror-inputrules "^0.21.0"
+    prosemirror-keymap "^0.21.0"
+    prosemirror-menu "^0.21.0"
+    prosemirror-schema-list "^0.21.0"
+    prosemirror-schema-table "^0.21.0"
+    prosemirror-state "^0.21.0"
+
+prosemirror-history@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-history/-/prosemirror-history-0.21.0.tgz#721096d754dc8f90a106c53a90683e7f0a6dc77a"
+  dependencies:
+    prosemirror-state "^0.21.0"
+    prosemirror-transform "^0.21.0"
+    rope-sequence "^1.2.0"
+
+prosemirror-inputrules@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-inputrules/-/prosemirror-inputrules-0.21.0.tgz#d3bd3ada61d162040b51fce27f2a9f7bd77ae8fd"
+  dependencies:
+    prosemirror-state "^0.21.0"
+    prosemirror-transform "^0.21.0"
+
+prosemirror-keymap@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-keymap/-/prosemirror-keymap-0.21.0.tgz#501f17b33423cc46e57daf62cae684307175a26e"
+  dependencies:
+    prosemirror-state "^0.21.0"
+    w3c-keyname "^1.1.0"
+
+prosemirror-menu@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-menu/-/prosemirror-menu-0.21.0.tgz#6118fe3958a370f49351531ea0a141fef8d90cf4"
+  dependencies:
+    crel "^3.0.0"
+    prosemirror-commands "^0.21.0"
+    prosemirror-history "^0.21.0"
+    prosemirror-state "^0.21.0"
+
+prosemirror-model@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-model/-/prosemirror-model-0.21.0.tgz#9ff771e69ac4f0c3338414e67ed120d2a0465b42"
+  dependencies:
+    orderedmap "^1.0.0"
+
+prosemirror-schema-basic@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-schema-basic/-/prosemirror-schema-basic-0.21.0.tgz#92011d65431315c9c74a7a53a1726177f7c465a3"
+  dependencies:
+    prosemirror-model "^0.21.0"
+
+prosemirror-schema-list@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-schema-list/-/prosemirror-schema-list-0.21.0.tgz#2a0f779559789a142afcbd26811e59c38b0cb940"
+  dependencies:
+    prosemirror-model "^0.21.0"
+    prosemirror-transform "^0.21.0"
+
+prosemirror-schema-table@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-schema-table/-/prosemirror-schema-table-0.21.0.tgz#0dd3ec3fdf7a641c981f2b4d12374f58b3f6e6c7"
+  dependencies:
+    prosemirror-model "^0.21.0"
+    prosemirror-state "^0.21.0"
+    prosemirror-transform "^0.21.0"
+
+prosemirror-state@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/prosemirror-state/-/prosemirror-state-0.21.0.tgz#7011637e0d9528549024c56f364718bb5e99edc4"
+  dependencies:
+    prosemirror-model "^0.21.0"
+    prosemirror-transform "^0.21.0"
+
+prosemirror-transform@^0.21.0:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/prosemirror-transform/-/prosemirror-transform-0.21.1.tgz#fa75522c520386c8e041136d4cdfe93f27535d5e"
+  dependencies:
+    prosemirror-model "^0.21.0"
+
+prosemirror-view@^0.21.0, prosemirror-view@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/prosemirror-view/-/prosemirror-view-0.21.1.tgz#106f39ab1ea134bf738259e6d8b194533b3c108f"
+  dependencies:
+    prosemirror-model "^0.21.0"
+    prosemirror-state "^0.21.0"
+    prosemirror-transform "^0.21.0"
+
 proxy-addr@~1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-1.1.4.tgz#27e545f6960a44a627d9b44467e35c1b6b4ce2f3"
@@ -3722,6 +3805,10 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^2.0.0"
     inherits "^2.0.1"
+
+rope-sequence@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/rope-sequence/-/rope-sequence-1.2.2.tgz#49c4e5c2f54a48e990b050926771e2871bcb31ce"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -4340,6 +4427,10 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+w3c-keyname@^1.1.0:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/w3c-keyname/-/w3c-keyname-1.1.6.tgz#f835231f26b36cf4fb2f7aa3ee3be3db266d4b35"
 
 watchpack@^1.3.1:
   version "1.3.1"
