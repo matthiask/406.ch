@@ -55,6 +55,7 @@ class PostAdmin(admin.ModelAdmin):
         'categories',
     )
     prepopulated_fields = {'slug': ('title',)}
+    radio_fields = {'content_type': admin.HORIZONTAL}
     search_fields = ('title', 'content', 'author')
 
     def formfield_for_dbfield(self, db_field, **kwargs):
