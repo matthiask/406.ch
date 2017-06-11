@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
@@ -63,6 +64,13 @@ def post_detail(request, slug):
         posts = Post.objects.published()
 
     instance = get_object_or_404(posts, slug=slug)
+    if request.method == 'POST' and request.user.is_staff:
+        instance.content = request.POST.get('content')
+        instance.content_type = 'html'
+        instance.clean()
+        instance.save()
+        return JsonResponse({'success': True})
+
     return render(request, 'blog/post_detail.html', {
         'post': instance,
     })

@@ -11,6 +11,7 @@ import {DOMParser} from 'prosemirror-model';
 // import {baseKeymap} from 'prosemirror-commands';
 // import {history} from 'prosemirror-history';
 import {exampleSetup} from 'prosemirror-example-setup';
+import debounce from 'lodash.debounce';
 
 import 'prosemirror-example-setup/style/style.css';
 import 'prosemirror-view/style/prosemirror.css';
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       state: state,
       dispatchTransaction(tr) {
         view.updateState(view.state.apply(tr));
-        window.console.log(tr);
+        postBack();
       },
     });
 
@@ -56,7 +57,21 @@ document.addEventListener('DOMContentLoaded', function() {
       window.console.log($('.editor [contenteditable]').innerHTML);
     };
 
+    const postBack = debounce(function() {
+      let fd = new FormData();
+      fd.append('content', $('.editor [contenteditable]').innerHTML);
+      fetch('.', {
+        credentials: 'include',
+        method: 'POST',
+        body: fd,
+        headers: {
+          'X-CSRFToken': document.cookie.match(/csrftoken=(.+)\b/)[1],
+        },
+      });
+    }, 2000, {maxWait: 10000});
+
   });
+
 });
 
 

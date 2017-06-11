@@ -24,6 +24,7 @@
     "imports-loader": "^0.7.0",
     "loader-utils": "^1.0.2",
     "lodash": "^4.17.4",
+    "lodash.debounce": "^4.0.8",
     "node-libs-browser": "^2.0.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.5",
