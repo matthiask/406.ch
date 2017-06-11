@@ -121,12 +121,12 @@ header {
   }
 
   blockquote::before {
-    content: open-quote;
+    content: '“';
     display: block;
     position: absolute;
-    left: -3rem;
-    top: -4.5rem;
-    font-size: 6rem;
+    left: -2rem;
+    top: -1rem;
+    font-size: 3rem;
     color: rgba(0, 0, 30, .4);
   }
 
