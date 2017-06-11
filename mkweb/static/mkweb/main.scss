@@ -145,3 +145,13 @@ header {
   }
 
 }
+
+
+/* editing */
+.editor + .content {
+  display: none;
+}
+
+.editor .ProseMirror-menubar {
+  min-height: 1em !important;
+}

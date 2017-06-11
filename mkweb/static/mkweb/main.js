@@ -20,7 +20,7 @@ import 'prosemirror-menu/style/menu.css';
 document.addEventListener('DOMContentLoaded', function() {
   $$('.content').forEach((element) => {
 
-    let editor = $.after($.create('div', {
+    let editor = $.before($.create('div', {
       className: 'editor',
     }), element);
 
@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
       doc: DOMParser.fromSchema(schema).parse(element),
       plugins: exampleSetup({
         schema: schema,
+        menuBar: true,
+        floatingMenu: true,
       }),
     });
     const view = new EditorView(editor, {
@@ -37,8 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.console.log(tr);
       },
     });
-
-    element.style.display = 'none';
 
     /*
     import {DOMSerializer} from 'prosemirror-model';
