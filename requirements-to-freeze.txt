@@ -1,3 +1,4 @@
+beautifulsoup4
 dj-database-url
 django-admin-sso
 django-cache-url
