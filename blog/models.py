@@ -1,8 +1,9 @@
+from bs4 import BeautifulSoup
 from markdown2 import markdown
 
+from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Q, signals
-from django.dispatch import receiver
+from django.db.models import Q
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -82,12 +83,14 @@ class Post(models.Model):
             'slug': self.slug,
         })
 
-
-@receiver(signals.pre_save, sender=Post)
-def render_html(instance, **kwargs):
-    if instance.content_type == 'markdown':
-        instance.html = markdown(instance.content, extras=(
-            'smarty-pants',
-        ))
-    else:
-        instance.html = instance.content
+    def clean(self):
+        if self.content_type == 'markdown':
+            self.html = markdown(
+                '# %s\n%s' % (self.title, self.content),
+                extras=('smarty-pants',))
+        else:
+            self.html = self.content
+            try:
+                self.title = BeautifulSoup(self.html).find('h1').text
+            except:
+                raise ValidationError('Please provide at least one H1 tag.')
