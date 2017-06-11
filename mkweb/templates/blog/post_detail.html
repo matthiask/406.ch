@@ -13,7 +13,7 @@
       {{ post.html|safe }}
     </div>
 
-    <p>
+    <p class="foot">
       <small>
         {% if post.published_on %}
           {% with published_on=post.published_on|date:"Y-m-d" %}
