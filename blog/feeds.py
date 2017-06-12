@@ -10,7 +10,7 @@ class PostFeed(Feed):
     feed_type = Atom1Feed
 
     def title(self):
-        return '406'
+        return 'Matthias Kestenholz'
 
     def link(self):
         return reverse('blog_post_feed')
@@ -32,7 +32,7 @@ class CategoryFeed(PostFeed):
         return get_object_or_404(Category, slug=slug)
 
     def title(self, obj):
-        return '406: Posts about %s' % obj
+        return 'Matthias Kestenholz: Posts about %s' % obj
 
     def link(self, obj):
         return reverse('blog_category_feed', kwargs={'slug': obj.slug})

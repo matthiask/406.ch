@@ -5,8 +5,8 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>{% block title %}406{% endblock %}</title>
-  <meta name="description" content="The digital home of Matthias Kestenholz">
+  <title>{% block title %}Matthias Kestenholz{% endblock %}</title>
+  <meta name="description" content="">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet">
   {% if debug %}
@@ -16,8 +16,7 @@
     {% render_bundle 'main' 'css' %}
   {% endif %}
 
-  <link rel="alternate" type="application/atom+xml"
-    title="406 NOT ACCEPTABLE" href="{{ blog.feed_url }}">
+  <link rel="alternate" type="application/atom+xml" title="Blog feed" href="{{ blog.feed_url }}">
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
