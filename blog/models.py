@@ -85,12 +85,11 @@ class Post(models.Model):
 
     def clean(self):
         if self.content_type == 'markdown':
-            self.html = markdown(
-                '# %s\n%s' % (self.title, self.content),
-                extras=('smarty-pants',))
+            self.html = markdown(self.content, extras=('smarty-pants',))
         else:
             self.html = self.content
-            try:
-                self.title = BeautifulSoup(self.html).find('h1').text
-            except:
-                raise ValidationError('Please provide at least one H1 tag.')
+
+        try:
+            self.title = BeautifulSoup(self.html).find('h1').text
+        except:
+            raise ValidationError('Please provide at least one H1 tag.')
