@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
       lineNumbers: true,
       lineWrapping: true,
       mode: 'gfm',
+      viewportMargin: Infinity,
     });
   });
 });
