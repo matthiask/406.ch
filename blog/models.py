@@ -6,6 +6,7 @@ from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -54,7 +55,7 @@ class Post(models.Model):
     published_on = models.DateTimeField(
         _('published on'), blank=True, null=True)
 
-    title = models.CharField(_('title'), max_length=200)
+    title = models.CharField(_('title'), max_length=200, blank=True)
     slug = models.SlugField(
         _('slug'), max_length=200, unique=True)
     content = models.TextField(_('content'), blank=True)
@@ -93,3 +94,8 @@ class Post(models.Model):
             self.title = BeautifulSoup(self.html).find('h1').text
         except:
             raise ValidationError('Please provide at least one H1 tag.')
+
+        if not self.is_active:
+            self.slug = slugify(self.title)
+        if self.is_active and not self.published_on:
+            self.published_on = timezone.now()

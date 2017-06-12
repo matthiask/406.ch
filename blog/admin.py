@@ -33,16 +33,15 @@ class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
             'fields': (
-                ('title', 'author'),
+                'is_active',
+                ('title', 'slug'),
                 'content',
                 'content_type',
-                'is_active',
-                'published_on',
                 'categories',
             ),
         }),
         (_('Meta'), {
-            'fields': ('slug', 'created_on'),
+            'fields': ('created_on', 'published_on', 'author'),
             'classes': ('collapse',),
         }),
     ]

@@ -21,6 +21,7 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     main: './main.js',
+    admin: './admin.js',
   },
   output: {
     path: path.resolve('./static/mkweb/'),

@@ -13,6 +13,7 @@
     "bliss-gallery": "^0.2.1",
     "blissfuljs": "^1.0.2",
     "clean-webpack-plugin": "^0.1.15",
+    "codemirror": "^5.26.0",
     "css-loader": "^0.28.4",
     "eslint": "^3.14.1",
     "exports-loader": "^0.6.3",
