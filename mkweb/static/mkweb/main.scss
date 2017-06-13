@@ -3,11 +3,11 @@
 body { box-sizing: border-box; }
 *, *:before, *:after { box-sizing: inherit; }
 
-$grey: #aac;
+$grey: #aaa;
 
 @media screen and (max-width: 600px) {
   html {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -35,7 +35,7 @@ header {
   margin: 0 0 2rem 0;
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-align: center;
     margin: 2rem 0 1.5rem 0;
   }
@@ -43,7 +43,7 @@ header {
   nav {
     display: flex;
     justify-content: space-between;
-    font-size: 2rem;
+    font-size: 1.8rem;
     padding: 1rem;
 
     .active {
@@ -56,7 +56,7 @@ header {
   text-align: center;
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
 
   ul {
@@ -64,16 +64,16 @@ header {
 
     a {
       display: block;
-      font-size: 2rem;
+      font-size: 1.5rem;
       margin: 1rem;
     }
   }
 
   p {
     margin: 0 auto 2rem auto;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.25;
-    max-width: 17em;
+    max-width: 20em;
 
     a {
       box-shadow: inset 0 0px 0 white, inset 0 -1px 0 $grey;
@@ -90,7 +90,7 @@ header {
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin: 0 0 1.5rem 0;
   }
 
@@ -130,6 +130,10 @@ header {
     color: rgba(0, 0, 30, .4);
   }
 
+  code {
+    font-size: .9rem;
+  }
+
   pre {
     margin: 0 0 2rem 2rem;
     font-size: .9rem;
@@ -151,19 +155,7 @@ header {
 
   .foot {
     margin-top: 2rem;
+    padding-top: .5rem;
     border-top: 1px solid $grey;
   }
-}
-
-
-/* editing */
-.editor + .content {
-  display: none;
-}
-
-.editor .ProseMirror-menubar {
-  min-height: 1em !important;
-}
-.editor .ProseMirror {
-  padding-top: 1rem;
 }
