@@ -18,19 +18,20 @@
 // pass the ticks parameter to the callback.
 
 function setTimeoutRequestAnimationFrame(cb) {
-  setTimeout(cb, 1000 / 60);
+  setTimeout(cb, 1000 / 60)
 }
 
-var requestAnimationFrame;
+var requestAnimationFrame
 
 if (typeof window === 'undefined') {
-  requestAnimationFrame = setTimeoutRequestAnimationFrame;
+  requestAnimationFrame = setTimeoutRequestAnimationFrame
 } else {
-  requestAnimationFrame = window.requestAnimationFrame ||
+  requestAnimationFrame =
+    window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     window.msRequestAnimationFrame ||
-    setTimeoutRequestAnimationFrame;
+    setTimeoutRequestAnimationFrame
 }
 
-export default requestAnimationFrame.bind(window);
+export default requestAnimationFrame.bind(window)

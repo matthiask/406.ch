@@ -5,10 +5,11 @@ contextlib2==0.5.5
 dj-database-url==0.4.2
 Django==1.11.2
 django-admin-sso==2.4.0
+django-cabinet==0.2.1
 django-cache-url==2.0.0
 django-debug-toolbar==1.8
 django-redis==4.8.0
-django-versatileimagefield==1.7.0
+django-versatileimagefield==1.7.1
 django-webpack-loader==0.5.0
 flake8==3.3.0
 gunicorn==19.7.1

@@ -1,7 +1,11 @@
 @import 'scss/_reset';
 
-body { box-sizing: border-box; }
-*, *:before, *:after { box-sizing: inherit; }
+body {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 $grey: #aaa;
 
@@ -26,7 +30,9 @@ body {
 
 .copy {
   position: absolute;
-  right: 0; bottom: .25rem; left: 0;
+  right: 0;
+  bottom: .25rem;
+  left: 0;
   text-align: center;
 }
 

@@ -1,19 +1,21 @@
 /* global __dirname, process */
-var path = require('path');
-var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var BundleTracker = require('webpack-bundle-tracker')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin')
 
-var HOST = process.env.HOST || '127.0.0.1';
-var DEBUG = (process.env.NODE_ENV !== 'production');
-var HTTPS = !!process.env.HTTPS;
+var HOST = process.env.HOST || '127.0.0.1'
+var DEBUG = process.env.NODE_ENV !== 'production'
+var HTTPS = !!process.env.HTTPS
 
 function cssLoader(firstLoader) {
   return ExtractTextPlugin.extract({
     fallback: 'style-loader',
-    use: ['css-loader?sourceMap', 'postcss-loader?sourceMap'].concat(firstLoader || []),
-  });
+    use: ['css-loader?sourceMap', 'postcss-loader?sourceMap'].concat(
+      firstLoader || []
+    ),
+  })
 }
 
 module.exports = {
@@ -25,7 +27,9 @@ module.exports = {
   },
   output: {
     path: path.resolve('./static/mkweb/'),
-    publicPath: DEBUG ? 'http' + (HTTPS ? 's' : '') + '://' + HOST + ':4000/' : '/static/mkweb/',
+    publicPath: DEBUG
+      ? 'http' + (HTTPS ? 's' : '') + '://' + HOST + ':4000/'
+      : '/static/mkweb/',
     filename: '[name]-[hash].js',
   },
   module: {
@@ -37,9 +41,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: [
-                ['es2015', {modules: false}],
-              ],
+              presets: [['es2015', {modules: false}]],
               cacheDirectory: path.resolve(__dirname, 'tmp'),
             },
           },
@@ -83,10 +85,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    modules: [
-      'mkweb/static/mkweb/',
-      'node_modules',
-    ],
+    modules: ['mkweb/static/mkweb/', 'node_modules'],
     alias: {},
   },
   plugins: [
@@ -100,18 +99,20 @@ module.exports = {
       filename: './static/webpack-stats-' + (DEBUG ? 'dev' : 'prod') + '.json',
     }),
     DEBUG ? new webpack.NamedModulesPlugin() : null,
-  ].filter(function(el) { return !!el; }),
+  ].filter(function(el) {
+    return !!el
+  }),
   devServer: {
     contentBase: false,
     inline: true,
     quiet: false,
     https: HTTPS,
     disableHostCheck: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: {'Access-Control-Allow-Origin': '*'},
   },
   performance: {
     // No point warning in development, since HMR / CSS bundling blows up
     // the asset / entrypoint size anyway.
     hints: DEBUG ? false : 'warning',
   },
-};
+}
