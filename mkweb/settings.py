@@ -216,5 +216,5 @@ GOOGLE_CLIENT_ID = env('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = env('GOOGLE_CLIENT_SECRET')
 
 ADMIN_OAUTH_PATTERNS = [
-    (r'^@406\.ch', 'mk@406.ch'),
+    (r'@406\.ch$', 'mk@406.ch'),
 ]
