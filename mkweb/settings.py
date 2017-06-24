@@ -127,13 +127,15 @@ INSTALLED_APPS = [app for app in [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authlib.admin_oauth',
     'django.contrib.admin',
     'django.contrib.sitemaps',
 
     'mkweb',
     'blog',
+    'cabinet',
+    'authlib.little_auth',
 
-    'admin_sso',
     'webpack_loader',
     'raven.contrib.django.raven_compat',
 
@@ -149,21 +151,11 @@ WEBPACK_LOADER = {
     },
 }
 
-DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID = env(
-    'DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID')
-DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET = env(
-    'DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET')
-DJANGO_ADMIN_SSO_ADD_LOGIN_BUTTON = all((
-    DJANGO_ADMIN_SSO_OAUTH_CLIENT_ID,
-    DJANGO_ADMIN_SSO_OAUTH_CLIENT_SECRET,
-))
-DJANGO_ADMIN_SSO_AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
-DJANGO_ADMIN_SSO_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
-DJANGO_ADMIN_SSO_REVOKE_URI = 'https://accounts.google.com/o/oauth2/revoke'
 AUTHENTICATION_BACKENDS = (
-    'admin_sso.auth.DjangoSSOAuthBackend',
+    'authlib.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+AUTH_USER_MODEL = 'little_auth.User'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIE_HTTPONLY = True
@@ -219,3 +211,10 @@ if ImageFile.MAXBLOCK < 1024 * 1024:
 
 X_FRAME_OPTIONS = 'DENY'
 # CSRF_COOKIE_HTTPONLY = True
+
+GOOGLE_CLIENT_ID = env('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = env('GOOGLE_CLIENT_SECRET')
+
+ADMIN_OAUTH_PATTERNS = [
+    (r'^@406\.ch', 'mk@406.ch'),
+]

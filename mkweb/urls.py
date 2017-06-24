@@ -5,6 +5,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.shortcuts import render
 from django.views import generic
 
+from authlib.admin_oauth.views import admin_oauth
 from blog.sitemaps import PostSitemap
 
 
@@ -25,6 +26,12 @@ urlpatterns = [
         generic.RedirectView.as_view(url='/writing/%(url)s'),
     ),
     url(r'^writing/', include('blog.urls')),
+    url(r'', include('authlib.admin_oauth.urls')),
+    url(
+        r'^manage/__oauth__/$',
+        admin_oauth,
+        name='admin_oauth',
+    ),
     url(r'^manage/', admin.site.urls),
     url(
         r'^sitemap\.xml$',

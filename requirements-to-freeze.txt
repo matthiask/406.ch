@@ -1,6 +1,6 @@
 beautifulsoup4
 dj-database-url
-django-admin-sso
+django-authlib
 django-cabinet
 django-cache-url
 django-debug-toolbar

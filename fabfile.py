@@ -23,8 +23,6 @@ import fh_fablib
 env.box_project_name = 'mkweb'
 env.box_domain = '406.ch'
 env.box_database_local = '406_ch'
-env.box_staticfiles = '%(box_project_name)s/static/%(box_project_name)s' % env
-env.box_static_src = env.box_staticfiles
 env.box_python = 'python3'
 env.box_restart = ['sctl restart %(box_domain)s:*']
 env.forward_agent = True
@@ -45,18 +43,6 @@ env.box_environments = {
         'repository': '406',
         'database': '406_ch',
     },
-    'staging': {
-        'shortcut': 's',
-        'domain': 'stage.fcz.ch',
-        'branch': 'develop',
-        'servers': [
-            'www-data@feinheit04.nine.ch',
-        ],
-        'remote': 'staging',
-        'repository': 'fcz_ch',
-        'database': 'stage_fcz_ch',
-    },
 }
-
 
 fh_fablib.init(globals())
