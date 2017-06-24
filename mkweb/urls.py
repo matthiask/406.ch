@@ -26,7 +26,6 @@ urlpatterns = [
         generic.RedirectView.as_view(url='/writing/%(url)s'),
     ),
     url(r'^writing/', include('blog.urls')),
-    url(r'', include('authlib.admin_oauth.urls')),
     url(
         r'^manage/__oauth__/$',
         admin_oauth,
