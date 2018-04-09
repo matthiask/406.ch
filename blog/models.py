@@ -57,7 +57,7 @@ class Post(models.Model):
 
     title = models.CharField(_('title'), max_length=200, blank=True)
     slug = models.SlugField(
-        _('slug'), max_length=200, unique=True)
+        _('slug'), max_length=200, unique=True, default='new')
     content = models.TextField(_('content'), blank=True)
     content_type = models.CharField(
         _('content type'), max_length=20,
@@ -92,7 +92,7 @@ class Post(models.Model):
 
         try:
             self.title = BeautifulSoup(self.html).find('h1').text
-        except:
+        except Exception:
             raise ValidationError('Please provide at least one H1 tag.')
 
         if not self.is_active:

@@ -3,7 +3,9 @@
 body {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -31,7 +33,7 @@ body {
 .copy {
   position: absolute;
   right: 0;
-  bottom: .25rem;
+  bottom: 0.25rem;
   left: 0;
   text-align: center;
 }
@@ -105,13 +107,16 @@ header {
     margin: 0 0 1.25rem 0;
   }
 
-  p, ul, ol {
+  p,
+  ul,
+  ol {
     font-size: 1.25rem;
     margin: 0 0 1rem 0;
     line-height: 1.5;
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin-left: 1.25rem;
 
     li {
@@ -140,16 +145,16 @@ header {
     left: -2rem;
     top: -1rem;
     font-size: 3rem;
-    color: rgba(0, 0, 30, .4);
+    color: rgba(0, 0, 30, 0.4);
   }
 
   code {
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
   pre {
     margin: 0 0 2rem 2rem;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
   small {
@@ -168,7 +173,7 @@ header {
 
   .foot {
     margin-top: 2rem;
-    padding-top: .5rem;
+    padding-top: 0.5rem;
     border-top: 1px solid $grey;
   }
 }

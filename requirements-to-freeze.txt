@@ -5,14 +5,13 @@ django-cabinet
 django-cache-url
 django-debug-toolbar
 django-redis
-django-versatileimagefield
 django-webpack-loader
 Django
 flake8
 gunicorn
 hiredis
 markdown2
-psycopg2
+psycopg2-binary
 pytz
 raven
 speckenv
