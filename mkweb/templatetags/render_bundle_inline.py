@@ -16,7 +16,7 @@ CSS_INLINE = '<style type="text/css">{chunk}</style>'
 JS_EXTERNAL = '<script type="text/javascript" src="{url}" {attrs}></script>'
 CSS_EXTERNAL = '<link type="text/css" rel="stylesheet" href="{url}" {attrs} />'
 
-BUNDLE_PATH = os.path.join(settings.BASE_DIR, 'static', 'app')
+BUNDLE_PATH = os.path.join(settings.BASE_DIR, 'static', 'mkweb')
 
 
 @register.simple_tag
