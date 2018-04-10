@@ -12,6 +12,10 @@
 
     <p class="foot">
       <small>
+        I like feedback! <a href="mailto:mk@406.ch">Send me an email.</a>
+        Did you like this post? <a href="/writing/feed/">Subscribe for more!</a>
+        <br>
+
         {% if post.published_on %}
           {% with published_on=post.published_on|date:"Y-m-d" %}
             {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
@@ -25,11 +29,6 @@
           <a href="{{ category.get_absolute_url }}">
             {{ category }}</a>{% if not forloop.last %},{% endif %}
         {% endfor %}
-        <br>
-        Subscribe to the
-        <a href="http://tinyletter.com/matthiask" target="_blank">Newsletter</a>
-        or the <a href="/writing/feed/">RSS feed</a> if you want to be kept up
-        to date.
       </small>
     </p>
 
