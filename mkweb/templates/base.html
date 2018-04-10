@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load i18n staticfiles %}
 {% load render_bundle from webpack_loader %}
+{% load render_bundle_inline %}
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script>
     {% render_bundle 'main' %}
   {% else %}
-    {% render_bundle 'main' 'css' %}
+    {% render_bundle_inline 'main' 'css' %}
   {% endif %}
 
   <link rel="alternate" type="application/atom+xml" title="Blog feed" href="{{ blog.feed_url }}">
