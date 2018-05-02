@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import generic
 
 from authlib.admin_oauth.views import admin_oauth
@@ -10,7 +10,9 @@ from blog.sitemaps import PostSitemap
 
 
 urlpatterns = [
-    url(r'^$', render, {'template_name': 'base.html'}),
+    url(r'^$', lambda request: redirect('blog_post_archive')),
+
+    url(r'^about/$', render, {'template_name': 'base.html'}),
     url(r'^404/$', render, {'template_name': '404.html'}),
     url(r'^projects/$', render, {'template_name': 'projects.html'}),
     url(
