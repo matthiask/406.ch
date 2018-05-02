@@ -23,4 +23,4 @@ env.box_environments = {
     },
 }
 
-fh_fablib.init(globals(), systemd=False)
+fh_fablib.init(globals(), systemd=True)
