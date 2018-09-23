@@ -14,7 +14,6 @@ urlpatterns = [
 
     url(r'^about/$', render, {'template_name': 'base.html'}),
     url(r'^404/$', render, {'template_name': '404.html'}),
-    url(r'^projects/$', render, {'template_name': 'projects.html'}),
     url(
         r'^contact/',
         generic.RedirectView.as_view(url='/'),
