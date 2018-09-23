@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://406.ch/sitemap.xml

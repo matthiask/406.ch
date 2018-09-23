@@ -8,11 +8,12 @@
 <h1>{% trans 'Writing' %}</h1>
 
 {% for post in object_list %}
-  {% ifchanged post.published_on.date|date:"Y" %}
-    <small>{{ post.published_on.date|date:"Y" }}</small>
-  {% endifchanged %}
-  <h2><a href="{{ post.get_absolute_url }}">
-    {{ post.title }}</a></h2>
+  <h2>
+    <a href="{{ post.get_absolute_url }}">
+      <small>{{ post.published_on|date:"Y-m-d" }}</small><br>
+      {{ post.title }}
+    </a>
+  </h2>
 {% empty %}
   <h2>
     {% trans 'Nothing here. Sorry!' %}

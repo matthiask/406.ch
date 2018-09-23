@@ -12,12 +12,12 @@ from blog.sitemaps import PostSitemap
 urlpatterns = [
     url(r'^$', lambda request: redirect('blog_post_archive')),
 
-    url(r'^about/$', render, {'template_name': 'base.html'}),
+    url(r'^projects/$', lambda request: redirect('blog_post_archive')),
+    url(r'^about/$', lambda request: redirect('blog_post_archive')),
+    url(r'^contact/', lambda request: redirect('blog_post_archive')),
+
     url(r'^404/$', render, {'template_name': '404.html'}),
-    url(
-        r'^contact/',
-        generic.RedirectView.as_view(url='/'),
-    ),
+
     url(
         r'^(?P<url>\d{4}/.*)$',
         generic.RedirectView.as_view(url='/writing/%(url)s')
