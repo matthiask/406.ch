@@ -7,10 +7,15 @@ from django.views import generic
 
 from authlib.admin_oauth.views import admin_oauth
 from blog.sitemaps import PostSitemap
+from blog.views import ArchiveIndexView
 
 
 urlpatterns = [
-    url(r'^$', lambda request: redirect('blog_post_archive')),
+    url(r'^$',
+        ArchiveIndexView.as_view(archive=False),
+        name='blog_post_archive'),
+
+    url(r'^writing/$', lambda request: redirect('blog_post_archive')),
 
     url(r'^projects/$', lambda request: redirect('blog_post_archive')),
     url(r'^about/$', lambda request: redirect('blog_post_archive')),
