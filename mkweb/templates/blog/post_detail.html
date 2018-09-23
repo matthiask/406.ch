@@ -7,6 +7,10 @@
 {% block content %}
 <main class="writing">
 
+  <p class="intro">
+    <a href="{% url 'blog_post_archive' %}">Back to the overview</a>
+  </p>
+
   <div class="text">
     {{ post.html|safe }}
 
