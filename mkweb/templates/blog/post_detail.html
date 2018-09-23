@@ -33,6 +33,10 @@
           <a href="{{ category.get_absolute_url }}">
             {{ category }}</a>{% if not forloop.last %},{% endif %}
         {% endfor %}
+
+        {% if request.user.is_staff %}
+          <br><a href="/manage/blog/post/{{ post.id }}/change/" target="_blank">Edit this post</a>
+        {% endif %}
       </small>
     </p>
 
