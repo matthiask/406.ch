@@ -51,6 +51,7 @@ class Post(models.Model):
     )
 
     is_active = models.BooleanField(_('is active'), default=False)
+    is_microblog = models.BooleanField(_("is microblog"), default=False)
     created_on = models.DateTimeField(_('created on'), default=timezone.now)
     published_on = models.DateTimeField(
         _('published on'), blank=True, null=True)
@@ -62,6 +63,7 @@ class Post(models.Model):
     content_type = models.CharField(
         _('content type'), max_length=20,
         choices=CONTENT_TYPE_CHOICES, default=CONTENT_TYPE_CHOICES[0][0])
+    url_override = models.URLField(_("URL override"), blank=True)
     html = models.TextField(_('HTML'), editable=False)
     author = models.CharField(_('author'), max_length=200, blank=True)
     categories = models.ManyToManyField(
@@ -80,20 +82,25 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog_post_detail', kwargs={
+        return self.url_override or reverse('blog_post_detail', kwargs={
             'slug': self.slug,
         })
 
     def clean(self):
         if self.content_type == 'markdown':
-            self.html = markdown(self.content, extras=('smarty-pants',))
+            self.html = markdown(self.content, extras=(
+                'smarty-pants', 'nofollow', 'target-blank-links'
+            ))
         else:
             self.html = self.content
 
-        try:
-            self.title = BeautifulSoup(self.html).find('h1').text
-        except Exception:
-            raise ValidationError('Please provide at least one H1 tag.')
+        if self.is_microblog:
+            self.title = self.html[:200]
+        else:
+            try:
+                self.title = BeautifulSoup(self.html).find('h1').text
+            except Exception:
+                raise ValidationError('Please provide at least one H1 tag.')
 
         if not self.is_active:
             self.slug = slugify(self.title)

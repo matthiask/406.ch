@@ -18,12 +18,21 @@
 </p>
 
 {% for post in object_list %}
-  <h2>
-    <a href="{{ post.get_absolute_url }}">
-      <small>{{ post.published_on|date:"Y-m-d" }}</small><br>
-      {{ post.title }}
-    </a>
-  </h2>
+  {% if post.is_microblog %}
+    <div class="microblog">
+      <small>{{ post.published_on|date:"Y-m-d" }}</small>
+      <div class="text">
+        {{ post.html|safe }}
+      </div>
+    </div>
+  {% else %}
+    <h2>
+      <a href="{{ post.get_absolute_url }}"{% if post.url_override %} target="_blank" rel="noopener"{% endif %}>
+        <small>{{ post.published_on|date:"Y-m-d" }}</small><br>
+        {{ post.title }}
+      </a>
+    </h2>
+  {% endif %}
 {% empty %}
   <h2>
     {% trans 'Nothing here. Sorry!' %}

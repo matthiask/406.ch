@@ -33,10 +33,11 @@ class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
             'fields': (
-                'is_active',
+                ('is_active', 'is_microblog'),
                 ('title', 'slug'),
                 'content',
                 'content_type',
+                'url_override',
                 'categories',
             ),
         }),
