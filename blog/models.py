@@ -96,7 +96,7 @@ class Post(models.Model):
             except Exception:
                 raise ValidationError("Please provide at least one H1 tag.")
 
-        if not self.is_active:
+        if self.slug in {"", "new"} or not self.is_active:
             self.slug = slugify(self.title)
         if self.is_active and not self.published_on:
             self.published_on = timezone.now()
