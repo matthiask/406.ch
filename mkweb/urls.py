@@ -11,47 +11,23 @@ from blog.views import ArchiveIndexView
 
 
 urlpatterns = [
-    url(r'^$',
-        ArchiveIndexView.as_view(archive=False),
-        name='blog_post_archive'),
-
-    url(r'^writing/$', lambda request: redirect('blog_post_archive')),
-
-    url(r'^projects/$', lambda request: redirect('blog_post_archive')),
-    url(r'^about/$', lambda request: redirect('blog_post_archive')),
-    url(r'^contact/', lambda request: redirect('blog_post_archive')),
-
-    url(r'^404/$', render, {'template_name': '404.html'}),
-
-    url(
-        r'^(?P<url>\d{4}/.*)$',
-        generic.RedirectView.as_view(url='/writing/%(url)s')
-    ),
-    url(
-        r'^blog/(?P<url>.*)$',
-        generic.RedirectView.as_view(url='/writing/%(url)s'),
-    ),
-    url(r'^writing/', include('blog.urls')),
-    url(
-        r'^manage/__oauth__/$',
-        admin_oauth,
-        name='admin_oauth',
-    ),
-    url(r'^manage/', admin.site.urls),
-    url(
-        r'^sitemap\.xml$',
-        sitemap,
-        {
-            'sitemaps': {'posts': PostSitemap},
-        },
-    ),
+    url(r"^$", ArchiveIndexView.as_view(archive=False), name="blog_post_archive"),
+    url(r"^writing/$", lambda request: redirect("blog_post_archive")),
+    url(r"^projects/$", lambda request: redirect("blog_post_archive")),
+    url(r"^about/$", lambda request: redirect("blog_post_archive")),
+    url(r"^contact/", lambda request: redirect("blog_post_archive")),
+    url(r"^404/$", render, {"template_name": "404.html"}),
+    url(r"^(?P<url>\d{4}/.*)$", generic.RedirectView.as_view(url="/writing/%(url)s")),
+    url(r"^blog/(?P<url>.*)$", generic.RedirectView.as_view(url="/writing/%(url)s")),
+    url(r"^writing/", include("blog.urls")),
+    url(r"^manage/__oauth__/$", admin_oauth, name="admin_oauth"),
+    url(r"^manage/", admin.site.urls),
+    url(r"^sitemap\.xml$", sitemap, {"sitemaps": {"posts": PostSitemap}}),
 ]
 
 if settings.DEBUG:
     try:
-        urlpatterns += [
-            url(r'^__debug__/', include(__import__('debug_toolbar').urls)),
-        ]
+        urlpatterns += [url(r"^__debug__/", include(__import__("debug_toolbar").urls))]
     except ImportError:
         pass
 
@@ -59,5 +35,4 @@ if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,15 +10,13 @@ class PostFeed(Feed):
     feed_type = Atom1Feed
 
     def title(self):
-        return 'Matthias Kestenholz'
+        return "Matthias Kestenholz"
 
     def link(self):
-        return reverse('blog_post_feed')
+        return reverse("blog_post_feed")
 
     def items(self):
-        return Post.objects.published().filter(
-            published_on__year__gte=2014,
-        )[:20]
+        return Post.objects.published().filter(published_on__year__gte=2014)[:20]
 
     def item_title(self, item):
         return item.title
@@ -32,13 +30,12 @@ class CategoryFeed(PostFeed):
         return get_object_or_404(Category, slug=slug)
 
     def title(self, obj):
-        return 'Matthias Kestenholz: Posts about %s' % obj
+        return "Matthias Kestenholz: Posts about %s" % obj
 
     def link(self, obj):
-        return reverse('blog_category_feed', kwargs={'slug': obj.slug})
+        return reverse("blog_category_feed", kwargs={"slug": obj.slug})
 
     def items(self, obj):
         return Post.objects.published().filter(
-            categories=obj,
-            published_on__year__gte=2014,
+            categories=obj, published_on__year__gte=2014
         )[:20]

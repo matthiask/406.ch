@@ -14,11 +14,13 @@ class ContextObject(object):
         return [
             date.year
             for date in Post.objects.published().datetimes(
-                'published_on', 'year', 'DESC')]
+                "published_on", "year", "DESC"
+            )
+        ]
 
     def feed_url(self):
-        return self.request.build_absolute_uri(reverse('blog_post_feed'))
+        return self.request.build_absolute_uri(reverse("blog_post_feed"))
 
 
 def blog(request):
-    return {'blog': ContextObject(request)}
+    return {"blog": ContextObject(request)}

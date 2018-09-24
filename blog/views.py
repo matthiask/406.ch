@@ -6,15 +6,15 @@ from .models import Category, Post
 
 class PostMixin(object):
     allow_empty = True
-    date_field = 'published_on'
+    date_field = "published_on"
     make_object_list = True
-    month_format = '%m'
+    month_format = "%m"
     archive = None
 
     def get_queryset(self):
         posts = Post.objects.published()
-        if self.request.GET.get('q'):
-            posts &= Post.objects.search(self.request.GET['q'])
+        if self.request.GET.get("q"):
+            posts &= Post.objects.search(self.request.GET["q"])
         if self.archive is False:
             posts = posts.filter(published_on__year__gte=2014)
         elif self.archive is True:
@@ -27,29 +27,32 @@ class ArchiveIndexView(PostMixin, generic.ArchiveIndexView):
 
 
 class YearArchiveView(PostMixin, generic.YearArchiveView):
-    template_name_suffix = '_archive'
+    template_name_suffix = "_archive"
 
 
 class MonthArchiveView(PostMixin, generic.MonthArchiveView):
-    template_name_suffix = '_archive'
+    template_name_suffix = "_archive"
 
 
 class DayArchiveView(PostMixin, generic.DayArchiveView):
-    template_name_suffix = '_archive'
+    template_name_suffix = "_archive"
 
 
 class CategoryArchiveIndexView(ArchiveIndexView):
-    template_name_suffix = '_archive'
+    template_name_suffix = "_archive"
 
     def get_queryset(self):
-        self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
-        return super(CategoryArchiveIndexView, self).get_queryset().filter(
-            categories=self.category)
+        self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
+        return (
+            super(CategoryArchiveIndexView, self)
+            .get_queryset()
+            .filter(categories=self.category)
+        )
 
     def get_context_data(self, **kwargs):
         return super(CategoryArchiveIndexView, self).get_context_data(
-            category=self.category,
-            **kwargs)
+            category=self.category, **kwargs
+        )
 
 
 def post_detail_redirect(request, year, month, day, slug):
@@ -64,6 +67,4 @@ def post_detail(request, slug):
 
     instance = get_object_or_404(posts, slug=slug)
 
-    return render(request, 'blog/post_detail.html', {
-        'post': instance,
-    })
+    return render(request, "blog/post_detail.html", {"post": instance})

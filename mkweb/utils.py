@@ -29,22 +29,22 @@ def render_to_mail(template, context, **kwargs):
         message = render_to_mail('myproject/hello_mail', {}, to=[email])
         message.send()
     """
-    lines = iter(render_to_string('%s.txt' % template, context).splitlines())
+    lines = iter(render_to_string("%s.txt" % template, context).splitlines())
 
-    subject = ''
+    subject = ""
     while True:
         line = next(lines)
         if line:
             subject = line
             break
 
-    body = '\n'.join(lines).strip('\n')
+    body = "\n".join(lines).strip("\n")
     message = EmailMultiAlternatives(subject=subject, body=body, **kwargs)
 
     try:
         message.attach_alternative(
-            render_to_string('%s.html' % template, context),
-            'text/html')
+            render_to_string("%s.html" % template, context), "text/html"
+        )
     except TemplateDoesNotExist:
         pass
 
@@ -55,8 +55,8 @@ class SkipUnreadablePostError(logging.Filter):
     """
     Skip errors which are caused by aborted POST requests.
     """
+
     def filter(self, record):
-        if (record.exc_info
-                and isinstance(record.exc_info[1], UnreadablePostError)):
+        if record.exc_info and isinstance(record.exc_info[1], UnreadablePostError):
             return False
         return True

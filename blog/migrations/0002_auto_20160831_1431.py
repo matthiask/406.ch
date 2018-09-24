@@ -7,32 +7,49 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0001_initial'),
-    ]
+    dependencies = [("blog", "0001_initial")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'ordering': ['title'], 'verbose_name': 'category', 'verbose_name_plural': 'categories'},
+            name="category",
+            options={
+                "ordering": ["title"],
+                "verbose_name": "category",
+                "verbose_name_plural": "categories",
+            },
         ),
         migrations.AlterModelOptions(
-            name='post',
-            options={'get_latest_by': 'published_on', 'ordering': ['-published_on'], 'verbose_name': 'post', 'verbose_name_plural': 'posts'},
+            name="post",
+            options={
+                "get_latest_by": "published_on",
+                "ordering": ["-published_on"],
+                "verbose_name": "post",
+                "verbose_name_plural": "posts",
+            },
         ),
         migrations.AddField(
-            model_name='post',
-            name='is_active',
-            field=models.BooleanField(default=False, verbose_name='is active'),
+            model_name="post",
+            name="is_active",
+            field=models.BooleanField(default=False, verbose_name="is active"),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='categories',
-            field=models.ManyToManyField(blank=True, related_name='posts', to='blog.Category', verbose_name='categories'),
+            model_name="post",
+            name="categories",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="posts",
+                to="blog.Category",
+                verbose_name="categories",
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='content_type',
-            field=models.CharField(choices=[('markdown', 'Markdown'), ('html', 'HTML')], default='markdown', max_length=20, verbose_name='content type'),
+            model_name="post",
+            name="content_type",
+            field=models.CharField(
+                choices=[("markdown", "Markdown"), ("html", "HTML")],
+                default="markdown",
+                max_length=20,
+                verbose_name="content type",
+            ),
         ),
     ]

@@ -5,29 +5,29 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0004_auto_20170610_1343'),
-    ]
+    dependencies = [("blog", "0004_auto_20170610_1343")]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='is_microblog',
-            field=models.BooleanField(default=False, verbose_name='is microblog'),
+            model_name="post",
+            name="is_microblog",
+            field=models.BooleanField(default=False, verbose_name="is microblog"),
         ),
         migrations.AddField(
-            model_name='post',
-            name='url_override',
-            field=models.URLField(blank=True, verbose_name='URL override'),
+            model_name="post",
+            name="url_override",
+            field=models.URLField(blank=True, verbose_name="URL override"),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='slug',
-            field=models.SlugField(default='new', max_length=200, unique=True, verbose_name='slug'),
+            model_name="post",
+            name="slug",
+            field=models.SlugField(
+                default="new", max_length=200, unique=True, verbose_name="slug"
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='title',
-            field=models.CharField(blank=True, max_length=200, verbose_name='title'),
+            model_name="post",
+            name="title",
+            field=models.CharField(blank=True, max_length=200, verbose_name="title"),
         ),
     ]

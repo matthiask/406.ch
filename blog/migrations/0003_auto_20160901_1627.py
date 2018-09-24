@@ -8,16 +8,13 @@ from django.db import migrations
 
 
 def forwards(apps, schema_editor):
-    for post in apps.get_model('blog', 'Post').objects.filter(content_type='markdown'):
-        post.html = markdown(post.content, extras=('smarty-pants',))
+    for post in apps.get_model("blog", "Post").objects.filter(content_type="markdown"):
+        post.html = markdown(post.content, extras=("smarty-pants",))
         post.save()
+
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0002_auto_20160831_1431'),
-    ]
+    dependencies = [("blog", "0002_auto_20160831_1431")]
 
-    operations = [
-        migrations.RunPython(forwards),
-    ]
+    operations = [migrations.RunPython(forwards)]

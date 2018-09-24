@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0003_auto_20160901_1627'),
-    ]
+    dependencies = [("blog", "0003_auto_20160901_1627")]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='slug',
-            field=models.SlugField(max_length=200, unique=True, verbose_name='slug'),
-        ),
+            model_name="category",
+            name="slug",
+            field=models.SlugField(max_length=200, unique=True, verbose_name="slug"),
+        )
     ]
