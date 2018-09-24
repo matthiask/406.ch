@@ -20,7 +20,7 @@ function cssLoader(firstLoader) {
 
 module.exports = {
   context: path.join(__dirname, 'mkweb', 'static', 'mkweb'),
-  devtool: 'source-map',
+  devtool: DEBUG ? 'eval' : 'source-map',
   entry: {
     main: './main.js',
     admin: './admin.js',
