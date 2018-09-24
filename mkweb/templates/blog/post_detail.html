@@ -5,11 +5,11 @@
 {% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
-<main class="writing">
+<header>
+  <a class="back" href="{% url 'blog_post_archive' %}">Back to the overview</a>
+</header>
 
-  <p class="intro">
-    <a href="{% url 'blog_post_archive' %}">Back to the overview</a>
-  </p>
+<main>
 
   <div class="text">
     {{ post.html|safe }}

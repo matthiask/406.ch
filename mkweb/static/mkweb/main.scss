@@ -35,6 +35,7 @@ body {
 
 header {
   border-bottom: 1px solid $grey;
+  padding: 0 0 0.75rem 0;
   margin: 0 0 2rem 0;
 
   nav {
@@ -47,19 +48,27 @@ header {
       font-weight: bold;
     }
   }
-}
 
-.intro {
-  border-bottom: 1px solid $grey;
-  padding: 0 0 1.5rem 0;
-  margin: 0 0 2rem 0;
+  .back {
+    display: inline-block;
+    margin: 0 0 1rem 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 0.25rem 0 0.75rem 0;
+  }
+
+  p {
+    margin: 0 0 0.75rem 0;
+  }
 
   a {
     box-shadow: inset 0 0px 0 white, inset 0 -1px 0 $grey;
   }
 }
 
-.writing {
+main {
   line-height: 1.25;
 
   h1 {

@@ -5,27 +5,30 @@
 {% block title %}{% if view.category %}{{ view.category }} - {% endif %}{{ block.super }}{% endblock %}
 
 {% block content %}
-<main class="writing">
 
 {% if view.category %}
-<p class="intro">
-  <a href="{% url 'blog_post_archive' %}">Back to the overview</a>
-</p>
-<h1>{{ view.category }}</h1>
+<header>
+  <a class="back" href="{% url 'blog_post_archive' %}">Back to the overview</a>
+  <h1>{{ view.category }}</h1>
+  {% if view.category.html %}{{ view.category.html|safe }}{% endif %}
+</header>
 {% else %}
-<h1>Hi, I'm Matthias</h1>
-<p class="intro">
-  I am a founding partner of
-  <a href="https://feinheit.ch" target="_blank">Feinheit AG</a> and
-  <a href="https://diebruchpiloten.com" target="_blank">Die Bruchpiloten AG</a>.
-  Find me on
-  <a href="https://github.com/matthiask/" target="_blank">Github</a>,
-  <a href="https://twitter.com/suppensud/" target="_blank">Twitter</a>,
-  <a href="https://www.linkedin.com/in/matthiaskestenholz" target="_blank">LinkedIn</a>
-  or by <a href="mailto:mk@406.ch">email</a>.
-</p>
+<header>
+  <h1>Hi, I'm Matthias</h1>
+  <p>
+    I am a founding partner of
+    <a href="https://feinheit.ch" target="_blank">Feinheit AG</a> and
+    <a href="https://diebruchpiloten.com" target="_blank">Die Bruchpiloten AG</a>.
+    Find me on
+    <a href="https://github.com/matthiask/" target="_blank">Github</a>,
+    <a href="https://twitter.com/suppensud/" target="_blank">Twitter</a>,
+    <a href="https://www.linkedin.com/in/matthiaskestenholz" target="_blank">LinkedIn</a>
+    or by <a href="mailto:mk@406.ch">email</a>.
+  </p>
+</header>
 {% endif %}
 
+<main>
 {% for post in object_list %}
   {% if post.is_microblog %}
     <div class="microblog">

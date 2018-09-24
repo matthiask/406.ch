@@ -13,6 +13,8 @@ from django.utils.translation import ugettext_lazy as _
 class Category(models.Model):
     title = models.CharField(_("title"), max_length=200)
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
+    content = models.TextField(_("content"), blank=True)
+    html = models.TextField(_("HTML"), editable=False)
 
     class Meta:
         ordering = ["title"]
@@ -24,6 +26,11 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse("blog_category_detail", kwargs={"slug": self.slug})
+
+    def clean(self):
+        self.html = markdown(
+            self.content, extras=("smarty-pants", "nofollow", "target-blank-links")
+        )
 
 
 class PostManager(models.Manager):
