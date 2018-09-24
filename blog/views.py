@@ -19,6 +19,8 @@ class PostMixin(object):
             posts = posts.filter(published_on__year__gte=2014)
         elif self.archive is True:
             posts = posts.filter(published_on__year__lt=2014)
+        if self.request.GET.get("o") == "chronological":
+            return posts.reverse()
         return posts
 
 
