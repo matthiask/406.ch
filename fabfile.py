@@ -1,24 +1,8 @@
-from __future__ import unicode_literals
+import fh_fablib as fl
 
-from fabric.api import env
-import fh_fablib
 
-env.box_project_name = "mkweb"
-env.box_domain = "406.ch"
-env.box_database_local = "406_ch"
-env.forward_agent = True
+fl.require("1.0.20200827")
+fl.config.update(base=fl.Path(__file__).parent, host="www-data@feinheit06.nine.ch")
+fl.config.update(app="app", domain="406.ch", branch="master", remote="production")
 
-env.box_hardwired_environment = "production"
-env.box_environments = {
-    "production": {
-        "shortcut": "p",
-        "domain": "406.ch",
-        "branch": "master",
-        "servers": ["www-data@feinheit06.nine.ch"],
-        "remote": "production",
-        "repository": "406",
-        "database": "406_ch",
-    }
-}
-
-fh_fablib.init(globals(), systemd=True)
+ns = fl.Collection(*fl.GENERAL, *fl.NINE)

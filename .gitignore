@@ -14,8 +14,8 @@ dist
 /venv
 /reports
 .sass-cache
-/mkweb/local_settings.py
-/mkweb/static/mkweb/stylesheets/
+/app/local_settings.py
+/app/static/app/stylesheets/
 /media
 /node_modules
 /.env

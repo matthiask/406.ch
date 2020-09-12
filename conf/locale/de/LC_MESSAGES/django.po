@@ -86,43 +86,43 @@ msgstr "Autor"
 msgid "post"
 msgstr "Beitrag"
 
-#: mkweb/settings.py:49
+#: app/settings.py:49
 msgid "German"
 msgstr "Deutsch"
 
-#: mkweb/settings.py:50
+#: app/settings.py:50
 msgid "French"
 msgstr "Französisch"
 
-#: mkweb/settings.py:51
+#: app/settings.py:51
 msgid "English"
 msgstr "Englisch"
 
-#: mkweb/templates/blog/base.html:7
+#: app/templates/blog/base.html:7
 msgid "Search"
 msgstr "Suche"
 
-#: mkweb/templates/blog/base.html:11
+#: app/templates/blog/base.html:11
 msgid "Categories"
 msgstr "Kategorien"
 
-#: mkweb/templates/blog/base.html:20
+#: app/templates/blog/base.html:20
 msgid "Archive"
 msgstr "Archiv"
 
-#: mkweb/templates/blog/post_archive.html:8
+#: app/templates/blog/post_archive.html:8
 msgid "Writing"
 msgstr "Writing"
 
-#: mkweb/templates/blog/post_archive.html:18
+#: app/templates/blog/post_archive.html:18
 msgid "Nothing here. Sorry!"
 msgstr "Nichts hier. Sorry!"
 
-#: mkweb/templates/blog/post_detail.html:19
+#: app/templates/blog/post_detail.html:19
 #, python-format
 msgid "Published on %(published_on)s"
 msgstr "Veröffentlicht am %(published_on)s"
 
-#: mkweb/templates/blog/post_detail.html:22
+#: app/templates/blog/post_detail.html:22
 msgid "Not published yet"
 msgstr "Noch nicht veröffentlicht"

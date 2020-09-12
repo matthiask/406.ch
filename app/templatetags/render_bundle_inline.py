@@ -4,7 +4,6 @@ import os
 from django import template
 from django.conf import settings
 from django.utils.html import mark_safe
-
 from webpack_loader import utils
 
 
@@ -16,7 +15,7 @@ CSS_INLINE = '<style type="text/css">{chunk}</style>'
 JS_EXTERNAL = '<script type="text/javascript" src="{url}" {attrs}></script>'
 CSS_EXTERNAL = '<link type="text/css" rel="stylesheet" href="{url}" {attrs} />'
 
-BUNDLE_PATH = os.path.join(settings.BASE_DIR, "static", "mkweb")
+BUNDLE_PATH = os.path.join(settings.BASE_DIR, "static", "app")
 
 
 @register.simple_tag

@@ -2,13 +2,14 @@
 
 from __future__ import absolute_import, unicode_literals
 
+import os
+import sys
+
 import dj_database_url
 import django_cache_url
-
-# from django.utils.translation import ugettext_lazy as _
-import os
+from django.utils.translation import gettext_lazy as _
 from speckenv import env
-import sys
+
 
 DEBUG = env(
     "DEBUG", default=any(r in sys.argv for r in ("runserver", "shell", "dbshell"))
@@ -46,7 +47,7 @@ LANGUAGE_CODE = "en"
 LANGUAGES = (
     # ('de', _('German')),
     # ('fr', _('French')),
-    # ('en', _('English')),
+    ("en", _("English")),
 )
 
 USE_I18N = True
@@ -71,14 +72,14 @@ MIDDLEWARE = [
         (
             "django.middleware.security.SecurityMiddleware"
             if FORCE_SSL
-            else "mkweb.middleware.force_domain"
+            else "app.middleware.force_domain"
         ),
         "django.contrib.sessions.middleware.SessionMiddleware",
         "django.middleware.common.CommonMiddleware",
         "django.middleware.csrf.CsrfViewMiddleware",
         "django.middleware.locale.LocaleMiddleware",
         "django.contrib.auth.middleware.AuthenticationMiddleware",
-        # '' if LIVE else 'mkweb.middleware.only_staff',
+        # '' if LIVE else 'app.middleware.only_staff',
         "django.contrib.messages.middleware.MessageMiddleware",
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
     ]
@@ -88,7 +89,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "mkweb", "templates")],
+        "DIRS": [os.path.join(BASE_DIR, "app", "templates")],
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -116,7 +117,7 @@ TEMPLATES = [
     }
 ]
 
-ROOT_URLCONF = "mkweb.urls"
+ROOT_URLCONF = "app.urls"
 WSGI_APPLICATION = "wsgi.application"
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "conf", "locale"),)
@@ -132,7 +133,7 @@ INSTALLED_APPS = [
         "authlib.admin_oauth",
         "django.contrib.admin",
         "django.contrib.sitemaps",
-        "mkweb",
+        "app",
         "blog",
         "cabinet",
         "authlib.little_auth",
@@ -213,6 +214,7 @@ else:
 # https://github.com/matthewwithanm/django-imagekit/issues/50
 
 from PIL import ImageFile  # noqa, avoid warning
+
 
 if ImageFile.MAXBLOCK < 1024 * 1024:
     ImageFile.MAXBLOCK = 1024 * 1024

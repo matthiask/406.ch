@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 
 
 def force_domain(get_response):
@@ -34,7 +34,7 @@ def only_staff(get_response):
         if request.path.startswith("/admin"):
             return get_response(request)
         elif not request.user.is_staff:
-            response = render_to_response("only_staff.html", {})
+            response = render(request, "only_staff.html", {})
             response.status_code = 403
             return response
 

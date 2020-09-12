@@ -1,13 +1,12 @@
 from bs4 import BeautifulSoup
-from markdown2 import markdown
-
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
+from markdown2 import markdown
 
 
 class Category(models.Model):

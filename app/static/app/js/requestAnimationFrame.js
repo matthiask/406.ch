@@ -23,7 +23,7 @@ function setTimeoutRequestAnimationFrame(cb) {
 
 var requestAnimationFrame
 
-if (typeof window === 'undefined') {
+if (typeof window === "undefined") {
   requestAnimationFrame = setTimeoutRequestAnimationFrame
 } else {
   requestAnimationFrame =

@@ -1,3 +1,4 @@
+from authlib.admin_oauth.views import admin_oauth
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -5,7 +6,6 @@ from django.contrib.sitemaps.views import sitemap
 from django.shortcuts import redirect, render
 from django.views import generic
 
-from authlib.admin_oauth.views import admin_oauth
 from blog.sitemaps import PostSitemap
 from blog.views import ArchiveIndexView
 
