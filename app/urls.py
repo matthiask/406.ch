@@ -1,9 +1,9 @@
 from authlib.admin_oauth.views import admin_oauth
 from django.conf import settings
-from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.shortcuts import redirect, render
+from django.urls import include, path, re_path
 from django.views import generic
 
 from blog.sitemaps import PostSitemap
@@ -11,23 +11,27 @@ from blog.views import ArchiveIndexView
 
 
 urlpatterns = [
-    url(r"^$", ArchiveIndexView.as_view(archive=False), name="blog_post_archive"),
-    url(r"^writing/$", lambda request: redirect("blog_post_archive")),
-    url(r"^projects/$", lambda request: redirect("blog_post_archive")),
-    url(r"^about/$", lambda request: redirect("blog_post_archive")),
-    url(r"^contact/", lambda request: redirect("blog_post_archive")),
-    url(r"^404/$", render, {"template_name": "404.html"}),
-    url(r"^(?P<url>\d{4}/.*)$", generic.RedirectView.as_view(url="/writing/%(url)s")),
-    url(r"^blog/(?P<url>.*)$", generic.RedirectView.as_view(url="/writing/%(url)s")),
-    url(r"^writing/", include("blog.urls")),
-    url(r"^manage/__oauth__/$", admin_oauth, name="admin_oauth"),
-    url(r"^manage/", admin.site.urls),
-    url(r"^sitemap\.xml$", sitemap, {"sitemaps": {"posts": PostSitemap}}),
+    path("", ArchiveIndexView.as_view(archive=False), name="blog_post_archive"),
+    path("writing/", lambda request: redirect("blog_post_archive")),
+    path("projects/", lambda request: redirect("blog_post_archive")),
+    path("about/", lambda request: redirect("blog_post_archive")),
+    path("contact/", lambda request: redirect("blog_post_archive")),
+    path("404/", render, {"template_name": "404.html"}),
+    re_path(
+        r"^(?P<url>\d{4}/.*)$", generic.RedirectView.as_view(url="/writing/%(url)s")
+    ),
+    re_path(
+        r"^blog/(?P<url>.*)$", generic.RedirectView.as_view(url="/writing/%(url)s")
+    ),
+    path("writing/", include("blog.urls")),
+    path("manage/__oauth__/", admin_oauth, name="admin_oauth"),
+    path("manage/", admin.site.urls),
+    path("sitemap.xml", sitemap, {"sitemaps": {"posts": PostSitemap}}),
 ]
 
 if settings.DEBUG:
     try:
-        urlpatterns += [url(r"^__debug__/", include(__import__("debug_toolbar").urls))]
+        urlpatterns += [path("__debug__/", include(__import__("debug_toolbar").urls))]
     except ImportError:
         pass
 
