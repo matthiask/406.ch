@@ -14,34 +14,36 @@
   <div class="text">
     {{ post.html|safe }}
 
-    <p class="foot">
-      <small>
-        I like feedback! <a href="mailto:mk@406.ch">Send me an email.</a>
-        Did you like this post? <a href="/writing/feed/">Subscribe for more!</a>
-        <br>
-
-        {% if post.published_on %}
-          {% with published_on=post.published_on|date:"Y-m-d" %}
-            {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
-          {% endwith %}
-        {% else %}
-          {% trans "Not published yet" %}
-        {% endif %}
-
-        {% for category in post.categories.all %}
-          {% if forloop.first %}in{% endif %}
-          <a href="{{ category.get_absolute_url }}">
-            {{ category }}</a>{% if not forloop.last %},{% endif %}
-        {% endfor %}
-
-        {% if request.user.is_staff %}
-          <br><a href="/manage/blog/post/{{ post.id }}/change/" target="_blank">Edit this post</a>
-        {% endif %}
-      </small>
-    </p>
-
   </div>
 
 </main>
+
+<footer>
+  <p>
+    <small>
+      I like feedback! <a href="mailto:mk@406.ch">Send me an email.</a>
+      Did you like this post? <a href="/writing/feed/">Subscribe for more!</a>
+      <br>
+
+      {% if post.published_on %}
+        {% with published_on=post.published_on|date:"Y-m-d" %}
+          {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
+        {% endwith %}
+      {% else %}
+        {% trans "Not published yet" %}
+      {% endif %}
+
+      {% for category in post.categories.all %}
+        {% if forloop.first %}in{% endif %}
+        <a href="{{ category.get_absolute_url }}">
+          {{ category }}</a>{% if not forloop.last %},{% endif %}
+      {% endfor %}
+
+      {% if request.user.is_staff %}
+        <br><a href="/manage/blog/post/{{ post.id }}/change/" target="_blank">Edit this post</a>
+      {% endif %}
+    </small>
+  </p>
+</footer>
 
 {% endblock %}

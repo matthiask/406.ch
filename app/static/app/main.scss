@@ -63,10 +63,6 @@ header {
   p {
     margin: 0 0 0.75rem 0;
   }
-
-  a {
-    box-shadow: inset 0 0px 0 white, inset 0 -1px 0 $grey;
-  }
 }
 
 main {
@@ -145,19 +141,22 @@ main {
     font-size: 0.8rem;
   }
 
-  .text {
-    a {
-      box-shadow: inset 0 0px 0 white, inset 0 -1px 0 $grey;
-    }
-  }
-
   .active {
     font-weight: bold;
   }
+}
 
-  .foot {
-    margin-top: 2rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid $grey;
+footer {
+  border-top: 1px solid $grey;
+  padding: 0.75rem 0 0 0;
+  margin: 2rem 0 0 0;
+  line-height: 1.6;
+}
+
+header,
+footer,
+main .text {
+  a {
+    box-shadow: inset 0 0px 0 white, inset 0 -1px 0 $grey;
   }
 }

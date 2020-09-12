@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{% if view.category %}
+{% if view.category or view.archive or request.GET %}
 <header>
   <a class="back" href="{% url 'blog_post_archive' %}">Back to the overview</a>
   <h1>{{ view.category }}</h1>
@@ -78,18 +78,23 @@
     {% endif %}
   </ul>
 {% endif %}
+</main>
 
+<footer>
 <p>
   <small>
     <strong>Categories:</strong>
-  {% for category in blog.categories %}
-    <a
-      {% if category.get_absolute_url in request.path %}class="active"{% endif %}
-      href="{{ category.get_absolute_url }}"
-    >{{ category.title }}</a>{% if not forloop.last %},{% endif %}
-  {% endfor %}
+    {% for category in blog.categories %}
+      <a
+        {% if category.get_absolute_url in request.path %}class="active"{% endif %}
+        href="{{ category.get_absolute_url }}"
+      >{{ category.title }}</a>{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  </small>
+</p>
 
-    <br>
+<p>
+  <small>
     <strong>RSS feeds:</strong>
     <a href="{% url 'blog_post_feed' %}">All posts</a>,
     {% for category in blog.categories %}
@@ -98,6 +103,6 @@
     {% endfor %}
   </small>
 </p>
+</footer>
 
-</main>
 {% endblock %}
