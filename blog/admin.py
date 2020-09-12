@@ -53,7 +53,6 @@ class PostAdmin(admin.ModelAdmin):
         ),
     ]
     list_display = ("title", "is_active", "published_on", "author")
-    list_editable = ("is_active",)
     list_filter = (
         ("published_on", PublishedOnListFilter),
         "is_active",
