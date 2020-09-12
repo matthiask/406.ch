@@ -9,12 +9,8 @@
   <title>{% block title %}Matthias Kestenholz{% endblock %}</title>
   <meta name="description" content="">
 
-  {# <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet"> #}
-  {% if debug %}
-    {# <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script> #}
-    {% render_bundle 'main' %}
-  {% else %}
-    {% render_bundle_inline 'main' 'css' %}
+  {% if debug %}{% render_bundle 'main' %}
+  {% else %}{% render_bundle_inline 'main' 'css' %}
   {% endif %}
 
   <link rel="alternate" type="application/atom+xml" title="Blog feed" href="{{ blog.feed_url }}">

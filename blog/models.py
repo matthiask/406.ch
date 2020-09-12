@@ -42,7 +42,9 @@ class PostManager(models.Manager):
 
     def published(self):
         return self.filter(
-            published_on__isnull=False, published_on__lte=timezone.now(), is_active=True
+            published_on__isnull=False,
+            published_on__lte=timezone.now(),
+            is_active=True,
         )
 
 
