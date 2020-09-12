@@ -2974,10 +2974,10 @@ faye-websocket@~0.11.1:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fh-webpack-config@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/fh-webpack-config/-/fh-webpack-config-1.0.7.tgz#42697ae5a32421d259cb50446266b95ab1d0cbd3"
-  integrity sha512-htrIgDDI2Rlzxh7ivadrXw7IdRabqNcG1bhZ4ciqcgZWa4MXLBC90eMOdk1pj6rKwJiOGmt64lfSkHWvI5lKgA==
+fh-webpack-config@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fh-webpack-config/-/fh-webpack-config-1.1.0.tgz#bd9fccf73c603ea07e78759500093b20a5ee9c7e"
+  integrity sha512-9krSfEu5xuFZPSrxe7M7sgcrFKBDxuy/04quIKZiTGHyBk5Kxb14CDGQo9HueenziPG/RAbCeSHrGTp5KNlQlA==
   dependencies:
     "@babel/core" "^7.7.4"
     "@babel/plugin-proposal-class-properties" "^7.7.4"
@@ -2995,7 +2995,7 @@ fh-webpack-config@^1.0.7:
     imports-loader "^0.8.0"
     mini-css-extract-plugin "^0.9.0"
     optimize-css-assets-webpack-plugin "^5.0.3"
-    postcss-loader "^3.0.0"
+    postcss-loader "^4.0.0"
     sass "^1.23.7"
     sass-loader "^8.0.0"
     script-loader "^0.7.2"
@@ -3557,13 +3557,6 @@ ignore@^4.0.6:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-import-cwd@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
-  integrity sha1-qmzzbnInYShcs3HsZRn1PiQ1sKk=
-  dependencies:
-    import-from "^2.1.0"
-
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
@@ -3579,13 +3572,6 @@ import-fresh@^3.0.0, import-fresh@^3.2.1:
   dependencies:
     parent-module "^1.0.0"
     resolve-from "^4.0.0"
-
-import-from@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/import-from/-/import-from-2.1.0.tgz#335db7f2a7affd53aaa471d4b8021dee36b7f3b1"
-  integrity sha1-M1238qev/VOqpHHUuAId7ja387E=
-  dependencies:
-    resolve-from "^3.0.0"
 
 import-local@^2.0.0:
   version "2.0.0"
@@ -4987,25 +4973,7 @@ postcss-discard-overridden@^4.0.1:
   dependencies:
     postcss "^7.0.0"
 
-postcss-load-config@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-2.1.0.tgz#c84d692b7bb7b41ddced94ee62e8ab31b417b003"
-  integrity sha512-4pV3JJVPLd5+RueiVVB+gFOAa7GWc25XQcMp86Zexzke69mKf6Nx9LRcQywdz7yZI9n1udOxmLuAwTBypypF8Q==
-  dependencies:
-    cosmiconfig "^5.0.0"
-    import-cwd "^2.0.0"
-
-postcss-loader@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-3.0.0.tgz#6b97943e47c72d845fa9e03f273773d4e8dd6c2d"
-  integrity sha512-cLWoDEY5OwHcAjDnkyRQzAXfs2jrKjXpO/HQFcc5b5u/r7aa471wdmChmwfnv7x2u840iat/wi0lQ5nbRgSkUA==
-  dependencies:
-    loader-utils "^1.1.0"
-    postcss "^7.0.0"
-    postcss-load-config "^2.0.0"
-    schema-utils "^1.0.0"
-
-postcss-loader@^4.0.1:
+postcss-loader@^4.0.0, postcss-loader@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-4.0.1.tgz#d1a2cf443005bcd65e856d3881204886646398d4"
   integrity sha512-m+2fe21cs/1Oz4Yds90al5uqVSc0yJRhYSfCRnsnVLt3z0QoNPpqLdgW7CGVWmlUlKEGL9vmq+P4hHS6Orb5DA==
