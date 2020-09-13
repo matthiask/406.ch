@@ -28,7 +28,8 @@ class Category(models.Model):
 
     def clean(self):
         self.html = markdown(
-            self.content, extras=("smarty-pants", "nofollow", "target-blank-links")
+            self.content,
+            extras=("smarty-pants", "nofollow", "target-blank-links", "footnotes"),
         )
 
 
@@ -91,7 +92,8 @@ class Post(models.Model):
     def clean(self):
         if self.content_type == "markdown":
             self.html = markdown(
-                self.content, extras=("smarty-pants", "nofollow", "target-blank-links")
+                self.content,
+                extras=("smarty-pants", "nofollow", "target-blank-links", "footnotes"),
             )
         else:
             self.html = self.content

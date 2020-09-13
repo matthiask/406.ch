@@ -75,7 +75,7 @@ main {
 
   h2 {
     font-size: 1.4rem;
-    margin: 0.75rem 0 0.25rem 0;
+    margin: 1.5rem 0 0.5rem 0;
 
     small {
       font-weight: normal;
@@ -88,7 +88,7 @@ main {
 
   h3 {
     font-size: 1.2rem;
-    margin: 0.75rem 0 0.25rem 0;
+    margin: 1.25rem 0 0.5rem 0;
   }
 
   p,
@@ -96,7 +96,7 @@ main {
   ol {
     font-size: 1rem;
     margin: 0 0 0.75rem 0;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   ul,
@@ -137,7 +137,8 @@ main {
     font-size: 0.8rem;
   }
 
-  small {
+  small,
+  .footnotes {
     font-size: 0.8rem;
   }
 
