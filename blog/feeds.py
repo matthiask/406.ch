@@ -16,7 +16,7 @@ class PostFeed(Feed):
         return reverse("blog_post_feed")
 
     def items(self):
-        return Post.objects.published().filter(published_on__year__gte=2014)[:20]
+        return Post.objects.published()[:20]
 
     def item_title(self, item):
         return item.title
@@ -36,6 +36,4 @@ class CategoryFeed(PostFeed):
         return reverse("blog_category_feed", kwargs={"slug": obj.slug})
 
     def items(self, obj):
-        return Post.objects.published().filter(
-            categories=obj, published_on__year__gte=2014
-        )[:20]
+        return Post.objects.published().filter(categories=obj)[:20]

@@ -12,13 +12,15 @@ class PostMixin(object):
     archive = None
 
     def get_queryset(self):
-        posts = Post.objects.published()
+        if self.archive is False:
+            posts = Post.objects.current()
+        elif self.archive is True:
+            posts = Post.objects.archive()
+        else:
+            posts = Post.objects.published()
+
         if self.request.GET.get("q"):
             posts &= Post.objects.search(self.request.GET["q"])
-        if self.archive is False:
-            posts = posts.filter(published_on__year__gte=2014)
-        elif self.archive is True:
-            posts = posts.filter(published_on__year__lt=2014)
         if self.request.GET.get("o") == "chronological":
             return posts.reverse()
         return posts

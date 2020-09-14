@@ -33,7 +33,7 @@ class Category(models.Model):
         )
 
 
-class PostManager(models.Manager):
+class PostQuerySet(models.QuerySet):
     def search(self, query):
         q = Q()
         for term in query.split():
@@ -47,6 +47,12 @@ class PostManager(models.Manager):
             published_on__lte=timezone.now(),
             is_active=True,
         )
+
+    def current(self):
+        return self.published().filter(published_on__year__gte=2014)
+
+    def archive(self):
+        return self.published().filter(published_on__year__lt=2014)
 
 
 class Post(models.Model):
@@ -73,7 +79,7 @@ class Post(models.Model):
         Category, related_name="posts", verbose_name=_("categories"), blank=True
     )
 
-    objects = PostManager()
+    objects = PostQuerySet.as_manager()
 
     class Meta:
         get_latest_by = "published_on"
