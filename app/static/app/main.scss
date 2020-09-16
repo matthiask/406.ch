@@ -137,9 +137,18 @@ main {
     font-size: 0.8rem;
   }
 
-  small,
-  .footnotes {
+  small {
     font-size: 0.8rem;
+  }
+
+  .footnotes {
+    margin-top: 2rem;
+  }
+
+  .footnotes ol,
+  .footnotes p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
   }
 
   .active {
@@ -149,7 +158,7 @@ main {
 
 footer {
   border-top: 1px solid $grey;
-  padding: 0.75rem 0 0 0;
+  padding: 0.5rem 0 0 0.5rem;
   margin: 2rem 0 0 0;
   line-height: 1.6;
 }
