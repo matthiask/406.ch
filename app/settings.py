@@ -131,6 +131,7 @@ INSTALLED_APPS = [
         "django.contrib.messages",
         "django.contrib.staticfiles",
         "authlib.admin_oauth",
+        "variable_admin",
         "django.contrib.admin",
         "django.contrib.sitemaps",
         "app",

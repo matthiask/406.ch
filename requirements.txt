@@ -6,13 +6,14 @@ certifi==2020.6.20
 chardet==3.0.4
 dj-database-url==0.5.0
 Django==3.1.1
-django-authlib==0.9.6
+django-authlib==0.9.7
 django-cabinet==0.11.0
 django-cache-url==3.1.2
-django-debug-toolbar==3.0a4
-django-imagefield==0.12.2
+django-debug-toolbar==3.1
+django-imagefield==0.12.3
 django-redis==4.12.1
 django-tree-queries==0.4.0
+django-variable-admin==0.0.4
 django-webpack-loader==0.7.0
 flake8==3.8.3
 gunicorn==20.0.4
