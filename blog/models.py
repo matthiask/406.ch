@@ -9,6 +9,15 @@ from django.utils.translation import gettext_lazy as _
 from markdown2 import markdown
 
 
+def markdown_to_soup(md):
+    html = markdown(
+        md,
+        extras=("smarty-pants", "nofollow", "target-blank-links", "footnotes"),
+    )
+    # Remove entities etc.
+    return BeautifulSoup(html)
+
+
 class Category(models.Model):
     title = models.CharField(_("title"), max_length=200)
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
@@ -27,10 +36,7 @@ class Category(models.Model):
         return reverse("blog_category_detail", kwargs={"slug": self.slug})
 
     def clean(self):
-        self.html = markdown(
-            self.content,
-            extras=("smarty-pants", "nofollow", "target-blank-links", "footnotes"),
-        )
+        self.html = str(markdown_to_soup(self.content))
 
 
 class PostQuerySet(models.QuerySet):
@@ -97,18 +103,17 @@ class Post(models.Model):
 
     def clean(self):
         if self.content_type == "markdown":
-            self.html = markdown(
-                self.content,
-                extras=("smarty-pants", "nofollow", "target-blank-links", "footnotes"),
-            )
+            soup = markdown_to_soup(self.content)
+            self.html = str(soup)
         else:
             self.html = self.content
+            soup = BeautifulSoup(self.html)
 
         if self.is_microblog:
             self.title = self.html[:200]
         else:
             try:
-                self.title = BeautifulSoup(self.html).find("h1").text
+                self.title = soup.find("h1").text
             except Exception:
                 raise ValidationError("Please provide at least one H1 tag.")
 

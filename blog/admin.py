@@ -58,6 +58,7 @@ class PostAdmin(admin.ModelAdmin):
         "is_active",
         "author",
         "categories",
+        "content_type",
     )
     prepopulated_fields = {"slug": ("title",)}
     radio_fields = {"content_type": admin.HORIZONTAL}
