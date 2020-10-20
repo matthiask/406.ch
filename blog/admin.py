@@ -39,7 +39,6 @@ class PostAdmin(admin.ModelAdmin):
                     ("title", "slug"),
                     "content",
                     "content_type",
-                    "url_override",
                     "categories",
                 )
             },

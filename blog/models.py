@@ -78,7 +78,6 @@ class Post(models.Model):
         choices=CONTENT_TYPE_CHOICES,
         default=CONTENT_TYPE_CHOICES[0][0],
     )
-    url_override = models.URLField(_("URL override"), blank=True)
     html = models.TextField(_("HTML"), editable=False)
     author = models.CharField(_("author"), max_length=200, blank=True)
     categories = models.ManyToManyField(
@@ -97,9 +96,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return self.url_override or reverse(
-            "blog_post_detail", kwargs={"slug": self.slug}
-        )
+        return reverse("blog_post_detail", kwargs={"slug": self.slug})
 
     def clean(self):
         if self.content_type == "markdown":

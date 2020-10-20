@@ -39,7 +39,7 @@
     </div>
   {% else %}
     <h2>
-      <a href="{{ post.get_absolute_url }}"{% if post.url_override %} target="_blank" rel="noopener noreferrer"{% endif %}>
+      <a href="{{ post.get_absolute_url }}">
         <small>{{ post.published_on|date:"Y-m-d" }}</small><br>
         {{ post.title }}
       </a>
