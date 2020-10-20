@@ -17,12 +17,12 @@
   <h1>Hi, I'm Matthias</h1>
   <p>
     I am a founding partner of
-    <a href="https://feinheit.ch" target="_blank">Feinheit AG</a> and
-    <a href="https://diebruchpiloten.com" target="_blank">Die Bruchpiloten AG</a>.
+    <a href="https://feinheit.ch" target="_blank" rel="noopener noreferrer">Feinheit AG</a> and
+    <a href="https://diebruchpiloten.com" target="_blank" rel="noopener noreferrer">Die Bruchpiloten AG</a>.
     Find me on
-    <a href="https://github.com/matthiask/" target="_blank">Github</a>,
-    <a href="https://twitter.com/matthispam/" target="_blank">Twitter</a>,
-    <a href="https://www.linkedin.com/in/matthiaskestenholz" target="_blank">LinkedIn</a>
+    <a href="https://github.com/matthiask/" target="_blank" rel="noopener noreferrer">Github</a>,
+    <a href="https://twitter.com/matthispam/" target="_blank" rel="noopener noreferrer">Twitter</a>,
+    <a href="https://www.linkedin.com/in/matthiaskestenholz" title="if you must" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     or by <a href="mailto:mk@406.ch">email</a>.
   </p>
 </header>
@@ -39,7 +39,7 @@
     </div>
   {% else %}
     <h2>
-      <a href="{{ post.get_absolute_url }}"{% if post.url_override %} target="_blank" rel="noopener"{% endif %}>
+      <a href="{{ post.get_absolute_url }}"{% if post.url_override %} target="_blank" rel="noopener noreferrer"{% endif %}>
         <small>{{ post.published_on|date:"Y-m-d" }}</small><br>
         {{ post.title }}
       </a>
