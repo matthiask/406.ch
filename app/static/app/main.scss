@@ -163,6 +163,25 @@ main {
   .active {
     font-weight: bold;
   }
+
+  .admonition {
+    border: 1px solid $grey;
+    padding: 0.25rem 0.5rem 0 0.5rem;
+    margin: 0.5rem 0 0.75rem 0;
+
+    * {
+      line-height: 1.25;
+    }
+
+    *:last-child {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .admonition-title {
+    font-weight: bold;
+    border-bottom: 1px solid $grey;
+  }
 }
 
 footer {
