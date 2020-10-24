@@ -147,10 +147,13 @@ main {
     background: none;
   }
 
+  .footnote,
   .footnotes {
     margin-top: 2rem;
   }
 
+  .footnote ol,
+  .footnote p,
   .footnotes ol,
   .footnotes p {
     font-size: 0.8rem;

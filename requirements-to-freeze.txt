@@ -11,7 +11,7 @@ Django
 flake8
 gunicorn
 hiredis
-markdown2
+Markdown
 psycopg2-binary
 pytz
 raven

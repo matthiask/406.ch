@@ -3,12 +3,14 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-from markdown2 import markdown
+from markdown import markdown
 
 
 def forwards(apps, schema_editor):
     for post in apps.get_model("blog", "Post").objects.filter(content_type="markdown"):
-        post.html = markdown(post.content, extras=("smarty-pants",))
+        post.html = markdown(
+            post.content, extensions=["smarty", "footnotes", "admonition"]
+        )
         post.save()
 
 

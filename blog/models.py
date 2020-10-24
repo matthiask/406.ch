@@ -6,16 +6,13 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
-from markdown2 import markdown
+from markdown import markdown
 
 
 def markdown_to_soup(md):
-    html = markdown(
-        md,
-        extras=("smarty-pants", "nofollow", "target-blank-links", "footnotes"),
-    )
+    html = markdown(md, extensions=["smarty", "footnotes", "admonition"])
     # Remove entities etc.
-    return BeautifulSoup(html)
+    return BeautifulSoup(html, features="html.parser")
 
 
 class Category(models.Model):
