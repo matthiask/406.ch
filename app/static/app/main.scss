@@ -170,7 +170,7 @@ main {
     margin: 0.5rem 0 0.75rem 0;
 
     * {
-      line-height: 1.25;
+      font-size: 0.8rem;
     }
 
     *:last-child {
@@ -180,7 +180,7 @@ main {
 
   .admonition-title {
     font-weight: bold;
-    border-bottom: 1px solid $grey;
+    margin-bottom: 0;
   }
 }
 
