@@ -29,7 +29,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    autocomplete_fields = ["categories"]
     date_hierarchy = "published_on"
     fieldsets = [
         (
