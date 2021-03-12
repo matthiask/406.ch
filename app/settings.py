@@ -37,6 +37,7 @@ DEFAULT_FROM_EMAIL = "no-reply@fcz.ch"
 SERVER_EMAIL = "root@oekohosting.ch"
 
 DATABASES = {"default": dj_database_url.config()}
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 CACHES = {"default": django_cache_url.config()}
 
@@ -131,7 +132,6 @@ INSTALLED_APPS = [
         "django.contrib.messages",
         "django.contrib.staticfiles",
         "authlib.admin_oauth",
-        "variable_admin",
         "django.contrib.admin",
         "django.contrib.sitemaps",
         "app",

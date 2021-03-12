@@ -5,7 +5,6 @@ django-cabinet
 django-cache-url
 django-debug-toolbar
 django-redis
-django-variable-admin
 django-webpack-loader
 Django
 flake8
