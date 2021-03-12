@@ -20,6 +20,7 @@ class PublishedOnListFilter(admin.DateFieldListFilter):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("title", "post_count")
     prepopulated_fields = {"slug": ("title",)}
+    search_fields = ["title"]
 
     def post_count(self, instance):
         return instance.posts.published().count()
@@ -28,6 +29,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["categories"]
     date_hierarchy = "published_on"
     fieldsets = [
         (
@@ -67,13 +69,6 @@ class PostAdmin(admin.ModelAdmin):
             kwargs.setdefault("initial", kwargs.get("request").user.get_full_name())
 
         return super(PostAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-
-    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
-        if db_field.name == "categories":
-            kwargs.setdefault("widget", forms.CheckboxSelectMultiple())
-        return super(PostAdmin, self).formfield_for_manytomany(
-            db_field, request=request, **kwargs
-        )
 
 
 admin.site.register(models.Category, CategoryAdmin)
