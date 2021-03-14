@@ -12,6 +12,7 @@ django-cache-url==3.2.3
 django-debug-toolbar==3.2
 django-imagefield==0.13.0
 django-redis==4.12.1
+django-sane-redirects==1.1.0
 django-tree-queries==0.4.3
 django-webpack-loader==0.7.0
 flake8==3.8.4

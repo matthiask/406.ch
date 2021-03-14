@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from markdown import markdown
+from sane_redirects.models import Redirect
 
 
 def markdown_to_soup(md):
@@ -115,3 +116,16 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         if self.is_active and not self.published_on:
             self.published_on = timezone.now()
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            slugs = Post.objects.filter(id=self.pk).values_list("slug", flat=True)
+            if slugs and slugs[0] != self.slug:
+                Redirect.objects.update_or_create(
+                    old_path=reverse("blog_post_detail", kwargs={"slug": slugs[0]}),
+                    defaults={"new_path": self.get_absolute_url()},
+                )
+
+        super().save(*args, **kwargs)
+
+    save.alters_data = True

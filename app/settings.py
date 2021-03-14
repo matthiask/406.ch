@@ -83,6 +83,7 @@ MIDDLEWARE = [
         # '' if LIVE else 'app.middleware.only_staff',
         "django.contrib.messages.middleware.MessageMiddleware",
         "django.middleware.clickjacking.XFrameOptionsMiddleware",
+        "sane_redirects.middleware.RedirectFallbackMiddleware",
     ]
     if m
 ]
@@ -138,6 +139,7 @@ INSTALLED_APPS = [
         "blog",
         "cabinet",
         "authlib.little_auth",
+        "sane_redirects",
         "webpack_loader",
         "raven.contrib.django.raven_compat",
         "debug_toolbar.apps.DebugToolbarConfig" if DEBUG_TOOLBAR else "",
