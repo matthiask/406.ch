@@ -1,6 +1,6 @@
 import "./main.scss"
 
-import "blissfuljs"
-const { $, $$ } = window // eslint-disable-line
+// import "blissfuljs"
+// const { $, $$ } = window // eslint-disable-line
 
-document.addEventListener("DOMContentLoaded", function () {})
+// document.addEventListener("DOMContentLoaded", function () {})

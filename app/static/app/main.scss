@@ -73,17 +73,17 @@ main {
     margin: 0 0 1.5rem 0;
   }
 
+  h2,
+  .microblog {
+    margin: 1.5rem 0 0.5rem 0;
+  }
+
   h2 {
     font-size: 1.4rem;
-    margin: 1.5rem 0 0.5rem 0;
 
     small {
       font-weight: normal;
     }
-  }
-
-  .microblog {
-    margin: 0.75rem 0 0.25rem 0;
   }
 
   h3 {
