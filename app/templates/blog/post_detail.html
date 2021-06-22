@@ -10,29 +10,18 @@
 </header>
 
 <main>
-
   <div class="text">
     {{ post.html|safe }}
-
   </div>
-
 </main>
-
-<hr>
-
-<script src="https://utteranc.es/client.js"
-        repo="matthiask/406-comments"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
 
 <footer>
   <p>
     <small>
-      I like feedback! <a href="mailto:mk@406.ch">Send me an email.</a>
-      Did you like this post? <a href="/writing/feed/">Subscribe for more!</a>
+      I like feedback! <a href="mailto:mk@406.ch?subject={{ post.title }}">Send me an email.</a>
+      <br>
+      {# Did you like this post? <a href="/writing/feed/">Subscribe to the RSS feed for more!</a> #}
+      <a href="https://ko-fi.com/matthiask" target="_blank" rel="noopener noreferrer">☕  Buy me a coffee?</a>
       <br>
 
       {% if post.published_on %}
@@ -55,5 +44,15 @@
     </small>
   </p>
 </footer>
+
+<hr>
+
+<script src="https://utteranc.es/client.js"
+        repo="matthiask/406-comments"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
 
 {% endblock %}
