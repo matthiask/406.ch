@@ -1,5 +1,5 @@
 beautifulsoup4
-Django
+Django<4  # PostgreSQL too old
 django-authlib
 django-cabinet
 django-cache-url
