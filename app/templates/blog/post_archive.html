@@ -29,7 +29,7 @@
   </div>
 </header>
 
-<main class="wrappy">
+<main><div class="wrappy">
 {% for post in object_list %}
   {% if post.is_microblog %}
     <div class="microblog">
@@ -54,6 +54,7 @@
 
 {% if view.archive is False %}
 <p>
+  <br>
   <small>
     <a href="/writing/archive/">Find older posts in the <strong>archive</strong>.</a>
   </small>
@@ -79,7 +80,7 @@
     {% endif %}
   </ul>
 {% endif %}
-</main>
+</div></main>
 
 <footer>
   <div class="wrappy">
