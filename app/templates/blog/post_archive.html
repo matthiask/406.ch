@@ -6,30 +6,30 @@
 
 {% block content %}
 
-{% if view.category or view.archive or request.GET %}
 <header>
-  <a class="back" href="{% url 'blog_post_archive' %}">Back to the overview</a>
-  <h1>{{ view.category }}</h1>
-  {% if view.category.html %}{{ view.category.html|safe }}{% endif %}
+  <div class="wrappy">
+    {% if view.category or view.archive or request.GET %}
+      <a class="back" href="{% url 'blog_post_archive' %}">Back to the overview</a>
+      <h1 class="title">{{ view.category }}</h1>
+      {% if view.category.html %}{{ view.category.html|safe }}{% endif %}
+    {% else %}
+      <h1 class="title">Hi, I'm Matthias</h1>
+      <p>
+        I am a founding partner of
+        <a href="https://feinheit.ch">Feinheit AG</a> and
+        <a href="https://diebruchpiloten.com">Die Bruchpiloten AG</a>.
+        Find me on
+        <a href="https://github.com/matthiask/" rel="">Github</a>,
+        <a href="https://hachyderm.io/@matthiask" rel="me">Mastodon</a>,
+        {# <a href="https://twitter.com/matthispam/" target="_blank" rel="noopener noreferrer">Twitter</a>, #}
+        <a href="https://www.linkedin.com/in/matthiaskestenholz" title="if you must" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        or by <a href="mailto:mk@406.ch">email</a>.
+      </p>
+    {% endif %}
+  </div>
 </header>
-{% else %}
-<header>
-  <h1>Hi, I'm Matthias</h1>
-  <p>
-    I am a founding partner of
-    <a href="https://feinheit.ch" target="_blank" rel="noopener noreferrer">Feinheit AG</a> and
-    <a href="https://diebruchpiloten.com" target="_blank" rel="noopener noreferrer">Die Bruchpiloten AG</a>.
-    Find me on
-    <a href="https://github.com/matthiask/" target="_blank" rel="noopener noreferrer">Github</a>,
-    <a href="https://hachyderm.io/@matthiask" target="_blank" rel="noopener noreferrer">Mastodon</a>,
-    {# <a href="https://twitter.com/matthispam/" target="_blank" rel="noopener noreferrer">Twitter</a>, #}
-    <a href="https://www.linkedin.com/in/matthiaskestenholz" title="if you must" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    or by <a href="mailto:mk@406.ch">email</a>.
-  </p>
-</header>
-{% endif %}
 
-<main>
+<main class="wrappy">
 {% for post in object_list %}
   {% if post.is_microblog %}
     <div class="microblog">
@@ -82,9 +82,11 @@
 </main>
 
 <footer>
+  <div class="wrappy">
+
 <p>
   <small>
-    <strong>Categories:</strong>
+    <strong>Categories: </strong>
     {% for category in blog.categories %}
       <a
         {% if category.get_absolute_url in request.path %}class="active"{% endif %}
@@ -96,7 +98,7 @@
 
 <p>
   <small>
-    <strong>RSS feeds:</strong>
+    <strong>RSS feeds: </strong>
     <a href="{% url 'blog_post_feed' %}">All posts</a>,
     {% for category in blog.categories %}
       <a href="{% url 'blog_category_feed' slug=category.slug %}">
@@ -104,6 +106,12 @@
     {% endfor %}
   </small>
 </p>
+
+<p>
+  <small>&copy; 2005 - {% now 'Y' %} Matthias Kestenholz</small>
+</p>
+
+  </div>
 </footer>
 
 {% endblock %}
