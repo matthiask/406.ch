@@ -1,23 +1,16 @@
 {% spaceless %}<!DOCTYPE html>
-{% load i18n static %}
-{% load render_bundle from webpack_loader %}
-{% load render_bundle_inline %}
+{% load i18n static webpack_assets %}
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% block title %}Matthias Kestenholz{% endblock %}</title>
   <meta name="description" content="">
-
-  {% if debug %}{% render_bundle 'main' %}
-  {% else %}{% render_bundle_inline 'main' 'css' %}
-  {% endif %}
-
+  {% webpack_assets 'main' %}
   <link rel="alternate" type="application/atom+xml" title="Blog feed" href="{{ blog.feed_url }}">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&amp;display=swap" rel="stylesheet">
-  <a rel="me" href="https://hachyderm.io/@matthiask">Mastodon</a>
-
+  <link rel="me" href="https://hachyderm.io/@matthiask">
 </head>
 <body>
 <div class="wrappy">
@@ -26,13 +19,6 @@
   {% endblock %}
 
   <small class="copy">&copy; 2005 - {% now 'Y' %} Matthias Kestenholz</small>
-
-  {% comment %}
-    {% if not debug %}
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=blissfuljs"></script>
-    {% render_bundle 'main' 'js' %}
-    {% endif %}
-  {% endcomment %}
 
 </div>
 </body>

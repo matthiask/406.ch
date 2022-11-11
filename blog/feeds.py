@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.feedgenerator import Atom1Feed
 
-from .models import Category, Post
+from blog.models import Category, Post
 
 
 class PostFeed(Feed):

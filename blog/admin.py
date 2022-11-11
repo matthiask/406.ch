@@ -1,13 +1,12 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from . import models
+from blog import models
 
 
 class PublishedOnListFilter(admin.DateFieldListFilter):
     def choices(self, cl):
-        for choice in super(PublishedOnListFilter, self).choices(cl):
-            yield choice
+        yield from super().choices(cl)
 
         param_dict = {"%sisnull" % self.field_generic: "True"}
         yield {
@@ -22,10 +21,9 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ["title"]
 
+    @admin.display(description=_("posts"))
     def post_count(self, instance):
         return instance.posts.published().count()
-
-    post_count.short_description = _("posts")
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -67,7 +65,7 @@ class PostAdmin(admin.ModelAdmin):
         if db_field.name == "author" and kwargs.get("request"):
             kwargs.setdefault("initial", kwargs.get("request").user.get_full_name())
 
-        return super(PostAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        return super().formfield_for_dbfield(db_field, **kwargs)
 
 
 admin.site.register(models.Category, CategoryAdmin)

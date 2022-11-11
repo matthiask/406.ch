@@ -1,18 +1,12 @@
+Django<4.1  # PostgreSQL too old
+Markdown
 beautifulsoup4
-Django<4  # PostgreSQL too old
 django-authlib
 django-cabinet
-django-cache-url
 django-debug-toolbar
-django-redis
 django-sane-redirects
-django-webpack-loader
-dj-database-url
 flake8
 gunicorn
 hiredis
-Markdown
 psycopg2-binary
-pytz
-raven
 speckenv

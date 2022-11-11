@@ -1,5 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import render
@@ -13,8 +11,8 @@ def force_domain(get_response):
         if request.method != "GET":
             return get_response(request)
 
-        if request.META.get("HTTP_HOST") != settings.FORCE_DOMAIN:
-            target = "http%s://%s%s" % (
+        if request.headers.get("host") != settings.FORCE_DOMAIN:
+            target = "http{}://{}{}".format(
                 request.is_secure() and "s" or "",
                 settings.FORCE_DOMAIN,
                 request.get_full_path(),

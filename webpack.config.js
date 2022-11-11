@@ -1,14 +1,42 @@
-const merge = require("webpack-merge")
-const config = require("fh-webpack-config")
+module.exports = (env, argv) => {
+  const PRODUCTION = argv.mode === "production"
+  const {
+    base,
+    devServer,
+    assetRule,
+    postcssRule,
+    babelRule,
+    truthy,
+    miniCssExtractPlugin,
+    htmlSingleChunkPlugin,
+    htmlInlineScriptPlugin,
+    noSplitting,
+  } = require("./webpack.library.js")(PRODUCTION)
 
-module.exports = merge.smart(
-  config.commonConfig,
-  {
-    entry: {
-      main: "./main.js",
-      admin: "./admin.js",
-    },
+  const entry = {
+    main: "./main.js",
+    admin: "./admin.js",
   }
-  // config.preactConfig,
-  // config.chunkSplittingConfig
-)
+
+  return {
+    ...base,
+    ...noSplitting,
+    entry,
+    devServer: devServer({ backendPort: env.backend }),
+    module: {
+      rules: [
+        assetRule(),
+        postcssRule({
+          plugins: ["postcss-nested", "autoprefixer"],
+        }),
+        babelRule(),
+      ],
+    },
+    plugins: truthy(
+      miniCssExtractPlugin(),
+      htmlSingleChunkPlugin("main"),
+      htmlSingleChunkPlugin("admin"),
+      htmlInlineScriptPlugin(),
+    ),
+  }
+}

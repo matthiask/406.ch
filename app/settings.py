@@ -1,9 +1,8 @@
-# Django settings for box project.
-
-from __future__ import absolute_import, unicode_literals
+import speckenv_django_patch  # noqa isort:skip
 
 import os
 import sys
+from pathlib import Path
 
 import dj_database_url
 import django_cache_url
@@ -20,7 +19,7 @@ FORCE_SSL = env("FORCE_SSL", default=False)
 FORCE_DOMAIN = env("FORCE_DOMAIN")
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", required=True)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 DEBUG_TOOLBAR = False
 if DEBUG:
@@ -52,7 +51,6 @@ LANGUAGES = (
 )
 
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -60,11 +58,8 @@ MEDIA_URL = "/media/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
-
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-)
+STATICFILES_DIRS = [BASE_DIR / "frontend"]
+WEBPACK_ASSETS = BASE_DIR / "static"
 
 MIDDLEWARE = [
     m
@@ -140,8 +135,6 @@ INSTALLED_APPS = [
         "cabinet",
         "authlib.little_auth",
         "sane_redirects",
-        "webpack_loader",
-        "raven.contrib.django.raven_compat",
         "debug_toolbar.apps.DebugToolbarConfig" if DEBUG_TOOLBAR else "",
     ]
     if app
@@ -192,7 +185,7 @@ CKEDITOR_CONFIGS = {
 
 if DEBUG:
     # `debug` is only True in templates if the vistor IP is in INTERNAL_IPS.
-    INTERNAL_IPS = type(str("c"), (), {"__contains__": lambda *a: True})()
+    INTERNAL_IPS = type("c", (), {"__contains__": lambda *a: True})()
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
     # DEFAULT_FILE_STORAGE = 'http_fallback_storage.FallbackStorage'

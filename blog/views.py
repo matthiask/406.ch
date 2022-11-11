@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
-from .models import Category, Post
+from blog.models import Category, Post
 
 
-class PostMixin(object):
+class PostMixin:
     allow_empty = True
     date_field = "published_on"
     make_object_list = True
@@ -47,16 +47,10 @@ class CategoryArchiveIndexView(ArchiveIndexView):
 
     def get_queryset(self):
         self.category = get_object_or_404(Category, slug=self.kwargs["slug"])
-        return (
-            super(CategoryArchiveIndexView, self)
-            .get_queryset()
-            .filter(categories=self.category)
-        )
+        return super().get_queryset().filter(categories=self.category)
 
     def get_context_data(self, **kwargs):
-        return super(CategoryArchiveIndexView, self).get_context_data(
-            category=self.category, **kwargs
-        )
+        return super().get_context_data(category=self.category, **kwargs)
 
 
 def post_detail_redirect(request, year, month, day, slug):

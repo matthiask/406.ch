@@ -1,8 +1,8 @@
 import fh_fablib as fl
 
 
-fl.require("1.0.20211029")
-fl.config.update(base=fl.Path(__file__).parent, host="www-data@feinheit06.nine.ch")
-fl.config.update(app="app", domain="406.ch", branch="master", remote="production")
+fl.require("1.0.20221102")
+fl.config.update(host="www-data@feinheit06.nine.ch")
+fl.config.update(domain="406.ch", branch="master", remote="production")
 
 ns = fl.Collection(*fl.GENERAL, *fl.NINE)

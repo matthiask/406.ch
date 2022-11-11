@@ -1,6 +1,6 @@
 {% extends 'admin/change_form.html' %}
 
-{% load render_bundle from webpack_loader %}
+{% load webpack_assets %}
 
 {% block extrahead %}{{ block.super }}
 <script>
@@ -14,15 +14,7 @@
     });
   });
 </script>
-
-{% render_bundle 'admin' %}
+{% webpack_assets 'admin' %}
 <style>
-label[for=id_content] {
-  display: none;
-}
-.CodeMirror {
-  height: auto;
-  max-width: 50rem;
-}
 </style>
 {% endblock %}

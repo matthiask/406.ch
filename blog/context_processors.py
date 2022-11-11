@@ -1,9 +1,9 @@
 from django.urls import reverse
 
-from .models import Category, Post
+from blog.models import Category, Post
 
 
-class ContextObject(object):
+class ContextObject:
     def __init__(self, request):
         self.request = request
 
