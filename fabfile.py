@@ -1,7 +1,7 @@
 import fh_fablib as fl
 
 
-fl.require("1.0.20221102")
+fl.require("1.0.20230130")
 fl.config.update(host="www-data@feinheit06.nine.ch")
 fl.config.update(domain="406.ch", branch="main", remote="production")
 

@@ -13,7 +13,6 @@ def forwards(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("blog", "0002_auto_20160831_1431")]
 
     operations = [migrations.RunPython(forwards)]
