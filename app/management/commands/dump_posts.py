@@ -28,16 +28,17 @@ class Command(BaseCommand):
                     if post.published_on
                     else dt.date.today().isoformat(),
                 ),
-                ("Tags", ", ".join(c.title for c in post.categories.all())),
+                ("Categories", ", ".join(c.title for c in post.categories.all())),
                 ("Slug", post.slug),
             ]
 
-            f = base / f"{post.slug}.md"
+            date = post.published_on or post.created_on
+            f = base / f"{date.date().isoformat()}-{post.slug}.md"
             f.write_text(
                 "\n\n".join(
                     (
                         "\n".join(f"{key}: {value}" for key, value in metadata),
-                        post.content,
+                        post.content.replace("\r", ""),
                     )
                 )
             )
