@@ -10,6 +10,8 @@ from blog.sitemaps import PostSitemap
 from blog.views import ArchiveIndexView
 
 
+admin.site.enable_nav_sidebar = False
+
 urlpatterns = [
     path("", ArchiveIndexView.as_view(archive=False), name="blog_post_archive"),
     path("writing/", lambda request: redirect("blog_post_archive")),
