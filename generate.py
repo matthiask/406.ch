@@ -146,16 +146,25 @@ def jinja_env(**kwargs):
     return env
 
 
-def add_to_feed(feed, post):
-    link = f"https://406.ch{post.url}"
-    feed.add_item(
-        title=post.title,
-        description=post.html,
-        link=link,
-        pubdate=dt.datetime.combine(post.date, dt.time(12, 0)),
-        unique_id=link,
-        unique_id_is_permalink=True,
-    )
+def render_minified(template, **kwargs):
+    return minify(template.render(**kwargs))
+
+
+def feed_with_posts(posts, **kwargs):
+    feed = feedgenerator.Atom1Feed(**kwargs)
+    for post in posts:
+        link = f"https://406.ch{post.url}"
+        feed.add_item(
+            title=post.title,
+            description=post.html,
+            link=link,
+            pubdate=dt.datetime.combine(post.date, dt.time(12, 0)),
+            unique_id=link,
+            unique_id_is_permalink=True,
+        )
+    with io.StringIO() as f:
+        feed.write(f, "utf-8")
+        return f.getvalue()
 
 
 if __name__ == "__main__":
@@ -165,7 +174,7 @@ if __name__ == "__main__":
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
 
     env = jinja_env(categories=categories)
-    write_minified_file(
+    write_file(
         "writing/index.html",
         '<meta http-equiv="refresh" content="0; url=https://406.ch/" />',
     )
@@ -178,45 +187,36 @@ if __name__ == "__main__":
     archive_template = env.get_template("post_archive.html")
     post_template = env.get_template("post_detail.html")
 
-    write_minified_file(
-        "index.html",
-        archive_template.render(posts=posts),
-    )
-    feed = feedgenerator.Atom1Feed(
+    write_file("index.html", render_minified(archive_template, posts=posts))
+    feed = feed_with_posts(
+        posts[:20],
         title="Matthias Kestenholz",
         link="https://406.ch/",
         description="",
         language="en",
     )
-    for post in posts[:20]:
-        add_to_feed(feed, post)
-    with io.StringIO() as f:
-        feed.write(f, "utf-8")
-        write_file("writing/atom.xml", f.getvalue())
-        write_file("writing/feed/index.html", f.getvalue())
+    write_file("writing/atom.xml", feed)
+    write_file("writing/feed/index.html", feed)
 
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
-        write_minified_file(
+        write_file(
             f"{category.url}index.html",
-            archive_template.render(posts=category_posts, current=category),
+            render_minified(archive_template, posts=category_posts, current=category),
         )
-        feed = feedgenerator.Atom1Feed(
+        feed = feed_with_posts(
+            category_posts[:20],
             title=f"Matthias Kestenholz: Posts about {category.title}",
             link=f"https://406.ch{category.url}",
             description="",
             language="en",
         )
-        for post in category_posts[:20]:
-            add_to_feed(feed, post)
-        with io.StringIO() as f:
-            feed.write(f, "utf-8")
-            write_file(f"{category.url}atom.xml", f.getvalue())
-            write_file(f"{category.url}feed/index.html", f.getvalue())
+        write_file(f"{category.url}atom.xml", feed)
+        write_file(f"{category.url}feed/index.html", feed)
 
     root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for post in posts:
-        write_minified_file(f"{post.url}index.html", post_template.render(post=post))
+        write_file(f"{post.url}index.html", render_minified(post_template, post=post))
         loc = SubElement(SubElement(root, "url"), "loc")
         loc.text = f"https://406.ch{post.url}"
 
