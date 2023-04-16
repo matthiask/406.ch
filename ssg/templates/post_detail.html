@@ -32,10 +32,9 @@
           Not published yet
         {% endif %}
 
-        {% for slug, title in post.categories %}
+        {% for category in post.categories %}
           {% if loop.first %}in{% endif %}
-          <a href="/writing/category-{{ slug }}/">
-            {{ title }}</a>{% if not loop.last %},{% endif %}
+          <a href="{{ category.url }}/">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
         {% endfor %}
 
       </small>

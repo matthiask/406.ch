@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}{% if view.category %}{{ view.category }} - {% endif %}{{ super() }}{% endblock %}
+{% block title %}{% if current %}{{ current.title }} - {% endif %}{{ super() }}{% endblock %}
 
 {% block content %}
 
 <header>
   <div class="wrappy">
-    {% if view.category or view.archive or request.GET %}
+    {% if current %}
       <a class="back" href="/">Back to the overview</a>
-      <h1 class="title">{{ view.category }}</h1>
-      {% if view.category.html %}{{ view.category.html|safe }}{% endif %}
+      <h1 class="title">{{ current.title }}</h1>
+      {# % if view.category.html %}{{ view.category.html|safe }}{% endif % #}
     {% else %}
       <h1 class="title">Hi, I'm Matthias</h1>
       <p class="subtitle">
@@ -39,7 +39,7 @@
     </div>
   {% else %}
     <h2>
-      <a href="{{ post.get_absolute_url }}">
+      <a href="{{ post.url }}">
         <small>{{ post.date.isoformat() }}</small><br>
         {{ post.title }}
       </a>
@@ -55,8 +55,8 @@
 <p>
   <small>
     <strong>Categories:</strong>
-    {% for slug, title in categories %}
-    <a {% if current == slug %}class="active"{% endif %} href="/writing/category-{{ slug }}/">{{ title }}</a>{% if not loop.last %},{% endif %}
+    {% for category in categories %}
+    <a {% if current == category %}class="active"{% endif %} href="{{ category.url }}">{{ category.title }}</a>{% if not loop.last %},{% endif %}
     {% endfor %}
   </small>
 </p>
@@ -65,8 +65,8 @@
   <small>
     <strong>RSS feeds:</strong>
     <a href="/writing/feed/">All posts</a>,
-    {% for slug, title in categories %}
-      <a href="/writing/category-{{ slug }}/feed/">{{ title }}</a>{% if not loop.last %}, {% endif %}
+    {% for category in categories %}
+      <a href="{{ category.feed_url }}">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
     {% endfor %}
   </small>
 </p>
