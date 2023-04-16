@@ -172,6 +172,7 @@ if __name__ == "__main__":
         with io.StringIO() as f:
             feed.write(f, "utf-8")
             write_file("writing/atom.xml", f.getvalue())
+            write_file("writing/feed/index.html", f.getvalue())
 
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
@@ -200,6 +201,9 @@ if __name__ == "__main__":
             with io.StringIO() as f:
                 feed.write(f, "utf-8")
                 write_file(f"writing/category-{category.slug}/atom.xml", f.getvalue())
+                write_file(
+                    f"writing/category-{category.slug}/feed/index.html", f.getvalue()
+                )
 
     template = env.get_template("post_detail.html")
     for post in posts:
