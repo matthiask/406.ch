@@ -9,17 +9,14 @@ from itertools import chain
 from pathlib import Path
 from typing import Literal
 
-import feedgenerator
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markdown import markdown
 from rcssmin import cssmin
 
+import feedgenerator
+
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent
-
-
-def markdown_to_html(md):
-    return markdown(md, extensions=["smarty", "footnotes", "admonition"])
 
 
 @dataclass(kw_only=True)
@@ -36,7 +33,9 @@ class Post:
         if self.type == "html":
             return self.content
         elif self.type == "markdown":
-            return markdown_to_html(self.content)
+            return markdown(
+                self.content, extensions=["smarty", "footnotes", "admonition"]
+            )
         raise Exception(f"Unknown content type {self.type}")
 
     @property
@@ -112,31 +111,21 @@ def load_posts(path):
 
 
 def write_file(path, content):
-    file = BASE_DIR / "out" / path
+    file = BASE_DIR / "out" / path.lstrip("/")
     file.parent.mkdir(parents=True, exist_ok=True)
     file.write_text(content)
 
 
-if __name__ == "__main__":
-    shutil.rmtree(BASE_DIR / "out", ignore_errors=True)
-    posts = load_posts(BASE_DIR / "posts" / "published")
-    categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
-
+def styles_url():
     styles = cssmin(
         "".join(file.read_text() for file in (BASE_DIR / "styles").glob("*.css"))
     )
     style_file = f"styles.{hashlib.md5(styles.encode('utf-8')).hexdigest()}.css"
     write_file(style_file, styles)
+    return f"/{style_file}"
 
-    # from pprint import pprint
-    # pprint(posts)
-    # print(posts[-1].html)
 
-    write_file(
-        "writing/index.html",
-        '<meta http-equiv="refresh" content="0; url=https://406.ch/" />',
-    )
-
+def jinja_env(**kwargs):
     env = Environment(
         loader=FileSystemLoader([BASE_DIR / "templates"]),
         autoescape=select_autoescape(
@@ -146,13 +135,32 @@ if __name__ == "__main__":
         ),
     )
     env.globals["year"] = dt.date.today().year
-    env.globals["categories"] = categories
-    env.globals["style_url"] = f"/{style_file}"
+    env.globals["styles_url"] = styles_url()
+    env.globals.update(kwargs)
+    return env
 
-    template = env.get_template("post_archive.html")
+
+if __name__ == "__main__":
+    shutil.rmtree(BASE_DIR / "out", ignore_errors=True)
+    posts = load_posts(BASE_DIR / "posts" / "published")
+    categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
+
+    # from pprint import pprint
+    # pprint(posts)
+    # print(posts[-1].html)
+
+    env = jinja_env(categories=categories)
+    write_file(
+        "writing/index.html",
+        '<meta http-equiv="refresh" content="0; url=https://406.ch/" />',
+    )
+
+    archive_template = env.get_template("post_archive.html")
+    post_template = env.get_template("post_detail.html")
+
     write_file(
         "index.html",
-        template.render(object_list=posts),
+        archive_template.render(object_list=posts),
     )
     feed = feedgenerator.Atom1Feed(
         title="Matthias Kestenholz",
@@ -177,8 +185,8 @@ if __name__ == "__main__":
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
         write_file(
-            f"writing/category-{category.slug}/index.html",
-            template.render(
+            f"{category.url}index.html",
+            archive_template.render(
                 object_list=category_posts,
                 current=category,
             ),
@@ -190,26 +198,18 @@ if __name__ == "__main__":
             language="en",
         )
         for post in category_posts[:20]:
-            link = f"https://406.ch/writing/{post.slug}/"
+            link = f"https://406.ch{post.url}"
             feed.add_item(
                 title=post.title,
                 description=post.html,
-                link=link,
+                link=post.url,
                 unique_id=link,
                 unique_id_is_permalink=True,
             )
             with io.StringIO() as f:
                 feed.write(f, "utf-8")
-                write_file(f"writing/category-{category.slug}/atom.xml", f.getvalue())
-                write_file(
-                    f"writing/category-{category.slug}/feed/index.html", f.getvalue()
-                )
+                write_file(f"{category.url}atom.xml", f.getvalue())
+                write_file(f"{category.url}feed/index.html", f.getvalue())
 
-    template = env.get_template("post_detail.html")
     for post in posts:
-        write_file(
-            f"writing/{post.slug}/index.html",
-            template.render(
-                post=posts[0],
-            ),
-        )
+        write_file(f"{post.url}index.html", post_template.render(post=post))
