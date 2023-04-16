@@ -180,7 +180,7 @@ if __name__ == "__main__":
     )
     feed = feedgenerator.Atom1Feed(
         title="Matthias Kestenholz",
-        link="https://406.ch/writing/feed/",
+        link="https://406.ch/",
         description="",
         language="en",
     )
