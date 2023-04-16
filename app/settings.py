@@ -212,7 +212,7 @@ else:
 from PIL import ImageFile  # noqa, avoid warning
 
 
-if ImageFile.MAXBLOCK < 1024 * 1024:
+if 1024 * 1024 > ImageFile.MAXBLOCK:
     ImageFile.MAXBLOCK = 1024 * 1024
 
 X_FRAME_OPTIONS = "DENY"

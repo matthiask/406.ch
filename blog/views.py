@@ -58,10 +58,7 @@ def post_detail_redirect(request, year, month, day, slug):
 
 
 def post_detail(request, slug):
-    if request.user.is_staff:
-        posts = Post.objects.all()
-    else:
-        posts = Post.objects.published()
+    posts = Post.objects.all() if request.user.is_staff else Post.objects.published()
 
     instance = get_object_or_404(posts, slug=slug)
 
