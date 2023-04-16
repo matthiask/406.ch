@@ -33,13 +33,11 @@ class Post:
     categories: list[str] = field(default_factory=list)
     content: str
 
-    @property
     def html(self):
         if all(not line.startswith("# ") for line in self.content.splitlines()):
             self.content = f"# {self.title}\n\n{self.content}"
         return markdown(self.content, extensions=["smarty", "footnotes", "admonition"])
 
-    @property
     def url(self):
         return f"/writing/{self.slug}/"
 
@@ -55,11 +53,9 @@ class Category:
     def __lt__(self, other):
         return self.title < other.title
 
-    @property
     def url(self):
         return f"/writing/category-{self.slug}/"
 
-    @property
     def feed_url(self):
         return f"/writing/category-{self.slug}/atom.xml"
 
@@ -136,10 +132,10 @@ def render_minified(template, **kwargs):
 def write_feed_with_posts(path, posts, **kwargs):
     feed = feedgenerator.Atom1Feed(description="", language="en", **kwargs)
     for post in posts:
-        link = f"{BASE}{post.url}"
+        link = f"{BASE}{post.url()}"
         feed.add_item(
             title=post.title,
-            description=post.html,
+            description=post.html(),
             link=link,
             pubdate=dt.datetime.combine(post.date, dt.time(12, 0)),
             unique_id=link,
@@ -153,7 +149,7 @@ def write_feed_with_posts(path, posts, **kwargs):
 def write_sitemap(posts):
     root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for post in posts:
-        SubElement(SubElement(root, "url"), "loc").text = f"{BASE}{post.url}"
+        SubElement(SubElement(root, "url"), "loc").text = f"{BASE}{post.url()}"
     sitemap = tostring(root, encoding="utf-8", xml_declaration=True)
     write_file("sitemap.xml", sitemap.decode("utf-8"))
 
@@ -187,17 +183,17 @@ if __name__ == "__main__":
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
         write_file(
-            f"{category.url}index.html",
+            f"{category.url()}index.html",
             render_minified(archive_template, posts=category_posts, current=category),
         )
         write_feed_with_posts(
-            category.url,
+            category.url(),
             category_posts[:20],
             title=f"Matthias Kestenholz: Posts about {category.title}",
-            link=f"{BASE}{category.url}",
+            link=f"{BASE}{category.url()}",
         )
 
     for post in posts:
-        write_file(f"{post.url}index.html", render_minified(post_template, post=post))
+        write_file(f"{post.url()}index.html", render_minified(post_template, post=post))
 
     print(f"Wrote {_files_written} files in {perf_counter() - start:.2f} seconds.")

@@ -11,7 +11,7 @@
 
 <main><div class="wrappy">
   <div class="text">
-    {{ post.html|safe }}
+    {{ post.html()|safe }}
   </div>
 </div></main>
 
@@ -33,7 +33,7 @@
 
         {% for category in post.categories %}
           {% if loop.first %}in{% endif %}
-          <a href="{{ category.url }}/">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
+          <a href="{{ category.url() }}">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
         {% endfor %}
 
       </small>
