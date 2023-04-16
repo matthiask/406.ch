@@ -32,6 +32,8 @@ class Post:
 
     @property
     def html(self):
+        if all(not line.startswith("# ") for line in self.content.splitlines()):
+            self.content = f"# {self.title}\n\n{self.content}"
         return markdown(self.content, extensions=["smarty", "footnotes", "admonition"])
 
     @property
@@ -94,7 +96,6 @@ def load_posts(path):
                     slug=properties.get("slug") or slugify(properties["title"]),
                     date=parse_date(properties.get("date", "")),
                     categories=parse_categories(properties.get("categories") or ""),
-                    type=properties.get("type") or "markdown",
                     content=content,
                 )
             )
