@@ -69,10 +69,8 @@ def slugify(value):
 
 
 def parse_date(value):
-    try:
+    if value:
         return dt.datetime.strptime(value, "%Y-%m-%d").date()
-    except (TypeError, ValueError):
-        return None
 
 
 def parse_categories(value):
@@ -140,14 +138,21 @@ def jinja_env(**kwargs):
     return env
 
 
+def add_to_feed(feed, post):
+    link = f"https://406.ch{post.url}"
+    feed.add_item(
+        title=post.title,
+        description=post.html,
+        link=post.url,
+        unique_id=link,
+        unique_id_is_permalink=True,
+    )
+
+
 if __name__ == "__main__":
     shutil.rmtree(BASE_DIR / "out", ignore_errors=True)
     posts = load_posts(BASE_DIR / "posts" / "published")
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
-
-    # from pprint import pprint
-    # pprint(posts)
-    # print(posts[-1].html)
 
     env = jinja_env(categories=categories)
     write_file(
@@ -169,18 +174,11 @@ if __name__ == "__main__":
         language="en",
     )
     for post in posts[:20]:
-        link = f"https://406.ch/writing/{post.slug}/"
-        feed.add_item(
-            title=post.title,
-            description=post.html,
-            link=link,
-            unique_id=link,
-            unique_id_is_permalink=True,
-        )
-        with io.StringIO() as f:
-            feed.write(f, "utf-8")
-            write_file("writing/atom.xml", f.getvalue())
-            write_file("writing/feed/index.html", f.getvalue())
+        add_to_feed(feed, post)
+    with io.StringIO() as f:
+        feed.write(f, "utf-8")
+        write_file("writing/atom.xml", f.getvalue())
+        write_file("writing/feed/index.html", f.getvalue())
 
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
@@ -198,18 +196,11 @@ if __name__ == "__main__":
             language="en",
         )
         for post in category_posts[:20]:
-            link = f"https://406.ch{post.url}"
-            feed.add_item(
-                title=post.title,
-                description=post.html,
-                link=post.url,
-                unique_id=link,
-                unique_id_is_permalink=True,
-            )
-            with io.StringIO() as f:
-                feed.write(f, "utf-8")
-                write_file(f"{category.url}atom.xml", f.getvalue())
-                write_file(f"{category.url}feed/index.html", f.getvalue())
+            add_to_feed(feed, post)
+        with io.StringIO() as f:
+            feed.write(f, "utf-8")
+            write_file(f"{category.url}atom.xml", f.getvalue())
+            write_file(f"{category.url}feed/index.html", f.getvalue())
 
     for post in posts:
         write_file(f"{post.url}index.html", post_template.render(post=post))
