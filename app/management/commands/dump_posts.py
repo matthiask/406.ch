@@ -18,6 +18,7 @@ class Command(BaseCommand):
         for post in Post.objects.all():
             metadata = [
                 ("Title", post.title),
+                ("Slug", post.slug),
                 (
                     "Status",
                     "published" if post.is_active and post.published_on else "draft",
@@ -29,7 +30,7 @@ class Command(BaseCommand):
                     else dt.date.today().isoformat(),
                 ),
                 ("Categories", ", ".join(c.title for c in post.categories.all())),
-                ("Slug", post.slug),
+                ("Type", post.content_type),
             ]
 
             date = post.published_on or post.created_on
