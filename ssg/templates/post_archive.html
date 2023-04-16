@@ -54,26 +54,20 @@
 
 <p>
   <small>
-    <strong>Categories: </strong>
-    {% for category in blog.categories %}
-      <a
-        {% if category.get_absolute_url in request.path %}class="active"{% endif %}
-        href="{{ category.get_absolute_url }}"
-      >{{ category.title }}</a>{% if not forloop.last %},{% endif %}
+    <strong>Categories:</strong>
+    {% for slug, title in categories %}
+    <a {% if current == slug %}class="active"{% endif %} href="/writing/category-{{ slug }}/">{{ title }}</a>{% if not loop.last %},{% endif %}
     {% endfor %}
   </small>
 </p>
 
 <p>
   <small>
-    <strong>RSS feeds: </strong>
-    <a href="/">All posts</a>,
-    {#
-    {% for category in blog.categories %}
-      <a href="{% url 'blog_category_feed' slug=category.slug %}">
-        {{ category }}</a>{% if not forloop.last %}, {% endif %}
+    <strong>RSS feeds:</strong>
+    <a href="/writing/feed/">All posts</a>,
+    {% for slug, title in categories %}
+      <a href="/writing/category-{{ slug }}/feed/">{{ title }}</a>{% if not loop.last %}, {% endif %}
     {% endfor %}
-    #}
   </small>
 </p>
 

@@ -1,6 +1,7 @@
 import datetime as dt
 import re
 from dataclasses import dataclass, field
+from itertools import chain
 from pathlib import Path
 from typing import Literal
 
@@ -59,7 +60,11 @@ def parse_date(value):
 
 
 def parse_categories(value):
-    return {slugify(category): category for category in value.split(", ")}
+    return sorted(
+        (slugify(category), category)
+        for category in (v.strip() for v in value.split(","))
+        if category
+    )
 
 
 def load_posts(path):
@@ -90,31 +95,45 @@ def load_posts(path):
     return sorted(posts, key=lambda post: post.date or dt.date.min, reverse=True)
 
 
+def write_html(path, content):
+    dir = BASE_DIR / "out" / path
+    dir.mkdir(parents=True, exist_ok=True)
+    (dir / "index.html").write_text(content)
+
+
 if __name__ == "__main__":
     posts = load_posts(BASE_DIR / "posts")
+    categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
 
     # from pprint import pprint
     # pprint(posts)
     # print(posts[-1].html)
 
+    published_posts = [post for post in posts if post.is_published]
+
     template = env.get_template("post_archive.html")
-    print(
+    write_html(
+        "",
         template.render(
-            object_list=[post for post in posts if post.is_published],
+            object_list=published_posts,
             year=dt.date.today().year,
-            blog={},
+            categories=categories,
             request={},
             view={},
-        )
+        ),
     )
 
     template = env.get_template("post_detail.html")
-    print(
-        template.render(
-            post=posts[0],
-            year=dt.date.today().year,
-            blog={},
-            request={},
-            view={},
+    for post in published_posts:
+        write_html(
+            f"writing/{post.slug}/",
+            template.render(
+                post=posts[0],
+                year=dt.date.today().year,
+                blog={},
+                request={},
+                view={},
+            ),
         )
-    )
+
+    print(categories)
