@@ -22,7 +22,8 @@ jobs:
       - name: Build site
         run: python generate.py
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@caba38d33773c0f6333df7eba0a7cd71a4adeb71 # v3.9.0
+        uses: peaceiris/actions-gh-pages@627df3d602afb02fc7cb2dce093cdf1716834e2e
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./htdocs/
+          cname: 406.ch
