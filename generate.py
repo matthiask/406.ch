@@ -8,7 +8,6 @@ from dataclasses import dataclass, field
 from functools import total_ordering
 from itertools import chain
 from pathlib import Path
-from typing import Literal
 from xml.etree.ElementTree import Element, SubElement, tostring
 
 from jinja2 import Environment, FileSystemLoader
@@ -29,18 +28,11 @@ class Post:
     slug: str
     date: dt.date | None = None
     categories: list[str] = field(default_factory=list)
-    type: Literal["markdown", "html"] = "markdown"
     content: str
 
     @property
     def html(self):
-        if self.type == "html":
-            return self.content
-        elif self.type == "markdown":
-            return markdown(
-                self.content, extensions=["smarty", "footnotes", "admonition"]
-            )
-        raise Exception(f"Unknown content type {self.type}")
+        return markdown(self.content, extensions=["smarty", "footnotes", "admonition"])
 
     @property
     def url(self):
