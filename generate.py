@@ -1,12 +1,12 @@
 import datetime as dt
-import hashlib
 import io
 import re
 import shutil
-import time
 from dataclasses import dataclass, field
+from hashlib import md5
 from itertools import chain
 from pathlib import Path
+from time import perf_counter
 from xml.etree.ElementTree import Element, SubElement, tostring
 
 from jinja2 import Environment, FileSystemLoader
@@ -112,16 +112,14 @@ def styles_url():
     styles = cssmin(
         "".join(file.read_text() for file in (BASE_DIR / "styles").glob("*.css"))
     )
-    style_file = f"styles.{hashlib.md5(styles.encode('utf-8')).hexdigest()}.css"
+    style_file = f"styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
     write_file(style_file, styles)
     return f"/{style_file}"
 
 
 def jinja_env(**kwargs):
-    env = Environment(
-        loader=FileSystemLoader([BASE_DIR / "templates"]),
-        autoescape=True,
-    )
+    loader = FileSystemLoader([BASE_DIR / "templates"])
+    env = Environment(loader=loader, autoescape=True)
     env.globals["year"] = dt.date.today().year
     env.globals["styles_url"] = styles_url()
     env.globals.update(kwargs)
@@ -158,7 +156,7 @@ def write_sitemap(posts):
 
 
 if __name__ == "__main__":
-    start = time.perf_counter()
+    start = perf_counter()
     shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
     posts = load_posts(BASE_DIR / "published")
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
@@ -199,5 +197,4 @@ if __name__ == "__main__":
     for post in posts:
         write_file(f"{post.url}index.html", render_minified(post_template, post=post))
 
-    elapsed = time.perf_counter() - start
-    print(f"Wrote {_files_written} files in {elapsed:.2f} seconds.")
+    print(f"Wrote {_files_written} files in {perf_counter() - start:.2f} seconds.")
