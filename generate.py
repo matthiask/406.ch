@@ -5,6 +5,7 @@ import datetime as dt
 import io
 import re
 import shutil
+import sys
 from dataclasses import dataclass, field
 from hashlib import md5
 from itertools import chain
@@ -76,15 +77,15 @@ def parse_categories(value):
     ]
 
 
-def load_posts(path):
+def load_posts():
     posts = []
-    for md in path.glob("*.md"):
+    for md in chain.from_iterable(BASE_DIR.glob(f"{dir}/*.md") for dir in sys.argv[1:]):
         try:
             props, content = md.read_text().split("\n\n", 1)
-            properties = {}
-            for prop in props.split("\n"):
-                name, value = prop.split(":", 1)
-                properties[name.lower()] = value.strip()
+            properties = {
+                name.lower(): value.strip()
+                for name, value in (prop.split(":", 1) for prop in props.split("\n"))
+            }
             posts.append(
                 Post(
                     title=properties["title"],
@@ -96,7 +97,9 @@ def load_posts(path):
             )
         except Exception as exc:
             raise Exception(f"Unable to load {md}") from exc
-    return sorted(posts, key=lambda post: post.date or dt.date.min, reverse=True)
+    return sorted(
+        posts, key=lambda post: (post.date or dt.date.min, post.title), reverse=True
+    )
 
 
 def write_file(path, content):
@@ -157,7 +160,7 @@ def write_sitemap(posts):
 if __name__ == "__main__":
     start = perf_counter()
     shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
-    posts = load_posts(BASE_DIR / "published")
+    posts = load_posts()
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
 
     env = jinja_env(categories=categories)

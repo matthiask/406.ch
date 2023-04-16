@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r requirements.txt
       - name: Build site
-        run: python3 generate.py
+        run: python3 generate.py published
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
