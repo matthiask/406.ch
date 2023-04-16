@@ -1,0 +1,28 @@
+<!doctypehtml><meta charset=utf-8><meta content=width=device-width,initial-scale=1.0 name=viewport><title>Django, Sitemaps and alternates - Matthias Kestenholz</title><link href=/styles.b8b7ef2015d8092526f2f18dad22a94a.css rel=stylesheet><link title="Blog feed"href=/writing/feed/ rel=alternate type=application/atom+xml><body><header><div class=wrappy><a class=back href=/>Back to the overview</a></div></header><main><div class=wrappy><div class=text><h1>Django, Sitemaps and alternates</h1><p>Django’s own <a href=https://docs.djangoproject.com/en/2.0/ref/contrib/sitemaps/>sitemaps</a> module is great for quickly generating <a href=https://support.google.com/webmasters/answer/183668?hl=en>sitemaps</a>, but it unfortunately does not support more than the bare minimum of attributes. Also, it uses the template engine to create XML and this makes me sad.<p><a href=https://feinheit.ch/>We</a> had to add a <code>sitemap.xml</code> file to a customers’ website. The site supports several languages and runs on several domains, so we had to carefully specify <a href=https://support.google.com/webmasters/answer/2620865?hl=en>alternate language pages</a> and <a href=https://support.google.com/webmasters/answer/139066?hl=en>canonical URLs</a> so that the website would not be punished for duplicate content.<p>Therefore, a year ago I set out to build a sitemaps app for Django which supports Django’s sitemaps, but also allows adding entries with additional attributes. The result of this work was <a href=https://github.com/matthiask/django-sitemaps>django-sitemaps</a>.<pre><code>from django_sitemaps import Sitemap
+
+def sitemap(request):
+    sitemap = Sitemap(build_absolute_uri=request.build_absolute_uri)
+    sitemap.add_django_sitemap(SomeSitemap, request=request)
+    sitemap.add(
+       url,
+       changefreq='weekly',
+       priority=0.5,
+       lastmod=datetime.now(),
+       alternates={
+           'en': '...',
+           'en-ch': '...',
+           'en-gb': '...',
+           'de': '...',
+           ...
+       },
+   )
+   return sitemap.response(pretty_print=True)
+</code></pre><p>Today, I also added support for generating the most simple <code>robots.txt</code> files possible: All user agents, and only <code>Sitemap: &LTabsolute url></code> entries. The recommended usage is now (still using <code>url()</code> instead of <code>path()</code> because I’m old and rusty):<pre><code>from django_sitemaps import robots_txt
+from app.views import sitemap
+
+urlpatterns = [
+    url(r'^sitemap\.xml$', sitemap),
+    url(r'^robots\.txt$', robots_txt(timeout=86400)),
+    ...
+]
+</code></pre></div></div></main><footer><div class=wrappy><p><small> I like feedback! <a href="mailto:mk@406.ch?subject=Django, Sitemaps and alternates">Send me an email.</a> <br> <a rel="noopener noreferrer"href=https://ko-fi.com/matthiask target=_blank>☕ Buy me a coffee?</a> <br> Published on 2018-04-11 in <a href=/writing/category-django//>Django</a>, <a href=/writing/category-programming//>Programming</a> </small></p><script async crossorigin issue-term=pathname repo=matthiask/406-comments src=https://utteranc.es/client.js theme=github-dark></script></div></footer>

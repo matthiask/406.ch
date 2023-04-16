@@ -1,0 +1,18 @@
+<!doctypehtml><meta charset=utf-8><meta content=width=device-width,initial-scale=1.0 name=viewport><title>Recent objects using several Django models - Matthias Kestenholz</title><link href=/styles.b8b7ef2015d8092526f2f18dad22a94a.css rel=stylesheet><link title="Blog feed"href=/writing/feed/ rel=alternate type=application/atom+xml><body><header><div class=wrappy><a class=back href=/>Back to the overview</a></div></header><main><div class=wrappy><div class=text><h1>Recent objects using several Django models</h1><p>I released a new Python package which builds on the excellent code published by Simon Willison in the blog post <a href=https://simonwillison.net/2018/Mar/25/combined-recent-additions/>Building a combined stream of recent additions using the Django ORM</a>. The rationale etc. for why this is useful is described much better by him and I’ll save everyone’s time by not repeating it in a worse way.<p>The new package is <a href=https://github.com/matthiask/django-recent-objects/>django-recent-objects</a>, developed on GitHub and available from PyPI.<p>The package supports e.g. combining recent articles and comments in a single activity stream:<pre><code>from testapp.models import Article, Comment
+from recent_objects.recent_objects import RecentObjects
+
+ro = RecentObjects(
+    [
+        {
+            "queryset": Article.objects.all(),
+            "date_field": "created_at",
+        },
+        {
+            "queryset": Comment.objects.all(),
+            "date_field": "created_at",
+        },
+    ]
+)
+
+additions = ro.page(paginate_by=10, page=1)
+</code></pre><p><a href=https://github.com/matthiask/django-recent-objects/>django-recent-objects</a> adds the following features which aren’t available in the blogpost linked above:<ul><li>The name of the <code>date_field</code> doesn’t have to be the same for all objects<li>Primary keys of different types are<sup id=fnref:1><a class=footnote-ref href=#fn:1>1</a></sup> supported<li>The code uses a real paginator and doesn’t only support fetching the first few objects</ul><div class=footnote><hr><ol><li id=fn:1><p>Hopefully! <a title="Jump back to footnote 1 in the text"class=footnote-backref href=#fnref:1>↩</a></p></ol></div></div></div></main><footer><div class=wrappy><p><small> I like feedback! <a href="mailto:mk@406.ch?subject=Recent objects using several Django models">Send me an email.</a> <br> <a rel="noopener noreferrer"href=https://ko-fi.com/matthiask target=_blank>☕ Buy me a coffee?</a> <br> Published on 2022-05-11 in <a href=/writing/category-django//>Django</a>, <a href=/writing/category-programming//>Programming</a> </small></p><script async crossorigin issue-term=pathname repo=matthiask/406-comments src=https://utteranc.es/client.js theme=github-dark></script></div></footer>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/" rel="alternate"/><id>https://406.ch/</id><updated>2023-04-16T15:03:19.853413+00:00</updated><entry><title>Static site generation</title><link href="https://406.ch/writing/static-site-generation/" rel="alternate"/><id>https://406.ch/writing/static-site-generation/</id><summary type="html">&lt;h1&gt;Static site generation&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-10/"&gt;I did what I threatened (myself) to do:&lt;/a&gt; I replaced the Django code base for this weblog with a static site generator.&lt;/p&gt;
+&lt;p&gt;My main goal was to preserve as much as possible of the existing structure, including the Atom feeds and the IDs of posts so that the rewrite wouldn&amp;rsquo;t flood any aggregators.&lt;/p&gt;
+&lt;p&gt;The end result is a hacky ~200 LOC Python script which uses Markdown, Jinja2 and minify-html. Markdown is great for blogging and I have been using it for a long time, basically since I started this website in 2005. I don&amp;rsquo;t like it that much for documentation, but that&amp;rsquo;s a story for another day.&lt;/p&gt;
+&lt;p&gt;For now I still deploy the blog to a VPS but there&amp;rsquo;s nothing stopping me from uploading it somewhere else. I&amp;rsquo;m thinking about using GitHub actions for the deployment, but I can do that another day.&lt;/p&gt;</summary></entry><entry><title>Run less code in production or you’ll end up paying the price later</title><link href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/" rel="alternate"/><id>https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/</id><summary type="html">&lt;h1&gt;Run less code in production or you&amp;rsquo;ll end up paying the price later&lt;/h1&gt;
+&lt;p&gt;At &lt;a href="https://feinheit.ch/"&gt;work&lt;/a&gt; we do have the problem of dependencies which aren&amp;rsquo;t maintained anymore. That&amp;rsquo;s actually a great problem to have because it means that the app or website ended up running for a long time, maybe longer than expected initially. I think that websites have a lifetime of 3-5 years&lt;sup id="fnref:lifetime"&gt;&lt;a class="footnote-ref" href="#fn:lifetime"&gt;1&lt;/a&gt;&lt;/sup&gt; which is already much longer than the lifetime of major versions of some rapid development frameworks, especially frontend frameworks. We have been using &lt;a href="https://get.foundation/"&gt;Zurb Foundation&lt;/a&gt; in the past. It has served us well and I don&amp;rsquo;t want to dunk on it – after all it is free, it has great documentation and it works well. It has many features and many components, but as changes happen, not just in the framework itself but also in the tooling it uses upgrades stay hard and things start to break somewhere down the road (for example when &lt;a href="https://github.com/sass/dart-sass"&gt;Dart Sass 2.0 will be released&lt;/a&gt;. And when that happens you have to pick up the parts and maintain them yourself &amp;ndash; having grown your codebase by a considerable amount practically overnight.&lt;/p&gt;
+&lt;p&gt;Of course it&amp;rsquo;s also hard to argue for starting to write all HTML, CSS and JavaScript from scratch. &lt;a href="https://406.ch/writing/flake8-and-value-standards/"&gt;Standards are very helpful.&lt;/a&gt; Building without some sort of standardized tooling will not only lead to rank growth but also means that you have to make many many small and (relatively) irrelevant decisions &lt;em&gt;and you have to justify those decisions when working in a team&lt;/em&gt; because you could just as well have decided differently.&lt;/p&gt;
+&lt;p&gt;So after all that, should you use frontend frameworks? The answer is &amp;ndash; as always &amp;ndash; it depends.&lt;/p&gt;
+&lt;p&gt;You should definitely use a framework when prototyping.&lt;/p&gt;
+&lt;p&gt;But already when working on a MVP it gets less and less clear. You&amp;rsquo;re kidding yourself if you think that sometime in the future you&amp;rsquo;ll have the time to clean up your code base; &lt;strong&gt;of course&lt;/strong&gt; you&amp;rsquo;re always refactoring and &lt;strong&gt;of course&lt;/strong&gt; you&amp;rsquo;ll try to always leave each part behind a little bit nicer than it was before, but even then the big rewrite didn&amp;rsquo;t happen and you&amp;rsquo;ll continue using at least some aspects of the code that was hastily written for the initial release.&lt;/p&gt;
+&lt;p&gt;The exceptions to the rule are frameworks and tools which have a proven track record of maintaining stability over time. So, despite the fact that &lt;a href="https://www.djangoproject.com/"&gt;the Django framework&lt;/a&gt; has more than 100&amp;lsquo;000 lines of code I feel good about using it. Django was released as Open Source in July 2005 and has been steadily maintained over the last nearly 18 years. &lt;a href="https://www.djangoproject.com/fundraising/"&gt;Funding&lt;/a&gt; is always a problem (contribute if you can!) but at least the Django software foundation manages to employ two Django fellows which are certainly key in driving the framework forward.&lt;/p&gt;
+&lt;p&gt;Again the picture gets less clear when third party apps are involved. Some third party apps were actively maintained several years ago and now they aren&amp;rsquo;t. I have personally taken over the maintenance of several such apps or more often than not reimplemented them with less functionality and much less code. Sometimes it&amp;rsquo;s easier to maintain a little more of your own code instead of much more of someone else&amp;rsquo;s code.&lt;/p&gt;
+&lt;p&gt;So, what&amp;rsquo;s the take away?&lt;/p&gt;
+&lt;p&gt;Maybe pay attention to the following points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Recent activity on the repository, recent releases and good docs are always a good sign for the health of a project.&lt;/li&gt;
+&lt;li&gt;Take the time to read at least a part of the code of third party projects before starting to rely on them. It&amp;rsquo;s a bad idea to just read the documentation and nothing else. When it comes to Django apps I always at least read the model files to understand how the data&amp;rsquo;s modeled and skim the views and forms.&lt;/li&gt;
+&lt;li&gt;Have a look at issues and pull/merge requests. Don&amp;rsquo;t worry about usage questions etc but mainly about &amp;ldquo;hard problem&amp;rdquo; issues.&lt;/li&gt;
+&lt;li&gt;Try to stay away from packages which are too comprehensive; reusing these packages is hard even for their authors and when they are abandoned the amount of responsibility transferred to you will be so much bigger.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:lifetime"&gt;
+&lt;p&gt;Citation required obviously, don&amp;rsquo;t take my word on it. Data is certainly more long lived, but I have my doubts regarding the code running many small sites.&amp;#160;&lt;a class="footnote-backref" href="#fnref:lifetime" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 13 and 14)</title><link href="https://406.ch/writing/weeknotes-2023-week-13-and-14/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2023-week-13-and-14/</id><summary type="html">&lt;h1&gt;Weeknotes (2023 week 13 and 14)&lt;/h1&gt;
+&lt;h2&gt;My son will be a teenager soon&lt;/h2&gt;
+&lt;p&gt;My eldest is now 12 years old and will be a teenager soon. We had a good time and two nice Birthday parties, one with his friends and one with family and our friends. Good times.&lt;/p&gt;
+&lt;h2&gt;django-debug-toolbar 4.0&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.djangoproject.com/weblog/2023/apr/03/django-42-released/"&gt;Django 4.2 was released&lt;/a&gt;, &lt;a href="https://github.com/pypa/hatch/pull/762"&gt;Hatch gained support for the Django 4.2 Trove classifier&lt;/a&gt; and &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;we released django-debug-toolbar 4.0&lt;/a&gt;, with support for Django 4.2, psycopg 3 and all the existing goodies.&lt;/p&gt;
+&lt;h2&gt;feincms3-cookiecontrol&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/feinheit/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol&lt;/a&gt; has gained support for consciously embedding stuff via oEmbed. It can now use &lt;a href="https://noembed.com/"&gt;Noembed&lt;/a&gt; (via &lt;a href="https://github.com/matthiask/feincms3"&gt;feincms3&lt;/a&gt;&amp;lsquo;s external plugin) and only actually embed the third party content if users consented explicitly.&lt;/p&gt;
+&lt;p&gt;I have since learned through the &lt;a href="https://podcast.datenschutzpartner.ch/"&gt;Datenschutz-Plaudereien&lt;/a&gt; podcast that laws regarding consent are not that strict in Switzerland compared to the European Union, also not when the &lt;a href="https://www.admin.ch/gov/de/start/dokumentation/medienmitteilungen.msg-id-90134.html"&gt;DSG&lt;/a&gt; is put into effect in September. What&amp;rsquo;s right and what&amp;rsquo;s legal are two different things and while I don&amp;rsquo;t really like the ubiquitous cookie banners (especially not when they aren&amp;rsquo;t actually doing anything) I like the idea of explicit consent and of not sending data unnecessarily to third party providers. The additional click isn&amp;rsquo;t that bad.&lt;/p&gt;
+&lt;h2&gt;Diving into hatch for Python packaging&lt;/h2&gt;
+&lt;p&gt;I listened to the TalkPython podcast episode with Ofek Lev on &lt;a href="https://talkpython.fm/episodes/show/408/hatch-a-modern-python-workflow"&gt;his Hatch packaging tool&lt;/a&gt;. After a long period of uncertainty and waiting I bit the bullet and started to migrate a few of my Python packages from setuptools and &lt;code&gt;setup.py&lt;/code&gt; to hatch and &lt;code&gt;pyproject.toml&lt;/code&gt;, until now &lt;a href="https://github.com/feinheit/feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt; and &lt;a href="https://github.com/matthiask/feincms3"&gt;feincms3&lt;/a&gt;. It was surprisingly painless.&lt;/p&gt;
+&lt;h2&gt;ruff&lt;/h2&gt;
+&lt;p&gt;I started learning Rust during the last &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt;; it&amp;rsquo;s a nice language. &lt;a href="https://beta.ruff.rs/"&gt;ruff&lt;/a&gt; is a linter and (more and more) formatter for Python code written in Rust. After years of working with Python and Python-based tools it&amp;rsquo;s surprisingly fast, almost worryingly so. It&amp;rsquo;s true what they say: ruff finishes so fast that I&amp;rsquo;m always left wondering if it even did anything at all.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m configuring ruff through &lt;code&gt;pyproject.toml&lt;/code&gt;, so switching from setuptools to hatch (see above) also helped in this regard. The main trouble I had was that I&amp;rsquo;m running Python 3.11 locally but Python 3.10 in the server environment (no dev-prod parity&amp;hellip;), and rebuilding &lt;code&gt;requirements.txt&lt;/code&gt; locally of course didn&amp;rsquo;t add TOML support because it&amp;rsquo;s built into Python 3.11, but Python 3.10 needs an external package. So of course I broke the build. That&amp;rsquo;s not all bad though: If stuff broke it definitely helps with remembering the reasons later.&lt;/p&gt;
+&lt;h2&gt;Meta&lt;/h2&gt;
+&lt;p&gt;Co-writing still works really well for me. Expressed differently: I seem to be unable to write without the (slight) pressure of writing together.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 11 and 12)</title><link href="https://406.ch/writing/weeknotes-2023-week-11-and-12/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2023-week-11-and-12/</id><summary type="html">&lt;h1&gt;Weeknotes (2023 week 11 and 12)&lt;/h1&gt;
+&lt;h2&gt;Mail user agents being mail user agents&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib&lt;/a&gt; is my collection of utilities for implementing passwordless authentication, either using OAuth2 or by sending magic links by email.&lt;/p&gt;
+&lt;p&gt;The latter functionality has existed for a long time in &lt;a href="https://pypi.org/project/django-registration/"&gt;django-registration&lt;/a&gt; (which is great!) but I wanted a way to generate links without the need for a storage somewhere. Django has utilities for &lt;a href="https://docs.djangoproject.com/en/4.1/topics/signing/"&gt;Cryptographic signing&lt;/a&gt; built-in as the &lt;code&gt;django.core.signing&lt;/code&gt; module. I&amp;rsquo;m using this module to send a signed version of the email address to users, and when I&amp;rsquo;m able to successfully verify the email addresses signature I can be sure (enough) that those links have actually been generated by my code.&lt;/p&gt;
+&lt;p&gt;The form of the generated verification URL is as follows: &lt;code&gt;https://example.com/.../test@example.com:1pXJtx:aypKOlb5zaCg.../&lt;/code&gt;; the part before the first colon contains the data-to-be-verified, the short string between colons is the timestamp and the rest is the signature, everything generated by &lt;code&gt;django.core.signing&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So far so boring.&lt;/p&gt;
+&lt;p&gt;But then mail user agents happened. Some MUAs insist to butcher the URL in various ways, e.g. by removing the signature or by making only the embedded email address clickable. This is &amp;ldquo;interesting&amp;rdquo; behavior and certainly unexpected.&lt;/p&gt;
+&lt;p&gt;Last week I implemented a change where I&amp;rsquo;m now also base64 encoding the email address itself. So, the URL is even longer and even more opaque now but it seems to work well. I also added a HTML version of the mail to hopefully prevent mail programs from creating their own worse version. I could have done that a long time ago but I really like &lt;code&gt;text/plain&lt;/code&gt; mails so I did hold off on that as long as I could. Oh well.&lt;/p&gt;
+&lt;h2&gt;feincms3-data and unique fields&lt;/h2&gt;
+&lt;p&gt;I did a longer post on &lt;a href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/"&gt;feincms3-data&lt;/a&gt; some time ago which explains what it is for.&lt;/p&gt;
+&lt;p&gt;A recurring problem was dumping and loading data in the presence of unique constraints. For example, website managers deleted data with a specific (unique) slug and created new data with the same slug. feincms3-data and also Django itself were unable to handle this. The former because it loads new data before deleting old data, the latter because it doesn&amp;rsquo;t even have a concept of data which should be deleted.&lt;/p&gt;
+&lt;p&gt;feincms3-data now has an ugly workaround for this problem: It generates random data for a list of explicitly specified fields (which is very unlikely to cause collisions) and only updates the records with the correct data after the cleanup step. &lt;a href="https://github.com/matthiask/feincms3-data/commit/9324605dc8dcb32ee4118adca0668643597ec130"&gt;The code wasn&amp;rsquo;t that hairy to write&lt;/a&gt; and I was again very happy that unittesting is a thing.&lt;/p&gt;
+&lt;h2&gt;ProseMirror hacking&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m back to hacking on &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt; plugins. I still feel really well about picking it as a basis for all those use cases when using the venerable &lt;a href="https://ckeditor.com/ckeditor-4/"&gt;CKEditor 4&lt;/a&gt; isn&amp;rsquo;t a good fit.&lt;/p&gt;
+&lt;p&gt;I did like the fact a lot that ProseMirror was written in JavaScript. Now that it has been rewritten in TypeScript I&amp;rsquo;m reevaluating my resistance against TypeScript, but I just don&amp;rsquo;t know if it&amp;rsquo;s worth it. Why write down all those annotations when the code also works without? I still don&amp;rsquo;t really see the point. Yes I know, catching bugs early and all that. But still.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 10)</title><link href="https://406.ch/writing/weeknotes-2023-week-10/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2023-week-10/</id><summary type="html">&lt;h1&gt;Weeknotes (2023 week 10)&lt;/h1&gt;
+&lt;h2&gt;FeinCMS bugs&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/feincms/feincms/"&gt;FeinCMS&lt;/a&gt; is really stable (since there isn&amp;rsquo;t much going on) but this week a Django upgrade surfaced bugs in the &lt;a href="https://github.com/feincms/feincms/blob/main/feincms/extensions/datepublisher.py"&gt;datepublisher&lt;/a&gt; extension. The extension uses a &lt;code&gt;granular_now&lt;/code&gt; utility to determine if a page should be shown or not; the time is rounded to a 5-minute boundary which makes some sorts of caching more effective.&lt;/p&gt;
+&lt;p&gt;On one hand it&amp;rsquo;s a bit sad that activity on the project has practically ground to a halt, on the other hand it&amp;rsquo;s great that the project requires practically no changes when a new version of Django is released. Stability is awesome.&lt;/p&gt;
+&lt;h2&gt;15 years of using GitHub&lt;/h2&gt;
+&lt;p&gt;I used &lt;a href="https://subversion.apache.org/"&gt;Subversion&lt;/a&gt; and &lt;a href="http://darcs.net/"&gt;darcs&lt;/a&gt; for probably not much more than a year each before discovering &lt;a href="https://git-scm.com/"&gt;Git&lt;/a&gt; probably some time in spring 2006. It was a very archaic version with a much worse CLI than today. Everything was archaic, not just the CLI itself but also the repository browsers and the various web UIs. But everything was also very interesting to me. I especially found the emphasis on clean data structures instead of code very inspiring. And here we are, basically all the tools have been rewritten but the commits from back then are still around.&lt;/p&gt;
+&lt;p&gt;Yesterday marks the 15 anniversary of my GitHub account. I was invited to join the private beta. GitHub was probably the first Git-related tool I encountered which actually looked nice. Hard to believe that so much time has passed.&lt;/p&gt;
+&lt;p&gt;(No, I don&amp;rsquo;t find Git hard to use. And I have basically stopped losing work since I started using Git, something which has happened too often before.)&lt;/p&gt;
+&lt;h2&gt;Static Site generation&lt;/h2&gt;
+&lt;p&gt;I played around with several static site generators to replace my blogging software. I checked out several generators:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://getpelican.com/"&gt;Pelican&lt;/a&gt; looks interesting because it uses Python and Jinja2 which should make it easier to reuse the Django templates (or so I thought)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; seems to be very widely used and looks like a good idea to bet on&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This site runs on Django and I&amp;rsquo;m using a markdown editor based on &lt;a href="https://codemirror.net/"&gt;CodeMirror&lt;/a&gt; in the admin. I do like CodeMirror a lot but I would like it even more if I could use neovim in the console. I know that vim bindings for CodeMirror exist, but I didn&amp;rsquo;t have a good experience with the vim bindings for VisualStudio Code so I&amp;rsquo;m wary (and too lazy).&lt;/p&gt;
+&lt;p&gt;The problem with all those generators are that they have different ideas for how to structure the URLs and RSS/Atom feeds. &lt;a href="https://web.archive.org/web/20110514113830/http://diveintomark.org/archives/2004/05/28/howto-atom-id"&gt;I have since learned the reason why Pelican doesn&amp;rsquo;t use the permalink of posts as their Atom ID&lt;/a&gt; (from the &lt;code&gt;feedgenerator&lt;/code&gt; module) but I&amp;rsquo;m just not convinced that flooding aggregators with old posts is a net benefit to everyone. Yes, it&amp;rsquo;s only once but&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Of course I&amp;rsquo;m now thinking about writing my own static site generator, for fun.&lt;/p&gt;
+&lt;h2&gt;Thanks, Tim&lt;/h2&gt;
+&lt;p&gt;I have been coworking with &lt;a href="https://hachyderm.io/@CodenameTim@fosstodon.org/109807763335807167"&gt;Tim&lt;/a&gt; to write more. Tim and I have been maintaining the &lt;a href="https://jazzband.co/projects/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; together in the last few years and have been pairing up every one or two weeks to write together (mostly) in silence as described by &lt;a href="https://jacobian.org/2021/mar/9/coworking-to-write-more/"&gt;Jacob Kaplan-Moss in his blog entry&lt;/a&gt; a few times. Today I really needed the additional motivation brought by committing to work together. If not for this arrangement I would probably have skipped it and who knows if I had managed to restart the weeknotes streak next week on my own&amp;hellip;!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 8 and 9)</title><link href="https://406.ch/writing/weeknotes-2023-week-8-and-9/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2023-week-8-and-9/</id><summary type="html">&lt;h1&gt;Weeknotes (2023 week 8 and 9)&lt;/h1&gt;
+&lt;p&gt;Last week was a short work week. We spent a few nights in the mountains. Not much snow though. Enough for some skiing and sledging.&lt;/p&gt;
+&lt;p&gt;This work week was &amp;hellip; not normal. Many meetings, not enough time to work on projects. That shortens these week notes a lot.&lt;/p&gt;
+&lt;h2&gt;Django Software Foundation membership&lt;/h2&gt;
+&lt;p&gt;I found out through Tim that I have been &lt;a href="https://www.djangoproject.com/foundation/minutes/2023/jan/12/dsf-board-monthly-meeting/"&gt;approved as an individual member of the Django Software Foundation&lt;/a&gt;. I&amp;rsquo;m honored and hope that this will be another way where I can give something back. It also feels good to be seen.&lt;/p&gt;
+&lt;p&gt;I didn&amp;rsquo;t even know that the Foundation&amp;rsquo;s &lt;a href="https://www.djangoproject.com/foundation/minutes/"&gt;meeting minutes&lt;/a&gt; were public. I still use RSS and can wholeheartedly recommend &lt;a href="https://theoldreader.com/"&gt;The Old Reader&lt;/a&gt; (no affiliation) and so I thought I&amp;rsquo;d try adding a RSS feed of meeting minutes to the website. &lt;a href="https://github.com/django/djangoproject.com/pull/1316"&gt;The pull request is still being reviewed.&lt;/a&gt; at the time of writing.&lt;/p&gt;
+&lt;h2&gt;feincms3-forms documentation&lt;/h2&gt;
+&lt;p&gt;I worked on the &lt;a href="https://github.com/matthiask/feincms3-forms"&gt;feincms3-forms&lt;/a&gt; README a bit. The README hopefully clarifies the purpose and the components of the app a bit.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This is an extremely flexible forms builder for the Django admin interface.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Migrating from Bitbucket to GitHub&lt;/h2&gt;
+&lt;p&gt;I have been a long time Bitbucket user since GitHub used a pricing where many private repositories were very expensive and Bitbucket only charged a fee per user. This has changed long ago though. I wanted to consolidate the tools used at $work and have therefore taken the time to move all private repositores to GitHub. Determining the list of repositories in a Bitbucket Workspace was surprisingly annoying but I got there in the end with an app-specific password and curl.&lt;/p&gt;
+&lt;p&gt;Next, I converted the JSON into a list of Git/SSH cloning URLs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import json, sys
+
+d = json.loads(sys.stdin.read())
+print(
+    "\n".join(
+        next(link["href"] for link in rec["links"]["clone"] if link["name"] == "ssh")
+        for rec in d["values"]
+    )
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I used it as (I had to repeat the first command for every 100 repos):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;python3 filter.py &amp;lt; repos.json &amp;gt;&amp;gt; clone.txt
+for url in $(cat clone.txt); do (cd mirror; git clone --mirror $url) ; done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, I wrote another Python script to create the repositores and upload them all:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import sys
+from subprocess import run
+
+for repo in sys.argv[1:]:
+    run(f"gh repo create --private feinheit-archive/{repo[:-4]}", shell=True, check=True)
+    run(f"cd {repo} &amp;amp;&amp;amp; git push git@github.com:feinheit-archive/{repo[:-4]}.git --all", shell=True, check=True)
+    run(f"rm -rf {repo}", shell=True, check=True)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And ran ist as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd mirror
+python3 ../upload.py *
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Funnily enough I learned that GitHub ratelimits repository creation. So I had to wait an hour after several dozen repos and start the command again afterwards. Of course the code wasn&amp;rsquo;t written defensively at first and deleted repos which weren&amp;rsquo;t uploaded yet so I had to work out the set of repos I have to re-download from Bitbucket&amp;hellip; I think it&amp;rsquo;s a bit surprising that &lt;code&gt;subprocess.run&lt;/code&gt; doesn&amp;rsquo;t raise an exception by default when a command fails. &lt;code&gt;check=True&lt;/code&gt; should definitely be the default.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not posting the code because I&amp;rsquo;m proud but because I&amp;rsquo;m not. Throwing such stuff together with Python feels great, and using &lt;code&gt;subprocess.run(..., shell=True)&lt;/code&gt; is more fun than writing bash scripts with &lt;code&gt;sed&lt;/code&gt; etc.&lt;/p&gt;
+&lt;h2&gt;Use Frontend frameworks to kickstart your site and to drag you down later&lt;/h2&gt;
+&lt;p&gt;A longer blog post is in the making as I&amp;rsquo;m trying to formulate my thoughts on this.&lt;/p&gt;
+&lt;p&gt;Frontend frameworks are a great help in getting a product out of the door quickly. But tools and needs evolve. Backwards incompatible versions&lt;sup id="fnref:semver"&gt;&lt;a class="footnote-ref" href="#fn:semver"&gt;1&lt;/a&gt;&lt;/sup&gt; of those Frameworks are published. And then it happens: Too many things break at once and you have to pick up the pieces. What has been an advantage in the beginning drags you down, because now you have to maintain not just your own code but also everything you used from $framework.&lt;/p&gt;
+&lt;p&gt;I wish I had been (even 😂) more cautious when selecting tools for potentially long running projects.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:semver"&gt;
+&lt;p&gt;Sometimes stuff breaks even when updating patch versions.&amp;#160;&lt;a class="footnote-backref" href="#fnref:semver" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 7)</title><link href="https://406.ch/writing/weeknotes-2023-week-7/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2023-week-7/</id><summary type="html">&lt;h1&gt;Weeknotes (2023 week 7)&lt;/h1&gt;
+&lt;h2&gt;iOS and Kiosk mode&lt;/h2&gt;
+&lt;p&gt;I did some research on easy ways to put an iPad into Kiosk mode because I want to build a surveying app for an exposition. The web platform is perfect for this especially given the budget constraints&amp;hellip;&lt;/p&gt;
+&lt;p&gt;I thought &lt;a href="https://www.hexnode.com/blogs/what-is-ios-kiosk-mode/"&gt;What is iOS kiosk mode and how do I enable it?&lt;/a&gt; was a great overview over the available options for using iPads in Kiosk mode. I definitely don&amp;rsquo;t want to build an app myself even though this would be relatively straightforward e.g. with React Native&lt;sup id="fnref:rn"&gt;&lt;a class="footnote-ref" href="#fn:rn"&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen"&gt;MDN Foxes example&lt;/a&gt; worked nicely apart from the fact that the bar containing the clock and indicators is still shown. This is probably an acceptable trade off, but we&amp;rsquo;ll see.&lt;/p&gt;
+&lt;h2&gt;Bitbucket to GitHub migration&lt;/h2&gt;
+&lt;p&gt;I have finally managed to bump against the GitHub API&amp;rsquo;s rate limit. I have transferred more than 300 private Git repositories from Bitbucket to GitHub. Most repositories aren&amp;rsquo;t used actively anymore, so it&amp;rsquo;s not really about GitHub vs. Bitbucket. The goal was simply to have one less tool to worry about.&lt;/p&gt;
+&lt;p&gt;Downloading the list of all repositores in a workspace was surprisingly annoying and I spent too much time bumping my head against the API authentication. In the end all I had to do was to generate an app specific password and authenticate with that and with my own username. It&amp;rsquo;s funny to me how simple things like that are still hard after working more than 15 years in this industry.&lt;/p&gt;
+&lt;h2&gt;Off by ones&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m still progressing with learning &lt;a href="https://www.rust-lang.org/"&gt;Rust&lt;/a&gt; using &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt; puzzles. Last night I was really close to a working solution but then I spent a lot of time chasing down off by one errors. I was totally aware that I should pay attention when writing the loop (respectively the range) and I still failed. Oh well, in the end it worked and I still had a good time.&lt;/p&gt;
+&lt;h2&gt;Where do stolen bikes go?&lt;/h2&gt;
+&lt;p&gt;Everyone has probably seen that one already but I thought it was a really interesting study:
+&lt;a href="https://news.mit.edu/2023/where-do-stolen-bikes-go-0215"&gt;Where do stolen bikes go?&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The research team also charted the movement of the bikes. Out of the 70 stolen bikes, 68 remained in the local Amsterdam area. Between three and six of those spent enough time in the vicinity of second-hand bike stores that the researchers concluded they were probably sold there. Another 12 bikes were taken to locations identified as places where bicycles are known to be sold informally, on the bicycle black market.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data&lt;/a&gt;: I wrote about circular references last week; this week I got confirmation that the code works and so I released it.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-sso/"&gt;django-admin-sso&lt;/a&gt;: It&amp;rsquo;s a project I&amp;rsquo;m not really using anymore, but I&amp;rsquo;m still maintaining it when it&amp;rsquo;s not much work. Switch to &lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib&lt;/a&gt;&amp;lsquo;s admin SSO support if you can since django-admin-sso still uses the deprecated oauth2client library.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:rn"&gt;
+&lt;p&gt;I do have some experience with React Native. It&amp;rsquo;s great to get started and works surprisingly well for a long time. The problems arrive one you want to optimize the behavior on all platforms and screen sizes but that&amp;rsquo;s a hard problem, so maybe problems shouldn&amp;rsquo;t surprise anyone.&amp;#160;&lt;a class="footnote-backref" href="#fnref:rn" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 6)</title><link href="https://406.ch/writing/weeknotes-2023-week-6/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2023-week-6/</id><summary type="html">&lt;h1&gt;Weeknotes (2023 week 6)&lt;/h1&gt;
+&lt;h2&gt;Rust&lt;/h2&gt;
+&lt;p&gt;I made some progress learning Rust. I don&amp;rsquo;t have to look up each character and function and am slowly getting a feel for the language, unwrapping and the borrow checker, so that&amp;rsquo;s nice.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t have a use for it for now, but we&amp;rsquo;ll see.&lt;/p&gt;
+&lt;h2&gt;feincms3-data and data cycles&lt;/h2&gt;
+&lt;p&gt;I added support for loading data with cyclic dependencies to &lt;a href="https://github.com/matthiask/feincms3-data"&gt;feincms3-data&lt;/a&gt;. This is useful e.g. when having Django models where you have a &lt;code&gt;ForeignKey("self")&lt;/code&gt; and you want to use feincms3-data to insert a new copy of some object and its dependencies.&lt;/p&gt;
+&lt;h2&gt;Editing trees in the Django administration interface&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m back to one of my favorite (not) activities which is making tree-shaped data editable in the Django administration panel. &lt;a href="https://github.com/feincms/feincms"&gt;FeinCMS&lt;/a&gt; and later &lt;a href="https://github.com/django-mptt/django-mptt/"&gt;django-mptt&lt;/a&gt; augments the changelist with some drag drop behavior. There&amp;rsquo;s no undo functionality though so making errors is potentially really bad.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; uses a separate page for moving nodes around.&lt;/p&gt;
+&lt;p&gt;Now I&amp;rsquo;m working on a &lt;a href="https://preactjs.com/"&gt;Preact&lt;/a&gt;-based project which also doesn&amp;rsquo;t use drag drop but which also allows inserting nodes, not just moving nodes around. I doubt I can make it reusable enough to make it useful for feincms3 but we&amp;rsquo;ll see.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 5)</title><link href="https://406.ch/writing/weeknotes-2023-week-5/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2023-week-5/</id><summary type="html">&lt;h1&gt;Weeknotes (2023 week 5)&lt;/h1&gt;
+&lt;p&gt;A long time has passed since I tried writing week notes. Oh well, here we go again. No committment here, just hope.&lt;/p&gt;
+&lt;h2&gt;Podcasts&lt;/h2&gt;
+&lt;p&gt;Really got into listening to podcasts in the last few weeks. That&amp;rsquo;s new for me, I never enjoyed listening to people talk when I could also listen to music. So, that&amp;rsquo;s interesting.&lt;/p&gt;
+&lt;p&gt;Podcasts I like a lot: &lt;a href="https://www.nytimes.com/column/ezra-klein-podcast"&gt;The Ezra Klein Show&lt;/a&gt;, &lt;a href="https://djangochat.com/"&gt;Django Chat&lt;/a&gt; and some others where I haven&amp;rsquo;t yet listened enough to list them here.&lt;/p&gt;
+&lt;h2&gt;Advent of Code&lt;/h2&gt;
+&lt;p&gt;I knew that Advent of Code existed quite long already but I never dug into it. I participated in the 2022 Advent of Code and enjoyed it a lot. I have long been unsecure regarding my programming skills since I do not have a formal CS background so it felt really good to be able to solve many problems with only a little help. Definitely not all of them though. It definitely was fun and I&amp;rsquo;m still working through other years a bit. Python is the most fun, JavaScript is sometimes nice. Rust gives me a hard time (or I&amp;rsquo;m giving myself a hard time) but the upside is that solving even easy puzzles feels very rewarding.&lt;/p&gt;
+&lt;h2&gt;Open Source&lt;/h2&gt;
+&lt;p&gt;This week I released new versions of &lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt; and &lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;, only patch releases. I didn&amp;rsquo;t do that much open source work in the last weeks or months; it really depends a lot on the work I&amp;rsquo;m doing during the day at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt;. The activity in the open source project space is mostly always higher when I&amp;rsquo;m starting many small new projects and not so much when working on big old projects.&lt;/p&gt;
+&lt;p&gt;Django 4.2a1 has been released, and the &lt;code&gt;main&lt;/code&gt; branch of Django will be the upcoming 5.0 release which will break backwards compatibility again. The minimum Python requirement has been bumped to Python 3.10, which caused and still causes some work in updating the CI job lists. Good to see that the world is moving forward here.&lt;/p&gt;
+&lt;p&gt;As an aside, I always try deploying the last and best version of Django in my current projects, but since one of our servers is still using Ubuntu 18.04 with an old PostgreSQL version I cannot even use Django 4.1 with many projects. That makes me sad but maybe the sadness will bring with it the energy to finally move to containers or something which makes it easier to jump to new versions. We&amp;rsquo;ll see. It&amp;rsquo;s not really an issue most of the time so maybe it still isn&amp;rsquo;t worth it even though I feel like our hosting strategy is stuck in 2010.&lt;/p&gt;
+&lt;h2&gt;Machine Learning&lt;/h2&gt;
+&lt;p&gt;I did some playing around with Dall-E and ChatGPT (as everyone seems to do). I had a few interesting discussions with people re. if predicting the next word will lead to Artificial General Intelligence (I don&amp;rsquo;t think so).&lt;/p&gt;
+&lt;p&gt;What was fun about it was that I got to throw a hack together with &lt;a href="https://docs.python.org/3/library/asyncio.html"&gt;asyncio&lt;/a&gt; respectively &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt; and &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. The Starlette source code is a breath of fresh air. It&amp;rsquo;s so beautiful to read and I just love how much it does with a minimal amount of code.&lt;/p&gt;</summary></entry><entry><title>Moving data including deletions between the same Django app running in different environments</title><link href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/" rel="alternate"/><id>https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/</id><summary type="html">&lt;h1&gt;Moving data including deletions between the same Django app running in different environments&lt;/h1&gt;
+&lt;p&gt;Many projects use different environments to stabilize the code; they have a &lt;em&gt;production&lt;/em&gt; environment which is actually seen by users, a &lt;em&gt;stage&lt;/em&gt; where code is tested in an environment close to production and maybe several additional environments where more experimental code is published or developed, either on internal or protected webservers or maybe on the workstations of developers themselves.&lt;/p&gt;
+&lt;p&gt;The same process may be desired for content; an environment where the content lives which is seen by users and other environments where the content can be changed without impacting the production environment. When using Django and the &lt;a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/"&gt;Django admin site&lt;/a&gt; there is no ready-made solution for doing this and maybe there shouldn&amp;rsquo;t be.&lt;/p&gt;
+&lt;h2&gt;Django&amp;rsquo;s serialization framework and its shortcomings for the use case outlined above&lt;/h2&gt;
+&lt;p&gt;Django comes with a &lt;a href="https://docs.djangoproject.com/en/4.1/topics/serialization/"&gt;serialization framework&lt;/a&gt; and with the &lt;code&gt;dumpdata&lt;/code&gt; and &lt;code&gt;loaddata&lt;/code&gt; management commands which can be used to dump and load data, e.g. to and from JSON. It&amp;rsquo;s also easily possible to specify a list of primary keys on the command line if you only want to dump a subset of the existing data. When loading this subset data which isn&amp;rsquo;t included isn&amp;rsquo;t changed in any way, and that&amp;rsquo;s good!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;However!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s assume we&amp;rsquo;re working with the question and choice models from &lt;a href="https://docs.djangoproject.com/en/4.1/intro/tutorial02/#creating-models"&gt;Django&amp;rsquo;s tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The serialization framework doesn&amp;rsquo;t offer a way to easily include related data in a dump. There&amp;rsquo;s no easy way to automatically include all choices of a question.&lt;/li&gt;
+&lt;li&gt;Even if there was a way to include the related data the target environment wouldn&amp;rsquo;t have a way to replicate deletions. If a choice has been removed in the source environment it will not be included in the dump, and the target environment will just do nothing with the now redundant choice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt; solves these problems in (I think) a nice way, by building on the serialization framework and augmenting the JSON dump with a few additional properties which tell the loader what to do with the dataset. The code doesn&amp;rsquo;t have a dependency on &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; but of course it&amp;rsquo;s very useful when used to dump and load structured data as is generated when using a CMS.&lt;/p&gt;
+&lt;p&gt;The following datasets configuration would work for the use case outlined above:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from feincms3_data.data import specs_for_models
+from polls import models
+
+def questions(args):
+    pks = [int(pk) for pk in args.split(",") if pk]
+    return [
+        *specs_for_models(
+            [models.Question],
+            {"filter": {"pk__in": pks}},
+        ),
+        *specs_for_models(
+            [models.Answer],
+            {"filter": {"question__pk__in": pks}, "delete_missing": True},
+        ),
+    ]
+
+def datasets():
+    return {"default": {"specs": questions}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, you have to point the &lt;code&gt;FEINCMS3_DATA_DATASETS&lt;/code&gt; setting at the &lt;code&gt;datasets()&lt;/code&gt; function above and now you could use &lt;code&gt;./manage.py f3dumpdata default:3,4&lt;/code&gt; to dump the questions with ID 3 and 4 including their choices. The JSON can be loaded in a different instance. The questions with ID 3 and 4 will be created or updated, and choices which match the &lt;code&gt;questions__pk__in=[3,4]&lt;/code&gt; filter &lt;em&gt;but aren&amp;rsquo;t included in the JSON&lt;/em&gt; will be removed from the database.&lt;/p&gt;
+&lt;p&gt;Despite its pre-1.0 version number it&amp;rsquo;s used for several clients to implement a workflow where they set a &amp;ldquo;request update&amp;rdquo; flag on some parent object, and the relevant data will be synced periodically between systems. I&amp;rsquo;m quite confident that the code is correct and that it does what it should. A thorough test suite helps a lot there! But you never now, but I&amp;rsquo;m sure everyone uses backups by now. But who knows.&lt;/p&gt;</summary></entry><entry><title>Leaving Twitter</title><link href="https://406.ch/writing/leaving-twitter/" rel="alternate"/><id>https://406.ch/writing/leaving-twitter/</id><summary type="html">&lt;h1&gt;Leaving Twitter&lt;/h1&gt;
+&lt;p&gt;I have been more or less regularly using Twitter since 2009. I enjoyed it, sometimes more, sometimes less.&lt;/p&gt;
+&lt;p&gt;I liked a lot that Twitter offered me a way to follow the thoughts and works of interesting people.&lt;/p&gt;
+&lt;p&gt;It surfaced ways of thinking and cultures which I probably wouldn&amp;rsquo;t have learned about otherwise.&lt;/p&gt;
+&lt;p&gt;In the last few years and (of course) especially in the last few weeks things god worse very quickly. I don&amp;rsquo;t want to be a part of the Twitter community anymore. I&amp;rsquo;m not sure if my use of Twitter helps or costs Twitter anything, but this doesn&amp;rsquo;t really matter all that much.&lt;/p&gt;
+&lt;p&gt;What matters is that I have all that and more by using RSS and Mastodon. I&amp;rsquo;ve never stopped using RSS and I have found &lt;a href="https://theoldreader.com/"&gt;The Old Reader&lt;/a&gt; to be a good replacement for Google Reader and have been using it ever since (if I do not misremember things). The social network which I am happy to be a part of on Mastodon checks all boxes which my leaving Twitter left unchecked and even a few additional checkboxes I didn&amp;rsquo;t even know. So, that&amp;rsquo;s good for now.&lt;/p&gt;</summary></entry><entry><title>Reusable cookie consent app for Django</title><link href="https://406.ch/writing/reusable-cookie-consent-app-for-django/" rel="alternate"/><id>https://406.ch/writing/reusable-cookie-consent-app-for-django/</id><summary type="html">&lt;h1&gt;Reusable cookie consent app for Django&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://feinheit.ch/"&gt;We at Feinheit&lt;/a&gt; have been working on a cookie consent app for some time.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The cookie banner" src="https://raw.githubusercontent.com/feinheit/feincms3-cookiecontrol/main/docs/banner.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;Why and what?&lt;/h2&gt;
+&lt;p&gt;There are many many solutions in this problem space already. We have used several scripts in the past. Some are simple banners or popups which only inform users that cookies are being used. It is our view and belief that this isn&amp;rsquo;t sufficient to fulfil the legal obligations imposed by the GDPR and other comparable legislations.&lt;/p&gt;
+&lt;p&gt;We wanted a way to ask for consent and only embed any third party scripts after the consent has been given, not use some other tool which only comes into action after e.g. the Google Analytics scripts already have been loaded.&lt;/p&gt;
+&lt;p&gt;Accepting only essential cookies is made very annoying by some cookie banners. They drown users in options and nudge (or maybe coerce) them towards accepting &lt;em&gt;all&lt;/em&gt; cookies. The banner buttons are inspired (stealed) from Twitter, we think it&amp;rsquo;s nice to offer as little options as possible.&lt;/p&gt;
+&lt;h2&gt;Embedding third party content&lt;/h2&gt;
+&lt;p&gt;Also, we wanted to integrate a solution for embedding content from third party sites (e.g. Vimeo, Mailchimp and friends) where consent was asked as well when users only accept essential (first party) cookies:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Consciously embedding a YouTube video" src="https://raw.githubusercontent.com/feinheit/feincms3-cookiecontrol/main/docs/embed.png" /&gt;&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s why we set out to build a simple solution doing all that. As always it&amp;rsquo;s released as Open Source since we believe that giving back is the right thing to do (tm) &lt;em&gt;and&lt;/em&gt; it helps with &lt;a href="https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/"&gt;managing complexity in our projects&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;feincms3-cookiecontrol&lt;/h2&gt;
+&lt;p&gt;The name of the project is &lt;a href="https://github.com/feinheit/feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;. It has reached the 1.0 version and we&amp;rsquo;re committed to backwards compatibility. The conscious embedding functionality depends on &lt;a href="https://feincms3.readthedocs.io/en/latest/ref/embedding.html"&gt;feincms3&amp;rsquo;s embedding module&lt;/a&gt;, everything else also works with Django only.&lt;/p&gt;</summary></entry><entry><title>Managing complexity and technical debt by releasing Open Source Software</title><link href="https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/" rel="alternate"/><id>https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/</id><summary type="html">&lt;h1&gt;Managing complexity and technical debt by releasing Open Source Software&lt;/h1&gt;
+&lt;p&gt;When working on projects for &lt;a href="https://feinheit.ch"&gt;our&lt;/a&gt; clients I often try to keep as much code as possible in third party packages; I often even create packages for Django apps even when I do not expect to use the code in more than one project at all. One of those packages (which, in the meantime &lt;em&gt;has&lt;/em&gt; been used more than once is &lt;a href="https://django-spark.readthedocs.io/"&gt;django-spark&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;At first sight it looks like more work to package, document and test the solution. Defining boundaries is also much harder when there are many packages involved &amp;ndash; it&amp;rsquo;s not possible to just add a hack at the right place. You have to define extension points or hooks or you have to design a library which can be used in various ways &amp;ndash; there&amp;rsquo;s not really a way around that when moving code into open source packages.&lt;/p&gt;
+&lt;p&gt;It isn&amp;rsquo;t the case that this approach necessarily means more work though, neither in the initial project nor during &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;maintenance&lt;/a&gt;. Here&amp;rsquo;s a list of reasons why that is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Once the logical units of functionality are identified separating them is relatively straightforward. Tricky pieces of code can be isolated, documented and tested using unit tests. I maintain that unit tests are more robust &lt;em&gt;and&lt;/em&gt; easier to write than integration tests.&lt;/li&gt;
+&lt;li&gt;Moving code into Open Source packages keeps the packages themselves relatively clean of project-specific concerns. This means that the promise of reusability of Django&amp;rsquo;s apps is actually achievable.&lt;/li&gt;
+&lt;li&gt;Compatibility concerns aren&amp;rsquo;t such a big topic. The third party package (initially) only has to work for the duration of the project.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There&amp;rsquo;s never a guarantee that any open source library will be maintained in the future. I&amp;rsquo;m thinking that it may be useful to communicate the &lt;em&gt;intented maintenance&lt;/em&gt; better by adding an additional classifier when publishing a library. I&amp;rsquo;m thinking about something along these lines:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Actively maintained, used in multiple projects&lt;/li&gt;
+&lt;li&gt;Actively maintained, used in few projects which may even be in maintenance mode&lt;/li&gt;
+&lt;li&gt;Unmaintained right now, future maintenance is probable&lt;/li&gt;
+&lt;li&gt;Unmaintained right now, future maintenance is improbable&lt;/li&gt;
+&lt;li&gt;Definitely a dead project&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;But yeah, I&amp;rsquo;m not doing this classification work right now and haven&amp;rsquo;t done it in the past. But it would certainly make it easier to know whether relying on a third party library is a good idea or not, as an additional signal to reading the code and skimming the issues and pull/merge requests.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;I have been sitting on this blog post for almost two years, and the ideas here have been gestating even longer. I&amp;rsquo;m sure someone else has said everything in here more eloquently in the meantime. But anyway, feedback is welcome as always and I don&amp;rsquo;t think the post is so bad that it should sit in the draft folder forever.&lt;/small&gt;&lt;/p&gt;</summary></entry><entry><title>Configuring Django backends using speckenv’s 12factor support</title><link href="https://406.ch/writing/configuring-django-backends-using-speckenvs-12factor-support/" rel="alternate"/><id>https://406.ch/writing/configuring-django-backends-using-speckenvs-12factor-support/</id><summary type="html">&lt;h1&gt;Configuring Django backends using speckenv&amp;rsquo;s 12factor support&lt;/h1&gt;
+&lt;p&gt;There are many many 12factor utility apps available to configure databases, caches and the email backend in Django apps, for example &lt;a href="https://github.com/jazzband/dj-database-url/"&gt;dj-database-url&lt;/a&gt;, &lt;a href="https://github.com/epicserve/django-cache-url/"&gt;django-cache-url&lt;/a&gt; and &lt;a href="https://github.com/migonzalvar/dj-email-url/"&gt;dj-email-url&lt;/a&gt;. As I wrote in my 2020 blog post &lt;a href="https://406.ch/writing/using-environment-variables-to-configure-django/"&gt;Using environment variables to configure Django&lt;/a&gt; I liked using them &amp;ndash; a lot. However, this has changed a bit because I don&amp;rsquo;t like the fact that all released versions of those libraries modify the &lt;code&gt;urllib.uses_netloc&lt;/code&gt; list with their own protocols (when it&amp;rsquo;s not necessary at all) and I don&amp;rsquo;t like it either that some bugs still exist in some libraries which make upgrading projects in our environments from Django 3.2 to Django 4.0 harder than it should be; the problem isn&amp;rsquo;t really caused by Django&amp;rsquo;s new built-in features but rather surfaced by it.&lt;/p&gt;
+&lt;p&gt;Anyway, since I already had a library which helped reading settings from the environment, adding another utility which transforms DSNs to configuration dictionaries understood by Django was straightforward. And that&amp;rsquo;s why I&amp;rsquo;m now happily using &lt;a href="https://github.com/matthiask/speckenv/#django-support"&gt;speckenv&amp;rsquo;s Django support&lt;/a&gt; for those use cases.&lt;/p&gt;
+&lt;p&gt;Reducing the amount of dependencies in a project maybe shouldn&amp;rsquo;t be a goal in itself, but replacing generic utilities with more opinionated utilities is certainly a net positive in my book (if it is possible!)&lt;/p&gt;</summary></entry><entry><title>Generating XLSX (or CSV) from the Django admin (or elsewhere)</title><link href="https://406.ch/writing/generating-xlsx-or-csv-from-the-django-admin-or-elsewhere/" rel="alternate"/><id>https://406.ch/writing/generating-xlsx-or-csv-from-the-django-admin-or-elsewhere/</id><summary type="html">&lt;h1&gt;Generating XLSX (or CSV) from the Django admin (or elsewhere)&lt;/h1&gt;
+&lt;p&gt;The blog post &lt;a href="https://reinout.vanrees.org/weblog/2022/08/15/excel-instead-of-csv.html"&gt;Django: excel output instead of csv&lt;/a&gt; inspired me to write about my own experience with XLSX or CSV generation.&lt;/p&gt;
+&lt;h2&gt;XLSX export&lt;/h2&gt;
+&lt;p&gt;For a long time I used similarly structured ad-hoc code built on &lt;a href="https://pypi.org/project/xlwt/"&gt;xlwt&lt;/a&gt;, a project which looks abandoned these days. I have been a more or less happy user of &lt;a href="https://pypi.org/project/openpyxl/"&gt;openpyxl&lt;/a&gt; during the last years and intend to continue using it.&lt;/p&gt;
+&lt;p&gt;Something which I (or rather my users) require often is a way to export a list of selected objects from the Django admin. A good way to achieve this is by using an &lt;a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/actions/"&gt;admin action&lt;/a&gt;. The common use case is that I have to export all model fields and maybe some additional data. &lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt; makes this very easy, all you have to do is:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from django.contrib import admin
+from xlsxdocument import export_selected
+from app import models
+
+@admin.register(models.Example)
+class ExampleAdmin(admin.ModelAdmin):
+    actions = [export_selected]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you wanted more control and wanted to add an additional field at the end you could write your own view (or embed the code in your own action, see the Django docs for this):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from xlsxdocument import export_selected
+from app.models import Example
+
+def generate_xlsx(request):
+    xlsx = XLSXDocument()
+    xlsx.table_from_queryset(
+        Example.objects.all(),
+        additional=[
+            ("URL", lambda obj: request.build_absolute_uri(obj.get_absolute_url())),
+        ],
+    )
+    return xlsx.to_response("example.xlsx")
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or, you could go even lower and use &lt;code&gt;xlsx.add_sheet()&lt;/code&gt; and &lt;code&gt;xlsx.table()&lt;/code&gt; yourself.&lt;/p&gt;
+&lt;p&gt;Dates, datetimes, numbers, choice fields and Django model instances are (I hope!) handled in a good way automatically.&lt;/p&gt;
+&lt;h2&gt;CSV export for large datasets&lt;/h2&gt;
+&lt;p&gt;For large datasets the xlsxdocument/openpyxl combination has proven to be too slow. I didn&amp;rsquo;t take the time to profile things to find where all the time is spent. Instead, I stumbled over a very relevant section in the Django documentation: &lt;a href="https://docs.djangoproject.com/en/4.1/howto/outputting-csv/#streaming-large-csv-files"&gt;Streaming large CSV files&lt;/a&gt; The code in there proved to be at least an order of magnitude faster (exports which produced server timeouts each time finished in a fraction of a second)&lt;/p&gt;
+&lt;p&gt;But, since I didn&amp;rsquo;t want to go back to copy-pasting code and since I also didn&amp;rsquo;t want to lose the automatic queryset handling I just had to write another library 😅 The result of this work is &lt;a href="https://github.com/matthiask/django-fast-export/"&gt;django-fast-export&lt;/a&gt;. Replicating the example from above (with the additional benefit of using a streaming response instead of building everything up-front) would look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from django_fast_export import StreamingCSVResponse, all_values, all_verbose_names
+from app.models import Example
+
+def generate_csv(request):
+    def _gen():
+        queryset = Example.objects.all()
+        yield (all_verbose_names(Example) + ["URL"])
+        yield from (
+            (all_values(instance) + [request.build_absolute_uri(instance.get_absolute_url())])
+            for instance in queryset
+        )
+
+    return StreamingCSVResponse(_gen())
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/matthiask/django-fast-export/"&gt;django-fast-export&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Recent objects using several Django models</title><link href="https://406.ch/writing/recent-objects-using-several-django-models/" rel="alternate"/><id>https://406.ch/writing/recent-objects-using-several-django-models/</id><summary type="html">&lt;h1&gt;Recent objects using several Django models&lt;/h1&gt;
+&lt;p&gt;I released a new Python package which builds on the excellent code published by Simon Willison in the blog post &lt;a href="https://simonwillison.net/2018/Mar/25/combined-recent-additions/"&gt;Building a combined stream of recent additions using the Django ORM&lt;/a&gt;. The rationale etc. for why this is useful is described much better by him and I&amp;rsquo;ll save everyone&amp;rsquo;s time by not repeating it in a worse way.&lt;/p&gt;
+&lt;p&gt;The new package is &lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt;, developed on GitHub and available from PyPI.&lt;/p&gt;
+&lt;p&gt;The package supports e.g. combining recent articles and comments in a single activity stream:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from testapp.models import Article, Comment
+from recent_objects.recent_objects import RecentObjects
+
+ro = RecentObjects(
+    [
+        {
+            "queryset": Article.objects.all(),
+            "date_field": "created_at",
+        },
+        {
+            "queryset": Comment.objects.all(),
+            "date_field": "created_at",
+        },
+    ]
+)
+
+additions = ro.page(paginate_by=10, page=1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt; adds the following features which aren&amp;rsquo;t available in the blogpost linked above:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The name of the &lt;code&gt;date_field&lt;/code&gt; doesn&amp;rsquo;t have to be the same for all objects&lt;/li&gt;
+&lt;li&gt;Primary keys of different types are&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt; supported&lt;/li&gt;
+&lt;li&gt;The code uses a real paginator and doesn&amp;rsquo;t only support fetching the first few objects&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Hopefully!&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2021 week 13 and 14)</title><link href="https://406.ch/writing/weeknotes-2021-week-13-and-14/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2021-week-13-and-14/</id><summary type="html">&lt;h1&gt;Weeknotes (2021 week 13 and 14)&lt;/h1&gt;
+&lt;h2&gt;Sorting django-admin-ordering instances in Python code&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/matthiask/django-admin-ordering/"&gt;django-admin-ordering&lt;/a&gt;&amp;lsquo;s &lt;code&gt;OrderableModel&lt;/code&gt; gained a &lt;code&gt;__lt__&lt;/code&gt; function (and &lt;code&gt;functools.total_ordering&lt;/code&gt;) in 0.14 which allows sorting model instances in Python code. This is useful for my projects.&lt;/p&gt;
+&lt;h2&gt;Some user agents do not like single quotes in OpenGraph tags&lt;/h2&gt;
+&lt;p&gt;Django autoescapes content inserted into HTML (an excellent default). It also converts some special characters into entities (resp., &lt;a href="https://docs.python.org/3/library/html.html"&gt;&lt;code&gt;html.escape&lt;/code&gt;&lt;/a&gt; does this). It seems that some user agents do not like entities in OpenGraph tags and show &lt;code&gt;&amp;amp;x27;&lt;/code&gt; instead of &lt;code&gt;'&lt;/code&gt;. Oh well. &lt;a href="https://github.com/matthiask/feincms3-meta/commit/c2524581f29ff0cbf2d1e7af419f6f943685a296"&gt;I added a workaround for this problem to feincms3-meta.&lt;/a&gt; It checks whether the value is safe&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt; and basically skips escaping in this case &amp;ndash; at least I hope it is safe!&lt;/p&gt;
+&lt;h2&gt;feincms3-forms – A new forms builder for the Django admin interface&lt;/h2&gt;
+&lt;p&gt;For a current project &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; needed a forms builder with the following constraints:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple fields (text, email, checkboxes, dropdowns etc.)&lt;/li&gt;
+&lt;li&gt;Custom validation and processing logic&lt;/li&gt;
+&lt;li&gt;It should be possible to add other content, e.g. headings and explanations between form fields&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;a href="https://github.com/feincms/form_designer"&gt;form_designer&lt;/a&gt; fulfilled a few of these requirements but not all. It still works well but I wanted a forms builder based on &lt;a href="https://github.com/matthiask/django-content-editor"&gt;django-content-editor&lt;/a&gt; for a long time already. Also, I really like the feincms3 pattern where the third party app only provides abstract models. Yeah, it is much more work to start with but the flexibility and configurability is worth it – especially since it&amp;rsquo;s possible to write straightforward code to handle special cases&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt; instead of configuring even more settings.&lt;/p&gt;
+&lt;p&gt;The humble beginnings are here in the &lt;a href="https://github.com/matthiask/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt; repository. The &lt;a href="https://github.com/matthiask/feincms3-forms/tree/main/tests/testapp"&gt;test suite already shows how things work together&lt;/a&gt; but as of now no documentation exists and no release has been made yet. I hope it will be ready for a first beta release in the next few weeks 😄&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;According to a restrictive allowlist.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;All sites are special.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2021 week 12)</title><link href="https://406.ch/writing/weeknotes-2021-week-12/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2021-week-12/</id><summary type="html">&lt;h1&gt;Weeknotes (2021 week 12)&lt;/h1&gt;
+&lt;p&gt;Not much open source work this week. The final thesis and presentation for the CAS in Interaction Design was due. I learned a lot but for now I&amp;rsquo;m just glad that it&amp;rsquo;s over. I&amp;rsquo;m looking forward to relearning how to do &amp;ldquo;nothing&amp;rdquo; on weekends.&lt;/p&gt;
+&lt;h2&gt;FeinCMS 1.20&lt;/h2&gt;
+&lt;p&gt;Some FeinCMS 1.x ItemEditor element attributes clashed with new IDs introduced in Django 3.1. The new version of FeinCMS fixes this.&lt;/p&gt;
+&lt;h2&gt;feincms3&lt;/h2&gt;
+&lt;p&gt;Fixed a few problems in the new inline CKEditor widget for the Django admin. An oversight made it impossible to add CKEditor instances with different configurations. Luckily enough this only affected beta/preview releases :-)&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2021 week 11)</title><link href="https://406.ch/writing/weeknotes-2021-week-11/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2021-week-11/</id><summary type="html">&lt;h1&gt;Weeknotes (2021 week 11)&lt;/h1&gt;
+&lt;h2&gt;django-simple-redirects&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.djangoproject.com/"&gt;Django&lt;/a&gt;&amp;lsquo;s built-in &lt;code&gt;django.contrib.redirects&lt;/code&gt; app has a hard dependency on &lt;code&gt;django.contrib.sites&lt;/code&gt;. I&amp;rsquo;m a big fan of NOT hardcoding the current site into the database or into settings except where absolutely necessary. Because of this I extracted the parts I liked into a standalone package with a &lt;a href="https://pypi.org/project/django-sane-redirects/"&gt;questionable and needlessly derogatory name&lt;/a&gt; a few years ago. The old package is still around (no need to break setups) but the package has been renamed to &lt;strong&gt;django-simple-redirects&lt;/strong&gt;, cleaned up for current versions of Python and Django and also been uploaded to PyPI.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-simple-redirects/"&gt;django-simple-redirects on PyPI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/feinheit/django-simple-redirects/"&gt;django-simple-redirects on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;CKEditor instances in Django&amp;rsquo;s admin interface without IFRAMEs&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="" src="https://406.ch/media/cabinet/2021/03/new-inline-ckeditor.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Currently incubating in feincms3. I have a strong dislike for scrollables inside scrollables, the proposed interface is much better.&lt;/p&gt;
+&lt;p&gt;Of course I&amp;rsquo;m still thinking about reimplementing the whole editing interface using &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;, but oh well&amp;hellip; maybe another time, when I do not have any projects for months to come.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2021 week 10)</title><link href="https://406.ch/writing/weeknotes-2021-week-10/" rel="alternate"/><id>https://406.ch/writing/weeknotes-2021-week-10/</id><summary type="html">&lt;h1&gt;Weeknotes (2021 week 10)&lt;/h1&gt;
+&lt;p&gt;I&amp;rsquo;m trying out the weeknotes format to hopefully write a bit more 😄.&lt;/p&gt;
+&lt;h2&gt;feincms3: Page types and moving torwards a 1.0 release&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://github.com/matthiask/feincms3/blob/main/CHANGELOG.rst"&gt;current beta release of feincms3 (0.90b*)&lt;/a&gt; introduces support for &lt;strong&gt;page types&lt;/strong&gt;. This new concept unifies templates and apps. Since feincms3 apps can basically do what they want it didn&amp;rsquo;t make much sense to force managers to choose a template when they already selected an app. Sometimes, we offered managers a &amp;ldquo;projects&amp;rdquo; template and a &amp;ldquo;projects&amp;rdquo; app and they had to select both. This duplication was hard to explain and justify.&lt;/p&gt;
+&lt;p&gt;This isn&amp;rsquo;t the only backwards-incompatible change in 0.90b*. The default image plugins now always have a caption and an alternative text field; the versatileimagefield-based plugin is gone as are the shims in &lt;code&gt;feincms3.apps&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The idea is to release a 1.0 of feincms3 soon-ish. It&amp;rsquo;s time to do this. feincms3 is in its fifth year of existence, several sites built with it have already been archived already, so it&amp;rsquo;s definitely past due. (django-content-editor (resp. FeinCMS 1.x) more than 12 years old now.)&lt;/p&gt;
+&lt;h2&gt;django-mptt is not maintained anymore&lt;/h2&gt;
+&lt;p&gt;We, the maintainers of django-mptt &lt;a href="https://github.com/django-mptt/django-mptt/pull/776"&gt;have marked django-mptt as unmaintained&lt;/a&gt;. I have released the current development version as 0.12.0 before proposing this.&lt;/p&gt;
+&lt;h2&gt;PostgreSQL&amp;rsquo;s ltree extension vs. django-tree-queries&amp;rsquo; recursive CTEs&lt;/h2&gt;
+&lt;p&gt;I got the (excellent) question why I wrote that PostgreSQL&amp;rsquo;s ltree extension didn&amp;rsquo;t seem a good solution &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;in my post about django-tree-queries&lt;/a&gt;. &lt;a href="https://github.com/matthiask/406-comments/issues/2#issuecomment-797981910"&gt;Here&amp;rsquo;s my current thinking on this.&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Going all-in on CSS Grid and PostCSS&lt;/h2&gt;
+&lt;p&gt;I have been using &lt;a href="https://github.com/postcss/autoprefixer"&gt;autoprefixer&lt;/a&gt; for years already. It&amp;rsquo;s probably the best-known &lt;a href="https://postcss.org/"&gt;PostCSS&lt;/a&gt; plugin. It automatically adds vendor-specific prefixes to your CSS code (e.g. &lt;code&gt;-moz-*&lt;/code&gt;, &lt;code&gt;-webkit-*&lt;/code&gt;, &lt;code&gt;-ms-*&lt;/code&gt; etc.) depending on a list of browsers you want to support and the &lt;a href="https://caniuse.com/"&gt;Can I use&amp;hellip;&lt;/a&gt; database.&lt;/p&gt;
+&lt;p&gt;I wanted to bring bundling times down and searched for alternatives to Webpack. Webpack isn&amp;rsquo;t the hot new thing anymore but it works really well and performs good enough as long as you do not have extreme amounts of code and plugins. I started with a new, minimal Webpack configuration and was pleasantly surprised that compilation times are more than acceptable when only using babel-loader to transpile JavaScript and some PostCSS. (I may write about the setup at a later time, for now &lt;a href="https://406.ch/writing/our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage/"&gt;this approach&lt;/a&gt; still serves &lt;a href="https://feinheit.ch/"&gt;us&lt;/a&gt; well and we have even packaged it up as &lt;a href="https://github.com/feinheit/fh-webpack-config/"&gt;fh-webpack-config&lt;/a&gt;.)&lt;/p&gt;
+&lt;h2&gt;Changing the main branch to main&lt;/h2&gt;
+&lt;p&gt;I added the &lt;a href="https://github.com/matthiask/dotfiles/commit/3a2e3ff58de38aa8e03ca1d684504ebea02cdd6c"&gt;following alias to my &lt;code&gt;.gitconfig&lt;/code&gt;&lt;/a&gt; to fix the problem where the &lt;code&gt;refs/remotes/origin/HEAD&lt;/code&gt; of local repositories would point to &lt;code&gt;master&lt;/code&gt; instead of &lt;code&gt;main&lt;/code&gt; after renaming the branch on GitHub:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git config --global alias.mainfix "symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main"
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;git mainfix&lt;/code&gt; is easier to type than &lt;code&gt;vim .git/refs/remotes/origin/HEAD&lt;/code&gt; and replacing whatever the previous main branch was called with &lt;code&gt;main&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;neovim&lt;/h2&gt;
+&lt;p&gt;I have switched from vim to neovim. I don&amp;rsquo;t exactly remember why but the transition has been seamless. I&amp;rsquo;m still happy with tmux and vim.&lt;/p&gt;</summary></entry></feed>
