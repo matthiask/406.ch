@@ -68,8 +68,7 @@ def slugify(value):
 
 
 def parse_date(value):
-    if value:
-        return dt.datetime.strptime(value, "%Y-%m-%d").date()
+    return dt.datetime.strptime(value, "%Y-%m-%d").date() if value else None
 
 
 def parse_categories(value):
@@ -85,24 +84,21 @@ def load_posts(path):
     for md in path.glob("*.md"):
         try:
             props, content = md.read_text().split("\n\n", 1)
-
             properties = {}
             for prop in props.split("\n"):
                 name, value = prop.split(":", 1)
                 properties[name.lower()] = value.strip()
-
             posts.append(
                 Post(
                     title=properties["title"],
                     slug=properties.get("slug") or slugify(properties["title"]),
-                    date=parse_date(properties.get("date", "")),
+                    date=parse_date(properties.get("date")),
                     categories=parse_categories(properties.get("categories") or ""),
                     content=content,
                 )
             )
         except Exception as exc:
             raise Exception(f"Unable to load {md}") from exc
-
     return sorted(posts, key=lambda post: post.date or dt.date.min, reverse=True)
 
 
@@ -139,7 +135,7 @@ def render_minified(template, **kwargs):
 
 
 def write_feed_with_posts(path, posts, **kwargs):
-    feed = feedgenerator.Atom1Feed(**kwargs)
+    feed = feedgenerator.Atom1Feed(description="", language="en", **kwargs)
     for post in posts:
         link = f"{BASE}{post.url}"
         feed.add_item(
@@ -158,8 +154,7 @@ def write_feed_with_posts(path, posts, **kwargs):
 def write_sitemap(posts):
     root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for post in posts:
-        loc = SubElement(SubElement(root, "url"), "loc")
-        loc.text = f"{BASE}{post.url}"
+        SubElement(SubElement(root, "url"), "loc").text = f"{BASE}{post.url}"
     sitemap = tostring(root, encoding="utf-8", xml_declaration=True)
     write_file("sitemap.xml", sitemap.decode("utf-8"))
 
@@ -188,8 +183,6 @@ if __name__ == "__main__":
         posts[:20],
         title="Matthias Kestenholz",
         link=f"{BASE}/",
-        description="",
-        language="en",
     )
 
     for category in categories:
@@ -203,8 +196,6 @@ if __name__ == "__main__":
             category_posts[:20],
             title=f"Matthias Kestenholz: Posts about {category.title}",
             link=f"{BASE}{category.url}",
-            description="",
-            language="en",
         )
 
     for post in posts:
