@@ -1,0 +1,28 @@
+name: Pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip wheel
+          python3 -m pip install -r requirements.txt
+      - name: Build site
+        run: python generate.py
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@caba38d33773c0f6333df7eba0a7cd71a4adeb71 # v3.9.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./htdocs/
