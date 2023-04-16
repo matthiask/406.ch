@@ -8,6 +8,7 @@ from functools import total_ordering
 from itertools import chain
 from pathlib import Path
 from typing import Literal
+from xml.etree.ElementTree import Element, SubElement, tostring
 
 from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
@@ -114,7 +115,10 @@ def write_file(path, content):
     _files_written += 1
     file = BASE_DIR / "out" / path.lstrip("/")
     file.parent.mkdir(parents=True, exist_ok=True)
-    file.write_text(content)
+    if isinstance(content, bytes):
+        file.write_bytes(content)
+    else:
+        file.write_text(content)
 
 
 def write_minified_file(path, content):
@@ -162,6 +166,10 @@ if __name__ == "__main__":
         "writing/index.html",
         '<meta http-equiv="refresh" content="0; url=https://406.ch/" />',
     )
+    write_file(
+        "robots.txt",
+        "User-agent: *\nSitemap: https://406.ch/sitemap.xml\n",
+    )
 
     archive_template = env.get_template("post_archive.html")
     post_template = env.get_template("post_detail.html")
@@ -202,6 +210,12 @@ if __name__ == "__main__":
             write_file(f"{category.url}atom.xml", f.getvalue())
             write_file(f"{category.url}feed/index.html", f.getvalue())
 
+    root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for post in posts:
         write_minified_file(f"{post.url}index.html", post_template.render(post=post))
+        loc = SubElement(SubElement(root, "url"), "loc")
+        loc.text = f"https://406.ch{post.url}"
+
+    write_file("sitemap.xml", tostring(root, encoding="utf-8", xml_declaration=True))
+
     print(f"Wrote {_files_written} files.")
