@@ -22,7 +22,7 @@ jobs:
       - name: Build site
         run: python generate.py
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@627df3d602afb02fc7cb2dce093cdf1716834e2e
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./htdocs/
