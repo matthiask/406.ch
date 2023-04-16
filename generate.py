@@ -16,6 +16,7 @@ from rcssmin import cssmin
 import feedgenerator
 
 
+_files_written = 0
 BASE_DIR = Path(__file__).resolve(strict=True).parent
 
 
@@ -109,6 +110,8 @@ def load_posts(path):
 
 
 def write_file(path, content):
+    global _files_written
+    _files_written += 1
     file = BASE_DIR / "out" / path.lstrip("/")
     file.parent.mkdir(parents=True, exist_ok=True)
     file.write_text(content)
@@ -139,7 +142,7 @@ def add_to_feed(feed, post):
     feed.add_item(
         title=post.title,
         description=post.html,
-        link=post.url,
+        link=link,
         unique_id=link,
         unique_id_is_permalink=True,
     )
@@ -197,3 +200,4 @@ if __name__ == "__main__":
 
     for post in posts:
         write_file(f"{post.url}index.html", post_template.render(post=post))
+    print(f"Wrote {_files_written} files.")
