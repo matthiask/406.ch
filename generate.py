@@ -152,6 +152,7 @@ def add_to_feed(feed, post):
         title=post.title,
         description=post.html,
         link=link,
+        pubdate=post.date,
         unique_id=link,
         unique_id_is_permalink=True,
     )
