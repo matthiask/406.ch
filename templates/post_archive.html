@@ -29,22 +29,13 @@
 
 <main><div class="wrappy">
 
-{% for post in object_list %}
-  {% if post.is_microblog %}
-    <div class="microblog">
-      <small>{{ post.date.isoformat() }}</small>
-      <div class="text">
-        {{ post.html|safe }}
-      </div>
-    </div>
-  {% else %}
-    <h2>
-      <a href="{{ post.url }}">
-        <small>{{ post.date.isoformat() }}</small><br>
-        {{ post.title }}
-      </a>
-    </h2>
-  {% endif %}
+{% for post in posts %}
+  <h2>
+    <a href="{{ post.url }}">
+      <small>{{ post.date.isoformat() }}</small><br>
+      {{ post.title }}
+    </a>
+  </h2>
 {% endfor %}
 
 </div></main>

@@ -63,13 +63,11 @@ h1 {
   margin: 0 0 1.5rem 0;
 }
 
-h2,
-.microblog {
+h2 {
   margin: 1.5rem 0 0.5rem 0;
 }
 
-h2:first-child,
-h2.microblog:first-child {
+h2:first-child {
   margin-top: 0;
 }
 

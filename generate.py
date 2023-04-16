@@ -9,7 +9,7 @@ from itertools import chain
 from pathlib import Path
 from typing import Literal
 
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
 from rcssmin import cssmin
 
@@ -126,11 +126,7 @@ def styles_url():
 def jinja_env(**kwargs):
     env = Environment(
         loader=FileSystemLoader([BASE_DIR / "templates"]),
-        autoescape=select_autoescape(
-            disabled_extensions=("txt",),
-            default_for_string=True,
-            default=True,
-        ),
+        autoescape=True,
     )
     env.globals["year"] = dt.date.today().year
     env.globals["styles_url"] = styles_url()
@@ -165,7 +161,7 @@ if __name__ == "__main__":
 
     write_file(
         "index.html",
-        archive_template.render(object_list=posts),
+        archive_template.render(posts=posts),
     )
     feed = feedgenerator.Atom1Feed(
         title="Matthias Kestenholz",
@@ -184,10 +180,7 @@ if __name__ == "__main__":
         category_posts = [post for post in posts if category in post.categories]
         write_file(
             f"{category.url}index.html",
-            archive_template.render(
-                object_list=category_posts,
-                current=category,
-            ),
+            archive_template.render(posts=category_posts, current=category),
         )
         feed = feedgenerator.Atom1Feed(
             title=f"Matthias Kestenholz: Posts about {category.title}",
