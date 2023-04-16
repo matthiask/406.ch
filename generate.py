@@ -3,6 +3,7 @@ import hashlib
 import io
 import re
 import shutil
+import time
 from dataclasses import dataclass, field
 from functools import total_ordering
 from itertools import chain
@@ -157,6 +158,7 @@ def add_to_feed(feed, post):
 
 
 if __name__ == "__main__":
+    start = time.perf_counter()
     shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
     posts = load_posts(BASE_DIR / "published")
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
@@ -217,4 +219,5 @@ if __name__ == "__main__":
         loc.text = f"https://406.ch{post.url}"
 
     write_file("sitemap.xml", tostring(root, encoding="utf-8", xml_declaration=True))
-    print(f"Wrote {_files_written} files.")
+    elapsed = time.perf_counter() - start
+    print(f"Wrote {_files_written} files in {elapsed:.2f} seconds.")
