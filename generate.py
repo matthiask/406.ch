@@ -1,3 +1,6 @@
+# License: WTFPL (DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE)
+# See http://www.wtfpl.net/
+
 import datetime as dt
 import io
 import re

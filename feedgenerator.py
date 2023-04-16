@@ -1,3 +1,6 @@
+# Code copied from https://github.com/django/django/tree/main/django/utils
+# License: https://github.com/django/django/blob/main/LICENSE
+
 # ruff: noqa
 """
 Syndication feed generation library -- used for generating RSS, etc.
