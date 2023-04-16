@@ -172,6 +172,7 @@ if __name__ == "__main__":
         "robots.txt",
         "User-agent: *\nSitemap: https://406.ch/sitemap.xml\n",
     )
+    write_file("404.html", env.get_template("404.html").render())
 
     archive_template = env.get_template("post_archive.html")
     post_template = env.get_template("post_detail.html")
