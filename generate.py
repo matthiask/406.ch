@@ -150,7 +150,7 @@ def render_minified(template, **kwargs):
     return minify(template.render(**kwargs))
 
 
-def feed_with_posts(posts, **kwargs):
+def write_feed_with_posts(path, posts, **kwargs):
     feed = feedgenerator.Atom1Feed(**kwargs)
     for post in posts:
         link = f"https://406.ch{post.url}"
@@ -160,11 +160,11 @@ def feed_with_posts(posts, **kwargs):
             link=link,
             pubdate=dt.datetime.combine(post.date, dt.time(12, 0)),
             unique_id=link,
-            unique_id_is_permalink=True,
         )
     with io.StringIO() as f:
         feed.write(f, "utf-8")
-        return f.getvalue()
+        write_file(f"{path}atom.xml", f.getvalue())
+        write_file(f"{path}feed/index.html", f.getvalue())
 
 
 if __name__ == "__main__":
@@ -188,15 +188,14 @@ if __name__ == "__main__":
     post_template = env.get_template("post_detail.html")
 
     write_file("index.html", render_minified(archive_template, posts=posts))
-    feed = feed_with_posts(
+    write_feed_with_posts(
+        "writing/",
         posts[:20],
         title="Matthias Kestenholz",
         link="https://406.ch/",
         description="",
         language="en",
     )
-    write_file("writing/atom.xml", feed)
-    write_file("writing/feed/index.html", feed)
 
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
@@ -204,15 +203,14 @@ if __name__ == "__main__":
             f"{category.url}index.html",
             render_minified(archive_template, posts=category_posts, current=category),
         )
-        feed = feed_with_posts(
+        write_feed_with_posts(
+            category.url,
             category_posts[:20],
             title=f"Matthias Kestenholz: Posts about {category.title}",
             link=f"https://406.ch{category.url}",
             description="",
             language="en",
         )
-        write_file(f"{category.url}atom.xml", feed)
-        write_file(f"{category.url}feed/index.html", feed)
 
     root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for post in posts:
