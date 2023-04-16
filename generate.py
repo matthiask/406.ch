@@ -20,6 +20,7 @@ import feedgenerator
 
 _files_written = 0
 BASE_DIR = Path(__file__).resolve(strict=True).parent
+BASE = "https://406.ch"
 
 
 @dataclass(kw_only=True)
@@ -146,7 +147,7 @@ def render_minified(template, **kwargs):
 def write_feed_with_posts(path, posts, **kwargs):
     feed = feedgenerator.Atom1Feed(**kwargs)
     for post in posts:
-        link = f"https://406.ch{post.url}"
+        link = f"{BASE}{post.url}"
         feed.add_item(
             title=post.title,
             description=post.html,
@@ -164,7 +165,7 @@ def write_sitemap(posts):
     root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for post in posts:
         loc = SubElement(SubElement(root, "url"), "loc")
-        loc.text = f"https://406.ch{post.url}"
+        loc.text = f"{BASE}{post.url}"
     sitemap = tostring(root, encoding="utf-8", xml_declaration=True)
     write_file("sitemap.xml", sitemap.decode("utf-8"))
 
@@ -178,14 +179,11 @@ if __name__ == "__main__":
     env = jinja_env(categories=categories)
     write_file(
         "writing/index.html",
-        '<meta http-equiv="refresh" content="0; url=https://406.ch/" />',
+        f'<meta http-equiv="refresh" content="0; url={BASE}/">',
     )
-    write_file(
-        "robots.txt",
-        "User-agent: *\nSitemap: https://406.ch/sitemap.xml\n",
-    )
+    write_file("robots.txt", f"User-agent: *\nSitemap: {BASE}/sitemap.xml\n")
     write_sitemap(posts)
-    write_file("404.html", env.get_template("404.html").render())
+    write_file("404.html", render_minified(env.get_template("404.html")))
 
     archive_template = env.get_template("post_archive.html")
     post_template = env.get_template("post_detail.html")
@@ -195,7 +193,7 @@ if __name__ == "__main__":
         "writing/",
         posts[:20],
         title="Matthias Kestenholz",
-        link="https://406.ch/",
+        link=f"{BASE}/",
         description="",
         language="en",
     )
@@ -210,7 +208,7 @@ if __name__ == "__main__":
             category.url,
             category_posts[:20],
             title=f"Matthias Kestenholz: Posts about {category.title}",
-            link=f"https://406.ch{category.url}",
+            link=f"{BASE}{category.url}",
             description="",
             language="en",
         )
