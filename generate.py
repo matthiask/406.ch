@@ -11,7 +11,7 @@ from typing import Literal
 
 from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
-from rcssmin import cssmin
+from minify_html import minify
 
 import feedgenerator
 
@@ -117,8 +117,12 @@ def write_file(path, content):
     file.write_text(content)
 
 
+def write_minified_file(path, content):
+    write_file(path, minify(content))
+
+
 def styles_url():
-    styles = cssmin(
+    styles = minify(
         "".join(file.read_text() for file in (BASE_DIR / "styles").glob("*.css"))
     )
     style_file = f"styles.{hashlib.md5(styles.encode('utf-8')).hexdigest()}.css"
@@ -154,7 +158,7 @@ if __name__ == "__main__":
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
 
     env = jinja_env(categories=categories)
-    write_file(
+    write_minified_file(
         "writing/index.html",
         '<meta http-equiv="refresh" content="0; url=https://406.ch/" />',
     )
@@ -162,7 +166,7 @@ if __name__ == "__main__":
     archive_template = env.get_template("post_archive.html")
     post_template = env.get_template("post_detail.html")
 
-    write_file(
+    write_minified_file(
         "index.html",
         archive_template.render(posts=posts),
     )
@@ -181,7 +185,7 @@ if __name__ == "__main__":
 
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
-        write_file(
+        write_minified_file(
             f"{category.url}index.html",
             archive_template.render(posts=category_posts, current=category),
         )
@@ -199,5 +203,5 @@ if __name__ == "__main__":
             write_file(f"{category.url}feed/index.html", f.getvalue())
 
     for post in posts:
-        write_file(f"{post.url}index.html", post_template.render(post=post))
+        write_minified_file(f"{post.url}index.html", post_template.render(post=post))
     print(f"Wrote {_files_written} files.")
