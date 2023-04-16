@@ -150,7 +150,7 @@ def add_to_feed(feed, post):
 
 if __name__ == "__main__":
     shutil.rmtree(BASE_DIR / "out", ignore_errors=True)
-    posts = load_posts(BASE_DIR / "posts" / "published")
+    posts = load_posts(BASE_DIR / "published")
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
 
     env = jinja_env(categories=categories)

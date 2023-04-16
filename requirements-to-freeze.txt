@@ -1,3 +1,0 @@
-Markdown
-jinja2
-rcssmin
