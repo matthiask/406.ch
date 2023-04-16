@@ -21,3 +21,4 @@ dist
 /.env
 /tmp
 /.tox
+out
