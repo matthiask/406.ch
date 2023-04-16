@@ -116,10 +116,7 @@ def write_file(path, content):
     _files_written += 1
     file = BASE_DIR / "htdocs" / path.lstrip("/")
     file.parent.mkdir(parents=True, exist_ok=True)
-    if isinstance(content, bytes):
-        file.write_bytes(content)
-    else:
-        file.write_text(content)
+    file.write_text(content)
 
 
 def write_minified_file(path, content):
@@ -167,6 +164,15 @@ def write_feed_with_posts(path, posts, **kwargs):
         write_file(f"{path}feed/index.html", f.getvalue())
 
 
+def write_sitemap(posts):
+    root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+    for post in posts:
+        loc = SubElement(SubElement(root, "url"), "loc")
+        loc.text = f"https://406.ch{post.url}"
+    sitemap = tostring(root, encoding="utf-8", xml_declaration=True)
+    write_file("sitemap.xml", sitemap.decode("utf-8"))
+
+
 if __name__ == "__main__":
     start = time.perf_counter()
     shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
@@ -182,6 +188,7 @@ if __name__ == "__main__":
         "robots.txt",
         "User-agent: *\nSitemap: https://406.ch/sitemap.xml\n",
     )
+    write_sitemap(posts)
     write_file("404.html", env.get_template("404.html").render())
 
     archive_template = env.get_template("post_archive.html")
@@ -212,12 +219,8 @@ if __name__ == "__main__":
             language="en",
         )
 
-    root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for post in posts:
         write_file(f"{post.url}index.html", render_minified(post_template, post=post))
-        loc = SubElement(SubElement(root, "url"), "loc")
-        loc.text = f"https://406.ch{post.url}"
 
-    write_file("sitemap.xml", tostring(root, encoding="utf-8", xml_declaration=True))
     elapsed = time.perf_counter() - start
     print(f"Wrote {_files_written} files in {elapsed:.2f} seconds.")
