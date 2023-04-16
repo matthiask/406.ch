@@ -13,6 +13,7 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
 from minify_html import minify
+from rcssmin import cssmin
 
 import feedgenerator
 
@@ -114,7 +115,7 @@ def write_file(path, content):
 
 
 def styles_url():
-    styles = minify(
+    styles = cssmin(
         "".join(file.read_text() for file in (BASE_DIR / "styles").glob("*.css"))
     )
     style_file = f"styles.{hashlib.md5(styles.encode('utf-8')).hexdigest()}.css"
