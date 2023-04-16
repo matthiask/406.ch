@@ -65,24 +65,27 @@ def parse_categories(value):
 def load_posts(path):
     posts = []
     for md in path.glob("*.md"):
-        props, content = md.read_text().split("\n\n", 1)
+        try:
+            props, content = md.read_text().split("\n\n", 1)
 
-        properties = {}
-        for prop in props.split("\n"):
-            name, value = prop.split(": ", 1)
-            properties[name.lower()] = value
+            properties = {}
+            for prop in props.split("\n"):
+                name, value = prop.split(":", 1)
+                properties[name.lower()] = value.strip()
 
-        posts.append(
-            Post(
-                title=properties["title"],
-                slug=properties.get("slug") or slugify(properties["title"]),
-                is_published=properties.get("status") == "published",
-                date=parse_date(properties.get("date", "")),
-                categories=parse_categories(properties.get("categories") or ""),
-                type=properties.get("type") or "markdown",
-                content=content,
+            posts.append(
+                Post(
+                    title=properties["title"],
+                    slug=properties.get("slug") or slugify(properties["title"]),
+                    is_published=properties.get("status") == "published",
+                    date=parse_date(properties.get("date", "")),
+                    categories=parse_categories(properties.get("categories") or ""),
+                    type=properties.get("type") or "markdown",
+                    content=content,
+                )
             )
-        )
+        except Exception as exc:
+            raise Exception(f"Unable to load {md}") from exc
 
     return sorted(posts, key=lambda post: post.date or dt.date.min, reverse=True)
 
@@ -98,6 +101,17 @@ if __name__ == "__main__":
     print(
         template.render(
             object_list=[post for post in posts if post.is_published],
+            year=dt.date.today().year,
+            blog={},
+            request={},
+            view={},
+        )
+    )
+
+    template = env.get_template("post_detail.html")
+    print(
+        template.render(
+            post=posts[0],
             year=dt.date.today().year,
             blog={},
             request={},

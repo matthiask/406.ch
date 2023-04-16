@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 
-{% load i18n %}
-
-{% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
+{% block title %}{{ post.title }} - {{ super() }}{% endblock %}
 
 {% block content %}
 <header>
   <div class="wrappy">
-    <a class="back" href="{% url 'blog_post_archive' %}">Back to the overview</a>
+    <a class="back" href="/">Back to the overview</a>
   </div>
 </header>
 
@@ -28,12 +26,10 @@
         <a href="https://ko-fi.com/matthiask" target="_blank" rel="noopener noreferrer">☕  Buy me a coffee?</a>
         <br>
 
-        {% if post.published_on %}
-          {% with published_on=post.published_on|date:"Y-m-d" %}
-            {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
-          {% endwith %}
+        {% if post.date %}
+          Published on {{ post.date.isoformat() }}
         {% else %}
-          {% trans "Not published yet" %}
+          Not published yet
         {% endif %}
 
         {% for category in post.categories.all %}
@@ -42,9 +38,6 @@
             {{ category }}</a>{% if not forloop.last %},{% endif %}
         {% endfor %}
 
-        {% if request.user.is_staff %}
-          <br><a href="/manage/blog/post/{{ post.id }}/change/" target="_blank">Edit this post</a>
-        {% endif %}
       </small>
     </p>
 
