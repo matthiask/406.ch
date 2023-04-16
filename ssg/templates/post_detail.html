@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<header>
+  <div class="wrappy">
+    <a class="back" href="{% url 'blog_post_archive' %}">Back to the overview</a>
+  </div>
+</header>
+
+<main><div class="wrappy">
+  <div class="text">
+    {{ post.html|safe }}
+  </div>
+</div></main>
+
+<footer>
+  <div class="wrappy">
+
+    <p>
+      <small>
+        I like feedback! <a href="mailto:mk@406.ch?subject={{ post.title }}">Send me an email.</a>
+        <br>
+        {# Did you like this post? <a href="/writing/feed/">Subscribe to the RSS feed for more!</a> #}
+        <a href="https://ko-fi.com/matthiask" target="_blank" rel="noopener noreferrer">☕  Buy me a coffee?</a>
+        <br>
+
+        {% if post.published_on %}
+          {% with published_on=post.published_on|date:"Y-m-d" %}
+            {% blocktrans %}Published on {{ published_on }}{% endblocktrans %}
+          {% endwith %}
+        {% else %}
+          {% trans "Not published yet" %}
+        {% endif %}
+
+        {% for category in post.categories.all %}
+          {% if forloop.first %}in{% endif %}
+          <a href="{{ category.get_absolute_url }}">
+            {{ category }}</a>{% if not forloop.last %},{% endif %}
+        {% endfor %}
+
+        {% if request.user.is_staff %}
+          <br><a href="/manage/blog/post/{{ post.id }}/change/" target="_blank">Edit this post</a>
+        {% endif %}
+      </small>
+    </p>
+
+    <script src="https://utteranc.es/client.js"
+            repo="matthiask/406-comments"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+  </div>
+
+</footer>
+
+{% endblock %}

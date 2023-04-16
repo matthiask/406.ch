@@ -4,10 +4,20 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal
 
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markdown import markdown
 
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent
+
+env = Environment(
+    loader=FileSystemLoader([BASE_DIR / "templates"]),
+    autoescape=select_autoescape(
+        disabled_extensions=("txt",),
+        default_for_string=True,
+        default=True,
+    ),
+)
 
 
 def markdown_to_html(md):
@@ -18,7 +28,7 @@ def markdown_to_html(md):
 class Post:
     title: str
     slug: str
-    status: Literal["published", "draft"] = "draft"
+    is_published: bool
     date: dt.date | None = None
     categories: list[str] = field(default_factory=list)
     type: Literal["markdown", "html"] = "markdown"
@@ -31,6 +41,10 @@ class Post:
         elif self.type == "markdown":
             return markdown_to_html(self.content)
         raise Exception(f"Unknown content type {self.type}")
+
+    @property
+    def get_absolute_url(self):
+        return f"/writing/{self.slug}/"
 
 
 def slugify(value):
@@ -62,7 +76,7 @@ def load_posts(path):
             Post(
                 title=properties["title"],
                 slug=properties.get("slug") or slugify(properties["title"]),
-                status=properties.get("status") or "draft",
+                is_published=properties.get("status") == "published",
                 date=parse_date(properties.get("date", "")),
                 categories=parse_categories(properties.get("categories") or ""),
                 type=properties.get("type") or "markdown",
@@ -70,13 +84,23 @@ def load_posts(path):
             )
         )
 
-    return sorted(posts, key=lambda post: post.date or dt.date.min)
+    return sorted(posts, key=lambda post: post.date or dt.date.min, reverse=True)
 
 
 if __name__ == "__main__":
     posts = load_posts(BASE_DIR / "posts")
-    from pprint import pprint
 
-    pprint(posts)
+    # from pprint import pprint
+    # pprint(posts)
+    # print(posts[-1].html)
 
-    print(posts[-1].html)
+    template = env.get_template("post_archive.html")
+    print(
+        template.render(
+            object_list=[post for post in posts if post.is_published],
+            year=dt.date.today().year,
+            blog={},
+            request={},
+            view={},
+        )
+    )

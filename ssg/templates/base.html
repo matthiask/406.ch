@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{% block title %}Matthias Kestenholz{% endblock %}</title>
+  <meta name="description" content="">
+  {# % webpack_assets 'main' % #}
+  <link rel="alternate" type="application/atom+xml" title="Blog feed" href="{{ blog.feed_url }}">
+</head>
+<body>
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

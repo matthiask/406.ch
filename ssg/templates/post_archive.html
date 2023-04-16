@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}{% if view.category %}{{ view.category }} - {% endif %}{{ super() }}{% endblock %}
+
+{% block content %}
+
+<header>
+  <div class="wrappy">
+    {% if view.category or view.archive or request.GET %}
+      <a class="back" href="/">Back to the overview</a>
+      <h1 class="title">{{ view.category }}</h1>
+      {% if view.category.html %}{{ view.category.html|safe }}{% endif %}
+    {% else %}
+      <h1 class="title">Hi, I'm Matthias</h1>
+      <p class="subtitle">
+        I am a founding partner of
+        <a href="https://feinheit.ch">Feinheit AG</a> and
+        <a href="https://diebruchpiloten.com">Die Bruchpiloten AG</a>.
+        Find me on
+        <a href="https://github.com/matthiask/" rel="">GitHub</a>,
+        <a href="https://hachyderm.io/@matthiask" rel="me">Mastodon</a>,
+        {# <a href="https://twitter.com/matthispam/" target="_blank" rel="noopener noreferrer">Twitter</a>, #}
+        <a href="https://www.linkedin.com/in/matthiaskestenholz" title="if you must" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        or by <a href="mailto:mk@406.ch">email</a>.
+      </p>
+    {% endif %}
+  </div>
+</header>
+
+<main><div class="wrappy">
+
+{% for post in object_list %}
+  {% if post.is_microblog %}
+    <div class="microblog">
+      <small>{{ post.date.isoformat() }}</small>
+      <div class="text">
+        {{ post.html|safe }}
+      </div>
+    </div>
+  {% else %}
+    <h2>
+      <a href="{{ post.get_absolute_url }}">
+        <small>{{ post.date.isoformat() }}</small><br>
+        {{ post.title }}
+      </a>
+    </h2>
+  {% endif %}
+{% endfor %}
+
+</div></main>
+
+<footer>
+  <div class="wrappy">
+
+<p>
+  <small>
+    <strong>Categories: </strong>
+    {% for category in blog.categories %}
+      <a
+        {% if category.get_absolute_url in request.path %}class="active"{% endif %}
+        href="{{ category.get_absolute_url }}"
+      >{{ category.title }}</a>{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  </small>
+</p>
+
+<p>
+  <small>
+    <strong>RSS feeds: </strong>
+    <a href="/">All posts</a>,
+    {#
+    {% for category in blog.categories %}
+      <a href="{% url 'blog_category_feed' slug=category.slug %}">
+        {{ category }}</a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+    #}
+  </small>
+</p>
+
+<p>
+  <small>&copy; 2005 - {{ year }} Matthias Kestenholz</small>
+</p>
+
+  </div>
+</footer>
+
+{% endblock %}
