@@ -119,10 +119,6 @@ def write_file(path, content):
     file.write_text(content)
 
 
-def write_minified_file(path, content):
-    write_file(path, minify(content))
-
-
 def styles_url():
     styles = minify(
         "".join(file.read_text() for file in (BASE_DIR / "styles").glob("*.css"))
