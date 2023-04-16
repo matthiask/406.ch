@@ -1,8 +1,9 @@
 import fh_fablib as fl
 
 
-fl.require("1.0.20230411")
-fl.config.update(host="www-data@feinheit06.nine.ch")
-fl.config.update(domain="406.ch", branch="main", remote="production")
-
-ns = fl.Collection(*fl.GENERAL, *fl.NINE)
+@fl.task
+def deploy(ctx):
+    fl.run_local(ctx, "venv/bin/python generate.py")
+    fl.run_local(
+        ctx, "rsync -avzhP --delete out/ www-data@feinheit06.nine.ch:406.ch/htdocs/"
+    )
