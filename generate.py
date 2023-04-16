@@ -113,7 +113,7 @@ def load_posts(path):
 def write_file(path, content):
     global _files_written
     _files_written += 1
-    file = BASE_DIR / "out" / path.lstrip("/")
+    file = BASE_DIR / "htdocs" / path.lstrip("/")
     file.parent.mkdir(parents=True, exist_ok=True)
     if isinstance(content, bytes):
         file.write_bytes(content)
@@ -157,7 +157,7 @@ def add_to_feed(feed, post):
 
 
 if __name__ == "__main__":
-    shutil.rmtree(BASE_DIR / "out", ignore_errors=True)
+    shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
     posts = load_posts(BASE_DIR / "published")
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
 
@@ -217,5 +217,4 @@ if __name__ == "__main__":
         loc.text = f"https://406.ch{post.url}"
 
     write_file("sitemap.xml", tostring(root, encoding="utf-8", xml_declaration=True))
-
     print(f"Wrote {_files_written} files.")
