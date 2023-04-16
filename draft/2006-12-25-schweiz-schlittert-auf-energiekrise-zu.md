@@ -2,7 +2,6 @@ Title: Schweiz schlittert auf Energiekrise zu?
 Slug: schweiz-schlittert-auf-energiekrise-zu
 Date: 2006-12-25
 Categories:
-Type: markdown
 
 Laut Walter Steinmann, dem Direktor des Bundesamtes für Energie zeichnet sich bereits im Jahre 2012 ein Energie-Engpass ab. Schnelles Handeln tut also Not.
 

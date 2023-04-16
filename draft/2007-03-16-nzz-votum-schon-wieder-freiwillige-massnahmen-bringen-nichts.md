@@ -2,7 +2,6 @@ Title: NZZ Votum: Schon wieder: Freiwillige Massnahmen bringen nichts.
 Slug: nzz-votum-schon-wieder-freiwillige-massnahmen-bringen-nichts
 Date: 2007-03-16
 Categories:
-Type: markdown
 
 Die Autolobby in Deutschland behauptet, dass seit 1999 neun Prozent CO2 eingespart werden konnte. Damit wird versucht, die Einführung von generellen Tempolimiten auf der Autobahn zu torpedieren.<br />
 <br />

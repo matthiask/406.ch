@@ -2,7 +2,6 @@ Title: 2005 war wärmstes Jahr seit Beginn der Instrumentenmessungen
 Slug: 2005-war-warmstes-jahr-seit-beginn-der-instrumentenmessungen
 Date: 2005-12-18
 Categories: Climate
-Type: markdown
 
 Laut dem [Goddard Institute for Space Studies](http://www.giss.nasa.gov/) war das meteorologische Jahr 2005 (Dezember '04 bis und mit November '05) das wärmste Jahr seit Beginn der instrumentellen Messungen vor über 100 Jahren.
 

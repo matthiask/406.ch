@@ -2,7 +2,6 @@ Title: Swiss Re erwartet 2006 weltweit steigende Versicherungsprämien
 Slug: swiss-re-erwartet-2006-weltweit-steigende-versicherungspramien
 Date: 2005-12-14
 Categories: Climate
-Type: markdown
 
 Die Swiss Re Group erwartet für das Jahr 2006 weltweit einen Anstieg der Prämien welcher höher als die Teuerung ausfallen wird. Besonders mahnte der grösste Rückversicherer der Welt, Sturmrisiken in Zukunft genauer zu prüfen. "Die Daten zeigen deutlich, dass wir uns in einer Periode erhöhter Hurrikanaktivität befinden", sagte Michel Lies, Leiter der Abteilung Kundenmärkte bei Swiss Re. Die Sturmsaison 2005 hat alleine in der Industrie kosten von über 60 Milliarden US-Dollar verursacht.
 

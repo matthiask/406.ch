@@ -2,7 +2,6 @@ Title: AKWs sind nicht CO2-neutral
 Slug: akws-sind-nicht-co2-neutral
 Date: 2007-03-03
 Categories:
-Type: markdown
 
 Es gibt keinen CO<sub>2</sub>-freien Strom. Bezüglich der Kohlendioxidintensität der Stromproduktion bestehen aber grosse Unterschiede.
 

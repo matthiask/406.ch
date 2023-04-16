@@ -2,7 +2,6 @@ Title: Jugendgewalt ist hausgemacht
 Slug: jugendgewalt-ist-hausgemacht
 Date: 2008-03-09
 Categories: Politik
-Type: markdown
 
 > Der Zürcher Strafrechtsprofessor Martin Killias ist nach eigenen Untersuchungen der Ansicht, dass das Problem der Schweiz mit Jugendgewalt hausgemacht ist. In Bosnien-Herzegowina etwa delinquierten Jugendliche weniger häufig als in der Schweiz.
 >

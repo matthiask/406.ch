@@ -2,7 +2,6 @@ Title: Ungefährliche Taser?
 Slug: ungefahrliche-taser
 Date: 2007-10-08
 Categories:
-Type: markdown
 
 > ## [Tausendmal getasert - drei im Krankenhaus ](http://www.spiegel.de/wissenschaft/mensch/0,1518,510156,00.html)
 >

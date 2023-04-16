@@ -2,7 +2,6 @@ Title: Nachrücken im Kantonsrat
 Slug: nachrucken-im-kantonsrat
 Date: 2009-09-14
 Categories:
-Type: markdown
 
 Vor ziemlich genau einer Woche habe ich [den Weblog hier wieder aufgeschaltet](http://406.ch/2009/09/08/wiederinbetriebnahme-dieses-weblogs/). Bisher bin ich aber die Begründung noch schuldig geblieben, weshalb ich dies mache. Aufmerksame Leser verschiedener Zeitungen haben es vielleicht schon festgestellt: Ich werde nächsten Montag als neuer, grüner Kantonsrat für Zürich Nord (also die Stadtkreise 11 und 12, Oerlikon, Affoltern, Seebach und Schwamendingen) vereidigt. Ich ersetze Natalie Vieli, welche aus beruflichen Gründen aus dem Kantonsrat zurückgetreten ist.
 

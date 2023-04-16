@@ -2,7 +2,6 @@ Title: The final INTERNAL_IPS fix for development hosts
 Slug: the-final-internal_ips-fix-for-development-hosts
 Date: 2018-04-20
 Categories: Django, Programming
-Type: markdown
 
 # The final INTERNAL_IPS fix for development hosts
 

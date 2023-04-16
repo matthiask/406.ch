@@ -2,7 +2,6 @@ Title: 98% weniger Verkehrsunfälle dank Radarfallen
 Slug: 98-weniger-verkehrsunfalle-dank-radarfallen
 Date: 2005-12-14
 Categories:
-Type: markdown
 
 # 98% weniger Verkehrsunfälle dank Radarfallen
 

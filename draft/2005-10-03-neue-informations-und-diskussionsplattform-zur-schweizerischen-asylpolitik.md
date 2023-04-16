@@ -2,7 +2,6 @@ Title: Neue Informations- und Diskussionsplattform zur schweizerischen Asylpolit
 Slug: neue-informations-und-diskussionsplattform-zur-schweizerischen-asylpolitik
 Date: 2005-10-03
 Categories:
-Type: markdown
 
 Esther Brunner macht in einem [Blogeintrag](http://www.kaffeehaus.ch/blog/asylpolitik.ch_er%C3%B6ffnet) von heute morgen darauf aufmerksam, dass [Asylpolitik.ch](http://www.asylpolitik.ch/) online geschaltet worden ist. Die Seite soll als Diskussions- und Informationsplattform zur schweizerischen Asylpolitik dienen und ist als Reaktion auf die [Verschärfung des Asylgesetzes](http://www.waehltmoritz.ch/?p=15) enstanden.
 

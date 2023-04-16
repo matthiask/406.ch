@@ -2,7 +2,6 @@ Title: feincms may still be relevant
 Slug: feincms-may-still-be-relevant
 Date: 2020-09-17
 Categories: Django, feincms, Programming
-Type: markdown
 
 # feincms may still be relevant
 

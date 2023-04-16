@@ -2,7 +2,6 @@ Title: Wachstum: Schweiz hinkt hinterher — Na und?
 Slug: wachstum-schweiz-hinkt-hinterher-na-und
 Date: 2005-11-29
 Categories:
-Type: markdown
 
 Die OECD ist bezüglich des Wachstums der Weltwirtschaft vorsichtig optimistisch. Besonders Deutschland soll vom Aufschwung profitieren. Für die Schweiz wurden die Prognosen jedoch gesenkt. Die Pariser Fachleute rechnen für den gesamten OECD-Raum für 2005 mit einem realen Wachstum von 2.7 Prozent und für die nächsten zwei Jahre mit 2.9 Prozent. Die Schweiz hinkt aber hinterher; dieses Jahr konnte sie ein Wachstum von 1.2 Prozent verzeichnen, für die nächsten zwei Jahre werden Raten von 1.7 beziehungsweise 1.8 Prozent erwartet. Die Schweiz fällt somit auch hinter das Mittel des Euroraraumes zurück, welches 2.1 Prozent betragen soll.
 

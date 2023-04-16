@@ -2,7 +2,6 @@ Title: Ein Zeichen für klimafreundliche Politik
 Slug: ein-zeichen-fur-klimafreundliche-politik
 Date: 2007-05-22
 Categories:
-Type: markdown
 
 Freiwillige Verringerung des CO2-Ausstosses? Definitiv nicht! Wie als ob die Klimawissenschaft in den letzten Jahren nicht immer klarere Warnungen herausgegeben hätten, wird weiter munter CO2 ausgestossen -- [die Menge nimmt sogar rapide zu](http://www.spiegel.de/wissenschaft/mensch/0,1518,484144,00.html)!
 

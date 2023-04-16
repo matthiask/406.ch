@@ -2,7 +2,6 @@ Title: Liebe CVP, liebe Mitteparteien, nehmt den Klimaschutz ernst!
 Slug: liebe-cvp-liebe-mitteparteien-nehmt-den-klimaschutz-ernst
 Date: 2007-09-16
 Categories: Climate
-Type: markdown
 
 Die CVP versucht, sich für die Nationalratswahlen im Herbst 2007 als umwelt- und klimafreundliche Partei zu positionieren. Sie können sich aber immer noch nicht entscheiden, [ob sie für eine wirkungsvolle Klimapolitik einstehen wollen oder nicht](http://www.klimainfo.ch/Single_News.41.0.html?&tx_ttnews%5Btt_news%5D=1490&cHash=f34d4ba68d). Nachdem sie im März versprochen hat, bis 2022 eine Reduktion des Treibhausgasausstosses der Schweiz um 35% mittragen zu wollen, hat sie sich jetzt gegen die von SP und Grünen sowie verschiedenen Umweltverbänden lancierte Klimainitiative ausgesprochen, mit dem Argument, dass sie lieber heute statt erst in einigen Jahren, bei einem allfälligen Abstimmungskampf um diese Initiative, handeln will. Dies klingt ja alles sehr gut, nur leider haben sie ihre Klimaziele nach unten korrigiert. Dies passt natürlich schon besser zum Abstimmungsverhalten der bisherigen Jahre als die grossmündigen Versprechen, welche sich leider wiederum als Strategie zum Wählerfang entpuppen.
 

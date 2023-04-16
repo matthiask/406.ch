@@ -2,7 +2,6 @@ Title: Der Kantonsratswahlkampf hat begonnen!
 Slug: der-kantonsratswahlkampf-hat-begonnen
 Date: 2007-01-18
 Categories:
-Type: markdown
 
 Am 15. April finden die nächsten Kantonsratswahlen im Kanton Zürich statt. Ich bin auch mit dabei, auf dem 2. Listenplatz der Grünen Liste für Zürich Nord (Affoltern/Oerlikon/Seebach/Schwamendingen).
 

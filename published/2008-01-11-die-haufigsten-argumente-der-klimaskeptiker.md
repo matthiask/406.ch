@@ -2,7 +2,6 @@ Title: Die häufigsten Argumente der Klimaskeptiker
 Slug: die-haufigsten-argumente-der-klimaskeptiker
 Date: 2008-01-11
 Categories: Climate, Politik
-Type: markdown
 
 Auf [Skeptical Science](http://www.skepticalscience.com/argument.php) ist eine Liste der häufigsten Argumente aufgeführt, welche die Klimaskeptiker verwenden, um die z.B. im [vierten IPCC Bericht](http://www.ipcc.ch/) veröffentlichten Aussagen anzuzweifeln.
 

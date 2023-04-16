@@ -2,7 +2,6 @@ Title: Wer soll die internationalen Finanzmärkte retten?
 Slug: wer-soll-die-internationalen-finanzmarkte-retten
 Date: 2008-05-13
 Categories:
-Type: markdown
 
 Den internationalen Finanzmärkten geht es immer noch schlecht. Meldungen über Milliardenverluste, Warnungen vor einer Konjunkturkrise, fallende Börsenkurse überall. Einige Experten geben zwar schon wieder Entwarnung, der US-Ökonom Nouriel Roubini [rechnet aber mit einer Verschärfung der Finanzkrise](http://www.20min.ch/finance/news/story/21504621). Er sieht nur einen Ausweg: Die US-Regierung soll marode Hypotheken aufkaufen und so die Grundlagen für eine wirtschaftliche Erholung schaffen.
 

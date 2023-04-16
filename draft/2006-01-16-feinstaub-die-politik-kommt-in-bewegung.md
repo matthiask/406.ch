@@ -2,7 +2,6 @@ Title: Feinstaub: Die Politik kommt in Bewegung
 Slug: feinstaub-die-politik-kommt-in-bewegung
 Date: 2006-01-16
 Categories:
-Type: markdown
 
 Wie Sandro von [Ignoranz.ch schreibt](http://www.ignoranz.ch/item/feinstaubalarm/), sanken die Feinstaubwerte in den letzten zehn Tagen in Zürich nicht mehr unter den gesetzlich festgeschriebenen Höchstwert, welcher eigentlich höchstens einmal im Jahr überschritten werden darf. Zürich reagiert nun aber: Nach dem Vorbild von Stuttgart (D) wird ein Fahrverbot für Autos mit hohen Abgaswerten geprüft. Ein Fahrverbot könnte aber laut [20min Online](http://www.20min.ch/news/schweiz/story/22448143) frühestens nächsten Winter umgesetzt werden.
 

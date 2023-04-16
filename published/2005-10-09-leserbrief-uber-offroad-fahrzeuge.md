@@ -2,7 +2,6 @@ Title: Leserbrief über Offroad-Fahrzeuge
 Slug: leserbrief-uber-offroad-fahrzeuge
 Date: 2005-10-09
 Categories: Climate, Politik
-Type: markdown
 
 Leserbrief Tages-Anzeiger 8.10.2005:
 

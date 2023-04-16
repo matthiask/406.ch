@@ -2,7 +2,6 @@ Title: Offroader-Humor
 Slug: offroader-humor
 Date: 2007-02-26
 Categories:
-Type: markdown
 
 Offroader als Prestigeobjekte haben möglicherweise kein allzu langes Leben mehr:
 

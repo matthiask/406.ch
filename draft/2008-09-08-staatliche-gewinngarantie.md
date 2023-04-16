@@ -2,7 +2,6 @@ Title: Staatliche Gewinngarantie
 Slug: staatliche-gewinngarantie
 Date: 2008-09-08
 Categories:
-Type: markdown
 
 Die Hypothekenbanken Freddie Mac und Fannie Mae verrechnen sich und [werden deshalb vom Staat aufgekauft.](http://www.tagesanzeiger.ch/wirtschaft/unternehmenkonjunktur/story/26854960) Schlussendlich bezahlt der Steuerzahler die Zeche. Die Börsen reagieren euphorisch -- offensichtlich kann beim Staat noch viel, viel Geld abgeholt werden.
 

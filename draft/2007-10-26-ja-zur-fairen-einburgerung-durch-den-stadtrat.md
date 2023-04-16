@@ -2,7 +2,6 @@ Title: Ja zur fairen Einbürgerung durch den Stadtrat
 Slug: ja-zur-fairen-einburgerung-durch-den-stadtrat
 Date: 2007-10-26
 Categories:
-Type: markdown
 
 Am 25. November stimmen wir in der Stadt Zürich über die [Bürgerrechtserteilung bzw. Einbürgerung durch den Stadtrat](http://www.faire-einbuergerung.ch/) ab. Die Einbürgerungsanforderungen bleiben gleich, dem Gemeinderat werden aber [unwürdige Einbürgerungs-Turnübungen erspart](http://www.matthiasprobst.ch/2007/06/13/geburtstag-im-rat/).
 

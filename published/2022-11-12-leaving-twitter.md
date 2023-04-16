@@ -2,7 +2,6 @@ Title: Leaving Twitter
 Slug: leaving-twitter
 Date: 2022-11-12
 Categories: Programming
-Type: markdown
 
 # Leaving Twitter
 

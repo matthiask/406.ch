@@ -2,7 +2,6 @@ Title: flake8 and the value of standards
 Slug: flake8-and-value-standards
 Date: 2014-08-08
 Categories: Programming
-Type: markdown
 
 I really, really liked tabs for indentation.
 

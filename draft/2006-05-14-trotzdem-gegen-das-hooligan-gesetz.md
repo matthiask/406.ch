@@ -2,7 +2,6 @@ Title: Trotzdem: Gegen das Hooligan-Gesetz!
 Slug: trotzdem-gegen-das-hooligan-gesetz
 Date: 2006-05-14
 Categories:
-Type: markdown
 
 Was sicher schon alle vernommen haben: Der FCZ schlug gestern Abend den FC Basel 2:1 und wird somit Schweizer Meister! Wie erwartet gab es nach dem Spiel massive Ausschreitungen von sogenannten "Fans", welche in Neandertaler-Manier lieber die [Fäuste statt Worte sprechen liessen](http://tagi.ch/dyn/news/fussball/624200.html).
 

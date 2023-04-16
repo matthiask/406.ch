@@ -2,7 +2,6 @@ Title: Investieren in Bildung, nicht in unfaire Steuersysteme!
 Slug: investieren-in-bildung-nicht-in-unfaire-steuersysteme
 Date: 2007-11-08
 Categories:
-Type: markdown
 
 Im Kanton Obwalden [demonstrieren Schüler gegen die Kantonsregierung](http://www.tagesanzeiger.ch/dyn/news/schweiz/810458.html). Durch das Hochwasser im Sommer 2005 wurden die Turnhalle und mehrere Schulräume unbrauchbar. Zwei Jahre lang dauerte der Versicherungsstreit, erst Ende August konnten sich der Kanton und die Versicherungsgesellschaft einigen, wie hoch der Schaden ausgefallen ist. Vor etwas mehr als einer Woche, Ende Oktober, erklärte die Regierung, dass sie die Räume sanieren will. Zur Diskussion hätte auch ein Neubau gestanden, welcher sieben Millionen mehr gekostet hätte als die Sanierung.
 

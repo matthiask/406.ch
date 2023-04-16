@@ -2,7 +2,6 @@ Title: Russische Daten zeigen keine Klimaveränderung?
 Slug: russische-daten-zeigen-keine-klimaveranderung
 Date: 2009-12-18
 Categories: Climate
-Type: markdown
 
 In der Blogosphäre machen wieder mal Halbwahrheiten, oder zumindest schlecht abgesicherte Aussagen über die Klimaforschung die Runde. Die neueste Behauptung ist nun, dass russische Daten verändert bzw. nur die Daten von ausgewählten Messstationen ausgewertet würden (nämlich denjenigen, welche auf eine Veränderung des Klimas hinweisen -- die anderen 75% der Stationen würden dies, auch laut [Manfred Messmer](http://arlesheimreloaded.ch/article/climategate-russland-unterschlagene-daten), nicht tun).
 

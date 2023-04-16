@@ -2,7 +2,6 @@ Title: Stromlücken, Kernkraftwerke und Sicherheitspolitik
 Slug: stromlucken-kernkraftwerke-und-sicherheitspolitik
 Date: 2008-06-16
 Categories:
-Type: markdown
 
 [Die Schweizer Behörden haben die Atom-Akten möglicherweise zu spät vernichtet](http://www.tagesanzeiger.ch/dyn/news/ausland/889275.html), die Baupläne für einen neuartigen Atomsprengsatz könnten sich bereits in falschen Händen befinden. Wer sich jetzt darüber aufregt, aber trotzdem verlangt, dass neue Atomkraftwerke gebaut werden, hat nicht begriffen, dass die Atomwaffentechnologie in denselben Topf wie die Stromproduktion mittels Kernkraft gehört.
 

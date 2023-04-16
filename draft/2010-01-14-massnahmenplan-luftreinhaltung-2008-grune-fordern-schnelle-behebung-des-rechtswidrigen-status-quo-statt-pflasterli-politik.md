@@ -2,7 +2,6 @@ Title: Massnahmenplan Luftreinhaltung 2008: Grüne fordern schnelle Behebung des
 Slug: massnahmenplan-luftreinhaltung-2008-grune-fordern-schnelle-behebung-des-rechtswidrigen-status-quo-statt-pflasterli-politik
 Date: 2010-01-14
 Categories:
-Type: markdown
 
 Der heute durch den Regierungsrat vorgestellte Massnahmenplan Luftreinhaltung 2008 benennt die Probleme, versäumt es aber, über griffige Massnahmen zu sprechen. Seit über 20 Jahren konnten keine wesentlichen Verbesserungen bei der Luftqualität im Kanton Zürich erreicht werden. Die Hälfte der Bevölkerung des Kantons Zürich leidet unter regelmässigen Überschreitungen der verschiedenen in der Luftreinhalteverordnung festgelegten Grenzwerte.
 

@@ -2,7 +2,6 @@ Title: Der Mensch braucht zwei Liter Wasser am Tag — oder etwa doch nicht?
 Slug: der-mensch-braucht-zwei-liter-wasser-am-tag-oder-etwa-doch-nicht
 Date: 2007-12-22
 Categories:
-Type: markdown
 
 Zur Abwechslung mal etwas ganz und gar Unpolitisches, dafür aber umso Wissenschaftlicheres: Auf Spiegel Online werden sieben medizinische Legenden beschrieben, an welche, dank millionenfacher Wiederholung, auch manche Mediziner glauben. Sehr lesenswert!
 

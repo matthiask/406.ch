@@ -2,7 +2,6 @@ Title: Using environment variables to configure Django
 Slug: using-environment-variables-to-configure-django
 Date: 2020-09-13
 Categories: Django, Programming
-Type: markdown
 
 # Using environment variables to configure Django
 

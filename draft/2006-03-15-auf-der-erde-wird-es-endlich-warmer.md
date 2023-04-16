@@ -2,7 +2,6 @@ Title: Auf der Erde wird es (endlich?) wärmer!
 Slug: auf-der-erde-wird-es-endlich-warmer
 Date: 2006-03-15
 Categories: Climate
-Type: markdown
 
 Die letzten Wochen waren kalt und schneereich ([Europa versinkt im Schnee](http://www.spiegel.de/wissenschaft/weltraum/0,1518,406099,00.html))-- soviel Schnee gab es in Zürich schon lange nicht mehr, und auch die anhaltende Kälte ist nicht die eines gewöhnlichen Jahres. Schnell vergessen wird da der warme Januar; und die Klimaforscher welche vor der zu erwartenden Erwärmung sprechen erhalten nur ein müdes Lächeln -- wer wäre nicht froh, wenn es endlich wärmer würde?
 

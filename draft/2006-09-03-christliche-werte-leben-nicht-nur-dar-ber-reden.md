@@ -2,7 +2,6 @@ Title: Christliche Werte leben, nicht nur darüber reden
 Slug: christliche-werte-leben-nicht-nur-dar-ber-reden
 Date: 2006-09-03
 Categories:
-Type: markdown
 
 Ich bin über das [Interview der NZZ mit dem Basler Bischof Kurt Koch](http://www.nzz.ch/2006/09/03/il/articleEFOD2.html) sehr beeindruckt. Religionen und ihr Umfeld interessieren mich zwar schon lange, selbst will ich im Moment aber nicht mehr viel damit zu tun haben, auch weil ich erlebt habe, dass die überzeugtesten "Christen" wichtige Werte wie Toleranz und Demut verlernt haben und sich selbst am Liebsten als Massstab und Wegweiser für den Rest der Welt sehen würden.
 

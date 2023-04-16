@@ -2,7 +2,6 @@ Title: django-translated-fields – localized model fields without magic
 Slug: django-translated-fields-localized-model-fields-without-magic
 Date: 2018-05-02
 Categories: Django, Programming
-Type: markdown
 
 # django-translated-fields -- localized model fields without magic
 

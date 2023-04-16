@@ -2,7 +2,6 @@ Title: Gegen die namentliche Offenlegung des Abstimmungsverhaltens im Bundesrat
 Slug: gegen-die-namentliche-offenlegung-des-abstimmungsverhaltens-im-bundesrat
 Date: 2006-01-01
 Categories:
-Type: markdown
 
 Die letzte Wochen-Umfrage von <a href="http://www.baz.ch/">BaZ online</a> ergab eine <a href="http://www.baz.ch/news/index.cfm?keyID=17CD2E0A-DF54-4CBB-95FF9E386784539B&startpage=1&ObjectID=7C251AB9-1422-0CEF-70C2C90D0099304A" >Mehrheit für die namentliche Offenlegung des Abstimmungsverhaltens im Bundesrat</a>, wie das unter anderem von den Präsidenten der SVP und SP, Ueli Maurer und Hans-Jürg Fehr verlangt wird.
 

@@ -2,7 +2,6 @@ Title: Polizei stellt sich gegen Militäreinsätze im Inland
 Slug: polizei-stellt-sich-gegen-militareinsatze-im-inland
 Date: 2007-05-30
 Categories:
-Type: markdown
 
 Man muss der Polizei geradezu applaudieren, dass sie sich [gegen den Einsatz von Soldaten als Hilfspolizisten](http://www.nzz.ch/2007/05/30/il/articleF80A9.html) ausspricht. Das Militär hat aus folgenden Gründen bei "Sicherheitseinsätzen" im Inland nichts zu suchen:
 

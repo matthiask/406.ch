@@ -2,7 +2,6 @@ Title: IPCC ignoriert jüngste Studien zum Klimawandel!
 Slug: ipcc-ignoriert-jungste-studien-zum-klimawandel
 Date: 2007-11-17
 Categories: Climate
-Type: markdown
 
 ["IPCC-Bericht: Uno-Klimareport ignoriert jüngste Studien"](http://www.spiegel.de/wissenschaft/mensch/0,1518,517999,00.html) ist der Titel eines Spiegel-Artikels. Aha, also doch! Wurden beim IPCC also doch wichtige Studien unterschlagen? Der Klimawandel ist also doch weniger schlimm, als uns die Klimalobbyisten weismachen wollen?
 

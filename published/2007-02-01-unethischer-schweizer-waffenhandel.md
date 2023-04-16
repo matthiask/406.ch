@@ -2,7 +2,6 @@ Title: Unethischer Schweizer Waffenhandel
 Slug: unethischer-schweizer-waffenhandel
 Date: 2007-02-01
 Categories: Politik
-Type: markdown
 
 Die Schweiz bereichert sich mit Waffenexporten. Im Jahr 2006 haben wir wieder [Kriegsmaterial im Wert von fast 400 Millionen Franken exportiert](http://www.nzz.ch/2007/02/01/il/newzzEXMZDOZZ-12.html). Dies ist eine absolute Frechheit.
 

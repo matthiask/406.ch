@@ -2,7 +2,6 @@ Title: Steuersenkungen in St. Gallen
 Slug: steuersenkungen-in-st-gallen
 Date: 2007-10-04
 Categories:
-Type: markdown
 
 Dank [NFA](http://www.nfa.ch/)-Geld und guter Konjunktur will auch die St. Galler Regierung mit den Steuern runter. Warum kriegt ein Kanton soviel Ausgleichsgeld, dass er anschliessend die Steuern senken kann und die Abwärtsspirale im Steuerwettbewerb weiterdrehen kann? Das finde ich unverständlich.
 

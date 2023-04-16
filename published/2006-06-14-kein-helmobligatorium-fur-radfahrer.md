@@ -2,7 +2,6 @@ Title: Kein Helmobligatorium für Radfahrer!
 Slug: kein-helmobligatorium-fur-radfahrer
 Date: 2006-06-14
 Categories: Politik
-Type: markdown
 
 Ich bin gerade über einen Blogeintrag gestolpert, welcher Nachteile eines Helmobligatoriums für Radfahrer aufzeigt. Er ist in englischer Sprache geschrieben:
 

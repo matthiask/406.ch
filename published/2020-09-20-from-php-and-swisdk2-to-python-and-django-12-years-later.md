@@ -2,7 +2,6 @@ Title: From PHP and SWISDK2 to Python and Django – 12 years later
 Slug: from-php-and-swisdk2-to-python-and-django-12-years-later
 Date: 2020-09-20
 Categories: Django, Programming
-Type: markdown
 
 # From PHP and SWISDK2 to Python and Django -- 12 years later
 

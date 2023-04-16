@@ -2,7 +2,6 @@ Title: Gefahr durch schmelzenden Permafrost
 Slug: gefahr-durch-schmelzenden-permafrost
 Date: 2005-09-07
 Categories: Climate
-Type: markdown
 
 Seit wenigen Jahren hört man in den Medien immer wieder Berichte, dass die Permafrostgrenze in den Alpen steigt. Dies hat schon dazu geführt, dass sich bei gewissen Bergbahnen die Masten zu bewegen beginnen. Im Moment liegen die Verschiebungen zwar noch im oder unterhalb des Millimeterbereichs, die Gefahr welche von instabilen Fundamenten ausgeht ist aber nicht zu vernachlässigen.
 Der Permafrost schmilzt aber nicht nur in den Bergen! In Westsibirien ist das grösste gefrorene Torfmoor der Welt im Begriff, aufzutauen. In diesem Moor der grösse Frankreichs und Deutschlands zusammen, welches seit der letzten Eiszeit immer zugefroren war, haben sich in dieser Zeit um die _70 Milliarden Tonnen Methan_ angesammelt welches jetzt in die Atmosphäre freigesetzt werden könnte. Der Treibhauseffekt von Methan ist zwanzig mal grösser als derjenige von Kohlendioxid.

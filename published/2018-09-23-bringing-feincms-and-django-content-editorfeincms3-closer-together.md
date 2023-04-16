@@ -2,7 +2,6 @@ Title: Bringing FeinCMS and django-content-editor/feincms3 closer together
 Slug: bringing-feincms-and-django-content-editorfeincms3-closer-together
 Date: 2018-09-23
 Categories: Django, feincms, Programming
-Type: markdown
 
 # Bringing FeinCMS and django-content-editor/feincms3 closer together
 

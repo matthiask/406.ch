@@ -2,7 +2,6 @@ Title: Vorsätze für das neue Jahr: Feinstaub-Bekämpfung?
 Slug: vorsatze-fur-das-neue-jahr-feinstaub-bekampfung
 Date: 2006-12-18
 Categories:
-Type: markdown
 
 Die Tage werden schon bald wieder länger, der Winter kommt aber erst richtig. Die atmosphärischen Bedingungen werden wieder dazu führen, dass in der Stadt Zürich regelmässig gegen die Luftreinhalteverordnung verstossen wird. Ich bin ja mal gespannt, ob diesen Winter wiederum nur die Grenzwerte, oder auch die Feinstaubimmissionen bekämpft werden. Gute Vorsätze und Ziele haben sich die Umweltdirektoren der Kantone und der Bund im letzten Frühling ja gesetzt. Hoffentlich werden sich diese Vorsätze auch in politischem Handeln äussern.
 

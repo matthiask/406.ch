@@ -2,7 +2,6 @@ Title: Christliche Todesdrohungen
 Slug: christliche-todesdrohungen
 Date: 2008-07-15
 Categories:
-Type: markdown
 
 Als während dem [Karikaturenstreit](http://de.wikipedia.org/wiki/Das_Gesicht_Mohammeds) in der islamischen Welt dänische Flaggen verbrannt wurden und Drohungen gegen den "gottlosen" Westen ausgestossen wurden, machte sich eine gewisse Hilflosigkeit breit. Auf der einen Seite gab es die Pressefreiheit, auf der anderen Seite ein [rechtspopulistisches Blatt, welches mit purer Provokation auf sich aufmerksam machen wollte](http://www.jusozueri.ch/content/?p=130). Sich für oder gegen die unbegrenzte Pressefreiheit auszusprechen war nicht eine einfache Entscheidung.
 

@@ -2,7 +2,6 @@ Title: Offline messages for Django
 Slug: offline-messages-for-django
 Date: 2018-04-18
 Categories: Django, Programming
-Type: markdown
 
 # Offline messages for Django
 

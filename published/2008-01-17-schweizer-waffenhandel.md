@@ -2,7 +2,6 @@ Title: Schweizer Waffenhandel
 Slug: schweizer-waffenhandel
 Date: 2008-01-17
 Categories: Politik
-Type: markdown
 
 Unglaubliches liest man, wenn man heute auf Tagi-Online surft: Im Tschad wurden am 2006 aus der Schweiz gelieferte militärische Trainingsflugzeug PC-9 Aufhängevorrichtungen montiert; sehr wahrscheinlich [wurde das Flugzeug auch mit Bewaffnung ausgerüstet](http://www.tagesanzeiger.ch/dyn/news/schweiz/832918.html).
 

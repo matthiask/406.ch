@@ -2,7 +2,6 @@ Title: Interview auf nachhaltigBeobachtet
 Slug: interview-auf-nachhaltigbeobachtet
 Date: 2007-01-23
 Categories:
-Type: markdown
 
 [Reto Stauss](http://nachhaltig-beobachtet.freeflux.net/) hat mir in den letzten Tagen einige Fragen zum Thema Nachhaltigkeit gestellt. Das Resultat dieses Emailinterviews ist jetzt auf seinem Weblog zu lesen:
 

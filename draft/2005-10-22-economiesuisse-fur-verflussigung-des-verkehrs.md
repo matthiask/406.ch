@@ -2,7 +2,6 @@ Title: Economiesuisse für Verflüssigung des Verkehrs
 Slug: economiesuisse-fur-verflussigung-des-verkehrs
 Date: 2005-10-22
 Categories:
-Type: markdown
 
 Road-Pricing wird neuerdings auch für die Wirtschaft eine valable Möglichkeit, den Verkehr in den Griff zu bekommen. In der Einleitung zu einem [Positionspapier über die Verkehrspolitik )PDF)](http://www.economiesuisse.ch/d/content.cfm?upid=2BE434E2-C19D-4966-A3973BA7D2D19C90&type=pdf&filetype=pdf) schreibt die [Economiesuisse](http://www.economiesuisse.ch/):
 

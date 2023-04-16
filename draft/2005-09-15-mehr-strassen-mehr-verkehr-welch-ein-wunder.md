@@ -2,7 +2,6 @@ Title: Mehr Strassen, mehr Verkehr, welch ein Wunder!
 Slug: mehr-strassen-mehr-verkehr-welch-ein-wunder
 Date: 2005-09-15
 Categories:
-Type: markdown
 
 Der Tagesanzeiger schreibt auf der Titelseite:
 

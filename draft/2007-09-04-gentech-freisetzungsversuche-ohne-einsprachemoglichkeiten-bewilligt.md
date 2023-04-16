@@ -2,7 +2,6 @@ Title: Gentech-Freisetzungsversuche ohne Einsprachemöglichkeiten bewilligt?
 Slug: gentech-freisetzungsversuche-ohne-einsprachemoglichkeiten-bewilligt
 Date: 2007-09-04
 Categories:
-Type: markdown
 
 Das Bundesamt für Umwelt gibt grünes Licht für [Freisetzungsversuche mit gentechnisch verändertem Weizen](http://www.tagesanzeiger.ch/dyn/news/schweiz/787531.html) in Zürich und in Pully. Einsprachen sind aber nur in Pully VD möglich, und auch nur für Leute, die höchstens 1000m vom Feld entfernt wohnen.
 

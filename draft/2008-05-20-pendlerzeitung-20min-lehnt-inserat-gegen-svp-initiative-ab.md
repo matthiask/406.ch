@@ -2,7 +2,6 @@ Title: Pendlerzeitung 20min lehnt Inserat gegen SVP-Initiative ab
 Slug: pendlerzeitung-20min-lehnt-inserat-gegen-svp-initiative-ab
 Date: 2008-05-20
 Categories:
-Type: markdown
 
 Ich bin längst nicht der erste, welcher einen Text über dieses Thema veröffentlicht, zudem habe ich ihn nicht selbst geschrieben, sondern über das Kontaktformular meiner Webseite zugeschickt erhalten.
 

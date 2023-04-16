@@ -2,7 +2,6 @@ Title: Feinstaub: Sind Holzfeuerungen wirklich schlimmer als die Autobahnen?
 Slug: feinstaub-sind-holzfeuerungen-wirklich-schlimmer-als-die-autobahnen
 Date: 2006-01-20
 Categories:
-Type: markdown
 
 Wie die [NZZ](http://www.nzz.ch/) schreibt, [sorgen nicht nur die Strassenverkehrsteilnehmer sondern auch Holzfeuerungen für eine erhöhte Feinstaubkonzentration in der Luft](http://www.nzz.ch/2006/01/20/il/newzzEIO9XN7B-12.html). Der [Tages-Anzeiger](http://www.tagesanzeiger.ch/) bemerkt sogar, dass die Luft vor allem in gewissen Bergtälern durch die Holzfeuerungen _stärker_ belastet wird als durch die Autobahnen.
 

@@ -2,7 +2,6 @@ Title: django-tree-queries
 Slug: django-tree-queries
 Date: 2020-09-15
 Categories: Django, Programming
-Type: markdown
 
 # django-tree-queries
 

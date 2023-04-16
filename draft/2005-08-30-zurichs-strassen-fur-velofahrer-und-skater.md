@@ -2,7 +2,6 @@ Title: Zürichs Strassen für Velofahrer und Skater
 Slug: zurichs-strassen-fur-velofahrer-und-skater
 Date: 2005-08-30
 Categories:
-Type: markdown
 
 Gerade vorhin wieder geschehen: Ich fahre mit dem Velo durch die Stadt und muss wegen einer Baustelle auf das Trottoir ausweichen. Eine Fussgängerin wettert sofort los, dass dies hier kein Veloweg sei.
 Nichts Wahnsinniges... nur ein weiterer Tropfen der das Radfahren in der Stadt nicht gerade zum Spass macht.

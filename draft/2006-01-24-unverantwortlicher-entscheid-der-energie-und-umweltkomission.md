@@ -2,7 +2,6 @@ Title: Unverantwortlicher Entscheid der Energie- und Umweltkomission
 Slug: unverantwortlicher-entscheid-der-energie-und-umweltkomission
 Date: 2006-01-24
 Categories: Climate
-Type: markdown
 
 Die Energie- und Umweltkomission des Nationalrates (UREK) hat sich heute für den Gebäuderappen und somit für eine Abgabe ohne Lenkunswirkung ausgesprochen. Die Jungen Grünen sind enttäuscht über die verpasste Gelegenheit, den CO2-Ausstoss der Schweiz zu senken und somit zur Einhaltung der internationalen Klimaschutzziele beizutragen wie dies im Kyoto-Protokoll und im CO2-Gesetz festgeschrieben ist.
 

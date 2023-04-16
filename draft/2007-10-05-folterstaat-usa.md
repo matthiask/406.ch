@@ -2,7 +2,6 @@ Title: Folterstaat USA
 Slug: folterstaat-usa
 Date: 2007-10-05
 Categories:
-Type: markdown
 
 Gerade den Linken wird häufig vorgeworfen, sie seien anti-amerikanistisch eingestellt. Dazu muss ich aber sagen: Wenn man die Zeitung liest hat man allen Grund dazu! [Nach 9/11 hat das Weisse Haus Folter erlaubt.](http://www.tagesanzeiger.ch/dyn/news/ausland/798901.html) Das ist -- tut mir leid für den Ausdruck -- total zum Kotzen und zeigt einmal mehr, wie weit sich die USA in den letzten Jahren von einem liberalen Rechtsstaat entfernt hat. Im Namen der Terrorbekämpfung werden Menschenrechte missachtet, Datenschutzrichtlinien bis zur Nichtexistenz aufgeweicht und wird Kalter-Krieg-Rhetorik aufgewärmt.
 

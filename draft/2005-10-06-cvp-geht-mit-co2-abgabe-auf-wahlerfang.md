@@ -2,7 +2,6 @@ Title: CVP geht mit CO2-Abgabe auf Wählerfang
 Slug: cvp-geht-mit-co2-abgabe-auf-wahlerfang
 Date: 2005-10-06
 Categories: Climate
-Type: markdown
 
 Die CVP schreibt in einer [Medienmitteilung](http://www2.cvp.ch/de/documents/documentdetail---0--0--0--0--3663.html):
 

@@ -2,7 +2,6 @@ Title: Generating XLSX (or CSV) from the Django admin (or elsewhere)
 Slug: generating-xlsx-or-csv-from-the-django-admin-or-elsewhere
 Date: 2022-08-17
 Categories: Django, Programming
-Type: markdown
 
 # Generating XLSX (or CSV) from the Django admin (or elsewhere)
 

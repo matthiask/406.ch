@@ -2,7 +2,6 @@ Title: The other future of FeinCMS: django-content-editor and feincms3
 Slug: the-other-future-of-feincms-django-content-editor-and-feincms3
 Date: 2018-09-22
 Categories: Django, feincms, Programming
-Type: markdown
 
 # The other future of FeinCMS: django-content-editor and feincms3
 

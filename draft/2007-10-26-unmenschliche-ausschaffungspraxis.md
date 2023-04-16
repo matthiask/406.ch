@@ -2,7 +2,6 @@ Title: Unmenschliche und unverständliche Ausschaffungspraxis
 Slug: unmenschliche-ausschaffungspraxis
 Date: 2007-10-26
 Categories:
-Type: markdown
 
 Sonia, zwölfjährig, "ein Musterbeispiel für gelungene Integration", [droht die Ausschaffung nach Nigeria](http://www.20min.ch/news/schweiz/story/16096972) durch das Zürcher Migrationsamt. Ich erwarte, dass sie dank der Medienpräsenz, welche sie durch ihre unverständliche Geschichte erhält, dazu führen wird, dass sie schlussendlich in der Schweiz bleiben darf.
 

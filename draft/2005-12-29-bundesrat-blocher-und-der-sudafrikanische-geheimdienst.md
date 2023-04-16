@@ -2,7 +2,6 @@ Title: Bundesrat Blocher und der südafrikanische Geheimdienst
 Slug: bundesrat-blocher-und-der-sudafrikanische-geheimdienst
 Date: 2005-12-29
 Categories:
-Type: markdown
 
 Vor einigen Tagen wurde auf dem Weblog [journalismus - nachrichten von heute](http://oraclesyndicate.twoday.net/) ein interessanter Artikel über [Bundesrat Blocher's Kontakte zum südafrikanischen Geheimdienst](http://oraclesyndicate.twoday.net/stories/1317545/) veröffentlicht. Nachfolgend die ersten Zeilen:
 

@@ -2,7 +2,6 @@ Title: Hungerflüchtlinge sind nicht Wirtschaftsflüchtlinge
 Slug: hungerfluchtlinge-sind-nicht-wirtschaftsfluchtlinge
 Date: 2007-10-11
 Categories:
-Type: markdown
 
 > Das humanitäre Drama, das sich am Mittelmeer abspielt, muss beendet werden. Die Europäer antworten nur mit militärischen Mitteln auf das Problem. Hungerflüchtlinge sind nicht Wirtschaftsflüchtlinge. Sie kämpfen um ihr Leben.
 

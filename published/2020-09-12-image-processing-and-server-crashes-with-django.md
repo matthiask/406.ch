@@ -2,7 +2,6 @@ Title: Image processing and server crashes with Django
 Slug: image-processing-and-server-crashes-with-django
 Date: 2020-09-12
 Categories: Django, Programming
-Type: markdown
 
 # Image processing and server crashes with Django
 

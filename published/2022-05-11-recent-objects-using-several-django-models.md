@@ -2,7 +2,6 @@ Title: Recent objects using several Django models
 Slug: recent-objects-using-several-django-models
 Date: 2022-05-11
 Categories: Django, Programming
-Type: markdown
 
 # Recent objects using several Django models
 

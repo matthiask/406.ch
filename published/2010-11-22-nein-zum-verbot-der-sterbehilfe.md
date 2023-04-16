@@ -2,7 +2,6 @@ Title: Nein zum Verbot der Sterbehilfe
 Slug: nein-zum-verbot-der-sterbehilfe
 Date: 2010-11-22
 Categories: Politik
-Type: markdown
 
 Mein Votum zum Geschäft [4666/2010: Volksinitiative zur Einreichung einer Standesinitiative «Stopp der Suizidhilfe!»](http://www.kantonsrat.zh.ch/Geschaeft_Details.aspx?ID=d28a57c5-de02-42ae-ad10-29ae426c58bc) im Kantonsrat:
 

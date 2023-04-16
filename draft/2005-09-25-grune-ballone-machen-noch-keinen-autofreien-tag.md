@@ -2,7 +2,6 @@ Title: Grüne Ballone machen noch keinen autofreien Tag
 Slug: grune-ballone-machen-noch-keinen-autofreien-tag
 Date: 2005-09-25
 Categories:
-Type: markdown
 
 Gross angekündigt kam der [Multimobiltag](http://www.multimobil.ch/) der Stadt Zürich daher --- die ganze Innenstadt sollte autofrei werden! Leider gehörte zur "Innenstadt" nur ein kleines Stück des Limmatquais, von welchem die Hälfte sowieso seit einem Jahr autofrei sein sollte! Der Anlass als Ganzes war eigentlich erfolgreich und auch gut besucht, schade nur dass er nicht als Jahrmarkt sondern als Tag der alternativen Mobilität angeworben wird --- er hinterlässt ein ungutes Gefühl.
 

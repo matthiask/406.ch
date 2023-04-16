@@ -2,7 +2,6 @@ Title: Der Golfstrom ist langsamer geworden (Update)
 Slug: der-golfstrom-ist-langsamer-geworden
 Date: 2005-12-01
 Categories: Climate
-Type: markdown
 
 Die Sonne erwärmt die Tropen viel stärker als die nördlichen Breiten, die dadurch entstehenden Temperaturunterschiede werden aber durch atmosphärische und ozeanische Wärmeflüsse verringert. Der "Golfstrom", Teil der [Meridional Overturning Circulation (Global Conveyor Belt/Thermohaline circulation)](http://en.wikipedia.org/wiki/Global_conveyor_belt), ist der wichtigste Wärmetransport im Nordatlantik. Eine [neue Studie](http://www.nature.com/nature/journal/v438/n7068/abs/nature04385.html), welche in der heutigen Ausgabe von [Nature](http://www.nature.com/nature/) publiziert wurde, legt nun Nahe, dass die Zirkulation in den letzten 50 Jahren um 30% langsamer geworden ist.
 

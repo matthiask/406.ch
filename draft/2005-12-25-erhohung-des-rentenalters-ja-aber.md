@@ -2,7 +2,6 @@ Title: Erhöhung des Rentenalters? Ja, aber…
 Slug: erhohung-des-rentenalters-ja-aber
 Date: 2005-12-25
 Categories:
-Type: markdown
 
 Die [jungfreisinnigen schweiz begrüssen es](http://jungfreisinnige.ch/Artikel.7+B6JmNIYXNoPTdhNWZjYjczNDEmdHhfdHRuZXdzW2JhY2tQaWRdPTUmdHhfdHRuZXdzW3R0X25ld3NdPTky.0.html), dass der Bundesrat mit der Botschaft zur 11. AHV-Revision die Problematik der demographischen Entwicklung erkannt hat und deshalb jetzt das Rentenalter erhöhen will. Es ist meiner Meinung nach nichts als konsequent, in einer Bevölkerung welche immer länger lebt und aber immer weniger Nachwuchs hat (tiefe Geburtenrate) die Arbeitsdauer heraufzusetzen; schon nur weil der verdiente Lohn der Pensionäre -- also die AHV -- gefährdet ist.
 

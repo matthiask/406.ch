@@ -2,7 +2,6 @@ Title: 2005 war teuerstes Katastrophenjahr der Geschichte
 Slug: 2005-war-teuerstes-katastrophenjahr-der-geschichte
 Date: 2005-12-20
 Categories: Climate
-Type: markdown
 
 Das Jahr 2005 geht als bislang teuerstes Katastrophenjahr in die Geschichte ein. Der finanzielle Gesamtschaden von Erdbeben, Wirbelstürmen und weiteren Katastrophen beträgt laut dem Rückversicherungskonzern Swiss Re 225 Milliarden Dollar, mehr als doppelt so viel als im bisherigen Rekordjahr 2004 mit 105 Milliarden Dollar.
 

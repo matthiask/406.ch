@@ -2,7 +2,6 @@ Title: Drohungen gegen Widmer-Schlumpf: Mitverantwortung von Blocher
 Slug: mitverantwortung-von-blocher-und-morgeli
 Date: 2007-12-29
 Categories:
-Type: markdown
 
 Der Führer der SVP, Blocher, lehnt es ab, einen Aufruf gegen die massive Bedrohung der neu gewählten Bundesrätin Eveline Widmer-Schlumpf aufzurufen. Er sieht keine Mitverantwortung der SVP-Spitzen. ([Tages-Anzeiger, 28. Dez: Blocher will keinen Aufruf gegen Drohungen machen](http://www.tagesanzeiger.ch/dyn/news/schweiz/827238.html))
 

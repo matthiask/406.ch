@@ -2,7 +2,6 @@ Title: Configuring Django backends using speckenv’s 12factor support
 Slug: configuring-django-backends-using-speckenvs-12factor-support
 Date: 2022-08-18
 Categories: Django, Programming
-Type: markdown
 
 # Configuring Django backends using speckenv's 12factor support
 

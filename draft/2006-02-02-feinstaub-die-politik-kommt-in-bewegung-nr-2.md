@@ -2,7 +2,6 @@ Title: Feinstaub: Die Politik kommt in Bewegung Nr. 2
 Slug: feinstaub-die-politik-kommt-in-bewegung-nr-2
 Date: 2006-02-02
 Categories:
-Type: markdown
 
 Obwohl ich schon vor zwei Wochen hoffnungsvoll geschrieben habe, dass die [Politik bezüglich des Feinstaubproblemes in Bewegung kommt](http://blog.irregular.ch/2006/01/16/feinstaub-die-politik-kommt-in-bewegung/) ist politisch nichts geschehen -- die [neuen Rekordwerte](http://tagesanzeiger.ch/dyn/news/schweiz/588967.html) drängen aber nun wirklich darauf, endlich wahrgenommen zu werden.
 

@@ -2,7 +2,6 @@ Title: Marketing-Zensur der Plakatwände
 Slug: marketing-zensur-der-plakatwande
 Date: 2008-06-03
 Categories:
-Type: markdown
 
 Absolut lächerlich: Damit das Image der Saubermann-Schweiz ja nicht angekratzt wird, werden die peinlichen SVP-Abstimmungsplakate so schnell wie möglich [abgehängt oder übermalt](http://www.20min.ch/news/schweiz/story/13654382).
 

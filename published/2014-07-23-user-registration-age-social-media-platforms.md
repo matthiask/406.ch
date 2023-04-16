@@ -2,7 +2,6 @@ Title: User registration in the age of social media platforms
 Slug: user-registration-age-social-media-platforms
 Date: 2014-07-23
 Categories: Django, Programming
-Type: markdown
 
 **Note!** While I still think the ideas in this blog post are sound, the reference to django-email-registration is a bit outdated. I recommend <a href="https://django-authlib.readthedocs.io/" title="">django-authlib</a> these days instead.</p>
 

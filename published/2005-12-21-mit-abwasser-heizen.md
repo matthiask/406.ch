@@ -2,7 +2,6 @@ Title: Mit Abwasser heizen?
 Slug: mit-abwasser-heizen
 Date: 2005-12-21
 Categories: Climate, Politik
-Type: markdown
 
 Abwasser hat eine Durchschnittstemperatur von 12 bis 20 Grad. Diese Wärme verpufft meistens ungenutzt in der Umwelt. Eine von einem Schweizer Ingenieur entwickelte Technologie macht es nun möglich, einen Haushalt mit dieser Wärme zu beheizen.
 

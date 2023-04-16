@@ -2,7 +2,6 @@ Title: Niedrigere Studiengebühren für bessere Studenten?
 Slug: niedrigere-studiengebuhren-fur-bessere-studenten
 Date: 2008-04-23
 Categories:
-Type: markdown
 
 Economiesuisse möchte eine [stärkere Leistungsorientierung an den Schulen und Hochschulen](http://www.tagesanzeiger.ch/dyn/news/schweiz/864024.html) und mehr Wettbewerb, damit die Steuergelder besser eingesetzt würden. Stellt sich nur die Frage, wie sich denn diese Leistung messen liesse. In manchen naturwissenschaftlichen oder technischen Fächern ist Leistung einfacher zu definieren als in sozial- oder geisteswissenschaftlichen Fächern. Aber auch in der höheren Mathematik ist es nicht so einfach, wie man sich vielleicht denken könnte: Um Jahrhunderträtsel der Mathematik lösen zu können, ist nicht die möglichst effiziente Abarbeitung von Aufgaben gefordert, sondern Querdenken. Würde Querdenken in einer total leistungsorientierten Hochschulumgebung überhaupt noch gefördert oder anerkannt? Daran zweifle ich.
 

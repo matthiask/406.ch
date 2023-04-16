@@ -2,7 +2,6 @@ Title: Continuous Integration
 Slug: continuous-integration
 Date: 2014-01-14
 Categories: Programming
-Type: markdown
 
 How did I ever manage to release working packages without continuous integration?
 

@@ -2,7 +2,6 @@ Title: Lächerliche Forderung nach Senkung des Spritpreises
 Slug: lacherliche-forderung-nach-senkung-des-spritpreises
 Date: 2008-06-13
 Categories:
-Type: markdown
 
 Seit Tagen streiken die Camionneure in Spanien und anderen EU-Ländern: Die hohen Treibstoffpreise machen ihnen zu schaffen, deshalb [fordern nun auch Schweizer Unternehmer eine Senkung der Treibstoffsteuern](http://www.20min.ch/finance/news/story/22505407). Durch die hohen Preise und die Anfang Jahr angehobene LSVA können die Transportunternehmen nicht mehr kostendeckend geschäften. Die Lehrbuchökonomie sagt uns, dass nun die Preise für Transporte ebenfalls steigen müssten. Warum wehren sich die angeblich so kompetitiven Strassentransportunternehmer nun gegen die ordnende Kraft des Marktes? Könnte es sein, dass nicht die [SBB Cargo ihre Preise senken muss](http://www.nzz.ch/nachrichten/schweiz/sbb_cargo_1.703514.html), sondern die anderen Transportunternehmen ihre Preise erhöhen müssen?
 

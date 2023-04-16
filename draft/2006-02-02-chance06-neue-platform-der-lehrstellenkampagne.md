@@ -2,7 +2,6 @@ Title: chance06 - Neue Platform der Lehrstellenkampagne
 Slug: chance06-neue-platform-der-lehrstellenkampagne
 Date: 2006-02-02
 Categories:
-Type: markdown
 
 Das Bundesamt für Berufsbildung und Technologie schreibt in einer [Medienmitteilung](http://www.news.admin.ch/NSBSubscriber/message/de/2769):
 

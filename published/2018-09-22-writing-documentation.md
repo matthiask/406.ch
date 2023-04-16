@@ -2,7 +2,6 @@ Title: Writing documentation
 Slug: writing-documentation
 Date: 2018-09-22
 Categories: Django, Programming
-Type: markdown
 
 # Writing documentation
 

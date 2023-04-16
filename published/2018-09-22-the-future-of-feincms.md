@@ -2,7 +2,6 @@ Title: The future of FeinCMS
 Slug: the-future-of-feincms
 Date: 2018-09-22
 Categories: Django, feincms, Programming
-Type: markdown
 
 # The future of FeinCMS
 

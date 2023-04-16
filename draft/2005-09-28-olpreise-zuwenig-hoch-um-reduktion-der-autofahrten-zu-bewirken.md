@@ -2,7 +2,6 @@ Title: Ölpreise zuwenig hoch, um Reduktion der Autofahrten zu bewirken
 Slug: olpreise-zuwenig-hoch-um-reduktion-der-autofahrten-zu-bewirken
 Date: 2005-09-28
 Categories: Climate
-Type: markdown
 
 [Der Tagesanzeiger schreibt:](http://tagi.ch/dyn/news/wirtschaft/544652.html)
 

@@ -2,7 +2,6 @@ Title: Studie belegt: Schwere Hurrikane werden dank Klimaerwärmung häufiger
 Slug: studie-belegt-schwere-hurrikane-werden-dank-klimaerwarmung-haufiger
 Date: 2005-09-16
 Categories: Climate
-Type: markdown
 
 In der diese Woche erschienen Ausgabe des [Science Magazins](http://www.sciencemag.org/) wird die Vermutung, dass die [Klimaerwärmung die Entstehung von mehr und stärkeren Hurrikanen begünstigt](http://blog.irregular.ch/2005/09/04/mehr-tropische-wirbelsturme-durch-klimaerwarmung/), mit einer weiteren Studie belegt:
 

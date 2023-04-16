@@ -2,7 +2,6 @@ Title: Django admin apps and Content Security Policy compliance
 Slug: django-admin-apps-and-content-security-policy-compliance
 Date: 2017-06-11
 Categories: Django, Programming
-Type: markdown
 
 # Django admin apps and Content Security Policy compliance
 

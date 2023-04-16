@@ -2,7 +2,6 @@ Title: Low maintenance software
 Slug: low-maintenance-software
 Date: 2017-06-05
 Categories: Django, Programming
-Type: markdown
 
 I'm passionate about writing low maintenance software.
 

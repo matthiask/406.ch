@@ -2,7 +2,6 @@ Title: Managing complexity and technical debt by releasing Open Source Software
 Slug: managing-complexity-and-technical-debt-by-releasing-open-source-software
 Date: 2022-08-19
 Categories: Django, Programming
-Type: markdown
 
 # Managing complexity and technical debt by releasing Open Source Software
 

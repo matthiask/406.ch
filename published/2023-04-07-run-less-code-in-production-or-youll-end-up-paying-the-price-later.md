@@ -2,7 +2,6 @@ Title: Run less code in production or you’ll end up paying the price later
 Slug: run-less-code-in-production-or-youll-end-up-paying-the-price-later
 Date: 2023-04-07
 Categories: Django, Programming
-Type: markdown
 
 # Run less code in production or you'll end up paying the price later
 

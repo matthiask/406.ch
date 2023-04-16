@@ -2,7 +2,6 @@ Title: Zu doof um zu wählen?
 Slug: zu-doof-um-zu-wahlen
 Date: 2007-10-09
 Categories:
-Type: markdown
 
 Zum Glück sind nicht alle Jugendlichen [zu doof um zu wählen](http://www.20min.ch/myvote/wahlnews/story/19815894). Es gibt nämlich politikinteressierte Jugendliche -- wers nicht glaubt, kann gerne mal bei den [Jungen Grünen](http://www.jungegruene.ch/zh/), bei der [JUSO](http://www.gerechtigkeit-jetzt.ch/) oder einer anderen Jungpartei reinschauen.
 

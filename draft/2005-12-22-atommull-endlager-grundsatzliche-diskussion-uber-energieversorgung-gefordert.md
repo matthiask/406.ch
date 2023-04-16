@@ -2,7 +2,6 @@ Title: Atommüll-Endlager: Grundsätzliche Diskussion über Energieversorgung ge
 Slug: atommull-endlager-grundsatzliche-diskussion-uber-energieversorgung-gefordert
 Date: 2005-12-22
 Categories:
-Type: markdown
 
 [Ein weiteres Kapitel](http://www.tagesanzeiger.ch/dyn/news/zuerich/574881.html) in der Endlos-Geschichte der Atommüll-Endlagerung: Der Kanton Zürich verlangt eine weitere Definition von Kriterien und die Prüfung anderer Standorte; der Entsorgungsnachweis der [Nagra](http://www.nagra.ch/) zum Standort im Zürcher Weinland genügt nach Ansicht des Zürcher Regierungsrates nicht.
 

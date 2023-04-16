@@ -2,7 +2,6 @@ Title: ... das sind Autohasser!
 Slug: das-sind-autohasser
 Date: 2008-09-01
 Categories:
-Type: markdown
 
 ... sagt Max Nötzli über die Initianten der [Initiative für eine menschenfreundlichere Mobilität (auch: Offroader-Initiative)](http://www.menschenfreundlicher.ch/) im [Blick](http://www.blick.ch/news/schweiz/das-sind-autohasser-99224).
 

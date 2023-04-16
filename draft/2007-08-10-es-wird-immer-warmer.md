@@ -2,7 +2,6 @@ Title: Es wird immer wärmer
 Slug: es-wird-immer-warmer
 Date: 2007-08-10
 Categories: Climate
-Type: markdown
 
 Es ist Hochsommer, in der Schweiz ist aber kein Badewetter. Beklagen können wir uns eher über [zuviel Wasser](http://www.tagi.ch/dyn/news/schweiz/779647.html) als zuviel Sonne. [Beides könnte sich aber im kommenden Jahrzehnt ändern](http://www.tagi.ch/dyn/news/vermischtes/779497.html), wie britische Klimaforscher herausgefunden haben. Die Ergebnisse ihres neuen Klimamodells weisen darauf hin, dass mindestens die Hälfte der Jahre von 2010 bis 2014 wärmer werden könnten als das [bislang heisseste Jahr 2005](http://spinlock.ch/blog/2005/12/18/2005-war-warmstes-jahr-seit-beginn-der-instrumentenmessungen/). Bemerkung: Der Tages-Anzeiger macht einen Fehler, wenn er das Jahr 1998 als bislang wärmstes Jahr bezeichnet.
 

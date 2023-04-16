@@ -2,7 +2,6 @@ Title: django-cabinet – A media library for Django
 Slug: django-cabinet-a-media-library-for-django
 Date: 2017-06-21
 Categories: Django, Programming
-Type: markdown
 
 # django-cabinet &ndash; A media library for Django
 

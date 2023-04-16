@@ -2,7 +2,6 @@ Title: Euro 08-Sperr-Perimeter: Aber sonst gehts noch gut!?
 Slug: euro-08-sperr-perimeter-aber-sonst-gehts-noch-gut
 Date: 2008-03-07
 Categories:
-Type: markdown
 
 Gehts eigentlich noch? Die UEFA macht sich alle Mühe, mir die letzte Freude an der bevorstehenden Euro 08 zu stehlen. Die Einrichtung von Sperr-Perimetern ist laut 20 Minuten [eine Anforderung der UEFA](http://www.20min.ch/em2008/neben_dem_platz/story/21194564). Das bedeutet, dass sich Zehntausende aufgrund eines **immer noch privat organisierten Anlasses** nicht mehr frei in der Nähe ihres Wohnortes bewegen dürfen. Die Leute, welchen durch dieses "Fussballfest" (wohl eher Geldfest) grundlegende Freiheiten weggenommen werden, profitieren in keiner Art und Weise -- die Profite werden von der UEFA eingesackt, oder höchstens von Betrieben, welche von der UEFA akkreditiert wurden.
 

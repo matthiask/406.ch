@@ -2,7 +2,6 @@ Title: Die Strategie der neokonservativen Rechten
 Slug: die-strategie-der-neokonservativen-rechten
 Date: 2008-06-23
 Categories:
-Type: markdown
 
 Thomas Frank über die republikanische Strategie in "What's the Matter with Kansas?":
 

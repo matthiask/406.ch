@@ -2,7 +2,6 @@ Title: Using Bliss with webpack
 Slug: using-bliss-with-webpack
 Date: 2018-04-30
 Categories: Programming
-Type: markdown
 
 # Using Bliss with webpack
 

@@ -2,7 +2,6 @@ Title: Feinstaub-Grenzwert überschritten
 Slug: feinstaub-grenzwert-uberschritten
 Date: 2007-10-12
 Categories:
-Type: markdown
 
 Mit der Nebeldecke über Teilen des Mittellandes wurden die Feinstaub-Grenzwerte [bereits zum ersten Mal überschritten](http://www.tagesanzeiger.ch/dyn/news/schweiz/801480.html).
 

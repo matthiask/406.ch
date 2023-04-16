@@ -2,7 +2,6 @@ Title: Prototyping. Writing products and the attention span
 Slug: prototyping-writing-products-and-attention-span
 Date: 2015-07-14
 Categories: Programming
-Type: markdown
 
 We started developing software with grandiose up front plans with durations of several months. We defined sprints, each with several goals and each going on for several weeks.
 

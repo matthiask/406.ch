@@ -2,7 +2,6 @@ Title: FDP selbstsicher — zu Unrecht
 Slug: fdp-selbstsicher-zu-unrecht
 Date: 2007-02-14
 Categories:
-Type: markdown
 
 Die FDP meint, dass sie bei den Wahlen in Basel (Korrektur von Siro Imber: Basel-Land) dem [Angriff der Linken und Grünen habe standhalten können](http://www.fdp-zh.ch/page/content/index.asp?MenuID=8600&ID=49017&ConID=49017&View=&Item=1).
 

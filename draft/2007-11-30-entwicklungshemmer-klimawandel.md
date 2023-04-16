@@ -2,7 +2,6 @@ Title: Entwicklungshemmer Klimawandel
 Slug: entwicklungshemmer-klimawandel
 Date: 2007-11-30
 Categories: Climate
-Type: markdown
 
 Unter den hundert grössten Verliererländern des Klimawandels befinden sich [fast nur arme Länder](http://www.spiegel.de/wissenschaft/natur/0,1518,520504,00.html). Diese tragen wenig Schuld am Klimawandel, werden aber besonders hart getroffen. Die sozioökonomische und politische Struktur diser Länder ist zudem wenig tragfähig, so dass sie mit den sowieso schon höheren Herausforderungen nochmals schlechter umgehen können werden als wir, glückliche Einwohner von industrialisierten Ländern mit einer funktionierenden Gesundheitsversorgung, einem starken Sozialstaat und einer erfolgreichen Wirtschaft.
 

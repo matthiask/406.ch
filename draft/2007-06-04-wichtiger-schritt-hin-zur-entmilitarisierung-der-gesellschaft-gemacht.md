@@ -2,7 +2,6 @@ Title: Wichtiger Schritt hin zur Entmilitarisierung der Gesellschaft gemacht
 Slug: wichtiger-schritt-hin-zur-entmilitarisierung-der-gesellschaft-gemacht
 Date: 2007-06-04
 Categories:
-Type: markdown
 
 Der Bundesrat scheint in weniger als einem Jahr einen grundsätzlichen Meinungswandel betreffend der Lagerung von Armeemunition in Privathaushalten durchlaufen zu haben: Nachdem er letzten September die Armeemunition zu Hause als zentral für die Demokratie definiert hat spricht er sich jetzt für die [Lagerung der Munition im Zeughaus](http://www.tagesanzeiger.ch/dyn/news/schweiz/758239.html) aus. Ein wichtiger Schritt hin zur Entmilitarisierung der Gesellschaft! Die Schweizer Armee hat in den letzten Jahrzehnten ihre Daseinsberechtigung verloren. Dies zeigt sich daran, dass die Armee im [Inland als Hilfspolizei](http://spinlock.ch/blog/2007/05/30/polizei-stellt-sich-gegen-militareinsatze-im-inland/) und zur Katastrophenhilfe eingesetzt wird, wobei das erste verwerflich ist und das zweite nur mässig sinnvoll: Abgesehen von den speziell ausgebildeten Genietruppen gibt es keinen Grund, warum nicht auch der Zivildienst und Zivilschutz diese Aufgaben erledigen könnte.
 

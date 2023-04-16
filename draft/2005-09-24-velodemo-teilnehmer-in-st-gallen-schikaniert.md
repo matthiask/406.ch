@@ -2,7 +2,6 @@ Title: Velodemo-Teilnehmer in St. Gallen schikaniert
 Slug: velodemo-teilnehmer-in-st-gallen-schikaniert
 Date: 2005-09-24
 Categories:
-Type: markdown
 
 Soeben habe ich über das [Kontaktformular der IG 22. September](http://www.22september.ch/kontakt/) einen Bericht über eine misslungene Velodemonstration in St. Gallen erhalten. Der Anlass für die Demo war der [internationale Tag für eine alternative Mobilität](http://blog.irregular.ch/2005/09/23/erfolgreiche-velodemo-fur-den-internationalen-tag-der-alternativen-mobilitat/). Natürlich war die Demonstration unbewilligt, aber dieses Vorkommnis zeigt doch sehr deutlich auf, welche "Probleme" ernstgenommen werden und welche nicht: Instandhaltung von Ruhe und Ordnung um jeden Preis, auch mit der Beschneidung von Freiheitsrechten (siehe Wegweisunsartikel in mehreren grossen schweizer Städten) sind scheinbar wesentlich wichtiger statt umweltfreundlicher und sozialer Politik.
 Die sozialen Probleme und Umweltschädigungen verschwinden aber nicht, wenn niemand hinsieht, auch wenn es natürlich viel einfacher ist.

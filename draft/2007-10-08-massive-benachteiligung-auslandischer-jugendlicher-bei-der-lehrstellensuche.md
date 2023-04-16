@@ -2,7 +2,6 @@ Title: Massive Benachteiligung ausländischer Jugendlicher bei der Lehrstellensu
 Slug: massive-benachteiligung-auslandischer-jugendlicher-bei-der-lehrstellensuche
 Date: 2007-10-08
 Categories:
-Type: markdown
 
 Jugendliche mit ausländischen Wurzeln [werden bei der Lehrstellensuche systematisch benachteiligt](http://www.tagi.ch/dyn/news/wirtschaft/800242.html). Bei gleich qualifizierten ausländischen Jugendlichen ist -- alleine aufgrund ihres Namens -- die Chance viermal kleiner, dass sie ihre Pläne verwirklichen können. Zudem hat sich diese Chancenungleichheit in den letzten Jahren noch verschärft.
 

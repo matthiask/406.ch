@@ -1,7 +1,6 @@
 Title: Static site generation
 Date: 2023-04-16
 Categories: Django, Programming
-Type: markdown
 
 # Static site generation
 

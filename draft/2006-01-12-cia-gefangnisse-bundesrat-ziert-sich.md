@@ -2,7 +2,6 @@ Title: CIA-Gefängnisse: Bundesrat ziert sich
 Slug: cia-gefangnisse-bundesrat-ziert-sich
 Date: 2006-01-12
 Categories:
-Type: markdown
 
 Der [Bundesrat verurteilt die Veröffentlichung des ägyptischen Faxes](http://www.baz.ch/news/index.cfm?keyID=17CD2E0A-DF54-4CBB-95FF9E386784539B&startpage=1&ObjectID=B99781FB-1422-0CEF-701CE048D5D04583) -- noch immer jammern die Politiker lieber über das Informationsleck, statt der USA mal auf die Finger zu klopfen -- das [Freihandelsabkommen scheint wichtiger zu sein als die Einhaltung der Menschenrechte (¨Agypten-Fax: Imageschaden für wen genau?")](http://www.kyriacou.ch/).
 

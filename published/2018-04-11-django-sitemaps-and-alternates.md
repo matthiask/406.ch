@@ -2,7 +2,6 @@ Title: Django, Sitemaps and alternates
 Slug: django-sitemaps-and-alternates
 Date: 2018-04-11
 Categories: Django, Programming
-Type: markdown
 
 # Django, Sitemaps and alternates
 

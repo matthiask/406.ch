@@ -2,7 +2,6 @@ Title: gettext, JSX and ES6 template literals
 Slug: gettext-jsx-and-es6-template-literals
 Date: 2020-10-21
 Categories: Django, Programming
-Type: markdown
 
 # gettext, JSX and ES6 template literals
 

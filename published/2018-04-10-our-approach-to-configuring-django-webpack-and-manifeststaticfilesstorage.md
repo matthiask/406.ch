@@ -2,7 +2,6 @@ Title: Our approach to configuring Django, Webpack and ManifestStaticFilesStorag
 Slug: our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage
 Date: 2018-04-10
 Categories: Django, Programming
-Type: markdown
 
 # Our approach to configuring Django, Webpack and ManifestStaticFilesStorage
 

@@ -2,7 +2,6 @@ Title: My rules for releasing open source software
 Slug: my-rules-for-releasing-open-source-software
 Date: 2017-12-06
 Categories: Django, Programming
-Type: markdown
 
 # My rules for releasing open source software
 

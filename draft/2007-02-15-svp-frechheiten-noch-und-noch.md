@@ -2,7 +2,6 @@ Title: SVP-Frechheiten noch und noch
 Slug: svp-frechheiten-noch-und-noch
 Date: 2007-02-15
 Categories:
-Type: markdown
 
 Die [Liste der kriminellen SVPler](http://www.google.ch/search?q=kriminell+svp) bekommt einen neuen Eintrag: Ein SVP-Politiker wurde in Vevey [für rassistische Sprayereien verurteilt](http://www.blick.ch/news/schweiz/artikel56142). Wen wunderts, schliesslich macht auch die Zürcher SVP mit Rassendiskriminierung auf sich aufmerksam, wie auch der Blick bemerkt.
 

@@ -2,7 +2,6 @@ Title: Linke sind unzufriedener als Rechte
 Slug: linke-sind-unzufriedener-als-rechte
 Date: 2007-10-01
 Categories: Politik
-Type: markdown
 
 Mal ohne persönlichen Kommentar verweise ich auf den Text über Linke und Rechte, welcher soeben auf Spiegel Online veröffentlicht wurde: [Politik und Glück: Linke sind unzufriedener als Rechte](http://www.spiegel.de/wissenschaft/mensch/0,1518,507558,00.html)
 

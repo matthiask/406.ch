@@ -2,7 +2,6 @@ Title: Klimaänderung so rasant wie noch nie - Auf der Erde wirds vier Grad wär
 Slug: klimaanderung-so-rasant-wie-noch-nie
 Date: 2005-09-30
 Categories: Climate
-Type: markdown
 
 [Max-Planck-Institut für Meteorologie: Klimaänderung so rasant wie noch nie](http://www.mpimet.mpg.de/dynindex.php?s=http://www.mpimet.mpg.de/de/web/news/newsdetail.php?id=76)
 

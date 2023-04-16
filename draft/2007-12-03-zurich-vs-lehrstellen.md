@@ -2,7 +2,6 @@ Title: Zürich vs. Lehrstellen
 Slug: zurich-vs-lehrstellen
 Date: 2007-12-03
 Categories:
-Type: markdown
 
 Der Kantonsrat Zürich lehnt den Lehrlingsfonds ab. Die immergleichen Begründungen der bürgerlichen Parteien dazu kann man sich gleich selbst ausdenken:
 

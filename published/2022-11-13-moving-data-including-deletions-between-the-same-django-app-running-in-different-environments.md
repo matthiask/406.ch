@@ -2,7 +2,6 @@ Title: Moving data including deletions between the same Django app running in di
 Slug: moving-data-including-deletions-between-the-same-django-app-running-in-different-environments
 Date: 2022-11-13
 Categories: Django, Programming
-Type: markdown
 
 # Moving data including deletions between the same Django app running in different environments
 

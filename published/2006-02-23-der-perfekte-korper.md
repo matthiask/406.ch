@@ -2,7 +2,6 @@ Title: Der perfekte Körper
 Slug: der-perfekte-korper
 Date: 2006-02-23
 Categories: Politik
-Type: markdown
 
 Schöne neue Medienwelt: [Glenn C. Feron - the art of retouching](http://glennferon.com/portfolio1/index.html)
 

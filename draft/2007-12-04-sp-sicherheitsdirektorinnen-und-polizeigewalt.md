@@ -2,7 +2,6 @@ Title: SP-Sicherheitsdirektorinnen und Polizeigewalt
 Slug: sp-sicherheitsdirektorinnen-und-polizeigewalt
 Date: 2007-12-04
 Categories:
-Type: markdown
 
 Die [extreme und unverhältnismässige Anwendung von Polizeigewalt in Luzern](http://www.20min.ch/news/luzern/story/22345959) schockiert. Das Vertrauen in den Träger des staatlichen Gewaltmonopols sinkt weiter in sich zusammen. Die SP-Sicherheitsdirektorin Ursula Stämmer [wird von linker Seite scharf kritisiert](http://www.20min.ch/news/luzern/story/15311821).
 

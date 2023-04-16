@@ -2,7 +2,6 @@ Title: The state of things in FeinCMS 1.x land
 Slug: the-state-of-things-in-feincms-1x-land
 Date: 2018-09-22
 Categories: Django, feincms, Programming
-Type: markdown
 
 # The state of things in FeinCMS 1.x land
 

@@ -2,7 +2,6 @@ Title: Schlüer verhindern
 Slug: schluer-verhindern
 Date: 2007-10-26
 Categories:
-Type: markdown
 
 [Chantal Galladé verzichtet auf eine Kandidatur für den Ständerat](http://www.nzz.ch/_1.575094.html). Was übrig bleibt, sind rechts-braune oder bürgerliche Kandidaturen. Als Linker hat man keine (Aus-)Wahl mehr.
 

@@ -2,7 +2,6 @@ Title: Klimaveränderung in den 70er Jahren: Eiszeit oder Erwärmung?
 Slug: klimaveranderung-in-den-70er-jahren-eiszeit-oder-erwarmung
 Date: 2008-02-21
 Categories: Climate, Politik
-Type: markdown
 
 Klimaveränderungsskeptiker machen häufig geltend, dass unter den Wissenschaftern in den 70er Jahren ein Konsens darüber bestanden haben soll, dass eine Eiszeit auf uns zukommt. Mit diesem Beispiel wollen sie darauf hinweisen, dass die Klimaforscher nicht wissen wovon sie sprechen und ihre Meinung alle paar Jahre ändern, dass man ihre Prognosen also nicht ernst nehmen sollte.
 

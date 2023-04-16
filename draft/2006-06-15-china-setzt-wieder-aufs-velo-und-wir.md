@@ -2,7 +2,6 @@ Title: China setzt wieder aufs Velo - und wir?
 Slug: china-setzt-wieder-aufs-velo-und-wir
 Date: 2006-06-15
 Categories:
-Type: markdown
 
 Tages-Anzeiger:
 

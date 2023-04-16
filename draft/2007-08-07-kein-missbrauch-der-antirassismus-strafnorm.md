@@ -2,7 +2,6 @@ Title: Kein Missbrauch der Antirassismus-Strafnorm
 Slug: kein-missbrauch-der-antirassismus-strafnorm
 Date: 2007-08-07
 Categories:
-Type: markdown
 
 Die Rassismus-Strafnorm wird in der Schweiz laut einer heute veröffentlichten Studie "vorsichtig" angewendet. 41 Prozent der Anzeigen sind berechtigt, es kommt zu Schuldsprüchen. Die bedeutet, dass die Strafnorm nicht dazu missbraucht wird, um den Stammtischpolemikern den Mund zu verbieten -- alleine untolerierbare Auswüchse werden angezeigt und dann auch zurecht bestraft.
 

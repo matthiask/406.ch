@@ -2,7 +2,6 @@ Title: Leserbrief: Jungpolitiker in den Kantonsrat!
 Slug: leserbrief-jungpolitiker-in-den-kantonsrat
 Date: 2007-03-01
 Categories:
-Type: markdown
 
 Als Antwort auf diesen Bericht aus der Vorstadt: [Hoffen der Kleinen, Bangen der Grossen](http://www.vorstadt.ch/storys/storys.cfm?vID=1356)
 

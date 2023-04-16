@@ -2,7 +2,6 @@ Title: Massnahmeplan bei hohen Ozonwerten
 Slug: massnahmeplan-bei-hohen-ozonwerten
 Date: 2010-03-01
 Categories:
-Type: markdown
 
 Mein Votum zu [45/2006 Postulat: Massnahmenplan bei hohen Ozonwerten wie bei den Feinstaubkonzentrationen](http://www.kantonsrat.zh.ch/Geschaeft_Details.aspx?ID=977ea62a-4c54-4a05-8891-a425bb4ed079) im Kantonsrat:
 

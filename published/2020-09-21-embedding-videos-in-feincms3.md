@@ -2,7 +2,6 @@ Title: Embedding videos in feincms3
 Slug: embedding-videos-in-feincms3
 Date: 2020-09-21
 Categories: Django, feincms, Programming
-Type: markdown
 
 # Embedding videos in feincms3
 

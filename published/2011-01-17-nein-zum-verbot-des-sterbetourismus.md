@@ -2,7 +2,6 @@ Title: Nein zum Verbot des Sterbetourismus
 Slug: nein-zum-verbot-des-sterbetourismus
 Date: 2011-01-17
 Categories: Politik
-Type: markdown
 
 Votum zu [Beschluss des Kantonsrates über die Volksinitiative «Nein zum Sterbetourismus im Kanton Zürich!»](http://www.kantonsrat.zh.ch/Geschaeft_Details.aspx?ID=456a27cb-6d96-448c-a4ed-69d603355822):
 
