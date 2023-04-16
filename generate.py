@@ -62,7 +62,7 @@ class Category:
 
 
 def slugify(value):
-    return re.sub(r"[^-a-z0-9]+", "-", value.lower())
+    return re.sub(r"[^-a-z0-9]+", "-", value.lower()).strip("-")
 
 
 def parse_date(value):
