@@ -5,7 +5,6 @@ import re
 import shutil
 import time
 from dataclasses import dataclass, field
-from functools import total_ordering
 from itertools import chain
 from pathlib import Path
 from xml.etree.ElementTree import Element, SubElement, tostring
@@ -42,7 +41,6 @@ class Post:
         return f"/writing/{self.slug}/"
 
 
-@total_ordering
 @dataclass(kw_only=True)
 class Category:
     title: str
@@ -72,11 +70,11 @@ def parse_date(value):
 
 
 def parse_categories(value):
-    return sorted(
+    return [
         Category(slug=slugify(category), title=category)
         for category in (v.strip() for v in value.split(","))
         if category
-    )
+    ]
 
 
 def load_posts(path):
