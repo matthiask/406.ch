@@ -152,7 +152,7 @@ def add_to_feed(feed, post):
         title=post.title,
         description=post.html,
         link=link,
-        pubdate=post.date,
+        pubdate=dt.datetime.combine(post.date, dt.time(12, 0)),
         unique_id=link,
         unique_id_is_permalink=True,
     )
