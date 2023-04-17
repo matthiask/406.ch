@@ -31,6 +31,9 @@ class Post:
     categories: list[str] = field(default_factory=list)
     content: str
 
+    def __lt__(self, other):
+        return (self.date, self.slug) < (other.date, other.slug)
+
     def html(self):
         if all(not line.startswith("# ") for line in self.content.splitlines()):
             self.content = f"# {self.title}\n\n{self.content}"
@@ -52,7 +55,7 @@ class Category:
         return hash(self.title)
 
     def __lt__(self, other):
-        return self.title < other.title
+        return self.slug < other.slug
 
     def url(self):
         return f"/writing/category-{self.slug}/"
@@ -93,9 +96,7 @@ def load_posts():
             )
         except Exception as exc:
             raise Exception(f"Unable to load {md}") from exc
-    return sorted(
-        posts, key=lambda post: (post.date or dt.date.min, post.title), reverse=True
-    )
+    return sorted(posts, reverse=True)
 
 
 def write_file(path, content):
