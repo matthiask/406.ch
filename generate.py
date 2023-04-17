@@ -95,7 +95,10 @@ def load_posts():
                 )
             )
         except Exception as exc:
-            raise Exception(f"Unable to load {md}") from exc
+            print(
+                f"Skipping the invalid {md.relative_to(BASE_DIR)} file: {exc!r}",
+                file=sys.stderr,
+            )
     return sorted(posts, reverse=True)
 
 
