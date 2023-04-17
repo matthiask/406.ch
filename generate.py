@@ -72,26 +72,22 @@ def parse_categories(value):
     ]
 
 
-def load_posts():
-    posts = []
-    for md in chain.from_iterable(BASE_DIR.glob(f"{dir}/*.md") for dir in sys.argv[1:]):
+def load_posts(dirs):
+    for md in chain.from_iterable(BASE_DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
             props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
             props = {name.lower(): value for name, value in props}
-            posts.append(
-                Post(
-                    title=props["title"],
-                    slug=props.get("slug") or slugify(props["title"]),
-                    date=dt.datetime.strptime(props["date"], "%Y-%m-%d").date(),
-                    categories=parse_categories(props.get("categories") or ""),
-                    content=content,
-                )
+            yield Post(
+                title=props["title"],
+                slug=props.get("slug") or slugify(props["title"]),
+                date=dt.datetime.strptime(props["date"], "%Y-%m-%d").date(),
+                categories=parse_categories(props.get("categories") or ""),
+                content=content,
             )
         except Exception as exc:
             md = md.relative_to(BASE_DIR)
             print(f"Skipping the invalid '{md}' file: {exc!r}", file=sys.stderr)
-    return sorted(posts, reverse=True)
 
 
 def write_file(path, content):
@@ -155,7 +151,7 @@ def write_sitemap(posts):
 if __name__ == "__main__":
     start = perf_counter()
     shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
-    posts = load_posts()
+    posts = sorted(load_posts(sys.argv[1:]), reverse=True)
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
 
     env = jinja_env(categories=categories)
