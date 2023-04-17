@@ -27,7 +27,7 @@ BASE = "https://406.ch"
 class Post:
     title: str
     slug: str
-    date: dt.date | None = None
+    date: dt.date
     categories: list[str] = field(default_factory=list)
     content: str
 
@@ -65,10 +65,6 @@ def slugify(value):
     return re.sub(r"[^-a-z0-9]+", "-", value.lower()).strip("-")
 
 
-def parse_date(value):
-    return dt.datetime.strptime(value, "%Y-%m-%d").date() if value else None
-
-
 def parse_categories(value):
     return [
         Category(slug=slugify(category), title=category)
@@ -90,7 +86,7 @@ def load_posts():
                 Post(
                     title=properties["title"],
                     slug=properties.get("slug") or slugify(properties["title"]),
-                    date=parse_date(properties.get("date")),
+                    date=dt.datetime.strptime(properties["date"], "%Y-%m-%d").date(),
                     categories=parse_categories(properties.get("categories") or ""),
                     content=content,
                 )
