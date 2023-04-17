@@ -18,7 +18,6 @@ from minify_html import minify
 from rcssmin import cssmin
 
 
-_files_written = 0
 BASE_DIR = Path(__file__).resolve(strict=True).parent
 BASE = "https://406.ch"
 
@@ -71,7 +70,7 @@ def slugify(value):
 def parse_categories(value):
     return [
         Category(slug=slugify(category), title=category)
-        for category in (v.strip() for v in value.split(","))
+        for category in re.split(r",\s*", value)
         if category
     ]
 
@@ -80,34 +79,29 @@ def load_posts():
     posts = []
     for md in chain.from_iterable(BASE_DIR.glob(f"{dir}/*.md") for dir in sys.argv[1:]):
         try:
-            props, content = md.read_text().split("\n\n", 1)
-            properties = {
-                name.lower(): value.strip()
-                for name, value in (prop.split(":", 1) for prop in props.split("\n"))
-            }
+            props, content = md.read_text().replace("\r", "").split("\n\n", 1)
+            props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
+            props = {name.lower(): value for name, value in props}
             posts.append(
                 Post(
-                    title=properties["title"],
-                    slug=properties.get("slug") or slugify(properties["title"]),
-                    date=dt.datetime.strptime(properties["date"], "%Y-%m-%d").date(),
-                    categories=parse_categories(properties.get("categories") or ""),
+                    title=props["title"],
+                    slug=props.get("slug") or slugify(props["title"]),
+                    date=dt.datetime.strptime(props["date"], "%Y-%m-%d").date(),
+                    categories=parse_categories(props.get("categories") or ""),
                     content=content,
                 )
             )
         except Exception as exc:
-            print(
-                f"Skipping the invalid {md.relative_to(BASE_DIR)} file: {exc!r}",
-                file=sys.stderr,
-            )
+            md = md.relative_to(BASE_DIR)
+            print(f"Skipping the invalid '{md}' file: {exc!r}", file=sys.stderr)
     return sorted(posts, reverse=True)
 
 
 def write_file(path, content):
-    global _files_written
-    _files_written += 1
     file = BASE_DIR / "htdocs" / path.lstrip("/")
     file.parent.mkdir(parents=True, exist_ok=True)
     file.write_text(content)
+    write_file.cc = getattr(write_file, "cc", 0) + 1
 
 
 def styles_url():
@@ -202,4 +196,4 @@ if __name__ == "__main__":
     for post in posts:
         write_file(f"{post.url()}index.html", render_minified(post_template, post=post))
 
-    print(f"Wrote {_files_written} files in {perf_counter() - start:.2f} seconds.")
+    print(f"Wrote {write_file.cc} files in {perf_counter() - start:.2f} seconds.")
