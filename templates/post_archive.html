@@ -57,7 +57,7 @@
     <strong>RSS feeds:</strong>
     <a href="/writing/atom.xml">All posts</a>,
     {% for category in categories %}
-      <a href="{{ category.feed_url() }}">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
+      <a href="{{ category.url() }}atom.xml">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
     {% endfor %}
   </small>
 </p>

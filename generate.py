@@ -5,7 +5,7 @@ import datetime as dt
 import re
 import shutil
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
@@ -27,7 +27,7 @@ class Post:
     title: str
     slug: str
     date: dt.date
-    categories: list[str] = field(default_factory=list)
+    categories: list[str]
     content: str
 
     def __lt__(self, other):
@@ -51,16 +51,13 @@ class Category:
     slug: str
 
     def __hash__(self):
-        return hash(self.title)
+        return hash(self.slug)
 
     def __lt__(self, other):
         return self.slug < other.slug
 
     def url(self):
         return f"/writing/category-{self.slug}/"
-
-    def feed_url(self):
-        return f"/writing/category-{self.slug}/atom.xml"
 
 
 def slugify(value):
@@ -132,6 +129,7 @@ def write_feed_with_posts(path, posts, title, link):
     SubElement(root, "link", {"href": link, "rel": "alternate"})
     SubElement(root, "id").text = link
     SubElement(root, "updated").text = posts[0].noon().isoformat()
+    SubElement(SubElement(root, "author"), "name").text = "Matthias Kestenholz"
     for post in posts:
         entry = SubElement(root, "entry")
         SubElement(entry, "title").text = post.title
@@ -147,7 +145,7 @@ def write_feed_with_posts(path, posts, title, link):
 
 
 def write_sitemap(posts):
-    root = Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+    root = Element("urlset", {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"})
     for post in posts:
         SubElement(SubElement(root, "url"), "loc").text = f"{BASE}{post.url()}"
     sitemap = tostring(root, encoding="utf-8", xml_declaration=True)
