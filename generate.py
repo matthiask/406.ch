@@ -34,9 +34,10 @@ class Post:
         return (self.date, self.slug) < (other.date, other.slug)
 
     def html(self):
-        if all(not line.startswith("# ") for line in self.content.splitlines()):
-            self.content = f"# {self.title}\n\n{self.content}"
-        return markdown(self.content, extensions=["smarty", "footnotes", "admonition"])
+        body = markdown(self.content, extensions=["smarty", "footnotes", "admonition"])
+        if "<h1>" not in body:
+            body = markdown(f"# {self.title}", extensions=["smarty"]) + body
+        return body
 
     def url(self):
         return f"/writing/{self.slug}/"
