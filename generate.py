@@ -159,14 +159,14 @@ if __name__ == "__main__":
     env = jinja_env(categories=categories)
     write_file(
         "writing/index.html",
-        f'<meta http-equiv="refresh" content="0; url={BASE}/">',
+        f'<meta http-equiv="refresh" content="0; url={BASE}">',
     )
     write_file("robots.txt", f"User-agent: *\nSitemap: {BASE}/sitemap.xml\n")
     write_sitemap(posts)
     write_file("404.html", render_minified(env.get_template("404.html")))
 
-    archive_template = env.get_template("post_archive.html")
-    post_template = env.get_template("post_detail.html")
+    archive_template = env.get_template("archive.html")
+    post_template = env.get_template("post.html")
 
     write_file("index.html", render_minified(archive_template, posts=posts))
     write_feed_with_posts("writing/", posts[:20], title=TITLE, link=BASE)
