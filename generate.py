@@ -20,6 +20,7 @@ from rcssmin import cssmin
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent
 BASE = "https://406.ch"
+TITLE = "Matthias Kestenholz"
 
 
 @dataclass(kw_only=True)
@@ -126,7 +127,7 @@ def write_feed_with_posts(path, posts, title, link):
     SubElement(root, "link", {"href": link, "rel": "alternate"})
     SubElement(root, "id").text = link
     SubElement(root, "updated").text = posts[0].noon().isoformat()
-    SubElement(SubElement(root, "author"), "name").text = "Matthias Kestenholz"
+    SubElement(SubElement(root, "author"), "name").text = TITLE
     for post in posts:
         entry = SubElement(root, "entry")
         SubElement(entry, "title").text = post.title
@@ -168,12 +169,7 @@ if __name__ == "__main__":
     post_template = env.get_template("post_detail.html")
 
     write_file("index.html", render_minified(archive_template, posts=posts))
-    write_feed_with_posts(
-        "writing/",
-        posts[:20],
-        title="Matthias Kestenholz",
-        link=f"{BASE}/",
-    )
+    write_feed_with_posts("writing/", posts[:20], title=TITLE, link=BASE)
 
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
@@ -184,7 +180,7 @@ if __name__ == "__main__":
         write_feed_with_posts(
             category.url(),
             category_posts[:20],
-            title=f"Matthias Kestenholz: Posts about {category.title}",
+            title=f"{TITLE}: Posts about {category.title}",
             link=f"{BASE}{category.url()}",
         )
 
