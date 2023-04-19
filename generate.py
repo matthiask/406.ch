@@ -152,7 +152,7 @@ if __name__ == "__main__":
     shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
     posts = sorted(load_posts(sys.argv[1:]), reverse=True)
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
-    print(f"Categories: {', '.join(c.title for c in categories)}")
+    print(f"{len(posts)} posts in {', '.join(c.title for c in categories)}")
 
     env = jinja_env(categories=categories)
     write_file(
