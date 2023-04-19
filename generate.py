@@ -34,12 +34,6 @@ class Post:
     def __lt__(self, other):
         return (self.date, self.slug) < (other.date, other.slug)
 
-    def html(self):
-        body = markdown(self.content, extensions=["smarty", "footnotes", "admonition"])
-        if "<h1>" not in body:
-            body = markdown(f"# {self.title}", extensions=["smarty"]) + body
-        return body
-
     def url(self):
         return f"/writing/{self.slug}/"
 
@@ -80,6 +74,9 @@ def load_posts(dirs):
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
             props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
             props = {name.lower(): value for name, value in props}
+            body = markdown(content, extensions=["smarty", "footnotes", "admonition"])
+            if "<h1>" not in body:
+                body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
             yield Post(
                 title=props["title"],
                 slug=props.get("slug") or slugify(props["title"]),
@@ -135,7 +132,7 @@ def write_feed_with_posts(path, posts, title, link):
         SubElement(entry, "link", {"href": link, "rel": "alternate"})
         SubElement(entry, "id").text = link
         SubElement(entry, "published").text = post.noon().isoformat()
-        SubElement(entry, "summary", {"type": "html"}).text = post.html()
+        SubElement(entry, "summary", {"type": "html"}).text = post.content
 
     xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
     write_file(f"{path}atom.xml", xml)
