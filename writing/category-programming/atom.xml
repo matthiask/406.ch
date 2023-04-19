@@ -1,5 +1,46 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-04-16T12:00:00+00:00</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 15)</title><link href="https://406.ch/writing/weeknotes-2023-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-15/</id><published>2023-04-16T12:00:00+00:00</published><summary type="html">&lt;h1&gt;Weeknotes (2023 week 15)&lt;/h1&gt;&lt;h2&gt;Romansh translations for feincms3-cookiecontrol and django-fineforms&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-04-19T12:00:00+00:00</updated><author><name>Matthias Kestenholz</name></author><entry><title>The insides of my static site generator</title><link href="https://406.ch/writing/the-insides-of-my-static-site-generator/" rel="alternate" /><id>https://406.ch/writing/the-insides-of-my-static-site-generator/</id><published>2023-04-19T12:00:00+00:00</published><summary type="html">&lt;h1&gt;The insides of my static site generator&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://406.ch/writing/static-site-generation/"&gt;Last sunday I wrote that I&amp;rsquo;m now using a hacky ~200 LOC Python script to
+generate this blog.&lt;/a&gt; The ~200
+LOC became a challenge to myself immediately and I started refactoring the code
+while adding additional features, adding a licensing comment at the top and
+further reducing the lines of code in there.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t intend to stop working on it, but I&amp;rsquo;m really happy with the result &lt;a href="https://github.com/matthiask/406.ch/blob/main/generate.py"&gt;as
+it is currently&lt;/a&gt;.
+The script is less than 190 lines long and supports:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Generating individual HTML files for the front page, the category pages and posts&lt;/li&gt;
+&lt;li&gt;Generating &lt;code&gt;robots.txt&lt;/code&gt; and &lt;code&gt;sitemap.xml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Generating Atom feeds for all posts and posts of each category.&lt;/li&gt;
+&lt;li&gt;Minifying HTML and CSS using
+  &lt;a href="https://pypi.org/project/minify-html/"&gt;minify-html&lt;/a&gt; and
+  &lt;a href="https://pypi.org/project/rcssmin/"&gt;rcssmin&lt;/a&gt;; the CSS is outputted as a
+  single file and includes the content hash in the filename for better
+  cacheability.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I used Django&amp;rsquo;s &lt;code&gt;feedgenerator.py&lt;/code&gt; module at first to generate the Atom feed;
+I have since switched to directly working with the &lt;a href="https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree"&gt;ElementTree
+API&lt;/a&gt;.
+Yes, it&amp;rsquo;s probably less efficient since it has to keep the whole XML tree in
+memory but who cares when the largest file&amp;rsquo;s file size is under 100 KiB at the
+time of writing.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m using tox to generate the site locally; the local build includes published
+and draft posts. The production build uses GitHub actions and automatically
+deploys to GitHub pages, while only including published posts. There is no
+incremental build right now but rebuilding the whole site using tox (with an
+initialized virtualenv) takes less than one second, so that&amp;rsquo;s not really a pain
+point for me right now.&lt;/p&gt;
+&lt;p&gt;A difficulty was that I have used URLs ending in slashes in the past, not just
+for the browsable pages but also for the Atom feeds themselves. nginx only
+serves &lt;code&gt;index.html&lt;/code&gt; in folders by default so I couldn&amp;rsquo;t just add a
+&lt;code&gt;index.xml&lt;/code&gt; file in those folders. Luckily enough the internet is made of
+lots and lots of duct tape and saving the atom feed as &lt;code&gt;.../feed/index.html&lt;/code&gt;
+actually works. It seems that RSS readers, aggregators and some libraries such
+as &lt;a href="https://pypi.org/project/feedparser/"&gt;feedparser&lt;/a&gt; do not really need the
+correct HTTP headers.&lt;/p&gt;
+&lt;p&gt;I have licensed the script under the &lt;a href="http://www.wtfpl.net/"&gt;WTFPL&lt;/a&gt;, so if
+you&amp;rsquo;re interested you can do what you want with it, without any obligations. I
+would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 15)</title><link href="https://406.ch/writing/weeknotes-2023-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-15/</id><published>2023-04-16T12:00:00+00:00</published><summary type="html">&lt;h1&gt;Weeknotes (2023 week 15)&lt;/h1&gt;&lt;h2&gt;Romansh translations for feincms3-cookiecontrol and django-fineforms&lt;/h2&gt;
 &lt;p&gt;The feincms3 cookie control banner and django-fineforms have received a small update: Support for the &lt;a href="https://en.wikipedia.org/wiki/Romansh_language"&gt;Romansh&lt;/a&gt; language. I would be surprised if any readers of this blog even knew about this language at all. Switzerland has four official languages: German, French, Italian and the mentioned Romansh.&lt;/p&gt;
 &lt;p&gt;It&amp;rsquo;s not a coincidence of course that those two packages have received an update at the same time. Both packages are used for an upcoming campaign site where people may express their support for political action to preserve or protect the &lt;a href="https://en.wikipedia.org/wiki/Biodiversity"&gt;biodiversity&lt;/a&gt;. It&amp;rsquo;s at the same time laughable and horrifying that this is even a thing though: Who in their right mind could NOT agree that preserving biodiversity is important? It&amp;rsquo;s incomprehensible. Maybe I&amp;rsquo;m just a romantic &lt;a href="https://en.wikipedia.org/wiki/Gutmensch"&gt;Gutmensch&lt;/a&gt; after all&amp;hellip;&lt;/p&gt;
 &lt;h2&gt;django-ckeditor&lt;/h2&gt;
@@ -370,14 +411,4 @@ additions = ro.page(paginate_by=10, page=1)
 &lt;h2&gt;FeinCMS 1.20&lt;/h2&gt;
 &lt;p&gt;Some FeinCMS 1.x ItemEditor element attributes clashed with new IDs introduced in Django 3.1. The new version of FeinCMS fixes this.&lt;/p&gt;
 &lt;h2&gt;feincms3&lt;/h2&gt;
-&lt;p&gt;Fixed a few problems in the new inline CKEditor widget for the Django admin. An oversight made it impossible to add CKEditor instances with different configurations. Luckily enough this only affected beta/preview releases :-)&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2021 week 11)</title><link href="https://406.ch/writing/weeknotes-2021-week-11/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2021-week-11/</id><published>2021-03-21T12:00:00+00:00</published><summary type="html">&lt;h1&gt;Weeknotes (2021 week 11)&lt;/h1&gt;
-&lt;h2&gt;django-simple-redirects&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://www.djangoproject.com/"&gt;Django&lt;/a&gt;&amp;lsquo;s built-in &lt;code&gt;django.contrib.redirects&lt;/code&gt; app has a hard dependency on &lt;code&gt;django.contrib.sites&lt;/code&gt;. I&amp;rsquo;m a big fan of NOT hardcoding the current site into the database or into settings except where absolutely necessary. Because of this I extracted the parts I liked into a standalone package with a &lt;a href="https://pypi.org/project/django-sane-redirects/"&gt;questionable and needlessly derogatory name&lt;/a&gt; a few years ago. The old package is still around (no need to break setups) but the package has been renamed to &lt;strong&gt;django-simple-redirects&lt;/strong&gt;, cleaned up for current versions of Python and Django and also been uploaded to PyPI.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-simple-redirects/"&gt;django-simple-redirects on PyPI&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/feinheit/django-simple-redirects/"&gt;django-simple-redirects on GitHub&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;CKEditor instances in Django&amp;rsquo;s admin interface without IFRAMEs&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="" src="https://406.ch/media/cabinet/2021/03/new-inline-ckeditor.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Currently incubating in feincms3. I have a strong dislike for scrollables inside scrollables, the proposed interface is much better.&lt;/p&gt;
-&lt;p&gt;Of course I&amp;rsquo;m still thinking about reimplementing the whole editing interface using &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;, but oh well&amp;hellip; maybe another time, when I do not have any projects for months to come.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;Fixed a few problems in the new inline CKEditor widget for the Django admin. An oversight made it impossible to add CKEditor instances with different configurations. Luckily enough this only affected beta/preview releases :-)&lt;/p&gt;</summary></entry></feed>
