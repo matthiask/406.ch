@@ -10,9 +10,7 @@ LOC became a challenge to myself immediately and I started refactoring the code
 while adding additional features, adding a licensing comment at the top and
 further reducing the lines of code in there.
 
-I don't intend to stop working on it, but I'm really happy with the result [as
-it is currently](https://github.com/matthiask/406.ch/blob/main/generate.py).
-The script is less than 190 lines long and supports:
+I don't intend to stop working on it, but I'm really happy with the result [as it is currently](https://github.com/matthiask/406.ch/blob/e6402d0927c92c6d426db1dd44de6002940f28b7/generate.py). The script is less than 190 lines long and supports:
 
 - Generating individual HTML files for the front page, the category pages and posts
 - Generating `robots.txt` and `sitemap.xml`
