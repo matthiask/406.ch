@@ -5,9 +5,7 @@ generate this blog.&lt;/a&gt; The ~200
 LOC became a challenge to myself immediately and I started refactoring the code
 while adding additional features, adding a licensing comment at the top and
 further reducing the lines of code in there.&lt;/p&gt;
-&lt;p&gt;I don&amp;rsquo;t intend to stop working on it, but I&amp;rsquo;m really happy with the result &lt;a href="https://github.com/matthiask/406.ch/blob/main/generate.py"&gt;as
-it is currently&lt;/a&gt;.
-The script is less than 190 lines long and supports:&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t intend to stop working on it, but I&amp;rsquo;m really happy with the result &lt;a href="https://github.com/matthiask/406.ch/blob/e6402d0927c92c6d426db1dd44de6002940f28b7/generate.py"&gt;as it is currently&lt;/a&gt;. The script is less than 190 lines long and supports:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Generating individual HTML files for the front page, the category pages and posts&lt;/li&gt;
 &lt;li&gt;Generating &lt;code&gt;robots.txt&lt;/code&gt; and &lt;code&gt;sitemap.xml&lt;/code&gt;&lt;/li&gt;
