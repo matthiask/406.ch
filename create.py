@@ -13,7 +13,7 @@ def slugify(value):
     return re.sub(r"[^-a-z0-9]+", "-", value.lower()).strip("-")
 
 
-type = "draft" if len(sys.argv) < 2 else sys.argv[1]
+type = "published" if len(sys.argv) < 2 else sys.argv[1]
 assert type in {"draft", "published"}, "First argument must be 'draft' or 'published'"
 
 if title := input("Title: "):
