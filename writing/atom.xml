@@ -9,12 +9,13 @@ further reducing the lines of code in there.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Generating individual HTML files for the front page, the category pages and posts&lt;/li&gt;
 &lt;li&gt;Generating &lt;code&gt;robots.txt&lt;/code&gt; and &lt;code&gt;sitemap.xml&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Generating Atom feeds for all posts and posts of each category.&lt;/li&gt;
+&lt;li&gt;Generating Atom feeds for all posts and posts of each category&lt;/li&gt;
 &lt;li&gt;Minifying HTML and CSS using
   &lt;a href="https://pypi.org/project/minify-html/"&gt;minify-html&lt;/a&gt; and
   &lt;a href="https://pypi.org/project/rcssmin/"&gt;rcssmin&lt;/a&gt;; the CSS is outputted as a
   single file and includes the content hash in the filename for better
-  cacheability.&lt;/li&gt;
+  cacheability&lt;/li&gt;
+&lt;li&gt;Keeping the link structure of the old Django-based website&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I used Django&amp;rsquo;s &lt;code&gt;feedgenerator.py&lt;/code&gt; module at first to generate the Atom feed;
 I have since switched to directly working with the &lt;a href="https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree"&gt;ElementTree
