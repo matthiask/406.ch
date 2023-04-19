@@ -1,6 +1,6 @@
 Title: The insides of my static site generator
 Date: 2023-04-19
-Categories: Programming
+Categories: Django, Programming
 
 # The insides of my static site generator
 
@@ -14,12 +14,13 @@ I don't intend to stop working on it, but I'm really happy with the result [as i
 
 - Generating individual HTML files for the front page, the category pages and posts
 - Generating `robots.txt` and `sitemap.xml`
-- Generating Atom feeds for all posts and posts of each category.
+- Generating Atom feeds for all posts and posts of each category
 - Minifying HTML and CSS using
   [minify-html](https://pypi.org/project/minify-html/) and
   [rcssmin](https://pypi.org/project/rcssmin/); the CSS is outputted as a
   single file and includes the content hash in the filename for better
-  cacheability.
+  cacheability
+- Keeping the link structure of the old Django-based website
 
 I used Django's `feedgenerator.py` module at first to generate the Atom feed;
 I have since switched to directly working with the [ElementTree
