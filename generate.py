@@ -29,7 +29,7 @@ class Post:
     slug: str
     date: dt.date
     categories: list[str]
-    content: str
+    body: str
 
     def __lt__(self, other):
         return (self.date, self.slug) < (other.date, other.slug)
@@ -82,7 +82,7 @@ def load_posts(dirs):
                 slug=props.get("slug") or slugify(props["title"]),
                 date=dt.datetime.strptime(props["date"], "%Y-%m-%d").date(),
                 categories=parse_categories(props.get("categories") or ""),
-                content=content,
+                body=body,
             )
         except Exception as exc:
             md = md.relative_to(BASE_DIR)
@@ -132,7 +132,7 @@ def write_feed_with_posts(path, posts, title, link):
         SubElement(entry, "link", {"href": link, "rel": "alternate"})
         SubElement(entry, "id").text = link
         SubElement(entry, "published").text = post.noon().isoformat()
-        SubElement(entry, "summary", {"type": "html"}).text = post.content
+        SubElement(entry, "summary", {"type": "html"}).text = post.body
 
     xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
     write_file(f"{path}atom.xml", xml)
