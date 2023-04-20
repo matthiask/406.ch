@@ -103,15 +103,12 @@ def styles():
     return style_file
 
 
-def jinja_env(**kwargs):
+def jinja_templates(**kwargs):
     loader = FileSystemLoader([BASE_DIR / "templates"])
     env = Environment(loader=loader, autoescape=True)
     env.globals.update({"year": date.today().year, "styles": styles()} | kwargs)
-    return env
-
-
-def render_minified(template, **kwargs):
-    return minify(template.render(**kwargs))
+    r = lambda template: lambda **ctx: minify(template.render(**ctx))  # noqa: E731
+    return [r(env.get_template(f"{t}.html")) for t in ["archive", "post", "404"]]
 
 
 def write_feed_with_posts(path, posts, title, link):
@@ -145,28 +142,27 @@ def write_sitemap(posts):
 
 if __name__ == "__main__":
     start = perf_counter()
-    shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
     posts = sorted(load_posts(sys.argv[1:]), reverse=True)
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
     print(f"{len(posts)} posts in {', '.join(c.title for c in categories)}")
 
-    env = jinja_env(categories=categories)
+    shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
     write_file("writing/index.html", f'<meta content="0;url={BASE}"http-equiv=refresh>')
     write_file("robots.txt", f"User-agent: *\nSitemap: {BASE}/sitemap.xml\n")
     write_sitemap(posts)
-    write_file("404.html", render_minified(env.get_template("404.html")))
 
-    archive_template = env.get_template("archive.html")
-    post_template = env.get_template("post.html")
-
-    write_file("index.html", render_minified(archive_template, posts=posts))
+    archive, detail, not_found = jinja_templates(categories=categories)
+    write_file("404.html", not_found())
+    write_file("index.html", archive(posts=posts))
     write_feed_with_posts("writing/", posts[:20], title=TITLE, link=BASE)
+    for post in posts:
+        write_file(f"{post.url()}index.html", detail(post=post))
 
     for category in categories:
         category_posts = [post for post in posts if category in post.categories]
         write_file(
             f"{category.url()}index.html",
-            render_minified(archive_template, posts=category_posts, current=category),
+            archive(posts=category_posts, current=category),
         )
         write_feed_with_posts(
             category.url(),
@@ -174,8 +170,5 @@ if __name__ == "__main__":
             title=f"{TITLE}: Posts about {category.title}",
             link=f"{BASE}{category.url()}",
         )
-
-    for post in posts:
-        write_file(f"{post.url()}index.html", render_minified(post_template, post=post))
 
     print(f"Wrote {write_file.cc} files in {perf_counter() - start:.2f} seconds.")
