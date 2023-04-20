@@ -98,9 +98,9 @@ def write_file(path, content):
 
 def styles():
     styles = cssmin("".join(file.read_text() for file in BASE_DIR.glob("styles/*.css")))
-    style_file = f"styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
+    style_file = f"/styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
     write_file(style_file, styles)
-    return f"/{style_file}"
+    return style_file
 
 
 def jinja_env(**kwargs):
@@ -151,10 +151,7 @@ if __name__ == "__main__":
     print(f"{len(posts)} posts in {', '.join(c.title for c in categories)}")
 
     env = jinja_env(categories=categories)
-    write_file(
-        "writing/index.html",
-        f'<meta http-equiv="refresh" content="0; url={BASE}">',
-    )
+    write_file("writing/index.html", f'<meta content="0;url={BASE}"http-equiv=refresh>')
     write_file("robots.txt", f"User-agent: *\nSitemap: {BASE}/sitemap.xml\n")
     write_sitemap(posts)
     write_file("404.html", render_minified(env.get_template("404.html")))
