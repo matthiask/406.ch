@@ -1,11 +1,11 @@
 # License: WTFPL (DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE)
 # See http://www.wtfpl.net/
 
-import datetime as dt
 import re
 import shutil
 import sys
 from dataclasses import dataclass
+from datetime import date, datetime, time, timezone
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
@@ -27,7 +27,7 @@ TITLE = "Matthias Kestenholz"
 class Post:
     title: str
     slug: str
-    date: dt.date
+    date: date
     categories: list[str]
     body: str
 
@@ -38,7 +38,7 @@ class Post:
         return f"/writing/{self.slug}/"
 
     def noon(self):
-        return dt.datetime.combine(self.date, dt.time(12, 0), tzinfo=dt.timezone.utc)
+        return datetime.combine(self.date, time(12, 0), tzinfo=timezone.utc)
 
 
 @dataclass(kw_only=True)
@@ -80,7 +80,7 @@ def load_posts(dirs):
             yield Post(
                 title=props["title"],
                 slug=props.get("slug") or slugify(props["title"]),
-                date=dt.datetime.strptime(props["date"], "%Y-%m-%d").date(),
+                date=datetime.strptime(props["date"], "%Y-%m-%d").date(),
                 categories=parse_categories(props.get("categories") or ""),
                 body=body,
             )
@@ -96,10 +96,8 @@ def write_file(path, content):
     write_file.cc = getattr(write_file, "cc", 0) + 1
 
 
-def styles_url():
-    styles = cssmin(
-        "".join(file.read_text() for file in (BASE_DIR / "styles").glob("*.css"))
-    )
+def styles():
+    styles = cssmin("".join(file.read_text() for file in BASE_DIR.glob("styles/*.css")))
     style_file = f"styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
     write_file(style_file, styles)
     return f"/{style_file}"
@@ -108,9 +106,7 @@ def styles_url():
 def jinja_env(**kwargs):
     loader = FileSystemLoader([BASE_DIR / "templates"])
     env = Environment(loader=loader, autoescape=True)
-    env.globals["year"] = dt.date.today().year
-    env.globals["styles_url"] = styles_url()
-    env.globals.update(kwargs)
+    env.globals.update({"year": date.today().year, "styles": styles()} | kwargs)
     return env
 
 
