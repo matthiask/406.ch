@@ -13,7 +13,7 @@ def slugify(value):
 while True:
     type = input("Create a draft? [Y/n] ").lower()
     if type in {"", "y", "n"}:
-        type = "published" if type == "n" else "draft"
+        type = "posts" if type == "n" else "drafts"
         break
 while True:
     title = input("Title: ")
