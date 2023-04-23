@@ -1,5 +1,5 @@
 Title: Static site generation
-Date: 2023-04-16
+Date: 2023-04-15
 Categories: Django, Programming
 
 # Static site generation
