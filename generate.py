@@ -28,6 +28,7 @@ class Post:
     title: str
     slug: str
     date: date
+    updated: datetime
     categories: list[str]
     body: str
 
@@ -36,9 +37,6 @@ class Post:
 
     def url(self):
         return f"/writing/{self.slug}/"
-
-    def noon(self):
-        return datetime.combine(self.date, time(12, 0), tzinfo=timezone.utc)
 
 
 @dataclass(kw_only=True)
@@ -77,10 +75,12 @@ def load_posts(dirs):
             body = markdown(content, extensions=["smarty", "footnotes", "admonition"])
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
+            date = datetime.strptime(props["date"], "%Y-%m-%d").date()
             yield Post(
                 title=props["title"],
                 slug=props.get("slug") or slugify(props["title"]),
-                date=datetime.strptime(props["date"], "%Y-%m-%d").date(),
+                date=date,
+                updated=datetime.combine(date, time(12, 0), tzinfo=timezone.utc),
                 categories=parse_categories(props.get("categories") or ""),
                 body=body,
             )
@@ -117,7 +117,7 @@ def write_feed_with_posts(path, posts, title, link):
     SubElement(root, "link", {"href": f"{BASE}/{path}atom.xml", "rel": "self"})
     SubElement(root, "link", {"href": link, "rel": "alternate"})
     SubElement(root, "id").text = link
-    SubElement(root, "updated").text = posts[0].noon().isoformat()
+    SubElement(root, "updated").text = posts[0].updated.isoformat()
     SubElement(SubElement(root, "author"), "name").text = TITLE
     for post in posts:
         entry = SubElement(root, "entry")
@@ -125,8 +125,8 @@ def write_feed_with_posts(path, posts, title, link):
         link = f"{BASE}{post.url()}"
         SubElement(entry, "link", {"href": link, "rel": "alternate"})
         SubElement(entry, "id").text = link
-        SubElement(entry, "published").text = post.noon().isoformat()
-        SubElement(entry, "updated").text = post.noon().isoformat()
+        SubElement(entry, "published").text = post.updated.isoformat()
+        SubElement(entry, "updated").text = post.updated.isoformat()
         SubElement(entry, "summary", {"type": "html"}).text = post.body
 
     xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
