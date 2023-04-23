@@ -114,6 +114,7 @@ def jinja_templates(**kwargs):
 def write_feed_with_posts(path, posts, title, link):
     root = Element("feed", {"xml:lang": "en", "xmlns": "http://www.w3.org/2005/Atom"})
     SubElement(root, "title").text = title
+    SubElement(root, "link", {"href": f"{link}/atom.xml", "rel": "self"})
     SubElement(root, "link", {"href": link, "rel": "alternate"})
     SubElement(root, "id").text = link
     SubElement(root, "updated").text = posts[0].noon().isoformat()
@@ -125,6 +126,7 @@ def write_feed_with_posts(path, posts, title, link):
         SubElement(entry, "link", {"href": link, "rel": "alternate"})
         SubElement(entry, "id").text = link
         SubElement(entry, "published").text = post.noon().isoformat()
+        SubElement(entry, "updated").text = post.noon().isoformat()
         SubElement(entry, "summary", {"type": "html"}).text = post.body
 
     xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
@@ -154,7 +156,7 @@ if __name__ == "__main__":
     archive, detail, not_found = jinja_templates(categories=categories)
     write_file("404.html", not_found())
     write_file("index.html", archive(posts=posts))
-    write_feed_with_posts("writing/", posts[:20], title=TITLE, link=BASE)
+    write_feed_with_posts("writing/", posts[:20], title=TITLE, link=f"{BASE}/")
     for post in posts:
         write_file(f"{post.url()}index.html", detail(post=post))
 
