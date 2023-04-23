@@ -114,7 +114,7 @@ def jinja_templates(**kwargs):
 def write_feed_with_posts(path, posts, title, link):
     root = Element("feed", {"xml:lang": "en", "xmlns": "http://www.w3.org/2005/Atom"})
     SubElement(root, "title").text = title
-    SubElement(root, "link", {"href": f"{link}/atom.xml", "rel": "self"})
+    SubElement(root, "link", {"href": f"{BASE}/{path}atom.xml", "rel": "self"})
     SubElement(root, "link", {"href": link, "rel": "alternate"})
     SubElement(root, "id").text = link
     SubElement(root, "updated").text = posts[0].noon().isoformat()
@@ -167,7 +167,7 @@ if __name__ == "__main__":
             archive(posts=category_posts, current=category),
         )
         write_feed_with_posts(
-            category.url(),
+            category.url().lstrip("/"),
             category_posts[:20],
             title=f"{TITLE}: Posts about {category.title}",
             link=f"{BASE}{category.url()}",
