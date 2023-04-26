@@ -144,7 +144,7 @@ def write_sitemap(posts):
 if __name__ == "__main__":
     posts = sorted(load_posts(sys.argv[1:]), reverse=True)
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
-    print(f"{len(posts)} posts in {', '.join(c.title for c in categories)}")
+    print(f"{len(posts)} posts in {', '.join(c.title for c in categories)}.")
 
     shutil.rmtree(BASE_DIR / "htdocs", ignore_errors=True)
     write_file("writing/index.html", f'<meta content="0;url={BASE}"http-equiv=refresh>')
