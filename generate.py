@@ -9,7 +9,6 @@ from datetime import date, datetime, time, timezone
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
-from time import perf_counter
 from xml.etree.ElementTree import Element, SubElement, tostring
 
 from jinja2 import Environment, FileSystemLoader
@@ -143,7 +142,6 @@ def write_sitemap(posts):
 
 
 if __name__ == "__main__":
-    start = perf_counter()
     posts = sorted(load_posts(sys.argv[1:]), reverse=True)
     categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
     print(f"{len(posts)} posts in {', '.join(c.title for c in categories)}")
@@ -172,5 +170,4 @@ if __name__ == "__main__":
             title=f"{TITLE}: Posts about {category.title}",
             link=f"{BASE}{category.url()}",
         )
-
-    print(f"Wrote {write_file.cc} files in {perf_counter() - start:.2f} seconds.")
+    print(f"Wrote {write_file.cc} files.")
