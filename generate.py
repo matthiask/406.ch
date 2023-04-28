@@ -5,7 +5,7 @@ import re
 import shutil
 import sys
 from dataclasses import dataclass
-from datetime import date, datetime, time, timezone
+from datetime import date, datetime
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
@@ -27,7 +27,7 @@ class Post:
     title: str
     slug: str
     date: date
-    updated: datetime
+    updated: str
     categories: list[str]
     body: str
 
@@ -79,7 +79,7 @@ def load_posts(dirs):
                 title=props["title"],
                 slug=props.get("slug") or slugify(props["title"]),
                 date=date,
-                updated=datetime.combine(date, time(12, 0), tzinfo=timezone.utc),
+                updated=f"{date.isoformat()}T12:00:00Z",
                 categories=parse_categories(props.get("categories") or ""),
                 body=body,
             )
@@ -116,7 +116,7 @@ def write_feed_with_posts(path, posts, title, link):
     SubElement(root, "link", {"href": f"{BASE}/{path}atom.xml", "rel": "self"})
     SubElement(root, "link", {"href": link, "rel": "alternate"})
     SubElement(root, "id").text = link
-    SubElement(root, "updated").text = posts[0].updated.isoformat()
+    SubElement(root, "updated").text = posts[0].updated
     SubElement(SubElement(root, "author"), "name").text = TITLE
     for post in posts:
         entry = SubElement(root, "entry")
@@ -124,8 +124,8 @@ def write_feed_with_posts(path, posts, title, link):
         link = f"{BASE}{post.url()}"
         SubElement(entry, "link", {"href": link, "rel": "alternate"})
         SubElement(entry, "id").text = link
-        SubElement(entry, "published").text = post.updated.isoformat()
-        SubElement(entry, "updated").text = post.updated.isoformat()
+        SubElement(entry, "published").text = post.updated
+        SubElement(entry, "updated").text = post.updated
         SubElement(entry, "summary", {"type": "html"}).text = post.body
 
     xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
