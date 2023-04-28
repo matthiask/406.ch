@@ -22,32 +22,23 @@ BASE = "https://406.ch"
 TITLE = "Matthias Kestenholz"
 
 
-@dataclass(kw_only=True)
+@dataclass(kw_only=True, frozen=True, order=True)
 class Post:
-    title: str
-    slug: str
     date: date
+    slug: str
+    title: str
     updated: str
     categories: list[str]
     body: str
-
-    def __lt__(self, other):
-        return (self.date, self.slug) < (other.date, other.slug)
 
     def url(self):
         return f"/writing/{self.slug}/"
 
 
-@dataclass(kw_only=True)
+@dataclass(kw_only=True, frozen=True, order=True)
 class Category:
-    title: str
     slug: str
-
-    def __hash__(self):
-        return hash(self.slug)
-
-    def __lt__(self, other):
-        return self.slug < other.slug
+    title: str
 
     def url(self):
         return f"/writing/category-{self.slug}/"
@@ -76,9 +67,9 @@ def load_posts(dirs):
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
             date = datetime.strptime(props["date"], "%Y-%m-%d").date()
             yield Post(
-                title=props["title"],
-                slug=props.get("slug") or slugify(props["title"]),
                 date=date,
+                slug=props.get("slug") or slugify(props["title"]),
+                title=props["title"],
                 updated=f"{date.isoformat()}T12:00:00Z",
                 categories=parse_categories(props.get("categories") or ""),
                 body=body,
