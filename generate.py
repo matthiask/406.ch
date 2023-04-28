@@ -92,7 +92,7 @@ def write_file(path, content):
     file = BASE_DIR / "htdocs" / path.lstrip("/")
     file.parent.mkdir(parents=True, exist_ok=True)
     file.write_text(content)
-    write_file.cc = getattr(write_file, "cc", 0) + 1
+    write_file.count = getattr(write_file, "count", 0) + 1
 
 
 def styles():
@@ -137,8 +137,8 @@ def write_sitemap(posts):
     root = Element("urlset", {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"})
     for post in posts:
         SubElement(SubElement(root, "url"), "loc").text = f"{BASE}{post.url()}"
-    sitemap = tostring(root, encoding="utf-8", xml_declaration=True)
-    write_file("sitemap.xml", sitemap.decode("utf-8"))
+    xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
+    write_file("sitemap.xml", xml)
 
 
 if __name__ == "__main__":
@@ -170,4 +170,4 @@ if __name__ == "__main__":
             title=f"{TITLE}: Posts about {category.title}",
             link=f"{BASE}{category.url()}",
         )
-    print(f"Wrote {write_file.cc} files.")
+    print(f"Wrote {write_file.count} files.")
