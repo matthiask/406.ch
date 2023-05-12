@@ -87,7 +87,7 @@ def write_file(path, content):
 
 
 def styles():
-    styles = cssmin("".join(file.read_text() for file in DIR.glob("styles/*.css")))
+    styles = cssmin("".join(f.read_text() for f in sorted(DIR.glob("styles/*.css"))))
     style_file = f"/styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
     write_file(style_file, styles)
     return style_file
