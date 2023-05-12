@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-04-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 17)</title><link href="https://406.ch/writing/weeknotes-2023-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-17/</id><published>2023-04-28T12:00:00Z</published><updated>2023-04-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 17)&lt;/h1&gt;&lt;h2&gt;Birthday&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-05-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 18 and 19)</title><link href="https://406.ch/writing/weeknotes-2023-week-18-and-19/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-18-and-19/</id><published>2023-05-12T12:00:00Z</published><updated>2023-05-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 18 and 19)&lt;/h1&gt;
+&lt;p&gt;Not much programming this week :-(&lt;/p&gt;
+&lt;h2&gt;oEmbed&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-17/"&gt;Still occupying myself with oEmbed.&lt;/a&gt; I have been looking at a few libraries and have rediscovered &lt;a href="https://github.com/coleifer/micawber/"&gt;micawber&lt;/a&gt; which probably does everything I need. Yay, another reinvented wheel avoided. I haven&amp;rsquo;t tested it yet but I&amp;rsquo;m quite sure that replacing the &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/plugins/external.py"&gt;oEmbed functionality in feincms3&amp;rsquo;s external plugin&lt;/a&gt; with micawber would be a good idea.&lt;/p&gt;
+&lt;h2&gt;Vacation&lt;/h2&gt;
+&lt;p&gt;Vacation last week. Was nice. We went for a few hikes. I have learned that I&amp;rsquo;m
+not totally free from giddiness anymore. Oh well.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 17)</title><link href="https://406.ch/writing/weeknotes-2023-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-17/</id><published>2023-04-28T12:00:00Z</published><updated>2023-04-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 17)&lt;/h1&gt;&lt;h2&gt;Birthday&lt;/h2&gt;
 &lt;p&gt;Another year achieved. Feels the same as last year. I&amp;rsquo;m glad.&lt;/p&gt;
 &lt;h2&gt;feincms3-cookiecontrol&lt;/h2&gt;
 &lt;p&gt;I have released &lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
@@ -372,39 +378,4 @@ def generate_csv(request):
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/matthiask/django-fast-export/"&gt;django-fast-export&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Recent objects using several Django models</title><link href="https://406.ch/writing/recent-objects-using-several-django-models/" rel="alternate" /><id>https://406.ch/writing/recent-objects-using-several-django-models/</id><published>2022-05-11T12:00:00Z</published><updated>2022-05-11T12:00:00Z</updated><summary type="html">&lt;h1&gt;Recent objects using several Django models&lt;/h1&gt;
-&lt;p&gt;I released a new Python package which builds on the excellent code published by Simon Willison in the blog post &lt;a href="https://simonwillison.net/2018/Mar/25/combined-recent-additions/"&gt;Building a combined stream of recent additions using the Django ORM&lt;/a&gt;. The rationale etc. for why this is useful is described much better by him and I&amp;rsquo;ll save everyone&amp;rsquo;s time by not repeating it in a worse way.&lt;/p&gt;
-&lt;p&gt;The new package is &lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt;, developed on GitHub and available from PyPI.&lt;/p&gt;
-&lt;p&gt;The package supports e.g. combining recent articles and comments in a single activity stream:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from testapp.models import Article, Comment
-from recent_objects.recent_objects import RecentObjects
-
-ro = RecentObjects(
-    [
-        {
-            "queryset": Article.objects.all(),
-            "date_field": "created_at",
-        },
-        {
-            "queryset": Comment.objects.all(),
-            "date_field": "created_at",
-        },
-    ]
-)
-
-additions = ro.page(paginate_by=10, page=1)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt; adds the following features which aren&amp;rsquo;t available in the blogpost linked above:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The name of the &lt;code&gt;date_field&lt;/code&gt; doesn&amp;rsquo;t have to be the same for all objects&lt;/li&gt;
-&lt;li&gt;Primary keys of different types are&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt; supported&lt;/li&gt;
-&lt;li&gt;The code uses a real paginator and doesn&amp;rsquo;t only support fetching the first few objects&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;Hopefully!&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
