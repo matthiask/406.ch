@@ -1,0 +1,32 @@
+<!doctypehtml><html lang=en><meta charset=utf-8><meta content=width=device-width,initial-scale=1.0 name=viewport><title>Unlearning SCSS to use CSS variables effectively - Matthias Kestenholz</title><link href=/styles.e1e3d0e38f27.css rel=stylesheet><link title="Blog feed"href=/writing/atom.xml rel=alternate type=application/atom+xml><body><header><div class=wrappy><a class=back href=/>Back to the overview</a></div></header><main><div class=wrappy><div class=text><h1>Unlearning SCSS to use CSS variables effectively</h1><p>SCSS variables are a way to stop repeating the same values over and over. They are very useful already, especially when used together with some of the more interesting SCSS functions such as <code>brighten()</code>, <code>darken()</code> etc. CSS doesn’t really have ways to do the same yet. <code>hsl(var(...)...)</code> only gets you so far.<p>CSS variables are another beast. You can use them the same way by replacing <code>$</code> with <code>--</code> but if you do this you’re missing out big time on the features which actually make CSS variables great: The cascade and the ability to update them in response to media queries, interactions or other events.<p>The way I’m using CSS variables is:<ul><li>Define good defaults on the <code>:root</code> selector.<li>Change those defaults in response to media queries, e.g. for large screens when writing mobile first CSS – as you should.<li>Override defaults in some contexts, e.g. in an <code>&LTaside></code> or some other fitting component.</ul><p>Suppose you wanted different spacings between components depending on the breakpoint. You could go the fully fluid route with <code>clamp()</code>, <code>max()</code>, <code>min()</code> and viewport-relative units. It’s simpler to keep the complexity lower and use breakpoints, certainly for me.<pre><code>:root {
+  --space: 1rem;
+}
+
+@media (min-width: 800px) {
+  :root {
+    --space: 2rem;
+  }
+}
+</code></pre><p>Now you can use <code>var(--space)</code> everywhere:<pre><code>.box {
+  margin-bottom: var(--space);
+}
+</code></pre><p>The equivalent SCSS would probably look something like this, with a fitting <code>breakpoint()</code> mixin:<pre><code>$space-sm: 1rem;
+$space-md: 2rem;
+
+.box {
+  margin-bottom: $space-sm;
+
+  @include breakpoint(md) {
+    margin-bottom: $space-md;
+  }
+}
+</code></pre><p>That doesn’t look too bad until you have to repeat the breakpoint in all your components. That’s when SCSS gets boring while CSS is staying awesome.<h2>Upping your game.</h2><p>You could also use <a href=https://www.npmjs.com/package/@csstools/postcss-nesting-experimental>postcss-nesting</a> and <a href=https://www.npmjs.com/package/postcss-custom-media>postcss-custom-media</a> and write:<pre><code>@custom-media --media-md (min-width: 800px);
+
+:root {
+  --space: 1rem;
+
+  @media (--media-md) {
+    --space: 2rem;
+  }
+}
+</code></pre><p>Nesting is definitely a two-edged sword though. CSS methodologies such as BEM (Block Element Modifier) should generally fix the need to use nesting at all. Nesting leads to overspecific CSS, and also to an enormous amount of generated CSS which is also brittle and basically impossible to refactor (“write-only CSS”). But, in some contexts it’s really nice. I do like the fact that indentation has a specific meaning if used like that.</div></div></main><footer><div class=wrappy><p><small> I like feedback! <a href="mailto:mk@406.ch?subject=Unlearning SCSS to use CSS variables effectively">Send me an email.</a> <br> <a rel="noopener noreferrer"href=https://ko-fi.com/matthiask target=_blank>☕ Buy me a coffee?</a> <br> Published on 2023-05-31 in <a href=/writing/category-programming/>Programming</a> </small></p><script async crossorigin issue-term=pathname repo=matthiask/406-comments src=https://utteranc.es/client.js theme=github-dark></script></div></footer>

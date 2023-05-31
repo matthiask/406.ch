@@ -1,5 +1,76 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-05-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 18 and 19)</title><link href="https://406.ch/writing/weeknotes-2023-week-18-and-19/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-18-and-19/</id><published>2023-05-12T12:00:00Z</published><updated>2023-05-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 18 and 19)&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-05-31T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Unlearning SCSS to use CSS variables effectively</title><link href="https://406.ch/writing/unlearning-scss-to-use-css-variables-effectively/" rel="alternate" /><id>https://406.ch/writing/unlearning-scss-to-use-css-variables-effectively/</id><published>2023-05-31T12:00:00Z</published><updated>2023-05-31T12:00:00Z</updated><summary type="html">&lt;h1&gt;Unlearning SCSS to use CSS variables effectively&lt;/h1&gt;
+&lt;p&gt;SCSS variables are a way to stop repeating the same values over and over. They
+are very useful already, especially when used together with some of the more
+interesting SCSS functions such as &lt;code&gt;brighten()&lt;/code&gt;, &lt;code&gt;darken()&lt;/code&gt; etc. CSS doesn&amp;rsquo;t
+really have ways to do the same yet. &lt;code&gt;hsl(var(...)...)&lt;/code&gt; only gets you so far.&lt;/p&gt;
+&lt;p&gt;CSS variables are another beast. You can use them the same way by replacing &lt;code&gt;$&lt;/code&gt;
+with &lt;code&gt;--&lt;/code&gt; but if you do this you&amp;rsquo;re missing out big time on the features which
+actually make CSS variables great: The cascade and the ability to update them
+in response to media queries, interactions or other events.&lt;/p&gt;
+&lt;p&gt;The way I&amp;rsquo;m using CSS variables is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Define good defaults on the &lt;code&gt;:root&lt;/code&gt; selector.&lt;/li&gt;
+&lt;li&gt;Change those defaults in response to media queries, e.g. for large screens
+  when writing mobile first CSS &amp;ndash; as you should.&lt;/li&gt;
+&lt;li&gt;Override defaults in some contexts, e.g. in an &lt;code&gt;&amp;lt;aside&amp;gt;&lt;/code&gt; or some other
+  fitting component.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Suppose you wanted different spacings between components depending on the
+breakpoint. You could go the fully fluid route with &lt;code&gt;clamp()&lt;/code&gt;, &lt;code&gt;max()&lt;/code&gt;, &lt;code&gt;min()&lt;/code&gt;
+and viewport-relative units. It&amp;rsquo;s simpler to keep the complexity lower and use
+breakpoints, certainly for me.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;:root {
+  --space: 1rem;
+}
+
+@media (min-width: 800px) {
+  :root {
+    --space: 2rem;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now you can use &lt;code&gt;var(--space)&lt;/code&gt; everywhere:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.box {
+  margin-bottom: var(--space);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The equivalent SCSS would probably look something like this, with a fitting
+&lt;code&gt;breakpoint()&lt;/code&gt; mixin:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$space-sm: 1rem;
+$space-md: 2rem;
+
+.box {
+  margin-bottom: $space-sm;
+
+  @include breakpoint(md) {
+    margin-bottom: $space-md;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That doesn&amp;rsquo;t look too bad until you have to repeat the breakpoint in all your
+components. That&amp;rsquo;s when SCSS gets boring while CSS is staying awesome.&lt;/p&gt;
+&lt;h2&gt;Upping your game.&lt;/h2&gt;
+&lt;p&gt;You could also use
+&lt;a href="https://www.npmjs.com/package/@csstools/postcss-nesting-experimental"&gt;postcss-nesting&lt;/a&gt;
+and &lt;a href="https://www.npmjs.com/package/postcss-custom-media"&gt;postcss-custom-media&lt;/a&gt;
+and write:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@custom-media --media-md (min-width: 800px);
+
+:root {
+  --space: 1rem;
+
+  @media (--media-md) {
+    --space: 2rem;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Nesting is definitely a two-edged sword though. CSS methodologies such as BEM
+(Block Element Modifier) should generally fix the need to use nesting at all.
+Nesting leads to overspecific CSS, and also to an enormous amount of generated
+CSS which is also brittle and basically impossible to refactor (&amp;ldquo;write-only
+CSS&amp;rdquo;). But, in some contexts it&amp;rsquo;s really nice. I do like the fact that
+indentation has a specific meaning if used like that.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 18 and 19)</title><link href="https://406.ch/writing/weeknotes-2023-week-18-and-19/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-18-and-19/</id><published>2023-05-12T12:00:00Z</published><updated>2023-05-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 18 and 19)&lt;/h1&gt;
 &lt;p&gt;Not much programming this week :-(&lt;/p&gt;
 &lt;h2&gt;oEmbed&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-17/"&gt;Still occupying myself with oEmbed.&lt;/a&gt; I have been looking at a few libraries and have rediscovered &lt;a href="https://github.com/coleifer/micawber/"&gt;micawber&lt;/a&gt; which probably does everything I need. Yay, another reinvented wheel avoided. I haven&amp;rsquo;t tested it yet but I&amp;rsquo;m quite sure that replacing the &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/plugins/external.py"&gt;oEmbed functionality in feincms3&amp;rsquo;s external plugin&lt;/a&gt; with micawber would be a good idea.&lt;/p&gt;
@@ -328,54 +399,4 @@ def datasets():
 &lt;p&gt;&lt;small&gt;I have been sitting on this blog post for almost two years, and the ideas here have been gestating even longer. I&amp;rsquo;m sure someone else has said everything in here more eloquently in the meantime. But anyway, feedback is welcome as always and I don&amp;rsquo;t think the post is so bad that it should sit in the draft folder forever.&lt;/small&gt;&lt;/p&gt;</summary></entry><entry><title>Configuring Django backends using speckenv’s 12factor support</title><link href="https://406.ch/writing/configuring-django-backends-using-speckenvs-12factor-support/" rel="alternate" /><id>https://406.ch/writing/configuring-django-backends-using-speckenvs-12factor-support/</id><published>2022-08-18T12:00:00Z</published><updated>2022-08-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Configuring Django backends using speckenv&amp;rsquo;s 12factor support&lt;/h1&gt;
 &lt;p&gt;There are many many 12factor utility apps available to configure databases, caches and the email backend in Django apps, for example &lt;a href="https://github.com/jazzband/dj-database-url/"&gt;dj-database-url&lt;/a&gt;, &lt;a href="https://github.com/epicserve/django-cache-url/"&gt;django-cache-url&lt;/a&gt; and &lt;a href="https://github.com/migonzalvar/dj-email-url/"&gt;dj-email-url&lt;/a&gt;. As I wrote in my 2020 blog post &lt;a href="https://406.ch/writing/using-environment-variables-to-configure-django/"&gt;Using environment variables to configure Django&lt;/a&gt; I liked using them &amp;ndash; a lot. However, this has changed a bit because I don&amp;rsquo;t like the fact that all released versions of those libraries modify the &lt;code&gt;urllib.uses_netloc&lt;/code&gt; list with their own protocols (when it&amp;rsquo;s not necessary at all) and I don&amp;rsquo;t like it either that some bugs still exist in some libraries which make upgrading projects in our environments from Django 3.2 to Django 4.0 harder than it should be; the problem isn&amp;rsquo;t really caused by Django&amp;rsquo;s new built-in features but rather surfaced by it.&lt;/p&gt;
 &lt;p&gt;Anyway, since I already had a library which helped reading settings from the environment, adding another utility which transforms DSNs to configuration dictionaries understood by Django was straightforward. And that&amp;rsquo;s why I&amp;rsquo;m now happily using &lt;a href="https://github.com/matthiask/speckenv/#django-support"&gt;speckenv&amp;rsquo;s Django support&lt;/a&gt; for those use cases.&lt;/p&gt;
-&lt;p&gt;Reducing the amount of dependencies in a project maybe shouldn&amp;rsquo;t be a goal in itself, but replacing generic utilities with more opinionated utilities is certainly a net positive in my book (if it is possible!)&lt;/p&gt;</summary></entry><entry><title>Generating XLSX (or CSV) from the Django admin (or elsewhere)</title><link href="https://406.ch/writing/generating-xlsx-or-csv-from-the-django-admin-or-elsewhere/" rel="alternate" /><id>https://406.ch/writing/generating-xlsx-or-csv-from-the-django-admin-or-elsewhere/</id><published>2022-08-17T12:00:00Z</published><updated>2022-08-17T12:00:00Z</updated><summary type="html">&lt;h1&gt;Generating XLSX (or CSV) from the Django admin (or elsewhere)&lt;/h1&gt;
-&lt;p&gt;The blog post &lt;a href="https://reinout.vanrees.org/weblog/2022/08/15/excel-instead-of-csv.html"&gt;Django: excel output instead of csv&lt;/a&gt; inspired me to write about my own experience with XLSX or CSV generation.&lt;/p&gt;
-&lt;h2&gt;XLSX export&lt;/h2&gt;
-&lt;p&gt;For a long time I used similarly structured ad-hoc code built on &lt;a href="https://pypi.org/project/xlwt/"&gt;xlwt&lt;/a&gt;, a project which looks abandoned these days. I have been a more or less happy user of &lt;a href="https://pypi.org/project/openpyxl/"&gt;openpyxl&lt;/a&gt; during the last years and intend to continue using it.&lt;/p&gt;
-&lt;p&gt;Something which I (or rather my users) require often is a way to export a list of selected objects from the Django admin. A good way to achieve this is by using an &lt;a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/actions/"&gt;admin action&lt;/a&gt;. The common use case is that I have to export all model fields and maybe some additional data. &lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt; makes this very easy, all you have to do is:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from django.contrib import admin
-from xlsxdocument import export_selected
-from app import models
-
-@admin.register(models.Example)
-class ExampleAdmin(admin.ModelAdmin):
-    actions = [export_selected]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you wanted more control and wanted to add an additional field at the end you could write your own view (or embed the code in your own action, see the Django docs for this):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from xlsxdocument import export_selected
-from app.models import Example
-
-def generate_xlsx(request):
-    xlsx = XLSXDocument()
-    xlsx.table_from_queryset(
-        Example.objects.all(),
-        additional=[
-            ("URL", lambda obj: request.build_absolute_uri(obj.get_absolute_url())),
-        ],
-    )
-    return xlsx.to_response("example.xlsx")
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Or, you could go even lower and use &lt;code&gt;xlsx.add_sheet()&lt;/code&gt; and &lt;code&gt;xlsx.table()&lt;/code&gt; yourself.&lt;/p&gt;
-&lt;p&gt;Dates, datetimes, numbers, choice fields and Django model instances are (I hope!) handled in a good way automatically.&lt;/p&gt;
-&lt;h2&gt;CSV export for large datasets&lt;/h2&gt;
-&lt;p&gt;For large datasets the xlsxdocument/openpyxl combination has proven to be too slow. I didn&amp;rsquo;t take the time to profile things to find where all the time is spent. Instead, I stumbled over a very relevant section in the Django documentation: &lt;a href="https://docs.djangoproject.com/en/4.1/howto/outputting-csv/#streaming-large-csv-files"&gt;Streaming large CSV files&lt;/a&gt; The code in there proved to be at least an order of magnitude faster (exports which produced server timeouts each time finished in a fraction of a second)&lt;/p&gt;
-&lt;p&gt;But, since I didn&amp;rsquo;t want to go back to copy-pasting code and since I also didn&amp;rsquo;t want to lose the automatic queryset handling I just had to write another library 😅 The result of this work is &lt;a href="https://github.com/matthiask/django-fast-export/"&gt;django-fast-export&lt;/a&gt;. Replicating the example from above (with the additional benefit of using a streaming response instead of building everything up-front) would look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from django_fast_export import StreamingCSVResponse, all_values, all_verbose_names
-from app.models import Example
-
-def generate_csv(request):
-    def _gen():
-        queryset = Example.objects.all()
-        yield (all_verbose_names(Example) + ["URL"])
-        yield from (
-            (all_values(instance) + [request.build_absolute_uri(instance.get_absolute_url())])
-            for instance in queryset
-        )
-
-    return StreamingCSVResponse(_gen())
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Links&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/matthiask/django-fast-export/"&gt;django-fast-export&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;p&gt;Reducing the amount of dependencies in a project maybe shouldn&amp;rsquo;t be a goal in itself, but replacing generic utilities with more opinionated utilities is certainly a net positive in my book (if it is possible!)&lt;/p&gt;</summary></entry></feed>
