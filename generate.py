@@ -4,6 +4,7 @@
 import re
 import shutil
 import sys
+from collections import Counter
 from dataclasses import dataclass
 from datetime import date, datetime
 from hashlib import md5
@@ -134,8 +135,10 @@ def write_sitemap(posts):
 
 if __name__ == "__main__":
     posts = sorted(load_posts(sys.argv[1:]), reverse=True)
-    categories = sorted(set(chain.from_iterable(post.categories for post in posts)))
-    print(f"{len(posts)} posts in {', '.join(c.title for c in categories)}.")
+    counter = Counter(chain.from_iterable(post.categories for post in posts))
+    categories = sorted(counter)
+    print(f"{len(posts)} posts in ", end="")
+    print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
 
     shutil.rmtree(DIR / "htdocs", ignore_errors=True)
     write_file("writing/index.html", f'<meta content="0;url={URL}"http-equiv=refresh>')
