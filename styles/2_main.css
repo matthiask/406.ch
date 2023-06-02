@@ -1,6 +1,7 @@
 :root {
   --fg: #333;
   --bg: #f8f8ff;
+  --bg2: #d6d6d9;
   --link: #11e;
   --grey: #999;
 }
@@ -33,7 +34,7 @@ body {
 header {
   padding: 2rem 0 2.75rem;
   line-height: 1.25;
-  border-bottom: 1px solid var(--grey);
+  background: var(--bg2);
 }
 
 nav {
@@ -182,7 +183,7 @@ hr {
 footer {
   padding: 2rem 0;
   line-height: 1.6;
-  border-top: 1px solid var(--grey);
+  background: var(--bg2);
 }
 
 header a,
