@@ -182,6 +182,7 @@ hr {
 footer {
   padding: 2rem 0;
   line-height: 1.6;
+  border-top: 1px solid;
 }
 
 header a,
