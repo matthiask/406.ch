@@ -9,11 +9,11 @@ I really like using [gettext](https://www.gnu.org/software/gettext/) to translat
 
 Unfortunately, the xgettext executable which is responsible to collect translatable strings in your code has a bug where it just stops processing files when encountering ES6 template literals inside JSX tags. Support for ES6 template literals was added [earlier this year](https://savannah.gnu.org/bugs/?50920) but combining those literals with JSX [still doesn't work](https://savannah.gnu.org/bugs/?58407).
 
-I wrote a small Python script to extract `*gettext` calls from JavaScript files; the current version is [here](https://github.com/matthiask/workbench/blob/main/extract_gettext.py). The idea is to find all JavaScript files using `git ls-files "*.js"`, using a regular expression to find `*gettext` calls and write the output to a place where Django's `./manage.py makemessages` finds it.
+I wrote a small Python script to extract `*gettext` calls from JavaScript files; the current version is [here](https://github.com/feinheit/fh-fablib/blob/main/fh_fablib/extract_js_gettext_strings.py). The idea is to find all JavaScript files using `git ls-files "*.js"`, using a regular expression to find `*gettext` calls and write the output to a place where Django's `./manage.py makemessages` finds it.
 
 I'm certain the code will break too with strange error messages in the near future but it seems to work well, for the moment.
 
-Here's the current version of the code (hopefully) for your enjoyment:
+Here's the initial version of the code (hopefully) for your enjoyment:
 
     #!/usr/bin/env python3
 
