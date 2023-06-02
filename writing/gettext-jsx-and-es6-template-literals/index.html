@@ -1,32 +1,32 @@
-<!doctypehtml><html lang=en><meta charset=utf-8><meta content=width=device-width,initial-scale=1.0 name=viewport><title>gettext, JSX and ES6 template literals - Matthias Kestenholz</title><link href=/styles.e1e3d0e38f27.css rel=stylesheet><link title="Blog feed"href=/writing/atom.xml rel=alternate type=application/atom+xml><body><header><div class=wrappy><a class=back href=/>Back to the overview</a></div></header><main><div class=wrappy><div class=text><h1>gettext, JSX and ES6 template literals</h1><p>I really like using <a href=https://www.gnu.org/software/gettext/>gettext</a> to translate hardcoded strings into other languages. <a href=https://docs.djangoproject.com/en/3.1/topics/i18n/translation/>Django’s translations functionality</a> relies on it as well.<p>Unfortunately, the xgettext executable which is responsible to collect translatable strings in your code has a bug where it just stops processing files when encountering ES6 template literals inside JSX tags. Support for ES6 template literals was added <a href=https://savannah.gnu.org/bugs/?50920>earlier this year</a> but combining those literals with JSX <a href=https://savannah.gnu.org/bugs/?58407>still doesn’t work</a>.<p>I wrote a small Python script to extract <code>*gettext</code> calls from JavaScript files; the current version is <a href=https://github.com/feinheit/fh-fablib/blob/main/fh_fablib/extract_js_gettext_strings.py>here</a>. The idea is to find all JavaScript files using <code>git ls-files "*.js"</code>, using a regular expression to find <code>*gettext</code> calls and write the output to a place where Django’s <code>./manage.py makemessages</code> finds it.<p>I’m certain the code will break too with strange error messages in the near future but it seems to work well, for the moment.<p>Here’s the initial version of the code (hopefully) for your enjoyment:<pre><code>#!/usr/bin/env python3
+<!doctypehtml><html lang=en><meta charset=utf-8><meta content=width=device-width,initial-scale=1.0 name=viewport><title>gettext, JSX and ES6 template literals - Matthias Kestenholz</title><link href=/styles.def803051060.css rel=stylesheet><link title="Blog feed"href=/writing/atom.xml rel=alternate type=application/atom+xml><body><header><div class=wrappy><a class=back href=/>Back to the overview</a></div></header><main><div class=wrappy><div class=text><h1>gettext, JSX and ES6 template literals</h1><p>I really like using <a href=https://www.gnu.org/software/gettext/>gettext</a> to translate hardcoded strings into other languages. <a href=https://docs.djangoproject.com/en/3.1/topics/i18n/translation/>Django’s translations functionality</a> relies on it as well.<p>Unfortunately, the xgettext executable which is responsible to collect translatable strings in your code has a bug where it just stops processing files when encountering ES6 template literals inside JSX tags. Support for ES6 template literals was added <a href=https://savannah.gnu.org/bugs/?50920>earlier this year</a> but combining those literals with JSX <a href=https://savannah.gnu.org/bugs/?58407>still doesn’t work</a>.<p>I wrote a small Python script to extract <code>*gettext</code> calls from JavaScript files; the current version is <a href=https://github.com/feinheit/fh-fablib/blob/main/fh_fablib/extract_js_gettext_strings.py>here</a>. The idea is to find all JavaScript files using <code>git ls-files "*.js"</code>, using a regular expression to find <code>*gettext</code> calls and write the output to a place where Django’s <code>./manage.py makemessages</code> finds it.<p>I’m certain the code will break too with strange error messages in the near future but it seems to work well, for the moment.<p>Here’s the initial version of the code (hopefully) for your enjoyment:<div class=codehilite><pre><span></span><code><span class=ch>#!/usr/bin/env python3</span>
 
-import re
-import subprocess
-
-
-def js_files():
-    res = subprocess.run(
-        ["git", "ls-files", "*js", "*mjs"],
-        capture_output=True,
-        encoding="utf-8",
-    )
-    return res.stdout.splitlines()
+<span class=kn>import</span> <span class=nn>re</span>
+<span class=kn>import</span> <span class=nn>subprocess</span>
 
 
-def gettext_calls(file):
-    with open(file, encoding="utf-8") as f:
-        return [
-            f"{match[0]}({match[1]})"
-            for match in re.findall(
-                r"""\b(\w*gettext)\(\s*((['"]).+?\3)\s*\)""",
-                f.read(),
-            )
-        ]
+<span class=k>def</span> <span class=nf>js_files</span><span class=p>():</span>
+    <span class=n>res</span> <span class=o>=</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>run</span><span class=p>(</span>
+        <span class=p>[</span><span class=s2>"git"</span><span class=p>,</span> <span class=s2>"ls-files"</span><span class=p>,</span> <span class=s2>"*js"</span><span class=p>,</span> <span class=s2>"*mjs"</span><span class=p>],</span>
+        <span class=n>capture_output</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>
+        <span class=n>encoding</span><span class=o>=</span><span class=s2>"utf-8"</span><span class=p>,</span>
+    <span class=p>)</span>
+    <span class=k>return</span> <span class=n>res</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>splitlines</span><span class=p>()</span>
 
 
-if __name__ == "__main__":
-    calls = []
-    for file in js_files():
-        calls.extend(gettext_calls(file))
-    print("\n".join(sorted(set(calls))))
-</code></pre></div></div></main><footer><div class=wrappy><p><small> I like feedback! <a href="mailto:mk@406.ch?subject=gettext, JSX and ES6 template literals">Send me an email.</a> <br> <a rel="noopener noreferrer"href=https://ko-fi.com/matthiask target=_blank>☕ Buy me a coffee?</a> <br> Published on 2020-10-21 in <a href=/writing/category-django/>Django</a>, <a href=/writing/category-programming/>Programming</a> </small></p><script async crossorigin issue-term=pathname repo=matthiask/406-comments src=https://utteranc.es/client.js theme=github-dark></script></div></footer>
+<span class=k>def</span> <span class=nf>gettext_calls</span><span class=p>(</span><span class=n>file</span><span class=p>):</span>
+    <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>file</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s2>"utf-8"</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+        <span class=k>return</span> <span class=p>[</span>
+            <span class=sa>f</span><span class=s2>"</span><span class=si>{</span><span class=n>match</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=si>}</span><span class=s2>(</span><span class=si>{</span><span class=n>match</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=si>}</span><span class=s2>)"</span>
+            <span class=k>for</span> <span class=n>match</span> <span class=ow>in</span> <span class=n>re</span><span class=o>.</span><span class=n>findall</span><span class=p>(</span>
+                <span class=sa>r</span><span class=sd>"""\b(\w*gettext)\(\s*((['"]).+?\3)\s*\)"""</span><span class=p>,</span>
+                <span class=n>f</span><span class=o>.</span><span class=n>read</span><span class=p>(),</span>
+            <span class=p>)</span>
+        <span class=p>]</span>
+
+
+<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>"__main__"</span><span class=p>:</span>
+    <span class=n>calls</span> <span class=o>=</span> <span class=p>[]</span>
+    <span class=k>for</span> <span class=n>file</span> <span class=ow>in</span> <span class=n>js_files</span><span class=p>():</span>
+        <span class=n>calls</span><span class=o>.</span><span class=n>extend</span><span class=p>(</span><span class=n>gettext_calls</span><span class=p>(</span><span class=n>file</span><span class=p>))</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>"</span><span class=se>\n</span><span class=s2>"</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=nb>sorted</span><span class=p>(</span><span class=nb>set</span><span class=p>(</span><span class=n>calls</span><span class=p>))))</span>
+</code></pre></div></div></div></main><footer><div class=wrappy><p><small> I like feedback! <a href="mailto:mk@406.ch?subject=gettext, JSX and ES6 template literals">Send me an email.</a> <br> <a rel="noopener noreferrer"href=https://ko-fi.com/matthiask target=_blank>☕ Buy me a coffee?</a> <br> Published on 2020-10-21 in <a href=/writing/category-django/>Django</a>, <a href=/writing/category-programming/>Programming</a> </small></p><script async crossorigin issue-term=pathname repo=matthiask/406-comments src=https://utteranc.es/client.js theme=github-light></script></div></footer>

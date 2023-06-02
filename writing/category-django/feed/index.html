@@ -160,33 +160,37 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;h2&gt;Migrating from Bitbucket to GitHub&lt;/h2&gt;
 &lt;p&gt;I have been a long time Bitbucket user since GitHub used a pricing where many private repositories were very expensive and Bitbucket only charged a fee per user. This has changed long ago though. I wanted to consolidate the tools used at $work and have therefore taken the time to move all private repositores to GitHub. Determining the list of repositories in a Bitbucket Workspace was surprisingly annoying but I got there in the end with an app-specific password and curl.&lt;/p&gt;
 &lt;p&gt;Next, I converted the JSON into a list of Git/SSH cloning URLs:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import json, sys
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 
-d = json.loads(sys.stdin.read())
-print(
-    "\n".join(
-        next(link["href"] for link in rec["links"]["clone"] if link["name"] == "ssh")
-        for rec in d["values"]
-    )
-)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;link&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;links&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;clone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ssh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;values&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;I used it as (I had to repeat the first command for every 100 repos):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;python3 filter.py &amp;lt; repos.json &amp;gt;&amp;gt; clone.txt
-for url in $(cat clone.txt); do (cd mirror; git clone --mirror $url) ; done
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then, I wrote another Python script to create the repositores and upload them all:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import sys
-from subprocess import run
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;python3&lt;/span&gt; &lt;span class="nv"&gt;filter&lt;/span&gt;.&lt;span class="nv"&gt;py&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nv"&gt;repos&lt;/span&gt;.&lt;span class="nv"&gt;json&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;clone&lt;/span&gt;.&lt;span class="nv"&gt;txt&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;url&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; $&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;cat&lt;/span&gt; &lt;span class="nv"&gt;clone&lt;/span&gt;.&lt;span class="nv"&gt;txt&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="c1"&gt;; do (cd mirror; git clone --mirror $url) ; done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-for repo in sys.argv[1:]:
-    run(f"gh repo create --private feinheit-archive/{repo[:-4]}", shell=True, check=True)
-    run(f"cd {repo} &amp;amp;&amp;amp; git push git@github.com:feinheit-archive/{repo[:-4]}.git --all", shell=True, check=True)
-    run(f"rm -rf {repo}", shell=True, check=True)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, I wrote another Python script to create the repositores and upload them all:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;sys&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;from&lt;/span&gt; &lt;span class="s s-Atom"&gt;subprocess&lt;/span&gt; &lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;run&lt;/span&gt;
+
+&lt;span class="s s-Atom"&gt;for&lt;/span&gt; &lt;span class="s s-Atom"&gt;repo&lt;/span&gt; &lt;span class="s s-Atom"&gt;in&lt;/span&gt; &lt;span class="s s-Atom"&gt;sys&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s s-Atom"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gh repo create --private feinheit-archive/{repo[:-4]}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cd {repo} &amp;amp;&amp;amp; git push git@github.com:feinheit-archive/{repo[:-4]}.git --all&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;rm -rf {repo}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;And ran ist as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cd mirror
-python3 ../upload.py *
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;mirror&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;../&lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Funnily enough I learned that GitHub ratelimits repository creation. So I had to wait an hour after several dozen repos and start the command again afterwards. Of course the code wasn&amp;rsquo;t written defensively at first and deleted repos which weren&amp;rsquo;t uploaded yet so I had to work out the set of repos I have to re-download from Bitbucket&amp;hellip; I think it&amp;rsquo;s a bit surprising that &lt;code&gt;subprocess.run&lt;/code&gt; doesn&amp;rsquo;t raise an exception by default when a command fails. &lt;code&gt;check=True&lt;/code&gt; should definitely be the default.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m not posting the code because I&amp;rsquo;m proud but because I&amp;rsquo;m not. Throwing such stuff together with Python feels great, and using &lt;code&gt;subprocess.run(..., shell=True)&lt;/code&gt; is more fun than writing bash scripts with &lt;code&gt;sed&lt;/code&gt; etc.&lt;/p&gt;
 &lt;h2&gt;Use Frontend frameworks to kickstart your site and to drag you down later&lt;/h2&gt;
@@ -264,25 +268,26 @@ python3 ../upload.py *
 &lt;h2&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt; solves these problems in (I think) a nice way, by building on the serialization framework and augmenting the JSON dump with a few additional properties which tell the loader what to do with the dataset. The code doesn&amp;rsquo;t have a dependency on &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; but of course it&amp;rsquo;s very useful when used to dump and load structured data as is generated when using a CMS.&lt;/p&gt;
 &lt;p&gt;The following datasets configuration would work for the use case outlined above:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from feincms3_data.data import specs_for_models
-from polls import models
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;feincms3_data.data&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;specs_for_models&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;polls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
 
-def questions(args):
-    pks = [int(pk) for pk in args.split(",") if pk]
-    return [
-        *specs_for_models(
-            [models.Question],
-            {"filter": {"pk__in": pks}},
-        ),
-        *specs_for_models(
-            [models.Answer],
-            {"filter": {"question__pk__in": pks}, "delete_missing": True},
-        ),
-    ]
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;questions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;pks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;specs_for_models&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Question&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;filter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pk__in&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pks&lt;/span&gt;&lt;span class="p"&gt;}},&lt;/span&gt;
+        &lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;specs_for_models&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Answer&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;filter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;question__pk__in&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pks&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;delete_missing&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
 
-def datasets():
-    return {"default": {"specs": questions}}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;datasets&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;specs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;questions&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Now, you have to point the &lt;code&gt;FEINCMS3_DATA_DATASETS&lt;/code&gt; setting at the &lt;code&gt;datasets()&lt;/code&gt; function above and now you could use &lt;code&gt;./manage.py f3dumpdata default:3,4&lt;/code&gt; to dump the questions with ID 3 and 4 including their choices. The JSON can be loaded in a different instance. The questions with ID 3 and 4 will be created or updated, and choices which match the &lt;code&gt;questions__pk__in=[3,4]&lt;/code&gt; filter &lt;em&gt;but aren&amp;rsquo;t included in the JSON&lt;/em&gt; will be removed from the database.&lt;/p&gt;
 &lt;p&gt;Despite its pre-1.0 version number it&amp;rsquo;s used for several clients to implement a workflow where they set a &amp;ldquo;request update&amp;rdquo; flag on some parent object, and the relevant data will be synced periodically between systems. I&amp;rsquo;m quite confident that the code is correct and that it does what it should. A thorough test suite helps a lot there! But you never now, but I&amp;rsquo;m sure everyone uses backups by now. But who knows.&lt;/p&gt;</summary></entry><entry><title>Reusable cookie consent app for Django</title><link href="https://406.ch/writing/reusable-cookie-consent-app-for-django/" rel="alternate" /><id>https://406.ch/writing/reusable-cookie-consent-app-for-django/</id><published>2022-11-04T12:00:00Z</published><updated>2022-11-04T12:00:00Z</updated><summary type="html">&lt;h1&gt;Reusable cookie consent app for Django&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://feinheit.ch/"&gt;We at Feinheit&lt;/a&gt; have been working on a cookie consent app for some time.&lt;/p&gt;
@@ -322,47 +327,50 @@ def datasets():
 &lt;h2&gt;XLSX export&lt;/h2&gt;
 &lt;p&gt;For a long time I used similarly structured ad-hoc code built on &lt;a href="https://pypi.org/project/xlwt/"&gt;xlwt&lt;/a&gt;, a project which looks abandoned these days. I have been a more or less happy user of &lt;a href="https://pypi.org/project/openpyxl/"&gt;openpyxl&lt;/a&gt; during the last years and intend to continue using it.&lt;/p&gt;
 &lt;p&gt;Something which I (or rather my users) require often is a way to export a list of selected objects from the Django admin. A good way to achieve this is by using an &lt;a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/actions/"&gt;admin action&lt;/a&gt;. The common use case is that I have to export all model fields and maybe some additional data. &lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt; makes this very easy, all you have to do is:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from django.contrib import admin
-from xlsxdocument import export_selected
-from app import models
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;admin&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;xlsxdocument&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;export_selected&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
 
-@admin.register(models.Example)
-class ExampleAdmin(admin.ModelAdmin):
-    actions = [export_selected]
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="nd"&gt;@admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ExampleAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelAdmin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;actions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;export_selected&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;If you wanted more control and wanted to add an additional field at the end you could write your own view (or embed the code in your own action, see the Django docs for this):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from xlsxdocument import export_selected
-from app.models import Example
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;xlsxdocument&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;export_selected&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;
 
-def generate_xlsx(request):
-    xlsx = XLSXDocument()
-    xlsx.table_from_queryset(
-        Example.objects.all(),
-        additional=[
-            ("URL", lambda obj: request.build_absolute_uri(obj.get_absolute_url())),
-        ],
-    )
-    return xlsx.to_response("example.xlsx")
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_xlsx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;xlsx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;XLSXDocument&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;xlsx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;table_from_queryset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+        &lt;span class="n"&gt;additional&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build_absolute_uri&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_absolute_url&lt;/span&gt;&lt;span class="p"&gt;())),&lt;/span&gt;
+        &lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;xlsx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;example.xlsx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Or, you could go even lower and use &lt;code&gt;xlsx.add_sheet()&lt;/code&gt; and &lt;code&gt;xlsx.table()&lt;/code&gt; yourself.&lt;/p&gt;
 &lt;p&gt;Dates, datetimes, numbers, choice fields and Django model instances are (I hope!) handled in a good way automatically.&lt;/p&gt;
 &lt;h2&gt;CSV export for large datasets&lt;/h2&gt;
 &lt;p&gt;For large datasets the xlsxdocument/openpyxl combination has proven to be too slow. I didn&amp;rsquo;t take the time to profile things to find where all the time is spent. Instead, I stumbled over a very relevant section in the Django documentation: &lt;a href="https://docs.djangoproject.com/en/4.1/howto/outputting-csv/#streaming-large-csv-files"&gt;Streaming large CSV files&lt;/a&gt; The code in there proved to be at least an order of magnitude faster (exports which produced server timeouts each time finished in a fraction of a second)&lt;/p&gt;
 &lt;p&gt;But, since I didn&amp;rsquo;t want to go back to copy-pasting code and since I also didn&amp;rsquo;t want to lose the automatic queryset handling I just had to write another library 😅 The result of this work is &lt;a href="https://github.com/matthiask/django-fast-export/"&gt;django-fast-export&lt;/a&gt;. Replicating the example from above (with the additional benefit of using a streaming response instead of building everything up-front) would look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from django_fast_export import StreamingCSVResponse, all_values, all_verbose_names
-from app.models import Example
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django_fast_export&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;StreamingCSVResponse&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;all_values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;all_verbose_names&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;
 
-def generate_csv(request):
-    def _gen():
-        queryset = Example.objects.all()
-        yield (all_verbose_names(Example) + ["URL"])
-        yield from (
-            (all_values(instance) + [request.build_absolute_uri(instance.get_absolute_url())])
-            for instance in queryset
-        )
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_gen&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="n"&gt;queryset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;all_verbose_names&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="k"&gt;yield from&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;all_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build_absolute_uri&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_absolute_url&lt;/span&gt;&lt;span class="p"&gt;())])&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
 
-    return StreamingCSVResponse(_gen())
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;StreamingCSVResponse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_gen&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h2&gt;Links&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt;&lt;/li&gt;
@@ -371,24 +379,25 @@ def generate_csv(request):
 &lt;p&gt;I released a new Python package which builds on the excellent code published by Simon Willison in the blog post &lt;a href="https://simonwillison.net/2018/Mar/25/combined-recent-additions/"&gt;Building a combined stream of recent additions using the Django ORM&lt;/a&gt;. The rationale etc. for why this is useful is described much better by him and I&amp;rsquo;ll save everyone&amp;rsquo;s time by not repeating it in a worse way.&lt;/p&gt;
 &lt;p&gt;The new package is &lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt;, developed on GitHub and available from PyPI.&lt;/p&gt;
 &lt;p&gt;The package supports e.g. combining recent articles and comments in a single activity stream:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from testapp.models import Article, Comment
-from recent_objects.recent_objects import RecentObjects
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;testapp.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Comment&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;recent_objects.recent_objects&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RecentObjects&lt;/span&gt;
 
-ro = RecentObjects(
-    [
-        {
-            "queryset": Article.objects.all(),
-            "date_field": "created_at",
-        },
-        {
-            "queryset": Comment.objects.all(),
-            "date_field": "created_at",
-        },
-    ]
-)
+&lt;span class="n"&gt;ro&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RecentObjects&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;queryset&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;date_field&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;queryset&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;date_field&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
 
-additions = ro.page(paginate_by=10, page=1)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="n"&gt;additions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ro&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paginate_by&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt; adds the following features which aren&amp;rsquo;t available in the blogpost linked above:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The name of the &lt;code&gt;date_field&lt;/code&gt; doesn&amp;rsquo;t have to be the same for all objects&lt;/li&gt;

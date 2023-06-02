@@ -4,9 +4,10 @@
 &lt;p&gt;However, the requirement to fetch data from a different service always bothered me, especially since all I wanted (most of the time) was to generate a bare &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; containing the embed, nothing more.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/jazzband/django-embed-video/"&gt;django-embed-video&lt;/a&gt; was almost what I needed but it had some worrysome thumbnail fetching code in there; also I didn&amp;rsquo;t understand the reason for defining backends, dynamically importing them etc. when all I wanted was a function where I would get back some HTML when passing a supported URL, or nothing if the URL wasn&amp;rsquo;t supported.&lt;/p&gt;
 &lt;p&gt;Since I really like writing code&lt;sup id="fnref:nih"&gt;&lt;a class="footnote-ref" href="#fn:nih"&gt;1&lt;/a&gt;&lt;/sup&gt; here&amp;rsquo;s my solution to embedding YouTube and Vimeo videos as a part of feincms3, &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/embedding.py"&gt;feincms3.embedding&lt;/a&gt;. Since it doesn&amp;rsquo;t depend on an external service (except the obvious ones) it is &lt;a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"&gt;never gonna give you up&lt;/a&gt; if you just call:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from feincms3.embedding import embed
-html = embed("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;feincms3.embedding&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;embed&lt;/span&gt;
+&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;embed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;div class="footnote"&gt;
 &lt;hr /&gt;
 &lt;ol&gt;

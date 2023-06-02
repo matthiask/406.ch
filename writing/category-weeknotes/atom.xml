@@ -99,33 +99,37 @@ looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></e
 &lt;h2&gt;Migrating from Bitbucket to GitHub&lt;/h2&gt;
 &lt;p&gt;I have been a long time Bitbucket user since GitHub used a pricing where many private repositories were very expensive and Bitbucket only charged a fee per user. This has changed long ago though. I wanted to consolidate the tools used at $work and have therefore taken the time to move all private repositores to GitHub. Determining the list of repositories in a Bitbucket Workspace was surprisingly annoying but I got there in the end with an app-specific password and curl.&lt;/p&gt;
 &lt;p&gt;Next, I converted the JSON into a list of Git/SSH cloning URLs:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import json, sys
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 
-d = json.loads(sys.stdin.read())
-print(
-    "\n".join(
-        next(link["href"] for link in rec["links"]["clone"] if link["name"] == "ssh")
-        for rec in d["values"]
-    )
-)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;link&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;links&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;clone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ssh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;values&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;I used it as (I had to repeat the first command for every 100 repos):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;python3 filter.py &amp;lt; repos.json &amp;gt;&amp;gt; clone.txt
-for url in $(cat clone.txt); do (cd mirror; git clone --mirror $url) ; done
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then, I wrote another Python script to create the repositores and upload them all:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import sys
-from subprocess import run
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;python3&lt;/span&gt; &lt;span class="nv"&gt;filter&lt;/span&gt;.&lt;span class="nv"&gt;py&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nv"&gt;repos&lt;/span&gt;.&lt;span class="nv"&gt;json&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;clone&lt;/span&gt;.&lt;span class="nv"&gt;txt&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;url&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; $&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;cat&lt;/span&gt; &lt;span class="nv"&gt;clone&lt;/span&gt;.&lt;span class="nv"&gt;txt&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="c1"&gt;; do (cd mirror; git clone --mirror $url) ; done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-for repo in sys.argv[1:]:
-    run(f"gh repo create --private feinheit-archive/{repo[:-4]}", shell=True, check=True)
-    run(f"cd {repo} &amp;amp;&amp;amp; git push git@github.com:feinheit-archive/{repo[:-4]}.git --all", shell=True, check=True)
-    run(f"rm -rf {repo}", shell=True, check=True)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, I wrote another Python script to create the repositores and upload them all:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;sys&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;from&lt;/span&gt; &lt;span class="s s-Atom"&gt;subprocess&lt;/span&gt; &lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;run&lt;/span&gt;
+
+&lt;span class="s s-Atom"&gt;for&lt;/span&gt; &lt;span class="s s-Atom"&gt;repo&lt;/span&gt; &lt;span class="s s-Atom"&gt;in&lt;/span&gt; &lt;span class="s s-Atom"&gt;sys&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s s-Atom"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gh repo create --private feinheit-archive/{repo[:-4]}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cd {repo} &amp;amp;&amp;amp; git push git@github.com:feinheit-archive/{repo[:-4]}.git --all&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;rm -rf {repo}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;And ran ist as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cd mirror
-python3 ../upload.py *
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;mirror&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;../&lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Funnily enough I learned that GitHub ratelimits repository creation. So I had to wait an hour after several dozen repos and start the command again afterwards. Of course the code wasn&amp;rsquo;t written defensively at first and deleted repos which weren&amp;rsquo;t uploaded yet so I had to work out the set of repos I have to re-download from Bitbucket&amp;hellip; I think it&amp;rsquo;s a bit surprising that &lt;code&gt;subprocess.run&lt;/code&gt; doesn&amp;rsquo;t raise an exception by default when a command fails. &lt;code&gt;check=True&lt;/code&gt; should definitely be the default.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m not posting the code because I&amp;rsquo;m proud but because I&amp;rsquo;m not. Throwing such stuff together with Python feels great, and using &lt;code&gt;subprocess.run(..., shell=True)&lt;/code&gt; is more fun than writing bash scripts with &lt;code&gt;sed&lt;/code&gt; etc.&lt;/p&gt;
 &lt;h2&gt;Use Frontend frameworks to kickstart your site and to drag you down later&lt;/h2&gt;
@@ -243,8 +247,9 @@ python3 ../upload.py *
 &lt;p&gt;I wanted to bring bundling times down and searched for alternatives to Webpack. Webpack isn&amp;rsquo;t the hot new thing anymore but it works really well and performs good enough as long as you do not have extreme amounts of code and plugins. I started with a new, minimal Webpack configuration and was pleasantly surprised that compilation times are more than acceptable when only using babel-loader to transpile JavaScript and some PostCSS. (I may write about the setup at a later time, for now &lt;a href="https://406.ch/writing/our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage/"&gt;this approach&lt;/a&gt; still serves &lt;a href="https://feinheit.ch/"&gt;us&lt;/a&gt; well and we have even packaged it up as &lt;a href="https://github.com/feinheit/fh-webpack-config/"&gt;fh-webpack-config&lt;/a&gt;.)&lt;/p&gt;
 &lt;h2&gt;Changing the main branch to main&lt;/h2&gt;
 &lt;p&gt;I added the &lt;a href="https://github.com/matthiask/dotfiles/commit/3a2e3ff58de38aa8e03ca1d684504ebea02cdd6c"&gt;following alias to my &lt;code&gt;.gitconfig&lt;/code&gt;&lt;/a&gt; to fix the problem where the &lt;code&gt;refs/remotes/origin/HEAD&lt;/code&gt; of local repositories would point to &lt;code&gt;master&lt;/code&gt; instead of &lt;code&gt;main&lt;/code&gt; after renaming the branch on GitHub:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git config --global alias.mainfix "symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main"
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git config --global alias.mainfix &amp;quot;symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;code&gt;git mainfix&lt;/code&gt; is easier to type than &lt;code&gt;vim .git/refs/remotes/origin/HEAD&lt;/code&gt; and replacing whatever the previous main branch was called with &lt;code&gt;main&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;neovim&lt;/h2&gt;
 &lt;p&gt;I have switched from vim to neovim. I don&amp;rsquo;t exactly remember why but the transition has been seamless. I&amp;rsquo;m still happy with tmux and vim.&lt;/p&gt;</summary></entry></feed>
