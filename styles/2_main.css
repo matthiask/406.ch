@@ -1,8 +1,4 @@
 :root {
-  --fg: #333;
-  --bg: #f8f8ff;
-  --bg2: #d6d6d9;
-  --link: #11e;
   --grey: #999;
 }
 
@@ -19,9 +15,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto,
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
-  color: var(--fg);
   font-size: 15px;
-  background: var(--bg);
+  color: #333;
+  background: #e6e6e9;
+}
+
+main {
+  background: #f8f8ff;
 }
 
 .wrappy {
@@ -34,7 +34,6 @@ body {
 header {
   padding: 2rem 0 2.75rem;
   line-height: 1.25;
-  background: var(--bg2);
 }
 
 nav {
@@ -183,14 +182,13 @@ hr {
 footer {
   padding: 2rem 0;
   line-height: 1.6;
-  background: var(--bg2);
 }
 
 header a,
 footer a,
 main .text a {
   text-decoration: underline;
-  color: var(--link);
+  color: #11e;
 }
 
 .utterances {
