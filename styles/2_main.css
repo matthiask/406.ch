@@ -1,6 +1,7 @@
 :root {
   --fg: #333;
   --bg: #f8f8ff;
+  --link: #11e;
   --grey: #999;
 }
 
@@ -186,9 +187,8 @@ footer {
 header a,
 footer a,
 main .text a {
-  box-shadow:
-    inset 0 0px 0 white,
-    inset 0 -1px 0 var(--grey);
+  text-decoration: underline;
+  color: var(--link);
 }
 
 .utterances {
