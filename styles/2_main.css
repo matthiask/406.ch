@@ -33,7 +33,7 @@ body {
 header {
   padding: 2rem 0 2.75rem;
   line-height: 1.25;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid var(--grey);
 }
 
 nav {
@@ -182,7 +182,7 @@ hr {
 footer {
   padding: 2rem 0;
   line-height: 1.6;
-  border-top: 1px solid;
+  border-top: 1px solid var(--grey);
 }
 
 header a,
