@@ -1,4 +1,6 @@
 :root {
+  --fg: #333;
+  --bg: #f8f8ff;
   --grey: #999;
 }
 
@@ -15,9 +17,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto,
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
-  color: #eee;
+  color: var(--fg);
   font-size: 15px;
-  background: #18021c;
+  background: var(--bg);
 }
 
 .wrappy {
@@ -30,6 +32,7 @@ body {
 header {
   padding: 2rem 0 2.75rem;
   line-height: 1.25;
+  border-bottom: 1px solid;
 }
 
 nav {
@@ -53,7 +56,6 @@ nav .active {
 }
 
 main {
-  background: #2c0532;
   line-height: 1.25;
   padding: 2rem 0;
 }
@@ -191,4 +193,10 @@ main .text a {
 
 .utterances {
   margin-top: 2rem;
+}
+
+/* CodeHilite overrides */
+.codehilite,
+.codehilite .err {
+  all: inherit;
 }

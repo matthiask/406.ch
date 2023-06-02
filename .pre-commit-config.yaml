@@ -1,4 +1,4 @@
-exclude: ".yarn/|yarn.lock"
+exclude: ".yarn/|yarn.lock|codehilite"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0

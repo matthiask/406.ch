@@ -27,6 +27,7 @@ breakpoint. You could go the fully fluid route with `clamp()`, `max()`, `min()`
 and viewport-relative units. It's simpler to keep the complexity lower and use
 breakpoints, certainly for me.
 
+    :::css
     :root {
       --space: 1rem;
     }
@@ -39,6 +40,7 @@ breakpoints, certainly for me.
 
 Now you can use `var(--space)` everywhere:
 
+    :::css
     .box {
       margin-bottom: var(--space);
     }
@@ -46,6 +48,7 @@ Now you can use `var(--space)` everywhere:
 The equivalent SCSS would probably look something like this, with a fitting
 `breakpoint()` mixin:
 
+    :::scss
     $space-sm: 1rem;
     $space-md: 2rem;
 
@@ -67,6 +70,7 @@ You could also use
 and [postcss-custom-media](https://www.npmjs.com/package/postcss-custom-media)
 and write:
 
+    :::css
     @custom-media --media-md (min-width: 800px);
 
     :root {

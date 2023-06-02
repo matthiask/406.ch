@@ -14,6 +14,7 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 
 from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
+from markdown.extensions.codehilite import CodeHiliteExtension
 from minify_html import minify
 from rcssmin import cssmin
 
@@ -21,6 +22,7 @@ from rcssmin import cssmin
 DIR = Path(__file__).resolve(strict=True).parent
 URL = "https://406.ch"
 TITLE = "Matthias Kestenholz"
+mext = ["smarty", "footnotes", "admonition", CodeHiliteExtension(linenums=False)]
 
 
 @dataclass(kw_only=True, frozen=True, order=True)
@@ -63,7 +65,7 @@ def load_posts(dirs):
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
             props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
             props = {name.lower(): value for name, value in props}
-            body = markdown(content, extensions=["smarty", "footnotes", "admonition"])
+            body = markdown(content, extensions=mext)
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
             date = datetime.strptime(props["date"], "%Y-%m-%d").date()
