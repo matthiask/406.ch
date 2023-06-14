@@ -137,7 +137,8 @@ def write_sitemap(posts):
 
 if __name__ == "__main__":
     posts = sorted(load_posts(sys.argv[1:]), reverse=True)
-    posts = [post for post in posts if post.date <= date.today()]
+    if "--future" not in sys.argv:
+        posts = [post for post in posts if post.date <= date.today()]
     counter = Counter(chain.from_iterable(post.categories for post in posts))
     categories = sorted(counter)
     print(f"{len(posts)} posts in ", end="")
