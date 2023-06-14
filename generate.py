@@ -63,11 +63,13 @@ def load_posts(dirs):
                 slug=props.get("slug") or slugify(props["title"]),
                 title=props["title"],
                 updated=f"{date.isoformat()}T12:00:00Z",
-                categories=[
-                    Category(slug=slugify(category), title=category)
-                    for category in re.split(r",\s*", props.get("categories", ""))
-                    if category
-                ],
+                categories=sorted(
+                    {
+                        Category(slug=slugify(category), title=category)
+                        for category in re.split(r",\s*", props.get("categories", ""))
+                        if category
+                    }
+                ),
                 body=body,
             )
         except Exception as exc:
