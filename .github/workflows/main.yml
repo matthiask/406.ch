@@ -2,7 +2,7 @@ name: Pages
 on:
   push:
     branches:
-      - live
+      - main
   schedule:
     - cron: "0 5 * * *"
 jobs:
