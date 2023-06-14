@@ -48,7 +48,7 @@ class Category:
 
 
 def load_posts(dirs):
-    slugify = lambda v: re.sub(r"[^-a-z0-9]+", "-", v.lower()).strip("-")  # noqa: E731
+    slugify = lambda v: re.sub(r"[^-a-z0-9]+", "-", v.lower()).strip("-")
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
@@ -90,10 +90,9 @@ def styles():
 
 
 def jinja_templates(**kwargs):
-    loader = FileSystemLoader([DIR / "templates"])
-    env = Environment(loader=loader, autoescape=True)
+    env = Environment(loader=FileSystemLoader([DIR / "templates"]), autoescape=True)
     env.globals.update({"year": date.today().year, "styles": styles()} | kwargs)
-    r = lambda template: lambda **ctx: minify(template.render(**ctx))  # noqa: E731
+    r = lambda template: lambda **ctx: minify(template.render(**ctx))
     return [r(env.get_template(f"{t}.html")) for t in ["archive", "post", "404"]]
 
 
