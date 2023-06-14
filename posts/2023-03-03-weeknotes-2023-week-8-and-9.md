@@ -1,7 +1,7 @@
 Title: Weeknotes (2023 week 8 and 9)
 Slug: weeknotes-2023-week-8-and-9
 Date: 2023-03-03
-Categories: Django, Programming, Weeknotes
+Categories: Django, Programming, Weeknotes, feincms
 
 # Weeknotes (2023 week 8 and 9)
 

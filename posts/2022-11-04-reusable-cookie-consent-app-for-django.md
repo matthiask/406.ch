@@ -1,7 +1,7 @@
 Title: Reusable cookie consent app for Django
 Slug: reusable-cookie-consent-app-for-django
 Date: 2022-11-04
-Categories: Django, Programming
+Categories: Django, Programming, feincms
 
 # Reusable cookie consent app for Django
 

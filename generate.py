@@ -132,7 +132,6 @@ def main(folders, *, future=False):
     if not future:
         posts = [post for post in posts if post.date <= date.today()]
     counter = Counter(chain.from_iterable(post.categories for post in posts))
-    categories = sorted(counter)
     print(f"{len(posts)} posts in ", end="")
     print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
 
@@ -141,14 +140,14 @@ def main(folders, *, future=False):
     write_file("robots.txt", f"User-agent: *\nSitemap: {URL}/sitemap.xml\n")
     write_sitemap(posts)
 
-    archive, detail, not_found = jinja_templates(categories=categories)
+    archive, detail, not_found = jinja_templates(categories=sorted(counter))
     write_file("404.html", not_found())
     write_file("index.html", archive(posts=posts))
     write_feed_with_posts("writing/", posts[:20], title=TITLE, link=f"{URL}/")
     for post in posts:
         write_file(f"{post.url()}index.html", detail(post=post))
 
-    for category in categories:
+    for category in sorted(counter):
         category_posts = [post for post in posts if category in post.categories]
         write_file(
             f"{category.url()}index.html",

@@ -1,6 +1,6 @@
 Title: CSS variables and immutability
 Date: 2023-06-14
-Categories: Django, Programming
+Categories: Django, Programming, feincms
 
 # Using CSS variables[^variables] to ship customizable CSS in Django apps
 

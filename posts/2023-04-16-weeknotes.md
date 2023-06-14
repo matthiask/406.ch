@@ -1,6 +1,6 @@
 Title: Weeknotes (2023 week 15)
 Date: 2023-04-16
-Categories: Django, Politik, Programming, Weeknotes
+Categories: Django, Politik, Programming, Weeknotes, feincms
 
 ## Romansh translations for feincms3-cookiecontrol and django-fineforms
 

@@ -1,6 +1,6 @@
 Title: Weeknotes (2023 week 24)
 Date: 2023-06-16
-Categories: Django, Programming, Weeknotes
+Categories: Django, Programming, Weeknotes, feincms
 
 Life happened and I missed a month of weeknotes. Oh well.
 

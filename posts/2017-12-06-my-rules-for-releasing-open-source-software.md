@@ -1,7 +1,7 @@
 Title: My rules for releasing open source software
 Slug: my-rules-for-releasing-open-source-software
 Date: 2017-12-06
-Categories: Django, Programming
+Categories: Django, Programming, feincms
 
 # My rules for releasing open source software
 

@@ -1,7 +1,7 @@
 Title: Open source activity (April 2018 edition)
 Slug: open-source-activity-april-2018-edition
 Date: 2018-04-09
-Categories: Django, Programming
+Categories: Django, Programming, feincms
 
 Again months have gone by without a new post. Still trying to change this, so here's a summary.
 
