@@ -47,19 +47,8 @@ class Category:
         return f"/writing/category-{self.slug}/"
 
 
-def slugify(value):
-    return re.sub(r"[^-a-z0-9]+", "-", value.lower()).strip("-")
-
-
-def parse_categories(value):
-    return [
-        Category(slug=slugify(category), title=category)
-        for category in re.split(r",\s*", value)
-        if category
-    ]
-
-
 def load_posts(dirs):
+    slugify = lambda v: re.sub(r"[^-a-z0-9]+", "-", v.lower()).strip("-")  # noqa: E731
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
@@ -74,7 +63,11 @@ def load_posts(dirs):
                 slug=props.get("slug") or slugify(props["title"]),
                 title=props["title"],
                 updated=f"{date.isoformat()}T12:00:00Z",
-                categories=parse_categories(props.get("categories") or ""),
+                categories=[
+                    Category(slug=slugify(category), title=category)
+                    for category in re.split(r",\s*", props.get("categories", ""))
+                    if category
+                ],
                 body=body,
             )
         except Exception as exc:
