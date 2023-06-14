@@ -127,9 +127,9 @@ def write_sitemap(posts):
     write_file("sitemap.xml", xml)
 
 
-if __name__ == "__main__":
-    posts = sorted(load_posts(sys.argv[1:]), reverse=True)
-    if "--future" not in sys.argv:
+def main(folders, *, future=False):
+    posts = sorted(load_posts(folders), reverse=True)
+    if not future:
         posts = [post for post in posts if post.date <= date.today()]
     counter = Counter(chain.from_iterable(post.categories for post in posts))
     categories = sorted(counter)
@@ -161,3 +161,7 @@ if __name__ == "__main__":
             link=f"{URL}{category.url()}",
         )
     print(f"Wrote {write_file.count} files.")
+
+
+if __name__ == "__main__":
+    main(["posts"])
