@@ -1,5 +1,121 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-04-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 17)</title><link href="https://406.ch/writing/weeknotes-2023-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-17/</id><published>2023-04-28T12:00:00Z</published><updated>2023-04-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 17)&lt;/h1&gt;&lt;h2&gt;Birthday&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-06-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>CSS variables and immutability</title><link href="https://406.ch/writing/css-variables-and-immutability/" rel="alternate" /><id>https://406.ch/writing/css-variables-and-immutability/</id><published>2023-06-14T12:00:00Z</published><updated>2023-06-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Using CSS variables&lt;sup id="fnref:variables"&gt;&lt;a class="footnote-ref" href="#fn:variables"&gt;1&lt;/a&gt;&lt;/sup&gt; to ship customizable CSS in Django apps&lt;/h1&gt;
+&lt;p&gt;I have been working with &lt;a href="https://sass-lang.com/"&gt;SASS&lt;/a&gt; for a long time but
+have been moving towards writing CSS with a few &lt;a href="https://postcss.org/"&gt;PostCSS&lt;/a&gt;
+goodies in the last years. At first, I just replaced the &lt;code&gt;$...&lt;/code&gt; with
+&lt;code&gt;var(--...)&lt;/code&gt; and didn&amp;rsquo;t think much about it. The realization that CSS variables
+can be more than that came later. Edit basic values directly in the browser and
+immediately see the results! Change CSS depending on media queries or the
+cascade!&lt;/p&gt;
+&lt;p&gt;With all that power came back the wish to not just ship backend and HTML code
+in Django apps I (help) maintain but also reusable CSS, with a few overrideable
+CSS variables for basic changes to the visual style. Loading &lt;code&gt;.scss&lt;/code&gt; files from
+somewhere inside &lt;code&gt;venv/lib/python3.11/site-packages/&amp;lt;package&amp;gt;/styles/&lt;/code&gt; would of
+course have been possible, but very obscure. Also, not everyone puts their
+virtualenv at &lt;code&gt;venv&lt;/code&gt;, the &lt;code&gt;README&lt;/code&gt; instructions for those packages would
+quickly have become unwieldy. CSS variables paved the way for shipping CSS as a
+Django static file while still allowing customizability by leveraging the
+functionality of the browser itself instead of the frontend build toolchain.&lt;/p&gt;
+&lt;h2&gt;Patterns for overrideable values&lt;/h2&gt;
+&lt;p&gt;A pattern for defining defaults for CSS variables is to always define the
+fallback (the example is intentionally bad but inspired by real world
+experiences when developing
+&lt;a href="https://github.com/feinheit/feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;):&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Less repetition (but trouble awaits)&lt;/h2&gt;
+&lt;p&gt;If &lt;code&gt;--box-background&lt;/code&gt; isn&amp;rsquo;t set the &lt;code&gt;var()&lt;/code&gt; function falls back to the second
+argument, &lt;code&gt;#222&lt;/code&gt;. Repeating this value over and over gets annoying quickly, so
+you define a few defaults on the &lt;code&gt;:root&lt;/code&gt; element and use those variables in the
+code, without specifying the default again:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The project can now override the default background color using:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#444&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#ccc&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course now you&amp;rsquo;re back at the mercy of CSS loading order. If the app&amp;rsquo;s CSS
+is loaded first, everything works. If not, your custom value is immediately
+overwritten. You could avoid this by overwriting the default lower in the cascade:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#444&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#ccc&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Great, everything works again!&lt;/p&gt;
+&lt;p&gt;Later, the box also contains a button which uses a different background but the
+same foreground, so of course we add more variables in the package:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-button-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#333&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-button-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;What happens now when overwriting the &lt;code&gt;--box-foreground&lt;/code&gt; variable just for the
+&lt;code&gt;.box&lt;/code&gt; element?&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;re not sure? I certainly wasn&amp;rsquo;t and am not. But what I remember happening
+was that the overridden foreground color was just applied to the text and not
+to the button itself. I was confused (it seems clearer in hindsight&amp;hellip;)&lt;/p&gt;
+&lt;h2&gt;A better way&lt;/h2&gt;
+&lt;p&gt;If values are supposed to be overridden and only used inside components, a
+better way is to define local CSS for components by following a convention
+(underscore prefix for local/private variables):&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;/* Defined on .box, not :root */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_button-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-button-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#333&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_button-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-button-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--_foreground&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And then you only use the prefixed versions inside the component:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--_background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--_foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box__button&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--_button-background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--_button-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;--box-*&lt;/code&gt; variables are undefined by default; the only time when they are
+set is when the user of the package wants to override those values. If you only
+overide the box foreground the button also inherits the new foreground color.
+And while there would certainly be a way to achieve the same thing with the old
+way above it&amp;rsquo;s certainly not as simple to explain.&lt;/p&gt;
+&lt;p&gt;The reason why it&amp;rsquo;s simple to explain is &lt;strong&gt;immutability&lt;/strong&gt;. The CSS variables
+which are overrideable by the user are only ever read by the package, never
+written to.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:variables"&gt;
+&lt;p&gt;Custom properties would probably be the more correct naming, but CSS variables is nicer to say.&amp;#160;&lt;a class="footnote-backref" href="#fnref:variables" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 17)</title><link href="https://406.ch/writing/weeknotes-2023-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-17/</id><published>2023-04-28T12:00:00Z</published><updated>2023-04-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 17)&lt;/h1&gt;&lt;h2&gt;Birthday&lt;/h2&gt;
 &lt;p&gt;Another year achieved. Feels the same as last year. I&amp;rsquo;m glad.&lt;/p&gt;
 &lt;h2&gt;feincms3-cookiecontrol&lt;/h2&gt;
 &lt;p&gt;I have released &lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
@@ -409,30 +525,6 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;ol&gt;
 &lt;li id="fn:1"&gt;
 &lt;p&gt;Hopefully!&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2021 week 13 and 14)</title><link href="https://406.ch/writing/weeknotes-2021-week-13-and-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2021-week-13-and-14/</id><published>2021-04-11T12:00:00Z</published><updated>2021-04-11T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2021 week 13 and 14)&lt;/h1&gt;
-&lt;h2&gt;Sorting django-admin-ordering instances in Python code&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/matthiask/django-admin-ordering/"&gt;django-admin-ordering&lt;/a&gt;&amp;lsquo;s &lt;code&gt;OrderableModel&lt;/code&gt; gained a &lt;code&gt;__lt__&lt;/code&gt; function (and &lt;code&gt;functools.total_ordering&lt;/code&gt;) in 0.14 which allows sorting model instances in Python code. This is useful for my projects.&lt;/p&gt;
-&lt;h2&gt;Some user agents do not like single quotes in OpenGraph tags&lt;/h2&gt;
-&lt;p&gt;Django autoescapes content inserted into HTML (an excellent default). It also converts some special characters into entities (resp., &lt;a href="https://docs.python.org/3/library/html.html"&gt;&lt;code&gt;html.escape&lt;/code&gt;&lt;/a&gt; does this). It seems that some user agents do not like entities in OpenGraph tags and show &lt;code&gt;&amp;amp;x27;&lt;/code&gt; instead of &lt;code&gt;'&lt;/code&gt;. Oh well. &lt;a href="https://github.com/matthiask/feincms3-meta/commit/c2524581f29ff0cbf2d1e7af419f6f943685a296"&gt;I added a workaround for this problem to feincms3-meta.&lt;/a&gt; It checks whether the value is safe&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt; and basically skips escaping in this case &amp;ndash; at least I hope it is safe!&lt;/p&gt;
-&lt;h2&gt;feincms3-forms – A new forms builder for the Django admin interface&lt;/h2&gt;
-&lt;p&gt;For a current project &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; needed a forms builder with the following constraints:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Simple fields (text, email, checkboxes, dropdowns etc.)&lt;/li&gt;
-&lt;li&gt;Custom validation and processing logic&lt;/li&gt;
-&lt;li&gt;It should be possible to add other content, e.g. headings and explanations between form fields&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The &lt;a href="https://github.com/feincms/form_designer"&gt;form_designer&lt;/a&gt; fulfilled a few of these requirements but not all. It still works well but I wanted a forms builder based on &lt;a href="https://github.com/matthiask/django-content-editor"&gt;django-content-editor&lt;/a&gt; for a long time already. Also, I really like the feincms3 pattern where the third party app only provides abstract models. Yeah, it is much more work to start with but the flexibility and configurability is worth it – especially since it&amp;rsquo;s possible to write straightforward code to handle special cases&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt; instead of configuring even more settings.&lt;/p&gt;
-&lt;p&gt;The humble beginnings are here in the &lt;a href="https://github.com/matthiask/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt; repository. The &lt;a href="https://github.com/matthiask/feincms3-forms/tree/main/tests/testapp"&gt;test suite already shows how things work together&lt;/a&gt; but as of now no documentation exists and no release has been made yet. I hope it will be ready for a first beta release in the next few weeks 😄&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;According to a restrictive allowlist.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:2"&gt;
-&lt;p&gt;All sites are special.&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</summary></entry></feed>
