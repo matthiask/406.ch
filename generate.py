@@ -128,9 +128,9 @@ def write_sitemap(posts):
     write_file("sitemap.xml", xml)
 
 
-def main(folders, *, future=False):
+def main(folders, *, only_published=True):
     posts = sorted(load_posts(folders), reverse=True)
-    if not future:
+    if only_published:
         posts = [post for post in posts if post.date <= date.today()]
     counter = Counter(chain.from_iterable(post.categories for post in posts))
     print(f"{len(posts)} posts in ", end="")
