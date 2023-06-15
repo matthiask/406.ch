@@ -1,5 +1,4 @@
-# License: WTFPL (DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE)
-# See http://www.wtfpl.net/
+# License: WTFPL (DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE), http://www.wtfpl.net/
 
 import re
 import shutil
@@ -26,25 +25,25 @@ mext = ["smarty", "footnotes", "admonition", CodeHiliteExtension(linenums=False)
 
 
 @dataclass(kw_only=True, frozen=True, order=True)
-class Post:
-    date: date
-    slug: str
-    title: str
-    updated: str
-    categories: list[str]
-    body: str
-
-    def url(self):
-        return f"/writing/{self.slug}/"
-
-
-@dataclass(kw_only=True, frozen=True, order=True)
 class Category:
     slug: str
     title: str
 
     def url(self):
         return f"/writing/category-{self.slug}/"
+
+
+@dataclass(kw_only=True, frozen=True, order=True)
+class Post:
+    date: date
+    slug: str
+    title: str
+    updated: str
+    categories: list[Category]
+    body: str
+
+    def url(self):
+        return f"/writing/{self.slug}/"
 
 
 def load_posts(dirs):
