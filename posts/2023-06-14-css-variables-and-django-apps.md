@@ -118,7 +118,7 @@ And then you only use the prefixed versions inside the component:
 
     .box__button {
       background: var(--_button-background);
-      foreground: var(--_button-foreground);
+      color: var(--_button-foreground);
     }
 
 The `--box-*` variables are undefined by default; the only time when they are
