@@ -1,5 +1,24 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-06-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>CSS variables and immutability</title><link href="https://406.ch/writing/css-variables-and-immutability/" rel="alternate" /><id>https://406.ch/writing/css-variables-and-immutability/</id><published>2023-06-14T12:00:00Z</published><updated>2023-06-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Using CSS variables&lt;sup id="fnref:variables"&gt;&lt;a class="footnote-ref" href="#fn:variables"&gt;1&lt;/a&gt;&lt;/sup&gt; to ship customizable CSS in Django apps&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-06-16T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 24)</title><link href="https://406.ch/writing/weeknotes-2023-week-24/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-24/</id><published>2023-06-16T12:00:00Z</published><updated>2023-06-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 24)&lt;/h1&gt;&lt;p&gt;Life happened and I missed a month of weeknotes. Oh well.&lt;/p&gt;
+&lt;h2&gt;django-debug-toolbar 4.1&lt;/h2&gt;
+&lt;p&gt;We have released &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar
+4.1&lt;/a&gt;. Another cycle where I
+mostly contributed reviews and not much else. Feels great :-)&lt;/p&gt;
+&lt;h2&gt;Going all in on hatch and hatchling&lt;/h2&gt;
+&lt;p&gt;I got to know hatch because django-debug-toolbar was converted to it. I was
+confused as probably anyone else with the new state of packaging in Python
+world. After listening to a few Podcasts (for example &lt;a href="https://talkpython.fm/episodes/show/408/hatch-a-modern-python-workflow"&gt;Hatch: A Modern Python
+Workflow&lt;/a&gt;)
+I did bite the bullet and started converting projects to hatch as mentioned
+&lt;a href="https://406.ch/writing/weeknotes-2023-week-13-and-14/"&gt;some time ago&lt;/a&gt;. I have
+converted a few other projects in the meantime because the development
+experience is nicer. Not much, but enough to make it worthwile.
+&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites&lt;/a&gt; is the latest
+package I converted.&lt;/p&gt;
+&lt;h2&gt;CKEditor 5&amp;rsquo;s new license and django-ckeditor&lt;/h2&gt;
+&lt;p&gt;The pressure is on to maybe switch away from CKEditor 4 since it probably will not be supported after &lt;a href="https://support.ckeditor.com/hc/en-us/articles/115005281629-How-long-will-CKEditor-4-be-supported-"&gt;June 2023&lt;/a&gt;. It&amp;rsquo;s totally understandable that the CKEditor 5 license isn&amp;rsquo;t the same as before, but I&amp;rsquo;m not sure what that means for the Django integration &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/482"&gt;django-ckeditor&lt;/a&gt; which I&amp;rsquo;m maintaining since a few years. I don&amp;rsquo;t actually like the new capabilities of CKEditor all that much and don&amp;rsquo;t intend to use them; maybe it would be better to use a build of &lt;a href=""&gt;ProseMirror&lt;/a&gt; in the CMS since &lt;a href="https://django-content-editor.readthedocs.io/en/latest/#about-rich-text-editors"&gt;we&amp;rsquo;re intentionally only using a very small subset of the features most rich text editors offer&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Mountain biking.&lt;/h2&gt;
+&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry><entry><title>CSS variables and immutability</title><link href="https://406.ch/writing/css-variables-and-immutability/" rel="alternate" /><id>https://406.ch/writing/css-variables-and-immutability/</id><published>2023-06-14T12:00:00Z</published><updated>2023-06-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Using CSS variables&lt;sup id="fnref:variables"&gt;&lt;a class="footnote-ref" href="#fn:variables"&gt;1&lt;/a&gt;&lt;/sup&gt; to ship customizable CSS in Django apps&lt;/h1&gt;
 &lt;p&gt;I have been working with &lt;a href="https://sass-lang.com/"&gt;SASS&lt;/a&gt; for a long time but
 have been moving towards writing CSS with a few &lt;a href="https://postcss.org/"&gt;PostCSS&lt;/a&gt;
 goodies in the last years. At first, I just replaced the &lt;code&gt;$...&lt;/code&gt; with
@@ -491,40 +510,4 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/matthiask/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/matthiask/django-fast-export/"&gt;django-fast-export&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Recent objects using several Django models</title><link href="https://406.ch/writing/recent-objects-using-several-django-models/" rel="alternate" /><id>https://406.ch/writing/recent-objects-using-several-django-models/</id><published>2022-05-11T12:00:00Z</published><updated>2022-05-11T12:00:00Z</updated><summary type="html">&lt;h1&gt;Recent objects using several Django models&lt;/h1&gt;
-&lt;p&gt;I released a new Python package which builds on the excellent code published by Simon Willison in the blog post &lt;a href="https://simonwillison.net/2018/Mar/25/combined-recent-additions/"&gt;Building a combined stream of recent additions using the Django ORM&lt;/a&gt;. The rationale etc. for why this is useful is described much better by him and I&amp;rsquo;ll save everyone&amp;rsquo;s time by not repeating it in a worse way.&lt;/p&gt;
-&lt;p&gt;The new package is &lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt;, developed on GitHub and available from PyPI.&lt;/p&gt;
-&lt;p&gt;The package supports e.g. combining recent articles and comments in a single activity stream:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;testapp.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Comment&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;recent_objects.recent_objects&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RecentObjects&lt;/span&gt;
-
-&lt;span class="n"&gt;ro&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RecentObjects&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;queryset&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;date_field&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;queryset&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;date_field&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="p"&gt;},&lt;/span&gt;
-    &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;additions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ro&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paginate_by&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/matthiask/django-recent-objects/"&gt;django-recent-objects&lt;/a&gt; adds the following features which aren&amp;rsquo;t available in the blogpost linked above:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The name of the &lt;code&gt;date_field&lt;/code&gt; doesn&amp;rsquo;t have to be the same for all objects&lt;/li&gt;
-&lt;li&gt;Primary keys of different types are&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt; supported&lt;/li&gt;
-&lt;li&gt;The code uses a real paginator and doesn&amp;rsquo;t only support fetching the first few objects&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;Hopefully!&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>

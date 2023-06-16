@@ -1,5 +1,24 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-06-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>CSS variables and immutability</title><link href="https://406.ch/writing/css-variables-and-immutability/" rel="alternate" /><id>https://406.ch/writing/css-variables-and-immutability/</id><published>2023-06-14T12:00:00Z</published><updated>2023-06-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Using CSS variables&lt;sup id="fnref:variables"&gt;&lt;a class="footnote-ref" href="#fn:variables"&gt;1&lt;/a&gt;&lt;/sup&gt; to ship customizable CSS in Django apps&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-06-16T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 24)</title><link href="https://406.ch/writing/weeknotes-2023-week-24/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-24/</id><published>2023-06-16T12:00:00Z</published><updated>2023-06-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 24)&lt;/h1&gt;&lt;p&gt;Life happened and I missed a month of weeknotes. Oh well.&lt;/p&gt;
+&lt;h2&gt;django-debug-toolbar 4.1&lt;/h2&gt;
+&lt;p&gt;We have released &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar
+4.1&lt;/a&gt;. Another cycle where I
+mostly contributed reviews and not much else. Feels great :-)&lt;/p&gt;
+&lt;h2&gt;Going all in on hatch and hatchling&lt;/h2&gt;
+&lt;p&gt;I got to know hatch because django-debug-toolbar was converted to it. I was
+confused as probably anyone else with the new state of packaging in Python
+world. After listening to a few Podcasts (for example &lt;a href="https://talkpython.fm/episodes/show/408/hatch-a-modern-python-workflow"&gt;Hatch: A Modern Python
+Workflow&lt;/a&gt;)
+I did bite the bullet and started converting projects to hatch as mentioned
+&lt;a href="https://406.ch/writing/weeknotes-2023-week-13-and-14/"&gt;some time ago&lt;/a&gt;. I have
+converted a few other projects in the meantime because the development
+experience is nicer. Not much, but enough to make it worthwile.
+&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites&lt;/a&gt; is the latest
+package I converted.&lt;/p&gt;
+&lt;h2&gt;CKEditor 5&amp;rsquo;s new license and django-ckeditor&lt;/h2&gt;
+&lt;p&gt;The pressure is on to maybe switch away from CKEditor 4 since it probably will not be supported after &lt;a href="https://support.ckeditor.com/hc/en-us/articles/115005281629-How-long-will-CKEditor-4-be-supported-"&gt;June 2023&lt;/a&gt;. It&amp;rsquo;s totally understandable that the CKEditor 5 license isn&amp;rsquo;t the same as before, but I&amp;rsquo;m not sure what that means for the Django integration &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/482"&gt;django-ckeditor&lt;/a&gt; which I&amp;rsquo;m maintaining since a few years. I don&amp;rsquo;t actually like the new capabilities of CKEditor all that much and don&amp;rsquo;t intend to use them; maybe it would be better to use a build of &lt;a href=""&gt;ProseMirror&lt;/a&gt; in the CMS since &lt;a href="https://django-content-editor.readthedocs.io/en/latest/#about-rich-text-editors"&gt;we&amp;rsquo;re intentionally only using a very small subset of the features most rich text editors offer&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Mountain biking.&lt;/h2&gt;
+&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry><entry><title>CSS variables and immutability</title><link href="https://406.ch/writing/css-variables-and-immutability/" rel="alternate" /><id>https://406.ch/writing/css-variables-and-immutability/</id><published>2023-06-14T12:00:00Z</published><updated>2023-06-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Using CSS variables&lt;sup id="fnref:variables"&gt;&lt;a class="footnote-ref" href="#fn:variables"&gt;1&lt;/a&gt;&lt;/sup&gt; to ship customizable CSS in Django apps&lt;/h1&gt;
 &lt;p&gt;I have been working with &lt;a href="https://sass-lang.com/"&gt;SASS&lt;/a&gt; for a long time but
 have been moving towards writing CSS with a few &lt;a href="https://postcss.org/"&gt;PostCSS&lt;/a&gt;
 goodies in the last years. At first, I just replaced the &lt;code&gt;$...&lt;/code&gt; with
@@ -461,59 +480,6 @@ projects should use &lt;a href="https://feincms3.readthedocs.io/en/latest/"&gt;f
 &lt;/li&gt;
 &lt;li id="fn:loc"&gt;
 &lt;p&gt;&lt;a href="https://dwheeler.com/sloccount/"&gt;SLOCCount&lt;/a&gt; counts 88&amp;lsquo;039 lines in Wagtail, 73&amp;lsquo;022 lines in django CMS, 45&amp;lsquo;306 lines in Mezzanine, and just 4012 lines in feincms3 and django-content-editor; all values including tests, in current Git repositories as of 2020-09-16. Not including dependencies; they would skew the results even more given that e.g. &lt;a href="https://github.com/django-treebeard/django-treebeard"&gt;django-treebeard&lt;/a&gt; has 10 times more code than &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:loc" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>django-tree-queries</title><link href="https://406.ch/writing/django-tree-queries/" rel="alternate" /><id>https://406.ch/writing/django-tree-queries/</id><published>2020-09-15T12:00:00Z</published><updated>2020-09-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-tree-queries&lt;/h1&gt;
-&lt;p&gt;The reason for this blog post is the recent release of &lt;a href="https://django-tree-queries.readthedocs.io/"&gt;django-tree-queries 0.4&lt;/a&gt;. django-tree-queries allows using an SQL database to retrieve tree nodes in &lt;a href="https://en.wikipedia.org/wiki/Depth-first_search"&gt;depth-first search (DFS)&lt;/a&gt; order.&lt;/p&gt;
-&lt;h2&gt;Other libraries&lt;/h2&gt;
-&lt;p&gt;Many Django libraries exist already for managing and retrieving tree-shaped data. A list of them follows along with reasons why none of them are being used in &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href="https://django-mptt.readthedocs.io/"&gt;django-mptt&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;I still am a heavy user of django-mptt. FeinCMS 1.x uses it and we therefore use django-mptt as well for many sites which are actively maintained. I also am a co-maintainer of django-mptt so the following critique should be understood with this fact in mind.&lt;/p&gt;
-&lt;p&gt;django-mptt uses the &lt;a href="https://en.wikipedia.org/wiki/Nested_set_model"&gt;nested set model&lt;/a&gt; with an additional &lt;code&gt;level&lt;/code&gt; and &lt;code&gt;tree_id&lt;/code&gt; field; the latter partitions nodes into individual, unconnected trees. This is a useful performance optimization. In principle, the nested set model doesn&amp;rsquo;t even require a parent foreign key for nodes; however, django-mptt always adds this field as well.&lt;/p&gt;
-&lt;p&gt;django-mptt is very dependent on having up-to-date values of the &lt;code&gt;left&lt;/code&gt;, &lt;code&gt;right&lt;/code&gt; and &lt;code&gt;parent_id&lt;/code&gt; values. Fetching ancestors or descendants does not work when those values are outdated. Calling &lt;code&gt;.save()&lt;/code&gt; with outdated values &lt;em&gt;absolutely will&lt;/em&gt; cause corrupted trees &amp;ndash; that is, the MPTT attributes get out of sync. A band-aid fix may be to call &lt;code&gt;.refresh_from_db()&lt;/code&gt; before each write; but even then I suspect there is a potential for corruption with concurrent writes which are probably only completely avoidable by using a database isolation level of &lt;code&gt;SERIALIZABLE&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;We had recurring problems with django-mptt even on medium sites without many editors so these problems aren&amp;rsquo;t just theoretical&lt;sup id="fnref:djcms"&gt;&lt;a class="footnote-ref" href="#fn:djcms"&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href="https://django-treebeard.readthedocs.io/"&gt;django-treebeard&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;django-treebeard offers three implementations: Nested sets, materialized paths and adjacency lists.&lt;/p&gt;
-&lt;p&gt;I didn&amp;rsquo;t really want to use more nested sets. The materialized path implementation would probably have been worth a try. The adjacency list implementation does not use recursive CTEs and therefore has to recursively execute one query per parent. This is obviously inefficient and therefore not viable.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not 100% sure anymore but I think I had some doubts regarding the maintainability of django-treebeard. I do like to help out generally, but treebeard still seems to suffer from scope creep a bit.&lt;/p&gt;
-&lt;h3&gt;ltree, closure trees, oh my&amp;hellip;&lt;/h3&gt;
-&lt;p&gt;I also looked at libraries using the &lt;a href="https://www.postgresql.org/docs/current/ltree.html"&gt;ltree PostgreSQL extension&lt;/a&gt;, and at closure trees and so on. Those solutions didn&amp;rsquo;t seem obviously better to me, at the time.&lt;/p&gt;
-&lt;h3&gt;&lt;a href="https://django-cte-trees.readthedocs.io/"&gt;django-cte-trees&lt;/a&gt; / &lt;a href="https://django-cte-forest.readthedocs.io/"&gt;django-cte-forest&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Researching alternative solutions lead me to the &lt;a href="https://django-cte-trees.readthedocs.io/"&gt;django-cte-trees&lt;/a&gt; project which uses the adjacency list model and therefore avoids redundant data in the database &amp;ndash; a thing which elegantly avoids even the possibility of data getting out of sync. Databases are able to build the tree structure with hundreds of nodes themselves and still execute SQL queries within milliseconds.&lt;/p&gt;
-&lt;p&gt;django-cte-forest was my attempt to modernize the codebase of the unmaintained project. This worked well enough. However, for some use cases I really wanted to avoid the common table expression. A better way to achieve this would have been an opt-in instead of an opt-out API for the CTE part. This proofed hard to implement. Also, django-cte-trees supported many many features that I didn&amp;rsquo;t even begin to use.&lt;/p&gt;
-&lt;h2&gt;The constraints of django-tree-queries&lt;/h2&gt;
-&lt;p&gt;This research lead me to write my own solution. The goals were as follows&lt;sup id="fnref:goals"&gt;&lt;a class="footnote-ref" href="#fn:goals"&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Depth-first search only.&lt;/li&gt;
-&lt;li&gt;No customizations of deletions etc, let Django&amp;rsquo;s &lt;code&gt;on_delete&lt;/code&gt; mechanism handle everything.&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s fine if primary keys must be integers (and not UUIDs etc.)&lt;/li&gt;
-&lt;li&gt;As little customization as possible.&lt;/li&gt;
-&lt;li&gt;No redundant data in the database. A nullable parent foreign key and optionally a position field to give ordering to siblings.&lt;/li&gt;
-&lt;li&gt;PostgreSQL-only is fine.&lt;/li&gt;
-&lt;li&gt;Tree querying shouldn&amp;rsquo;t be active by default.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Recursive common table expressions (CTE) might just be fast enough. As long as you guarantee that the database only contains trees things will never get out of sync or break. The only data corruption which is possible is when a node contains itself in its ancestry. Right now, django-tree-queries doesn&amp;rsquo;t handle this case because it may come with an (additional) performance penalty and because I think model validation is sufficient for avoiding these types of accidents.&lt;/p&gt;
-&lt;h2&gt;The value of small API surfaces&lt;/h2&gt;
-&lt;p&gt;The initial version of django-tree-queries only supported PostgreSQL, but because of its small API surface it didn&amp;rsquo;t take a lot of work to add support for other databases. In the end only two changes were necessary:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;MySQL/MariaDB and sqlite3 do not have a native array type. I therefore decided on concatenating padded strings in the database and splitting the string back into its parts in Python again.&lt;/li&gt;
-&lt;li&gt;I had to write slightly different SQL for each database.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This worked out quite well and immediately made &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; compatible with a broader range of databases.&lt;/p&gt;
-&lt;h2&gt;The state of things now&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://dwheeler.com/sloccount/"&gt;SLOCCount&lt;/a&gt; counts 280 lines of code (only the &lt;code&gt;tree_queries&lt;/code&gt; folder containing the library itself, without tests or &lt;code&gt;setup.py&lt;/code&gt; files) for a library supporting Django 1.8 or better, Python 2.7 or better, and recursive CTEs on PostgreSQL, sqlite3, MariaDB and MySQL.&lt;/p&gt;
-&lt;p&gt;The first few months of development from summer to the fall of 2018 almost no changes were necessary to the core implementation. The code stayed basically unchanged since before the release of Django 2.2 LTS until last week&lt;sup id="fnref:change"&gt;&lt;a class="footnote-ref" href="#fn:change"&gt;3&lt;/a&gt;&lt;/sup&gt;, following my aim of writing &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;low maintenance software&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:djcms"&gt;
-&lt;p&gt;&lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt; was a heavy user of django-mptt until 2015, when they switched to django-treebeard because of the problems mentioned.&amp;#160;&lt;a class="footnote-backref" href="#fnref:djcms" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:goals"&gt;
-&lt;p&gt;That&amp;rsquo;s probably colored by hindsight and wasn&amp;rsquo;t completely worked out at the time.&amp;#160;&lt;a class="footnote-backref" href="#fnref:goals" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:change"&gt;
-&lt;p&gt;The only recent change improves performance on PostgreSQL by going back to using integers directly instead of casting them to &lt;code&gt;::text&lt;/code&gt; if it isn&amp;rsquo;t necessary.&amp;#160;&lt;a class="footnote-backref" href="#fnref:change" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</summary></entry></feed>
