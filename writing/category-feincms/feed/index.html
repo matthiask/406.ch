@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-06-16T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 24)</title><link href="https://406.ch/writing/weeknotes-2023-week-24/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-24/</id><published>2023-06-16T12:00:00Z</published><updated>2023-06-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 24)&lt;/h1&gt;&lt;p&gt;Life happened and I missed a month of weeknotes. Oh well.&lt;/p&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-06-19T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>FeinCMS is a dead end (but feincms3 is not)</title><link href="https://406.ch/writing/feincms-is-a-dead-end-but-feincms3-is-not/" rel="alternate" /><id>https://406.ch/writing/feincms-is-a-dead-end-but-feincms3-is-not/</id><published>2023-06-19T12:00:00Z</published><updated>2023-06-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;FeinCMS is a dead end (but feincms3 is not)&lt;/h1&gt;
+&lt;p&gt;I wouldn&amp;rsquo;t encourage people to start new sites with FeinCMS. Five years ago I wrote that &lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS is used in a few flagship projects which we’re still actively developing, which means that FeinCMS won’t be going away for years to come.&lt;/a&gt; That&amp;rsquo;s still true but less and less so. We&amp;rsquo;re actively moving away from FeinCMS where we can, mostly towards feincms3 and django-content-editor.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/"&gt;FeinCMS lives on in django-content-editor and feincms3&lt;/a&gt;; not only in spirit but also in (code) history, since django-content-editor contains the whole history of FeinCMS up to and including the beginning of 2016.&lt;/p&gt;
+&lt;p&gt;The implementation of FeinCMS is too expensive to clean up without breaking backwards compatibility. I still wish I had pursued an incremental way back then which would have allowed us to evolve old projects to the current best way of doing things (tm), but it didn&amp;rsquo;t happen and I&amp;rsquo;m not shedding too many tears about that since I&amp;rsquo;m quite happy with where we&amp;rsquo;re at today.&lt;/p&gt;
+&lt;p&gt;That basically means that I won&amp;rsquo;t put any effort into &lt;a href="https://406.ch/writing/bringing-feincms-and-django-content-editorfeincms3-closer-together/"&gt;bringing FeinCMS and django-content-editor closer together&lt;/a&gt;. I haven&amp;rsquo;t spent much time on that anyway but now my mind is made up that this wouldn&amp;rsquo;t be time well spent. That being said, some of the items mentioned in the blog post linked above are available in django-content-editor now.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 24)</title><link href="https://406.ch/writing/weeknotes-2023-week-24/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-24/</id><published>2023-06-16T12:00:00Z</published><updated>2023-06-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 24)&lt;/h1&gt;&lt;p&gt;Life happened and I missed a month of weeknotes. Oh well.&lt;/p&gt;
 &lt;h2&gt;django-debug-toolbar 4.1&lt;/h2&gt;
 &lt;p&gt;We have released &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar
 4.1&lt;/a&gt;. Another cycle where I
@@ -437,49 +441,6 @@ looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></e
 &lt;ol&gt;
 &lt;li id="fn:nih"&gt;
 &lt;p&gt;Maybe it&amp;rsquo;s just a really strong &lt;a href="https://en.wikipedia.org/wiki/Not_invented_here"&gt;NIH syndrome&lt;/a&gt;. Either way, since most other content providers are sadly/luckily irrelevant for the sites I help create and maintain it should be fine.&amp;#160;&lt;a class="footnote-backref" href="#fnref:nih" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>feincms may still be relevant</title><link href="https://406.ch/writing/feincms-may-still-be-relevant/" rel="alternate" /><id>https://406.ch/writing/feincms-may-still-be-relevant/</id><published>2020-09-17T12:00:00Z</published><updated>2020-09-17T12:00:00Z</updated><summary type="html">&lt;h1&gt;feincms may still be relevant&lt;/h1&gt;
-&lt;div class="admonition note"&gt;
-&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;In the following text &amp;ldquo;feincms&amp;rdquo; denotes the feincms-family of tools. Just to reiterate, new
-projects should use &lt;a href="https://feincms3.readthedocs.io/en/latest/"&gt;feincms3&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;About 10 years ago there existed a few Django-based CMS. If someone didn&amp;rsquo;t already know which to choose, the following three systems were seen as reasonable choices&lt;sup id="fnref:choices"&gt;&lt;a class="footnote-ref" href="#fn:choices"&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href="http://mezzanine.jupo.org/"&gt;Mezzanine&lt;/a&gt;&lt;/strong&gt;. There were some doubts about Mezzanine&amp;rsquo;s maintenance status, see &lt;a href="https://github.com/jazzband-roadies/help/issues/178"&gt;this Jazzband issue&lt;/a&gt; but they were unfounded.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt;&lt;/strong&gt;. Perhaps the best known Django-based CMS back then and maybe now too.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href="http://web.archive.org/web/20110925190435/http://feincms.org:80/"&gt;feincms&lt;/a&gt;&lt;sup id="fnref:feincms-archive"&gt;&lt;a class="footnote-ref" href="#fn:feincms-archive"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The landscape has changed. &lt;strong&gt;&lt;a href="https://wagtail.io/"&gt;Wagtail&lt;/a&gt;&lt;/strong&gt; hasn&amp;rsquo;t been the new kid on the block anymore for a long time.&lt;/p&gt;
-&lt;p&gt;I have been following the development of those CMS more or less closely over the years and am convinced that all of them are good choices for starting new projects.&lt;/p&gt;
-&lt;p&gt;We&amp;rsquo;re still using &lt;a href="https://github.com/feincms/feincms/"&gt;feincms&lt;/a&gt; at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt;; or more often &lt;a href="https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/"&gt;django-content-editor and feincms3&lt;/a&gt;, especially for new projects. Since the development of the feincms 1.x line has slowed down to maintenance mode and the community of feincms3 is really small you might ask why we&amp;rsquo;re still sticking with those tools &amp;ndash; we&amp;rsquo;re certainly asking it ourselves from time to time.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="feincms3 / django-content-editor interface" src="https://406.ch/media/cabinet/2020/09/django-content-editor.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Here&amp;rsquo;s a list of reasons why feincms is still relevant:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;There&amp;rsquo;s only one autogenerated administration interface to maintain and explain to users &amp;ndash; the stock Django administration interface. It works really well and since it&amp;rsquo;s maintained by the Django community it has received a steady stream of (small but important) improvements over the years. feincms has always been in the position to profit from those improvements immediately since it does not come with its own administration interface.&lt;/li&gt;
-&lt;li&gt;feincms is generally very stable. Especially the django-content-editor / feincms3 combination consists of very little code&lt;sup id="fnref:loc"&gt;&lt;a class="footnote-ref" href="#fn:loc"&gt;3&lt;/a&gt;&lt;/sup&gt;, which allows us to easily use the latest and best version of Django and other packages.&lt;/li&gt;
-&lt;li&gt;Django makes it straightforward to manage the database content and structure. If you&amp;rsquo;ve ever imported content from a different CMS you know how tidy a database managed by Django can be, a stark contrast to the JSON blobs or PHP serialization results used by other content management systems. feincms doesn&amp;rsquo;t invent its own database structure either but allows continuing this success story into the realm of flow content.&lt;/li&gt;
-&lt;li&gt;feincms does not insist to take over the whole site, and can be used to manage parts only. feincms also allows integrating other models and apps without much boilerplate.&lt;/li&gt;
-&lt;li&gt;feincms exposes its building blocks and the foundation, making it relatively easy to use the same content in different ways.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The &lt;a href="https://www.goodreads.com/book/show/37567459-designing-connected-content"&gt;Designing Connected Content&lt;/a&gt; book gave me a way to better formulate these thoughts. I&amp;rsquo;d recommend it to everyone who sometimes has to defend using Django instead of &amp;ldquo;nicer&amp;rdquo; CMS such as Wordpress.&lt;/p&gt;
-&lt;p&gt;feincms will probably never get back to being one of the major Django-based CMS. That&amp;rsquo;s alright (no, really!) &lt;em&gt;but&lt;/em&gt; I hope that it keeps its place in the toolkit of a few Django developers.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If you have to build a blog or cms alongside a django project (ie. entreprise blog), django-content-editor from @suppensud is a nifty, minimal and unobtrusive package to manage and dnd custom content blocks&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://twitter.com/providenz/status/961906127477895168"&gt;by @providenz on Twitter&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:choices"&gt;
-&lt;p&gt;I hope I do not step on too many toes with this formulation.&amp;#160;&lt;a class="footnote-backref" href="#fnref:choices" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:feincms-archive"&gt;
-&lt;p&gt;Wayback machine link, the current website redirects to this blog.&amp;#160;&lt;a class="footnote-backref" href="#fnref:feincms-archive" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:loc"&gt;
-&lt;p&gt;&lt;a href="https://dwheeler.com/sloccount/"&gt;SLOCCount&lt;/a&gt; counts 88&amp;lsquo;039 lines in Wagtail, 73&amp;lsquo;022 lines in django CMS, 45&amp;lsquo;306 lines in Mezzanine, and just 4012 lines in feincms3 and django-content-editor; all values including tests, in current Git repositories as of 2020-09-16. Not including dependencies; they would skew the results even more given that e.g. &lt;a href="https://github.com/django-treebeard/django-treebeard"&gt;django-treebeard&lt;/a&gt; has 10 times more code than &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:loc" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</summary></entry></feed>
