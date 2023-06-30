@@ -100,7 +100,7 @@ def jinja_templates(**kwargs):
 def write_feed_with_posts(path, posts, title, link):
     root = Element("feed", {"xml:lang": "en", "xmlns": "http://www.w3.org/2005/Atom"})
     SE(root, "title").text = title
-    SE(root, "link", {"href": f"{URL}/{path}atom.xml", "rel": "self"})
+    SE(root, "link", {"href": f"{URL}/{path[1:]}atom.xml", "rel": "self"})
     SE(root, "link", {"href": link, "rel": "alternate"})
     SE(root, "id").text = link
     SE(root, "updated").text = posts[0].updated
@@ -113,8 +113,8 @@ def write_feed_with_posts(path, posts, title, link):
         SE(entry, "id").text = link
         SE(entry, "published").text = SE(entry, "updated").text = post.updated
         SE(entry, "summary", {"type": "html"}).text = post.body
-    write_file(f"{path}atom.xml", tostring(root))
-    write_file(f"{path}feed/index.html", tostring(root))
+    write_file(f"{path[1:]}atom.xml", tostring(root))
+    write_file(f"{path[1:]}feed/index.html", tostring(root))
 
 
 def write_sitemap(posts):
@@ -139,7 +139,7 @@ def main(folders, *, only_published=True):
     write_sitemap(posts)
     write_file("404.html", not_found())
     write_file("index.html", archive(posts=posts))
-    write_feed_with_posts("writing/", posts[:20], title=TITLE, link=f"{URL}/")
+    write_feed_with_posts("/writing/", posts[:20], title=TITLE, link=f"{URL}/")
     for post in posts:
         write_file(f"{post.url()}index.html", detail(post=post))
     for category in sorted(counter):
@@ -149,7 +149,7 @@ def main(folders, *, only_published=True):
             archive(posts=category_posts, current=category),
         )
         write_feed_with_posts(
-            category.url().lstrip("/"),
+            category.url(),
             category_posts[:20],
             title=f"{TITLE}: Posts about {category.title}",
             link=f"{URL}{category.url()}",
