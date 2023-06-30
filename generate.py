@@ -9,7 +9,7 @@ from datetime import date, datetime
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
-from xml.etree.ElementTree import Element, SubElement, tostring
+from xml.etree.ElementTree import Element, SubElement as SE, tostring as _ts
 
 from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
@@ -22,6 +22,7 @@ DIR = Path(__file__).resolve(strict=True).parent
 URL = "https://406.ch"
 TITLE = "Matthias Kestenholz"
 md_exts = ["smarty", "footnotes", "admonition", CodeHiliteExtension(linenums=False)]
+tostring = lambda el: _ts(el, encoding="utf-8", xml_declaration=True).decode("utf-8")
 
 
 @dataclass(kw_only=True, frozen=True, order=True)
@@ -72,8 +73,7 @@ def load_posts(dirs):
                 body=body,
             )
         except Exception as exc:
-            md = md.relative_to(DIR)
-            print(f"Skipping the invalid '{md}' file: {exc!r}", file=sys.stderr)
+            print(f"{md.relative_to(DIR)} invalid, skipping: {exc!r}", file=sys.stderr)
 
 
 def write_file(path, content):
@@ -99,33 +99,29 @@ def jinja_templates(**kwargs):
 
 def write_feed_with_posts(path, posts, title, link):
     root = Element("feed", {"xml:lang": "en", "xmlns": "http://www.w3.org/2005/Atom"})
-    SubElement(root, "title").text = title
-    SubElement(root, "link", {"href": f"{URL}/{path}atom.xml", "rel": "self"})
-    SubElement(root, "link", {"href": link, "rel": "alternate"})
-    SubElement(root, "id").text = link
-    SubElement(root, "updated").text = posts[0].updated
-    SubElement(SubElement(root, "author"), "name").text = TITLE
+    SE(root, "title").text = title
+    SE(root, "link", {"href": f"{URL}/{path}atom.xml", "rel": "self"})
+    SE(root, "link", {"href": link, "rel": "alternate"})
+    SE(root, "id").text = link
+    SE(root, "updated").text = posts[0].updated
+    SE(SE(root, "author"), "name").text = TITLE
     for post in posts:
-        entry = SubElement(root, "entry")
-        SubElement(entry, "title").text = post.title
+        entry = SE(root, "entry")
+        SE(entry, "title").text = post.title
         link = f"{URL}{post.url()}"
-        SubElement(entry, "link", {"href": link, "rel": "alternate"})
-        SubElement(entry, "id").text = link
-        SubElement(entry, "published").text = post.updated
-        SubElement(entry, "updated").text = post.updated
-        SubElement(entry, "summary", {"type": "html"}).text = post.body
-
-    xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
-    write_file(f"{path}atom.xml", xml)
-    write_file(f"{path}feed/index.html", xml)
+        SE(entry, "link", {"href": link, "rel": "alternate"})
+        SE(entry, "id").text = link
+        SE(entry, "published").text = SE(entry, "updated").text = post.updated
+        SE(entry, "summary", {"type": "html"}).text = post.body
+    write_file(f"{path}atom.xml", tostring(root))
+    write_file(f"{path}feed/index.html", tostring(root))
 
 
 def write_sitemap(posts):
     root = Element("urlset", {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"})
     for post in posts:
-        SubElement(SubElement(root, "url"), "loc").text = f"{URL}{post.url()}"
-    xml = tostring(root, encoding="utf-8", xml_declaration=True).decode("utf-8")
-    write_file("sitemap.xml", xml)
+        SE(SE(root, "url"), "loc").text = f"{URL}{post.url()}"
+    write_file("sitemap.xml", tostring(root))
 
 
 def main(folders, *, only_published=True):
@@ -137,17 +133,15 @@ def main(folders, *, only_published=True):
     print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
 
     shutil.rmtree(DIR / "htdocs", ignore_errors=True)
+    archive, detail, not_found = jinja_templates(categories=sorted(counter))
     write_file("writing/index.html", f'<meta content="0;url={URL}"http-equiv=refresh>')
     write_file("robots.txt", f"User-agent: *\nSitemap: {URL}/sitemap.xml\n")
     write_sitemap(posts)
-
-    archive, detail, not_found = jinja_templates(categories=sorted(counter))
     write_file("404.html", not_found())
     write_file("index.html", archive(posts=posts))
     write_feed_with_posts("writing/", posts[:20], title=TITLE, link=f"{URL}/")
     for post in posts:
         write_file(f"{post.url()}index.html", detail(post=post))
-
     for category in sorted(counter):
         category_posts = [post for post in posts if category in post.categories]
         write_file(
