@@ -29,9 +29,7 @@ tostring = lambda el: _ts(el, encoding="utf-8", xml_declaration=True).decode("ut
 class Category:
     slug: str
     title: str
-
-    def url(self):
-        return f"/writing/category-{self.slug}/"
+    url = lambda self: f"/writing/category-{self.slug}/"
 
 
 @dataclass(kw_only=True, frozen=True, order=True)
@@ -42,36 +40,35 @@ class Post:
     updated: str
     categories: list[Category]
     body: str
-
-    def url(self):
-        return f"/writing/{self.slug}/"
+    url = lambda self: f"/writing/{self.slug}/"
 
 
-def load_posts(dirs):
+def load_posts(dirs, *, only_published):
     slugify = lambda v: re.sub(r"[^-a-z0-9]+", "-", v.lower()).strip("-")
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
             props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
-            props = {name.lower(): value for name, value in props}
+            props = {"categories": ""} | {name.lower(): value for name, value in props}
             body = markdown(content, extensions=md_exts)
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
-            date = datetime.strptime(props["date"], "%Y-%m-%d").date()
-            yield Post(
-                date=date,
-                slug=props.get("slug") or slugify(props["title"]),
-                title=props["title"],
-                updated=f"{date.isoformat()}T12:00:00Z",
-                categories=sorted(
-                    {
-                        Category(slug=slugify(category), title=category)
-                        for category in re.split(r",\s*", props.get("categories", ""))
-                        if category
-                    }
-                ),
-                body=body,
-            )
+            post_date = datetime.strptime(props["date"], "%Y-%m-%d").date()
+            if post_date <= date.today():
+                yield Post(
+                    date=post_date,
+                    slug=props.get("slug") or slugify(props["title"]),
+                    title=props["title"],
+                    updated=f"{post_date.isoformat()}T12:00:00Z",
+                    categories=sorted(
+                        {
+                            Category(slug=slugify(category), title=category)
+                            for category in re.split(r",\s*", props["categories"])
+                            if category
+                        }
+                    ),
+                    body=body,
+                )
         except Exception as exc:
             print(f"{md.relative_to(DIR)} invalid, skipping: {exc!r}", file=sys.stderr)
 
@@ -125,9 +122,7 @@ def write_sitemap(posts):
 
 
 def main(folders, *, only_published=True):
-    posts = sorted(load_posts(folders), reverse=True)
-    if only_published:
-        posts = [post for post in posts if post.date <= date.today()]
+    posts = sorted(load_posts(folders, only_published=only_published), reverse=True)
     counter = Counter(chain.from_iterable(post.categories for post in posts))
     print(f"{len(posts)} posts in ", end="")
     print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
