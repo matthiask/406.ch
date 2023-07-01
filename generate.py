@@ -18,7 +18,7 @@ from minify_html import minify
 from rcssmin import cssmin
 
 
-DIR = Path(__file__).resolve(strict=True).parent
+DIR = Path(__file__).parent
 URL = "https://406.ch"
 TITLE = "Matthias Kestenholz"
 md_exts = ["smarty", "footnotes", "admonition", CodeHiliteExtension(linenums=False)]
@@ -74,7 +74,7 @@ def load_posts(dirs, *, only_published):
 
 
 def write_file(path, content):
-    file = DIR / "htdocs" / path.lstrip("/")
+    file = DIR / "htdocs" / path[1:]
     file.parent.mkdir(parents=True, exist_ok=True)
     file.write_text(content)
     write_file.count = getattr(write_file, "count", 0) + 1
@@ -95,30 +95,23 @@ def jinja_templates(**kwargs):
 
 
 def write_feed_with_posts(path, posts, title, link):
-    root = Element("feed", {"xml:lang": "en", "xmlns": "http://www.w3.org/2005/Atom"})
-    SE(root, "title").text = title
-    SE(root, "link", {"href": f"{URL}/{path[1:]}atom.xml", "rel": "self"})
-    SE(root, "link", {"href": link, "rel": "alternate"})
-    SE(root, "id").text = link
-    SE(root, "updated").text = posts[0].updated
-    SE(SE(root, "author"), "name").text = TITLE
+    feed = Element("feed", {"xml:lang": "en", "xmlns": "http://www.w3.org/2005/Atom"})
+    SE(feed, "title").text = title
+    SE(feed, "link", {"href": f"{URL}{path}atom.xml", "rel": "self"})
+    SE(feed, "link", {"href": link, "rel": "alternate"})
+    SE(feed, "id").text = link
+    SE(feed, "updated").text = posts[0].updated
+    SE(SE(feed, "author"), "name").text = TITLE
     for post in posts:
-        entry = SE(root, "entry")
+        entry = SE(feed, "entry")
         SE(entry, "title").text = post.title
         link = f"{URL}{post.url()}"
         SE(entry, "link", {"href": link, "rel": "alternate"})
         SE(entry, "id").text = link
         SE(entry, "published").text = SE(entry, "updated").text = post.updated
         SE(entry, "summary", {"type": "html"}).text = post.body
-    write_file(f"{path[1:]}atom.xml", tostring(root))
-    write_file(f"{path[1:]}feed/index.html", tostring(root))
-
-
-def write_sitemap(posts):
-    root = Element("urlset", {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"})
-    for post in posts:
-        SE(SE(root, "url"), "loc").text = f"{URL}{post.url()}"
-    write_file("sitemap.xml", tostring(root))
+    write_file(f"{path}atom.xml", tostring(feed))
+    write_file(f"{path}feed/index.html", tostring(feed))
 
 
 def main(folders, *, only_published=True):
@@ -129,14 +122,15 @@ def main(folders, *, only_published=True):
 
     shutil.rmtree(DIR / "htdocs", ignore_errors=True)
     archive, detail, not_found = jinja_templates(categories=sorted(counter))
-    write_file("writing/index.html", f'<meta content="0;url={URL}"http-equiv=refresh>')
-    write_file("robots.txt", f"User-agent: *\nSitemap: {URL}/sitemap.xml\n")
-    write_sitemap(posts)
-    write_file("404.html", not_found())
-    write_file("index.html", archive(posts=posts))
+    write_file("/writing/index.html", f'<meta content="0;url={URL}"http-equiv=refresh>')
+    write_file("/robots.txt", f"User-agent: *\nSitemap: {URL}/sitemap.xml\n")
+    write_file("/404.html", not_found())
+    write_file("/index.html", archive(posts=posts))
     write_feed_with_posts("/writing/", posts[:20], title=TITLE, link=f"{URL}/")
+    urlset = Element("urlset", {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"})
     for post in posts:
         write_file(f"{post.url()}index.html", detail(post=post))
+        SE(SE(urlset, "url"), "loc").text = f"{URL}{post.url()}"
     for category in sorted(counter):
         category_posts = [post for post in posts if category in post.categories]
         write_file(
@@ -149,6 +143,8 @@ def main(folders, *, only_published=True):
             title=f"{TITLE}: Posts about {category.title}",
             link=f"{URL}{category.url()}",
         )
+        SE(SE(urlset, "url"), "loc").text = f"{URL}{category.url()}"
+    write_file("/sitemap.xml", tostring(urlset))
     print(f"Wrote {write_file.count} files.")
 
 
