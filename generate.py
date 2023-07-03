@@ -53,19 +53,14 @@ def load_posts(dirs, *, only_published):
             body = markdown(content, extensions=md_exts)
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
+            c_slugs = sorted(set(filter(None, re.split(r",\s*", props["categories"]))))
             if (d := dt.strptime(props["date"], "%Y-%m-%d").date()) <= date.today():
                 yield Post(
                     date=d,
                     slug=props.get("slug") or slugify(props["title"]),
                     title=props["title"],
                     updated=f"{d.isoformat()}T12:00:00Z",
-                    categories=sorted(
-                        {
-                            Category(slug=slugify(category), title=category)
-                            for category in re.split(r",\s*", props["categories"])
-                            if category
-                        }
-                    ),
+                    categories=[Category(slug=slugify(c), title=c) for c in c_slugs],
                     body=body,
                 )
         except Exception as exc:
