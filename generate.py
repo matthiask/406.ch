@@ -67,23 +67,13 @@ def load_posts(dirs, *, only_published):
             print(f"{md.relative_to(DIR)} invalid, skipping: {exc!r}", file=sys.stderr)
 
 
-def write_file(path, content):
-    file = DIR / "htdocs" / path[1:]
-    file.parent.mkdir(parents=True, exist_ok=True)
-    file.write_text(content)
-    write_file.count = getattr(write_file, "count", 0) + 1
-
-
-def styles():
+def jinja_templates(context):
     styles = cssmin("".join(f.read_text() for f in sorted(DIR.glob("styles/*.css"))))
     style_file = f"/styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
     write_file(style_file, styles)
-    return style_file
 
-
-def jinja_templates(**kwargs):
     env = Environment(loader=FileSystemLoader([DIR / "templates"]), autoescape=True)
-    env.globals.update({"year": date.today().year, "styles": styles()} | kwargs)
+    env.globals.update({"year": date.today().year, "styles": style_file} | context)
     r = lambda template: lambda **ctx: minify(template.render(**ctx))
     return [r(env.get_template(f"{t}.html")) for t in ["archive", "post", "404"]]
 
@@ -108,6 +98,13 @@ def write_feed_with_posts(path, posts, title, link):
     write_file(f"{path}feed/index.html", tostring(feed))
 
 
+def write_file(path, content):
+    file = DIR / "htdocs" / path[1:]
+    file.parent.mkdir(parents=True, exist_ok=True)
+    file.write_text(content)
+    write_file.count = getattr(write_file, "count", 0) + 1
+
+
 def main(folders, *, only_published=True):
     posts = sorted(load_posts(folders, only_published=only_published), reverse=True)
     counter = Counter(chain.from_iterable(post.categories for post in posts))
@@ -115,7 +112,7 @@ def main(folders, *, only_published=True):
     print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
 
     shutil.rmtree(DIR / "htdocs", ignore_errors=True)
-    archive, detail, not_found = jinja_templates(categories=sorted(counter))
+    archive, detail, not_found = jinja_templates({"categories": sorted(counter)})
     write_file("/writing/index.html", f'<meta content="0;url={URL}"http-equiv=refresh>')
     write_file("/robots.txt", f"User-agent: *\nSitemap: {URL}/sitemap.xml\n")
     write_file("/404.html", not_found())
