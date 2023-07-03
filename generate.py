@@ -5,7 +5,7 @@ import shutil
 import sys
 from collections import Counter
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime as dt
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
@@ -53,13 +53,12 @@ def load_posts(dirs, *, only_published):
             body = markdown(content, extensions=md_exts)
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
-            post_date = datetime.strptime(props["date"], "%Y-%m-%d").date()
-            if post_date <= date.today():
+            if (d := dt.strptime(props["date"], "%Y-%m-%d").date()) <= date.today():
                 yield Post(
-                    date=post_date,
+                    date=d,
                     slug=props.get("slug") or slugify(props["title"]),
                     title=props["title"],
-                    updated=f"{post_date.isoformat()}T12:00:00Z",
+                    updated=f"{d.isoformat()}T12:00:00Z",
                     categories=sorted(
                         {
                             Category(slug=slugify(category), title=category)
