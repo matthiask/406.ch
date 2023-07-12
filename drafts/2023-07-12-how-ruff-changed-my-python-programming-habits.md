@@ -56,17 +56,13 @@ Sometimes annoying, mostly useful. I don't like that the plugin flags e.g. `with
 
 ### flake8-bugbear
 
-Mostly useful. I have disabled some of the more opinionated warnings though.
+Mostly useful. I have disabled the `zip()` without `strict=` warning.
 
 ### flake8-comprehensions
 
 ### flake8-django
 
 I actually like consistency. I also like flagging `fields = "__all__"`, but this check shouldn't trigger in admin `ModelForm` classes, really. I probably have to add another entry to `[tool.ruff.per-file-ignores]` for this.
-
-### flake8-logging-format
-
-I have removed this rule, I don't find it helpful.
 
 ### flake8-pie
 
@@ -89,3 +85,9 @@ Ruff is able to automatically remove `# noqa` statements which don't actually si
 Yes, let's go there. I still don't use longer lines than +/- 80 characters, but
 I have disabled all line length warnings these days. I don't want to be warned
 because I didn't break a string across lines.
+
+## Rules I don't like
+
+- flake8-builtins: Too many boring warnings. I didn't even want to know that
+  `copyright` is a Python builtin.
+- flake8-logging-format: Not helpful.
