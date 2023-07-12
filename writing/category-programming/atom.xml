@@ -1,5 +1,49 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-06-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 26)</title><link href="https://406.ch/writing/weeknotes-2023-week-26/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-26/</id><published>2023-06-30T12:00:00Z</published><updated>2023-06-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 26)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-07-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 28)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.2&lt;/a&gt;: Made the
+  sanitizer&amp;rsquo;s configuration initialization more strict. Strings cannot be used
+  anymore in places where the sanitizer expects a set (resp. any iterable).
+  It&amp;rsquo;s useful that strings are iterable in Python and I wouldn&amp;rsquo;t want to change
+  that, but the fact that &lt;code&gt;("class")&lt;/code&gt; is a string and not a tuple makes me sad.
+  The fact that tuples are created by &lt;code&gt;,&lt;/code&gt; and not by &lt;code&gt;()&lt;/code&gt; will always trip up
+  people.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites
+  0.1&lt;/a&gt;: The version number
+  is wrong but whatever. I&amp;rsquo;m certainly happy with the state of things. The big
+  change in 0.1 is that &lt;code&gt;Page.get_absolute_url&lt;/code&gt; no longer generates
+  protocol-relative URLs. Depending on the value of &lt;code&gt;SECURE_SSL_REDIRECT&lt;/code&gt; it
+  automatically prepends either &lt;code&gt;http:&lt;/code&gt; or &lt;code&gt;https:&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.15&lt;/a&gt;:
+  django-authlib&amp;rsquo;s admin Single Sign On module now supports a hook to
+  automatically create staff users when a matching user doesn&amp;rsquo;t exist already.
+  I don&amp;rsquo;t plan to use this functionality myself and I have recommended people
+  to implement the functionality themselves using the tools in django-authlib
+  if they need it, but the change was so small and well-contained that adding
+  it to the core made sense to me.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;pipx inject&lt;/h2&gt;
+&lt;p&gt;We learned that &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; seems to remember injected
+packages even across &lt;code&gt;pipx reinstall&lt;/code&gt; invocations. Not too surprising now that
+we know it, but we certainly spent some time scratching our heads. &lt;code&gt;pipx
+uninject&lt;/code&gt; was the thing we needed to stop pipx from installing an old version
+of a dependency instead of the one being specified in &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;hatchling and data files&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m very confused by the way &lt;a href="https://hatch.pypa.io/"&gt;hatchling&lt;/a&gt; sometimes
+includes data files and sometimes it doesn&amp;rsquo;t. I had to add &lt;code&gt;[tool.hatch.build]
+include=["authlib/"]&lt;/code&gt; to &lt;a href="https://github.com/matthiask/django-authlib/commit/67d4673e4039eac277b5d2557c0736c1f01442ac"&gt;django-authlib&amp;rsquo;s &lt;code&gt;pyproject.toml&lt;/code&gt;
+file&lt;/a&gt;
+to make it include HTML files from subpackages. Maybe the subpackages are the
+reason, but I&amp;rsquo;m not sure.&lt;/p&gt;
+&lt;h2&gt;Payment providers that must not be named&lt;/h2&gt;
+&lt;p&gt;I have spent hours and hours battling with the badly documented, incomplete,
+inconsistent and confusing API of a (not that well known) payment provider
+based in Switzerland. I&amp;rsquo;m surprised that this still happens years and years
+after Stripe started offering a really well thought out and documented API
+geared towards programmers. It&amp;rsquo;s really sad because when the same structure is
+named with differing naming conventions (e.g. &lt;code&gt;snake_case&lt;/code&gt; vs. &lt;code&gt;camelCase&lt;/code&gt;) in
+different parts of the API you just know that somebody spent too much time
+writing too much code instead of reusing already existing functionality.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 26)</title><link href="https://406.ch/writing/weeknotes-2023-week-26/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-26/</id><published>2023-06-30T12:00:00Z</published><updated>2023-06-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 26)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
 &lt;p&gt;I released updates to a few of my packages; I have continued converting packages to &lt;a href="https://hatch.pypa.io"&gt;hatchling&lt;/a&gt; and &lt;a href="https://github.com/astral-sh/ruff"&gt;ruff&lt;/a&gt; while doing that.&lt;/p&gt;
 &lt;p&gt;New releases in the last two weeks include:&lt;/p&gt;
 &lt;ul&gt;
@@ -496,39 +540,4 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;p&gt;As an aside, I always try deploying the last and best version of Django in my current projects, but since one of our servers is still using Ubuntu 18.04 with an old PostgreSQL version I cannot even use Django 4.1 with many projects. That makes me sad but maybe the sadness will bring with it the energy to finally move to containers or something which makes it easier to jump to new versions. We&amp;rsquo;ll see. It&amp;rsquo;s not really an issue most of the time so maybe it still isn&amp;rsquo;t worth it even though I feel like our hosting strategy is stuck in 2010.&lt;/p&gt;
 &lt;h2&gt;Machine Learning&lt;/h2&gt;
 &lt;p&gt;I did some playing around with Dall-E and ChatGPT (as everyone seems to do). I had a few interesting discussions with people re. if predicting the next word will lead to Artificial General Intelligence (I don&amp;rsquo;t think so).&lt;/p&gt;
-&lt;p&gt;What was fun about it was that I got to throw a hack together with &lt;a href="https://docs.python.org/3/library/asyncio.html"&gt;asyncio&lt;/a&gt; respectively &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt; and &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. The Starlette source code is a breath of fresh air. It&amp;rsquo;s so beautiful to read and I just love how much it does with a minimal amount of code.&lt;/p&gt;</summary></entry><entry><title>Moving data including deletions between the same Django app running in different environments</title><link href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/" rel="alternate" /><id>https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/</id><published>2022-11-13T12:00:00Z</published><updated>2022-11-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;Moving data including deletions between the same Django app running in different environments&lt;/h1&gt;
-&lt;p&gt;Many projects use different environments to stabilize the code; they have a &lt;em&gt;production&lt;/em&gt; environment which is actually seen by users, a &lt;em&gt;stage&lt;/em&gt; where code is tested in an environment close to production and maybe several additional environments where more experimental code is published or developed, either on internal or protected webservers or maybe on the workstations of developers themselves.&lt;/p&gt;
-&lt;p&gt;The same process may be desired for content; an environment where the content lives which is seen by users and other environments where the content can be changed without impacting the production environment. When using Django and the &lt;a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/"&gt;Django admin site&lt;/a&gt; there is no ready-made solution for doing this and maybe there shouldn&amp;rsquo;t be.&lt;/p&gt;
-&lt;h2&gt;Django&amp;rsquo;s serialization framework and its shortcomings for the use case outlined above&lt;/h2&gt;
-&lt;p&gt;Django comes with a &lt;a href="https://docs.djangoproject.com/en/4.1/topics/serialization/"&gt;serialization framework&lt;/a&gt; and with the &lt;code&gt;dumpdata&lt;/code&gt; and &lt;code&gt;loaddata&lt;/code&gt; management commands which can be used to dump and load data, e.g. to and from JSON. It&amp;rsquo;s also easily possible to specify a list of primary keys on the command line if you only want to dump a subset of the existing data. When loading this subset data which isn&amp;rsquo;t included isn&amp;rsquo;t changed in any way, and that&amp;rsquo;s good!&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;However!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s assume we&amp;rsquo;re working with the question and choice models from &lt;a href="https://docs.djangoproject.com/en/4.1/intro/tutorial02/#creating-models"&gt;Django&amp;rsquo;s tutorial&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The serialization framework doesn&amp;rsquo;t offer a way to easily include related data in a dump. There&amp;rsquo;s no easy way to automatically include all choices of a question.&lt;/li&gt;
-&lt;li&gt;Even if there was a way to include the related data the target environment wouldn&amp;rsquo;t have a way to replicate deletions. If a choice has been removed in the source environment it will not be included in the dump, and the target environment will just do nothing with the now redundant choice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt; solves these problems in (I think) a nice way, by building on the serialization framework and augmenting the JSON dump with a few additional properties which tell the loader what to do with the dataset. The code doesn&amp;rsquo;t have a dependency on &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; but of course it&amp;rsquo;s very useful when used to dump and load structured data as is generated when using a CMS.&lt;/p&gt;
-&lt;p&gt;The following datasets configuration would work for the use case outlined above:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;feincms3_data.data&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;specs_for_models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;polls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;questions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;pks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;specs_for_models&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Question&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-            &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;filter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pk__in&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pks&lt;/span&gt;&lt;span class="p"&gt;}},&lt;/span&gt;
-        &lt;span class="p"&gt;),&lt;/span&gt;
-        &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;specs_for_models&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Answer&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-            &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;filter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;question__pk__in&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pks&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;delete_missing&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;datasets&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;specs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;questions&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now, you have to point the &lt;code&gt;FEINCMS3_DATA_DATASETS&lt;/code&gt; setting at the &lt;code&gt;datasets()&lt;/code&gt; function above and now you could use &lt;code&gt;./manage.py f3dumpdata default:3,4&lt;/code&gt; to dump the questions with ID 3 and 4 including their choices. The JSON can be loaded in a different instance. The questions with ID 3 and 4 will be created or updated, and choices which match the &lt;code&gt;questions__pk__in=[3,4]&lt;/code&gt; filter &lt;em&gt;but aren&amp;rsquo;t included in the JSON&lt;/em&gt; will be removed from the database.&lt;/p&gt;
-&lt;p&gt;Despite its pre-1.0 version number it&amp;rsquo;s used for several clients to implement a workflow where they set a &amp;ldquo;request update&amp;rdquo; flag on some parent object, and the relevant data will be synced periodically between systems. I&amp;rsquo;m quite confident that the code is correct and that it does what it should. A thorough test suite helps a lot there! But you never now, but I&amp;rsquo;m sure everyone uses backups by now. But who knows.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;What was fun about it was that I got to throw a hack together with &lt;a href="https://docs.python.org/3/library/asyncio.html"&gt;asyncio&lt;/a&gt; respectively &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt; and &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. The Starlette source code is a breath of fresh air. It&amp;rsquo;s so beautiful to read and I just love how much it does with a minimal amount of code.&lt;/p&gt;</summary></entry></feed>

@@ -1,5 +1,49 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-06-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 26)</title><link href="https://406.ch/writing/weeknotes-2023-week-26/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-26/</id><published>2023-06-30T12:00:00Z</published><updated>2023-06-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 26)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-07-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 28)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.2&lt;/a&gt;: Made the
+  sanitizer&amp;rsquo;s configuration initialization more strict. Strings cannot be used
+  anymore in places where the sanitizer expects a set (resp. any iterable).
+  It&amp;rsquo;s useful that strings are iterable in Python and I wouldn&amp;rsquo;t want to change
+  that, but the fact that &lt;code&gt;("class")&lt;/code&gt; is a string and not a tuple makes me sad.
+  The fact that tuples are created by &lt;code&gt;,&lt;/code&gt; and not by &lt;code&gt;()&lt;/code&gt; will always trip up
+  people.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites
+  0.1&lt;/a&gt;: The version number
+  is wrong but whatever. I&amp;rsquo;m certainly happy with the state of things. The big
+  change in 0.1 is that &lt;code&gt;Page.get_absolute_url&lt;/code&gt; no longer generates
+  protocol-relative URLs. Depending on the value of &lt;code&gt;SECURE_SSL_REDIRECT&lt;/code&gt; it
+  automatically prepends either &lt;code&gt;http:&lt;/code&gt; or &lt;code&gt;https:&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.15&lt;/a&gt;:
+  django-authlib&amp;rsquo;s admin Single Sign On module now supports a hook to
+  automatically create staff users when a matching user doesn&amp;rsquo;t exist already.
+  I don&amp;rsquo;t plan to use this functionality myself and I have recommended people
+  to implement the functionality themselves using the tools in django-authlib
+  if they need it, but the change was so small and well-contained that adding
+  it to the core made sense to me.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;pipx inject&lt;/h2&gt;
+&lt;p&gt;We learned that &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; seems to remember injected
+packages even across &lt;code&gt;pipx reinstall&lt;/code&gt; invocations. Not too surprising now that
+we know it, but we certainly spent some time scratching our heads. &lt;code&gt;pipx
+uninject&lt;/code&gt; was the thing we needed to stop pipx from installing an old version
+of a dependency instead of the one being specified in &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;hatchling and data files&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m very confused by the way &lt;a href="https://hatch.pypa.io/"&gt;hatchling&lt;/a&gt; sometimes
+includes data files and sometimes it doesn&amp;rsquo;t. I had to add &lt;code&gt;[tool.hatch.build]
+include=["authlib/"]&lt;/code&gt; to &lt;a href="https://github.com/matthiask/django-authlib/commit/67d4673e4039eac277b5d2557c0736c1f01442ac"&gt;django-authlib&amp;rsquo;s &lt;code&gt;pyproject.toml&lt;/code&gt;
+file&lt;/a&gt;
+to make it include HTML files from subpackages. Maybe the subpackages are the
+reason, but I&amp;rsquo;m not sure.&lt;/p&gt;
+&lt;h2&gt;Payment providers that must not be named&lt;/h2&gt;
+&lt;p&gt;I have spent hours and hours battling with the badly documented, incomplete,
+inconsistent and confusing API of a (not that well known) payment provider
+based in Switzerland. I&amp;rsquo;m surprised that this still happens years and years
+after Stripe started offering a really well thought out and documented API
+geared towards programmers. It&amp;rsquo;s really sad because when the same structure is
+named with differing naming conventions (e.g. &lt;code&gt;snake_case&lt;/code&gt; vs. &lt;code&gt;camelCase&lt;/code&gt;) in
+different parts of the API you just know that somebody spent too much time
+writing too much code instead of reusing already existing functionality.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 26)</title><link href="https://406.ch/writing/weeknotes-2023-week-26/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-26/</id><published>2023-06-30T12:00:00Z</published><updated>2023-06-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 26)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
 &lt;p&gt;I released updates to a few of my packages; I have continued converting packages to &lt;a href="https://hatch.pypa.io"&gt;hatchling&lt;/a&gt; and &lt;a href="https://github.com/astral-sh/ruff"&gt;ruff&lt;/a&gt; while doing that.&lt;/p&gt;
 &lt;p&gt;New releases in the last two weeks include:&lt;/p&gt;
 &lt;ul&gt;
@@ -462,22 +506,4 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;p&gt;&lt;img alt="Consciously embedding a YouTube video" src="https://raw.githubusercontent.com/feinheit/feincms3-cookiecontrol/main/docs/embed.png" /&gt;&lt;/p&gt;
 &lt;p&gt;That&amp;rsquo;s why we set out to build a simple solution doing all that. As always it&amp;rsquo;s released as Open Source since we believe that giving back is the right thing to do (tm) &lt;em&gt;and&lt;/em&gt; it helps with &lt;a href="https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/"&gt;managing complexity in our projects&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;feincms3-cookiecontrol&lt;/h2&gt;
-&lt;p&gt;The name of the project is &lt;a href="https://github.com/feinheit/feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;. It has reached the 1.0 version and we&amp;rsquo;re committed to backwards compatibility. The conscious embedding functionality depends on &lt;a href="https://feincms3.readthedocs.io/en/latest/ref/embedding.html"&gt;feincms3&amp;rsquo;s embedding module&lt;/a&gt;, everything else also works with Django only.&lt;/p&gt;</summary></entry><entry><title>Managing complexity and technical debt by releasing Open Source Software</title><link href="https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/" rel="alternate" /><id>https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/</id><published>2022-08-19T12:00:00Z</published><updated>2022-08-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;Managing complexity and technical debt by releasing Open Source Software&lt;/h1&gt;
-&lt;p&gt;When working on projects for &lt;a href="https://feinheit.ch"&gt;our&lt;/a&gt; clients I often try to keep as much code as possible in third party packages; I often even create packages for Django apps even when I do not expect to use the code in more than one project at all. One of those packages (which, in the meantime &lt;em&gt;has&lt;/em&gt; been used more than once is &lt;a href="https://django-spark.readthedocs.io/"&gt;django-spark&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;At first sight it looks like more work to package, document and test the solution. Defining boundaries is also much harder when there are many packages involved &amp;ndash; it&amp;rsquo;s not possible to just add a hack at the right place. You have to define extension points or hooks or you have to design a library which can be used in various ways &amp;ndash; there&amp;rsquo;s not really a way around that when moving code into open source packages.&lt;/p&gt;
-&lt;p&gt;It isn&amp;rsquo;t the case that this approach necessarily means more work though, neither in the initial project nor during &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;maintenance&lt;/a&gt;. Here&amp;rsquo;s a list of reasons why that is:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Once the logical units of functionality are identified separating them is relatively straightforward. Tricky pieces of code can be isolated, documented and tested using unit tests. I maintain that unit tests are more robust &lt;em&gt;and&lt;/em&gt; easier to write than integration tests.&lt;/li&gt;
-&lt;li&gt;Moving code into Open Source packages keeps the packages themselves relatively clean of project-specific concerns. This means that the promise of reusability of Django&amp;rsquo;s apps is actually achievable.&lt;/li&gt;
-&lt;li&gt;Compatibility concerns aren&amp;rsquo;t such a big topic. The third party package (initially) only has to work for the duration of the project.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There&amp;rsquo;s never a guarantee that any open source library will be maintained in the future. I&amp;rsquo;m thinking that it may be useful to communicate the &lt;em&gt;intented maintenance&lt;/em&gt; better by adding an additional classifier when publishing a library. I&amp;rsquo;m thinking about something along these lines:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Actively maintained, used in multiple projects&lt;/li&gt;
-&lt;li&gt;Actively maintained, used in few projects which may even be in maintenance mode&lt;/li&gt;
-&lt;li&gt;Unmaintained right now, future maintenance is probable&lt;/li&gt;
-&lt;li&gt;Unmaintained right now, future maintenance is improbable&lt;/li&gt;
-&lt;li&gt;Definitely a dead project&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;But yeah, I&amp;rsquo;m not doing this classification work right now and haven&amp;rsquo;t done it in the past. But it would certainly make it easier to know whether relying on a third party library is a good idea or not, as an additional signal to reading the code and skimming the issues and pull/merge requests.&lt;/p&gt;
-&lt;p&gt;&lt;small&gt;I have been sitting on this blog post for almost two years, and the ideas here have been gestating even longer. I&amp;rsquo;m sure someone else has said everything in here more eloquently in the meantime. But anyway, feedback is welcome as always and I don&amp;rsquo;t think the post is so bad that it should sit in the draft folder forever.&lt;/small&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;The name of the project is &lt;a href="https://github.com/feinheit/feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;. It has reached the 1.0 version and we&amp;rsquo;re committed to backwards compatibility. The conscious embedding functionality depends on &lt;a href="https://feincms3.readthedocs.io/en/latest/ref/embedding.html"&gt;feincms3&amp;rsquo;s embedding module&lt;/a&gt;, everything else also works with Django only.&lt;/p&gt;</summary></entry></feed>

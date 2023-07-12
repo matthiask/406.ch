@@ -1,5 +1,49 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-06-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 26)</title><link href="https://406.ch/writing/weeknotes-2023-week-26/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-26/</id><published>2023-06-30T12:00:00Z</published><updated>2023-06-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 26)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-07-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 28)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.2&lt;/a&gt;: Made the
+  sanitizer&amp;rsquo;s configuration initialization more strict. Strings cannot be used
+  anymore in places where the sanitizer expects a set (resp. any iterable).
+  It&amp;rsquo;s useful that strings are iterable in Python and I wouldn&amp;rsquo;t want to change
+  that, but the fact that &lt;code&gt;("class")&lt;/code&gt; is a string and not a tuple makes me sad.
+  The fact that tuples are created by &lt;code&gt;,&lt;/code&gt; and not by &lt;code&gt;()&lt;/code&gt; will always trip up
+  people.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites
+  0.1&lt;/a&gt;: The version number
+  is wrong but whatever. I&amp;rsquo;m certainly happy with the state of things. The big
+  change in 0.1 is that &lt;code&gt;Page.get_absolute_url&lt;/code&gt; no longer generates
+  protocol-relative URLs. Depending on the value of &lt;code&gt;SECURE_SSL_REDIRECT&lt;/code&gt; it
+  automatically prepends either &lt;code&gt;http:&lt;/code&gt; or &lt;code&gt;https:&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.15&lt;/a&gt;:
+  django-authlib&amp;rsquo;s admin Single Sign On module now supports a hook to
+  automatically create staff users when a matching user doesn&amp;rsquo;t exist already.
+  I don&amp;rsquo;t plan to use this functionality myself and I have recommended people
+  to implement the functionality themselves using the tools in django-authlib
+  if they need it, but the change was so small and well-contained that adding
+  it to the core made sense to me.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;pipx inject&lt;/h2&gt;
+&lt;p&gt;We learned that &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; seems to remember injected
+packages even across &lt;code&gt;pipx reinstall&lt;/code&gt; invocations. Not too surprising now that
+we know it, but we certainly spent some time scratching our heads. &lt;code&gt;pipx
+uninject&lt;/code&gt; was the thing we needed to stop pipx from installing an old version
+of a dependency instead of the one being specified in &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;hatchling and data files&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m very confused by the way &lt;a href="https://hatch.pypa.io/"&gt;hatchling&lt;/a&gt; sometimes
+includes data files and sometimes it doesn&amp;rsquo;t. I had to add &lt;code&gt;[tool.hatch.build]
+include=["authlib/"]&lt;/code&gt; to &lt;a href="https://github.com/matthiask/django-authlib/commit/67d4673e4039eac277b5d2557c0736c1f01442ac"&gt;django-authlib&amp;rsquo;s &lt;code&gt;pyproject.toml&lt;/code&gt;
+file&lt;/a&gt;
+to make it include HTML files from subpackages. Maybe the subpackages are the
+reason, but I&amp;rsquo;m not sure.&lt;/p&gt;
+&lt;h2&gt;Payment providers that must not be named&lt;/h2&gt;
+&lt;p&gt;I have spent hours and hours battling with the badly documented, incomplete,
+inconsistent and confusing API of a (not that well known) payment provider
+based in Switzerland. I&amp;rsquo;m surprised that this still happens years and years
+after Stripe started offering a really well thought out and documented API
+geared towards programmers. It&amp;rsquo;s really sad because when the same structure is
+named with differing naming conventions (e.g. &lt;code&gt;snake_case&lt;/code&gt; vs. &lt;code&gt;camelCase&lt;/code&gt;) in
+different parts of the API you just know that somebody spent too much time
+writing too much code instead of reusing already existing functionality.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 26)</title><link href="https://406.ch/writing/weeknotes-2023-week-26/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-26/</id><published>2023-06-30T12:00:00Z</published><updated>2023-06-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 26)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
 &lt;p&gt;I released updates to a few of my packages; I have continued converting packages to &lt;a href="https://hatch.pypa.io"&gt;hatchling&lt;/a&gt; and &lt;a href="https://github.com/astral-sh/ruff"&gt;ruff&lt;/a&gt; while doing that.&lt;/p&gt;
 &lt;p&gt;New releases in the last two weeks include:&lt;/p&gt;
 &lt;ul&gt;
@@ -429,24 +473,4 @@ looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></e
 &lt;h2&gt;CKEditor instances in Django&amp;rsquo;s admin interface without IFRAMEs&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="" src="https://406.ch/media/cabinet/2021/03/new-inline-ckeditor.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Currently incubating in feincms3. I have a strong dislike for scrollables inside scrollables, the proposed interface is much better.&lt;/p&gt;
-&lt;p&gt;Of course I&amp;rsquo;m still thinking about reimplementing the whole editing interface using &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;, but oh well&amp;hellip; maybe another time, when I do not have any projects for months to come.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2021 week 10)</title><link href="https://406.ch/writing/weeknotes-2021-week-10/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2021-week-10/</id><published>2021-03-14T12:00:00Z</published><updated>2021-03-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2021 week 10)&lt;/h1&gt;
-&lt;p&gt;I&amp;rsquo;m trying out the weeknotes format to hopefully write a bit more 😄.&lt;/p&gt;
-&lt;h2&gt;feincms3: Page types and moving torwards a 1.0 release&lt;/h2&gt;
-&lt;p&gt;The &lt;a href="https://github.com/matthiask/feincms3/blob/main/CHANGELOG.rst"&gt;current beta release of feincms3 (0.90b*)&lt;/a&gt; introduces support for &lt;strong&gt;page types&lt;/strong&gt;. This new concept unifies templates and apps. Since feincms3 apps can basically do what they want it didn&amp;rsquo;t make much sense to force managers to choose a template when they already selected an app. Sometimes, we offered managers a &amp;ldquo;projects&amp;rdquo; template and a &amp;ldquo;projects&amp;rdquo; app and they had to select both. This duplication was hard to explain and justify.&lt;/p&gt;
-&lt;p&gt;This isn&amp;rsquo;t the only backwards-incompatible change in 0.90b*. The default image plugins now always have a caption and an alternative text field; the versatileimagefield-based plugin is gone as are the shims in &lt;code&gt;feincms3.apps&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The idea is to release a 1.0 of feincms3 soon-ish. It&amp;rsquo;s time to do this. feincms3 is in its fifth year of existence, several sites built with it have already been archived already, so it&amp;rsquo;s definitely past due. (django-content-editor (resp. FeinCMS 1.x) more than 12 years old now.)&lt;/p&gt;
-&lt;h2&gt;django-mptt is not maintained anymore&lt;/h2&gt;
-&lt;p&gt;We, the maintainers of django-mptt &lt;a href="https://github.com/django-mptt/django-mptt/pull/776"&gt;have marked django-mptt as unmaintained&lt;/a&gt;. I have released the current development version as 0.12.0 before proposing this.&lt;/p&gt;
-&lt;h2&gt;PostgreSQL&amp;rsquo;s ltree extension vs. django-tree-queries&amp;rsquo; recursive CTEs&lt;/h2&gt;
-&lt;p&gt;I got the (excellent) question why I wrote that PostgreSQL&amp;rsquo;s ltree extension didn&amp;rsquo;t seem a good solution &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;in my post about django-tree-queries&lt;/a&gt;. &lt;a href="https://github.com/matthiask/406-comments/issues/2#issuecomment-797981910"&gt;Here&amp;rsquo;s my current thinking on this.&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Going all-in on CSS Grid and PostCSS&lt;/h2&gt;
-&lt;p&gt;I have been using &lt;a href="https://github.com/postcss/autoprefixer"&gt;autoprefixer&lt;/a&gt; for years already. It&amp;rsquo;s probably the best-known &lt;a href="https://postcss.org/"&gt;PostCSS&lt;/a&gt; plugin. It automatically adds vendor-specific prefixes to your CSS code (e.g. &lt;code&gt;-moz-*&lt;/code&gt;, &lt;code&gt;-webkit-*&lt;/code&gt;, &lt;code&gt;-ms-*&lt;/code&gt; etc.) depending on a list of browsers you want to support and the &lt;a href="https://caniuse.com/"&gt;Can I use&amp;hellip;&lt;/a&gt; database.&lt;/p&gt;
-&lt;p&gt;I wanted to bring bundling times down and searched for alternatives to Webpack. Webpack isn&amp;rsquo;t the hot new thing anymore but it works really well and performs good enough as long as you do not have extreme amounts of code and plugins. I started with a new, minimal Webpack configuration and was pleasantly surprised that compilation times are more than acceptable when only using babel-loader to transpile JavaScript and some PostCSS. (I may write about the setup at a later time, for now &lt;a href="https://406.ch/writing/our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage/"&gt;this approach&lt;/a&gt; still serves &lt;a href="https://feinheit.ch/"&gt;us&lt;/a&gt; well and we have even packaged it up as &lt;a href="https://github.com/feinheit/fh-webpack-config/"&gt;fh-webpack-config&lt;/a&gt;.)&lt;/p&gt;
-&lt;h2&gt;Changing the main branch to main&lt;/h2&gt;
-&lt;p&gt;I added the &lt;a href="https://github.com/matthiask/dotfiles/commit/3a2e3ff58de38aa8e03ca1d684504ebea02cdd6c"&gt;following alias to my &lt;code&gt;.gitconfig&lt;/code&gt;&lt;/a&gt; to fix the problem where the &lt;code&gt;refs/remotes/origin/HEAD&lt;/code&gt; of local repositories would point to &lt;code&gt;master&lt;/code&gt; instead of &lt;code&gt;main&lt;/code&gt; after renaming the branch on GitHub:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git config --global alias.mainfix &amp;quot;symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code&gt;git mainfix&lt;/code&gt; is easier to type than &lt;code&gt;vim .git/refs/remotes/origin/HEAD&lt;/code&gt; and replacing whatever the previous main branch was called with &lt;code&gt;main&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;neovim&lt;/h2&gt;
-&lt;p&gt;I have switched from vim to neovim. I don&amp;rsquo;t exactly remember why but the transition has been seamless. I&amp;rsquo;m still happy with tmux and vim.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;Of course I&amp;rsquo;m still thinking about reimplementing the whole editing interface using &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;, but oh well&amp;hellip; maybe another time, when I do not have any projects for months to come.&lt;/p&gt;</summary></entry></feed>
