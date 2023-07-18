@@ -107,6 +107,9 @@ def write_file(path, content):
 
 def main(folders, *, only_published=True):
     posts = sorted(load_posts(folders, only_published=only_published), reverse=True)
+    slugs = Counter(post.slug for post in posts).items()
+    if dup := [slug for slug, count in slugs if count > 1]:
+        print(f"Duplicated slugs: {', '.join(map(repr, dup))}", file=sys.stderr)
     counter = Counter(chain.from_iterable(post.categories for post in posts))
     print(f"{len(posts)} posts in ", end="")
     print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
