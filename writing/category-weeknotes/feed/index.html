@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2023-07-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 28)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2023-07-21T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 29)</title><link href="https://406.ch/writing/weeknotes-2023-week-29/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-29/</id><published>2023-07-21T12:00:00Z</published><updated>2023-07-21T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
+&lt;p&gt;I have mainly done work in private projects this week. Not much to talk about.
+Except for the ZIP file &lt;code&gt;content-type&lt;/code&gt; bug which was interesting enough to
+justify &lt;a href="https://406.ch/writing/serving-zip-files-using-django/"&gt;its own blog post&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.13&lt;/a&gt;: I converted
+  the package to use ruff, hatchling; started running CI tests using Python
+  3.11. The internals of the Django admin&amp;rsquo;s filters have changed to allow
+  multi-valued filters, this has required some changes to the implementation of
+  the folder filter. I opted to using a relatively ugly &lt;code&gt;django.VERSION&lt;/code&gt;
+  hack; but that&amp;rsquo;s not too bad since such branches will be automatically
+  removed by the awesome
+  &lt;a href="https://github.com/adamchainz/django-upgrade"&gt;django-upgrade&lt;/a&gt;. I would have
+  tried finding other ways in the past but now that old compatibility code can
+  be removed by a single run of &lt;code&gt;django-upgrade&lt;/code&gt; (respectively
+  &lt;code&gt;pre-commit&lt;/code&gt;) there really is no point to doing it in a different way.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 28)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.2&lt;/a&gt;: Made the
   sanitizer&amp;rsquo;s configuration initialization more strict. Strings cannot be used
