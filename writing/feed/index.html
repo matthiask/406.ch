@@ -1,5 +1,73 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-07-21T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 29)</title><link href="https://406.ch/writing/weeknotes-2023-week-29/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-29/</id><published>2023-07-21T12:00:00Z</published><updated>2023-07-21T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-07-26T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>How ruff changed my Python programming habits</title><link href="https://406.ch/writing/how-ruff-changed-my-python-programming-habits/" rel="alternate" /><id>https://406.ch/writing/how-ruff-changed-my-python-programming-habits/</id><published>2023-07-26T12:00:00Z</published><updated>2023-07-26T12:00:00Z</updated><summary type="html">&lt;h1&gt;How ruff changed my Python programming habits&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://beta.ruff.rs/"&gt;ruff&lt;/a&gt; isn&amp;rsquo;t just a faster replacement for flake8, isort
+and friends.&lt;/p&gt;
+&lt;p&gt;With other Python-based formatters and linters there&amp;rsquo;s always a trade off
+between development speed (waiting on &lt;code&gt;git commit&lt;/code&gt; is very boring) and
+strictness.&lt;/p&gt;
+&lt;p&gt;ruff is so fast that enabling additional rules is practically free in terms of
+speed; the only question is if those rules lead to better, or maybe just to
+more correct and consistent code.&lt;/p&gt;
+&lt;p&gt;I have long been using &lt;a href="https://pre-commit.com/"&gt;pre-commit&lt;/a&gt;, and even longer
+flake8, black, isort. I have written a piece about &lt;a href="https://406.ch/writing/flake8-and-value-standards/"&gt;flake8 and the value of
+standards&lt;/a&gt; almost 9 years
+ago and have continued moving in the mentioned direction ever since.&lt;/p&gt;
+&lt;p&gt;These days I have enabled a wide variety of rules. I&amp;rsquo;m not sold on all of them
+(looking at you, pylint) and I&amp;rsquo;m definitely not of the opinion that rules which
+I&amp;rsquo;m not using currently are worthless. I didn&amp;rsquo;t even know most of these rules
+before starting to use ruff, and ruff making them easy and painless to use
+(without a measureable performance penalty) has certainly lead to me annoying
+my coworkers with a growing set of enabled rules.&lt;/p&gt;
+&lt;h2&gt;Rules&lt;/h2&gt;
+&lt;p&gt;The current ruleset and some justifications for it follows.&lt;/p&gt;
+&lt;h3&gt;pyflakes, pycodestyle&lt;/h3&gt;
+&lt;p&gt;No justification necessary, really.&lt;/p&gt;
+&lt;h3&gt;mccabe&lt;/h3&gt;
+&lt;p&gt;I like the cyclomatic complexity checker, but I have relaxed it a bit. I find it very useful to avoid complex code, but some code is totally straightforward (e.g. building a queryset from a wide variety of query parameters) but still has many &lt;code&gt;if&lt;/code&gt; statements. I&amp;rsquo;d rather allow more complexity instead of sprinkling the code with &lt;code&gt;# noqa&lt;/code&gt; statements.&lt;/p&gt;
+&lt;h3&gt;isort&lt;/h3&gt;
+&lt;p&gt;Sorted imports are great.&lt;/p&gt;
+&lt;h3&gt;pep8-naming&lt;/h3&gt;
+&lt;p&gt;Mostly great except when it flags Django&amp;rsquo;s migration files. The filenames
+always start with numbers and that&amp;rsquo;s obviously not a valid Python module name,
+but it&amp;rsquo;s not supposed to be.&lt;/p&gt;
+&lt;h3&gt;pyupgrade&lt;/h3&gt;
+&lt;p&gt;pyupgrade is totally awesome.&lt;/p&gt;
+&lt;h3&gt;flake-2020&lt;/h3&gt;
+&lt;p&gt;Avoiding non future-proof uses of &lt;code&gt;sys.version&lt;/code&gt; and &lt;code&gt;sys.version_info&lt;/code&gt; is a good idea, no questions about that.&lt;/p&gt;
+&lt;h3&gt;flake8-boolean-trap&lt;/h3&gt;
+&lt;p&gt;Sometimes annoying, mostly useful. I don&amp;rsquo;t like that the plugin flags e.g. &lt;code&gt;with_tree_fields(True)&lt;/code&gt; or &lt;code&gt;with_tree_fields(False)&lt;/code&gt; because I don&amp;rsquo;t think this could be possibly misread. But, apart from these edge cases it really is a good idea, especially since keyword-only arguments exist and those aren&amp;rsquo;t flagged by this rule.&lt;/p&gt;
+&lt;h3&gt;flake8-bugbear&lt;/h3&gt;
+&lt;p&gt;Mostly useful. I have disabled the &lt;code&gt;zip()&lt;/code&gt; without &lt;code&gt;strict=&lt;/code&gt; warning.&lt;/p&gt;
+&lt;h3&gt;flake8-comprehensions&lt;/h3&gt;
+&lt;p&gt;Checks for unnecessary conversions between generators and lists, sets, tuples or dicts.&lt;/p&gt;
+&lt;h3&gt;flake8-django&lt;/h3&gt;
+&lt;p&gt;I actually like consistency. I also like flagging &lt;code&gt;fields = "__all__"&lt;/code&gt;, but this check shouldn&amp;rsquo;t trigger in admin &lt;code&gt;ModelForm&lt;/code&gt; classes, really. I probably have to add another entry to &lt;code&gt;[tool.ruff.per-file-ignores]&lt;/code&gt; for this.&lt;/p&gt;
+&lt;h3&gt;flake8-pie&lt;/h3&gt;
+&lt;p&gt;Quite a random assortment of rules. I like the &lt;code&gt;no-unnecessary-pass&lt;/code&gt; and &lt;code&gt;no-pointless-statements&lt;/code&gt; rules, among others.&lt;/p&gt;
+&lt;h3&gt;flake8-simplify&lt;/h3&gt;
+&lt;p&gt;Nice simplifications. I&amp;rsquo;m not sure if ternary opeartors are always a plus, especially since they hide the branching from &lt;a href="https://pypi.org/project/coverage/"&gt;coverage&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;flake8-gettext&lt;/h3&gt;
+&lt;p&gt;Enormously useful and important. I don&amp;rsquo;t know how many times I have encountered broken code like &lt;code&gt;gettext("Hello {name}".format(name=name))&lt;/code&gt; instead of &lt;code&gt;gettext("Hello {name}").format(name=name)&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;pygrep-hooks&lt;/h3&gt;
+&lt;p&gt;Avoids &lt;code&gt;eval()&lt;/code&gt;. Avoids blanket &lt;code&gt;# noqa&lt;/code&gt; rules (always be specific!)&lt;/p&gt;
+&lt;h3&gt;pylint&lt;/h3&gt;
+&lt;p&gt;I have been using all pylint rules for some time. The pylint refactoring rules (&lt;code&gt;PLR&lt;/code&gt;) did prove to be very annoying so I have reverted to only enabling errors and warnings.&lt;/p&gt;
+&lt;p&gt;The two main offenders were PLR0913 (too many arguments) and PLR2004 (magic value comparison). The former would be fine if it would count keyword-only arguments differently; it&amp;rsquo;s certainly a good idea to avoid too many positional parameters, I don&amp;rsquo;t think keyword-only parameters are that bad. The latter is bad because often the magic value is really obvious. If you&amp;rsquo;re writing code for the web you shouldn&amp;rsquo;t have to use constants for the &lt;code&gt;200&lt;/code&gt; or &lt;code&gt;404&lt;/code&gt; status codes; one can assume that they are well known.&lt;/p&gt;
+&lt;h3&gt;RUF100&lt;/h3&gt;
+&lt;p&gt;Ruff is able to automatically remove &lt;code&gt;# noqa&lt;/code&gt; statements which don&amp;rsquo;t actually silence any warnings. That&amp;rsquo;s a great feature to have.&lt;/p&gt;
+&lt;h2&gt;Line length&lt;/h2&gt;
+&lt;p&gt;Yes, let&amp;rsquo;s go there. I still don&amp;rsquo;t use longer lines than +/- 80 characters, but
+I have disabled all line length warnings these days. I don&amp;rsquo;t want to be warned
+because I didn&amp;rsquo;t break a string across lines.&lt;/p&gt;
+&lt;h2&gt;Rules I don&amp;rsquo;t like&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;flake8-builtins: Too many boring warnings. I didn&amp;rsquo;t even want to know that
+  &lt;code&gt;copyright&lt;/code&gt; is a Python builtin.&lt;/li&gt;
+&lt;li&gt;flake8-logging-format: Not generally helpful. Avoiding different exception strings so that e.g. &lt;a href="https://sentry.io/welcome/"&gt;Sentry&lt;/a&gt; can group exceptions more easily is a good idea, but the rule generated so many false positives as to be not useful anymore.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Final words (for now)&lt;/h2&gt;
+&lt;p&gt;I really hope that Black is integrated into ruff one day.&lt;/p&gt;
+&lt;p&gt;Also, I hope that ESLint and prettier will be replaced by a faster tool. I have my eyes on a few alternatives, but they are not there yet for my use cases.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 29)</title><link href="https://406.ch/writing/weeknotes-2023-week-29/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-29/</id><published>2023-07-21T12:00:00Z</published><updated>2023-07-21T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
 &lt;p&gt;I have mainly done work in private projects this week. Not much to talk about.
 Except for the ZIP file &lt;code&gt;content-type&lt;/code&gt; bug which was interesting enough to
 justify &lt;a href="https://406.ch/writing/serving-zip-files-using-django/"&gt;its own blog post&lt;/a&gt;.&lt;/p&gt;
@@ -513,34 +581,6 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;ol&gt;
 &lt;li id="fn:semver"&gt;
 &lt;p&gt;Sometimes stuff breaks even when updating patch versions.&amp;#160;&lt;a class="footnote-backref" href="#fnref:semver" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 7)</title><link href="https://406.ch/writing/weeknotes-2023-week-7/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-7/</id><published>2023-02-17T12:00:00Z</published><updated>2023-02-17T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 7)&lt;/h1&gt;
-&lt;h2&gt;iOS and Kiosk mode&lt;/h2&gt;
-&lt;p&gt;I did some research on easy ways to put an iPad into Kiosk mode because I want to build a surveying app for an exposition. The web platform is perfect for this especially given the budget constraints&amp;hellip;&lt;/p&gt;
-&lt;p&gt;I thought &lt;a href="https://www.hexnode.com/blogs/what-is-ios-kiosk-mode/"&gt;What is iOS kiosk mode and how do I enable it?&lt;/a&gt; was a great overview over the available options for using iPads in Kiosk mode. I definitely don&amp;rsquo;t want to build an app myself even though this would be relatively straightforward e.g. with React Native&lt;sup id="fnref:rn"&gt;&lt;a class="footnote-ref" href="#fn:rn"&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-&lt;p&gt;The &lt;a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_screen"&gt;MDN Foxes example&lt;/a&gt; worked nicely apart from the fact that the bar containing the clock and indicators is still shown. This is probably an acceptable trade off, but we&amp;rsquo;ll see.&lt;/p&gt;
-&lt;h2&gt;Bitbucket to GitHub migration&lt;/h2&gt;
-&lt;p&gt;I have finally managed to bump against the GitHub API&amp;rsquo;s rate limit. I have transferred more than 300 private Git repositories from Bitbucket to GitHub. Most repositories aren&amp;rsquo;t used actively anymore, so it&amp;rsquo;s not really about GitHub vs. Bitbucket. The goal was simply to have one less tool to worry about.&lt;/p&gt;
-&lt;p&gt;Downloading the list of all repositores in a workspace was surprisingly annoying and I spent too much time bumping my head against the API authentication. In the end all I had to do was to generate an app specific password and authenticate with that and with my own username. It&amp;rsquo;s funny to me how simple things like that are still hard after working more than 15 years in this industry.&lt;/p&gt;
-&lt;h2&gt;Off by ones&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m still progressing with learning &lt;a href="https://www.rust-lang.org/"&gt;Rust&lt;/a&gt; using &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt; puzzles. Last night I was really close to a working solution but then I spent a lot of time chasing down off by one errors. I was totally aware that I should pay attention when writing the loop (respectively the range) and I still failed. Oh well, in the end it worked and I still had a good time.&lt;/p&gt;
-&lt;h2&gt;Where do stolen bikes go?&lt;/h2&gt;
-&lt;p&gt;Everyone has probably seen that one already but I thought it was a really interesting study:
-&lt;a href="https://news.mit.edu/2023/where-do-stolen-bikes-go-0215"&gt;Where do stolen bikes go?&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The research team also charted the movement of the bikes. Out of the 70 stolen bikes, 68 remained in the local Amsterdam area. Between three and six of those spent enough time in the vicinity of second-hand bike stores that the researchers concluded they were probably sold there. Another 12 bikes were taken to locations identified as places where bicycles are known to be sold informally, on the bicycle black market.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data&lt;/a&gt;: I wrote about circular references last week; this week I got confirmation that the code works and so I released it.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-sso/"&gt;django-admin-sso&lt;/a&gt;: It&amp;rsquo;s a project I&amp;rsquo;m not really using anymore, but I&amp;rsquo;m still maintaining it when it&amp;rsquo;s not much work. Switch to &lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib&lt;/a&gt;&amp;rsquo;s admin SSO support if you can since django-admin-sso still uses the deprecated oauth2client library.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:rn"&gt;
-&lt;p&gt;I do have some experience with React Native. It&amp;rsquo;s great to get started and works surprisingly well for a long time. The problems arrive one you want to optimize the behavior on all platforms and screen sizes but that&amp;rsquo;s a hard problem, so maybe problems shouldn&amp;rsquo;t surprise anyone.&amp;#160;&lt;a class="footnote-backref" href="#fnref:rn" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;</summary></entry></feed>
