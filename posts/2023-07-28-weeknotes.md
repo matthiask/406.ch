@@ -10,7 +10,7 @@ I have used [Django Channels](https://channels.readthedocs.io/) successfully in 
 
 Django truly has come a long way but there's much left to do. Django 5.0 is looking great already, but 4.2 misses many pieces still. I am really really glad Django wants to stay backwards compatible but I wish I could wave a magic wand and upgrade everything to async. Adding `a` prefixes everywhere for the async version is certainly a good compromise and probably the way to go but it's just not that nice.
 
-I have been playing around with making [feincms3](https://feincms3.readthedocs.io/)'s applications middleware async compatible. The code is already released but undocumented and not even mentioned in the changelog. So, feel free to play around with it but it's not supposed to be stable or supported yet.
+I have been playing around with making [feincms3](https://feincms3.readthedocs.io/)'s applications middleware async compatible because I want the full middleware stack to be async. The code is already released but undocumented and not even mentioned in the changelog. So, feel free to play around with it but it's not supposed to be stable or supported yet.
 
 ## Releases
 
