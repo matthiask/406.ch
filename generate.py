@@ -139,6 +139,7 @@ def main(folders, *, only_published=True):
         )
         SE(SE(urlset, "url"), "loc").text = f"{URL}{category.url()}"
     write_file("/sitemap.xml", tostring(urlset))
+    shutil.copy("styles/favicon.ico", "htdocs/favicon.ico")
     print(f"Wrote {write_file.count} files.")
 
 
