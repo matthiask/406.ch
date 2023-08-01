@@ -11,11 +11,6 @@ def slugify(value):
 
 
 while True:
-    type = input("Create a draft? [Y/n] ").lower()
-    if type in {"", "y", "n"}:
-        type = "posts" if type == "n" else "drafts"
-        break
-while True:
     title = input("Title: ")
     if title:
         break
@@ -26,6 +21,7 @@ text = f"""\
 Title: {title}
 Date: {pubdate}
 Categories:
+Draft: remove-this-to-publish
 
 # {title}
 """

@@ -40,29 +40,26 @@ class Post:
     updated: str
     categories: list[Category]
     body: str
+    draft: str
     url = lambda self: f"/writing/{self.slug}/"
 
 
-def load_posts(dirs, *, only_published):
+def load_posts(dirs):
     slugify = lambda v: re.sub(r"[^-a-z0-9]+", "-", v.lower()).strip("-")
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
             props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
-            props = {"categories": ""} | {name.lower(): value for name, value in props}
+            props = {name.lower(): value for name, value in props}
+            props["date"] = dt.strptime(props["date"], "%Y-%m-%d").date()
+            props["slug"] = props.get("slug") or slugify(props["title"])
+            props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
             body = markdown(content, extensions=md_exts)
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
-            c_slugs = sorted(set(filter(None, re.split(r",\s*", props["categories"]))))
-            if (d := dt.strptime(props["date"], "%Y-%m-%d").date()) <= date.today():
-                yield Post(
-                    date=d,
-                    slug=props.get("slug") or slugify(props["title"]),
-                    title=props["title"],
-                    updated=f"{d.isoformat()}T12:00:00Z",
-                    categories=[Category(slug=slugify(c), title=c) for c in c_slugs],
-                    body=body,
-                )
+            c_titles = set(filter(None, re.split(r",\s*", props.get("categories", ""))))
+            props["categories"] = [Category(slug=slugify(c), title=c) for c in c_titles]
+            yield Post(**{"body": body, "draft": ""} | props)
         except Exception as exc:
             print(f"{md.relative_to(DIR)} invalid, skipping: {exc!r}", file=sys.stderr)
 
@@ -105,8 +102,10 @@ def write_file(path, content):
     write_file.count = getattr(write_file, "count", 0) + 1
 
 
-def main(folders, *, only_published=True):
-    posts = sorted(load_posts(folders, only_published=only_published), reverse=True)
+def main(*, only_published=True):
+    posts = sorted(load_posts(["posts"]), reverse=True)
+    if only_published:
+        posts = [post for post in posts if post.date <= date.today() and not post.draft]
     slugs = Counter(post.slug for post in posts).items()
     if dup := [slug for slug, count in slugs if count > 1]:
         print(f"Duplicated slugs: {', '.join(map(repr, dup))}", file=sys.stderr)
@@ -144,4 +143,4 @@ def main(folders, *, only_published=True):
 
 
 if __name__ == "__main__":
-    main(["posts"])
+    main()

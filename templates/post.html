@@ -11,6 +11,7 @@
 
 <main><div class="wrappy">
   <div class="text">
+    <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small>
     {{ post.body|safe }}
   </div>
 </div></main>
