@@ -65,11 +65,11 @@ def load_posts(dirs):
 
 
 def jinja_templates(context):
-    styles = cssmin("".join(f.read_text() for f in sorted(DIR.glob("styles/*.css"))))
+    styles = cssmin("".join(f.read_text() for f in sorted(DIR.glob("resources/*.css"))))
     style_file = f"/styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
     write_file(style_file, styles)
 
-    env = Environment(loader=FileSystemLoader([DIR / "templates"]), autoescape=True)
+    env = Environment(loader=FileSystemLoader([DIR / "resources"]), autoescape=True)
     env.globals.update({"year": date.today().year, "styles": style_file} | context)
     r = lambda template: lambda **ctx: minify(template.render(**ctx))
     return [r(env.get_template(f"{t}.html")) for t in ["archive", "post", "404"]]
@@ -138,7 +138,7 @@ def main(*, only_published=True):
         )
         SE(SE(urlset, "url"), "loc").text = f"{URL}{category.url()}"
     write_file("/sitemap.xml", tostring(urlset))
-    shutil.copy("styles/favicon.ico", "htdocs/favicon.ico")
+    shutil.copy("resources/favicon.ico", "htdocs/favicon.ico")
     print(f"Wrote {write_file.count} files.")
 
 
