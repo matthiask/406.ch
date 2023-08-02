@@ -26,9 +26,9 @@ Draft: remove-this-to-publish
 # {title}
 """
 
-path = Path.cwd() / type / filename
+path = Path.cwd() / "posts" / filename
 if path.exists():
-    print(f"Not overwriting {type}/{filename}", file=sys.stderr)
+    print(f"Not overwriting posts/{filename}", file=sys.stderr)
 else:
     path.write_text(text)
-    print(f"Created {type}/{filename}")
+    print(f"Created posts/{filename}")
