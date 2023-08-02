@@ -50,14 +50,14 @@ def load_posts(dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
             props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
-            props = {name.lower(): value for name, value in props}
+            props = {"categories": ""} | {name.lower(): value for name, value in props}
             props["date"] = dt.strptime(props["date"], "%Y-%m-%d").date()
             props["slug"] = props.get("slug") or slugify(props["title"])
             props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
             body = markdown(content, extensions=md_exts)
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
-            c_titles = set(filter(None, re.split(r",\s*", props.get("categories", ""))))
+            c_titles = sorted(c for c in re.split(r",\s*", props["categories"]) if c)
             props["categories"] = [Category(slug=slugify(c), title=c) for c in c_titles]
             yield Post(**{"body": body, "draft": ""} | props)
         except Exception as exc:
