@@ -51,7 +51,9 @@ In my ideal world, generic views would be composed of small reusable and composa
 
 The internet is full of advice that you should prefer composition over inheritance. Let's try to outline what generic views could look like if they followed the composition paradigm. Note that the goal isn't to gain points by showing that the resulting code is shorter -- the goal is maintainability by being easier to understand, and by showing a better path from a beginner's use of views to an experts understanding of everything underneath it.
 
-Before refactoring and following DRY (don't repeat yourself) to the extreme you should instead follow the [Three Strikes And You Refactor](https://wiki.c2.com/?ThreeStrikesAndYouRefactor) rule. Some repetition is fine. Not all identical three lines of code are the same.
+Before refactoring and following DRY (Don't Repeat Yourself) to the extreme you should instead follow the [Three Strikes And You Refactor](https://wiki.c2.com/?ThreeStrikesAndYouRefactor) rule[^wet]. Some repetition is fine. Not all identical three lines of code are the same.
+
+[^wet]: Also called the WET rule (Write Everything Twice). (Not coined by me.)
 
 ### ListView and DetailView
 
