@@ -41,7 +41,7 @@ The class-based views introduced a few patterns such as:
 - Class-based views have to be adapted by calling the `View.as_view()` method; `as_view()` returns arguably the thing which is viewed (sorry) as the view by Django, it's the thing which gets called with a request and is expected to return a response.
 - This thing instantiates the view object once per request; this means that `self` can be used to save request-specific data such as `self.request`, `self.args` but also custom attributes.
 
-The GCBV code is extremely factored and decomposed. The CCBV site mentions that the `UpdateView` has 10 separate ancestors and its code is spread across three files. But, the view code for instantiating a model object and handling a form really isn't that complex. Most of the complexity is handled by Django itself, in the request handler and in the `django.forms` package.
+The GCBV code is extremely factored and decomposed. The [Classy Class-Based Views](https://ccbv.co,ul/) site mentions that the `UpdateView` has 10 separate ancestors and its code is spread across three files. But, the view code for instantiating a model object and handling a form really isn't that complex. Most of the complexity is handled by Django itself, in the request handler and in the `django.forms` package. So, what's the reason for all this?
 
 ## Generic views could be simple
 
@@ -57,7 +57,9 @@ Before refactoring and following DRY (Don't Repeat Yourself) to the extreme you 
 
 ### ListView and DetailView
 
-I'm going to profit from [feincms3's shortcuts module](https://feincms3.readthedocs.io/en/latest/ref/shortcuts.html) which offers functions for rendering pages for single objects or lists of objects. The `render_list` and `render_detail` functions implement the same way of determining the template paths as the generic views use (for example `<app_name>/<model_name>_detail.html`) and the same way of naming context variables (`object` and `<model_name>` for the object, `object_list` and `<model_name>_list` for the list) as well as pagination, but that's it.
+I'm going to profit from [feincms3's shortcuts module](https://feincms3.readthedocs.io/en/latest/ref/shortcuts.html) which offers functions for rendering pages for single objects or lists of objects. The `render_list` and `render_detail` functions implement the same way of determining the template paths as the generic views use (for example `<app_name>/<model_name>_detail.html`) and the same way of naming context variables (`object` and `<model_name>` for the object, `object_list` and `<model_name>_list` for the list) as well as pagination, but nothing more.
+
+Here's a possible minimal implementation of a list and detail object generic view:
 
     :::python
     from django.shortcuts import get_list_or_404, get_object_or_404
@@ -73,7 +75,7 @@ I'm going to profit from [feincms3's shortcuts module](https://feincms3.readthed
         object = get_object_or_404(model, **{slug_field: slug})
         return render_detail(request, object)
 
-You want to change the way a single object is retrieved? You can do that easily, but not by adding configuration-adjacent values in your URLconf but rather by adding a view yourself:
+You want to change the way a single object is retrieved? You could do that easily, but not by adding configuration-adjacent values in your URLconf but rather by adding a view yourself:
 
     :::python
     def article_detail(request, year, slug):
@@ -106,15 +108,24 @@ And think about the internal implementation of the `object_detail` view. Viewed 
 
 The additional benefit is that it shows beginners the way to intermediate skills -- writing views isn't hard, and shouldn't be.
 
+Finally, the official way of overriding `DetailView.get_object()` (I think!) doesn't look that good compared to the `def article_detail()` view above:
+
+    :::python
+    class ArticleDetailView(generic.DetailView):
+        def get_object(self, queryset=None):
+            if queryset is None:
+                queryset = self.get_queryset()
+            return get_object_or_404(queryset, year=self.kwargs["year"], slug=self.kwargs["slug"])
+
+Did you know that `get_object()` has an optional queryset argument? I certainly didn't. It seems to be used by the date-based generic views, but they also have their own `get_object()` implementation so who knows, really.
+
 ## Detail view with additional behavior
 
     :::python
     def article_detail(request, year, slug):
         object = get_object_or_404(Article.objects.published(), year=year, slug=slug)
-        form = CommentForm(
-            request.POST if request.method == "POST" else None,
-            comment=object,
-        )
+        data = (request.POST, request.FILES) if request.method == "POST" else ()
+        form = CommentForm(*data, comment=object)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(".#comments")
@@ -133,16 +144,69 @@ straightforward as the example above either.
 The custom view is the most obvious way of keeping the form instantiation in
 one place.
 
-## Closing words
+## Form views
 
-Some points this post could have made are made much better by Luke Plant in the
-guide [Django Views - The Right
+Generic create and update views could look something like this, again reusing the shortcuts mentioned above:
+
+    :::python
+    def save_and_redirect_to_object(request, form):
+        object = form.save()
+        return redirect(object)
+
+    def object_create(request, *, model=None, form_class=None, form_valid=save_and_redirect_to_object):
+        assert model or form_class, "Provide at least one of model and form_class"
+        if model is None:
+            model = form_class._meta.model
+        elif form_class is None:
+            form_class = modelform_factory(model)
+        args = (request.POST, request.FILES) if request.method == "POST" else ()
+        form = form_class(*args)
+        if form.is_valid():
+            return form_valid(request, form)
+        return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
+
+    def object_update(request, *, model, slug, slug_field="slug", form_class=None, form_valid=save_and_redirect_to_object):
+        object = get_object_or_404(model, **{slug_field: slug})
+        assert model or form_class, "Provide at least one of model and form_class"
+        if model is None:
+            model = form_class._meta.model
+        elif form_class is None:
+            form_class = modelform_factory(model)
+        args = (request.POST, request.FILES) if request.method == "POST" else ()
+        form = form_class(*args, instance=object)
+        if form.is_valid():
+            return form_valid(request, form)
+        return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
+
+## Date-based generic views
+
+I think I would want to offer a few analyzers which allow easily returning a
+data structure suitable for rendering links for yearly, monthly, weekly or even
+daily (who writes that much?) archives. The archive views themselves are
+straightforward adaptations of the `object_list` view above.
+
+It may feel like leaving out the actually hard part, but I'd have to be
+convinced that this is actually a hard problem and not just a problem of making
+basically arbitrary choices which people then adapt to and then think that this
+is the way things should be since it's the way things are.
+
+## Wrapping up
+
+Some points this post could have made or tried to make are made much better by
+Luke Plant in the guide [Django Views - The Right
 Way](https://spookylukey.github.io/django-views-the-right-way/). I don't
 generally think that class-based views never make sense. I also don't think
-that people shouldn't use the available tools. I just think that I, myself
-don't want to use them too much, and I also think that I'm still happier with
-`lambda request: HttpResponseRedirect(...)` than with
+that people shouldn't use the available tools. I just think that I, myself,
+don't want to use them, and I also think that I'm still happier with `lambda
+request: HttpResponseRedirect(...)` than with
 `generic.RedirectView.as_view(url=...)`. The point isn't to compare the
 character count. The point is: Does the `RedirectView` cause a permanent or a
 temporary redirect? I had to look it up for a long time, and then it changed.
 The former is completely obvious.
+
+## Closing words
+
+I know that people have strong opinions. I'm not interested in all of them. I'm
+mostly interested in design critiques and arguments regarding the beginner to
+intermediate skills argument. It's fine if CBVs work fine for you, and there's
+no need to feel challenged by this post. Thanks for reading.
