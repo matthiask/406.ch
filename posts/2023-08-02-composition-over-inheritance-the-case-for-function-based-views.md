@@ -106,9 +106,36 @@ And think about the internal implementation of the `object_detail` view. Viewed 
 
 The additional benefit is that it shows beginners the way to intermediate skills -- writing views isn't hard, and shouldn't be.
 
+## Detail view with additional behavior
+
+    :::python
+    def article_detail(request, year, slug):
+        object = get_object_or_404(Article.objects.published(), year=year, slug=slug)
+        form = CommentForm(
+            request.POST if request.method == "POST" else None,
+            comment=object,
+        )
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(".#comments")
+        return render_detail(request, object, {"comment_form": form})
+
+A counterexample would be to move the endpoint which accepts a comment POST
+request somewhere else. But then you'd also have to keep the different
+`CommentForm` instantiations in sync.
+
+You could also override `get_context_data()` to add the comment form to the
+context and override `post()` to instantiate check the form's validity. But
+then you'd have to make sure that an eventual invalid form is handled correctly
+by `get_context_data()`. It's not hard but it certainly isn't as
+straightforward as the example above either.
+
+The custom view is the most obvious way of keeping the form instantiation in
+one place.
+
 ## Closing words
 
-Some points this post could have made are made much better by Luke plant in the
+Some points this post could have made are made much better by Luke Plant in the
 guide [Django Views - The Right
 Way](https://spookylukey.github.io/django-views-the-right-way/). I don't
 generally think that class-based views never make sense. I also don't think
