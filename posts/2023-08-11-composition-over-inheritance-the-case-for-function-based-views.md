@@ -15,7 +15,7 @@ class-based views.
 
 ## The introduction of class-based views
 
-Class based views (both generic versions and the base `View`) were introduced to Django in 2010. Judging from the [ticket tracker](https://code.djangoproject.com/ticket/6735) the main motivation was to avoid adding yet another argument to the generic function-based views (GFBV) which we're available in Django back then.
+Class based views (both generic versions and the base `View`) were introduced to Django in 2010. Judging from the [ticket tracker](https://code.djangoproject.com/ticket/6735) the main motivation was to avoid adding yet another argument to the generic function-based views (GFBV) which were available in Django back then.
 
 The GFBV's argument count was impressive. Two examples follow:
 
