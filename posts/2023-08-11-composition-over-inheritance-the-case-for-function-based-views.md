@@ -1,7 +1,6 @@
 Title: Composition over inheritance: The case for function-based views
-Date: 2023-08-02
+Date: 2023-08-11
 Categories: Django, Python, Programming, feincms
-Draft: remove-this-to-publish
 
 # Composition over inheritance: The case for function-based views
 
@@ -44,7 +43,7 @@ The GCBV code is extremely factored and decomposed. The [Classy Class-Based View
 
 I wish that the existing generic views had better building blocks instead of a big hierarchy of mixins and multiple inheritance which is probably not understood by anyone without checking and re-checking the documentation, the code, or the excellent [Classy Class-Based Views](https://ccbv.co.uk/). Certainly not by me.
 
-In my ideal world, generic views would be composed of small reusable and composable functions which wuld cover 80% of use cases with 20% of the code. And if not, you could copy the whole code of the view, change or introduce a line or two and leave it at that. And since the functions do one thing (but do that well) you can immediately see what they are doing and why. You'd avoid the Hollywood Principle (Don't call us, we'll call you) in your code. Sure, your view is called by Django, but you don't have to introduce more and more layers of indirection.
+In my ideal world, generic views would be composed of small reusable and composable functions which wuld cover 80% of use cases with 20% of the code. And if not, you could copy the whole code of the view, change or introduce a line or two and leave it at that. And since the functions do one thing (but do that well) you can immediately see what they are doing and why. You'd avoid the Hollywood Principle (Don't call us, we'll call you) in your code. Sure, your view is called by Django but you don't have to introduce more and more layers of indirection.
 
 The internet is full of advice that you should prefer composition over inheritance. Let's try to outline what generic views could look like if they followed the composition paradigm. Note that the goal isn't to gain points by showing that the resulting code is shorter. One important goal is maintainability by being easier to understand. Another important goal is showing a better path from a beginner's use of views to an experts understanding of everything underneath it by bridging the gap using more powerful building blocks which don't leave all the minutiae to you if the defaults don't work.
 
@@ -54,7 +53,7 @@ Some repetition caused by copy pasting is fine. Not all identical three lines of
 
 ### ListView and DetailView
 
-I'm going to profit from Django's shortcuts module and also from [feincms3's shortcuts module](https://feincms3.readthedocs.io/en/latest/ref/shortcuts.html) which offers functions for rendering pages for single objects or lists of objects. The `render_list` and `render_detail` functions implement the same way of determining the template paths as the generic views use (for example `<app_name>/<model_name>_detail.html`) and the same way of naming context variables (`object` and `<model_name>` for the object, `object_list` and `<model_name>_list` for the list) as well as pagination, but nothing more.
+I'm going to profit from Django's shortcuts module and also from [feincms3's shortcuts module](https://feincms3.readthedocs.io/en/latest/ref/shortcuts.html) which offers functions for rendering pages for single objects or lists of objects. The `render_list` and `render_detail` functions implement the same way of determining the template paths as the generic views use (for example `<app_name>/<model_name>_detail.html`) and the same way of naming context variables (`object` and `<model_name>` for the object, `object_list` and `<model_name>_list` for the list) as well as pagination but nothing more.
 
 Here's a possible minimal implementation of a list and detail object generic view:
 
@@ -72,7 +71,7 @@ Here's a possible minimal implementation of a list and detail object generic vie
         object = get_object_or_404(model, **{slug_field: slug})
         return render_detail(request, object)
 
-You want to change the way a single object is retrieved? You could do that easily, but not by adding configuration-adjacent values in your URLconf but rather by adding a view yourself:
+You want to change the way a single object is retrieved? You could do that easily but not by adding configuration-adjacent values in your URLconf but rather by adding a view yourself:
 
     :::python
     def article_detail(request, year, slug):
@@ -101,7 +100,7 @@ I don't think that was much harder than a hypothetical alternative:
         ...
     ]
 
-And think about the internal implementation of the `object_detail` view. Viewed one additional feature at a time it may be fine, but when adding up everything it would probably be quite gross.
+And think about the internal implementation of the `object_detail` view. Viewed one additional feature at a time it may be fine but when adding up everything it would probably be quite gross.
 
 The additional benefit is that it shows beginners the way to intermediate skills -- writing views isn't hard, and shouldn't be.
 
@@ -114,7 +113,7 @@ Finally, the official way of overriding `DetailView.get_object()` (I think!) doe
                 queryset = self.get_queryset()
             return get_object_or_404(queryset, year=self.kwargs["year"], slug=self.kwargs["slug"])
 
-Did you know that `get_object()` has an optional queryset argument? I certainly didn't. It seems to be used by the date-based generic views, but they also have their own `get_object()` implementation so who knows, really.
+Did you know that `get_object()` has an optional queryset argument? I certainly didn't. It seems to be used by the date-based generic views but they also have their own `get_object()` implementation so who knows, really.
 
 ## Detail view with additional behavior
 
@@ -191,6 +190,31 @@ You want to redirect to a different URL and maybe emit a success message? Easy:
 
 Yes, these generic views wouldn't allow overriding the case when a form was invalid. But, I'd assume that displaying the form with error messages is the right thing to do in 90% of the cases. And if not, write your own specific or generic view? After all, with the mentioned tools it won't take up more than a few lines of straightforward code. (If the code was tricky it would be different. But views shouldn't be tricky.)
 
+Adding more `form_valid` handlers should be mostly painless. A few examples inspired by [Django's generic editing documentation](https://docs.djangoproject.com/en/4.2/topics/class-based-views/generic-editing/):
+
+    :::python
+    def save_and_redirect_to(url):
+        def fn(request, form):
+            form.save()
+            return redirect(url)
+        return fn
+
+    def send_mail(request, form):
+        form.send_email()
+        return HttpResponseRedirect("/thanks/")
+
+    def set_author_and_save(request, form):
+        form.instance.created_by = request.user
+        object = form.save()
+        return redirect(object)
+
+You could also couple the form a bit to the request and do something like:
+
+    def process_form(request, form):
+        return form.process(request)
+
+Sure, forms probably shouldn't know much about requests. But then, Django is a framework for perfectionists _with deadlines_ and sometimes practicality beats purity.
+
 ## Date-based generic views
 
 I think I would want to offer a few analyzers which allow easily returning a
@@ -202,7 +226,7 @@ method should be a big help there.
 The archive views themselves are straightforward adaptations of the
 `object_list` view above.
 
-It may feel like leaving out the actually hard part, but I'd have to be
+It may feel like leaving out the actually hard part but I'd have to be
 convinced that this is actually a hard problem and not just a problem of making
 basically arbitrary choices which people then adapt to and then think that this
 is the way things should be since it's the way things are.
@@ -226,4 +250,6 @@ The former is completely obvious.
 I know that people have strong opinions. I'm not interested in all of them. I'm
 mostly interested in design critiques and arguments regarding the beginner to
 intermediate skills argument. It's fine if CBVs work fine for you, and there's
-no need to feel challenged by this post. Thanks for reading.
+no need to feel challenged by this post.
+
+Thanks for reading!
