@@ -121,8 +121,9 @@ Did you know that `get_object()` has an optional queryset argument? I certainly 
     def article_detail(request, year, slug):
         object = get_object_or_404(Article.objects.published(), year=year, slug=slug)
         data = (request.POST, request.FILES) if request.method == "POST" else ()
-        form = CommentForm(*data, comment=object)
+        form = CommentForm(*data)
         if form.is_valid():
+            form.instance.article = object
             form.save()
             return HttpResponseRedirect(".#comments")
         return render_detail(request, object, {"comment_form": form})
