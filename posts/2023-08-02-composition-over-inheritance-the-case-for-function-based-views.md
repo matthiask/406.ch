@@ -5,7 +5,7 @@ Draft: remove-this-to-publish
 
 # Composition over inheritance: The case for function-based views
 
-[A recent conversation with Carlton on Mastodon](https://hachyderm.io/@matthiask/110814846128940975) prompted me to write down a summary of my thoughts re. function- vs class-based views in Django.
+[A recent conversation with Carlton on Mastodon](https://hachyderm.io/@matthiask/110814846128940975) prompted me to write down some of my thoughts re. function- vs class-based views in Django.
 
 ## The early days
 
@@ -36,10 +36,7 @@ The GFBV's argument count was impressive. Two examples follow:
 
 The GFBVs where immediately when GCBVs were introduced and later removed in 2012.
 
-The class-based views introduced a few patterns such as:
-
-- Class-based views have to be adapted by calling the `View.as_view()` method; `as_view()` returns arguably the thing which is viewed (sorry) as the view by Django, it's the thing which gets called with a request and is expected to return a response.
-- This thing instantiates the view object once per request; this means that `self` can be used to save request-specific data such as `self.request`, `self.args` but also custom attributes.
+Class-based views have to be adapted by calling the `View.as_view()` method; `as_view()` returns arguably the thing which is viewed (sorry) as the view by Django, it's the thing which gets called with a request and is expected to return a response. This thing in turn instantiates the view object once per request; this means that `self` can be used to save request-specific data such as `self.request`, `self.args` but also custom attributes.
 
 The GCBV code is extremely factored and decomposed. The [Classy Class-Based Views](https://ccbv.co,ul/) site mentions that the `UpdateView` has 10 separate ancestors and its code is spread across three files. But, the view code for instantiating a model object and handling a form really isn't that complex. Most of the complexity is handled by Django itself, in the request handler and in the `django.forms` package. So, what's the reason for all this?
 
@@ -47,17 +44,17 @@ The GCBV code is extremely factored and decomposed. The [Classy Class-Based View
 
 I wish that the existing generic views had better building blocks instead of a big hierarchy of mixins and multiple inheritance which is probably not understood by anyone without checking and re-checking the documentation, the code, or the excellent [Classy Class-Based Views](https://ccbv.co.uk/). Certainly not by me.
 
-In my ideal world, generic views would be composed of small reusable and composable functions where you could copy the code of the view, change a line or two, and leave it at that. And since the functions do one thing (but do that well) you can immediately see what they are doing and why. And you avoid adding too much of the Hollywood Principle (Don't call us, we'll call you) in your code. Sure, your view is called by Django, but you don't have to introduce more and more layers of indirection.
+In my ideal world, generic views would be composed of small reusable and composable functions which wuld cover 80% of use cases with 20% of the code. And if not, you could copy the whole code of the view, change or introduce a line or two and leave it at that. And since the functions do one thing (but do that well) you can immediately see what they are doing and why. You'd avoid the Hollywood Principle (Don't call us, we'll call you) in your code. Sure, your view is called by Django, but you don't have to introduce more and more layers of indirection.
 
-The internet is full of advice that you should prefer composition over inheritance. Let's try to outline what generic views could look like if they followed the composition paradigm. Note that the goal isn't to gain points by showing that the resulting code is shorter -- the goal is maintainability by being easier to understand, and by showing a better path from a beginner's use of views to an experts understanding of everything underneath it.
+The internet is full of advice that you should prefer composition over inheritance. Let's try to outline what generic views could look like if they followed the composition paradigm. Note that the goal isn't to gain points by showing that the resulting code is shorter. One important goal is maintainability by being easier to understand. Another important goal is showing a better path from a beginner's use of views to an experts understanding of everything underneath it by bridging the gap using more powerful building blocks which don't leave all the minutiae to you if the defaults don't work.
 
-Before refactoring and following DRY (Don't Repeat Yourself) to the extreme you should instead follow the [Three Strikes And You Refactor](https://wiki.c2.com/?ThreeStrikesAndYouRefactor) rule[^wet]. Some repetition is fine. Not all identical three lines of code are the same.
+Some repetition caused by copy pasting is fine. Not all identical three lines of code are the same. The [Three Strikes And You Refactor](https://wiki.c2.com/?ThreeStrikesAndYouRefactor) rule[^wet] leads to better and more maintainable code than following an extreme interpretation of the DRY (Don't Repeat Yourself) principle.
 
 [^wet]: Also called the WET rule (Write Everything Twice). (Not coined by me.)
 
 ### ListView and DetailView
 
-I'm going to profit from [feincms3's shortcuts module](https://feincms3.readthedocs.io/en/latest/ref/shortcuts.html) which offers functions for rendering pages for single objects or lists of objects. The `render_list` and `render_detail` functions implement the same way of determining the template paths as the generic views use (for example `<app_name>/<model_name>_detail.html`) and the same way of naming context variables (`object` and `<model_name>` for the object, `object_list` and `<model_name>_list` for the list) as well as pagination, but nothing more.
+I'm going to profit from Django's shortcuts module and also from [feincms3's shortcuts module](https://feincms3.readthedocs.io/en/latest/ref/shortcuts.html) which offers functions for rendering pages for single objects or lists of objects. The `render_list` and `render_detail` functions implement the same way of determining the template paths as the generic views use (for example `<app_name>/<model_name>_detail.html`) and the same way of naming context variables (`object` and `<model_name>` for the object, `object_list` and `<model_name>_list` for the list) as well as pagination, but nothing more.
 
 Here's a possible minimal implementation of a list and detail object generic view:
 
