@@ -62,16 +62,16 @@ I'm going to profit from [feincms3's shortcuts module](https://feincms3.readthed
 Here's a possible minimal implementation of a list and detail object generic view:
 
     :::python
-    from django.shortcuts import get_list_or_404, get_object_or_404
+    # _get_queryset runs ._default_manager.all() on models and returns
+    # everything else as-is. It's the secret sauce which allows using models,
+    # managers or querysets with get_object_or_404 and friends.
+    from django.shortcuts import get_object_or_404, _get_queryset
     from feincms3.shortcuts import render_list, render_detail
 
     def object_list(request, *, model, paginate_by=None):
-        # model can be a model, manager or queryset object
-        queryset = get_list_or_404(model)
-        return render_list(request, queryset, paginate_by=paginate_by)
+        return render_list(request, _get_queryset(model), paginate_by=paginate_by)
 
     def object_detail(request, *, model, slug, slug_field="slug"):
-        # model can be a model, manager or queryset object
         object = get_object_or_404(model, **{slug_field: slug})
         return render_detail(request, object)
 
@@ -153,27 +153,22 @@ Generic create and update views could look something like this, again reusing th
         object = form.save()
         return redirect(object)
 
-    def object_create(request, *, model=None, form_class=None, form_valid=save_and_redirect_to_object):
+    def get_form_instance(request, *, model, form_class, instance=None):
         assert model or form_class, "Provide at least one of model and form_class"
-        if model is None:
-            model = form_class._meta.model
-        elif form_class is None:
+        if form_class is None:
             form_class = modelform_factory(model)
-        args = (request.POST, request.FILES) if request.method == "POST" else ()
-        form = form_class(*args)
+        data = (request.POST, request.FILES) if request.method == "POST" else ()
+        return form_class(*data)
+
+    def object_create(request, *, model=None, form_class=None, form_valid=save_and_redirect_to_object):
+        form = get_form_instance(request, model=model, form_class=form_class)
         if form.is_valid():
             return form_valid(request, form)
         return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
 
     def object_update(request, *, model, slug, slug_field="slug", form_class=None, form_valid=save_and_redirect_to_object):
         object = get_object_or_404(model, **{slug_field: slug})
-        assert model or form_class, "Provide at least one of model and form_class"
-        if model is None:
-            model = form_class._meta.model
-        elif form_class is None:
-            form_class = modelform_factory(model)
-        args = (request.POST, request.FILES) if request.method == "POST" else ()
-        form = form_class(*args, instance=object)
+        form = get_form_instance(request, model=object.__class__, form_class=form_class, instance=object)
         if form.is_valid():
             return form_valid(request, form)
         return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
