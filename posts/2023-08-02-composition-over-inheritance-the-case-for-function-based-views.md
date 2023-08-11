@@ -173,6 +173,27 @@ Generic create and update views could look something like this, again reusing th
             return form_valid(request, form)
         return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
 
+You want to redirect to a different URL and maybe emit a success message? Easy:
+
+    :::python
+    def article_form_valid(request, form):
+        form.save()
+        messages.success(request, _("Successfully updated the article."))
+        return redirect("articles:list")
+
+    urlpatterns = [
+        ...
+        path(
+            "<slug:slug>/update/",
+            object_update,
+            {"model": Article, "form_valid": article_form_valid},
+            name=...
+        ),
+        ...
+    ]
+
+Yes, these generic views wouldn't allow overriding the case when a form was invalid. But, I'd assume that displaying the form with error messages is the right thing to do in 90% of the cases. And if not, write your own specific or generic view? After all, with the mentioned tools it won't take up more than a few lines of straightforward code. (If the code was tricky it would be different. But views shouldn't be tricky.)
+
 ## Date-based generic views
 
 I think I would want to offer a few analyzers which allow easily returning a
