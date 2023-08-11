@@ -198,8 +198,12 @@ Yes, these generic views wouldn't allow overriding the case when a form was inva
 
 I think I would want to offer a few analyzers which allow easily returning a
 data structure suitable for rendering links for yearly, monthly, weekly or even
-daily (who writes that much?) archives. The archive views themselves are
-straightforward adaptations of the `object_list` view above.
+daily (who writes that much?) archives. The [`.dates()` queryset
+method](https://docs.djangoproject.com/en/4.2/ref/models/querysets/#dates)
+method should be a big help there.
+
+The archive views themselves are straightforward adaptations of the
+`object_list` view above.
 
 It may feel like leaving out the actually hard part, but I'd have to be
 convinced that this is actually a hard problem and not just a problem of making
