@@ -17,7 +17,7 @@ New releases in the last two weeks include:
 
 ## GitHub projects
 
-We are using GitHub project boards more and more. It definitely isn't the most versatile way of managing projects but it sort-of hits the sweet spot for us. [I'm mostly happy with it, and it seems to me that applying [the rule of least power](https://en.wikipedia.org/wiki/Rule_of_least_power) to project management software may not be such a bad idea after all.
+We are using GitHub project boards more and more. It definitely isn't the most versatile way of managing projects but it sort-of hits the sweet spot for us. I'm mostly happy with it, and it seems to me that applying [the rule of least power](https://en.wikipedia.org/wiki/Rule_of_least_power) to project management software may not be such a bad idea after all.
 
 The built-in workflows are a bit boring and limited; especially the fact that it seems impossible to automatically add issues to the project when using multiple repositories. Luckily, [actions/add-to-project](https://github.com/actions/add-to-project) exists so that's not really a big problem.
 
