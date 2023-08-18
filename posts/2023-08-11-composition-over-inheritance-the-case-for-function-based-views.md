@@ -33,7 +33,7 @@ The GFBV's argument count was impressive. Two examples follow:
         template_object_name='object', mimetype=None, allow_future=False):
         ...
 
-The GFBVs where immediately when GCBVs were introduced and later removed in 2012.
+The GFBVs were immediately deprecated when GCBVs were introduced and later removed in 2012.
 
 Class-based views have to be adapted by calling the `View.as_view()` method; `as_view()` returns arguably the thing which is viewed (sorry) as the view by Django, it's the thing which gets called with a request and is expected to return a response. This thing in turn instantiates the view object once per request; this means that `self` can be used to save request-specific data such as `self.request`, `self.args` but also custom attributes.
 
