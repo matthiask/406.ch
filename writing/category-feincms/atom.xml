@@ -23,7 +23,7 @@ class-based views.&lt;/p&gt;
     &lt;span class="o"&gt;...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;The GFBVs where immediately when GCBVs were introduced and later removed in 2012.&lt;/p&gt;
+&lt;p&gt;The GFBVs were immediately deprecated when GCBVs were introduced and later removed in 2012.&lt;/p&gt;
 &lt;p&gt;Class-based views have to be adapted by calling the &lt;code&gt;View.as_view()&lt;/code&gt; method; &lt;code&gt;as_view()&lt;/code&gt; returns arguably the thing which is viewed (sorry) as the view by Django, it&amp;rsquo;s the thing which gets called with a request and is expected to return a response. This thing in turn instantiates the view object once per request; this means that &lt;code&gt;self&lt;/code&gt; can be used to save request-specific data such as &lt;code&gt;self.request&lt;/code&gt;, &lt;code&gt;self.args&lt;/code&gt; but also custom attributes.&lt;/p&gt;
 &lt;p&gt;The GCBV code is extremely factored and decomposed. The &lt;a href="https://ccbv.co,ul/"&gt;Classy Class-Based Views&lt;/a&gt; site mentions that the &lt;code&gt;UpdateView&lt;/code&gt; has 10 separate ancestors and its code is spread across three files. But, the view code for instantiating a model object and handling a form really isn&amp;rsquo;t that complex. Most of the complexity is handled by Django itself, in the request handler and in the &lt;code&gt;django.forms&lt;/code&gt; package. So, what&amp;rsquo;s the reason for all this?&lt;/p&gt;
 &lt;h2&gt;Generic views could be simple&lt;/h2&gt;
