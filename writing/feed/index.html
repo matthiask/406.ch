@@ -1,5 +1,109 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-08-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>My reaction to the block-driven CMS blog post</title><link href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/" rel="alternate" /><id>https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/</id><published>2023-08-23T12:00:00Z</published><updated>2023-08-23T12:00:00Z</updated><summary type="html">&lt;h1&gt;My reaction to the block-driven CMS blog post&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-09-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Keep content managers' admin access up-to-date with role-based permissions</title><link href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/" rel="alternate" /><id>https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/</id><published>2023-09-20T12:00:00Z</published><updated>2023-09-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Keep content managers&amp;rsquo; Django admin access up-to-date with role-based permissions&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/default/#permissions-and-authorization"&gt;Django&amp;rsquo;s built-in permissions
+system&lt;/a&gt;
+is great if you want fine-grained control of the permissions content
+managers should have. The allowlist-based approach where users have no
+permissions by default and must be granted each permission individually makes a
+lot of sense to me and is easy to understand.&lt;/p&gt;
+&lt;p&gt;When we build a CMS at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we often use the Django administration panel as a CMS.
+Unfortunately, Django doesn&amp;rsquo;t provide a way to specify that content managers
+should have all permissions in the &lt;code&gt;pages&lt;/code&gt; and &lt;code&gt;articles&lt;/code&gt; app (just as an
+example). Adding all current permissions in a particular app is straightforward when using the
+&lt;a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.filter_horizontal"&gt;&lt;code&gt;filter_horizontal&lt;/code&gt;&lt;/a&gt;
+interface but keeping the list up-to-date later isn&amp;rsquo;t. When we add an
+additional &lt;a href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/"&gt;content block
+plugin&lt;/a&gt;
+we always have to remember to also update the permissions after deploying the
+change &amp;ndash; and often, deployment happens some time after the code has been
+written, e.g. because clients want to approve the change first. What happens
+all too often is that the manual step of updating permissions gets forgotten.&lt;/p&gt;
+&lt;p&gt;This has annoyed me (intermittently) for a long time and my preferred solution
+has always been to give superuser permissions to everyone and trust them to
+not make changes which they aren&amp;rsquo;t supposed to according to the &lt;em&gt;Trusted Users
+Editing Structured Content&lt;/em&gt; principle which was mentioned in a Django book I
+read early in my Django journey.&lt;/p&gt;
+&lt;h2&gt;The basic ideas of my role-based permissions implementation&lt;/h2&gt;
+&lt;p&gt;A recent project has resurfaced this annoyance and I did finally bite the
+bullet and implement a solution for this in the form of a
+&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; extension. The basic ideas are:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;All users are assigned a single role&lt;/strong&gt;: Single roles sound inflexible, but is
+good enough for my default use case. Examples for roles could be &lt;em&gt;default&lt;/em&gt; (no
+additional permissions granted), &lt;em&gt;content managers&lt;/em&gt; (grant access to the pages
+and articles apps) or maybe &lt;em&gt;deny auth&lt;/em&gt; (deny access to users, groups and
+permissions).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The permission check is implemented using a single callable&lt;/strong&gt;: A custom
+backend is provided whose only job is to call the correct callable for the
+user&amp;rsquo;s current role.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The callable either returns a boolean or raises &lt;code&gt;PermissionDenied&lt;/code&gt; to prevent
+other backends from granting access&lt;/strong&gt;: No new ideas here, it&amp;rsquo;s exactly what
+&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#handling-authorization-in-custom-backends"&gt;Django&amp;rsquo;s authentication backends are supposed to
+do&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Permission checkers for the most common scenarios are bundled&lt;/strong&gt;:
+django-authlib only ships one permission checker right now, &lt;code&gt;allow_deny_globs&lt;/code&gt;,
+which allows specifying a list of permission name globs to allow and to deny.
+Deny overrides allow as is probably expected.&lt;/p&gt;
+&lt;h2&gt;Using roles in your own project&lt;/h2&gt;
+&lt;p&gt;Specify the available roles in your settings and add the authentication backend:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;gettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHLIB_ROLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;editorial staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;callback&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;pages.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;articles.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHENTICATION_BACKENDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="c1"&gt;# This is the necessary additional backend&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;authlib.backends.PermissionsBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# Maybe you want to use authlib&amp;#39;s email authentication ...&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;authlib.backends.EmailBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# ... or the standard username &amp;amp; password combination:&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;django.contrib.auth.backends.ModelBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You have to extend your user model (you have to use &lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#specifying-custom-user-model"&gt;a custom user model&lt;/a&gt; if you&amp;rsquo;re not using django-authlib&amp;rsquo;s &lt;code&gt;little_user.User&lt;/code&gt;):&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AbstractUser&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# ...&lt;/span&gt;
+    &lt;span class="n"&gt;role&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And that&amp;rsquo;s basically it.&lt;/p&gt;
+&lt;p&gt;Of course the globbing is flexible, you could also allow users to view all objects:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.view_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you could block users from deleting anything:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.delete_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And as mentioned above, you can also combine &lt;code&gt;allow&lt;/code&gt; and &lt;code&gt;deny&lt;/code&gt; (&lt;code&gt;deny&lt;/code&gt; wins
+over &lt;code&gt;allow&lt;/code&gt;) or even provide your own callables. If you provide your own
+callable it must accept &lt;code&gt;user&lt;/code&gt;, &lt;code&gt;perm&lt;/code&gt; and &lt;code&gt;obj&lt;/code&gt; (which may be &lt;code&gt;None&lt;/code&gt;) as
+keyword arguments. Implementing such a callable is probably less work than
+implementing an authentication backend yourself; I had to do more work than
+initially expected because only implementing &lt;code&gt;.has_perm&lt;/code&gt; isn&amp;rsquo;t sufficient if
+you want to see any apps and models in the admin index page. The current
+&lt;code&gt;allow_deny_globs&lt;/code&gt; implementation is nice and short:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;PermissionDenied&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>My reaction to the block-driven CMS blog post</title><link href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/" rel="alternate" /><id>https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/</id><published>2023-08-23T12:00:00Z</published><updated>2023-08-23T12:00:00Z</updated><summary type="html">&lt;h1&gt;My reaction to the block-driven CMS blog post&lt;/h1&gt;
 &lt;p&gt;This morning I read an interesting post on the Lincoln Loop blog called &lt;a href="https://lincolnloop.com/insights/block-driven-cms-is-critical-build-a-future-proof/"&gt;Building a Future-Proof Platform with Block-Driven CMS&lt;/a&gt;. It shouldn&amp;rsquo;t come as a surprise to those (few 😄) who know my work in the area of content management systems that the post resonated with me. I found the description of the advantages of block-based CMS editing very clear and I like the emphasis on structuring data well so that it can be reused for multiple distribution channels.&lt;/p&gt;
 &lt;p&gt;Of course &lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt; isn&amp;rsquo;t the only way to implement a block-driven CMS using Django. Since its inception &lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS&lt;/a&gt; was always the smaller, faster and nimbler counterpart to it, achieving the same &lt;em&gt;basic&lt;/em&gt; goals with a fraction of the code and maintenance headaches. django CMS always seems to trail the official releases of Django. django-content-editor and feincms3 are almost always compatible with the development version of Django by way of running the tests with the &lt;code&gt;main&lt;/code&gt; branch as well. This allows me to be an early adopter of upcoming Django releases with a software stack that&amp;rsquo;s already well tested, or also to report bugs to the Django project itself. All that probably wouldn&amp;rsquo;t be possible if feincms3 and its dependencies supported all the things django CMS does, but it doesn&amp;rsquo;t have to to be useful.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/"&gt;django-content-editor and feincms3&lt;/a&gt; are the legacy of FeinCMS in an even smaller, even more maintainable and even more composable package and while I&amp;rsquo;m definitely always checking out other Django-based CMS I&amp;rsquo;m persuaded that sticking with feincms3 is a good choice.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 33)</title><link href="https://406.ch/writing/weeknotes-2023-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-33/</id><published>2023-08-20T12:00:00Z</published><updated>2023-08-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
@@ -710,27 +814,4 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-10/"&gt;I did what I threatened (myself) to do:&lt;/a&gt; I replaced the Django code base for this weblog with a static site generator.&lt;/p&gt;
 &lt;p&gt;My main goal was to preserve as much as possible of the existing structure, including the Atom feeds and the IDs of posts so that the rewrite wouldn&amp;rsquo;t flood any aggregators.&lt;/p&gt;
 &lt;p&gt;The end result is a hacky ~200 LOC Python script which uses Markdown, Jinja2 and minify-html. Markdown is great for blogging and I have been using it for a long time, basically since I started this website in 2005. I don&amp;rsquo;t like it that much for documentation, but that&amp;rsquo;s a story for another day.&lt;/p&gt;
-&lt;p&gt;For now I still deploy the blog to a VPS but there&amp;rsquo;s nothing stopping me from uploading it somewhere else. I&amp;rsquo;m thinking about using GitHub actions for the deployment, but I can do that another day.&lt;/p&gt;</summary></entry><entry><title>Run less code in production or you’ll end up paying the price later</title><link href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/" rel="alternate" /><id>https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/</id><published>2023-04-07T12:00:00Z</published><updated>2023-04-07T12:00:00Z</updated><summary type="html">&lt;h1&gt;Run less code in production or you&amp;rsquo;ll end up paying the price later&lt;/h1&gt;
-&lt;p&gt;At &lt;a href="https://feinheit.ch/"&gt;work&lt;/a&gt; we do have the problem of dependencies which aren&amp;rsquo;t maintained anymore. That&amp;rsquo;s actually a great problem to have because it means that the app or website ended up running for a long time, maybe longer than expected initially. I think that websites have a lifetime of 3-5 years&lt;sup id="fnref:lifetime"&gt;&lt;a class="footnote-ref" href="#fn:lifetime"&gt;1&lt;/a&gt;&lt;/sup&gt; which is already much longer than the lifetime of major versions of some rapid development frameworks, especially frontend frameworks. We have been using &lt;a href="https://get.foundation/"&gt;Zurb Foundation&lt;/a&gt; in the past. It has served us well and I don&amp;rsquo;t want to dunk on it – after all it is free, it has great documentation and it works well. It has many features and many components, but as changes happen, not just in the framework itself but also in the tooling it uses upgrades stay hard and things start to break somewhere down the road (for example when &lt;a href="https://github.com/sass/dart-sass"&gt;Dart Sass 2.0 will be released&lt;/a&gt;. And when that happens you have to pick up the parts and maintain them yourself &amp;ndash; having grown your codebase by a considerable amount practically overnight.&lt;/p&gt;
-&lt;p&gt;Of course it&amp;rsquo;s also hard to argue for starting to write all HTML, CSS and JavaScript from scratch. &lt;a href="https://406.ch/writing/flake8-and-value-standards/"&gt;Standards are very helpful.&lt;/a&gt; Building without some sort of standardized tooling will not only lead to rank growth but also means that you have to make many many small and (relatively) irrelevant decisions &lt;em&gt;and you have to justify those decisions when working in a team&lt;/em&gt; because you could just as well have decided differently.&lt;/p&gt;
-&lt;p&gt;So after all that, should you use frontend frameworks? The answer is &amp;ndash; as always &amp;ndash; it depends.&lt;/p&gt;
-&lt;p&gt;You should definitely use a framework when prototyping.&lt;/p&gt;
-&lt;p&gt;But already when working on a MVP it gets less and less clear. You&amp;rsquo;re kidding yourself if you think that sometime in the future you&amp;rsquo;ll have the time to clean up your code base; &lt;strong&gt;of course&lt;/strong&gt; you&amp;rsquo;re always refactoring and &lt;strong&gt;of course&lt;/strong&gt; you&amp;rsquo;ll try to always leave each part behind a little bit nicer than it was before, but even then the big rewrite didn&amp;rsquo;t happen and you&amp;rsquo;ll continue using at least some aspects of the code that was hastily written for the initial release.&lt;/p&gt;
-&lt;p&gt;The exceptions to the rule are frameworks and tools which have a proven track record of maintaining stability over time. So, despite the fact that &lt;a href="https://www.djangoproject.com/"&gt;the Django framework&lt;/a&gt; has more than 100&amp;lsquo;000 lines of code I feel good about using it. Django was released as Open Source in July 2005 and has been steadily maintained over the last nearly 18 years. &lt;a href="https://www.djangoproject.com/fundraising/"&gt;Funding&lt;/a&gt; is always a problem (contribute if you can!) but at least the Django software foundation manages to employ two Django fellows which are certainly key in driving the framework forward.&lt;/p&gt;
-&lt;p&gt;Again the picture gets less clear when third party apps are involved. Some third party apps were actively maintained several years ago and now they aren&amp;rsquo;t. I have personally taken over the maintenance of several such apps or more often than not reimplemented them with less functionality and much less code. Sometimes it&amp;rsquo;s easier to maintain a little more of your own code instead of much more of someone else&amp;rsquo;s code.&lt;/p&gt;
-&lt;p&gt;So, what&amp;rsquo;s the take away?&lt;/p&gt;
-&lt;p&gt;Maybe pay attention to the following points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Recent activity on the repository, recent releases and good docs are always a good sign for the health of a project.&lt;/li&gt;
-&lt;li&gt;Take the time to read at least a part of the code of third party projects before starting to rely on them. It&amp;rsquo;s a bad idea to just read the documentation and nothing else. When it comes to Django apps I always at least read the model files to understand how the data&amp;rsquo;s modeled and skim the views and forms.&lt;/li&gt;
-&lt;li&gt;Have a look at issues and pull/merge requests. Don&amp;rsquo;t worry about usage questions etc but mainly about &amp;ldquo;hard problem&amp;rdquo; issues.&lt;/li&gt;
-&lt;li&gt;Try to stay away from packages which are too comprehensive; reusing these packages is hard even for their authors and when they are abandoned the amount of responsibility transferred to you will be so much bigger.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:lifetime"&gt;
-&lt;p&gt;Citation required obviously, don&amp;rsquo;t take my word on it. Data is certainly more long lived, but I have my doubts regarding the code running many small sites.&amp;#160;&lt;a class="footnote-backref" href="#fnref:lifetime" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry></feed>
+&lt;p&gt;For now I still deploy the blog to a VPS but there&amp;rsquo;s nothing stopping me from uploading it somewhere else. I&amp;rsquo;m thinking about using GitHub actions for the deployment, but I can do that another day.&lt;/p&gt;</summary></entry></feed>

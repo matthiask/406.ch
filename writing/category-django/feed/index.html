@@ -1,5 +1,109 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-08-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>My reaction to the block-driven CMS blog post</title><link href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/" rel="alternate" /><id>https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/</id><published>2023-08-23T12:00:00Z</published><updated>2023-08-23T12:00:00Z</updated><summary type="html">&lt;h1&gt;My reaction to the block-driven CMS blog post&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-09-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Keep content managers' admin access up-to-date with role-based permissions</title><link href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/" rel="alternate" /><id>https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/</id><published>2023-09-20T12:00:00Z</published><updated>2023-09-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Keep content managers&amp;rsquo; Django admin access up-to-date with role-based permissions&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/default/#permissions-and-authorization"&gt;Django&amp;rsquo;s built-in permissions
+system&lt;/a&gt;
+is great if you want fine-grained control of the permissions content
+managers should have. The allowlist-based approach where users have no
+permissions by default and must be granted each permission individually makes a
+lot of sense to me and is easy to understand.&lt;/p&gt;
+&lt;p&gt;When we build a CMS at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we often use the Django administration panel as a CMS.
+Unfortunately, Django doesn&amp;rsquo;t provide a way to specify that content managers
+should have all permissions in the &lt;code&gt;pages&lt;/code&gt; and &lt;code&gt;articles&lt;/code&gt; app (just as an
+example). Adding all current permissions in a particular app is straightforward when using the
+&lt;a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.filter_horizontal"&gt;&lt;code&gt;filter_horizontal&lt;/code&gt;&lt;/a&gt;
+interface but keeping the list up-to-date later isn&amp;rsquo;t. When we add an
+additional &lt;a href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/"&gt;content block
+plugin&lt;/a&gt;
+we always have to remember to also update the permissions after deploying the
+change &amp;ndash; and often, deployment happens some time after the code has been
+written, e.g. because clients want to approve the change first. What happens
+all too often is that the manual step of updating permissions gets forgotten.&lt;/p&gt;
+&lt;p&gt;This has annoyed me (intermittently) for a long time and my preferred solution
+has always been to give superuser permissions to everyone and trust them to
+not make changes which they aren&amp;rsquo;t supposed to according to the &lt;em&gt;Trusted Users
+Editing Structured Content&lt;/em&gt; principle which was mentioned in a Django book I
+read early in my Django journey.&lt;/p&gt;
+&lt;h2&gt;The basic ideas of my role-based permissions implementation&lt;/h2&gt;
+&lt;p&gt;A recent project has resurfaced this annoyance and I did finally bite the
+bullet and implement a solution for this in the form of a
+&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; extension. The basic ideas are:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;All users are assigned a single role&lt;/strong&gt;: Single roles sound inflexible, but is
+good enough for my default use case. Examples for roles could be &lt;em&gt;default&lt;/em&gt; (no
+additional permissions granted), &lt;em&gt;content managers&lt;/em&gt; (grant access to the pages
+and articles apps) or maybe &lt;em&gt;deny auth&lt;/em&gt; (deny access to users, groups and
+permissions).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The permission check is implemented using a single callable&lt;/strong&gt;: A custom
+backend is provided whose only job is to call the correct callable for the
+user&amp;rsquo;s current role.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The callable either returns a boolean or raises &lt;code&gt;PermissionDenied&lt;/code&gt; to prevent
+other backends from granting access&lt;/strong&gt;: No new ideas here, it&amp;rsquo;s exactly what
+&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#handling-authorization-in-custom-backends"&gt;Django&amp;rsquo;s authentication backends are supposed to
+do&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Permission checkers for the most common scenarios are bundled&lt;/strong&gt;:
+django-authlib only ships one permission checker right now, &lt;code&gt;allow_deny_globs&lt;/code&gt;,
+which allows specifying a list of permission name globs to allow and to deny.
+Deny overrides allow as is probably expected.&lt;/p&gt;
+&lt;h2&gt;Using roles in your own project&lt;/h2&gt;
+&lt;p&gt;Specify the available roles in your settings and add the authentication backend:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;gettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHLIB_ROLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;editorial staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;callback&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;pages.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;articles.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHENTICATION_BACKENDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="c1"&gt;# This is the necessary additional backend&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;authlib.backends.PermissionsBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# Maybe you want to use authlib&amp;#39;s email authentication ...&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;authlib.backends.EmailBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# ... or the standard username &amp;amp; password combination:&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;django.contrib.auth.backends.ModelBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You have to extend your user model (you have to use &lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#specifying-custom-user-model"&gt;a custom user model&lt;/a&gt; if you&amp;rsquo;re not using django-authlib&amp;rsquo;s &lt;code&gt;little_user.User&lt;/code&gt;):&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AbstractUser&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# ...&lt;/span&gt;
+    &lt;span class="n"&gt;role&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And that&amp;rsquo;s basically it.&lt;/p&gt;
+&lt;p&gt;Of course the globbing is flexible, you could also allow users to view all objects:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.view_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you could block users from deleting anything:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.delete_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And as mentioned above, you can also combine &lt;code&gt;allow&lt;/code&gt; and &lt;code&gt;deny&lt;/code&gt; (&lt;code&gt;deny&lt;/code&gt; wins
+over &lt;code&gt;allow&lt;/code&gt;) or even provide your own callables. If you provide your own
+callable it must accept &lt;code&gt;user&lt;/code&gt;, &lt;code&gt;perm&lt;/code&gt; and &lt;code&gt;obj&lt;/code&gt; (which may be &lt;code&gt;None&lt;/code&gt;) as
+keyword arguments. Implementing such a callable is probably less work than
+implementing an authentication backend yourself; I had to do more work than
+initially expected because only implementing &lt;code&gt;.has_perm&lt;/code&gt; isn&amp;rsquo;t sufficient if
+you want to see any apps and models in the admin index page. The current
+&lt;code&gt;allow_deny_globs&lt;/code&gt; implementation is nice and short:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;PermissionDenied&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>My reaction to the block-driven CMS blog post</title><link href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/" rel="alternate" /><id>https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/</id><published>2023-08-23T12:00:00Z</published><updated>2023-08-23T12:00:00Z</updated><summary type="html">&lt;h1&gt;My reaction to the block-driven CMS blog post&lt;/h1&gt;
 &lt;p&gt;This morning I read an interesting post on the Lincoln Loop blog called &lt;a href="https://lincolnloop.com/insights/block-driven-cms-is-critical-build-a-future-proof/"&gt;Building a Future-Proof Platform with Block-Driven CMS&lt;/a&gt;. It shouldn&amp;rsquo;t come as a surprise to those (few 😄) who know my work in the area of content management systems that the post resonated with me. I found the description of the advantages of block-based CMS editing very clear and I like the emphasis on structuring data well so that it can be reused for multiple distribution channels.&lt;/p&gt;
 &lt;p&gt;Of course &lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt; isn&amp;rsquo;t the only way to implement a block-driven CMS using Django. Since its inception &lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS&lt;/a&gt; was always the smaller, faster and nimbler counterpart to it, achieving the same &lt;em&gt;basic&lt;/em&gt; goals with a fraction of the code and maintenance headaches. django CMS always seems to trail the official releases of Django. django-content-editor and feincms3 are almost always compatible with the development version of Django by way of running the tests with the &lt;code&gt;main&lt;/code&gt; branch as well. This allows me to be an early adopter of upcoming Django releases with a software stack that&amp;rsquo;s already well tested, or also to report bugs to the Django project itself. All that probably wouldn&amp;rsquo;t be possible if feincms3 and its dependencies supported all the things django CMS does, but it doesn&amp;rsquo;t have to to be useful.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/"&gt;django-content-editor and feincms3&lt;/a&gt; are the legacy of FeinCMS in an even smaller, even more maintainable and even more composable package and while I&amp;rsquo;m definitely always checking out other Django-based CMS I&amp;rsquo;m persuaded that sticking with feincms3 is a good choice.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 33)</title><link href="https://406.ch/writing/weeknotes-2023-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-33/</id><published>2023-08-20T12:00:00Z</published><updated>2023-08-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
@@ -666,18 +770,4 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;p&gt;I started learning Rust during the last &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt;; it&amp;rsquo;s a nice language. &lt;a href="https://beta.ruff.rs/"&gt;ruff&lt;/a&gt; is a linter and (more and more) formatter for Python code written in Rust. After years of working with Python and Python-based tools it&amp;rsquo;s surprisingly fast, almost worryingly so. It&amp;rsquo;s true what they say: ruff finishes so fast that I&amp;rsquo;m always left wondering if it even did anything at all.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m configuring ruff through &lt;code&gt;pyproject.toml&lt;/code&gt;, so switching from setuptools to hatch (see above) also helped in this regard. The main trouble I had was that I&amp;rsquo;m running Python 3.11 locally but Python 3.10 in the server environment (no dev-prod parity&amp;hellip;), and rebuilding &lt;code&gt;requirements.txt&lt;/code&gt; locally of course didn&amp;rsquo;t add TOML support because it&amp;rsquo;s built into Python 3.11, but Python 3.10 needs an external package. So of course I broke the build. That&amp;rsquo;s not all bad though: If stuff broke it definitely helps with remembering the reasons later.&lt;/p&gt;
 &lt;h2&gt;Meta&lt;/h2&gt;
-&lt;p&gt;Co-writing still works really well for me. Expressed differently: I seem to be unable to write without the (slight) pressure of writing together.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 11 and 12)</title><link href="https://406.ch/writing/weeknotes-2023-week-11-and-12/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-11-and-12/</id><published>2023-03-24T12:00:00Z</published><updated>2023-03-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 11 and 12)&lt;/h1&gt;
-&lt;h2&gt;Mail user agents being mail user agents&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib&lt;/a&gt; is my collection of utilities for implementing passwordless authentication, either using OAuth2 or by sending magic links by email.&lt;/p&gt;
-&lt;p&gt;The latter functionality has existed for a long time in &lt;a href="https://pypi.org/project/django-registration/"&gt;django-registration&lt;/a&gt; (which is great!) but I wanted a way to generate links without the need for a storage somewhere. Django has utilities for &lt;a href="https://docs.djangoproject.com/en/4.1/topics/signing/"&gt;Cryptographic signing&lt;/a&gt; built-in as the &lt;code&gt;django.core.signing&lt;/code&gt; module. I&amp;rsquo;m using this module to send a signed version of the email address to users, and when I&amp;rsquo;m able to successfully verify the email addresses signature I can be sure (enough) that those links have actually been generated by my code.&lt;/p&gt;
-&lt;p&gt;The form of the generated verification URL is as follows: &lt;code&gt;https://example.com/.../test@example.com:1pXJtx:aypKOlb5zaCg.../&lt;/code&gt;; the part before the first colon contains the data-to-be-verified, the short string between colons is the timestamp and the rest is the signature, everything generated by &lt;code&gt;django.core.signing&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;So far so boring.&lt;/p&gt;
-&lt;p&gt;But then mail user agents happened. Some MUAs insist to butcher the URL in various ways, e.g. by removing the signature or by making only the embedded email address clickable. This is &amp;ldquo;interesting&amp;rdquo; behavior and certainly unexpected.&lt;/p&gt;
-&lt;p&gt;Last week I implemented a change where I&amp;rsquo;m now also base64 encoding the email address itself. So, the URL is even longer and even more opaque now but it seems to work well. I also added a HTML version of the mail to hopefully prevent mail programs from creating their own worse version. I could have done that a long time ago but I really like &lt;code&gt;text/plain&lt;/code&gt; mails so I did hold off on that as long as I could. Oh well.&lt;/p&gt;
-&lt;h2&gt;feincms3-data and unique fields&lt;/h2&gt;
-&lt;p&gt;I did a longer post on &lt;a href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/"&gt;feincms3-data&lt;/a&gt; some time ago which explains what it is for.&lt;/p&gt;
-&lt;p&gt;A recurring problem was dumping and loading data in the presence of unique constraints. For example, website managers deleted data with a specific (unique) slug and created new data with the same slug. feincms3-data and also Django itself were unable to handle this. The former because it loads new data before deleting old data, the latter because it doesn&amp;rsquo;t even have a concept of data which should be deleted.&lt;/p&gt;
-&lt;p&gt;feincms3-data now has an ugly workaround for this problem: It generates random data for a list of explicitly specified fields (which is very unlikely to cause collisions) and only updates the records with the correct data after the cleanup step. &lt;a href="https://github.com/matthiask/feincms3-data/commit/9324605dc8dcb32ee4118adca0668643597ec130"&gt;The code wasn&amp;rsquo;t that hairy to write&lt;/a&gt; and I was again very happy that unittesting is a thing.&lt;/p&gt;
-&lt;h2&gt;ProseMirror hacking&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m back to hacking on &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt; plugins. I still feel really well about picking it as a basis for all those use cases when using the venerable &lt;a href="https://ckeditor.com/ckeditor-4/"&gt;CKEditor 4&lt;/a&gt; isn&amp;rsquo;t a good fit.&lt;/p&gt;
-&lt;p&gt;I did like the fact a lot that ProseMirror was written in JavaScript. Now that it has been rewritten in TypeScript I&amp;rsquo;m reevaluating my resistance against TypeScript, but I just don&amp;rsquo;t know if it&amp;rsquo;s worth it. Why write down all those annotations when the code also works without? I still don&amp;rsquo;t really see the point. Yes I know, catching bugs early and all that. But still.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;Co-writing still works really well for me. Expressed differently: I seem to be unable to write without the (slight) pressure of writing together.&lt;/p&gt;</summary></entry></feed>

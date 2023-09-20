@@ -1,5 +1,109 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-08-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>My reaction to the block-driven CMS blog post</title><link href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/" rel="alternate" /><id>https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/</id><published>2023-08-23T12:00:00Z</published><updated>2023-08-23T12:00:00Z</updated><summary type="html">&lt;h1&gt;My reaction to the block-driven CMS blog post&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-09-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Keep content managers' admin access up-to-date with role-based permissions</title><link href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/" rel="alternate" /><id>https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/</id><published>2023-09-20T12:00:00Z</published><updated>2023-09-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Keep content managers&amp;rsquo; Django admin access up-to-date with role-based permissions&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/default/#permissions-and-authorization"&gt;Django&amp;rsquo;s built-in permissions
+system&lt;/a&gt;
+is great if you want fine-grained control of the permissions content
+managers should have. The allowlist-based approach where users have no
+permissions by default and must be granted each permission individually makes a
+lot of sense to me and is easy to understand.&lt;/p&gt;
+&lt;p&gt;When we build a CMS at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we often use the Django administration panel as a CMS.
+Unfortunately, Django doesn&amp;rsquo;t provide a way to specify that content managers
+should have all permissions in the &lt;code&gt;pages&lt;/code&gt; and &lt;code&gt;articles&lt;/code&gt; app (just as an
+example). Adding all current permissions in a particular app is straightforward when using the
+&lt;a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.filter_horizontal"&gt;&lt;code&gt;filter_horizontal&lt;/code&gt;&lt;/a&gt;
+interface but keeping the list up-to-date later isn&amp;rsquo;t. When we add an
+additional &lt;a href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/"&gt;content block
+plugin&lt;/a&gt;
+we always have to remember to also update the permissions after deploying the
+change &amp;ndash; and often, deployment happens some time after the code has been
+written, e.g. because clients want to approve the change first. What happens
+all too often is that the manual step of updating permissions gets forgotten.&lt;/p&gt;
+&lt;p&gt;This has annoyed me (intermittently) for a long time and my preferred solution
+has always been to give superuser permissions to everyone and trust them to
+not make changes which they aren&amp;rsquo;t supposed to according to the &lt;em&gt;Trusted Users
+Editing Structured Content&lt;/em&gt; principle which was mentioned in a Django book I
+read early in my Django journey.&lt;/p&gt;
+&lt;h2&gt;The basic ideas of my role-based permissions implementation&lt;/h2&gt;
+&lt;p&gt;A recent project has resurfaced this annoyance and I did finally bite the
+bullet and implement a solution for this in the form of a
+&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; extension. The basic ideas are:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;All users are assigned a single role&lt;/strong&gt;: Single roles sound inflexible, but is
+good enough for my default use case. Examples for roles could be &lt;em&gt;default&lt;/em&gt; (no
+additional permissions granted), &lt;em&gt;content managers&lt;/em&gt; (grant access to the pages
+and articles apps) or maybe &lt;em&gt;deny auth&lt;/em&gt; (deny access to users, groups and
+permissions).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The permission check is implemented using a single callable&lt;/strong&gt;: A custom
+backend is provided whose only job is to call the correct callable for the
+user&amp;rsquo;s current role.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The callable either returns a boolean or raises &lt;code&gt;PermissionDenied&lt;/code&gt; to prevent
+other backends from granting access&lt;/strong&gt;: No new ideas here, it&amp;rsquo;s exactly what
+&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#handling-authorization-in-custom-backends"&gt;Django&amp;rsquo;s authentication backends are supposed to
+do&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Permission checkers for the most common scenarios are bundled&lt;/strong&gt;:
+django-authlib only ships one permission checker right now, &lt;code&gt;allow_deny_globs&lt;/code&gt;,
+which allows specifying a list of permission name globs to allow and to deny.
+Deny overrides allow as is probably expected.&lt;/p&gt;
+&lt;h2&gt;Using roles in your own project&lt;/h2&gt;
+&lt;p&gt;Specify the available roles in your settings and add the authentication backend:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;gettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHLIB_ROLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;editorial staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;callback&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;pages.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;articles.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHENTICATION_BACKENDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="c1"&gt;# This is the necessary additional backend&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;authlib.backends.PermissionsBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# Maybe you want to use authlib&amp;#39;s email authentication ...&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;authlib.backends.EmailBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# ... or the standard username &amp;amp; password combination:&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;django.contrib.auth.backends.ModelBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You have to extend your user model (you have to use &lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#specifying-custom-user-model"&gt;a custom user model&lt;/a&gt; if you&amp;rsquo;re not using django-authlib&amp;rsquo;s &lt;code&gt;little_user.User&lt;/code&gt;):&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AbstractUser&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# ...&lt;/span&gt;
+    &lt;span class="n"&gt;role&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And that&amp;rsquo;s basically it.&lt;/p&gt;
+&lt;p&gt;Of course the globbing is flexible, you could also allow users to view all objects:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.view_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you could block users from deleting anything:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.delete_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And as mentioned above, you can also combine &lt;code&gt;allow&lt;/code&gt; and &lt;code&gt;deny&lt;/code&gt; (&lt;code&gt;deny&lt;/code&gt; wins
+over &lt;code&gt;allow&lt;/code&gt;) or even provide your own callables. If you provide your own
+callable it must accept &lt;code&gt;user&lt;/code&gt;, &lt;code&gt;perm&lt;/code&gt; and &lt;code&gt;obj&lt;/code&gt; (which may be &lt;code&gt;None&lt;/code&gt;) as
+keyword arguments. Implementing such a callable is probably less work than
+implementing an authentication backend yourself; I had to do more work than
+initially expected because only implementing &lt;code&gt;.has_perm&lt;/code&gt; isn&amp;rsquo;t sufficient if
+you want to see any apps and models in the admin index page. The current
+&lt;code&gt;allow_deny_globs&lt;/code&gt; implementation is nice and short:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;PermissionDenied&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>My reaction to the block-driven CMS blog post</title><link href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/" rel="alternate" /><id>https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/</id><published>2023-08-23T12:00:00Z</published><updated>2023-08-23T12:00:00Z</updated><summary type="html">&lt;h1&gt;My reaction to the block-driven CMS blog post&lt;/h1&gt;
 &lt;p&gt;This morning I read an interesting post on the Lincoln Loop blog called &lt;a href="https://lincolnloop.com/insights/block-driven-cms-is-critical-build-a-future-proof/"&gt;Building a Future-Proof Platform with Block-Driven CMS&lt;/a&gt;. It shouldn&amp;rsquo;t come as a surprise to those (few 😄) who know my work in the area of content management systems that the post resonated with me. I found the description of the advantages of block-based CMS editing very clear and I like the emphasis on structuring data well so that it can be reused for multiple distribution channels.&lt;/p&gt;
 &lt;p&gt;Of course &lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt; isn&amp;rsquo;t the only way to implement a block-driven CMS using Django. Since its inception &lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS&lt;/a&gt; was always the smaller, faster and nimbler counterpart to it, achieving the same &lt;em&gt;basic&lt;/em&gt; goals with a fraction of the code and maintenance headaches. django CMS always seems to trail the official releases of Django. django-content-editor and feincms3 are almost always compatible with the development version of Django by way of running the tests with the &lt;code&gt;main&lt;/code&gt; branch as well. This allows me to be an early adopter of upcoming Django releases with a software stack that&amp;rsquo;s already well tested, or also to report bugs to the Django project itself. All that probably wouldn&amp;rsquo;t be possible if feincms3 and its dependencies supported all the things django CMS does, but it doesn&amp;rsquo;t have to to be useful.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/"&gt;django-content-editor and feincms3&lt;/a&gt; are the legacy of FeinCMS in an even smaller, even more maintainable and even more composable package and while I&amp;rsquo;m definitely always checking out other Django-based CMS I&amp;rsquo;m persuaded that sticking with feincms3 is a good choice.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 33)</title><link href="https://406.ch/writing/weeknotes-2023-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-33/</id><published>2023-08-20T12:00:00Z</published><updated>2023-08-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
@@ -641,39 +745,4 @@ looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></e
 &lt;p&gt;As an aside, I always try deploying the last and best version of Django in my current projects, but since one of our servers is still using Ubuntu 18.04 with an old PostgreSQL version I cannot even use Django 4.1 with many projects. That makes me sad but maybe the sadness will bring with it the energy to finally move to containers or something which makes it easier to jump to new versions. We&amp;rsquo;ll see. It&amp;rsquo;s not really an issue most of the time so maybe it still isn&amp;rsquo;t worth it even though I feel like our hosting strategy is stuck in 2010.&lt;/p&gt;
 &lt;h2&gt;Machine Learning&lt;/h2&gt;
 &lt;p&gt;I did some playing around with Dall-E and ChatGPT (as everyone seems to do). I had a few interesting discussions with people re. if predicting the next word will lead to Artificial General Intelligence (I don&amp;rsquo;t think so).&lt;/p&gt;
-&lt;p&gt;What was fun about it was that I got to throw a hack together with &lt;a href="https://docs.python.org/3/library/asyncio.html"&gt;asyncio&lt;/a&gt; respectively &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt; and &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. The Starlette source code is a breath of fresh air. It&amp;rsquo;s so beautiful to read and I just love how much it does with a minimal amount of code.&lt;/p&gt;</summary></entry><entry><title>Moving data including deletions between the same Django app running in different environments</title><link href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/" rel="alternate" /><id>https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/</id><published>2022-11-13T12:00:00Z</published><updated>2022-11-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;Moving data including deletions between the same Django app running in different environments&lt;/h1&gt;
-&lt;p&gt;Many projects use different environments to stabilize the code; they have a &lt;em&gt;production&lt;/em&gt; environment which is actually seen by users, a &lt;em&gt;stage&lt;/em&gt; where code is tested in an environment close to production and maybe several additional environments where more experimental code is published or developed, either on internal or protected webservers or maybe on the workstations of developers themselves.&lt;/p&gt;
-&lt;p&gt;The same process may be desired for content; an environment where the content lives which is seen by users and other environments where the content can be changed without impacting the production environment. When using Django and the &lt;a href="https://docs.djangoproject.com/en/4.1/ref/contrib/admin/"&gt;Django admin site&lt;/a&gt; there is no ready-made solution for doing this and maybe there shouldn&amp;rsquo;t be.&lt;/p&gt;
-&lt;h2&gt;Django&amp;rsquo;s serialization framework and its shortcomings for the use case outlined above&lt;/h2&gt;
-&lt;p&gt;Django comes with a &lt;a href="https://docs.djangoproject.com/en/4.1/topics/serialization/"&gt;serialization framework&lt;/a&gt; and with the &lt;code&gt;dumpdata&lt;/code&gt; and &lt;code&gt;loaddata&lt;/code&gt; management commands which can be used to dump and load data, e.g. to and from JSON. It&amp;rsquo;s also easily possible to specify a list of primary keys on the command line if you only want to dump a subset of the existing data. When loading this subset data which isn&amp;rsquo;t included isn&amp;rsquo;t changed in any way, and that&amp;rsquo;s good!&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;However!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Let&amp;rsquo;s assume we&amp;rsquo;re working with the question and choice models from &lt;a href="https://docs.djangoproject.com/en/4.1/intro/tutorial02/#creating-models"&gt;Django&amp;rsquo;s tutorial&lt;/a&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The serialization framework doesn&amp;rsquo;t offer a way to easily include related data in a dump. There&amp;rsquo;s no easy way to automatically include all choices of a question.&lt;/li&gt;
-&lt;li&gt;Even if there was a way to include the related data the target environment wouldn&amp;rsquo;t have a way to replicate deletions. If a choice has been removed in the source environment it will not be included in the dump, and the target environment will just do nothing with the now redundant choice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/matthiask/feincms3-data/"&gt;feincms3-data&lt;/a&gt; solves these problems in (I think) a nice way, by building on the serialization framework and augmenting the JSON dump with a few additional properties which tell the loader what to do with the dataset. The code doesn&amp;rsquo;t have a dependency on &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; but of course it&amp;rsquo;s very useful when used to dump and load structured data as is generated when using a CMS.&lt;/p&gt;
-&lt;p&gt;The following datasets configuration would work for the use case outlined above:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;feincms3_data.data&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;specs_for_models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;polls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;questions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;pks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;specs_for_models&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Question&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-            &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;filter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pk__in&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pks&lt;/span&gt;&lt;span class="p"&gt;}},&lt;/span&gt;
-        &lt;span class="p"&gt;),&lt;/span&gt;
-        &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;specs_for_models&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Answer&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-            &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;filter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;question__pk__in&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pks&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;delete_missing&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;datasets&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;specs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;questions&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now, you have to point the &lt;code&gt;FEINCMS3_DATA_DATASETS&lt;/code&gt; setting at the &lt;code&gt;datasets()&lt;/code&gt; function above and now you could use &lt;code&gt;./manage.py f3dumpdata default:3,4&lt;/code&gt; to dump the questions with ID 3 and 4 including their choices. The JSON can be loaded in a different instance. The questions with ID 3 and 4 will be created or updated, and choices which match the &lt;code&gt;questions__pk__in=[3,4]&lt;/code&gt; filter &lt;em&gt;but aren&amp;rsquo;t included in the JSON&lt;/em&gt; will be removed from the database.&lt;/p&gt;
-&lt;p&gt;Despite its pre-1.0 version number it&amp;rsquo;s used for several clients to implement a workflow where they set a &amp;ldquo;request update&amp;rdquo; flag on some parent object, and the relevant data will be synced periodically between systems. I&amp;rsquo;m quite confident that the code is correct and that it does what it should. A thorough test suite helps a lot there! But you never now, but I&amp;rsquo;m sure everyone uses backups by now. But who knows.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;What was fun about it was that I got to throw a hack together with &lt;a href="https://docs.python.org/3/library/asyncio.html"&gt;asyncio&lt;/a&gt; respectively &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt; and &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. The Starlette source code is a breath of fresh air. It&amp;rsquo;s so beautiful to read and I just love how much it does with a minimal amount of code.&lt;/p&gt;</summary></entry></feed>
