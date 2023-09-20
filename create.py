@@ -15,8 +15,8 @@ while True:
     if title:
         break
 
-pubdate = dt.date.today().isoformat().replace("-", "")
-filename = f"{pubdate}-{slugify(title)}.md"
+pubdate = dt.date.today().isoformat()
+filename = f"{pubdate.replace('-', '')}-{slugify(title)}.md"
 text = f"""\
 Title: {title}
 Date: {pubdate}
