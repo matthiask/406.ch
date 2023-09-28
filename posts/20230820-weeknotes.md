@@ -2,8 +2,6 @@ Title: Weeknotes (2023 week 33)
 Date: 2023-08-20
 Categories: Django, Programming, Weeknotes, feincms
 
-# Weeknotes
-
 I'm not sure if I should call these posts weeknotes when I see the posting schedule, but oh well. Keep expectations up but also practice forgiveness when not meeting them, it's fine really.
 
 ## `py_modules` using hatchling
