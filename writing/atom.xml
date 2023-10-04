@@ -1,5 +1,62 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-09-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 39)</title><link href="https://406.ch/writing/weeknotes-2023-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-39/</id><published>2023-09-28T12:00:00Z</published><updated>2023-09-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 39)&lt;/h1&gt;&lt;p&gt;Again a few weeks have passed since the last weeknotes entry :-)&lt;/p&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-10-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 40)</title><link href="https://406.ch/writing/weeknotes-2023-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-40/</id><published>2023-10-04T12:00:00Z</published><updated>2023-10-04T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 40)&lt;/h1&gt;&lt;h2&gt;More work on hosting several websites from a single Django application server using feincms3-sites&lt;/h2&gt;
+&lt;p&gt;I have mentioned feincms3-sites last week in my last weeknotes entry; I have
+again given this package a lot of attention in the last days, so another update
+is in order.&lt;/p&gt;
+&lt;p&gt;It is now possible to override the list of languages available on each site.
+That&amp;rsquo;s especially useful for an upcoming campaign site where the umbrella
+group&amp;rsquo;s site is available in three languages, but (most?) individual group
+sites (hosted on subdomains) will only have a subset of languages. Since I live
+in a country with four national languages (english isn&amp;rsquo;t one of them, but is
+spoken by many!) supporting more than one language, or even many languages is
+totally commonplace. It&amp;rsquo;s great that Django has good support for
+internationalization. For the sake of an example, I have the following sites:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;example.com&lt;/code&gt;: The default. The host has to match exactly.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;subdomain.example.com&lt;/code&gt;: One individual group&amp;rsquo;s site. The host has to match the regex &lt;code&gt;^subdomain\.&lt;/code&gt; (sorry, I actually do like regexes).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Overriding configured hosts for local development&lt;/h3&gt;
+&lt;p&gt;One thing which always annoyed me when using &lt;code&gt;django.contrib.sites&lt;/code&gt; was that
+&amp;ldquo;just&amp;rdquo; pulling the database from production to the local development
+environment always produced links pointing back to the remote host instead of
+working locally (when producing absolute URLs). This problem was shared by
+feincms3-sites as well. I have now found a very ugly but perfectly workable
+solution: Overwrite &lt;code&gt;Site.get_host()&lt;/code&gt; locally:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;example.com&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Or whatever&lt;/span&gt;
+    &lt;span class="n"&gt;_get_host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;localhost:8000&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;FEINCMS3_SITES_SITE_GET_HOST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;_get_host&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This works especially well when using &lt;code&gt;example.com&lt;/code&gt; and maybe subdomains of
+&lt;code&gt;example.com&lt;/code&gt;: All absolute links will point to &lt;code&gt;localhost:8000&lt;/code&gt; or
+&lt;code&gt;subdomain.localhost:8000&lt;/code&gt;. Since &lt;code&gt;*.localhost&lt;/code&gt; always resolves to the local IP
+the browser knows where it should connect to, and since
+&lt;code&gt;subdomain.localhost:8000&lt;/code&gt; also matches the &lt;code&gt;^subdomain\.&lt;/code&gt; regex mentioned
+above, the site selection logic works as well.&lt;/p&gt;
+&lt;p&gt;Of course if you have more domains, not just subdomains, you could adapt the
+&lt;code&gt;get_host&lt;/code&gt; override and the relevant regexes to those use cases.&lt;/p&gt;
+&lt;h3&gt;Closing words&lt;/h3&gt;
+&lt;p&gt;We&amp;rsquo;re at 100% code coverage now when running the test suite. That&amp;rsquo;s really nice.&lt;/p&gt;
+&lt;h2&gt;Logging into the Django admin using your Google account&lt;/h2&gt;
+&lt;p&gt;This functionality has long been provided by
+&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-admin-sso&lt;/a&gt;; however, as
+mentioned a long time ago this package still uses a deprecated OAuth2 library.
+&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; supports using a
+Google account to authenticate with the Django admin since 2017. I have now
+fixed a small problem with it: If you are logged into a single Google account,
+and this account&amp;rsquo;s email address doesn&amp;rsquo;t match the configured admin login rule,
+you were out of luck: There was no way to add another account at that time
+because the library didn&amp;rsquo;t request the account selection. That has changed now,
+if the first login attempt doesn&amp;rsquo;t work, it now explicitly tells Google to let
+the user select their Google account. A small quality of life improvement for
+those using more than one Google account (voluntarily or not).&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.4.3&lt;/a&gt;: Polished the CKEditor integration a little bit. Re-enabled the source button now that we&amp;rsquo;re back to using the classic iframe-based editor again.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.19.3&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.4&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 39)</title><link href="https://406.ch/writing/weeknotes-2023-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-39/</id><published>2023-09-28T12:00:00Z</published><updated>2023-09-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 39)&lt;/h1&gt;&lt;p&gt;Again a few weeks have passed since the last weeknotes entry :-)&lt;/p&gt;
 &lt;h2&gt;Moving feincms3 repositories into the feincms organization&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://github.com/feincms"&gt;feincms&lt;/a&gt; GitHub organization has seen more
 active days when FeinCMS 1.x was still actively developed. Since my interest
@@ -821,12 +878,4 @@ as &lt;a href="https://pypi.org/project/feedparser/"&gt;feedparser&lt;/a&gt; do 
 correct HTTP headers.&lt;/p&gt;
 &lt;p&gt;I have licensed the script under the &lt;a href="http://www.wtfpl.net/"&gt;WTFPL&lt;/a&gt;, so if
 you&amp;rsquo;re interested you can do what you want with it, without any obligations. I
-would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 15)</title><link href="https://406.ch/writing/weeknotes-2023-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-15/</id><published>2023-04-16T12:00:00Z</published><updated>2023-04-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 15)&lt;/h1&gt;&lt;h2&gt;Romansh translations for feincms3-cookiecontrol and django-fineforms&lt;/h2&gt;
-&lt;p&gt;The feincms3 cookie control banner and django-fineforms have received a small update: Support for the &lt;a href="https://en.wikipedia.org/wiki/Romansh_language"&gt;Romansh&lt;/a&gt; language. I would be surprised if any readers of this blog even knew about this language at all. Switzerland has four official languages: German, French, Italian and the mentioned Romansh.&lt;/p&gt;
-&lt;p&gt;It&amp;rsquo;s not a coincidence of course that those two packages have received an update at the same time. Both packages are used for an upcoming campaign site where people may express their support for political action to preserve or protect the &lt;a href="https://en.wikipedia.org/wiki/Biodiversity"&gt;biodiversity&lt;/a&gt;. It&amp;rsquo;s at the same time laughable and horrifying that this is even a thing though: Who in their right mind could NOT agree that preserving biodiversity is important? It&amp;rsquo;s incomprehensible. Maybe I&amp;rsquo;m just a romantic &lt;a href="https://en.wikipedia.org/wiki/Gutmensch"&gt;Gutmensch&lt;/a&gt; after all&amp;hellip;&lt;/p&gt;
-&lt;h2&gt;django-ckeditor&lt;/h2&gt;
-&lt;p&gt;I have set up the &lt;a href="https://github.com/actions/stale"&gt;stale&lt;/a&gt; GitHub action for the &lt;a href="https://github.com/django-ckeditor/django-ckeditor"&gt;django-ckeditor&lt;/a&gt; repository. So many support requests, so little time and almost no actual collaborators. Also, many support requests actually concern CKEditor itself, not its Django integration. I shouldn&amp;rsquo;t complain though, CKEditor has served me well and still does, &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/inline_ckeditor.py"&gt;especially when it&amp;rsquo;s being used with a very minimal configuration&lt;/a&gt; which basically makes most pain points of HTML editors go away.&lt;/p&gt;
-&lt;h2&gt;django-debug-toolbar&lt;/h2&gt;
-&lt;p&gt;I have reviewed and merged a few changes to &lt;a href="https://github.com/jazzband/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; in the last week. Still a fun project, especially since it&amp;rsquo;s so widely used and loved.&lt;/p&gt;
-&lt;h2&gt;Meta&lt;/h2&gt;
-&lt;p&gt;Blogging with vim is fun.&lt;/p&gt;</summary></entry></feed>
+would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry></feed>
