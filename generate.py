@@ -49,7 +49,7 @@ def load_posts(dirs):
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
-            props = [re.split(r":\s*", prop, 1) for prop in props.split("\n")]
+            props = [re.split(r":\s*", prop, maxsplit=1) for prop in props.split("\n")]
             props = {"categories": ""} | {name.lower(): value for name, value in props}
             props["date"] = dt.strptime(props["date"], "%Y-%m-%d").date()
             props["slug"] = props.get("slug") or slugify(props["title"])
