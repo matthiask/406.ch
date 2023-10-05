@@ -7,6 +7,6 @@ export PYTHONUNBUFFERED=yes
 
 set -ex
 (cd htdocs; python3 -m http.server 8001)&
-(find posts | entr tox)&
+(git ls-files | entr tox)&
 
 for job in $(jobs -p); do wait $job; done
