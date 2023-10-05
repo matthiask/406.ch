@@ -21,7 +21,8 @@ from rcssmin import cssmin
 DIR = Path(__file__).parent
 URL = "https://406.ch"
 TITLE = "Matthias Kestenholz"
-md_exts = ["smarty", "footnotes", "admonition", CodeHiliteExtension(linenums=False)]
+c = CodeHiliteExtension(linenums=False, css_class="chl")
+md_exts = ["smarty", "footnotes", "admonition", c]
 tostring = lambda el: _ts(el, encoding="utf-8", xml_declaration=True).decode("utf-8")
 
 

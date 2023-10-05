@@ -196,8 +196,8 @@ main .text a {
 }
 
 /* CodeHilite overrides */
-.codehilite,
-.codehilite .err {
+.chl,
+.chl .err {
   all: inherit;
 }
 
