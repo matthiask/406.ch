@@ -20,3 +20,5 @@ Then came Slack. Finally we had an easy to use tool. Need a new space to discuss
 However, my personal lived experience rapidly deteriorated. I wanted to be accessible for urgent inquiries to unblock colleagues when they needed something. But this also fostered an ASAP culture. Project managers knew I was available. It didn't help that some were terribly unorganized at times. 
 
 Since asking was easier that searching the documentation in the handbook people didn't bother to document things anymore. The information was shared in Slack but since nobody found the relevant messages after time had passed the same questions were asked (and answered) over and over.
+
+After a time Slack became the primary source of stress. I tried several times to stop using it. I suffered an unreasonable amount of FOMO during that time but it was also true that I missed out on information which was only shared on Slack by others. I asked myself many times what my problem was and why I couldn't "simply" shut it off and ignore the downsides. And a minor but still important point, ignore the unread messages indicator.
