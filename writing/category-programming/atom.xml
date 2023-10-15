@@ -1,5 +1,117 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-10-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 40)</title><link href="https://406.ch/writing/weeknotes-2023-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-40/</id><published>2023-10-04T12:00:00Z</published><updated>2023-10-04T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 40)&lt;/h1&gt;&lt;h2&gt;More work on hosting several websites from a single Django application server using feincms3-sites&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-10-15T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Why we switched from Slack to Discord at Work</title><link href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/" rel="alternate" /><id>https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/</id><published>2023-10-15T12:00:00Z</published><updated>2023-10-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Why we switched from Slack to Discord at Work&lt;/h1&gt;&lt;p&gt;We have switched from Slack to Discord at &lt;a href="https://feinheit.ch"&gt;Feinheit&lt;/a&gt; a few years back. This post explores the history, the reasons for the switch and what we learned in the meantime.&lt;/p&gt;
+&lt;h2&gt;The early days&lt;/h2&gt;
+&lt;p&gt;In the early days we used Skype group chats. I don&amp;rsquo;t remember why we stopped.
+We probably became too numerous for a single chat. After we stopped we
+certainly missed the easy way to share things with everyone. An alternative had
+to be found. Company based social networks were the hype for a short amount of
+time. I don&amp;rsquo;t even remember the name of the product we used, that probably says
+enough about that. Suffice to say that it wasn&amp;rsquo;t a happy time tool-wise.&lt;/p&gt;
+&lt;h2&gt;Slack&lt;/h2&gt;
+&lt;p&gt;Then came Slack. Finally we had something easy to use, again. Need a new space to
+discuss something? Just open a new channel, everybody can do it! Need to ask a
+specific person something? Direct messages are right there, and (arguably) much
+better than always interrupting people by walking to their desk for everything.&lt;/p&gt;
+&lt;p&gt;However, my personal lived experience rapidly deteriorated. I wanted to be
+accessible for urgent inquiries to unblock colleagues when they needed
+something. But this also fostered an ASAP culture. Project managers knew I was
+almost always available. It didn&amp;rsquo;t help that some were terribly unorganized at
+times.&lt;/p&gt;
+&lt;p&gt;Since asking was easier that searching the documentation or the handbook people
+didn&amp;rsquo;t bother to document things anymore. The information was shared in Slack
+but since nobody found the relevant messages after time had passed the same
+questions were asked (and answered) over and over. Slack became the place where
+knowledge goes to die.&lt;/p&gt;
+&lt;p&gt;After a time Slack became my primary source of stress. I tried several times to
+stop using it. I suffered an unreasonable amount of FOMO&lt;sup id="fnref:fomo"&gt;&lt;a class="footnote-ref" href="#fn:fomo"&gt;1&lt;/a&gt;&lt;/sup&gt; during that
+time but it was also true that I did not know stuff which was only shared on
+Slack by others. I asked myself many times what my problem was and why I
+couldn&amp;rsquo;t &amp;ldquo;simply&amp;rdquo; shut it off and ignore the downsides. And a minor but still
+important point, ignore the unread messages indicator.&lt;/p&gt;
+&lt;p&gt;Luckily I learned of others who felt the same way, mostly outside the company
+but some of them at Feinheit. Slack had to go. The question was: Which tool
+could be a suitable replacement? Given the title of this post it shouldn&amp;rsquo;t come
+as a surprise that the answer was Discord.&lt;/p&gt;
+&lt;h2&gt;Digression: Project management software&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s probably important to know that we have been using a project management
+tool and also issue trackers all this time. So, Slack really wasn&amp;rsquo;t just a
+possibly improved&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;2&lt;/a&gt;&lt;/sup&gt; replacement for mail-based project management. Slack
+mainly crept into the project management tooling because some people perceived
+it to be more modern: A simpler way for those asking others for their time or
+knowledge.&lt;/p&gt;
+&lt;h2&gt;Discord as an addition, not a replacement for project management software&lt;/h2&gt;
+&lt;p&gt;We have started using Discord in the summer of 2021 with a clear set of rules
+and a small number of channels.&lt;/p&gt;
+&lt;h3&gt;Rules&lt;/h3&gt;
+&lt;p&gt;The most important rules are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Discord is the place for casual and informal exchange.&lt;/li&gt;
+&lt;li&gt;Nobody is expected to read anything on Discord. If it is expected that people
+  actually receive a message it must not be shared on Discord.&lt;/li&gt;
+&lt;li&gt;No discussing project work, not in channels nor in direct messages. The
+  former is enforced by a short list of moderators, the latter is formulated as
+  an expectation (since it&amp;rsquo;s impossible to enforce).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The rules message also contains a direct message to a shared to do list, where
+everyone can easily assign to do items to others without having to find the
+project&amp;rsquo;s issue tracker. This is especially important because we have many
+small projects and no one works on all of them. If assigning to dos wasn&amp;rsquo;t
+relatively straightforward people would understandably fall back to direct
+messages.&lt;/p&gt;
+&lt;h3&gt;Server configuration&lt;/h3&gt;
+&lt;p&gt;We are able to uphold these rules because of Discord&amp;rsquo;s strong moderation
+features (compared to Slack). Discord is much more configurable. Our server is
+configured in the following way:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Channel creation is disallowed. Only moderators can create new channels; if
+  someone asks for a new channel, the request is denied if it is probable that
+  the rules above would be broken.&lt;/li&gt;
+&lt;li&gt;No one is expected to accept DMs from other members.&lt;/li&gt;
+&lt;li&gt;Threads are disabled. The structure they provide makes it acceptable to loop
+  people into a &amp;ldquo;quick&amp;rdquo; conversation which 99% of the time belongs somewhere
+  more permanent, for example the project management software.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Those are just the most important points.&lt;/p&gt;
+&lt;h3&gt;Channels&lt;/h3&gt;
+&lt;p&gt;At the time of writing those are our text channels (The names are translated to their equivalents):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;#reception&lt;/code&gt; &amp;ndash; this is the only channel people see when they haven&amp;rsquo;t been
+  given the appropriate role. This is necessary because everybody can join a
+  server if they have an invite code and we don&amp;rsquo;t want random people to read
+  everything we post.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#staircase&lt;/code&gt; &amp;ndash; the place to say hello, bye, and a few things in-between.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#random&lt;/code&gt; &amp;ndash; all servers need this :-)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#politics&lt;/code&gt; &amp;ndash; a separate space for politics. Everything&amp;rsquo;s political, and we are too.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#inspiration&lt;/code&gt; &amp;ndash; I myself thought that &lt;code&gt;#staircase&lt;/code&gt; and &lt;code&gt;#random&lt;/code&gt; would be
+  sufficient but people wanted this and the moderators didn&amp;rsquo;t think that this
+  additional channel would lead to a violation of the rules above.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, we have two voice channels, &lt;code&gt;cow-orking&lt;/code&gt; and &lt;code&gt;sofa&lt;/code&gt;. The former
+was used more ofting when more people were working from home to have a place to
+hear from others, the latter is more an invitation to talk. More talk happens
+in-person in the office these days, but when working remotely it&amp;rsquo;s still nice
+to know that those channels are just a click away.&lt;/p&gt;
+&lt;h2&gt;Closing words&lt;/h2&gt;
+&lt;p&gt;I myself have joined the work discord using my private account and I feel good
+about that. I&amp;rsquo;m not friends with everyone at work but I certainly have good
+relationships with basically everyone.&lt;/p&gt;
+&lt;p&gt;I also did not live-stream my activities to Discord before creating the work
+server anyway so there hasn&amp;rsquo;t been a change there at all. And people mostly
+know that Discord is about the slowest place to get something from me (and I
+make a point of it!) so even if people do not heed the &amp;ldquo;No DMs&amp;rdquo; rule above this
+behavior isn&amp;rsquo;t really reinforced.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m actually really happy with the way we&amp;rsquo;re using these tools these days.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:fomo"&gt;
+&lt;p&gt;Fear Of Missing Out.&amp;#160;&lt;a class="footnote-backref" href="#fnref:fomo" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;For some people it seems to be an improvement.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 40)</title><link href="https://406.ch/writing/weeknotes-2023-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-40/</id><published>2023-10-04T12:00:00Z</published><updated>2023-10-04T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 40)&lt;/h1&gt;&lt;h2&gt;More work on hosting several websites from a single Django application server using feincms3-sites&lt;/h2&gt;
 &lt;p&gt;I have mentioned feincms3-sites last week in my last weeknotes entry; I have
 again given this package a lot of attention in the last days, so another update
 is in order.&lt;/p&gt;
@@ -838,44 +950,4 @@ looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></e
 &lt;p&gt;I&amp;rsquo;m not complaining and people aren&amp;rsquo;t complaining, almost everyone is nice and tries to be helpful. Since I&amp;rsquo;m not a heavy user of django-ckeditor anymore I don&amp;rsquo;t really find the motivation to fix this issue myself since it&amp;rsquo;s not all that enjoyable work to me. I would just hope that &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/670"&gt;after all this time&lt;/a&gt; someone would finally come and do the necessary work &amp;ndash; if they cared enough.&lt;/p&gt;
 &lt;h2&gt;django-mptt&lt;/h2&gt;
 &lt;p&gt;I have marked &lt;a href="https://github.com/django-mptt/django-mptt"&gt;django-mptt&lt;/a&gt; as unmaintained two years ago. I&amp;rsquo;m still looking at pull requests from time to time but without feeling an obligation to do so and without feeling bad when I miss something.&lt;/p&gt;
-&lt;p&gt;I wonder if there are still many people out there who still depend on this library and if any of them would be willing to pick up the maintenance? On the off chance that someone is out there who has the time, ability and motivation and just didn&amp;rsquo;t know that django-mptt could use some love: Here&amp;rsquo;s your invite!&lt;/p&gt;</summary></entry><entry><title>The insides of my static site generator</title><link href="https://406.ch/writing/the-insides-of-my-static-site-generator/" rel="alternate" /><id>https://406.ch/writing/the-insides-of-my-static-site-generator/</id><published>2023-04-19T12:00:00Z</published><updated>2023-04-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;The insides of my static site generator&lt;/h1&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/static-site-generation/"&gt;Last sunday I wrote that I&amp;rsquo;m now using a hacky ~200 LOC Python script to
-generate this blog.&lt;/a&gt; The ~200
-LOC became a challenge to myself immediately and I started refactoring the code
-while adding additional features, adding a licensing comment at the top and
-further reducing the lines of code in there.&lt;/p&gt;
-&lt;p&gt;I don&amp;rsquo;t intend to stop working on it, but I&amp;rsquo;m really happy with the result &lt;a href="https://github.com/matthiask/406.ch/blob/e6402d0927c92c6d426db1dd44de6002940f28b7/generate.py"&gt;as it is currently&lt;/a&gt;. The script is less than 190 lines long and supports:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Generating individual HTML files for the front page, the category pages and posts&lt;/li&gt;
-&lt;li&gt;Generating &lt;code&gt;robots.txt&lt;/code&gt; and &lt;code&gt;sitemap.xml&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Generating Atom feeds for all posts and posts of each category&lt;/li&gt;
-&lt;li&gt;Minifying HTML and CSS using
-  &lt;a href="https://pypi.org/project/minify-html/"&gt;minify-html&lt;/a&gt; and
-  &lt;a href="https://pypi.org/project/rcssmin/"&gt;rcssmin&lt;/a&gt;; the CSS is outputted as a
-  single file and includes the content hash in the filename for better
-  cacheability&lt;/li&gt;
-&lt;li&gt;Keeping the link structure of the old Django-based website&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I used Django&amp;rsquo;s &lt;code&gt;feedgenerator.py&lt;/code&gt; module at first to generate the Atom feed;
-I have since switched to directly working with the &lt;a href="https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree"&gt;ElementTree
-API&lt;/a&gt;.
-Yes, it&amp;rsquo;s probably less efficient since it has to keep the whole XML tree in
-memory but who cares when the largest file&amp;rsquo;s file size is under 100 KiB at the
-time of writing.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m using tox to generate the site locally; the local build includes published
-and draft posts. The production build uses GitHub actions and automatically
-deploys to GitHub pages, while only including published posts. There is no
-incremental build right now but rebuilding the whole site using tox (with an
-initialized virtualenv) takes less than one second, so that&amp;rsquo;s not really a pain
-point for me right now.&lt;/p&gt;
-&lt;p&gt;A difficulty was that I have used URLs ending in slashes in the past, not just
-for the browsable pages but also for the Atom feeds themselves. nginx only
-serves &lt;code&gt;index.html&lt;/code&gt; in folders by default so I couldn&amp;rsquo;t just add a
-&lt;code&gt;index.xml&lt;/code&gt; file in those folders. Luckily enough the internet is made of
-lots and lots of duct tape and saving the atom feed as &lt;code&gt;.../feed/index.html&lt;/code&gt;
-actually works. It seems that RSS readers, aggregators and some libraries such
-as &lt;a href="https://pypi.org/project/feedparser/"&gt;feedparser&lt;/a&gt; do not really need the
-correct HTTP headers.&lt;/p&gt;
-&lt;p&gt;I have licensed the script under the &lt;a href="http://www.wtfpl.net/"&gt;WTFPL&lt;/a&gt;, so if
-you&amp;rsquo;re interested you can do what you want with it, without any obligations. I
-would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;I wonder if there are still many people out there who still depend on this library and if any of them would be willing to pick up the maintenance? On the off chance that someone is out there who has the time, ability and motivation and just didn&amp;rsquo;t know that django-mptt could use some love: Here&amp;rsquo;s your invite!&lt;/p&gt;</summary></entry></feed>
