@@ -172,8 +172,8 @@ one place.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You could also couple the form a bit to the request and do something like:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;process_form&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;request&lt;/span&gt;, &lt;span class="nv"&gt;form&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;form&lt;/span&gt;.&lt;span class="nv"&gt;process&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;request&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def process_form(request, form):
+    return form.process(request)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Sure, forms probably shouldn&amp;rsquo;t know much about requests. But then, Django is a framework for perfectionists &lt;em&gt;with deadlines&lt;/em&gt; and sometimes practicality beats purity.&lt;/p&gt;
