@@ -30,6 +30,19 @@ the thinking are always getting out of step, and this happens less when using a
 slower method of writing. This actually isn't an idea I had myself, but I don't
 remember where I got it from.
 
+## Zero-based versioning: Good or bad?
+
+I discovered [ZeroVer](https://0ver.org/) sometime in the last few days. I have
+many many Django packages with zero-based versions. Some of them have been used
+in production for years now. I sometimes wonder if staying with `0.` is
+unprofessional and I should just release 1.0 and be done with it or if it
+doesn't really matter at all.
+
+If I evaluate software packages more often than not I don't look at the version
+number or the version numbering scheme (except when a package is still using
+`0.0.`) when deciding whether to rely on it or not. The documentation and the
+code itself are much more important to me.
+
 ## Releases
 
 I haven't uploaded any releases in the last 14 days. That's good: I'm one of
