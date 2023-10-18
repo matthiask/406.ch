@@ -1,7 +1,6 @@
 Title: Weeknotes (2023 week 42)
 Date: 2023-10-18
 Categories: Django, Programming, Weeknotes, feincms
-Draft: remove-this-to-publish
 
 ## Vacation in Italy
 
