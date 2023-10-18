@@ -1,5 +1,40 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-10-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 40)</title><link href="https://406.ch/writing/weeknotes-2023-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-40/</id><published>2023-10-04T12:00:00Z</published><updated>2023-10-04T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 40)&lt;/h1&gt;&lt;h2&gt;More work on hosting several websites from a single Django application server using feincms3-sites&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-10-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 42)&lt;/h1&gt;&lt;h2&gt;Vacation in Italy&lt;/h2&gt;
+&lt;p&gt;We have spent a wonderful family week in Italy. The voyage by train was very
+comfortable and we had a great time there. I have lived close to lakes all my
+life but the sea is always something else. Now I enjoy the cold temperatures of
+fall.&lt;/p&gt;
+&lt;h2&gt;Going back (forward) to GitJournal&lt;/h2&gt;
+&lt;p&gt;I have tried several note taking apps but I&amp;rsquo;m now back using
+&lt;a href="https://gitjournal.io/"&gt;GitJournal&lt;/a&gt; with a Git repository filled with Markdown
+notes. It works well enough. I just wish that there was a way to make notes
+more distinguishable and I wish that the editor was more forgiving when
+encountering badly formatted checklists.&lt;/p&gt;
+&lt;h2&gt;Analog blogging&lt;/h2&gt;
+&lt;p&gt;I have long wanted to write about &lt;a href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/"&gt;our switch from Slack to
+Discord&lt;/a&gt;.
+I have started to write this post with pen and paper. I find that I think
+better when using pen and paper than when using the computer keyboard. One
+factor is certainly that the computer offers more distractions, but I suspect
+that another, more important factor is that as a fast typist the fingers and
+the thinking are always getting out of step, and this happens less when using a
+slower method of writing. This actually isn&amp;rsquo;t an idea I had myself, but I don&amp;rsquo;t
+remember where I got it from.&lt;/p&gt;
+&lt;h2&gt;Zero-based versioning: Good or bad?&lt;/h2&gt;
+&lt;p&gt;I discovered &lt;a href="https://0ver.org/"&gt;ZeroVer&lt;/a&gt; sometime in the last few days. I have
+many many Django packages with zero-based versions. Some of them have been used
+in production for years now. I sometimes wonder if staying with &lt;code&gt;0.&lt;/code&gt; is
+unprofessional and I should just release 1.0 and be done with it or if it
+doesn&amp;rsquo;t really matter at all.&lt;/p&gt;
+&lt;p&gt;If I evaluate software packages more often than not I don&amp;rsquo;t look at the version
+number or the version numbering scheme (except when a package is still using
+&lt;code&gt;0.0.&lt;/code&gt;) when deciding whether to rely on it or not. The documentation and the
+code itself are much more important to me.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;p&gt;I haven&amp;rsquo;t uploaded any releases in the last 14 days. That&amp;rsquo;s good: I&amp;rsquo;m one of
+those people who have made their passion their job (which is great) but that
+sometimes makes it hard to not work at all since I can always tell myself that
+I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 40)</title><link href="https://406.ch/writing/weeknotes-2023-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-40/</id><published>2023-10-04T12:00:00Z</published><updated>2023-10-04T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 40)&lt;/h1&gt;&lt;h2&gt;More work on hosting several websites from a single Django application server using feincms3-sites&lt;/h2&gt;
 &lt;p&gt;I have mentioned feincms3-sites last week in my last weeknotes entry; I have
 again given this package a lot of attention in the last days, so another update
 is in order.&lt;/p&gt;
@@ -805,8 +840,4 @@ would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry
 &lt;h2&gt;django-debug-toolbar&lt;/h2&gt;
 &lt;p&gt;I have reviewed and merged a few changes to &lt;a href="https://github.com/jazzband/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; in the last week. Still a fun project, especially since it&amp;rsquo;s so widely used and loved.&lt;/p&gt;
 &lt;h2&gt;Meta&lt;/h2&gt;
-&lt;p&gt;Blogging with vim is fun.&lt;/p&gt;</summary></entry><entry><title>Static site generation</title><link href="https://406.ch/writing/static-site-generation/" rel="alternate" /><id>https://406.ch/writing/static-site-generation/</id><published>2023-04-15T12:00:00Z</published><updated>2023-04-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Static site generation&lt;/h1&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-10/"&gt;I did what I threatened (myself) to do:&lt;/a&gt; I replaced the Django code base for this weblog with a static site generator.&lt;/p&gt;
-&lt;p&gt;My main goal was to preserve as much as possible of the existing structure, including the Atom feeds and the IDs of posts so that the rewrite wouldn&amp;rsquo;t flood any aggregators.&lt;/p&gt;
-&lt;p&gt;The end result is a hacky ~200 LOC Python script which uses Markdown, Jinja2 and minify-html. Markdown is great for blogging and I have been using it for a long time, basically since I started this website in 2005. I don&amp;rsquo;t like it that much for documentation, but that&amp;rsquo;s a story for another day.&lt;/p&gt;
-&lt;p&gt;For now I still deploy the blog to a VPS but there&amp;rsquo;s nothing stopping me from uploading it somewhere else. I&amp;rsquo;m thinking about using GitHub actions for the deployment, but I can do that another day.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;Blogging with vim is fun.&lt;/p&gt;</summary></entry></feed>

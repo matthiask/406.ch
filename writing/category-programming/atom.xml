@@ -1,5 +1,40 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-10-15T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Why we switched from Slack to Discord at Work</title><link href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/" rel="alternate" /><id>https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/</id><published>2023-10-15T12:00:00Z</published><updated>2023-10-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Why we switched from Slack to Discord at Work&lt;/h1&gt;&lt;p&gt;We have switched from Slack to Discord at &lt;a href="https://feinheit.ch"&gt;Feinheit&lt;/a&gt; a few years back. This post explores the history, the reasons for the switch and what we learned in the meantime.&lt;/p&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-10-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 42)&lt;/h1&gt;&lt;h2&gt;Vacation in Italy&lt;/h2&gt;
+&lt;p&gt;We have spent a wonderful family week in Italy. The voyage by train was very
+comfortable and we had a great time there. I have lived close to lakes all my
+life but the sea is always something else. Now I enjoy the cold temperatures of
+fall.&lt;/p&gt;
+&lt;h2&gt;Going back (forward) to GitJournal&lt;/h2&gt;
+&lt;p&gt;I have tried several note taking apps but I&amp;rsquo;m now back using
+&lt;a href="https://gitjournal.io/"&gt;GitJournal&lt;/a&gt; with a Git repository filled with Markdown
+notes. It works well enough. I just wish that there was a way to make notes
+more distinguishable and I wish that the editor was more forgiving when
+encountering badly formatted checklists.&lt;/p&gt;
+&lt;h2&gt;Analog blogging&lt;/h2&gt;
+&lt;p&gt;I have long wanted to write about &lt;a href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/"&gt;our switch from Slack to
+Discord&lt;/a&gt;.
+I have started to write this post with pen and paper. I find that I think
+better when using pen and paper than when using the computer keyboard. One
+factor is certainly that the computer offers more distractions, but I suspect
+that another, more important factor is that as a fast typist the fingers and
+the thinking are always getting out of step, and this happens less when using a
+slower method of writing. This actually isn&amp;rsquo;t an idea I had myself, but I don&amp;rsquo;t
+remember where I got it from.&lt;/p&gt;
+&lt;h2&gt;Zero-based versioning: Good or bad?&lt;/h2&gt;
+&lt;p&gt;I discovered &lt;a href="https://0ver.org/"&gt;ZeroVer&lt;/a&gt; sometime in the last few days. I have
+many many Django packages with zero-based versions. Some of them have been used
+in production for years now. I sometimes wonder if staying with &lt;code&gt;0.&lt;/code&gt; is
+unprofessional and I should just release 1.0 and be done with it or if it
+doesn&amp;rsquo;t really matter at all.&lt;/p&gt;
+&lt;p&gt;If I evaluate software packages more often than not I don&amp;rsquo;t look at the version
+number or the version numbering scheme (except when a package is still using
+&lt;code&gt;0.0.&lt;/code&gt;) when deciding whether to rely on it or not. The documentation and the
+code itself are much more important to me.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;p&gt;I haven&amp;rsquo;t uploaded any releases in the last 14 days. That&amp;rsquo;s good: I&amp;rsquo;m one of
+those people who have made their passion their job (which is great) but that
+sometimes makes it hard to not work at all since I can always tell myself that
+I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry><entry><title>Why we switched from Slack to Discord at Work</title><link href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/" rel="alternate" /><id>https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/</id><published>2023-10-15T12:00:00Z</published><updated>2023-10-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Why we switched from Slack to Discord at Work&lt;/h1&gt;&lt;p&gt;We have switched from Slack to Discord at &lt;a href="https://feinheit.ch"&gt;Feinheit&lt;/a&gt; a few years back. This post explores the history, the reasons for the switch and what we learned in the meantime.&lt;/p&gt;
 &lt;h2&gt;The early days&lt;/h2&gt;
 &lt;p&gt;In the early days we used Skype group chats. I don&amp;rsquo;t remember why we stopped.
 We probably became too numerous for a single chat. After we stopped we
@@ -939,15 +974,4 @@ central list of &lt;a href="https://oembed.com/providers.json"&gt;providers&lt;/
 of content but I worry more and more about its maintenance state.
 Reimplementing the interesting parts shouldn&amp;rsquo;t be that hard, but maybe I don&amp;rsquo;t
 have to do this myself. &lt;a href="https://github.com/attakei-lab/oEmbedPy/"&gt;oEmbedPy&lt;/a&gt;
-looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 16)</title><link href="https://406.ch/writing/weeknotes-2023-week-16/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-16/</id><published>2023-04-21T12:00:00Z</published><updated>2023-04-21T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 16)&lt;/h1&gt;
-&lt;h2&gt;Experiments with Stable Diffusion&lt;/h2&gt;
-&lt;p&gt;A friend and myself threw a few scripts together to automatically finetune a Stable Diffusion model using images downloaded from Google Image search. It&amp;rsquo;s terrifying how easy and fast generating fake news including photorealistic images can be and will be already. And seeing how fast those models improve it&amp;rsquo;s just a matter of time until we can trust photos even less than now. Manipulating images has been possible for a long time of course, but it hasn&amp;rsquo;t been a &amp;ldquo;commodity&amp;rdquo; until now.&lt;/p&gt;
-&lt;p&gt;I definitely also see upsides in the new machine learning technologies but I fear that there&amp;rsquo;s a real danger to trust, and in extension to democracy.&lt;/p&gt;
-&lt;p&gt;This technology and what we did will be a part of an upcoming &lt;a href="https://www.srf.ch/play/tv/sendung/kulturplatz?id=d70e9bb9-0cee-46b6-8d87-7cbd8317a9c7"&gt;SRF Kulturplatz&lt;/a&gt; broadcast, or so I hope. It&amp;rsquo;s high time that the public knows what&amp;rsquo;s possible. It&amp;rsquo;s about &lt;strong&gt;,edia literacy&lt;/strong&gt; really.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not that pessimistic though. I just hope that this time the thoughtfulness will prevail over pure profit seeking. (Did I really write that.)&lt;/p&gt;
-&lt;h2&gt;&lt;a href="https://github.com/django-ckeditor/django-ckeditor"&gt;django-ckeditor&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Many people are noticing that the CKEditor 4 integration for Django doesn&amp;rsquo;t work that well when using the dark color scheme of the Django admin panel. That&amp;rsquo;s not surprising. What does surprise me is the number of reports and the total absence of pull requests. Subjectively, most other packages I help maintain have a comfortable ratio of issues and pull requests.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not complaining and people aren&amp;rsquo;t complaining, almost everyone is nice and tries to be helpful. Since I&amp;rsquo;m not a heavy user of django-ckeditor anymore I don&amp;rsquo;t really find the motivation to fix this issue myself since it&amp;rsquo;s not all that enjoyable work to me. I would just hope that &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/670"&gt;after all this time&lt;/a&gt; someone would finally come and do the necessary work &amp;ndash; if they cared enough.&lt;/p&gt;
-&lt;h2&gt;django-mptt&lt;/h2&gt;
-&lt;p&gt;I have marked &lt;a href="https://github.com/django-mptt/django-mptt"&gt;django-mptt&lt;/a&gt; as unmaintained two years ago. I&amp;rsquo;m still looking at pull requests from time to time but without feeling an obligation to do so and without feeling bad when I miss something.&lt;/p&gt;
-&lt;p&gt;I wonder if there are still many people out there who still depend on this library and if any of them would be willing to pick up the maintenance? On the off chance that someone is out there who has the time, ability and motivation and just didn&amp;rsquo;t know that django-mptt could use some love: Here&amp;rsquo;s your invite!&lt;/p&gt;</summary></entry></feed>
+looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></entry></feed>
