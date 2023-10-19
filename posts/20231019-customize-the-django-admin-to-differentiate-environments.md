@@ -1,9 +1,10 @@
 Title: Customize the Django admin to differentiate environments
-Date: 2023-10-18
+Date: 2023-10-19
 Categories: Django, Programming
-Draft: remove-this-to-publish
 
 # Customize the Django admin to differentiate environments
+
+![Four different themes](https://user-images.githubusercontent.com/2627/276531977-6787c55e-4e8c-448c-8ed4-c71cd98c9750.png)
 
 We often have the same website running in different configurations:
 
