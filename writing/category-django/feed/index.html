@@ -1,5 +1,46 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-10-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 42)&lt;/h1&gt;&lt;h2&gt;Vacation in Italy&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-10-19T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Customize the Django admin to differentiate environments</title><link href="https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/" rel="alternate" /><id>https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/</id><published>2023-10-19T12:00:00Z</published><updated>2023-10-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;Customize the Django admin to differentiate environments&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="Four different themes" src="https://user-images.githubusercontent.com/2627/276531977-6787c55e-4e8c-448c-8ed4-c71cd98c9750.png" /&gt;&lt;/p&gt;
+&lt;p&gt;We often have the same website running in different configurations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Once as a production site.&lt;/li&gt;
+&lt;li&gt;Once as a place where editors update and preview the content. The content is later automatically (and maybe &lt;a href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/"&gt;partially&lt;/a&gt;) transferred from this environment to the production environment.&lt;/li&gt;
+&lt;li&gt;Once as a stage environment to stabilize the code.&lt;/li&gt;
+&lt;li&gt;And maybe additional environments for local development.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Django admin panel mainly uses CSS variables for styling since &lt;a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#admin-theming"&gt;theming support was introduced in Django 3.2&lt;/a&gt; (by yours truly with a lot of help from others). This makes it simple and fun to customize the colors of all interface elements in a straightforward way without having to write loads of CSS.&lt;/p&gt;
+&lt;p&gt;If you have a &lt;code&gt;ENVIRONMENT&lt;/code&gt; context variable available (as we do) you could add
+the following template as &lt;code&gt;admin/base.html&lt;/code&gt; to your project, giving you a red
+color scheme for the production environment (to discourage people from updating
+content) and a nice scheme for the &lt;code&gt;preproduction&lt;/code&gt; environment which clearly
+deviates from the standard color scheme used everywhere else:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;extrahead&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+  &lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nb"&gt;block&lt;/span&gt;&lt;span class="nv"&gt;.super&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;site-name&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; (&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;ENVIRONMENT&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s2"&gt;)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;ENVIRONMENT&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;production&amp;#39;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--primary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#aa0000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--secondary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#810000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--accent&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;yellow&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="nv"&gt;ENVIRONMENT&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;preproduction&amp;#39;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--primary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#30b181&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--secondary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#1f7957&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--accent&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#cdffea&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 42)&lt;/h1&gt;&lt;h2&gt;Vacation in Italy&lt;/h2&gt;
 &lt;p&gt;We have spent a wonderful family week in Italy. The voyage by train was very
 comfortable and we had a great time there. I have lived close to lakes all my
 life but the sea is always something else. Now I enjoy the cold temperatures of
@@ -832,12 +873,4 @@ as &lt;a href="https://pypi.org/project/feedparser/"&gt;feedparser&lt;/a&gt; do 
 correct HTTP headers.&lt;/p&gt;
 &lt;p&gt;I have licensed the script under the &lt;a href="http://www.wtfpl.net/"&gt;WTFPL&lt;/a&gt;, so if
 you&amp;rsquo;re interested you can do what you want with it, without any obligations. I
-would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 15)</title><link href="https://406.ch/writing/weeknotes-2023-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-15/</id><published>2023-04-16T12:00:00Z</published><updated>2023-04-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 15)&lt;/h1&gt;&lt;h2&gt;Romansh translations for feincms3-cookiecontrol and django-fineforms&lt;/h2&gt;
-&lt;p&gt;The feincms3 cookie control banner and django-fineforms have received a small update: Support for the &lt;a href="https://en.wikipedia.org/wiki/Romansh_language"&gt;Romansh&lt;/a&gt; language. I would be surprised if any readers of this blog even knew about this language at all. Switzerland has four official languages: German, French, Italian and the mentioned Romansh.&lt;/p&gt;
-&lt;p&gt;It&amp;rsquo;s not a coincidence of course that those two packages have received an update at the same time. Both packages are used for an upcoming campaign site where people may express their support for political action to preserve or protect the &lt;a href="https://en.wikipedia.org/wiki/Biodiversity"&gt;biodiversity&lt;/a&gt;. It&amp;rsquo;s at the same time laughable and horrifying that this is even a thing though: Who in their right mind could NOT agree that preserving biodiversity is important? It&amp;rsquo;s incomprehensible. Maybe I&amp;rsquo;m just a romantic &lt;a href="https://en.wikipedia.org/wiki/Gutmensch"&gt;Gutmensch&lt;/a&gt; after all&amp;hellip;&lt;/p&gt;
-&lt;h2&gt;django-ckeditor&lt;/h2&gt;
-&lt;p&gt;I have set up the &lt;a href="https://github.com/actions/stale"&gt;stale&lt;/a&gt; GitHub action for the &lt;a href="https://github.com/django-ckeditor/django-ckeditor"&gt;django-ckeditor&lt;/a&gt; repository. So many support requests, so little time and almost no actual collaborators. Also, many support requests actually concern CKEditor itself, not its Django integration. I shouldn&amp;rsquo;t complain though, CKEditor has served me well and still does, &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/inline_ckeditor.py"&gt;especially when it&amp;rsquo;s being used with a very minimal configuration&lt;/a&gt; which basically makes most pain points of HTML editors go away.&lt;/p&gt;
-&lt;h2&gt;django-debug-toolbar&lt;/h2&gt;
-&lt;p&gt;I have reviewed and merged a few changes to &lt;a href="https://github.com/jazzband/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; in the last week. Still a fun project, especially since it&amp;rsquo;s so widely used and loved.&lt;/p&gt;
-&lt;h2&gt;Meta&lt;/h2&gt;
-&lt;p&gt;Blogging with vim is fun.&lt;/p&gt;</summary></entry></feed>
+would certainly enjoy hearing about it though!&lt;/p&gt;</summary></entry></feed>
