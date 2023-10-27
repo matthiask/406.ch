@@ -1,5 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-10-19T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Customize the Django admin to differentiate environments</title><link href="https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/" rel="alternate" /><id>https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/</id><published>2023-10-19T12:00:00Z</published><updated>2023-10-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;Customize the Django admin to differentiate environments&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-10-27T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 43)</title><link href="https://406.ch/writing/weeknotes-2023-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-43/</id><published>2023-10-27T12:00:00Z</published><updated>2023-10-27T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 43)&lt;/h1&gt;&lt;h2&gt;Switching to ruff format&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/astral-sh/ruff/releases/tag/v0.1.2"&gt;ruff v0.1.2&lt;/a&gt; includes
+the beta version of the ruff formatter. It formats the code almost the same way
+as black, but much much faster. I have started switching projects I&amp;rsquo;m working
+on and the experience has been nothing but great.&lt;/p&gt;
+&lt;h2&gt;100% test coverage&lt;/h2&gt;
+&lt;p&gt;I have again fixed a bad bug in code which had 100% test coverage. It&amp;rsquo;s not
+news that 100% test coverage isn&amp;rsquo;t a recipe for bug-free code, and it&amp;rsquo;s
+probably not even worth optimizing for that metric in code. It&amp;rsquo;s nothing more
+but a proxy for what you should really measure. Nevertheless it certainly does
+feel good to achieve high coverage values!&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;p&gt;No releases at all.&lt;/p&gt;</summary></entry><entry><title>Customize the Django admin to differentiate environments</title><link href="https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/" rel="alternate" /><id>https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/</id><published>2023-10-19T12:00:00Z</published><updated>2023-10-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;Customize the Django admin to differentiate environments&lt;/h1&gt;
 &lt;p&gt;&lt;img alt="Four different themes" src="https://user-images.githubusercontent.com/2627/276531977-6787c55e-4e8c-448c-8ed4-c71cd98c9750.png" /&gt;&lt;/p&gt;
 &lt;p&gt;We often have the same website running in different configurations:&lt;/p&gt;
 &lt;ul&gt;
@@ -994,10 +1006,4 @@ and write:&lt;/p&gt;
 Nesting leads to overspecific CSS, and also to an enormous amount of generated
 CSS which is also brittle and basically impossible to refactor (&amp;ldquo;write-only
 CSS&amp;rdquo;). But, in some contexts it&amp;rsquo;s really nice. I do like the fact that
-indentation has a specific meaning if used like that.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 18 and 19)</title><link href="https://406.ch/writing/weeknotes-2023-week-18-and-19/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-18-and-19/</id><published>2023-05-12T12:00:00Z</published><updated>2023-05-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 18 and 19)&lt;/h1&gt;
-&lt;p&gt;Not much programming this week :-(&lt;/p&gt;
-&lt;h2&gt;oEmbed&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-17/"&gt;Still occupying myself with oEmbed.&lt;/a&gt; I have been looking at a few libraries and have rediscovered &lt;a href="https://github.com/coleifer/micawber/"&gt;micawber&lt;/a&gt; which probably does everything I need. Yay, another reinvented wheel avoided. I haven&amp;rsquo;t tested it yet but I&amp;rsquo;m quite sure that replacing the &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/plugins/external.py"&gt;oEmbed functionality in feincms3&amp;rsquo;s external plugin&lt;/a&gt; with micawber would be a good idea.&lt;/p&gt;
-&lt;h2&gt;Vacation&lt;/h2&gt;
-&lt;p&gt;Vacation last week. Was nice. We went for a few hikes. I have learned that I&amp;rsquo;m
-not totally free from giddiness anymore. Oh well.&lt;/p&gt;</summary></entry></feed>
+indentation has a specific meaning if used like that.&lt;/p&gt;</summary></entry></feed>
