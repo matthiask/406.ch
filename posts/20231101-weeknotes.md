@@ -1,7 +1,6 @@
 Title: Weeknotes (2023 week 44)
-Date: 2023-11-01
+Date: 2023-11-02
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 ## Unmaintained but maintained packages
 
@@ -15,4 +14,5 @@ I do understand why the `.readthedocs.yaml` file is now necessary. I wish that I
 
 ## Releases
 
+- [feincms3 4.5](https://pypi.org/project/feincms3/), [feincms3-sites 0.20](https://pypi.org/project/feincms3-sites/) and [feincms3-language-sites 0.3](https://github.com/feincms/feincms3-language-sites): Fixed the check which only allows adding an application through the CMS to the page tree (yes, that's right) once; feincms3 worked fine, feincms3-language-sites by accident but feincms3-sites didn't.
 - [towel 0.31](https://pypi.org/project/towel/): Towel is one of my oldest packages which is still being used in real-world projects. Towel is a tool for building CRUD-type applications and is designed to keep you DRY while doing that. The project has been heavily inspired by a Django-based agency software I built many years back. The package even has [docs](https://towel.readthedocs.io/en/latest/)! I'm still quite proud of the mostly transparent support for multitenancy, but apart from that I haven't used it in many new projects.
