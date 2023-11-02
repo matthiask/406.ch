@@ -1,5 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-10-27T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 43)</title><link href="https://406.ch/writing/weeknotes-2023-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-43/</id><published>2023-10-27T12:00:00Z</published><updated>2023-10-27T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 43)&lt;/h1&gt;&lt;h2&gt;Switching to ruff format&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2023-11-02T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 44)</title><link href="https://406.ch/writing/weeknotes-2023-week-44/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-44/</id><published>2023-11-02T12:00:00Z</published><updated>2023-11-02T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 44)&lt;/h1&gt;&lt;h2&gt;Unmaintained but maintained packages&lt;/h2&gt;
+&lt;p&gt;There&amp;rsquo;s a discussion going on in the &lt;a href="https://github.com/django-mptt/django-mptt/issues/833"&gt;django-mptt issue tracker&lt;/a&gt; about the maintenance state of django-mptt. &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;I have marked the project as unmaintained in March 2021&lt;/a&gt; and haven&amp;rsquo;t regretted this decision at all. I haven&amp;rsquo;t had to fix &lt;a href="https://github.com/django-mptt/django-mptt/labels/Broken%20Tree"&gt;inconsistencies in the tree structure&lt;/a&gt; once since switching to &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;. And if that wasn&amp;rsquo;t enough, I get little but only warm and thankful feedback for the latter, so that&amp;rsquo;s extra nice.&lt;/p&gt;
+&lt;p&gt;Despite marking django-mptt as unmaintained I seem to be doing a little bit of maintenance still. I&amp;rsquo;m still using it in old paid projects and so the things I do to make the package work for me is paid work. I&amp;rsquo;m not personally invested in the package anymore, so I&amp;rsquo;m able to tell people that there are absolutely no guarantees about the maintenance, and that feels good.&lt;/p&gt;
+&lt;h2&gt;Read the Docs&lt;/h2&gt;
+&lt;p&gt;I do understand why the &lt;code&gt;.readthedocs.yaml&lt;/code&gt; file is now necessary. I wish that I wouldn&amp;rsquo;t have to do all the busywork of adding one to projects. I have just resubscribed to the Read the Docs Gold Membership which probably has expired at some point in the past. Read the Docs is excellent and everybody who can should support them.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5&lt;/a&gt;, &lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20&lt;/a&gt; and &lt;a href="https://github.com/feincms/feincms3-language-sites"&gt;feincms3-language-sites 0.3&lt;/a&gt;: Fixed the check which only allows adding an application through the CMS to the page tree (yes, that&amp;rsquo;s right) once; feincms3 worked fine, feincms3-language-sites by accident but feincms3-sites didn&amp;rsquo;t.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/towel/"&gt;towel 0.31&lt;/a&gt;: Towel is one of my oldest packages which is still being used in real-world projects. Towel is a tool for building CRUD-type applications and is designed to keep you DRY while doing that. The project has been heavily inspired by a Django-based agency software I built many years back. The package even has &lt;a href="https://towel.readthedocs.io/en/latest/"&gt;docs&lt;/a&gt;! I&amp;rsquo;m still quite proud of the mostly transparent support for multitenancy, but apart from that I haven&amp;rsquo;t used it in many new projects.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 43)</title><link href="https://406.ch/writing/weeknotes-2023-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-43/</id><published>2023-10-27T12:00:00Z</published><updated>2023-10-27T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 43)&lt;/h1&gt;&lt;h2&gt;Switching to ruff format&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/astral-sh/ruff/releases/tag/v0.1.2"&gt;ruff v0.1.2&lt;/a&gt; includes
 the beta version of the ruff formatter. It formats the code almost the same way
 as black, but much much faster. I have started switching projects I&amp;rsquo;m working
@@ -931,79 +940,4 @@ written to.&lt;/p&gt;
 &lt;p&gt;Custom properties would probably be the more correct naming, but CSS variables is nicer to say.&amp;#160;&lt;a class="footnote-backref" href="#fnref:variables" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Unlearning SCSS to use CSS variables effectively</title><link href="https://406.ch/writing/unlearning-scss-to-use-css-variables-effectively/" rel="alternate" /><id>https://406.ch/writing/unlearning-scss-to-use-css-variables-effectively/</id><published>2023-05-31T12:00:00Z</published><updated>2023-05-31T12:00:00Z</updated><summary type="html">&lt;h1&gt;Unlearning SCSS to use CSS variables effectively&lt;/h1&gt;
-&lt;p&gt;SCSS variables are a way to stop repeating the same values over and over. They
-are very useful already, especially when used together with some of the more
-interesting SCSS functions such as &lt;code&gt;brighten()&lt;/code&gt;, &lt;code&gt;darken()&lt;/code&gt; etc. CSS doesn&amp;rsquo;t
-really have ways to do the same yet. &lt;code&gt;hsl(var(...)...)&lt;/code&gt; only gets you so far.&lt;/p&gt;
-&lt;p&gt;CSS variables are another beast. You can use them the same way by replacing &lt;code&gt;$&lt;/code&gt;
-with &lt;code&gt;--&lt;/code&gt; but if you do this you&amp;rsquo;re missing out big time on the features which
-actually make CSS variables great: The cascade and the ability to update them
-in response to media queries, interactions or other events.&lt;/p&gt;
-&lt;p&gt;The way I&amp;rsquo;m using CSS variables is:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Define good defaults on the &lt;code&gt;:root&lt;/code&gt; selector.&lt;/li&gt;
-&lt;li&gt;Change those defaults in response to media queries, e.g. for large screens
-  when writing mobile first CSS &amp;ndash; as you should.&lt;/li&gt;
-&lt;li&gt;Override defaults in some contexts, e.g. in an &lt;code&gt;&amp;lt;aside&amp;gt;&lt;/code&gt; or some other
-  fitting component.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Suppose you wanted different spacings between components depending on the
-breakpoint. You could go the fully fluid route with &lt;code&gt;clamp()&lt;/code&gt;, &lt;code&gt;max()&lt;/code&gt;, &lt;code&gt;min()&lt;/code&gt;
-and viewport-relative units. It&amp;rsquo;s simpler to keep the complexity lower and use
-breakpoints, certainly for me.&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--space&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;media&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;800px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nv"&gt;--space&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="kt"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now you can use &lt;code&gt;var(--space)&lt;/code&gt; everywhere:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;margin-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--space&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The equivalent SCSS would probably look something like this, with a fitting
-&lt;code&gt;breakpoint()&lt;/code&gt; mixin:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;$space-sm&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="nv"&gt;$space-md&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="kt"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="nc"&gt;.box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;margin-bottom&lt;/span&gt;&lt;span class="nd"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="nt"&gt;space-sm&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="nt"&gt;include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;breakpoint&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;md&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;margin-bottom&lt;/span&gt;&lt;span class="nd"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="nt"&gt;space-md&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;That doesn&amp;rsquo;t look too bad until you have to repeat the breakpoint in all your
-components. That&amp;rsquo;s when SCSS gets boring while CSS is staying awesome.&lt;/p&gt;
-&lt;h2&gt;Upping your game.&lt;/h2&gt;
-&lt;p&gt;You could also use
-&lt;a href="https://www.npmjs.com/package/@csstools/postcss-nesting-experimental"&gt;postcss-nesting&lt;/a&gt;
-and &lt;a href="https://www.npmjs.com/package/postcss-custom-media"&gt;postcss-custom-media&lt;/a&gt;
-and write:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;custom-media&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;--media-md&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;min-width&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;800px&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--space&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="err"&gt;@media&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;(--media-md)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nv"&gt;--space&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="kt"&gt;rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="err"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Nesting is definitely a two-edged sword though. CSS methodologies such as BEM
-(Block Element Modifier) should generally fix the need to use nesting at all.
-Nesting leads to overspecific CSS, and also to an enormous amount of generated
-CSS which is also brittle and basically impossible to refactor (&amp;ldquo;write-only
-CSS&amp;rdquo;). But, in some contexts it&amp;rsquo;s really nice. I do like the fact that
-indentation has a specific meaning if used like that.&lt;/p&gt;</summary></entry></feed>
+&lt;/div&gt;</summary></entry></feed>
