@@ -1,5 +1,5 @@
 Jinja2
 Markdown
-Pygments
 minify-html
+Pygments
 rcssmin
