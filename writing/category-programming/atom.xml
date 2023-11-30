@@ -1,5 +1,42 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-11-02T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 44)</title><link href="https://406.ch/writing/weeknotes-2023-week-44/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-44/</id><published>2023-11-02T12:00:00Z</published><updated>2023-11-02T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 44)&lt;/h1&gt;&lt;h2&gt;Unmaintained but maintained packages&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-11-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 48)</title><link href="https://406.ch/writing/weeknotes-2023-week-48/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-48/</id><published>2023-11-30T12:00:00Z</published><updated>2023-11-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 48)&lt;/h1&gt;&lt;p&gt;A few weeks have passed since the last update. The whole family was repeatedly
+sick with different viruses etc&amp;hellip; I hope that the worst is over now. Who
+knows.&lt;/p&gt;
+&lt;h2&gt;12-factor Django storage configuration&lt;/h2&gt;
+&lt;p&gt;I should maybe write a longer and separate post about this, but &lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv&lt;/a&gt; has gained support for the Django &lt;code&gt;STORAGES&lt;/code&gt; setting. No documentation yet, but it supports two storage backends for now, the file system storage and &lt;a href="https://github.com/etianen/django-s3-storage/"&gt;django-s3-storage&lt;/a&gt;, my go-to library for S3-compatible services.&lt;/p&gt;
+&lt;p&gt;Using it looks something like this:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;speckenv&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;speckenv_django&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;django_storage_url&lt;/span&gt;
+
+&lt;span class="n"&gt;STORAGES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;django_storage_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;STORAGE_URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file:./media/?base_url=/media/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;base_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;BASE_DIR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;staticfiles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;BACKEND&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;django.contrib.staticfiles.storage.ManifestStaticFilesStorage&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, if you want to use S3 you can put something like this in your &lt;code&gt;.env&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;STORAGE_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;secret&lt;/span&gt;&lt;span class="nv"&gt;@bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;central&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or maybe something like this, if you want to serve media files without authentication:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;STORAGE_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;secret&lt;/span&gt;&lt;span class="nv"&gt;@bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;central&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="n"&gt;aws_s3_public_auth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;False&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;aws_s3_max_age_seconds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;31536000&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv 6.1.1&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-meta/"&gt;feincms3-meta 4.6&lt;/a&gt;: York has contributed support for emitting structured data records. Looks nice. No documentation yet.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.16.1&lt;/a&gt;: &lt;code&gt;.values()&lt;/code&gt; and &lt;code&gt;.values_list()&lt;/code&gt; queries are now handled better and more consistently than before.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 44)</title><link href="https://406.ch/writing/weeknotes-2023-week-44/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-44/</id><published>2023-11-02T12:00:00Z</published><updated>2023-11-02T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 44)&lt;/h1&gt;&lt;h2&gt;Unmaintained but maintained packages&lt;/h2&gt;
 &lt;p&gt;There&amp;rsquo;s a discussion going on in the &lt;a href="https://github.com/django-mptt/django-mptt/issues/833"&gt;django-mptt issue tracker&lt;/a&gt; about the maintenance state of django-mptt. &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;I have marked the project as unmaintained in March 2021&lt;/a&gt; and haven&amp;rsquo;t regretted this decision at all. I haven&amp;rsquo;t had to fix &lt;a href="https://github.com/django-mptt/django-mptt/labels/Broken%20Tree"&gt;inconsistencies in the tree structure&lt;/a&gt; once since switching to &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;. And if that wasn&amp;rsquo;t enough, I get little but only warm and thankful feedback for the latter, so that&amp;rsquo;s extra nice.&lt;/p&gt;
 &lt;p&gt;Despite marking django-mptt as unmaintained I seem to be doing a little bit of maintenance still. I&amp;rsquo;m still using it in old paid projects and so the things I do to make the package work for me is paid work. I&amp;rsquo;m not personally invested in the package anymore, so I&amp;rsquo;m able to tell people that there are absolutely no guarantees about the maintenance, and that feels good.&lt;/p&gt;
 &lt;h2&gt;Read the Docs&lt;/h2&gt;
@@ -824,120 +861,4 @@ package I converted.&lt;/p&gt;
 &lt;h2&gt;CKEditor 5&amp;rsquo;s new license and django-ckeditor&lt;/h2&gt;
 &lt;p&gt;The pressure is on to maybe switch away from CKEditor 4 since it probably will not be supported after &lt;a href="https://support.ckeditor.com/hc/en-us/articles/115005281629-How-long-will-CKEditor-4-be-supported-"&gt;June 2023&lt;/a&gt;. It&amp;rsquo;s totally understandable that the CKEditor 5 license isn&amp;rsquo;t the same as before, but I&amp;rsquo;m not sure what that means for the Django integration &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/482"&gt;django-ckeditor&lt;/a&gt; which I&amp;rsquo;m maintaining since a few years. I don&amp;rsquo;t actually like the new capabilities of CKEditor all that much and don&amp;rsquo;t intend to use them; maybe it would be better to use a build of &lt;a href=""&gt;ProseMirror&lt;/a&gt; in the CMS since &lt;a href="https://django-content-editor.readthedocs.io/en/latest/#about-rich-text-editors"&gt;we&amp;rsquo;re intentionally only using a very small subset of the features most rich text editors offer&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Mountain biking.&lt;/h2&gt;
-&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry><entry><title>CSS variables and immutability</title><link href="https://406.ch/writing/css-variables-and-immutability/" rel="alternate" /><id>https://406.ch/writing/css-variables-and-immutability/</id><published>2023-06-14T12:00:00Z</published><updated>2023-06-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Using CSS variables&lt;sup id="fnref:variables"&gt;&lt;a class="footnote-ref" href="#fn:variables"&gt;1&lt;/a&gt;&lt;/sup&gt; to ship customizable CSS in Django apps&lt;/h1&gt;
-&lt;p&gt;I have been working with &lt;a href="https://sass-lang.com/"&gt;SASS&lt;/a&gt; for a long time but
-have been moving towards writing CSS with a few &lt;a href="https://postcss.org/"&gt;PostCSS&lt;/a&gt;
-goodies in the last years. At first, I just replaced the &lt;code&gt;$...&lt;/code&gt; with
-&lt;code&gt;var(--...)&lt;/code&gt; and didn&amp;rsquo;t think much about it. The realization that CSS variables
-can be more than that came later. Edit basic values directly in the browser and
-immediately see the results! Change CSS depending on media queries or the
-cascade!&lt;/p&gt;
-&lt;p&gt;With all that power came back the wish to not just ship backend and HTML code
-in Django apps I (help) maintain but also reusable CSS, with a few overrideable
-CSS variables for basic changes to the visual style. Loading &lt;code&gt;.scss&lt;/code&gt; files from
-somewhere inside &lt;code&gt;venv/lib/python3.11/site-packages/&amp;lt;package&amp;gt;/styles/&lt;/code&gt; would of
-course have been possible, but very obscure. Also, not everyone puts their
-virtualenv at &lt;code&gt;venv&lt;/code&gt;, the &lt;code&gt;README&lt;/code&gt; instructions for those packages would
-quickly have become unwieldy. CSS variables paved the way for shipping CSS as a
-Django static file while still allowing customizability by leveraging the
-functionality of the browser itself instead of the frontend build toolchain.&lt;/p&gt;
-&lt;h2&gt;Patterns for overrideable values&lt;/h2&gt;
-&lt;p&gt;A pattern for defining defaults for CSS variables is to always define the
-fallback (the example is intentionally bad but inspired by real world
-experiences when developing
-&lt;a href="https://github.com/feinheit/feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;):&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Less repetition (but trouble awaits)&lt;/h2&gt;
-&lt;p&gt;If &lt;code&gt;--box-background&lt;/code&gt; isn&amp;rsquo;t set the &lt;code&gt;var()&lt;/code&gt; function falls back to the second
-argument, &lt;code&gt;#222&lt;/code&gt;. Repeating this value over and over gets annoying quickly, so
-you define a few defaults on the &lt;code&gt;:root&lt;/code&gt; element and use those variables in the
-code, without specifying the default again:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The project can now override the default background color using:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#444&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#ccc&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Of course now you&amp;rsquo;re back at the mercy of CSS loading order. If the app&amp;rsquo;s CSS
-is loaded first, everything works. If not, your custom value is immediately
-overwritten. You could avoid this by overwriting the default lower in the cascade:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#444&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#ccc&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Great, everything works again!&lt;/p&gt;
-&lt;p&gt;Later, the box also contains a button which uses a different background but the
-same foreground, so of course we add more variables in the package:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-button-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#333&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-button-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;What happens now when overwriting the &lt;code&gt;--box-foreground&lt;/code&gt; variable just for the
-&lt;code&gt;.box&lt;/code&gt; element?&lt;/p&gt;
-&lt;p&gt;You&amp;rsquo;re not sure? I certainly wasn&amp;rsquo;t and am not. But what I remember happening
-was that the overridden foreground color was just applied to the text and not
-to the button itself. I was confused (it seems clearer in hindsight&amp;hellip;)&lt;/p&gt;
-&lt;h2&gt;A better way&lt;/h2&gt;
-&lt;p&gt;If values are supposed to be overridden and only used inside components, a
-better way is to define local CSS for components by following a convention
-(underscore prefix for local/private variables):&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;/* Defined on .box, not :root */&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_button-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-button-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#333&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_button-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-button-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_foreground&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And then you only use the prefixed versions inside the component:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box__button&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_button&lt;/span&gt;&lt;span class="nv"&gt;-background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_button&lt;/span&gt;&lt;span class="nv"&gt;-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;--box-*&lt;/code&gt; variables are undefined by default; the only time when they are
-set is when the user of the package wants to override those values. If you only
-overide the box foreground the button also inherits the new foreground color.
-And while there would certainly be a way to achieve the same thing with the old
-way above it&amp;rsquo;s certainly not as simple to explain.&lt;/p&gt;
-&lt;p&gt;The reason why it&amp;rsquo;s simple to explain is &lt;strong&gt;immutability&lt;/strong&gt;. The CSS variables
-which are overrideable by the user are only ever read by the package, never
-written to.&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:variables"&gt;
-&lt;p&gt;Custom properties would probably be the more correct naming, but CSS variables is nicer to say.&amp;#160;&lt;a class="footnote-backref" href="#fnref:variables" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry></feed>
+&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry></feed>
