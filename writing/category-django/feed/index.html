@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-11-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 48)</title><link href="https://406.ch/writing/weeknotes-2023-week-48/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-48/</id><published>2023-11-30T12:00:00Z</published><updated>2023-11-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 48)&lt;/h1&gt;&lt;p&gt;A few weeks have passed since the last update. The whole family was repeatedly
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-12-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-json-schema-editor</title><link href="https://406.ch/writing/django-json-schema-editor/" rel="alternate" /><id>https://406.ch/writing/django-json-schema-editor/</id><published>2023-12-13T12:00:00Z</published><updated>2023-12-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-json-schema-editor&lt;/h1&gt;&lt;p&gt;I have extracted a JSON editing component based on
+&lt;a href="https://www.npmjs.com/package/@json-editor/json-editor"&gt;@json-editor/json-editor&lt;/a&gt;
+from a client&amp;rsquo;s project and released it as open source. It isn&amp;rsquo;t the first JSON editing component by far but I like it a lot for the following reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It works really well.&lt;/li&gt;
+&lt;li&gt;It supports editing arrays of objects using a tabular presentation. Tabular
+  isn&amp;rsquo;t always better, but stacked definitely isn&amp;rsquo;t always better as well.&lt;/li&gt;
+&lt;li&gt;The data structure is defined as &lt;a href="https://json-schema.org/"&gt;JSON schema&lt;/a&gt;,the
+  data which is being entered is validated on the server using the
+  &lt;a href="https://pypi.org/project/fastjsonschema/"&gt;fastjsonschema&lt;/a&gt; library. Having a
+  schema and schema-based validation fixes most problems I have with less
+  structured data than when using only Django model fields (without JSON).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here&amp;rsquo;s a screenshot of the editing component used as a &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; plugin:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="django-json-schema-editor screenshot" src="/assets/20231313-json-schema-editor.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Within the first few days of having released the package it has already proven
+useful in several other projects. A pleasant (but not totally unexpected)
+surprise.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 48)</title><link href="https://406.ch/writing/weeknotes-2023-week-48/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-48/</id><published>2023-11-30T12:00:00Z</published><updated>2023-11-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 48)&lt;/h1&gt;&lt;p&gt;A few weeks have passed since the last update. The whole family was repeatedly
 sick with different viruses etc&amp;hellip; I hope that the worst is over now. Who
 knows.&lt;/p&gt;
 &lt;h2&gt;12-factor Django storage configuration&lt;/h2&gt;
@@ -853,19 +870,4 @@ written to.&lt;/p&gt;
 &lt;p&gt;Custom properties would probably be the more correct naming, but CSS variables is nicer to say.&amp;#160;&lt;a class="footnote-backref" href="#fnref:variables" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 17)</title><link href="https://406.ch/writing/weeknotes-2023-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-17/</id><published>2023-04-28T12:00:00Z</published><updated>2023-04-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 17)&lt;/h1&gt;&lt;h2&gt;Birthday&lt;/h2&gt;
-&lt;p&gt;Another year achieved. Feels the same as last year. I&amp;rsquo;m glad.&lt;/p&gt;
-&lt;h2&gt;feincms3-cookiecontrol&lt;/h2&gt;
-&lt;p&gt;I have released &lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
-1.3&lt;/a&gt;. Mostly cleanups since
-1.2, but also a new translation (already announced here). The script size has
-been reduced from 4519 bytes to 4228 bytes (-6.5%) while keeping all features
-intact. The reduction is totally meaningless but it was fun to do.&lt;/p&gt;
-&lt;h2&gt;oEmbed&lt;/h2&gt;
-&lt;p&gt;I have been digging into the oEmbed spec a bit. I didn&amp;rsquo;t even know that a
-central list of &lt;a href="https://oembed.com/providers.json"&gt;providers&lt;/a&gt; exists.
-&lt;a href="https://noembed.com/"&gt;Noembed&lt;/a&gt; still works great to embed many different types
-of content but I worry more and more about its maintenance state.
-Reimplementing the interesting parts shouldn&amp;rsquo;t be that hard, but maybe I don&amp;rsquo;t
-have to do this myself. &lt;a href="https://github.com/attakei-lab/oEmbedPy/"&gt;oEmbedPy&lt;/a&gt;
-looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></entry></feed>
+&lt;/div&gt;</summary></entry></feed>
