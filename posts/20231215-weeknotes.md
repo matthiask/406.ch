@@ -21,8 +21,16 @@ career. I have enjoyed participating in the [Advent of Code
 2022](https://adventofcode.com/) a lot and I have definitely learned to know
 when to use and how to use a few algorithms I didn't even know before. I'm
 again working through the puzzles in my own pace and have managed to solve
-almost all of them up to today this year. The big exception is yesterday's
-puzzle, I don't even know where to start 😅.
+almost all of them up to today this year. There still is a puzzle where I don't
+even know where to start though 😅.
+
+## Hosting
+
+We're still hosting most sites on virtualized servers, without any containers
+or any of the new stuff. I'm finally reaching the point where the downsides of
+this approach start to drag new projects down and the workarounds start looking
+worse than maybe switching to containers or even Kubernetes. Wish me luck, I'm
+more confused than I've been in years.
 
 ## Health
 
