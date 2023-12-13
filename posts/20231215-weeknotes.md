@@ -36,9 +36,9 @@ more confused than I've been in years.
 
 To absolutely nobody's surprise the family and myself have continued to be sick
 in the last two weeks. Nothing really bad happened, so we're still lucky.
+
 There's unfortunately no way to solve a societal problem individually, so that
-will probably continue to be our life for now. Maybe it's over as of today, but
-we'll see.
+will probably continue to be our life for now.
 
 ## Releases
 
