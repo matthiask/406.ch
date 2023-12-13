@@ -41,11 +41,11 @@ a bigger value yourself. The default will probably change in the future.
 I have always felt a bit as an imposter because I do not have any formal CS
 education; not so much in the last few years but certainly earlier in my
 career. I have enjoyed participating in the [Advent of Code
-2022](https://adventofcode.com/) a lot and I have definitely learned to use a
-few algorithms I didn't even know before. I'm again working through the puzzles
-in my own speed and have managed to solve almost all of them up to today this
-year. The big exception is yesterday's puzzle, I don't even know where to start
-😅.
+2022](https://adventofcode.com/) a lot and I have definitely learned to know
+when to use and how to use a few algorithms I didn't even know before. I'm
+again working through the puzzles in my own pace and have managed to solve
+almost all of them up to today this year. The big exception is yesterday's
+puzzle, I don't even know where to start 😅.
 
 ## Health
 
@@ -66,7 +66,4 @@ we'll see.
   seems to dislike it if the project name and the Python module name do not
   match. I actually like `django-js-asset`'s Python module to be `js_asset`
   but I'm beginning to rethink this decision.
-- [django-json-schema-editor
-  0.0.4](https://pypi.org/project/django-json-schema-editor/): JSON editing
-  support using JSON schema; built using
-  [https://www.npmjs.com/package/@json-editor/json-editor](@json-editor/json-editor).
+- [django-json-schema-editor 0.0.4](https://pypi.org/project/django-json-schema-editor/): See above.
