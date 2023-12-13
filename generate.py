@@ -115,6 +115,7 @@ def main(*, only_published=True):
     print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
 
     shutil.rmtree(DIR / "htdocs", ignore_errors=True)
+    shutil.copytree(DIR / "assets", DIR / "htdocs" / "assets", dirs_exist_ok=True)
     archive, detail, not_found = jinja_templates({"categories": sorted(counter)})
     write_file("/writing/index.html", f'<meta content="0;url={URL}"http-equiv=refresh>')
     write_file("/robots.txt", f"User-agent: *\nSitemap: {URL}/sitemap.xml\n")
