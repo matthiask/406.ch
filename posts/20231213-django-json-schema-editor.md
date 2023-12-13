@@ -22,3 +22,8 @@ Here's a screenshot of the editing component used as a [django-content-editor](h
 Within the first few days of having released the package it has already proven
 useful in several other projects. A pleasant (but not totally unexpected)
 surprise.
+
+## Links:
+
+- [PyPI](https://pypi.org/project/django-json-schema-editor/)
+- [GitHub](https://github.com/matthiask/django-json-schema-editor)
