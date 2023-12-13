@@ -16,7 +16,12 @@ from a client&amp;rsquo;s project and released it as open source. It isn&amp;rsq
 &lt;p&gt;&lt;img alt="django-json-schema-editor screenshot" src="/assets/20231313-json-schema-editor.png" /&gt;&lt;/p&gt;
 &lt;p&gt;Within the first few days of having released the package it has already proven
 useful in several other projects. A pleasant (but not totally unexpected)
-surprise.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 48)</title><link href="https://406.ch/writing/weeknotes-2023-week-48/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-48/</id><published>2023-11-30T12:00:00Z</published><updated>2023-11-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 48)&lt;/h1&gt;&lt;p&gt;A few weeks have passed since the last update. The whole family was repeatedly
+surprise.&lt;/p&gt;
+&lt;h2&gt;Links:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;PyPI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 48)</title><link href="https://406.ch/writing/weeknotes-2023-week-48/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-48/</id><published>2023-11-30T12:00:00Z</published><updated>2023-11-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 48)&lt;/h1&gt;&lt;p&gt;A few weeks have passed since the last update. The whole family was repeatedly
 sick with different viruses etc&amp;hellip; I hope that the worst is over now. Who
 knows.&lt;/p&gt;
 &lt;h2&gt;12-factor Django storage configuration&lt;/h2&gt;
