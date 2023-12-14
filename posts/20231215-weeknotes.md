@@ -21,8 +21,8 @@ career. I have enjoyed participating in the [Advent of Code
 2022](https://adventofcode.com/) a lot and I have definitely learned to know
 when to use and how to use a few algorithms I didn't even know before. I'm
 again working through the puzzles in my own pace and have managed to solve
-almost all of them up to today this year. There still is a puzzle where I don't
-even know where to start though 😅.
+almost all of them up to today this year. There still are some puzzles where I
+don't even know how to start the second part 😅.
 
 ## Hosting
 
