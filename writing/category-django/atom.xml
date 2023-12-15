@@ -1,5 +1,45 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-12-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-json-schema-editor</title><link href="https://406.ch/writing/django-json-schema-editor/" rel="alternate" /><id>https://406.ch/writing/django-json-schema-editor/</id><published>2023-12-13T12:00:00Z</published><updated>2023-12-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-json-schema-editor&lt;/h1&gt;&lt;p&gt;I have extracted a JSON editing component based on
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2023-12-15T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 50)</title><link href="https://406.ch/writing/weeknotes-2023-week-50/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-50/</id><published>2023-12-15T12:00:00Z</published><updated>2023-12-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 50)&lt;/h1&gt;&lt;h2&gt;django-imagefield&lt;/h2&gt;
+&lt;p&gt;The path building scheme used by &lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield&lt;/a&gt; has proven problematic: It&amp;rsquo;s too likely that processed images will have the same path.&lt;/p&gt;
+&lt;p&gt;I have changed the strategy used for generating paths to use more data from the
+source; it&amp;rsquo;s now possible (and recommended!) to set &lt;code&gt;IMAGEFIELD_BIN_DEPTH&lt;/code&gt; to
+a value greater than 1; 2 or 3 should be sufficient. The default value is 1
+which corresponds to the old default so that the change won&amp;rsquo;t be backwards
+incompatible. However, you&amp;rsquo;ll always get a deprecation warning if you don&amp;rsquo;t set
+a bigger value yourself. The default will probably change in the future.&lt;/p&gt;
+&lt;h2&gt;Advent of Code&lt;/h2&gt;
+&lt;p&gt;I have always felt a bit as an imposter because I do not have any formal CS
+education; not so much in the last few years but certainly earlier in my
+career. I have enjoyed participating in the &lt;a href="https://adventofcode.com/"&gt;Advent of Code
+2022&lt;/a&gt; a lot and I have definitely learned to know
+when to use and how to use a few algorithms I didn&amp;rsquo;t even know before. I&amp;rsquo;m
+again working through the puzzles in my own pace and have managed to solve
+almost all of them up to today this year. There still are some puzzles where I
+don&amp;rsquo;t even know how to start the second part 😅.&lt;/p&gt;
+&lt;h2&gt;Hosting&lt;/h2&gt;
+&lt;p&gt;We&amp;rsquo;re still hosting most sites on virtualized servers, without any containers
+or any of the new stuff. I&amp;rsquo;m finally reaching the point where the downsides of
+this approach start to drag new projects down and the workarounds start looking
+worse than maybe switching to containers or even Kubernetes. Wish me luck, I&amp;rsquo;m
+more confused than I&amp;rsquo;ve been in years.&lt;/p&gt;
+&lt;h2&gt;Health&lt;/h2&gt;
+&lt;p&gt;To absolutely nobody&amp;rsquo;s surprise the family and myself have continued to be sick
+in the last two weeks. Nothing really bad happened, so we&amp;rsquo;re still lucky.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s unfortunately no way to solve a societal problem individually, so that
+will probably continue to be our life for now.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.18&lt;/a&gt;: See
+  above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20.1&lt;/a&gt;: Added
+  additional validation (cleaning) checks. Showing error messages is
+  preferrable to crashing with &lt;code&gt;IntegrityError&lt;/code&gt; exceptions after all.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 2.2.0&lt;/a&gt;: Hatchling
+  seems to dislike it if the project name and the Python module name do not
+  match. I actually like &lt;code&gt;django-js-asset&lt;/code&gt;&amp;rsquo;s Python module to be &lt;code&gt;js_asset&lt;/code&gt;
+  but I&amp;rsquo;m beginning to rethink this decision.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.4&lt;/a&gt;: See &lt;a href="https://406.ch/writing/django-json-schema-editor/"&gt;the post from this week&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-json-schema-editor</title><link href="https://406.ch/writing/django-json-schema-editor/" rel="alternate" /><id>https://406.ch/writing/django-json-schema-editor/</id><published>2023-12-13T12:00:00Z</published><updated>2023-12-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-json-schema-editor&lt;/h1&gt;&lt;p&gt;I have extracted a JSON editing component based on
 &lt;a href="https://www.npmjs.com/package/@json-editor/json-editor"&gt;@json-editor/json-editor&lt;/a&gt;
 from a client&amp;rsquo;s project and released it as open source. It isn&amp;rsquo;t the first JSON editing component by far but I like it a lot for the following reasons:&lt;/p&gt;
 &lt;ul&gt;
@@ -759,120 +799,4 @@ package I converted.&lt;/p&gt;
 &lt;h2&gt;CKEditor 5&amp;rsquo;s new license and django-ckeditor&lt;/h2&gt;
 &lt;p&gt;The pressure is on to maybe switch away from CKEditor 4 since it probably will not be supported after &lt;a href="https://support.ckeditor.com/hc/en-us/articles/115005281629-How-long-will-CKEditor-4-be-supported-"&gt;June 2023&lt;/a&gt;. It&amp;rsquo;s totally understandable that the CKEditor 5 license isn&amp;rsquo;t the same as before, but I&amp;rsquo;m not sure what that means for the Django integration &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/482"&gt;django-ckeditor&lt;/a&gt; which I&amp;rsquo;m maintaining since a few years. I don&amp;rsquo;t actually like the new capabilities of CKEditor all that much and don&amp;rsquo;t intend to use them; maybe it would be better to use a build of &lt;a href=""&gt;ProseMirror&lt;/a&gt; in the CMS since &lt;a href="https://django-content-editor.readthedocs.io/en/latest/#about-rich-text-editors"&gt;we&amp;rsquo;re intentionally only using a very small subset of the features most rich text editors offer&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Mountain biking.&lt;/h2&gt;
-&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry><entry><title>CSS variables and immutability</title><link href="https://406.ch/writing/css-variables-and-immutability/" rel="alternate" /><id>https://406.ch/writing/css-variables-and-immutability/</id><published>2023-06-14T12:00:00Z</published><updated>2023-06-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;Using CSS variables&lt;sup id="fnref:variables"&gt;&lt;a class="footnote-ref" href="#fn:variables"&gt;1&lt;/a&gt;&lt;/sup&gt; to ship customizable CSS in Django apps&lt;/h1&gt;
-&lt;p&gt;I have been working with &lt;a href="https://sass-lang.com/"&gt;SASS&lt;/a&gt; for a long time but
-have been moving towards writing CSS with a few &lt;a href="https://postcss.org/"&gt;PostCSS&lt;/a&gt;
-goodies in the last years. At first, I just replaced the &lt;code&gt;$...&lt;/code&gt; with
-&lt;code&gt;var(--...)&lt;/code&gt; and didn&amp;rsquo;t think much about it. The realization that CSS variables
-can be more than that came later. Edit basic values directly in the browser and
-immediately see the results! Change CSS depending on media queries or the
-cascade!&lt;/p&gt;
-&lt;p&gt;With all that power came back the wish to not just ship backend and HTML code
-in Django apps I (help) maintain but also reusable CSS, with a few overrideable
-CSS variables for basic changes to the visual style. Loading &lt;code&gt;.scss&lt;/code&gt; files from
-somewhere inside &lt;code&gt;venv/lib/python3.11/site-packages/&amp;lt;package&amp;gt;/styles/&lt;/code&gt; would of
-course have been possible, but very obscure. Also, not everyone puts their
-virtualenv at &lt;code&gt;venv&lt;/code&gt;, the &lt;code&gt;README&lt;/code&gt; instructions for those packages would
-quickly have become unwieldy. CSS variables paved the way for shipping CSS as a
-Django static file while still allowing customizability by leveraging the
-functionality of the browser itself instead of the frontend build toolchain.&lt;/p&gt;
-&lt;h2&gt;Patterns for overrideable values&lt;/h2&gt;
-&lt;p&gt;A pattern for defining defaults for CSS variables is to always define the
-fallback (the example is intentionally bad but inspired by real world
-experiences when developing
-&lt;a href="https://github.com/feinheit/feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;):&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Less repetition (but trouble awaits)&lt;/h2&gt;
-&lt;p&gt;If &lt;code&gt;--box-background&lt;/code&gt; isn&amp;rsquo;t set the &lt;code&gt;var()&lt;/code&gt; function falls back to the second
-argument, &lt;code&gt;#222&lt;/code&gt;. Repeating this value over and over gets annoying quickly, so
-you define a few defaults on the &lt;code&gt;:root&lt;/code&gt; element and use those variables in the
-code, without specifying the default again:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The project can now override the default background color using:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#444&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#ccc&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Of course now you&amp;rsquo;re back at the mercy of CSS loading order. If the app&amp;rsquo;s CSS
-is loaded first, everything works. If not, your custom value is immediately
-overwritten. You could avoid this by overwriting the default lower in the cascade:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#444&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#ccc&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Great, everything works again!&lt;/p&gt;
-&lt;p&gt;Later, the box also contains a button which uses a different background but the
-same foreground, so of course we add more variables in the package:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-button-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#333&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--box-button-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;What happens now when overwriting the &lt;code&gt;--box-foreground&lt;/code&gt; variable just for the
-&lt;code&gt;.box&lt;/code&gt; element?&lt;/p&gt;
-&lt;p&gt;You&amp;rsquo;re not sure? I certainly wasn&amp;rsquo;t and am not. But what I remember happening
-was that the overridden foreground color was just applied to the text and not
-to the button itself. I was confused (it seems clearer in hindsight&amp;hellip;)&lt;/p&gt;
-&lt;h2&gt;A better way&lt;/h2&gt;
-&lt;p&gt;If values are supposed to be overridden and only used inside components, a
-better way is to define local CSS for components by following a convention
-(underscore prefix for local/private variables):&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;/* Defined on .box, not :root */&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#222&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#fff&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_button-background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-button-background&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#333&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--_button-foreground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;--box-button-foreground&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_foreground&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And then you only use the prefixed versions inside the component:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;box__button&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_button&lt;/span&gt;&lt;span class="nv"&gt;-background&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;var&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;_button&lt;/span&gt;&lt;span class="nv"&gt;-foreground&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;--box-*&lt;/code&gt; variables are undefined by default; the only time when they are
-set is when the user of the package wants to override those values. If you only
-overide the box foreground the button also inherits the new foreground color.
-And while there would certainly be a way to achieve the same thing with the old
-way above it&amp;rsquo;s certainly not as simple to explain.&lt;/p&gt;
-&lt;p&gt;The reason why it&amp;rsquo;s simple to explain is &lt;strong&gt;immutability&lt;/strong&gt;. The CSS variables
-which are overrideable by the user are only ever read by the package, never
-written to.&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:variables"&gt;
-&lt;p&gt;Custom properties would probably be the more correct naming, but CSS variables is nicer to say.&amp;#160;&lt;a class="footnote-backref" href="#fnref:variables" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry></feed>
+&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry></feed>

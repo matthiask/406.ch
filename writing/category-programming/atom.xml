@@ -1,5 +1,45 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-12-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-json-schema-editor</title><link href="https://406.ch/writing/django-json-schema-editor/" rel="alternate" /><id>https://406.ch/writing/django-json-schema-editor/</id><published>2023-12-13T12:00:00Z</published><updated>2023-12-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-json-schema-editor&lt;/h1&gt;&lt;p&gt;I have extracted a JSON editing component based on
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2023-12-15T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 50)</title><link href="https://406.ch/writing/weeknotes-2023-week-50/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-50/</id><published>2023-12-15T12:00:00Z</published><updated>2023-12-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 50)&lt;/h1&gt;&lt;h2&gt;django-imagefield&lt;/h2&gt;
+&lt;p&gt;The path building scheme used by &lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield&lt;/a&gt; has proven problematic: It&amp;rsquo;s too likely that processed images will have the same path.&lt;/p&gt;
+&lt;p&gt;I have changed the strategy used for generating paths to use more data from the
+source; it&amp;rsquo;s now possible (and recommended!) to set &lt;code&gt;IMAGEFIELD_BIN_DEPTH&lt;/code&gt; to
+a value greater than 1; 2 or 3 should be sufficient. The default value is 1
+which corresponds to the old default so that the change won&amp;rsquo;t be backwards
+incompatible. However, you&amp;rsquo;ll always get a deprecation warning if you don&amp;rsquo;t set
+a bigger value yourself. The default will probably change in the future.&lt;/p&gt;
+&lt;h2&gt;Advent of Code&lt;/h2&gt;
+&lt;p&gt;I have always felt a bit as an imposter because I do not have any formal CS
+education; not so much in the last few years but certainly earlier in my
+career. I have enjoyed participating in the &lt;a href="https://adventofcode.com/"&gt;Advent of Code
+2022&lt;/a&gt; a lot and I have definitely learned to know
+when to use and how to use a few algorithms I didn&amp;rsquo;t even know before. I&amp;rsquo;m
+again working through the puzzles in my own pace and have managed to solve
+almost all of them up to today this year. There still are some puzzles where I
+don&amp;rsquo;t even know how to start the second part 😅.&lt;/p&gt;
+&lt;h2&gt;Hosting&lt;/h2&gt;
+&lt;p&gt;We&amp;rsquo;re still hosting most sites on virtualized servers, without any containers
+or any of the new stuff. I&amp;rsquo;m finally reaching the point where the downsides of
+this approach start to drag new projects down and the workarounds start looking
+worse than maybe switching to containers or even Kubernetes. Wish me luck, I&amp;rsquo;m
+more confused than I&amp;rsquo;ve been in years.&lt;/p&gt;
+&lt;h2&gt;Health&lt;/h2&gt;
+&lt;p&gt;To absolutely nobody&amp;rsquo;s surprise the family and myself have continued to be sick
+in the last two weeks. Nothing really bad happened, so we&amp;rsquo;re still lucky.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s unfortunately no way to solve a societal problem individually, so that
+will probably continue to be our life for now.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.18&lt;/a&gt;: See
+  above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20.1&lt;/a&gt;: Added
+  additional validation (cleaning) checks. Showing error messages is
+  preferrable to crashing with &lt;code&gt;IntegrityError&lt;/code&gt; exceptions after all.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 2.2.0&lt;/a&gt;: Hatchling
+  seems to dislike it if the project name and the Python module name do not
+  match. I actually like &lt;code&gt;django-js-asset&lt;/code&gt;&amp;rsquo;s Python module to be &lt;code&gt;js_asset&lt;/code&gt;
+  but I&amp;rsquo;m beginning to rethink this decision.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.4&lt;/a&gt;: See &lt;a href="https://406.ch/writing/django-json-schema-editor/"&gt;the post from this week&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-json-schema-editor</title><link href="https://406.ch/writing/django-json-schema-editor/" rel="alternate" /><id>https://406.ch/writing/django-json-schema-editor/</id><published>2023-12-13T12:00:00Z</published><updated>2023-12-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-json-schema-editor&lt;/h1&gt;&lt;p&gt;I have extracted a JSON editing component based on
 &lt;a href="https://www.npmjs.com/package/@json-editor/json-editor"&gt;@json-editor/json-editor&lt;/a&gt;
 from a client&amp;rsquo;s project and released it as open source. It isn&amp;rsquo;t the first JSON editing component by far but I like it a lot for the following reasons:&lt;/p&gt;
 &lt;ul&gt;
@@ -860,8 +900,4 @@ writing too much code instead of reusing already existing functionality.&lt;/p&g
 &lt;p&gt;I notice that writing is the first thing I start skipping when I have to
 prioritize. Programming, biking, gardening come first. That&amp;rsquo;s fine, really. But
 I&amp;rsquo;m still a bit sad that I do not manage to at least put out a short weekly
-weeknotes entry.&lt;/p&gt;</summary></entry><entry><title>FeinCMS is a dead end (but feincms3 is not)</title><link href="https://406.ch/writing/feincms-is-a-dead-end-but-feincms3-is-not/" rel="alternate" /><id>https://406.ch/writing/feincms-is-a-dead-end-but-feincms3-is-not/</id><published>2023-06-19T12:00:00Z</published><updated>2023-06-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;FeinCMS is a dead end (but feincms3 is not)&lt;/h1&gt;
-&lt;p&gt;I wouldn&amp;rsquo;t encourage people to start new sites with FeinCMS. Five years ago I wrote that &lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS is used in a few flagship projects which we’re still actively developing, which means that FeinCMS won’t be going away for years to come.&lt;/a&gt; That&amp;rsquo;s still true but less and less so. We&amp;rsquo;re actively moving away from FeinCMS where we can, mostly towards feincms3 and django-content-editor.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/"&gt;FeinCMS lives on in django-content-editor and feincms3&lt;/a&gt;; not only in spirit but also in (code) history, since django-content-editor contains the whole history of FeinCMS up to and including the beginning of 2016.&lt;/p&gt;
-&lt;p&gt;The implementation of FeinCMS is too expensive to clean up without breaking backwards compatibility. I still wish I had pursued an incremental way back then which would have allowed us to evolve old projects to the current best way of doing things (tm), but it didn&amp;rsquo;t happen and I&amp;rsquo;m not shedding too many tears about that since I&amp;rsquo;m quite happy with where we&amp;rsquo;re at today.&lt;/p&gt;
-&lt;p&gt;That basically means that I won&amp;rsquo;t put any effort into &lt;a href="https://406.ch/writing/bringing-feincms-and-django-content-editorfeincms3-closer-together/"&gt;bringing FeinCMS and django-content-editor closer together&lt;/a&gt;. I haven&amp;rsquo;t spent much time on that anyway but now my mind is made up that this wouldn&amp;rsquo;t be time well spent. That being said, some of the items mentioned in the blog post linked above are available in django-content-editor now.&lt;/p&gt;</summary></entry></feed>
+weeknotes entry.&lt;/p&gt;</summary></entry></feed>
