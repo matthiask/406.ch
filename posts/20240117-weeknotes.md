@@ -1,7 +1,6 @@
 Title: Weeknotes (2024 week 03)
 Date: 2024-01-17
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 ## Djangonaut Space
 
