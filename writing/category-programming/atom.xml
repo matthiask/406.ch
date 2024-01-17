@@ -1,5 +1,23 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-01-03T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 01)</title><link href="https://406.ch/writing/weeknotes-2024-week-01/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-01/</id><published>2024-01-03T12:00:00Z</published><updated>2024-01-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 01)&lt;/h1&gt;&lt;p&gt;First weeknotes post for 2024! Happy new year!&lt;/p&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-01-17T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 03)</title><link href="https://406.ch/writing/weeknotes-2024-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-03/</id><published>2024-01-17T12:00:00Z</published><updated>2024-01-17T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 03)&lt;/h1&gt;&lt;h2&gt;Djangonaut Space&lt;/h2&gt;
+&lt;p&gt;I wish all participants a good time and much success. I do not have anything to do with it really but I enjoy the idea a lot and maybe there will be a pull request or two to review.&lt;/p&gt;
+&lt;h2&gt;Kubernetes&lt;/h2&gt;
+&lt;p&gt;After years and years of hosting all sites on VPS I have finally reached the point where the old setup is more annoying to work with than switching to a new one. I have searched long for a solution which wasn&amp;rsquo;t as limited as some PaaS and as complex as going full Kubernetes, and where I can still delegate the responsibility of actually keeping things up and running to other people. In the end I have now accepted that such a thing doesn&amp;rsquo;t exist; either you have the limitations of a ready made solution, the limitation of having to open many many support tickets or the problem of having to learn Kubernetes (or something similar) with its extremely steep learning curve.&lt;/p&gt;
+&lt;p&gt;After spending days with it I&amp;rsquo;m slowly getting to the point where setting up local development environments and deploying changes is fun again. I&amp;rsquo;m using the GitOps paradigm; while I&amp;rsquo;m still building and uploading Docker (podman) images from the local development environment everything else is automated and goes through a Git based process. That&amp;rsquo;s much nicer than clicking around in some interface or copy pasting obscure commands into the console.&lt;/p&gt;
+&lt;p&gt;The biggest problem I encountered was (perhaps unsurprisingly) managing secrets as a team. It seems to me that while &lt;a href="https://github.com/bitnami-labs/sealed-secrets/"&gt;sealed secrets&lt;/a&gt; work great as an individual developer they don&amp;rsquo;t really offer straightforward solutions to avoid different people overwriting and resetting each others secrets when updating them. I&amp;rsquo;m a happy user of the external secrets operator and using some cloud service to actually store those secrets.&lt;/p&gt;
+&lt;p&gt;I have started using &lt;a href="https://github.com/emmett-framework/granian/"&gt;granian&lt;/a&gt; in production. I like the idea of a Rust-based ASGI/WSGI server. Nothing mission critical yet. My idea is to build confidence in the software stack.&lt;/p&gt;
+&lt;h2&gt;Compulsory social measures&lt;/h2&gt;
+&lt;p&gt;The more I learn about how Switzerland treats its citizens the more I wonder about the ways in which humans can mistreat other humans in a so called civilized and peaceful society.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s not exactly a new topic for me, but working on platforms which help remember and which help introducing people to the history certainly causes a heightened awareness for issues such as these.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.bj.admin.ch/bj/en/home/gesellschaft/fszm.html"&gt;More on this&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20.2&lt;/a&gt;: It
+  previously wasn&amp;rsquo;t possible to filter the list of sites to only show those
+  sites which do &lt;em&gt;not&lt;/em&gt; have a default language. This has been fixed.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.10&lt;/a&gt;: It&amp;rsquo;s now actually possible to use the JSON editor outside inlines! That was a fun bug&amp;hellip; not. Apart from the mentioned bug this new release mostly contains fixes to the styles. We&amp;rsquo;re slowly getting there.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.16&lt;/a&gt;: I didn&amp;rsquo;t do anything except for the changelog and the release. That&amp;rsquo;s alright. The release contains a few minor fixes.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 01)</title><link href="https://406.ch/writing/weeknotes-2024-week-01/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-01/</id><published>2024-01-03T12:00:00Z</published><updated>2024-01-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 01)&lt;/h1&gt;&lt;p&gt;First weeknotes post for 2024! Happy new year!&lt;/p&gt;
 &lt;h2&gt;Looking back on 2023&lt;/h2&gt;
 &lt;h3&gt;Writing&lt;/h3&gt;
 &lt;p&gt;I have published almost 40 posts last year. That&amp;rsquo;s almost as many posts as I published in the time period from 2014 to 2023. &lt;a href="https://jacobian.org/2021/mar/9/coworking-to-write-more/"&gt;Coworking to write more&lt;/a&gt; does work.&lt;/p&gt;
@@ -856,48 +874,4 @@ gunicorn/nginx didn&amp;rsquo;t.&lt;/p&gt;
 &lt;p&gt;In the end, I had to change &lt;code&gt;content_type="application/zip"&lt;/code&gt; to
 &lt;code&gt;content_type="application/x-zip-compressed"&lt;/code&gt;. I still don&amp;rsquo;t know what changed
 and I have only theories why that&amp;rsquo;s necessary, but maybe it helps someone else.
-Sometimes it&amp;rsquo;s better to be dumber about it.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 28)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.2&lt;/a&gt;: Made the
-  sanitizer&amp;rsquo;s configuration initialization more strict. Strings cannot be used
-  anymore in places where the sanitizer expects a set (resp. any iterable).
-  It&amp;rsquo;s useful that strings are iterable in Python and I wouldn&amp;rsquo;t want to change
-  that, but the fact that &lt;code&gt;("class")&lt;/code&gt; is a string and not a tuple makes me sad.
-  The fact that tuples are created by &lt;code&gt;,&lt;/code&gt; and not by &lt;code&gt;()&lt;/code&gt; will always trip up
-  people.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites
-  0.1&lt;/a&gt;: The version number
-  is wrong but whatever. I&amp;rsquo;m certainly happy with the state of things. The big
-  change in 0.1 is that &lt;code&gt;Page.get_absolute_url&lt;/code&gt; no longer generates
-  protocol-relative URLs. Depending on the value of &lt;code&gt;SECURE_SSL_REDIRECT&lt;/code&gt; it
-  automatically prepends either &lt;code&gt;http:&lt;/code&gt; or &lt;code&gt;https:&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.15&lt;/a&gt;:
-  django-authlib&amp;rsquo;s admin Single Sign On module now supports a hook to
-  automatically create staff users when a matching user doesn&amp;rsquo;t exist already.
-  I don&amp;rsquo;t plan to use this functionality myself and I have recommended people
-  to implement the functionality themselves using the tools in django-authlib
-  if they need it, but the change was so small and well-contained that adding
-  it to the core made sense to me.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;pipx inject&lt;/h2&gt;
-&lt;p&gt;We learned that &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; seems to remember injected
-packages even across &lt;code&gt;pipx reinstall&lt;/code&gt; invocations. Not too surprising now that
-we know it, but we certainly spent some time scratching our heads. &lt;code&gt;pipx
-uninject&lt;/code&gt; was the thing we needed to stop pipx from installing an old version
-of a dependency instead of the one being specified in &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;hatchling and data files&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m very confused by the way &lt;a href="https://hatch.pypa.io/"&gt;hatchling&lt;/a&gt; sometimes
-includes data files and sometimes it doesn&amp;rsquo;t. I had to add &lt;code&gt;[tool.hatch.build]
-include=["authlib/"]&lt;/code&gt; to &lt;a href="https://github.com/matthiask/django-authlib/commit/67d4673e4039eac277b5d2557c0736c1f01442ac"&gt;django-authlib&amp;rsquo;s &lt;code&gt;pyproject.toml&lt;/code&gt;
-file&lt;/a&gt;
-to make it include HTML files from subpackages. Maybe the subpackages are the
-reason, but I&amp;rsquo;m not sure.&lt;/p&gt;
-&lt;h2&gt;Payment providers that must not be named&lt;/h2&gt;
-&lt;p&gt;I have spent hours and hours battling with the badly documented, incomplete,
-inconsistent and confusing API of a (not that well known) payment provider
-based in Switzerland. I&amp;rsquo;m surprised that this still happens years and years
-after Stripe started offering a really well thought out and documented API
-geared towards programmers. It&amp;rsquo;s really sad because when the same structure is
-named with differing naming conventions (e.g. &lt;code&gt;snake_case&lt;/code&gt; vs. &lt;code&gt;camelCase&lt;/code&gt;) in
-different parts of the API you just know that somebody spent too much time
-writing too much code instead of reusing already existing functionality.&lt;/p&gt;</summary></entry></feed>
+Sometimes it&amp;rsquo;s better to be dumber about it.&lt;/p&gt;</summary></entry></feed>
