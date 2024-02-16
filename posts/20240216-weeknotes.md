@@ -1,9 +1,8 @@
 Title: Weeknotes (2024 week 07)
 Date: 2024-02-16
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
-This is a short weeknotes entry which mainly contains a large list of releases. The reason for this is that I haven't written a blogpost in several weeks. The last time this has happened was last year in September. I don't feel bad though -- I have checked off a large chunk of my company-internal writing to dos.
+This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven't published a weeknotes entry in weeks.
 
 ## Releases
 
@@ -17,3 +16,4 @@ This is a short weeknotes entry which mainly contains a large list of releases. 
 - [django-ckeditor 6.7.1](https://pypi.org/project/django-ckeditor/): See above.
 - [django-json-schema-editor 0.0.11](https://pypi.org/project/django-json-schema-editor/): Fixed a crash which happened when not providing the optional (!) configuration. Shit happens. I should really have a test suite for this package.
 - [feincms3 4.5.2](https://pypi.org/project/feincms3/): Disables the CKEditor version check.
+- [django-content-editor 6.4](https://pypi.org/project/django-content-editor/): The first release since December 2022! Very stable software. The editor now restores the collapsed state of inlines and the scroll position when using "Save and continue editing". This is especially useful if editing an object with many content blocks.
