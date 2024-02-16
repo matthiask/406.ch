@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-02-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-ckeditor</title><link href="https://406.ch/writing/django-ckeditor/" rel="alternate" /><id>https://406.ch/writing/django-ckeditor/</id><published>2024-02-14T12:00:00Z</published><updated>2024-02-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-ckeditor&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-02-16T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 07)&lt;/h1&gt;&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.23&lt;/a&gt;: Only small changes, mainly updated the package for current Django and Python versions.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.4.6&lt;/a&gt;: A minor change: Swallow exceptions which happen during startup when clobbering the scripts data fails. As an aside: I find it funny that I have discovered the &lt;code&gt;.f3cc&lt;/code&gt; class in some cookie banner blocklists. It feels good to be recognized even if this maybe isn&amp;rsquo;t the nicest way, but it works for me since I actually do not like cookie banners either. At least feincms3-cookiecontrol doesn&amp;rsquo;t inject anything without users&amp;rsquo; consent, and doesn&amp;rsquo;t require a third party service to run.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_simple_redirects/"&gt;django-simple-redirects 2.2.0&lt;/a&gt;: Minor release which adds a search field to the admin changelist. django-simple-redirects is a repackaged version of &lt;code&gt;django.contrib.redirects&lt;/code&gt; without the &lt;code&gt;django.contrib.sites&lt;/code&gt; dependency.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv 6.2&lt;/a&gt;: &lt;code&gt;django_cache_url&lt;/code&gt; now supports parsing redis configuration for a leader-replica redis installation with a read-write leader host and read-only replica hosts. I use the same configuration format as &lt;a href="https://github.com/epicserve/django-cache-url"&gt;django-cache-url&lt;/a&gt; does.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.3&lt;/a&gt;: I haven&amp;rsquo;t done much here, just some reviewing here and there. I enjoy the Djangonaut Space contributions a lot.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14&lt;/a&gt;: I have removed the constraint which enforces unique names for subfolders. Enforcing the uniqueness does make sense, but it also makes bulk-updating the media library using serialized data more painful than it should be. It&amp;rsquo;s a clear case of worse is better for me. If people want to confuse themselves I&amp;rsquo;m not going to stop them (anymore, in this case) but it makes the rest of the code so much easier to write that it&amp;rsquo;s not even funny.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.3&lt;/a&gt;: This release contains a nice contribution which removes some whitespace which has been added by the sanitizer when merging adjacent tags of the same type, e.g. &lt;code&gt;&amp;lt;strong&amp;gt;abc&amp;lt;/strong&amp;gt;&amp;lt;strong&amp;gt;def&amp;lt;/strong&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.1&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.11&lt;/a&gt;: Fixed a crash which happened when not providing the optional (!) configuration. Shit happens. I should really have a test suite for this package.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5.2&lt;/a&gt;: Disables the CKEditor version check.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.4&lt;/a&gt;: The first release since December 2022! Very stable software. The editor now restores the collapsed state of inlines and the scroll position when using &amp;ldquo;Save and continue editing&amp;rdquo;. This is especially useful if editing an object with many content blocks.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-ckeditor</title><link href="https://406.ch/writing/django-ckeditor/" rel="alternate" /><id>https://406.ch/writing/django-ckeditor/</id><published>2024-02-14T12:00:00Z</published><updated>2024-02-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-ckeditor&lt;/h1&gt;
 &lt;p&gt;It has finally happened. The open source version of CKEditor 4 does not contain fixes for known problems, see &lt;a href="https://ckeditor.com/cke4/release/CKEditor-4.24.0-LTS"&gt;the CKEditor 4.24.0 LTS announcement&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I totally get why the CKEditor developers did this and can only thank them for all the work that went into the editor.&lt;/p&gt;
 &lt;p&gt;I wish I didn&amp;rsquo;t have to do the migration work to move basically everything to a different editor. The CKEditor 4 LTS version is only expected to be supported until the end of 2026 and I have a few projects which will be around far longer than this (or at least I hope so). Therefore, buying the LTS package would only delay the inevitable. CKEditor 5 is a completely different editor and uses the GPL license, so that&amp;rsquo;s not really an option either. TinyMCE is well known and I have been using it much earlier in my career, but reimplementing plugins isn&amp;rsquo;t fun to do.&lt;/p&gt;
@@ -757,48 +771,4 @@ gunicorn/nginx didn&amp;rsquo;t.&lt;/p&gt;
 &lt;p&gt;In the end, I had to change &lt;code&gt;content_type="application/zip"&lt;/code&gt; to
 &lt;code&gt;content_type="application/x-zip-compressed"&lt;/code&gt;. I still don&amp;rsquo;t know what changed
 and I have only theories why that&amp;rsquo;s necessary, but maybe it helps someone else.
-Sometimes it&amp;rsquo;s better to be dumber about it.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 28)&lt;/h1&gt;&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.2&lt;/a&gt;: Made the
-  sanitizer&amp;rsquo;s configuration initialization more strict. Strings cannot be used
-  anymore in places where the sanitizer expects a set (resp. any iterable).
-  It&amp;rsquo;s useful that strings are iterable in Python and I wouldn&amp;rsquo;t want to change
-  that, but the fact that &lt;code&gt;("class")&lt;/code&gt; is a string and not a tuple makes me sad.
-  The fact that tuples are created by &lt;code&gt;,&lt;/code&gt; and not by &lt;code&gt;()&lt;/code&gt; will always trip up
-  people.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites
-  0.1&lt;/a&gt;: The version number
-  is wrong but whatever. I&amp;rsquo;m certainly happy with the state of things. The big
-  change in 0.1 is that &lt;code&gt;Page.get_absolute_url&lt;/code&gt; no longer generates
-  protocol-relative URLs. Depending on the value of &lt;code&gt;SECURE_SSL_REDIRECT&lt;/code&gt; it
-  automatically prepends either &lt;code&gt;http:&lt;/code&gt; or &lt;code&gt;https:&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.15&lt;/a&gt;:
-  django-authlib&amp;rsquo;s admin Single Sign On module now supports a hook to
-  automatically create staff users when a matching user doesn&amp;rsquo;t exist already.
-  I don&amp;rsquo;t plan to use this functionality myself and I have recommended people
-  to implement the functionality themselves using the tools in django-authlib
-  if they need it, but the change was so small and well-contained that adding
-  it to the core made sense to me.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;pipx inject&lt;/h2&gt;
-&lt;p&gt;We learned that &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; seems to remember injected
-packages even across &lt;code&gt;pipx reinstall&lt;/code&gt; invocations. Not too surprising now that
-we know it, but we certainly spent some time scratching our heads. &lt;code&gt;pipx
-uninject&lt;/code&gt; was the thing we needed to stop pipx from installing an old version
-of a dependency instead of the one being specified in &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;hatchling and data files&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m very confused by the way &lt;a href="https://hatch.pypa.io/"&gt;hatchling&lt;/a&gt; sometimes
-includes data files and sometimes it doesn&amp;rsquo;t. I had to add &lt;code&gt;[tool.hatch.build]
-include=["authlib/"]&lt;/code&gt; to &lt;a href="https://github.com/matthiask/django-authlib/commit/67d4673e4039eac277b5d2557c0736c1f01442ac"&gt;django-authlib&amp;rsquo;s &lt;code&gt;pyproject.toml&lt;/code&gt;
-file&lt;/a&gt;
-to make it include HTML files from subpackages. Maybe the subpackages are the
-reason, but I&amp;rsquo;m not sure.&lt;/p&gt;
-&lt;h2&gt;Payment providers that must not be named&lt;/h2&gt;
-&lt;p&gt;I have spent hours and hours battling with the badly documented, incomplete,
-inconsistent and confusing API of a (not that well known) payment provider
-based in Switzerland. I&amp;rsquo;m surprised that this still happens years and years
-after Stripe started offering a really well thought out and documented API
-geared towards programmers. It&amp;rsquo;s really sad because when the same structure is
-named with differing naming conventions (e.g. &lt;code&gt;snake_case&lt;/code&gt; vs. &lt;code&gt;camelCase&lt;/code&gt;) in
-different parts of the API you just know that somebody spent too much time
-writing too much code instead of reusing already existing functionality.&lt;/p&gt;</summary></entry></feed>
+Sometimes it&amp;rsquo;s better to be dumber about it.&lt;/p&gt;</summary></entry></feed>
