@@ -1,5 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-02-16T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 07)&lt;/h1&gt;&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-02-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>My 2024 Development Setup</title><link href="https://406.ch/writing/my-2024-development-setup/" rel="alternate" /><id>https://406.ch/writing/my-2024-development-setup/</id><published>2024-02-28T12:00:00Z</published><updated>2024-02-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;My 2024 Development Setup&lt;/h1&gt;
+&lt;p&gt;I have been inspired by &lt;a href="https://micro.webology.dev/2024/02/18/my-development-setup.html"&gt;Jeff Triplett&amp;rsquo;s post&lt;/a&gt; to write this down. The main value &amp;ndash; if there&amp;rsquo;s value at all in this post &amp;ndash; lies in my ability to revisit it later and see if anything changed.&lt;/p&gt;
+&lt;h2&gt;Desk&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m using a standing desk since 2015 or 2016. I&amp;rsquo;m actually doing most of my work standing; when I&amp;rsquo;m tired or maybe after a sports session I sit down, but when I do that I mostly choose the sofa or a different table and get back to the standing desk as soon as possible. I have started using the standing desk when I was in therapy for severe back pain but I have come to like it a lot since then. I do have a chair but I don&amp;rsquo;t really use it all that often.&lt;/p&gt;
+&lt;p&gt;The greatest thing about a standing desk is that when I go to an event which involves a lot of standing around (or dancing!) I don&amp;rsquo;t get tired as fast as before :-)&lt;/p&gt;
+&lt;h2&gt;Hardware&lt;/h2&gt;
+&lt;p&gt;My main machines are two Thinkpad notebooks, a Lenovo X1 carbon and a Lenovo X1 nano. I bought the latter because my previous notebook broke during a warranty repair by a technician and I really really had to have a notebook for the coming days and I already had ordered the former, but it wasn&amp;rsquo;t to be delivered for several weeks. That was annoying. The good thing about it is that I normally do not have to carry around anything when going to the office, since I leave one of them in the office most of the time. I&amp;rsquo;m using a 27&amp;rdquo; WQHD monitor when I work. I have used a 32&amp;rdquo; 4k monitor for some time, but I have noticed that I&amp;rsquo;m starting to spend time searching for windows. I don&amp;rsquo;t like curved or widescreens monitors at all (I have tried them). I thought I&amp;rsquo;d never reach the point when I would reduce the available screen size voluntarily, but here I am.&lt;/p&gt;
+&lt;p&gt;I also have a desktop machine at home, but I mostly use it for gaming, and only a little development on the side. It has a 11th gen i7, 32 GB ram and a GeForce RTX 30 series graphics card.&lt;/p&gt;
+&lt;p&gt;This also means that I&amp;rsquo;m switching computers all the time, and basically everything has to be synced to the cloud all the time. I&amp;rsquo;m using git since the spring of 2006 and push everything all the time anyway. And when I&amp;rsquo;m not, I&amp;rsquo;m mostly using web-based software. This means that I mostly don&amp;rsquo;t care about backing up my data, I let the cloud companies and the NSA do it.&lt;/p&gt;
+&lt;h2&gt;Software&lt;/h2&gt;
+&lt;p&gt;After many years on macOS and a few years on Windows with WSL I am back to using Linux without a VM. I am using Fedora because I actually like the unmodified GNOME 3, and because I prefer flatpaks to snaps. RPM/DNF are alright, but I&amp;rsquo;m still more accustomed to DEB/APT.&lt;/p&gt;
+&lt;p&gt;I have left macOS because of the touch bar and the terrible keyboard, and Windows because I don&amp;rsquo;t want ads everywhere on &lt;em&gt;my&lt;/em&gt; computer.&lt;/p&gt;
+&lt;h2&gt;Development&lt;/h2&gt;
+&lt;p&gt;I use a terminal emulator (gnome-terminal on Linux, &lt;a href="https://alacritty.org/"&gt;alacritty&lt;/a&gt; on Windows/WSL) to run &lt;a href="https://github.com/tmux/tmux/"&gt;tmux&lt;/a&gt;, and start everything I need directly in there.&lt;/p&gt;
+&lt;p&gt;I have tried escaping vim many times but have always failed. (No, not &lt;em&gt;exiting&lt;/em&gt; vim, thanks for your help.) The various VIM modes in popular editors such as VisualStudio Code just do not cut it. I&amp;rsquo;m currently editing code in &lt;a href="https://neovim.io/"&gt;neovim&lt;/a&gt; with a few plugins. The only really important plugin is &lt;a href="https://github.com/ctrlpvim/ctrlp.vim"&gt;ctrlp.vim&lt;/a&gt;. Ctrl-P with fuzzy matching is a great way to open files. I like vi, and I tell people that I use it when I&amp;rsquo;m asked but I do not suggest to people that they should use it as well. The learning curve isn&amp;rsquo;t worth it except maybe if you do a lot of system administration, I don&amp;rsquo;t know.&lt;/p&gt;
+&lt;p&gt;I have a VisualStudio Code installation laying around for using Live Share. I think it&amp;rsquo;s a great way for helping others solve a particular problem in a project they are working on, much better than screen sharing and probably even better than sitting at a table together, just because having two keyboards and cursors is so nice.&lt;/p&gt;
+&lt;p&gt;I mostly only use virtualenvs created using &lt;code&gt;python3 -m venv venv&lt;/code&gt; for local development, no containers or anything. I definitely see the value of containers for deployment but I haven&amp;rsquo;t yet gotten around to setting things up for local development. This means that my machine always (also) runs a PostgreSQL and a redis server and maybe some other tools. Python 3 upgrades are mostly painless. NodeJS upgrades have sometimes been painful, but I avoid most of the pain by upgrading relatively late.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 07)&lt;/h1&gt;&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
 &lt;h2&gt;Releases&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.23&lt;/a&gt;: Only small changes, mainly updated the package for current Django and Python versions.&lt;/li&gt;
@@ -802,72 +818,4 @@ no need to feel challenged by this post.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms 0.4&lt;/a&gt;: Switched to hatchling and ruff. Started defining default icons for the form fields &lt;a href="https://django-content-editor.readthedocs.io/"&gt;content editor&lt;/a&gt; plugins.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7&lt;/a&gt;: I&amp;rsquo;m still maintaining the CKEditor 4 integration for Django even though CKEditor 4 itself isn&amp;rsquo;t supported anymore. Minor updates to the editor itself and Pillow compatibility updates.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.3.2&lt;/a&gt;: The cookie banner doesn&amp;rsquo;t generate an empty &lt;code&gt;&amp;lt;div class="f3cc"&amp;gt;&lt;/code&gt; element anymore if there&amp;rsquo;s nothing to add inside (e.g. if the user only accepted necessary cookies).&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>How ruff changed my Python programming habits</title><link href="https://406.ch/writing/how-ruff-changed-my-python-programming-habits/" rel="alternate" /><id>https://406.ch/writing/how-ruff-changed-my-python-programming-habits/</id><published>2023-07-26T12:00:00Z</published><updated>2023-07-26T12:00:00Z</updated><summary type="html">&lt;h1&gt;How ruff changed my Python programming habits&lt;/h1&gt;
-&lt;p&gt;&lt;a href="https://beta.ruff.rs/"&gt;ruff&lt;/a&gt; isn&amp;rsquo;t just a faster replacement for flake8, isort
-and friends.&lt;/p&gt;
-&lt;p&gt;With other Python-based formatters and linters there&amp;rsquo;s always a trade off
-between development speed (waiting on &lt;code&gt;git commit&lt;/code&gt; is very boring) and
-strictness.&lt;/p&gt;
-&lt;p&gt;ruff is so fast that enabling additional rules is practically free in terms of
-speed; the only question is if those rules lead to better, or maybe just to
-more correct and consistent code.&lt;/p&gt;
-&lt;p&gt;I have long been using &lt;a href="https://pre-commit.com/"&gt;pre-commit&lt;/a&gt;, and even longer
-flake8, black, isort. I have written a piece about &lt;a href="https://406.ch/writing/flake8-and-value-standards/"&gt;flake8 and the value of
-standards&lt;/a&gt; almost 9 years
-ago and have continued moving in the mentioned direction ever since.&lt;/p&gt;
-&lt;p&gt;These days I have enabled a wide variety of rules. I&amp;rsquo;m not sold on all of them
-(looking at you, pylint) and I&amp;rsquo;m definitely not of the opinion that rules which
-I&amp;rsquo;m not using currently are worthless. I didn&amp;rsquo;t even know most of these rules
-before starting to use ruff, and ruff making them easy and painless to use
-(without a measureable performance penalty) has certainly lead to me annoying
-my coworkers with a growing set of enabled rules.&lt;/p&gt;
-&lt;h2&gt;Rules&lt;/h2&gt;
-&lt;p&gt;The current ruleset and some justifications for it follows.&lt;/p&gt;
-&lt;h3&gt;pyflakes, pycodestyle&lt;/h3&gt;
-&lt;p&gt;No justification necessary, really.&lt;/p&gt;
-&lt;h3&gt;mccabe&lt;/h3&gt;
-&lt;p&gt;I like the cyclomatic complexity checker, but I have relaxed it a bit. I find it very useful to avoid complex code, but some code is totally straightforward (e.g. building a queryset from a wide variety of query parameters) but still has many &lt;code&gt;if&lt;/code&gt; statements. I&amp;rsquo;d rather allow more complexity instead of sprinkling the code with &lt;code&gt;# noqa&lt;/code&gt; statements.&lt;/p&gt;
-&lt;h3&gt;isort&lt;/h3&gt;
-&lt;p&gt;Sorted imports are great.&lt;/p&gt;
-&lt;h3&gt;pep8-naming&lt;/h3&gt;
-&lt;p&gt;Mostly great except when it flags Django&amp;rsquo;s migration files. The filenames
-always start with numbers and that&amp;rsquo;s obviously not a valid Python module name,
-but it&amp;rsquo;s not supposed to be.&lt;/p&gt;
-&lt;h3&gt;pyupgrade&lt;/h3&gt;
-&lt;p&gt;pyupgrade is totally awesome.&lt;/p&gt;
-&lt;h3&gt;flake-2020&lt;/h3&gt;
-&lt;p&gt;Avoiding non future-proof uses of &lt;code&gt;sys.version&lt;/code&gt; and &lt;code&gt;sys.version_info&lt;/code&gt; is a good idea, no questions about that.&lt;/p&gt;
-&lt;h3&gt;flake8-boolean-trap&lt;/h3&gt;
-&lt;p&gt;Sometimes annoying, mostly useful. I don&amp;rsquo;t like that the plugin flags e.g. &lt;code&gt;with_tree_fields(True)&lt;/code&gt; or &lt;code&gt;with_tree_fields(False)&lt;/code&gt; because I don&amp;rsquo;t think this could be possibly misread. But, apart from these edge cases it really is a good idea, especially since keyword-only arguments exist and those aren&amp;rsquo;t flagged by this rule.&lt;/p&gt;
-&lt;h3&gt;flake8-bugbear&lt;/h3&gt;
-&lt;p&gt;Mostly useful. I have disabled the &lt;code&gt;zip()&lt;/code&gt; without &lt;code&gt;strict=&lt;/code&gt; warning.&lt;/p&gt;
-&lt;h3&gt;flake8-comprehensions&lt;/h3&gt;
-&lt;p&gt;Checks for unnecessary conversions between generators and lists, sets, tuples or dicts.&lt;/p&gt;
-&lt;h3&gt;flake8-django&lt;/h3&gt;
-&lt;p&gt;I actually like consistency. I also like flagging &lt;code&gt;fields = "__all__"&lt;/code&gt;, but this check shouldn&amp;rsquo;t trigger in admin &lt;code&gt;ModelForm&lt;/code&gt; classes, really. I probably have to add another entry to &lt;code&gt;[tool.ruff.per-file-ignores]&lt;/code&gt; for this.&lt;/p&gt;
-&lt;h3&gt;flake8-pie&lt;/h3&gt;
-&lt;p&gt;Quite a random assortment of rules. I like the &lt;code&gt;no-unnecessary-pass&lt;/code&gt; and &lt;code&gt;no-pointless-statements&lt;/code&gt; rules, among others.&lt;/p&gt;
-&lt;h3&gt;flake8-simplify&lt;/h3&gt;
-&lt;p&gt;Nice simplifications. I&amp;rsquo;m not sure if ternary opeartors are always a plus, especially since they hide the branching from &lt;a href="https://pypi.org/project/coverage/"&gt;coverage&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;flake8-gettext&lt;/h3&gt;
-&lt;p&gt;Enormously useful and important. I don&amp;rsquo;t know how many times I have encountered broken code like &lt;code&gt;gettext("Hello {name}".format(name=name))&lt;/code&gt; instead of &lt;code&gt;gettext("Hello {name}").format(name=name)&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;pygrep-hooks&lt;/h3&gt;
-&lt;p&gt;Avoids &lt;code&gt;eval()&lt;/code&gt;. Avoids blanket &lt;code&gt;# noqa&lt;/code&gt; rules (always be specific!)&lt;/p&gt;
-&lt;h3&gt;pylint&lt;/h3&gt;
-&lt;p&gt;I have been using all pylint rules for some time. The pylint refactoring rules (&lt;code&gt;PLR&lt;/code&gt;) did prove to be very annoying so I have reverted to only enabling errors and warnings.&lt;/p&gt;
-&lt;p&gt;The two main offenders were PLR0913 (too many arguments) and PLR2004 (magic value comparison). The former would be fine if it would count keyword-only arguments differently; it&amp;rsquo;s certainly a good idea to avoid too many positional parameters, I don&amp;rsquo;t think keyword-only parameters are that bad. The latter is bad because often the magic value is really obvious. If you&amp;rsquo;re writing code for the web you shouldn&amp;rsquo;t have to use constants for the &lt;code&gt;200&lt;/code&gt; or &lt;code&gt;404&lt;/code&gt; status codes; one can assume that they are well known.&lt;/p&gt;
-&lt;h3&gt;RUF100&lt;/h3&gt;
-&lt;p&gt;Ruff is able to automatically remove &lt;code&gt;# noqa&lt;/code&gt; statements which don&amp;rsquo;t actually silence any warnings. That&amp;rsquo;s a great feature to have.&lt;/p&gt;
-&lt;h2&gt;Line length&lt;/h2&gt;
-&lt;p&gt;Yes, let&amp;rsquo;s go there. I still don&amp;rsquo;t use longer lines than +/- 80 characters, but
-I have disabled all line length warnings these days. I don&amp;rsquo;t want to be warned
-because I didn&amp;rsquo;t break a string across lines.&lt;/p&gt;
-&lt;h2&gt;Rules I don&amp;rsquo;t like&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;flake8-builtins: Too many boring warnings. I didn&amp;rsquo;t even want to know that
-  &lt;code&gt;copyright&lt;/code&gt; is a Python builtin.&lt;/li&gt;
-&lt;li&gt;flake8-logging-format: Not generally helpful. Avoiding different exception strings so that e.g. &lt;a href="https://sentry.io/welcome/"&gt;Sentry&lt;/a&gt; can group exceptions more easily is a good idea, but the rule generated so many false positives as to be not useful anymore.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Final words (for now)&lt;/h2&gt;
-&lt;p&gt;I really hope that Black is integrated into ruff one day.&lt;/p&gt;
-&lt;p&gt;Also, I hope that ESLint and prettier will be replaced by a faster tool. I have my eyes on a few alternatives, but they are not there yet for my use cases.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
