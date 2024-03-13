@@ -1,5 +1,67 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-02-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>My 2024 Development Setup</title><link href="https://406.ch/writing/my-2024-development-setup/" rel="alternate" /><id>https://406.ch/writing/my-2024-development-setup/</id><published>2024-02-28T12:00:00Z</published><updated>2024-02-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;My 2024 Development Setup&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-03-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-prose-editor – Prose-editing component for the Django admin</title><link href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/</id><published>2024-03-13T12:00:00Z</published><updated>2024-03-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-prose-editor – Prose-editing component for the Django admin&lt;/h1&gt;&lt;p&gt;During the last few days I have been working on a prose-editing component for
+the Django admin which will replace the basically dead
+&lt;a href="https://406.ch/writing/django-ckeditor/"&gt;django-ckeditor&lt;/a&gt; in all of my
+projects. It is based on &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;, in my opinion
+the greatest toolkit for building prose editors for the web.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s a screenshot:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="django-prose-editor screenshot" src="https://406.ch/assets/20240313-prose-editor.png" /&gt;&lt;/p&gt;
+&lt;p&gt;django-prose-editor is in active development; it&amp;rsquo;s &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;available on
+PyPI&lt;/a&gt; and is developed in the
+open &lt;a href="https://github.com/matthiask/django-prose-editor/"&gt;here on GitHub&lt;/a&gt;. The
+version at the time of writing is 0.2, and it&amp;rsquo;s not yet used in production
+environments, only in staging/preview environments. That will soon change
+though.&lt;/p&gt;
+&lt;h2&gt;Researching alternatives to django-ckeditor&lt;/h2&gt;
+&lt;p&gt;I have spent a lot of time evaluating alternatives. All of them are great
+choices, and I don&amp;rsquo;t want to bash any of them. But, I didn&amp;rsquo;t feel good betting on any of the choices from the &lt;a href="https://djangopackages.org/grids/g/wysiwyg/"&gt;WYSIWYG editors grid on Django Packages&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A few packages have potential licensing issues. CKEditor 5&amp;rsquo;s change to the GPL
+is what basically killed django-ckeditor. The upcoming TinyMCE 7 version will
+also change to the GPL according to the &lt;a href="https://github.com/tinymce/tinymce/"&gt;TinyMCE GitHub
+repository&lt;/a&gt;. Froala only has a free trial.
+The &lt;a href="https://github.com/summernote/django-summernote/"&gt;django-summernote app&lt;/a&gt;
+doesn&amp;rsquo;t have a dedicated maintainer, so I wouldn&amp;rsquo;t bet on it.
+&lt;a href="https://github.com/withlogicco/django-prose"&gt;django-prose&lt;/a&gt; uses Trix; there
+are various reasons why I didn&amp;rsquo;t want to bet on Trix, among them my personal
+experience that it sometimes gets into a buggy state where only a full page
+reload unfreezes the editor.&lt;/p&gt;
+&lt;p&gt;Other packages are basically &lt;a href="https://en.wikipedia.org/wiki/Markdown"&gt;Markdown&lt;/a&gt;
+editors. I like Markdown and use it for my blog. I don&amp;rsquo;t think Markdown is a
+good choice for a CMS which is used by people of many different skill levels. I
+don&amp;rsquo;t want to teach people to use the Markdown link syntax or the heading
+syntax even if the editor helps out a bit.&lt;/p&gt;
+&lt;p&gt;Some of the remaining choices are using JavaScript widgets which haven&amp;rsquo;t been
+updated for a really long time or they are really code editors, not WYSIWYG
+editors, also a no go.&lt;/p&gt;
+&lt;h2&gt;Deciding on going with ProseMirror&lt;/h2&gt;
+&lt;p&gt;I have worked with &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt; on and off since
+October 2015, soon after the crowdfunding ended. It is used in a project where
+people can write their own book with a standardized pipeline and process, where
+the technical side of the project is implemented using Django, ProseMirror and
+LaTeX. A hacked
+&lt;a href="https://github.com/ProseMirror/prosemirror-example-setup/"&gt;prosemirror-example-setup&lt;/a&gt;
+still is good enough for this project.&lt;/p&gt;
+&lt;p&gt;The ProseMirror deep dive came much later, only a few years back, when
+implementing an editor with more custom functionality such as annotations,
+different ways of marking up text and even interactive elements within the
+text, for example to use it as a cloze in teaching materials.&lt;/p&gt;
+&lt;p&gt;The learning curve is steep. I haven&amp;rsquo;t worked with another library which was so
+hard to get started with. It is my conviction that the reason for this is that
+rich-text editing is actually a hard problem. The ProseMirror architecture and
+implementation definitely makes sense when it finally clicks.&lt;/p&gt;
+&lt;p&gt;As additional bonuses the ProseMirror community is nice and ProseMirror is used
+in a few large software projects which make me believe that the software has a
+non-zero probability of being maintained in the long run.&lt;/p&gt;
+&lt;h2&gt;Current plans&lt;/h2&gt;
+&lt;p&gt;The only thing which is configurable right now is the server-side sanitizing of
+submitted HTML content. I plan on allowing some configurability, for example to
+disable links when the content will only be used inside a card teaser which
+itself is already a link. Too much configurability isn&amp;rsquo;t a good thing though in
+my mind, so I&amp;rsquo;ll probably be slow to add features and rather keep complexity
+low.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m definitely interested to hear from people who want to use the package but
+cannot do so right now or who would want some additional features. Issues and
+pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>My 2024 Development Setup</title><link href="https://406.ch/writing/my-2024-development-setup/" rel="alternate" /><id>https://406.ch/writing/my-2024-development-setup/</id><published>2024-02-28T12:00:00Z</published><updated>2024-02-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;My 2024 Development Setup&lt;/h1&gt;
 &lt;p&gt;I have been inspired by &lt;a href="https://micro.webology.dev/2024/02/18/my-development-setup.html"&gt;Jeff Triplett&amp;rsquo;s post&lt;/a&gt; to write this down. The main value &amp;ndash; if there&amp;rsquo;s value at all in this post &amp;ndash; lies in my ability to revisit it later and see if anything changed.&lt;/p&gt;
 &lt;h2&gt;Desk&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;m using a standing desk since 2015 or 2016. I&amp;rsquo;m actually doing most of my work standing; when I&amp;rsquo;m tired or maybe after a sports session I sit down, but when I do that I mostly choose the sofa or a different table and get back to the standing desk as soon as possible. I have started using the standing desk when I was in therapy for severe back pain but I have come to like it a lot since then. I do have a chair but I don&amp;rsquo;t really use it all that often.&lt;/p&gt;
@@ -807,15 +869,4 @@ no need to feel challenged by this post.&lt;/p&gt;
 &lt;p&gt;Also called the WET rule (Write Everything Twice). (Not coined by me.)&amp;#160;&lt;a class="footnote-backref" href="#fnref:wet" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 30)</title><link href="https://406.ch/writing/weeknotes-2023-week-30/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-30/</id><published>2023-07-28T12:00:00Z</published><updated>2023-07-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
-&lt;h2&gt;Async Django&lt;/h2&gt;
-&lt;p&gt;I have used &lt;a href="https://channels.readthedocs.io/"&gt;Django Channels&lt;/a&gt; successfully in a few projects from 2017 to 2019. A few months back I have worked with &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. And now I have finally started digging into using Django itself with an ASGI server, and not just for one or two views but also including the middleware stack etc since I also need authentication, not just an endpoint forwarding requests to a remote server. I have looked at &lt;a href="https://github.com/emmett-framework/granian"&gt;Granian&lt;/a&gt;, an RSGI/ASGI server written in Rust. But for now I am using &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Django truly has come a long way but there&amp;rsquo;s much left to do. Django 5.0 is looking great already, but 4.2 misses many pieces still. I am really really glad Django wants to stay backwards compatible but I wish I could wave a magic wand and upgrade everything to async. Adding &lt;code&gt;a&lt;/code&gt; prefixes everywhere for the async version is certainly a good compromise and probably the way to go but it&amp;rsquo;s just not that nice.&lt;/p&gt;
-&lt;p&gt;I have been playing around with making &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt;&amp;rsquo;s applications middleware async compatible because I want the full middleware stack to be async. The code is already released but undocumented and not even mentioned in the changelog. So, feel free to play around with it but it&amp;rsquo;s not supposed to be stable or supported yet.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.1&lt;/a&gt;: Switched to hatchling and ruff. Updated the feincms3-sites docs. Some async updates mentioned above. A Django 4.2 admin CSS update for the inline CKEditor.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms 0.4&lt;/a&gt;: Switched to hatchling and ruff. Started defining default icons for the form fields &lt;a href="https://django-content-editor.readthedocs.io/"&gt;content editor&lt;/a&gt; plugins.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7&lt;/a&gt;: I&amp;rsquo;m still maintaining the CKEditor 4 integration for Django even though CKEditor 4 itself isn&amp;rsquo;t supported anymore. Minor updates to the editor itself and Pillow compatibility updates.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.3.2&lt;/a&gt;: The cookie banner doesn&amp;rsquo;t generate an empty &lt;code&gt;&amp;lt;div class="f3cc"&amp;gt;&lt;/code&gt; element anymore if there&amp;rsquo;s nothing to add inside (e.g. if the user only accepted necessary cookies).&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/div&gt;</summary></entry></feed>

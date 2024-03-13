@@ -1,5 +1,67 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-02-16T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 07)&lt;/h1&gt;&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-03-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-prose-editor – Prose-editing component for the Django admin</title><link href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/</id><published>2024-03-13T12:00:00Z</published><updated>2024-03-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-prose-editor – Prose-editing component for the Django admin&lt;/h1&gt;&lt;p&gt;During the last few days I have been working on a prose-editing component for
+the Django admin which will replace the basically dead
+&lt;a href="https://406.ch/writing/django-ckeditor/"&gt;django-ckeditor&lt;/a&gt; in all of my
+projects. It is based on &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;, in my opinion
+the greatest toolkit for building prose editors for the web.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s a screenshot:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="django-prose-editor screenshot" src="https://406.ch/assets/20240313-prose-editor.png" /&gt;&lt;/p&gt;
+&lt;p&gt;django-prose-editor is in active development; it&amp;rsquo;s &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;available on
+PyPI&lt;/a&gt; and is developed in the
+open &lt;a href="https://github.com/matthiask/django-prose-editor/"&gt;here on GitHub&lt;/a&gt;. The
+version at the time of writing is 0.2, and it&amp;rsquo;s not yet used in production
+environments, only in staging/preview environments. That will soon change
+though.&lt;/p&gt;
+&lt;h2&gt;Researching alternatives to django-ckeditor&lt;/h2&gt;
+&lt;p&gt;I have spent a lot of time evaluating alternatives. All of them are great
+choices, and I don&amp;rsquo;t want to bash any of them. But, I didn&amp;rsquo;t feel good betting on any of the choices from the &lt;a href="https://djangopackages.org/grids/g/wysiwyg/"&gt;WYSIWYG editors grid on Django Packages&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A few packages have potential licensing issues. CKEditor 5&amp;rsquo;s change to the GPL
+is what basically killed django-ckeditor. The upcoming TinyMCE 7 version will
+also change to the GPL according to the &lt;a href="https://github.com/tinymce/tinymce/"&gt;TinyMCE GitHub
+repository&lt;/a&gt;. Froala only has a free trial.
+The &lt;a href="https://github.com/summernote/django-summernote/"&gt;django-summernote app&lt;/a&gt;
+doesn&amp;rsquo;t have a dedicated maintainer, so I wouldn&amp;rsquo;t bet on it.
+&lt;a href="https://github.com/withlogicco/django-prose"&gt;django-prose&lt;/a&gt; uses Trix; there
+are various reasons why I didn&amp;rsquo;t want to bet on Trix, among them my personal
+experience that it sometimes gets into a buggy state where only a full page
+reload unfreezes the editor.&lt;/p&gt;
+&lt;p&gt;Other packages are basically &lt;a href="https://en.wikipedia.org/wiki/Markdown"&gt;Markdown&lt;/a&gt;
+editors. I like Markdown and use it for my blog. I don&amp;rsquo;t think Markdown is a
+good choice for a CMS which is used by people of many different skill levels. I
+don&amp;rsquo;t want to teach people to use the Markdown link syntax or the heading
+syntax even if the editor helps out a bit.&lt;/p&gt;
+&lt;p&gt;Some of the remaining choices are using JavaScript widgets which haven&amp;rsquo;t been
+updated for a really long time or they are really code editors, not WYSIWYG
+editors, also a no go.&lt;/p&gt;
+&lt;h2&gt;Deciding on going with ProseMirror&lt;/h2&gt;
+&lt;p&gt;I have worked with &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt; on and off since
+October 2015, soon after the crowdfunding ended. It is used in a project where
+people can write their own book with a standardized pipeline and process, where
+the technical side of the project is implemented using Django, ProseMirror and
+LaTeX. A hacked
+&lt;a href="https://github.com/ProseMirror/prosemirror-example-setup/"&gt;prosemirror-example-setup&lt;/a&gt;
+still is good enough for this project.&lt;/p&gt;
+&lt;p&gt;The ProseMirror deep dive came much later, only a few years back, when
+implementing an editor with more custom functionality such as annotations,
+different ways of marking up text and even interactive elements within the
+text, for example to use it as a cloze in teaching materials.&lt;/p&gt;
+&lt;p&gt;The learning curve is steep. I haven&amp;rsquo;t worked with another library which was so
+hard to get started with. It is my conviction that the reason for this is that
+rich-text editing is actually a hard problem. The ProseMirror architecture and
+implementation definitely makes sense when it finally clicks.&lt;/p&gt;
+&lt;p&gt;As additional bonuses the ProseMirror community is nice and ProseMirror is used
+in a few large software projects which make me believe that the software has a
+non-zero probability of being maintained in the long run.&lt;/p&gt;
+&lt;h2&gt;Current plans&lt;/h2&gt;
+&lt;p&gt;The only thing which is configurable right now is the server-side sanitizing of
+submitted HTML content. I plan on allowing some configurability, for example to
+disable links when the content will only be used inside a card teaser which
+itself is already a link. Too much configurability isn&amp;rsquo;t a good thing though in
+my mind, so I&amp;rsquo;ll probably be slow to add features and rather keep complexity
+low.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m definitely interested to hear from people who want to use the package but
+cannot do so right now or who would want some additional features. Issues and
+pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 07)&lt;/h1&gt;&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
 &lt;h2&gt;Releases&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.23&lt;/a&gt;: Only small changes, mainly updated the package for current Django and Python versions.&lt;/li&gt;
@@ -763,12 +825,4 @@ justify &lt;a href="https://406.ch/writing/serving-zip-files-using-django/"&gt;i
   tried finding other ways in the past but now that old compatibility code can
   be removed by a single run of &lt;code&gt;django-upgrade&lt;/code&gt; (respectively
   &lt;code&gt;pre-commit&lt;/code&gt;) there really is no point to doing it in a different way.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Serving ZIP files using Django</title><link href="https://406.ch/writing/serving-zip-files-using-django/" rel="alternate" /><id>https://406.ch/writing/serving-zip-files-using-django/</id><published>2023-07-18T12:00:00Z</published><updated>2023-07-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Serving ZIP files using Django&lt;/h1&gt;
-&lt;p&gt;I have generated ZIP files on the fly and served them using Django for a time.
-Serving ZIP files worked well until it didn&amp;rsquo;t and browsing StackOverflow etc.
-didn&amp;rsquo;t produce clear answers either. The development server worked fine, but
-gunicorn/nginx didn&amp;rsquo;t.&lt;/p&gt;
-&lt;p&gt;In the end, I had to change &lt;code&gt;content_type="application/zip"&lt;/code&gt; to
-&lt;code&gt;content_type="application/x-zip-compressed"&lt;/code&gt;. I still don&amp;rsquo;t know what changed
-and I have only theories why that&amp;rsquo;s necessary, but maybe it helps someone else.
-Sometimes it&amp;rsquo;s better to be dumber about it.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
