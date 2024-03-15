@@ -186,7 +186,7 @@ header a,
 footer a,
 main .text a {
   text-decoration: underline;
-  color: #11e;
+  color: #0c7575;
 }
 
 .utterances {
@@ -212,7 +212,7 @@ main .text a {
   header a,
   footer a,
   main .text a {
-    color: #aaf;
+    color: #14b7b7;
   }
 
   .codehilite {
