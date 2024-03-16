@@ -1,6 +1,6 @@
 Title: Weeknotes (2023 week 17)
 Date: 2023-04-28
-Categories: Politik, Django, Programming, Weeknotes, feincms
+Categories: Django, Programming, Weeknotes, feincms
 
 ## Birthday
 

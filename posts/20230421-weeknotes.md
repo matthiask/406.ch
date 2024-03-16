@@ -10,7 +10,7 @@ A friend and myself threw a few scripts together to automatically finetune a Sta
 
 I definitely also see upsides in the new machine learning technologies but I fear that there's a real danger to trust, and in extension to democracy.
 
-This technology and what we did will be a part of an upcoming [SRF Kulturplatz](https://www.srf.ch/play/tv/sendung/kulturplatz?id=d70e9bb9-0cee-46b6-8d87-7cbd8317a9c7) broadcast, or so I hope. It's high time that the public knows what's possible. It's about **,edia literacy** really.
+This technology and what we did will be a part of an upcoming [SRF Kulturplatz](https://www.srf.ch/play/tv/sendung/kulturplatz?id=d70e9bb9-0cee-46b6-8d87-7cbd8317a9c7) broadcast, or so I hope. It's high time that the public knows what's possible. It's about **media literacy** really.
 
 I'm not that pessimistic though. I just hope that this time the thoughtfulness will prevail over pure profit seeking. (Did I really write that.)
 
