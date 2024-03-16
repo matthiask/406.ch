@@ -1,5 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-03-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-prose-editor – Prose-editing component for the Django admin</title><link href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/</id><published>2024-03-13T12:00:00Z</published><updated>2024-03-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-prose-editor – Prose-editing component for the Django admin&lt;/h1&gt;&lt;p&gt;During the last few days I have been working on a prose-editing component for
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-03-16T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 11)</title><link href="https://406.ch/writing/weeknotes-2024-week-11/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-11/</id><published>2024-03-16T12:00:00Z</published><updated>2024-03-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 11)&lt;/h1&gt;&lt;h2&gt;Estimates&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://jacobian.org/2024/mar/11/breaking-down-tasks/"&gt;Jacob wrote an excellent post on breaking down tasks&lt;/a&gt;. I did like the post a lot. Maybe I&amp;rsquo;ll write a longer reply later, but for now just this. &lt;a href="https://hachyderm.io/@jacob@jacobian.org/112081126379604868"&gt;There definitely are good reasons for the pushback against estimation&lt;/a&gt;, and it&amp;rsquo;s really not just that some people lack professionalism.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.1&lt;/a&gt;: Mini
+  release containing a Turkish translation. It&amp;rsquo;s always nice if software is
+  used.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.6&lt;/a&gt;: Fixed a bug where the
+  move form wouldn&amp;rsquo;t use a potentially overridden &lt;code&gt;ModelAdmin.get_queryset&lt;/code&gt;
+  method.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.24&lt;/a&gt;: Updated the
+  package for django-recaptcha 4.0.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.3.1&lt;/a&gt;: Fixed an
+  edge case sanitization bug (luckily without security implications).&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor
+  6.4.2&lt;/a&gt;:
+  django-content-editor now again supports transitioning plugin fieldsets when
+  opening &lt;em&gt;and&lt;/em&gt; closing thanks to CSS grid&amp;rsquo;s ability to animate the maximum
+  height of an element. Also, the initialization in 6.4 was badly broken.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.2&lt;/a&gt;: &lt;a href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/"&gt;See the announcement blog post from Wednesday&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-prose-editor – Prose-editing component for the Django admin</title><link href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/</id><published>2024-03-13T12:00:00Z</published><updated>2024-03-13T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-prose-editor – Prose-editing component for the Django admin&lt;/h1&gt;&lt;p&gt;During the last few days I have been working on a prose-editing component for
 the Django admin which will replace the basically dead
 &lt;a href="https://406.ch/writing/django-ckeditor/"&gt;django-ckeditor&lt;/a&gt; in all of my
 projects. It is based on &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;, in my opinion
@@ -808,21 +828,4 @@ because I didn&amp;rsquo;t break a string across lines.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Final words (for now)&lt;/h2&gt;
 &lt;p&gt;I really hope that Black is integrated into ruff one day.&lt;/p&gt;
-&lt;p&gt;Also, I hope that ESLint and prettier will be replaced by a faster tool. I have my eyes on a few alternatives, but they are not there yet for my use cases.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 29)</title><link href="https://406.ch/writing/weeknotes-2023-week-29/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-29/</id><published>2023-07-21T12:00:00Z</published><updated>2023-07-21T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
-&lt;p&gt;I have mainly done work in private projects this week. Not much to talk about.
-Except for the ZIP file &lt;code&gt;content-type&lt;/code&gt; bug which was interesting enough to
-justify &lt;a href="https://406.ch/writing/serving-zip-files-using-django/"&gt;its own blog post&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.13&lt;/a&gt;: I converted
-  the package to use ruff, hatchling; started running CI tests using Python
-  3.11. The internals of the Django admin&amp;rsquo;s filters have changed to allow
-  multi-valued filters, this has required some changes to the implementation of
-  the folder filter. I opted to using a relatively ugly &lt;code&gt;django.VERSION&lt;/code&gt;
-  hack; but that&amp;rsquo;s not too bad since such branches will be automatically
-  removed by the awesome
-  &lt;a href="https://github.com/adamchainz/django-upgrade"&gt;django-upgrade&lt;/a&gt;. I would have
-  tried finding other ways in the past but now that old compatibility code can
-  be removed by a single run of &lt;code&gt;django-upgrade&lt;/code&gt; (respectively
-  &lt;code&gt;pre-commit&lt;/code&gt;) there really is no point to doing it in a different way.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;p&gt;Also, I hope that ESLint and prettier will be replaced by a faster tool. I have my eyes on a few alternatives, but they are not there yet for my use cases.&lt;/p&gt;</summary></entry></feed>
