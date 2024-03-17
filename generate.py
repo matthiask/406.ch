@@ -49,7 +49,7 @@ class Post:
 
 def create_excerpt(body):
     soup = BeautifulSoup(body)
-    return " ".join(tag.text for tag in soup.select("h2, p, li"))
+    return " ".join(tag.text for tag in soup.select("h2, h3, p, li"))
 
 
 def load_posts(dirs):
