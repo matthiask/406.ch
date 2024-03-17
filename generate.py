@@ -11,6 +11,7 @@ from itertools import chain
 from pathlib import Path
 from xml.etree.ElementTree import Element, SubElement as SE, tostring as _ts
 
+from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
@@ -41,8 +42,14 @@ class Post:
     updated: str
     categories: list[Category]
     body: str
+    excerpt: str
     draft: str
     url = lambda self: f"/writing/{self.slug}/"
+
+
+def create_excerpt(body):
+    soup = BeautifulSoup(body)
+    return " ".join(tag.text for tag in soup.select("h2, p, li"))
 
 
 def load_posts(dirs):
@@ -58,6 +65,7 @@ def load_posts(dirs):
             body = markdown(content, extensions=md_exts)
             if "<h1>" not in body:
                 body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
+            props["excerpt"] = create_excerpt(body)
             c_titles = sorted(c for c in re.split(r",\s*", props["categories"]) if c)
             props["categories"] = [Category(slug=slugify(c), title=c) for c in c_titles]
             yield Post(**{"body": body, "draft": ""} | props)

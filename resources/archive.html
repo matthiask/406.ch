@@ -30,12 +30,13 @@
 <main><div class="wrappy">
 
 {% for post in posts %}
-  <h2>
-    <a href="{{ post.url() }}">
-      <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small>
-      <br>{{ post.title }}
-    </a>
-  </h2>
+  <a href="{{ post.url() }}">
+    <h2>
+      <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small><br>
+      {{ post.title }}
+    </h2>
+    <p>{{ post.excerpt|truncate }}</p>
+  </a>
 {% endfor %}
 
 </div></main>
