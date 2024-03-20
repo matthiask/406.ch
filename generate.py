@@ -48,7 +48,7 @@ class Post:
 
 
 def create_excerpt(body):
-    soup = BeautifulSoup(body)
+    soup = BeautifulSoup(body, "html.parser")
     return " ".join(tag.text for tag in soup.select("h2, h3, p, li"))
 
 
