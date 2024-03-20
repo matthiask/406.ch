@@ -53,7 +53,7 @@ def create_excerpt(body):
 
 
 def load_posts(dirs):
-    slugify = lambda v: re.sub(r"[^-a-z0-9]+", "-", v.lower()).strip("-")
+    slugify = lambda v: re.sub(r"[^a-z0-9]+", "-", v.lower()).strip("-")
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)

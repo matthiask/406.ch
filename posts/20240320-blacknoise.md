@@ -1,4 +1,4 @@
-Title: blacknoise - an ASGI app for static file serving
+Title: blacknoise – ASGI app for static file serving
 Date: 2024-03-20
 Categories: Django, Programming
 
