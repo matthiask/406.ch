@@ -1,5 +1,68 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-03-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Podcasts I like listening to&lt;/h1&gt;&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-03-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>blacknoise - an ASGI app for static file serving</title><link href="https://406.ch/writing/blacknoise---an-asgi-app-for-static-file-serving/" rel="alternate" /><id>https://406.ch/writing/blacknoise---an-asgi-app-for-static-file-serving/</id><published>2024-03-20T12:00:00Z</published><updated>2024-03-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;blacknoise - an ASGI app for static file serving&lt;/h1&gt;&lt;div class="admonition note"&gt;
+&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;This blog post consists of the &lt;a href="https://github.com/matthiask/blacknoise"&gt;blacknoise
+README&lt;/a&gt; at the time of publishing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;blacknoise is an &lt;a href="https://asgi.readthedocs.io/en/latest/"&gt;ASGI&lt;/a&gt; app for static
+file serving inspired by &lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt;
+and following the principles of &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;low maintenance
+software&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This is pre-alpha software and everything is subject to change. I&amp;rsquo;m not even
+sure if blacknoise should exist at all or if the energy wouldn&amp;rsquo;t be better
+spent improving whitenoise or other tools. Feedback and contributions are very
+welcome though!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;Using blacknoise with Django to serve static files&lt;/h2&gt;
+&lt;p&gt;Install blacknoise into your Python environment:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;pip install blacknoise&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Wrap your ASGI application with the &lt;code&gt;BlackNoise&lt;/code&gt; app:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;blacknoise&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BlackNoise&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.asgi&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_asgi_application&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pathlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;
+
+&lt;span class="n"&gt;BASE_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__file__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;
+
+&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BlackNoise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_asgi_application&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BASE_DIR&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;static&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/static&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;BlackNoise&lt;/code&gt; will automatically handle all paths below the prefixes added, and
+either return the files or return 404 errors if files do not exist. The files
+are added on server startup, which also means that &lt;code&gt;BlackNoise&lt;/code&gt; only knows
+about files which existed at that particular point in time.&lt;/p&gt;
+&lt;h2&gt;Improving performance&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;BlackNoise&lt;/code&gt; has worse performance than when using an optimized webserver such
+as nginx and others. Sometimes it doesn&amp;rsquo;t matter much if the app is behind a
+caching reverse proxy or behind a content delivery network anyway. To further
+support this use case &lt;code&gt;BlackNoise&lt;/code&gt; can be configured to serve media files with
+far-future expiry headers and has support for serving compressed assets.&lt;/p&gt;
+&lt;p&gt;Compressing is possible by running:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;python -m blacknoise.compress static/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;BlackNoise&lt;/code&gt; will try compress non-binary files using gzip or brotli (if the
+&lt;a href="ttps://pypi.org/project/Brotli/"&gt;Brotli&lt;/a&gt; library is available), and will serve
+the compressed version if the compression actually results in (significantly)
+smaller files and if the client also supports it.&lt;/p&gt;
+&lt;p&gt;Far-future expiry headers can be enabled by passing the &lt;code&gt;immutable_file_test&lt;/code&gt;
+callable to the &lt;code&gt;BlackNoise&lt;/code&gt; constructor:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;immutable_file_test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;  &lt;span class="c1"&gt;# Enable far-future expiry headers for all files&lt;/span&gt;
+
+&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BlackNoise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;get_asgi_application&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+    &lt;span class="n"&gt;immutable_file_test&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;immutable_file_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Maybe you want to add some other logic, for example check if the path contains
+a hash based upon the contents of the static file. Such hashes can be added by
+Django&amp;rsquo;s &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt; or by appropriately configuring bundlers
+such as &lt;code&gt;webpack&lt;/code&gt; and others.&lt;/p&gt;
+&lt;h2&gt;License&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;blacknoise&lt;/code&gt; is distributed under the terms of the &lt;a href="https://spdx.org/licenses/MIT.html"&gt;MIT&lt;/a&gt; license.&lt;/p&gt;</summary></entry><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Podcasts I like listening to&lt;/h1&gt;&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
 why anyone would want to listen to people talk when they could listen to music
 or nothing, but that has changed a bit.&lt;/p&gt;
 &lt;p&gt;So, here&amp;rsquo;s a list of podcasts I&amp;rsquo;m currently listening to on a regular basis.&lt;/p&gt;
@@ -820,15 +883,4 @@ no need to feel challenged by this post.&lt;/p&gt;
 &lt;p&gt;Also called the WET rule (Write Everything Twice). (Not coined by me.)&amp;#160;&lt;a class="footnote-backref" href="#fnref:wet" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 30)</title><link href="https://406.ch/writing/weeknotes-2023-week-30/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-30/</id><published>2023-07-28T12:00:00Z</published><updated>2023-07-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes&lt;/h1&gt;
-&lt;h2&gt;Async Django&lt;/h2&gt;
-&lt;p&gt;I have used &lt;a href="https://channels.readthedocs.io/"&gt;Django Channels&lt;/a&gt; successfully in a few projects from 2017 to 2019. A few months back I have worked with &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. And now I have finally started digging into using Django itself with an ASGI server, and not just for one or two views but also including the middleware stack etc since I also need authentication, not just an endpoint forwarding requests to a remote server. I have looked at &lt;a href="https://github.com/emmett-framework/granian"&gt;Granian&lt;/a&gt;, an RSGI/ASGI server written in Rust. But for now I am using &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Django truly has come a long way but there&amp;rsquo;s much left to do. Django 5.0 is looking great already, but 4.2 misses many pieces still. I am really really glad Django wants to stay backwards compatible but I wish I could wave a magic wand and upgrade everything to async. Adding &lt;code&gt;a&lt;/code&gt; prefixes everywhere for the async version is certainly a good compromise and probably the way to go but it&amp;rsquo;s just not that nice.&lt;/p&gt;
-&lt;p&gt;I have been playing around with making &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt;&amp;rsquo;s applications middleware async compatible because I want the full middleware stack to be async. The code is already released but undocumented and not even mentioned in the changelog. So, feel free to play around with it but it&amp;rsquo;s not supposed to be stable or supported yet.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.1&lt;/a&gt;: Switched to hatchling and ruff. Updated the feincms3-sites docs. Some async updates mentioned above. A Django 4.2 admin CSS update for the inline CKEditor.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms 0.4&lt;/a&gt;: Switched to hatchling and ruff. Started defining default icons for the form fields &lt;a href="https://django-content-editor.readthedocs.io/"&gt;content editor&lt;/a&gt; plugins.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7&lt;/a&gt;: I&amp;rsquo;m still maintaining the CKEditor 4 integration for Django even though CKEditor 4 itself isn&amp;rsquo;t supported anymore. Minor updates to the editor itself and Pillow compatibility updates.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.3.2&lt;/a&gt;: The cookie banner doesn&amp;rsquo;t generate an empty &lt;code&gt;&amp;lt;div class="f3cc"&amp;gt;&lt;/code&gt; element anymore if there&amp;rsquo;s nothing to add inside (e.g. if the user only accepted necessary cookies).&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/div&gt;</summary></entry></feed>

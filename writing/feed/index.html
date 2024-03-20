@@ -1,5 +1,68 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-03-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Podcasts I like listening to&lt;/h1&gt;&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-03-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>blacknoise - an ASGI app for static file serving</title><link href="https://406.ch/writing/blacknoise---an-asgi-app-for-static-file-serving/" rel="alternate" /><id>https://406.ch/writing/blacknoise---an-asgi-app-for-static-file-serving/</id><published>2024-03-20T12:00:00Z</published><updated>2024-03-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;blacknoise - an ASGI app for static file serving&lt;/h1&gt;&lt;div class="admonition note"&gt;
+&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;This blog post consists of the &lt;a href="https://github.com/matthiask/blacknoise"&gt;blacknoise
+README&lt;/a&gt; at the time of publishing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;blacknoise is an &lt;a href="https://asgi.readthedocs.io/en/latest/"&gt;ASGI&lt;/a&gt; app for static
+file serving inspired by &lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt;
+and following the principles of &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;low maintenance
+software&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This is pre-alpha software and everything is subject to change. I&amp;rsquo;m not even
+sure if blacknoise should exist at all or if the energy wouldn&amp;rsquo;t be better
+spent improving whitenoise or other tools. Feedback and contributions are very
+welcome though!&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;Using blacknoise with Django to serve static files&lt;/h2&gt;
+&lt;p&gt;Install blacknoise into your Python environment:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;pip install blacknoise&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Wrap your ASGI application with the &lt;code&gt;BlackNoise&lt;/code&gt; app:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;blacknoise&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BlackNoise&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.asgi&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_asgi_application&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pathlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;
+
+&lt;span class="n"&gt;BASE_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__file__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parent&lt;/span&gt;
+
+&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BlackNoise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_asgi_application&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BASE_DIR&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;static&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/static&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;BlackNoise&lt;/code&gt; will automatically handle all paths below the prefixes added, and
+either return the files or return 404 errors if files do not exist. The files
+are added on server startup, which also means that &lt;code&gt;BlackNoise&lt;/code&gt; only knows
+about files which existed at that particular point in time.&lt;/p&gt;
+&lt;h2&gt;Improving performance&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;BlackNoise&lt;/code&gt; has worse performance than when using an optimized webserver such
+as nginx and others. Sometimes it doesn&amp;rsquo;t matter much if the app is behind a
+caching reverse proxy or behind a content delivery network anyway. To further
+support this use case &lt;code&gt;BlackNoise&lt;/code&gt; can be configured to serve media files with
+far-future expiry headers and has support for serving compressed assets.&lt;/p&gt;
+&lt;p&gt;Compressing is possible by running:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;python -m blacknoise.compress static/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;BlackNoise&lt;/code&gt; will try compress non-binary files using gzip or brotli (if the
+&lt;a href="ttps://pypi.org/project/Brotli/"&gt;Brotli&lt;/a&gt; library is available), and will serve
+the compressed version if the compression actually results in (significantly)
+smaller files and if the client also supports it.&lt;/p&gt;
+&lt;p&gt;Far-future expiry headers can be enabled by passing the &lt;code&gt;immutable_file_test&lt;/code&gt;
+callable to the &lt;code&gt;BlackNoise&lt;/code&gt; constructor:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;immutable_file_test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;  &lt;span class="c1"&gt;# Enable far-future expiry headers for all files&lt;/span&gt;
+
+&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BlackNoise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;get_asgi_application&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+    &lt;span class="n"&gt;immutable_file_test&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;immutable_file_test&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Maybe you want to add some other logic, for example check if the path contains
+a hash based upon the contents of the static file. Such hashes can be added by
+Django&amp;rsquo;s &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt; or by appropriately configuring bundlers
+such as &lt;code&gt;webpack&lt;/code&gt; and others.&lt;/p&gt;
+&lt;h2&gt;License&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;blacknoise&lt;/code&gt; is distributed under the terms of the &lt;a href="https://spdx.org/licenses/MIT.html"&gt;MIT&lt;/a&gt; license.&lt;/p&gt;</summary></entry><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Podcasts I like listening to&lt;/h1&gt;&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
 why anyone would want to listen to people talk when they could listen to music
 or nothing, but that has changed a bit.&lt;/p&gt;
 &lt;p&gt;So, here&amp;rsquo;s a list of podcasts I&amp;rsquo;m currently listening to on a regular basis.&lt;/p&gt;
@@ -633,108 +696,4 @@ repositories into the organization.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.4.1&lt;/a&gt;: I&amp;rsquo;m enormously unhappy but I had to go back to the classic CKEditor instead of using the inline editor. The latter looked much nicer but overriding the Django admin CSS was very very painful. Also, I can totally understand why CKEditor 5 is completely different and why CKEditor 4 is only maintained in a paid LTS plan. It still is making me look for alternatives.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.15&lt;/a&gt;: I unfortunately am still using this despite the fact that I have marked it as officially unmaintained since march 2021. I did a mediocre job of making the library run on Django@main again. Parts of the library do not work, but since I&amp;rsquo;m not using them I don&amp;rsquo;t care too much. I&amp;rsquo;m still wondering if someone wants to take over maintenance of the library since it still seems to be actively used in projects of others as well. When I don&amp;rsquo;t have to use django-mptt I&amp;rsquo;m still really happy with &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.22&lt;/a&gt;: This is probably my oldest actively developed project these days. 13 years! (Except for django-content-editor of course.) I have modernized the package, switched to hatchling and put out a new release.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Keep content managers' admin access up-to-date with role-based permissions</title><link href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/" rel="alternate" /><id>https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/</id><published>2023-09-20T12:00:00Z</published><updated>2023-09-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Keep content managers&amp;rsquo; Django admin access up-to-date with role-based permissions&lt;/h1&gt;
-&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/default/#permissions-and-authorization"&gt;Django&amp;rsquo;s built-in permissions
-system&lt;/a&gt;
-is great if you want fine-grained control of the permissions content
-managers should have. The allowlist-based approach where users have no
-permissions by default and must be granted each permission individually makes a
-lot of sense to me and is easy to understand.&lt;/p&gt;
-&lt;p&gt;When we build a CMS at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we often use the Django administration panel as a CMS.
-Unfortunately, Django doesn&amp;rsquo;t provide a way to specify that content managers
-should have all permissions in the &lt;code&gt;pages&lt;/code&gt; and &lt;code&gt;articles&lt;/code&gt; app (just as an
-example). Adding all current permissions in a particular app is straightforward when using the
-&lt;a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.filter_horizontal"&gt;&lt;code&gt;filter_horizontal&lt;/code&gt;&lt;/a&gt;
-interface but keeping the list up-to-date later isn&amp;rsquo;t. When we add an
-additional &lt;a href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/"&gt;content block
-plugin&lt;/a&gt;
-we always have to remember to also update the permissions after deploying the
-change &amp;ndash; and often, deployment happens some time after the code has been
-written, e.g. because clients want to approve the change first. What happens
-all too often is that the manual step of updating permissions gets forgotten.&lt;/p&gt;
-&lt;p&gt;This has annoyed me (intermittently) for a long time and my preferred solution
-has always been to give superuser permissions to everyone and trust them to
-not make changes which they aren&amp;rsquo;t supposed to according to the &lt;em&gt;Trusted Users
-Editing Structured Content&lt;/em&gt; principle which was mentioned in a Django book I
-read early in my Django journey.&lt;/p&gt;
-&lt;h2&gt;The basic ideas of my role-based permissions implementation&lt;/h2&gt;
-&lt;p&gt;A recent project has resurfaced this annoyance and I did finally bite the
-bullet and implement a solution for this in the form of a
-&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; extension. The basic ideas are:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;All users are assigned a single role&lt;/strong&gt;: Single roles sound inflexible, but is
-good enough for my default use case. Examples for roles could be &lt;em&gt;default&lt;/em&gt; (no
-additional permissions granted), &lt;em&gt;content managers&lt;/em&gt; (grant access to the pages
-and articles apps) or maybe &lt;em&gt;deny auth&lt;/em&gt; (deny access to users, groups and
-permissions).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The permission check is implemented using a single callable&lt;/strong&gt;: A custom
-backend is provided whose only job is to call the correct callable for the
-user&amp;rsquo;s current role.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The callable either returns a boolean or raises &lt;code&gt;PermissionDenied&lt;/code&gt; to prevent
-other backends from granting access&lt;/strong&gt;: No new ideas here, it&amp;rsquo;s exactly what
-&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#handling-authorization-in-custom-backends"&gt;Django&amp;rsquo;s authentication backends are supposed to
-do&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Permission checkers for the most common scenarios are bundled&lt;/strong&gt;:
-django-authlib only ships one permission checker right now, &lt;code&gt;allow_deny_globs&lt;/code&gt;,
-which allows specifying a list of permission name globs to allow and to deny.
-Deny overrides allow as is probably expected.&lt;/p&gt;
-&lt;h2&gt;Using roles in your own project&lt;/h2&gt;
-&lt;p&gt;Specify the available roles in your settings and add the authentication backend:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;gettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-&lt;span class="n"&gt;AUTHLIB_ROLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;editorial staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;callback&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="s2"&gt;&amp;quot;pages.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="s2"&gt;&amp;quot;articles.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="n"&gt;AUTHENTICATION_BACKENDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="c1"&gt;# This is the necessary additional backend&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;authlib.backends.PermissionsBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="c1"&gt;# Maybe you want to use authlib&amp;#39;s email authentication ...&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;authlib.backends.EmailBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="c1"&gt;# ... or the standard username &amp;amp; password combination:&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;django.contrib.auth.backends.ModelBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You have to extend your user model (you have to use &lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#specifying-custom-user-model"&gt;a custom user model&lt;/a&gt; if you&amp;rsquo;re not using django-authlib&amp;rsquo;s &lt;code&gt;little_user.User&lt;/code&gt;):&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AbstractUser&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="c1"&gt;# ...&lt;/span&gt;
-    &lt;span class="n"&gt;role&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And that&amp;rsquo;s basically it.&lt;/p&gt;
-&lt;p&gt;Of course the globbing is flexible, you could also allow users to view all objects:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.view_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Or you could block users from deleting anything:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.delete_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And as mentioned above, you can also combine &lt;code&gt;allow&lt;/code&gt; and &lt;code&gt;deny&lt;/code&gt; (&lt;code&gt;deny&lt;/code&gt; wins
-over &lt;code&gt;allow&lt;/code&gt;) or even provide your own callables. If you provide your own
-callable it must accept &lt;code&gt;user&lt;/code&gt;, &lt;code&gt;perm&lt;/code&gt; and &lt;code&gt;obj&lt;/code&gt; (which may be &lt;code&gt;None&lt;/code&gt;) as
-keyword arguments. Implementing such a callable is probably less work than
-implementing an authentication backend yourself; I had to do more work than
-initially expected because only implementing &lt;code&gt;.has_perm&lt;/code&gt; isn&amp;rsquo;t sufficient if
-you want to see any apps and models in the admin index page. The current
-&lt;code&gt;allow_deny_globs&lt;/code&gt; implementation is nice and short:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;PermissionDenied&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
