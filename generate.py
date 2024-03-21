@@ -1,4 +1,4 @@
-# License: WTFPL (DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE), http://www.wtfpl.net/
+# Licensed under the MIT License -- do whatever you want with it but don't complain to me.
 
 import re
 import shutil
