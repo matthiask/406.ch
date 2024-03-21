@@ -5,6 +5,10 @@ Categories: Django, Programming
 
 # Our approach to configuring Django, Webpack and ManifestStaticFilesStorage
 
+!!! note
+
+    This post is outdated. See the [2024 edition of this post instead](https://406.ch/writing/using-django-with-webpack-2024-edition/).
+
 I spent some time finding out how [Django](https://www.djangoproject.com/) and [webpack](https://webpack.js.org/) should be configured so that they work well together both in development and in production. [We](https://feinheit.ch/) are now using this setup on dozens of websites, so now is a good time to write down the approach.
 
 Requirements for development were:
