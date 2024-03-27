@@ -1,5 +1,67 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-03-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>blacknoise – ASGI app for static file serving</title><link href="https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/" rel="alternate" /><id>https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/</id><published>2024-03-20T12:00:00Z</published><updated>2024-03-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;blacknoise – ASGI app for static file serving&lt;/h1&gt;&lt;div class="admonition note"&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-03-27T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>The Django admin is a CMS</title><link href="https://406.ch/writing/the-django-admin-is-a-cms/" rel="alternate" /><id>https://406.ch/writing/the-django-admin-is-a-cms/</id><published>2024-03-27T12:00:00Z</published><updated>2024-03-27T12:00:00Z</updated><summary type="html">&lt;h1&gt;The Django admin is a CMS&lt;/h1&gt;&lt;p&gt;The post &lt;a href="https://www.coderedcorp.com/blog/why-is-the-django-admin-ugly/"&gt;Why is the Django Admin “Ugly”?&lt;/a&gt; and the &lt;a href="https://hachyderm.io/@paulox@fosstodon.org/111298440425647176"&gt;discussion on
+Mastodon&lt;/a&gt; around it finally motivated me to write down my
+thoughts regarding the recurring theme in Django land that the &lt;a href="https://docs.djangoproject.com/en/5.0/ref/contrib/admin/"&gt;Django
+administration interface&lt;/a&gt; isn&amp;rsquo;t a CMS (Content Management
+System).&lt;/p&gt;
+&lt;p&gt;I think that this is misguided and needlessly limits the discourse around what
+the admin&amp;rsquo;s current functionality is and the ideas what it could be and already
+is.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Web_content_management_system"&gt;A web content management system&lt;/a&gt; is about website authoring for users
+who do not need to be web programming experts in their own rights. &lt;a href="https://en.wikipedia.org/wiki/Django_(web_framework)"&gt;Django was
+created at the Lawrence Journal-World newspaper&lt;/a&gt;. The admin itself was
+created to allow quickly spinning up new websites, where the admin interface
+was used by content managers to fill in the content while programmers finalized
+the rest of the website. So obviously the admin interface was a system used to
+manage content&lt;sup id="fnref:words"&gt;&lt;a class="footnote-ref" href="#fn:words"&gt;1&lt;/a&gt;&lt;/sup&gt; from the beginning.&lt;/p&gt;
+&lt;p&gt;Sure, the &lt;a href="https://docs.djangoproject.com/en/5.0/ref/contrib/admin/"&gt;Django admin site documentation&lt;/a&gt; states:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;One of the most powerful parts of Django is the automatic admin interface. It reads metadata from your models to provide a quick, model-centric interface where trusted users can manage content on your site. The admin’s recommended use is limited to an organization’s internal management tool. &lt;strong&gt;It’s not intended for building your entire front end around.&lt;/strong&gt; [emphasis added]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In other words, the Django documentation also points out that the admin is
+powerful and that it allows trusted users to manage content&lt;sup id="fnref2:words"&gt;&lt;a class="footnote-ref" href="#fn:words"&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Yes, it will be very painful if you try to do everything on top of the Django
+admin site. The warnings against using the Django admin for more than it was
+designed to are necessary and I totally support them. As soon as you&amp;rsquo;re getting
+into workflows, into complex permission scenarios (sad noises) or similar
+things the admin definitely isn&amp;rsquo;t for you. But, the admin nicely solves 90% of
+the problems with 10% of the effort. And it&amp;rsquo;s very good at that.&lt;/p&gt;
+&lt;p&gt;And sure, if you try building your own frontend on top of the Django admin
+you&amp;rsquo;re in for a bumpy ride, but that much should be obvious.&lt;/p&gt;
+&lt;p&gt;Many third party apps for Django actually target the Django admin interface
+itself, and not one of the (excellent!) Django-based CMS such as
+&lt;a href="https://wagtail.org/"&gt;Wagtail&lt;/a&gt;. This means that by building on the Django
+admin instead of one of the CMS you&amp;rsquo;re &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;running less code&lt;/a&gt;, by using
+more libraries instead of frameworks (on top of frameworks) you&amp;rsquo;re &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;keeping
+maintenance lower&lt;/a&gt;, and you&amp;rsquo;re a part of a larger
+community&lt;sup id="fnref:community"&gt;&lt;a class="footnote-ref" href="#fn:community"&gt;2&lt;/a&gt;&lt;/sup&gt;, which brings the potential benefit of being able to
+profit more from the general Django packages ecosystem.&lt;/p&gt;
+&lt;p&gt;Since you&amp;rsquo;re depending on smaller pieces of additional software it will
+generally be possible to upgrade to new Django versions quicker. This isn&amp;rsquo;t
+true for all packages of course, and I&amp;rsquo;m a reluctant maintainer of some of
+them. Anecdotes aren&amp;rsquo;t data, but I see that some larger CMS systems are
+definitely having a hard time keeping up with Django&amp;rsquo;s release schedule.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not trying to say that the Django admin is a better CMS than other
+Django-based CMS, or any other CMS. I&amp;rsquo;m saying it&amp;rsquo;s a trade off and you should
+be mindful of the downsides of choosing a larger system. And I&amp;rsquo;m saying that
+the people who tell you that you shouldn&amp;rsquo;t be using the Django admin interface
+are wrong in the first approximation.&lt;/p&gt;
+&lt;p&gt;The fact that it&amp;rsquo;s so easy to spin up an additional site and with minimal
+effort and still be able to work with clean database schemas and all the great
+tools Django (and Python) offers is important for those of us who are working
+on many different projects with limited financial resources, because the
+website often is for example just a small part of a campaign.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:words"&gt;
+&lt;p&gt;Sorry-not-sorry for my choice of words.&amp;#160;&lt;a class="footnote-backref" href="#fnref:words" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;a class="footnote-backref" href="#fnref2:words" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:community"&gt;
+&lt;p&gt;The assumption that the communities of these Django-based CMS projects are a subset of the Django community itself shouldn&amp;rsquo;t be too controversial.&amp;#160;&lt;a class="footnote-backref" href="#fnref:community" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>blacknoise – ASGI app for static file serving</title><link href="https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/" rel="alternate" /><id>https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/</id><published>2024-03-20T12:00:00Z</published><updated>2024-03-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;blacknoise – ASGI app for static file serving&lt;/h1&gt;&lt;div class="admonition note"&gt;
 &lt;p class="admonition-title"&gt;Note&lt;/p&gt;
 &lt;p&gt;This blog post consists of the &lt;a href="https://github.com/matthiask/blacknoise"&gt;blacknoise
 README&lt;/a&gt; at the time of publishing.&lt;/p&gt;
@@ -676,24 +738,4 @@ those using more than one Google account (voluntarily or not).&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.4.3&lt;/a&gt;: Polished the CKEditor integration a little bit. Re-enabled the source button now that we&amp;rsquo;re back to using the classic iframe-based editor again.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.19.3&lt;/a&gt;: See above.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.4&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 39)</title><link href="https://406.ch/writing/weeknotes-2023-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-39/</id><published>2023-09-28T12:00:00Z</published><updated>2023-09-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 39)&lt;/h1&gt;&lt;p&gt;Again a few weeks have passed since the last weeknotes entry :-)&lt;/p&gt;
-&lt;h2&gt;Moving feincms3 repositories into the feincms organization&lt;/h2&gt;
-&lt;p&gt;The &lt;a href="https://github.com/feincms"&gt;feincms&lt;/a&gt; GitHub organization has seen more
-active days when FeinCMS 1.x was still actively developed. Since my interest
-has moved to feincms3 some years ago I haven&amp;rsquo;t kept the organization up to
-date. That has changed this week, and I have moved most feincms3-related
-repositories into the organization.&lt;/p&gt;
-&lt;p&gt;This move doesn&amp;rsquo;t change much though, but it certainly feels more official now.&lt;/p&gt;
-&lt;h2&gt;Adding scheduled tests&lt;/h2&gt;
-&lt;p&gt;I have started using the cronjob schedule feature of GitHub actions to ensure that tests run at least once a month in a few important projects. I want to get notified of changes in Django@main affecting my packages not only when actively working on them. I try to keep up with Django@main in all packages I maintain.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.18.2&lt;/a&gt;: Many releases in the last weeks. Stopped using permanent redirects in DEBUG mode. Avoid migrations when Django adds more languages. Added utilities which allow restricting model relations to objects in the same site (trickier than it sounds). Added utilities for building full URLs to other sites without taxing the database as much.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites 0.2.0&lt;/a&gt;: No biggie. No permanent redirects in DEBUG mode anymore.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.4.5&lt;/a&gt;: Reduced the byte size of the CSS and JavaScript some more. Added spanish translations.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.3&lt;/a&gt;: I have published a post last week describing the new &lt;a href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/"&gt;role-based permissions feature&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.17&lt;/a&gt;: The &lt;code&gt;process_imagefields&lt;/code&gt; management command now allows specifying globs. If you wanted to prerender all imagefields in the pages app you can use &lt;code&gt;./manage.py process_imagefields pages.*&lt;/code&gt; now instead of listing all image fields&amp;rsquo; labels explicitly.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.4.1&lt;/a&gt;: I&amp;rsquo;m enormously unhappy but I had to go back to the classic CKEditor instead of using the inline editor. The latter looked much nicer but overriding the Django admin CSS was very very painful. Also, I can totally understand why CKEditor 5 is completely different and why CKEditor 4 is only maintained in a paid LTS plan. It still is making me look for alternatives.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.15&lt;/a&gt;: I unfortunately am still using this despite the fact that I have marked it as officially unmaintained since march 2021. I did a mediocre job of making the library run on Django@main again. Parts of the library do not work, but since I&amp;rsquo;m not using them I don&amp;rsquo;t care too much. I&amp;rsquo;m still wondering if someone wants to take over maintenance of the library since it still seems to be actively used in projects of others as well. When I don&amp;rsquo;t have to use django-mptt I&amp;rsquo;m still really happy with &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.22&lt;/a&gt;: This is probably my oldest actively developed project these days. 13 years! (Except for django-content-editor of course.) I have modernized the package, switched to hatchling and put out a new release.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
