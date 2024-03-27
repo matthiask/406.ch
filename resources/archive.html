@@ -4,29 +4,6 @@
 
 {% block content %}
 
-<header>
-  <div class="wrappy">
-    {% if current %}
-      <a class="back" href="/">Back to the overview</a>
-      <h1 class="title">{{ current.title }}</h1>
-      {# % if view.category.html %}{{ view.category.html|safe }}{% endif % #}
-    {% else %}
-      <h1 class="title">Hi, I'm Matthias</h1>
-      <p class="subtitle">
-        I am a founding partner of
-        <a href="https://feinheit.ch">Feinheit AG</a> and
-        <a href="https://diebruchpiloten.com">Die Bruchpiloten AG</a>.
-        Find me on
-        <a href="https://github.com/matthiask/" rel="">GitHub</a>,
-        <a href="https://hachyderm.io/@matthiask" rel="me">Mastodon</a>,
-        {# <a href="https://twitter.com/matthispam/" target="_blank" rel="noopener noreferrer">Twitter</a>, #}
-        <a href="https://www.linkedin.com/in/matthiaskestenholz" title="if you must" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        or by <a href="mailto:mk@406.ch">email</a>.
-      </p>
-    {% endif %}
-  </div>
-</header>
-
 <main><div class="wrappy">
 
 {% for post in posts %}
