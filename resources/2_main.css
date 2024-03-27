@@ -228,3 +228,7 @@ sup, sub {
   line-height: 1;
   padding-left: 2px;
 }
+
+.article {
+  display: block;
+}

@@ -30,7 +30,7 @@
 <main><div class="wrappy">
 
 {% for post in posts %}
-  <a href="{{ post.url() }}">
+  <a href="{{ post.url() }}" class="article">
     <h2>
       <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small><br>
       {{ post.title }}
