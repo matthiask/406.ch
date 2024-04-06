@@ -1,5 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Politik</title><link href="https://406.ch/writing/category-politik/atom.xml" rel="self" /><link href="https://406.ch/writing/category-politik/" rel="alternate" /><id>https://406.ch/writing/category-politik/</id><updated>2024-03-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Podcasts I like listening to&lt;/h1&gt;&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Politik</title><link href="https://406.ch/writing/category-politik/atom.xml" rel="self" /><link href="https://406.ch/writing/category-politik/" rel="alternate" /><id>https://406.ch/writing/category-politik/</id><updated>2024-04-06T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
+extraction. I&amp;rsquo;m recovering quite quickly it seems and I&amp;rsquo;m glad about it.&lt;/p&gt;
+&lt;p&gt;This weeknotes entry is short and quick. I&amp;rsquo;m trying to get back into the habit
+of writing them after a mediocre start this year.&lt;/p&gt;
+&lt;h2&gt;20th Anniversary Celebration of Young Greens Switzerland&lt;/h2&gt;
+&lt;p&gt;I have attended the celebration of Young Greens Switzerland. I have been a
+founding member and have been active for close to ten years. A lot of time has
+passed since then. It has been great to reminisce about old times with friends
+and, more importantly, to see how the torch is carried on.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 0.0.5&lt;/a&gt;: blacknoise is an
+  ASGI app for static file serving inspired by
+  &lt;a href="https://whitenoise.readthedocs.io/en/latest/"&gt;whitenoise&lt;/a&gt;. It only supports
+  a very limited subset of whitenoise&amp;rsquo;s functionality, but it supports async.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.1&lt;/a&gt;: The lxml
+  library moved the HTML cleaner into its own package,
+  &lt;a href="https://pypi.org/project/lxml-html-clean/"&gt;lxml-html-clean&lt;/a&gt;; this release
+  adds support for that. I didn&amp;rsquo;t know that the HTML cleaner is viewed as being
+  problematic by the lxml maintainers. I&amp;rsquo;m having another look at
+  &lt;a href="https://github.com/messense/nh3"&gt;nh3&lt;/a&gt; and will maybe switch html-sanitizer&amp;rsquo;s
+  guts from lxml to nh3 in the future.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.18&lt;/a&gt;:
+  django-tree-queries now supports ordering siblings by multiple fields and
+  even allows descending orderings.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.2&lt;/a&gt;: This
+  release fixes the CKEditor 4 filebrowser popup when using Django 5 or better.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Podcasts I like listening to&lt;/h1&gt;&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
 why anyone would want to listen to people talk when they could listen to music
 or nothing, but that has changed a bit.&lt;/p&gt;
 &lt;p&gt;So, here&amp;rsquo;s a list of podcasts I&amp;rsquo;m currently listening to on a regular basis.&lt;/p&gt;
@@ -167,6 +194,4 @@ Es ist schon interessant, wie dieses Thema viele Leute beschäftigt; zumindest k
 &lt;p&gt;Mit dem Sommerwetter steigen auch die Ozonwerte. An fast allen Messpunkten wurde der Grenzwert überschritten. Umweltdirektoren raten: Sport nur in Randstunden.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Fällt eigentlich sonst niemandem die Idiotie dieser Empfehlung auf? Warum soll sich die grosse Mehrheit der autofahrenden Minderheit fügen? Warum ist es erlaubt, dass eine Minderheit einer breiten Bevölkerungsschicht aktiv Schaden zufügt, und das während Monaten, nämlich den ganzen Sommer durch? Warum werden nur Empfehlungen abgegeben und keine Massnahmen ergriffen, wo doch die Gesetzeslage sonnenklar ist: Die Dauerüberschreitung des Ozongrenzwertes während Schönwetterperioden ist ganz klar gesetzeswidrig, daran können auch die verbissensten Autofahrer und Luftverschmutzer nicht rütteln.&lt;/p&gt;
-&lt;p&gt;Ich bin enttäuscht, dass Symptombekämpfung noch immer Vorrang vor der Ursachenbekämpfung bekommt.&lt;/p&gt;</summary></entry><entry><title>Mit Abwasser heizen?</title><link href="https://406.ch/writing/mit-abwasser-heizen/" rel="alternate" /><id>https://406.ch/writing/mit-abwasser-heizen/</id><published>2005-12-21T12:00:00Z</published><updated>2005-12-21T12:00:00Z</updated><summary type="html">&lt;h1&gt;Mit Abwasser heizen?&lt;/h1&gt;&lt;p&gt;Abwasser hat eine Durchschnittstemperatur von 12 bis 20 Grad. Diese Wärme verpufft meistens ungenutzt in der Umwelt. Eine von einem Schweizer Ingenieur entwickelte Technologie macht es nun möglich, einen Haushalt mit dieser Wärme zu beheizen.&lt;/p&gt;
-&lt;p&gt;Die notwendige Technik dazu existiert laut Ernst A. Müller, Experte bei EnergieSchweiz schon seit zwanzig Jahren. Die Idee geriet aber in Vergessenheit und man begann erst in den letzten Jahren wieder, sich damit zu befassen. Der kontinuierlich steigende Erdölpreis und die Notwendigkeit zur Reduktion von schädlichen Gasen machen diese Wärmequelle wieder interessant.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://www.swissinfo.org/sde/swissinfo.html?siteSect=111&amp;amp;sid=6309213&amp;amp;cKey=1135176494000&amp;amp;rss=true"&gt;Zum kompletten Artikel auf swissinfo.org&lt;/a&gt;&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;Ich bin enttäuscht, dass Symptombekämpfung noch immer Vorrang vor der Ursachenbekämpfung bekommt.&lt;/p&gt;</summary></entry></feed>

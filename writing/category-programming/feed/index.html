@@ -1,5 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-03-27T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>The Django admin is a CMS</title><link href="https://406.ch/writing/the-django-admin-is-a-cms/" rel="alternate" /><id>https://406.ch/writing/the-django-admin-is-a-cms/</id><published>2024-03-27T12:00:00Z</published><updated>2024-03-27T12:00:00Z</updated><summary type="html">&lt;h1&gt;The Django admin is a CMS&lt;/h1&gt;&lt;p&gt;The post &lt;a href="https://www.coderedcorp.com/blog/why-is-the-django-admin-ugly/"&gt;Why is the Django Admin “Ugly”?&lt;/a&gt; and the &lt;a href="https://hachyderm.io/@paulox@fosstodon.org/111298440425647176"&gt;discussion on
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-04-06T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
+extraction. I&amp;rsquo;m recovering quite quickly it seems and I&amp;rsquo;m glad about it.&lt;/p&gt;
+&lt;p&gt;This weeknotes entry is short and quick. I&amp;rsquo;m trying to get back into the habit
+of writing them after a mediocre start this year.&lt;/p&gt;
+&lt;h2&gt;20th Anniversary Celebration of Young Greens Switzerland&lt;/h2&gt;
+&lt;p&gt;I have attended the celebration of Young Greens Switzerland. I have been a
+founding member and have been active for close to ten years. A lot of time has
+passed since then. It has been great to reminisce about old times with friends
+and, more importantly, to see how the torch is carried on.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 0.0.5&lt;/a&gt;: blacknoise is an
+  ASGI app for static file serving inspired by
+  &lt;a href="https://whitenoise.readthedocs.io/en/latest/"&gt;whitenoise&lt;/a&gt;. It only supports
+  a very limited subset of whitenoise&amp;rsquo;s functionality, but it supports async.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.1&lt;/a&gt;: The lxml
+  library moved the HTML cleaner into its own package,
+  &lt;a href="https://pypi.org/project/lxml-html-clean/"&gt;lxml-html-clean&lt;/a&gt;; this release
+  adds support for that. I didn&amp;rsquo;t know that the HTML cleaner is viewed as being
+  problematic by the lxml maintainers. I&amp;rsquo;m having another look at
+  &lt;a href="https://github.com/messense/nh3"&gt;nh3&lt;/a&gt; and will maybe switch html-sanitizer&amp;rsquo;s
+  guts from lxml to nh3 in the future.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.18&lt;/a&gt;:
+  django-tree-queries now supports ordering siblings by multiple fields and
+  even allows descending orderings.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.2&lt;/a&gt;: This
+  release fixes the CKEditor 4 filebrowser popup when using Django 5 or better.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>The Django admin is a CMS</title><link href="https://406.ch/writing/the-django-admin-is-a-cms/" rel="alternate" /><id>https://406.ch/writing/the-django-admin-is-a-cms/</id><published>2024-03-27T12:00:00Z</published><updated>2024-03-27T12:00:00Z</updated><summary type="html">&lt;h1&gt;The Django admin is a CMS&lt;/h1&gt;&lt;p&gt;The post &lt;a href="https://www.coderedcorp.com/blog/why-is-the-django-admin-ugly/"&gt;Why is the Django Admin “Ugly”?&lt;/a&gt; and the &lt;a href="https://hachyderm.io/@paulox@fosstodon.org/111298440425647176"&gt;discussion on
 Mastodon&lt;/a&gt; around it finally motivated me to write down my
 thoughts regarding the recurring theme in Django land that the &lt;a href="https://docs.djangoproject.com/en/5.0/ref/contrib/admin/"&gt;Django
 administration interface&lt;/a&gt; isn&amp;rsquo;t a CMS (Content Management
@@ -681,61 +708,4 @@ behavior isn&amp;rsquo;t really reinforced.&lt;/p&gt;
 &lt;p&gt;For some people it seems to be an improvement.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 40)</title><link href="https://406.ch/writing/weeknotes-2023-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-40/</id><published>2023-10-04T12:00:00Z</published><updated>2023-10-04T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 40)&lt;/h1&gt;&lt;h2&gt;More work on hosting several websites from a single Django application server using feincms3-sites&lt;/h2&gt;
-&lt;p&gt;I have mentioned feincms3-sites last week in my last weeknotes entry; I have
-again given this package a lot of attention in the last days, so another update
-is in order.&lt;/p&gt;
-&lt;p&gt;It is now possible to override the list of languages available on each site.
-That&amp;rsquo;s especially useful for an upcoming campaign site where the umbrella
-group&amp;rsquo;s site is available in three languages, but (most?) individual group
-sites (hosted on subdomains) will only have a subset of languages. Since I live
-in a country with four national languages (english isn&amp;rsquo;t one of them, but is
-spoken by many!) supporting more than one language, or even many languages is
-totally commonplace. It&amp;rsquo;s great that Django has good support for
-internationalization. For the sake of an example, I have the following sites:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;example.com&lt;/code&gt;: The default. The host has to match exactly.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;subdomain.example.com&lt;/code&gt;: One individual group&amp;rsquo;s site. The host has to match the regex &lt;code&gt;^subdomain\.&lt;/code&gt; (sorry, I actually do like regexes).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Overriding configured hosts for local development&lt;/h3&gt;
-&lt;p&gt;One thing which always annoyed me when using &lt;code&gt;django.contrib.sites&lt;/code&gt; was that
-&amp;ldquo;just&amp;rdquo; pulling the database from production to the local development
-environment always produced links pointing back to the remote host instead of
-working locally (when producing absolute URLs). This problem was shared by
-feincms3-sites as well. I have now found a very ugly but perfectly workable
-solution: Overwrite &lt;code&gt;Site.get_host()&lt;/code&gt; locally:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;example.com&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Or whatever&lt;/span&gt;
-    &lt;span class="n"&gt;_get_host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;localhost:8000&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;FEINCMS3_SITES_SITE_GET_HOST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;_get_host&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This works especially well when using &lt;code&gt;example.com&lt;/code&gt; and maybe subdomains of
-&lt;code&gt;example.com&lt;/code&gt;: All absolute links will point to &lt;code&gt;localhost:8000&lt;/code&gt; or
-&lt;code&gt;subdomain.localhost:8000&lt;/code&gt;. Since &lt;code&gt;*.localhost&lt;/code&gt; always resolves to the local IP
-the browser knows where it should connect to, and since
-&lt;code&gt;subdomain.localhost:8000&lt;/code&gt; also matches the &lt;code&gt;^subdomain\.&lt;/code&gt; regex mentioned
-above, the site selection logic works as well.&lt;/p&gt;
-&lt;p&gt;Of course if you have more domains, not just subdomains, you could adapt the
-&lt;code&gt;get_host&lt;/code&gt; override and the relevant regexes to those use cases.&lt;/p&gt;
-&lt;h3&gt;Closing words&lt;/h3&gt;
-&lt;p&gt;We&amp;rsquo;re at 100% code coverage now when running the test suite. That&amp;rsquo;s really nice.&lt;/p&gt;
-&lt;h2&gt;Logging into the Django admin using your Google account&lt;/h2&gt;
-&lt;p&gt;This functionality has long been provided by
-&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-admin-sso&lt;/a&gt;; however, as
-mentioned a long time ago this package still uses a deprecated OAuth2 library.
-&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; supports using a
-Google account to authenticate with the Django admin since 2017. I have now
-fixed a small problem with it: If you are logged into a single Google account,
-and this account&amp;rsquo;s email address doesn&amp;rsquo;t match the configured admin login rule,
-you were out of luck: There was no way to add another account at that time
-because the library didn&amp;rsquo;t request the account selection. That has changed now,
-if the first login attempt doesn&amp;rsquo;t work, it now explicitly tells Google to let
-the user select their Google account. A small quality of life improvement for
-those using more than one Google account (voluntarily or not).&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.4.3&lt;/a&gt;: Polished the CKEditor integration a little bit. Re-enabled the source button now that we&amp;rsquo;re back to using the classic iframe-based editor again.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.19.3&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.4&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/div&gt;</summary></entry></feed>
