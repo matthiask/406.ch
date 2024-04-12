@@ -12,7 +12,7 @@
       <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small><br>
       {{ post.title }}
     </h2>
-    <p>{{ post.excerpt|truncate }}</p>
+    <p>{{ post.excerpt|truncate(240) }}</p>
   </a>
 {% endfor %}
 
