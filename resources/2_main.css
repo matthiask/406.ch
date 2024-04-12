@@ -11,9 +11,12 @@ body {
   box-sizing: inherit;
 }
 
+html {
+  font-size: 17px;
+}
+
 body {
   font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  font-size: 15px;
   color: #333;
   background: #e6e6e9;
 }
@@ -23,7 +26,7 @@ main {
 }
 
 .wrappy {
-  max-width: 45rem;
+  max-width: 40rem;
   margin: 0 auto;
   padding: 0 1rem;
   position: relative;

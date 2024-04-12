@@ -1,7 +1,6 @@
 Title: Building forms with the Django admin
-Date: 2024-04-10
+Date: 2024-04-12
 Categories: Django, Programming
-Draft: remove-this-to-publish
 
 # Building forms with the Django admin
 
@@ -62,3 +61,8 @@ It still doesn't come close to WPForms in terms of included functionality; a big
 ![The feincms3-forms admin interface](https://406.ch/assets/20240410-feincms3-forms.png)
 
 The feincms3-forms forms support all types of content between form fields (basically everything [django-content-editor](https://django-content-editor.readthedocs.io/) supports). Plugins for form fields are more flexible and can add as many input fields to the form as they want, you're not restricted to single values or single input fields.
+
+## Packages
+
+- [form-designer](https://github.com/feincms/form-designer)
+- [feincms3-forms](https://github.com/feincms/feincms3-forms)
