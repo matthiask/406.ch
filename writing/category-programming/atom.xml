@@ -1,5 +1,51 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-04-06T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-04-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;
+&lt;p&gt;The title of this post was shamelessly copied from &lt;a href="https://mastodon.social/@webology/112235938469045649"&gt;Jeff Triplett&amp;rsquo;s post on
+Mastodon&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Why?&lt;/h2&gt;
+&lt;p&gt;Many websites need a simple way of embedding forms, for example as a contact
+form or for simple surveys to collect some data or inputs from visitors.
+&lt;a href="https://docs.djangoproject.com/en/5.0/topics/forms/"&gt;Django&amp;rsquo;s forms library&lt;/a&gt;
+makes building such forms straightforward but changing those forms requires
+programming skills and programmer time. Both of them may not be readily
+available. More importantly, sometimes it&amp;rsquo;s just nice to give more tools to web
+publishers.&lt;/p&gt;
+&lt;p&gt;The simple way to build something like this is to use a form builder such as
+Google Forms, Typeform, Paperform or anything of the sort. Those options work
+nicely. The downsides are that embedded forms using those services load slowly,
+look differently, cost a lot or collect a lot of data on users, or all of those
+options. Because of that there&amp;rsquo;s still a place for building such functionality
+locally.&lt;/p&gt;
+&lt;p&gt;If I wanted to use PHP and WordPress I could just use
+&lt;a href="https://wpforms.com/"&gt;WPForms&lt;/a&gt; and call it a day. Since I do not actually want
+that this blog post is a bit longer.&lt;/p&gt;
+&lt;h2&gt;The early days: form-designer&lt;/h2&gt;
+&lt;p&gt;One of the first Django-based third party apps I published was the &lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;. The first version was uploaded to PyPI in 2012 but it had already been used in production for more than two years at that point in time. I had used &lt;a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;Git submodules&lt;/a&gt; for the deployment back then, before switching to &lt;a href="https://virtualenv.pypa.io/"&gt;Python virtualenvs&lt;/a&gt; some time later (and never looking back!)&lt;/p&gt;
+&lt;p&gt;The form-designer is still maintained actively. Because of Django&amp;rsquo;s stability and because of the fact that the app doesn&amp;rsquo;t do all that much it doesn&amp;rsquo;t require much development at all.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A screenshot of the admin interface" src="https://406.ch/assets/20240410-form-designer.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The form designer supports a selection of standard HTML5 input fields out of the box and also has an optional &lt;a href="https://github.com/django-recaptcha/django-recaptcha"&gt;django-recaptcha&lt;/a&gt; integration. All fields support some basic configuration such as setting a title, a help text, marking the field as required etc. Submissions can be sent to a configurable email address and can be saved in the database and later exported as an XLSX file. It&amp;rsquo;s also possible to define your own actions.&lt;/p&gt;
+&lt;h2&gt;More flexibility needed: feincms3-forms&lt;/h2&gt;
+&lt;p&gt;A few years back I mentioned &lt;a href="https://406.ch/writing/weeknotes-2021-week-13-and-14/"&gt;feincms3-forms in a weeknotes entry&lt;/a&gt;. The reasons why form-designer wasn&amp;rsquo;t sufficient for a project back then are outlined in the blog post:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h3&gt;feincms3-forms – A new forms builder for the Django admin interface&lt;/h3&gt;
+&lt;p&gt;For a current project &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; needed a forms builder with the following constraints:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple fields (text, email, checkboxes, dropdowns etc.)&lt;/li&gt;
+&lt;li&gt;Custom validation and processing logic&lt;/li&gt;
+&lt;li&gt;It should be possible to add other content, e.g. headings and explanations between form fields&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;a href="https://github.com/feincms/form_designer"&gt;form_designer&lt;/a&gt; fulfilled a few of these requirements but not all. It still works well but I wanted a forms builder based on &lt;a href="https://github.com/matthiask/django-content-editor"&gt;django-content-editor&lt;/a&gt; for a long time already. Also, I really like the feincms3 pattern where the third party app only provides abstract models. Yeah, it is much more work to start with but the flexibility and configurability is worth it – especially since it&amp;rsquo;s possible to write straightforward code to handle special cases[^2] instead of configuring even more settings.&lt;/p&gt;
+&lt;p&gt;The humble beginnings are here in the &lt;a href="https://github.com/matthiask/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt; repository. The &lt;a href="https://github.com/matthiask/feincms3-forms/tree/main/tests/testapp"&gt;test suite already shows how things work together&lt;/a&gt; but as of now no documentation exists and no release has been made yet. I hope it will be ready for a first beta release in the next few weeks 😄&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Since then I have used feincms3-forms more often than form-designer, for building simple forms and also to build multi-step form wizards with custom fields, custom validation, configurable steps etc. The &lt;a href="https://github.com/feincms/feincms3-forms?tab=readme-ov-file#feincms3-forms"&gt;README&lt;/a&gt; now actually explains why the project exists and how it could be used.&lt;/p&gt;
+&lt;p&gt;It still doesn&amp;rsquo;t come close to WPForms in terms of included functionality; a big feature which is missing is conditional logic because I haven&amp;rsquo;t yet had a use for it.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The feincms3-forms admin interface" src="https://406.ch/assets/20240410-feincms3-forms.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The feincms3-forms forms support all types of content between form fields (basically everything &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; supports). Plugins for form fields are more flexible and can add as many input fields to the form as they want, you&amp;rsquo;re not restricted to single values or single input fields.&lt;/p&gt;
+&lt;h2&gt;Packages&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
 extraction. I&amp;rsquo;m recovering quite quickly it seems and I&amp;rsquo;m glad about it.&lt;/p&gt;
 &lt;p&gt;This weeknotes entry is short and quick. I&amp;rsquo;m trying to get back into the habit
 of writing them after a mediocre start this year.&lt;/p&gt;
@@ -596,116 +642,4 @@ code itself are much more important to me.&lt;/p&gt;
 &lt;p&gt;I haven&amp;rsquo;t uploaded any releases in the last 14 days. That&amp;rsquo;s good: I&amp;rsquo;m one of
 those people who have made their passion their job (which is great) but that
 sometimes makes it hard to not work at all since I can always tell myself that
-I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry><entry><title>Why we switched from Slack to Discord at Work</title><link href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/" rel="alternate" /><id>https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/</id><published>2023-10-15T12:00:00Z</published><updated>2023-10-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Why we switched from Slack to Discord at Work&lt;/h1&gt;&lt;p&gt;We have switched from Slack to Discord at &lt;a href="https://feinheit.ch"&gt;Feinheit&lt;/a&gt; a few years back. This post explores the history, the reasons for the switch and what we learned in the meantime.&lt;/p&gt;
-&lt;h2&gt;The early days&lt;/h2&gt;
-&lt;p&gt;In the early days we used Skype group chats. I don&amp;rsquo;t remember why we stopped.
-We probably became too numerous for a single chat. After we stopped we
-certainly missed the easy way to share things with everyone. An alternative had
-to be found. Company based social networks were the hype for a short amount of
-time. I don&amp;rsquo;t even remember the name of the product we used, that probably says
-enough about that. Suffice to say that it wasn&amp;rsquo;t a happy time tool-wise.&lt;/p&gt;
-&lt;h2&gt;Slack&lt;/h2&gt;
-&lt;p&gt;Then came Slack. Finally we had something easy to use, again. Need a new space to
-discuss something? Just open a new channel, everybody can do it! Need to ask a
-specific person something? Direct messages are right there, and (arguably) much
-better than always interrupting people by walking to their desk for everything.&lt;/p&gt;
-&lt;p&gt;However, my personal lived experience rapidly deteriorated. I wanted to be
-accessible for urgent inquiries to unblock colleagues when they needed
-something. But this also fostered an ASAP culture. Project managers knew I was
-almost always available. It didn&amp;rsquo;t help that some were terribly unorganized at
-times.&lt;/p&gt;
-&lt;p&gt;Since asking was easier that searching the documentation or the handbook people
-didn&amp;rsquo;t bother to document things anymore. The information was shared in Slack
-but since nobody found the relevant messages after time had passed the same
-questions were asked (and answered) over and over. Slack became the place where
-knowledge goes to die.&lt;/p&gt;
-&lt;p&gt;After a time Slack became my primary source of stress. I tried several times to
-stop using it. I suffered an unreasonable amount of FOMO&lt;sup id="fnref:fomo"&gt;&lt;a class="footnote-ref" href="#fn:fomo"&gt;1&lt;/a&gt;&lt;/sup&gt; during that
-time but it was also true that I did not know stuff which was only shared on
-Slack by others. I asked myself many times what my problem was and why I
-couldn&amp;rsquo;t &amp;ldquo;simply&amp;rdquo; shut it off and ignore the downsides. And a minor but still
-important point, ignore the unread messages indicator.&lt;/p&gt;
-&lt;p&gt;Luckily I learned of others who felt the same way, mostly outside the company
-but some of them at Feinheit. Slack had to go. The question was: Which tool
-could be a suitable replacement? Given the title of this post it shouldn&amp;rsquo;t come
-as a surprise that the answer was Discord.&lt;/p&gt;
-&lt;h2&gt;Digression: Project management software&lt;/h2&gt;
-&lt;p&gt;It&amp;rsquo;s probably important to know that we have been using a project management
-tool and also issue trackers all this time. So, Slack really wasn&amp;rsquo;t just a
-possibly improved&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;2&lt;/a&gt;&lt;/sup&gt; replacement for mail-based project management. Slack
-mainly crept into the project management tooling because some people perceived
-it to be more modern: A simpler way for those asking others for their time or
-knowledge.&lt;/p&gt;
-&lt;h2&gt;Discord as an addition, not a replacement for project management software&lt;/h2&gt;
-&lt;p&gt;We have started using Discord in the summer of 2021 with a clear set of rules
-and a small number of channels.&lt;/p&gt;
-&lt;h3&gt;Rules&lt;/h3&gt;
-&lt;p&gt;The most important rules are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Discord is the place for casual and informal exchange.&lt;/li&gt;
-&lt;li&gt;Nobody is expected to read anything on Discord. If it is expected that people
-  actually receive a message it must not be shared on Discord.&lt;/li&gt;
-&lt;li&gt;No discussing project work, not in channels nor in direct messages. The
-  former is enforced by a short list of moderators, the latter is formulated as
-  an expectation (since it&amp;rsquo;s impossible to enforce).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The rules message also contains a direct message to a shared to do list, where
-everyone can easily assign to do items to others without having to find the
-project&amp;rsquo;s issue tracker. This is especially important because we have many
-small projects and no one works on all of them. If assigning to dos wasn&amp;rsquo;t
-relatively straightforward people would understandably fall back to direct
-messages.&lt;/p&gt;
-&lt;h3&gt;Server configuration&lt;/h3&gt;
-&lt;p&gt;We are able to uphold these rules because of Discord&amp;rsquo;s strong moderation
-features (compared to Slack). Discord is much more configurable. Our server is
-configured in the following way:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Channel creation is disallowed. Only moderators can create new channels; if
-  someone asks for a new channel, the request is denied if it is probable that
-  the rules above would be broken.&lt;/li&gt;
-&lt;li&gt;No one is expected to accept DMs from other members.&lt;/li&gt;
-&lt;li&gt;Threads are disabled. The structure they provide makes it acceptable to loop
-  people into a &amp;ldquo;quick&amp;rdquo; conversation which 99% of the time belongs somewhere
-  more permanent, for example the project management software.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Those are just the most important points.&lt;/p&gt;
-&lt;h3&gt;Channels&lt;/h3&gt;
-&lt;p&gt;At the time of writing those are our text channels (The names are translated to their equivalents):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;#reception&lt;/code&gt; &amp;ndash; this is the only channel people see when they haven&amp;rsquo;t been
-  given the appropriate role. This is necessary because everybody can join a
-  server if they have an invite code and we don&amp;rsquo;t want random people to read
-  everything we post.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;#staircase&lt;/code&gt; &amp;ndash; the place to say hello, bye, and a few things in-between.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;#random&lt;/code&gt; &amp;ndash; all servers need this :-)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;#politics&lt;/code&gt; &amp;ndash; a separate space for politics. Everything&amp;rsquo;s political, and we are too.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;#inspiration&lt;/code&gt; &amp;ndash; I myself thought that &lt;code&gt;#staircase&lt;/code&gt; and &lt;code&gt;#random&lt;/code&gt; would be
-  sufficient but people wanted this and the moderators didn&amp;rsquo;t think that this
-  additional channel would lead to a violation of the rules above.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Additionally, we have two voice channels, &lt;code&gt;cow-orking&lt;/code&gt; and &lt;code&gt;sofa&lt;/code&gt;. The former
-was used more ofting when more people were working from home to have a place to
-hear from others, the latter is more an invitation to talk. More talk happens
-in-person in the office these days, but when working remotely it&amp;rsquo;s still nice
-to know that those channels are just a click away.&lt;/p&gt;
-&lt;h2&gt;Closing words&lt;/h2&gt;
-&lt;p&gt;I myself have joined the work discord using my private account and I feel good
-about that. I&amp;rsquo;m not friends with everyone at work but I certainly have good
-relationships with basically everyone.&lt;/p&gt;
-&lt;p&gt;I also did not live-stream my activities to Discord before creating the work
-server anyway so there hasn&amp;rsquo;t been a change there at all. And people mostly
-know that Discord is about the slowest place to get something from me (and I
-make a point of it!) so even if people do not heed the &amp;ldquo;No DMs&amp;rdquo; rule above this
-behavior isn&amp;rsquo;t really reinforced.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m actually really happy with the way we&amp;rsquo;re using these tools these days.&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:fomo"&gt;
-&lt;p&gt;Fear Of Missing Out.&amp;#160;&lt;a class="footnote-backref" href="#fnref:fomo" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;For some people it seems to be an improvement.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry></feed>
+I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry></feed>

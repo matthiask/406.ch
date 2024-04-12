@@ -1,5 +1,51 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-04-06T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-04-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;
+&lt;p&gt;The title of this post was shamelessly copied from &lt;a href="https://mastodon.social/@webology/112235938469045649"&gt;Jeff Triplett&amp;rsquo;s post on
+Mastodon&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Why?&lt;/h2&gt;
+&lt;p&gt;Many websites need a simple way of embedding forms, for example as a contact
+form or for simple surveys to collect some data or inputs from visitors.
+&lt;a href="https://docs.djangoproject.com/en/5.0/topics/forms/"&gt;Django&amp;rsquo;s forms library&lt;/a&gt;
+makes building such forms straightforward but changing those forms requires
+programming skills and programmer time. Both of them may not be readily
+available. More importantly, sometimes it&amp;rsquo;s just nice to give more tools to web
+publishers.&lt;/p&gt;
+&lt;p&gt;The simple way to build something like this is to use a form builder such as
+Google Forms, Typeform, Paperform or anything of the sort. Those options work
+nicely. The downsides are that embedded forms using those services load slowly,
+look differently, cost a lot or collect a lot of data on users, or all of those
+options. Because of that there&amp;rsquo;s still a place for building such functionality
+locally.&lt;/p&gt;
+&lt;p&gt;If I wanted to use PHP and WordPress I could just use
+&lt;a href="https://wpforms.com/"&gt;WPForms&lt;/a&gt; and call it a day. Since I do not actually want
+that this blog post is a bit longer.&lt;/p&gt;
+&lt;h2&gt;The early days: form-designer&lt;/h2&gt;
+&lt;p&gt;One of the first Django-based third party apps I published was the &lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;. The first version was uploaded to PyPI in 2012 but it had already been used in production for more than two years at that point in time. I had used &lt;a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;Git submodules&lt;/a&gt; for the deployment back then, before switching to &lt;a href="https://virtualenv.pypa.io/"&gt;Python virtualenvs&lt;/a&gt; some time later (and never looking back!)&lt;/p&gt;
+&lt;p&gt;The form-designer is still maintained actively. Because of Django&amp;rsquo;s stability and because of the fact that the app doesn&amp;rsquo;t do all that much it doesn&amp;rsquo;t require much development at all.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A screenshot of the admin interface" src="https://406.ch/assets/20240410-form-designer.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The form designer supports a selection of standard HTML5 input fields out of the box and also has an optional &lt;a href="https://github.com/django-recaptcha/django-recaptcha"&gt;django-recaptcha&lt;/a&gt; integration. All fields support some basic configuration such as setting a title, a help text, marking the field as required etc. Submissions can be sent to a configurable email address and can be saved in the database and later exported as an XLSX file. It&amp;rsquo;s also possible to define your own actions.&lt;/p&gt;
+&lt;h2&gt;More flexibility needed: feincms3-forms&lt;/h2&gt;
+&lt;p&gt;A few years back I mentioned &lt;a href="https://406.ch/writing/weeknotes-2021-week-13-and-14/"&gt;feincms3-forms in a weeknotes entry&lt;/a&gt;. The reasons why form-designer wasn&amp;rsquo;t sufficient for a project back then are outlined in the blog post:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h3&gt;feincms3-forms – A new forms builder for the Django admin interface&lt;/h3&gt;
+&lt;p&gt;For a current project &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; needed a forms builder with the following constraints:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple fields (text, email, checkboxes, dropdowns etc.)&lt;/li&gt;
+&lt;li&gt;Custom validation and processing logic&lt;/li&gt;
+&lt;li&gt;It should be possible to add other content, e.g. headings and explanations between form fields&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;a href="https://github.com/feincms/form_designer"&gt;form_designer&lt;/a&gt; fulfilled a few of these requirements but not all. It still works well but I wanted a forms builder based on &lt;a href="https://github.com/matthiask/django-content-editor"&gt;django-content-editor&lt;/a&gt; for a long time already. Also, I really like the feincms3 pattern where the third party app only provides abstract models. Yeah, it is much more work to start with but the flexibility and configurability is worth it – especially since it&amp;rsquo;s possible to write straightforward code to handle special cases[^2] instead of configuring even more settings.&lt;/p&gt;
+&lt;p&gt;The humble beginnings are here in the &lt;a href="https://github.com/matthiask/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt; repository. The &lt;a href="https://github.com/matthiask/feincms3-forms/tree/main/tests/testapp"&gt;test suite already shows how things work together&lt;/a&gt; but as of now no documentation exists and no release has been made yet. I hope it will be ready for a first beta release in the next few weeks 😄&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Since then I have used feincms3-forms more often than form-designer, for building simple forms and also to build multi-step form wizards with custom fields, custom validation, configurable steps etc. The &lt;a href="https://github.com/feincms/feincms3-forms?tab=readme-ov-file#feincms3-forms"&gt;README&lt;/a&gt; now actually explains why the project exists and how it could be used.&lt;/p&gt;
+&lt;p&gt;It still doesn&amp;rsquo;t come close to WPForms in terms of included functionality; a big feature which is missing is conditional logic because I haven&amp;rsquo;t yet had a use for it.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The feincms3-forms admin interface" src="https://406.ch/assets/20240410-feincms3-forms.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The feincms3-forms forms support all types of content between form fields (basically everything &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; supports). Plugins for form fields are more flexible and can add as many input fields to the form as they want, you&amp;rsquo;re not restricted to single values or single input fields.&lt;/p&gt;
+&lt;h2&gt;Packages&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
 extraction. I&amp;rsquo;m recovering quite quickly it seems and I&amp;rsquo;m glad about it.&lt;/p&gt;
 &lt;p&gt;This weeknotes entry is short and quick. I&amp;rsquo;m trying to get back into the habit
 of writing them after a mediocre start this year.&lt;/p&gt;
@@ -730,7 +776,4 @@ you want to see any apps and models in the admin index page. The current
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;PermissionDenied&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>My reaction to the block-driven CMS blog post</title><link href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/" rel="alternate" /><id>https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/</id><published>2023-08-23T12:00:00Z</published><updated>2023-08-23T12:00:00Z</updated><summary type="html">&lt;h1&gt;My reaction to the block-driven CMS blog post&lt;/h1&gt;
-&lt;p&gt;This morning I read an interesting post on the Lincoln Loop blog called &lt;a href="https://lincolnloop.com/insights/block-driven-cms-is-critical-build-a-future-proof/"&gt;Building a Future-Proof Platform with Block-Driven CMS&lt;/a&gt;. It shouldn&amp;rsquo;t come as a surprise to those (few 😄) who know my work in the area of content management systems that the post resonated with me. I found the description of the advantages of block-based CMS editing very clear and I like the emphasis on structuring data well so that it can be reused for multiple distribution channels.&lt;/p&gt;
-&lt;p&gt;Of course &lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt; isn&amp;rsquo;t the only way to implement a block-driven CMS using Django. Since its inception &lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS&lt;/a&gt; was always the smaller, faster and nimbler counterpart to it, achieving the same &lt;em&gt;basic&lt;/em&gt; goals with a fraction of the code and maintenance headaches. django CMS always seems to trail the official releases of Django. django-content-editor and feincms3 are almost always compatible with the development version of Django by way of running the tests with the &lt;code&gt;main&lt;/code&gt; branch as well. This allows me to be an early adopter of upcoming Django releases with a software stack that&amp;rsquo;s already well tested, or also to report bugs to the Django project itself. All that probably wouldn&amp;rsquo;t be possible if feincms3 and its dependencies supported all the things django CMS does, but it doesn&amp;rsquo;t have to to be useful.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/"&gt;django-content-editor and feincms3&lt;/a&gt; are the legacy of FeinCMS in an even smaller, even more maintainable and even more composable package and while I&amp;rsquo;m definitely always checking out other Django-based CMS I&amp;rsquo;m persuaded that sticking with feincms3 is a good choice.&lt;/p&gt;</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
