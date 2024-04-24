@@ -1,6 +1,6 @@
 Title: Workbench, the Django-based agency software
 Date: 2024-04-24
-Categories: Django, Programming, Workbench
+Categories: Django, Programming
 Draft: remove-this-to-publish
 
 I get the impression that there's a lot of interesting software in Django land, and people do not know about it. I'm thinking about starting a series of posts on some of the things I do in the hope that they are interesting.

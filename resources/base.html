@@ -10,7 +10,7 @@
 <body>
   <header>
     <div class="wrappy">
-      <h1 class="title">Hi, I'm Matthias</h1>
+      <a class="title" href="/">Hi, I'm Matthias</a>
       <p class="subtitle">
         I am a founding partner of
         <a href="https://feinheit.ch">Feinheit AG</a> and
@@ -24,7 +24,6 @@
       </p>
 
       <nav>
-        <a {% if posts and not current %}class="active"{% endif %} href="/">Archive</a>
         {% for category in categories %}
         <a {% if current == category %}class="active"{% endif %} href="{{ category.url() }}">{{ category.title }}</a>
         {% endfor %}
