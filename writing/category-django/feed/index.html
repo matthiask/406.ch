@@ -1,5 +1,40 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-04-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-04-24T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Workbench, the Django-based agency software</title><link href="https://406.ch/writing/workbench-the-django-based-agency-software/" rel="alternate" /><id>https://406.ch/writing/workbench-the-django-based-agency-software/</id><published>2024-04-24T12:00:00Z</published><updated>2024-04-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench, the Django-based agency software&lt;/h1&gt;&lt;p&gt;I get the impression that there&amp;rsquo;s a lot of interesting but unknown software in Django land. I don&amp;rsquo;t know if there&amp;rsquo;s any interest in some of the packages I have been working on; if not this blog post is for myself only.&lt;/p&gt;
+&lt;h2&gt;(Hi)story time&lt;/h2&gt;
+&lt;p&gt;As people may know I work at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt;, an agency which specializes in digital communication services for SMEs, campaigns for referendums, and website and webapp development. At the time of writing we are a team of about 20-25 communication experts, graphic designers, programmers and project managers.&lt;/p&gt;
+&lt;p&gt;We have many different clients and are working on many different projects at the same time and are billing by the hour&lt;sup id="fnref:bythehour"&gt;&lt;a class="footnote-ref" href="#fn:bythehour"&gt;1&lt;/a&gt;&lt;/sup&gt;. Last year my own work has been billed to more than 50 different customers. In the early days we used a shared file server with spreadsheet files to track our working hours. Luckily we didn&amp;rsquo;t often overwrite the edits others made but that was definitely something which happened from time to time.&lt;/p&gt;
+&lt;p&gt;We knew of another agency who had the same problems and used a FileMaker-based software. Their solution had several problems, among them the fact that it became hard to evolve and that it got slower and slower as more and more data was entered into it over the years. They had the accounting know how and we had the software engineering know how so we wrote a webapp based on the Django framework. As always, it was much more work than the initial estimate, but if we as programmers didn&amp;rsquo;t underestimate the effort needed we wouldn&amp;rsquo;t have started many of the great projects we&amp;rsquo;re now getting much value and/or enjoyment from, hopefully both. The product of that work was &lt;a href="https://www.fineware.ch/"&gt;Metronom&lt;/a&gt;. The first release happened a little bit later than &lt;a href="https://www.getharvest.com/about"&gt;harvest&lt;/a&gt; but it already came with full time tracking including an annual working time calculator, absence management, offers, invoices including PDF generation etc, so it was quite a bit more versatile while still being easier to use than &amp;ldquo;real&amp;rdquo; business software solutions.&lt;/p&gt;
+&lt;p&gt;I personally was of the opinion that the product was good enough to try selling it, but for a variety of reasons (which I don&amp;rsquo;t want to go into here) this never happened and &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; decided that we didn&amp;rsquo;t want to be involved anymore.&lt;/p&gt;
+&lt;p&gt;However, this meant that we were dead-end street with a software that didn&amp;rsquo;t belong to us anymore, which wasn&amp;rsquo;t evolving to our changing requirements. I also didn&amp;rsquo;t enjoy working on it anymore. Over the years I have tried replacing it several times but that never came to pass until some time after the introduction of &lt;a href="https://www.holacracy.org/"&gt;Holacracy&lt;/a&gt; at our company. I noticed that I didn&amp;rsquo;t have to persuade everyone but that I, as the responsible person for this particular decision, could &amp;ldquo;just&amp;rdquo;&lt;sup id="fnref:just"&gt;&lt;a class="footnote-ref" href="#fn:just"&gt;2&lt;/a&gt;&lt;/sup&gt; move ahead with a broad interpretation of the purpose and accountabilities of one of my roles.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="https://github.com/matthiask/workbench"&gt;Workbench&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="https://406.ch/assets/20240424-workbench.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/matthiask/workbench"&gt;Workbench&lt;/a&gt; is the product of a few long nights of hacking. The project was started as an experiment in 2015 and was used for sending invoices but that wasn&amp;rsquo;t really the intended purpose. After long periods of lying dormant I have brought the project to a good enough state and switched Feinheit away from Metronom in 2019.&lt;/p&gt;
+&lt;p&gt;I have thought long and hard about switching to one of the off-the-shelf products and it could very well be that one of them would work well for us. Also, we wouldn&amp;rsquo;t have to pay (in form of working hours) for the maintenance and for enhancements ourselves. On the other hand, we can use a tool which is tailored to our needs. Is it worth the effort? That&amp;rsquo;s always hard to answer. The tool certainly works well for the few companies which are using it right now, so there&amp;rsquo;s no reason to agonize over that.&lt;/p&gt;
+&lt;p&gt;At the time of writing, Workbench offers projects and services, offers and invoices incl. PDF generation, recurring invoices, an address book, a logbook for rendered services, annual working time reports, an acquisition funnel, a stupid project planning and resource management tool and various reports. It has not only replaced Metronom but also a selection of SaaS (for example Pipedrive and TeamGantt) we were using previously.&lt;/p&gt;
+&lt;p&gt;The whole thing is open source because I don&amp;rsquo;t want to try making agency software into a business anymore, I only want to solve the problems &lt;em&gt;we&lt;/em&gt; have. That being said, if someone else finds it useful then that&amp;rsquo;s certainly alright as well.&lt;/p&gt;
+&lt;p&gt;The license has been MIT for the first few years but I have switched to the GPL because I wanted to integrate the excellent &lt;a href="https://pypi.org/project/qrbill/"&gt;qrbill&lt;/a&gt; module which is also licensed under the GPL. As I wrote elsewhere, I have released almost everything under the GPL in my first few open source years but have switched to BSD/MIT later when starting to work mainly with Python and Django because I thought that this license is a better fit&lt;sup id="fnref:license"&gt;&lt;a class="footnote-ref" href="#fn:license"&gt;3&lt;/a&gt;&lt;/sup&gt; for the ecosystem. That being said, for a product such as this the GPL is certainly an excellent fit.&lt;/p&gt;
+&lt;h2&gt;Final words?&lt;/h2&gt;
+&lt;p&gt;There are a few things I could write about to make this into a series. I&amp;rsquo;m putting a few ideas here, not as an announcement, just as a reminder for myself.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Better time tracking&lt;/li&gt;
+&lt;li&gt;Patterns for creating recurring invoices&lt;/li&gt;
+&lt;li&gt;Feature switches and configurability&lt;/li&gt;
+&lt;li&gt;Coffee time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:bythehour"&gt;
+&lt;p&gt;Rather, in six minute increments. It&amp;rsquo;s even worse.&amp;#160;&lt;a class="footnote-backref" href="#fnref:bythehour" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:just"&gt;
+&lt;p&gt;Of course it&amp;rsquo;s never that simple, because the responsibility is a lot. The important point is: It would have been a lot of work anyways, the big difference is that it was sufficient to get consent from people; no consensus required.&amp;#160;&lt;a class="footnote-backref" href="#fnref:just" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:license"&gt;
+&lt;p&gt;That&amp;rsquo;s not meant as a criticism in any way!&amp;#160;&lt;a class="footnote-backref" href="#fnref:license" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;
 &lt;p&gt;The title of this post was shamelessly copied from &lt;a href="https://mastodon.social/@webology/112235938469045649"&gt;Jeff Triplett&amp;rsquo;s post on
 Mastodon&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Why?&lt;/h2&gt;
@@ -672,108 +707,4 @@ repositories into the organization.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.4.1&lt;/a&gt;: I&amp;rsquo;m enormously unhappy but I had to go back to the classic CKEditor instead of using the inline editor. The latter looked much nicer but overriding the Django admin CSS was very very painful. Also, I can totally understand why CKEditor 5 is completely different and why CKEditor 4 is only maintained in a paid LTS plan. It still is making me look for alternatives.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.15&lt;/a&gt;: I unfortunately am still using this despite the fact that I have marked it as officially unmaintained since march 2021. I did a mediocre job of making the library run on Django@main again. Parts of the library do not work, but since I&amp;rsquo;m not using them I don&amp;rsquo;t care too much. I&amp;rsquo;m still wondering if someone wants to take over maintenance of the library since it still seems to be actively used in projects of others as well. When I don&amp;rsquo;t have to use django-mptt I&amp;rsquo;m still really happy with &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.22&lt;/a&gt;: This is probably my oldest actively developed project these days. 13 years! (Except for django-content-editor of course.) I have modernized the package, switched to hatchling and put out a new release.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Keep content managers' admin access up-to-date with role-based permissions</title><link href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/" rel="alternate" /><id>https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/</id><published>2023-09-20T12:00:00Z</published><updated>2023-09-20T12:00:00Z</updated><summary type="html">&lt;h1&gt;Keep content managers&amp;rsquo; Django admin access up-to-date with role-based permissions&lt;/h1&gt;
-&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/default/#permissions-and-authorization"&gt;Django&amp;rsquo;s built-in permissions
-system&lt;/a&gt;
-is great if you want fine-grained control of the permissions content
-managers should have. The allowlist-based approach where users have no
-permissions by default and must be granted each permission individually makes a
-lot of sense to me and is easy to understand.&lt;/p&gt;
-&lt;p&gt;When we build a CMS at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we often use the Django administration panel as a CMS.
-Unfortunately, Django doesn&amp;rsquo;t provide a way to specify that content managers
-should have all permissions in the &lt;code&gt;pages&lt;/code&gt; and &lt;code&gt;articles&lt;/code&gt; app (just as an
-example). Adding all current permissions in a particular app is straightforward when using the
-&lt;a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.filter_horizontal"&gt;&lt;code&gt;filter_horizontal&lt;/code&gt;&lt;/a&gt;
-interface but keeping the list up-to-date later isn&amp;rsquo;t. When we add an
-additional &lt;a href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/"&gt;content block
-plugin&lt;/a&gt;
-we always have to remember to also update the permissions after deploying the
-change &amp;ndash; and often, deployment happens some time after the code has been
-written, e.g. because clients want to approve the change first. What happens
-all too often is that the manual step of updating permissions gets forgotten.&lt;/p&gt;
-&lt;p&gt;This has annoyed me (intermittently) for a long time and my preferred solution
-has always been to give superuser permissions to everyone and trust them to
-not make changes which they aren&amp;rsquo;t supposed to according to the &lt;em&gt;Trusted Users
-Editing Structured Content&lt;/em&gt; principle which was mentioned in a Django book I
-read early in my Django journey.&lt;/p&gt;
-&lt;h2&gt;The basic ideas of my role-based permissions implementation&lt;/h2&gt;
-&lt;p&gt;A recent project has resurfaced this annoyance and I did finally bite the
-bullet and implement a solution for this in the form of a
-&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; extension. The basic ideas are:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;All users are assigned a single role&lt;/strong&gt;: Single roles sound inflexible, but is
-good enough for my default use case. Examples for roles could be &lt;em&gt;default&lt;/em&gt; (no
-additional permissions granted), &lt;em&gt;content managers&lt;/em&gt; (grant access to the pages
-and articles apps) or maybe &lt;em&gt;deny auth&lt;/em&gt; (deny access to users, groups and
-permissions).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The permission check is implemented using a single callable&lt;/strong&gt;: A custom
-backend is provided whose only job is to call the correct callable for the
-user&amp;rsquo;s current role.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The callable either returns a boolean or raises &lt;code&gt;PermissionDenied&lt;/code&gt; to prevent
-other backends from granting access&lt;/strong&gt;: No new ideas here, it&amp;rsquo;s exactly what
-&lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#handling-authorization-in-custom-backends"&gt;Django&amp;rsquo;s authentication backends are supposed to
-do&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Permission checkers for the most common scenarios are bundled&lt;/strong&gt;:
-django-authlib only ships one permission checker right now, &lt;code&gt;allow_deny_globs&lt;/code&gt;,
-which allows specifying a list of permission name globs to allow and to deny.
-Deny overrides allow as is probably expected.&lt;/p&gt;
-&lt;h2&gt;Using roles in your own project&lt;/h2&gt;
-&lt;p&gt;Specify the available roles in your settings and add the authentication backend:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;gettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-&lt;span class="n"&gt;AUTHLIB_ROLES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;editorial staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;callback&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="s2"&gt;&amp;quot;pages.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="s2"&gt;&amp;quot;articles.*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="n"&gt;AUTHENTICATION_BACKENDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="c1"&gt;# This is the necessary additional backend&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;authlib.backends.PermissionsBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="c1"&gt;# Maybe you want to use authlib&amp;#39;s email authentication ...&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;authlib.backends.EmailBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="c1"&gt;# ... or the standard username &amp;amp; password combination:&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;django.contrib.auth.backends.ModelBackend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You have to extend your user model (you have to use &lt;a href="https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#specifying-custom-user-model"&gt;a custom user model&lt;/a&gt; if you&amp;rsquo;re not using django-authlib&amp;rsquo;s &lt;code&gt;little_user.User&lt;/code&gt;):&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authlib.roles&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AbstractUser&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="c1"&gt;# ...&lt;/span&gt;
-    &lt;span class="n"&gt;role&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RoleField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And that&amp;rsquo;s basically it.&lt;/p&gt;
-&lt;p&gt;Of course the globbing is flexible, you could also allow users to view all objects:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.view_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Or you could block users from deleting anything:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;partial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.delete_*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And as mentioned above, you can also combine &lt;code&gt;allow&lt;/code&gt; and &lt;code&gt;deny&lt;/code&gt; (&lt;code&gt;deny&lt;/code&gt; wins
-over &lt;code&gt;allow&lt;/code&gt;) or even provide your own callables. If you provide your own
-callable it must accept &lt;code&gt;user&lt;/code&gt;, &lt;code&gt;perm&lt;/code&gt; and &lt;code&gt;obj&lt;/code&gt; (which may be &lt;code&gt;None&lt;/code&gt;) as
-keyword arguments. Implementing such a callable is probably less work than
-implementing an authentication backend yourself; I had to do more work than
-initially expected because only implementing &lt;code&gt;.has_perm&lt;/code&gt; isn&amp;rsquo;t sufficient if
-you want to see any apps and models in the admin index page. The current
-&lt;code&gt;allow_deny_globs&lt;/code&gt; implementation is nice and short:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;allow_deny_globs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deny&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;PermissionDenied&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;any&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fnmatch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;perm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rule&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>

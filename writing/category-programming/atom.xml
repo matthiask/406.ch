@@ -1,5 +1,40 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-04-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-04-24T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Workbench, the Django-based agency software</title><link href="https://406.ch/writing/workbench-the-django-based-agency-software/" rel="alternate" /><id>https://406.ch/writing/workbench-the-django-based-agency-software/</id><published>2024-04-24T12:00:00Z</published><updated>2024-04-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench, the Django-based agency software&lt;/h1&gt;&lt;p&gt;I get the impression that there&amp;rsquo;s a lot of interesting but unknown software in Django land. I don&amp;rsquo;t know if there&amp;rsquo;s any interest in some of the packages I have been working on; if not this blog post is for myself only.&lt;/p&gt;
+&lt;h2&gt;(Hi)story time&lt;/h2&gt;
+&lt;p&gt;As people may know I work at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt;, an agency which specializes in digital communication services for SMEs, campaigns for referendums, and website and webapp development. At the time of writing we are a team of about 20-25 communication experts, graphic designers, programmers and project managers.&lt;/p&gt;
+&lt;p&gt;We have many different clients and are working on many different projects at the same time and are billing by the hour&lt;sup id="fnref:bythehour"&gt;&lt;a class="footnote-ref" href="#fn:bythehour"&gt;1&lt;/a&gt;&lt;/sup&gt;. Last year my own work has been billed to more than 50 different customers. In the early days we used a shared file server with spreadsheet files to track our working hours. Luckily we didn&amp;rsquo;t often overwrite the edits others made but that was definitely something which happened from time to time.&lt;/p&gt;
+&lt;p&gt;We knew of another agency who had the same problems and used a FileMaker-based software. Their solution had several problems, among them the fact that it became hard to evolve and that it got slower and slower as more and more data was entered into it over the years. They had the accounting know how and we had the software engineering know how so we wrote a webapp based on the Django framework. As always, it was much more work than the initial estimate, but if we as programmers didn&amp;rsquo;t underestimate the effort needed we wouldn&amp;rsquo;t have started many of the great projects we&amp;rsquo;re now getting much value and/or enjoyment from, hopefully both. The product of that work was &lt;a href="https://www.fineware.ch/"&gt;Metronom&lt;/a&gt;. The first release happened a little bit later than &lt;a href="https://www.getharvest.com/about"&gt;harvest&lt;/a&gt; but it already came with full time tracking including an annual working time calculator, absence management, offers, invoices including PDF generation etc, so it was quite a bit more versatile while still being easier to use than &amp;ldquo;real&amp;rdquo; business software solutions.&lt;/p&gt;
+&lt;p&gt;I personally was of the opinion that the product was good enough to try selling it, but for a variety of reasons (which I don&amp;rsquo;t want to go into here) this never happened and &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; decided that we didn&amp;rsquo;t want to be involved anymore.&lt;/p&gt;
+&lt;p&gt;However, this meant that we were dead-end street with a software that didn&amp;rsquo;t belong to us anymore, which wasn&amp;rsquo;t evolving to our changing requirements. I also didn&amp;rsquo;t enjoy working on it anymore. Over the years I have tried replacing it several times but that never came to pass until some time after the introduction of &lt;a href="https://www.holacracy.org/"&gt;Holacracy&lt;/a&gt; at our company. I noticed that I didn&amp;rsquo;t have to persuade everyone but that I, as the responsible person for this particular decision, could &amp;ldquo;just&amp;rdquo;&lt;sup id="fnref:just"&gt;&lt;a class="footnote-ref" href="#fn:just"&gt;2&lt;/a&gt;&lt;/sup&gt; move ahead with a broad interpretation of the purpose and accountabilities of one of my roles.&lt;/p&gt;
+&lt;h2&gt;&lt;a href="https://github.com/matthiask/workbench"&gt;Workbench&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="https://406.ch/assets/20240424-workbench.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/matthiask/workbench"&gt;Workbench&lt;/a&gt; is the product of a few long nights of hacking. The project was started as an experiment in 2015 and was used for sending invoices but that wasn&amp;rsquo;t really the intended purpose. After long periods of lying dormant I have brought the project to a good enough state and switched Feinheit away from Metronom in 2019.&lt;/p&gt;
+&lt;p&gt;I have thought long and hard about switching to one of the off-the-shelf products and it could very well be that one of them would work well for us. Also, we wouldn&amp;rsquo;t have to pay (in form of working hours) for the maintenance and for enhancements ourselves. On the other hand, we can use a tool which is tailored to our needs. Is it worth the effort? That&amp;rsquo;s always hard to answer. The tool certainly works well for the few companies which are using it right now, so there&amp;rsquo;s no reason to agonize over that.&lt;/p&gt;
+&lt;p&gt;At the time of writing, Workbench offers projects and services, offers and invoices incl. PDF generation, recurring invoices, an address book, a logbook for rendered services, annual working time reports, an acquisition funnel, a stupid project planning and resource management tool and various reports. It has not only replaced Metronom but also a selection of SaaS (for example Pipedrive and TeamGantt) we were using previously.&lt;/p&gt;
+&lt;p&gt;The whole thing is open source because I don&amp;rsquo;t want to try making agency software into a business anymore, I only want to solve the problems &lt;em&gt;we&lt;/em&gt; have. That being said, if someone else finds it useful then that&amp;rsquo;s certainly alright as well.&lt;/p&gt;
+&lt;p&gt;The license has been MIT for the first few years but I have switched to the GPL because I wanted to integrate the excellent &lt;a href="https://pypi.org/project/qrbill/"&gt;qrbill&lt;/a&gt; module which is also licensed under the GPL. As I wrote elsewhere, I have released almost everything under the GPL in my first few open source years but have switched to BSD/MIT later when starting to work mainly with Python and Django because I thought that this license is a better fit&lt;sup id="fnref:license"&gt;&lt;a class="footnote-ref" href="#fn:license"&gt;3&lt;/a&gt;&lt;/sup&gt; for the ecosystem. That being said, for a product such as this the GPL is certainly an excellent fit.&lt;/p&gt;
+&lt;h2&gt;Final words?&lt;/h2&gt;
+&lt;p&gt;There are a few things I could write about to make this into a series. I&amp;rsquo;m putting a few ideas here, not as an announcement, just as a reminder for myself.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Better time tracking&lt;/li&gt;
+&lt;li&gt;Patterns for creating recurring invoices&lt;/li&gt;
+&lt;li&gt;Feature switches and configurability&lt;/li&gt;
+&lt;li&gt;Coffee time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:bythehour"&gt;
+&lt;p&gt;Rather, in six minute increments. It&amp;rsquo;s even worse.&amp;#160;&lt;a class="footnote-backref" href="#fnref:bythehour" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:just"&gt;
+&lt;p&gt;Of course it&amp;rsquo;s never that simple, because the responsibility is a lot. The important point is: It would have been a lot of work anyways, the big difference is that it was sufficient to get consent from people; no consensus required.&amp;#160;&lt;a class="footnote-backref" href="#fnref:just" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:license"&gt;
+&lt;p&gt;That&amp;rsquo;s not meant as a criticism in any way!&amp;#160;&lt;a class="footnote-backref" href="#fnref:license" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;
 &lt;p&gt;The title of this post was shamelessly copied from &lt;a href="https://mastodon.social/@webology/112235938469045649"&gt;Jeff Triplett&amp;rsquo;s post on
 Mastodon&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Why?&lt;/h2&gt;
@@ -607,39 +642,4 @@ deviates from the standard color scheme used everywhere else:&lt;/p&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
 &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 42)&lt;/h1&gt;&lt;h2&gt;Vacation in Italy&lt;/h2&gt;
-&lt;p&gt;We have spent a wonderful family week in Italy. The voyage by train was very
-comfortable and we had a great time there. I have lived close to lakes all my
-life but the sea is always something else. Now I enjoy the cold temperatures of
-fall.&lt;/p&gt;
-&lt;h2&gt;Going back (forward) to GitJournal&lt;/h2&gt;
-&lt;p&gt;I have tried several note taking apps but I&amp;rsquo;m now back using
-&lt;a href="https://gitjournal.io/"&gt;GitJournal&lt;/a&gt; with a Git repository filled with Markdown
-notes. It works well enough. I just wish that there was a way to make notes
-more distinguishable and I wish that the editor was more forgiving when
-encountering badly formatted checklists.&lt;/p&gt;
-&lt;h2&gt;Analog blogging&lt;/h2&gt;
-&lt;p&gt;I have long wanted to write about &lt;a href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/"&gt;our switch from Slack to
-Discord&lt;/a&gt;.
-I have started to write this post with pen and paper. I find that I think
-better when using pen and paper than when using the computer keyboard. One
-factor is certainly that the computer offers more distractions, but I suspect
-that another, more important factor is that as a fast typist the fingers and
-the thinking are always getting out of step, and this happens less when using a
-slower method of writing. This actually isn&amp;rsquo;t an idea I had myself, but I don&amp;rsquo;t
-remember where I got it from.&lt;/p&gt;
-&lt;h2&gt;Zero-based versioning: Good or bad?&lt;/h2&gt;
-&lt;p&gt;I discovered &lt;a href="https://0ver.org/"&gt;ZeroVer&lt;/a&gt; sometime in the last few days. I have
-many many Django packages with zero-based versions. Some of them have been used
-in production for years now. I sometimes wonder if staying with &lt;code&gt;0.&lt;/code&gt; is
-unprofessional and I should just release 1.0 and be done with it or if it
-doesn&amp;rsquo;t really matter at all.&lt;/p&gt;
-&lt;p&gt;If I evaluate software packages more often than not I don&amp;rsquo;t look at the version
-number or the version numbering scheme (except when a package is still using
-&lt;code&gt;0.0.&lt;/code&gt;) when deciding whether to rely on it or not. The documentation and the
-code itself are much more important to me.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;p&gt;I haven&amp;rsquo;t uploaded any releases in the last 14 days. That&amp;rsquo;s good: I&amp;rsquo;m one of
-those people who have made their passion their job (which is great) but that
-sometimes makes it hard to not work at all since I can always tell myself that
-I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
