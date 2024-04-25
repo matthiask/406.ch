@@ -52,6 +52,12 @@ def create_excerpt(body):
     return " ".join(tag.text for tag in soup.select("h2, h3, p, li"))
 
 
+def post_date(path, props):
+    if "date" in props:
+        return dt.strptime(props["date"], "%Y-%m-%d").date()
+    return dt.strptime(path.name[:8], "%Y%m%d").date()
+
+
 def load_posts(dirs):
     slugify = lambda v: re.sub(r"[^a-z0-9]+", "-", v.lower()).strip("-")
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
@@ -59,7 +65,7 @@ def load_posts(dirs):
             props, content = md.read_text().replace("\r", "").split("\n\n", 1)
             props = [re.split(r":\s*", prop, maxsplit=1) for prop in props.split("\n")]
             props = {"categories": ""} | {name.lower(): value for name, value in props}
-            props["date"] = dt.strptime(props["date"], "%Y-%m-%d").date()
+            props["date"] = post_date(md, props)
             props["slug"] = props.get("slug") or slugify(props["title"])
             props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
             body = markdown(content, extensions=md_exts)

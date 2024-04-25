@@ -19,7 +19,6 @@ pubdate = dt.date.today().isoformat()
 filename = f"{pubdate.replace('-', '')}-{slugify(title)}.md"
 text = f"""\
 Title: {title}
-Date: {pubdate}
 Categories:
 Draft: remove-this-to-publish
 
