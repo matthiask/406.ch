@@ -1,6 +1,5 @@
 Title: Weeknotes (2024 week 18)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 ## Google Summer of Code has begun
 
