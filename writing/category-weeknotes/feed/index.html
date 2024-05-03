@@ -1,5 +1,68 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-04-06T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-05-03T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2&gt;Google Summer of Code has begun&lt;/h2&gt;
+&lt;p&gt;We have a student helping out with adding async support to the &lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;Django Debug
+Toolbar&lt;/a&gt;. It&amp;rsquo;s great that
+someone can spend some concentrated time to work on this. Tim and others have
+done all the necessary preparation work, I&amp;rsquo;m only helping from the sidelines so
+don&amp;rsquo;t thank me.&lt;/p&gt;
+&lt;h2&gt;Bike to Work&lt;/h2&gt;
+&lt;p&gt;Two teams from my company are participating in the &lt;a href="https://www.biketowork.ch/"&gt;Bike to Work Challenge
+2024&lt;/a&gt;. It&amp;rsquo;s what I do anyway (if I&amp;rsquo;m not working
+from home) but maybe it helps build others some motivation to get on the
+bicycle once more. Public transports in the city where I live are great but
+I&amp;rsquo;ll always take the bike when I can. I also went on my first mountain bike
+ride in a few months yesterday, good fun.&lt;/p&gt;
+&lt;h2&gt;JSON blobs and referential integrity&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://github.com/matthiask/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt; has gained support for referencing Django models. Here&amp;rsquo;s an example schema excerpt:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;array&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;table&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;minItems&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;maxItems&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;items&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;article&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;foreign_key&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;options&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/admin/articles/article/?_popup=1&amp;amp;_to_field=id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The ID field is stringly typed; using an integer directly wouldn&amp;rsquo;t work because
+the empty string isn&amp;rsquo;t a valid integer.&lt;/p&gt;
+&lt;p&gt;The problem with referencing models in this way is that there&amp;rsquo;s no way to know
+if the referenced object is still around or not, or even to protect it against
+deletion. The bundled django-content-editor &lt;code&gt;JSONPlugin&lt;/code&gt; now supports
+automatically generating a &lt;code&gt;ManyToManyField&lt;/code&gt; with a &lt;code&gt;through&lt;/code&gt; model which
+protects articles from deletion as long as they are referenced from a
+&lt;code&gt;JSONPlugin&lt;/code&gt; instance. The &lt;code&gt;register_reference&lt;/code&gt; line creates the mentioned
+model with an &lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to articles and a
+&lt;code&gt;post_save&lt;/code&gt; handler which updates said references.&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django_json_schema_editor.plugins&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;register_reference&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;articles.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;JSONPlugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;register_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Releases since the beginning of April&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.14&lt;/a&gt;: See above. Also, some styling work and a patch update to the vendorized json-editor.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.4.6&lt;/a&gt;: Many small stylistic fixes. The target indicator when dragging plugins is now also shown when plugins are collapsed. It&amp;rsquo;s now possible to directly drag a plugin to the end, and not just to the second to last position.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.3.4&lt;/a&gt;: Switched to the nh3 sanitizer because it&amp;rsquo;s faster and because ProseMirror never emits HTML which has to be cleaned up first. Stopped generating menu items for nodes and marks which aren&amp;rsquo;t in the schema. Added the possibility to reduce the functionality per editor instance. Small tweaks and fixes.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.19&lt;/a&gt;: Added support for pre-filtering the tree (much more efficient when only querying a part of the tree). Added support for adding additional fields to the CTE so that you can collect values from ancestors for other fields than the default fields too.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.4.2&lt;/a&gt;: Added support for webp images. Fixed a few of the admin list filters to work with Django 5.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.3&lt;/a&gt;: Fixed the support for the &lt;code&gt;extra_context&lt;/code&gt; argument to our &lt;code&gt;changelist_view&lt;/code&gt; implementation.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 14)&lt;/h1&gt;&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
 extraction. I&amp;rsquo;m recovering quite quickly it seems and I&amp;rsquo;m glad about it.&lt;/p&gt;
 &lt;p&gt;This weeknotes entry is short and quick. I&amp;rsquo;m trying to get back into the habit
 of writing them after a mediocre start this year.&lt;/p&gt;
@@ -453,19 +516,4 @@ package I converted.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-17/"&gt;Still occupying myself with oEmbed.&lt;/a&gt; I have been looking at a few libraries and have rediscovered &lt;a href="https://github.com/coleifer/micawber/"&gt;micawber&lt;/a&gt; which probably does everything I need. Yay, another reinvented wheel avoided. I haven&amp;rsquo;t tested it yet but I&amp;rsquo;m quite sure that replacing the &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/plugins/external.py"&gt;oEmbed functionality in feincms3&amp;rsquo;s external plugin&lt;/a&gt; with micawber would be a good idea.&lt;/p&gt;
 &lt;h2&gt;Vacation&lt;/h2&gt;
 &lt;p&gt;Vacation last week. Was nice. We went for a few hikes. I have learned that I&amp;rsquo;m
-not totally free from giddiness anymore. Oh well.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 17)</title><link href="https://406.ch/writing/weeknotes-2023-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-17/</id><published>2023-04-28T12:00:00Z</published><updated>2023-04-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 17)&lt;/h1&gt;&lt;h2&gt;Birthday&lt;/h2&gt;
-&lt;p&gt;Another year achieved. Feels the same as last year. I&amp;rsquo;m glad.&lt;/p&gt;
-&lt;h2&gt;feincms3-cookiecontrol&lt;/h2&gt;
-&lt;p&gt;I have released &lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
-1.3&lt;/a&gt;. Mostly cleanups since
-1.2, but also a new translation (already announced here). The script size has
-been reduced from 4519 bytes to 4228 bytes (-6.5%) while keeping all features
-intact. The reduction is totally meaningless but it was fun to do.&lt;/p&gt;
-&lt;h2&gt;oEmbed&lt;/h2&gt;
-&lt;p&gt;I have been digging into the oEmbed spec a bit. I didn&amp;rsquo;t even know that a
-central list of &lt;a href="https://oembed.com/providers.json"&gt;providers&lt;/a&gt; exists.
-&lt;a href="https://noembed.com/"&gt;Noembed&lt;/a&gt; still works great to embed many different types
-of content but I worry more and more about its maintenance state.
-Reimplementing the interesting parts shouldn&amp;rsquo;t be that hard, but maybe I don&amp;rsquo;t
-have to do this myself. &lt;a href="https://github.com/attakei-lab/oEmbedPy/"&gt;oEmbedPy&lt;/a&gt;
-looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></entry></feed>
+not totally free from giddiness anymore. Oh well.&lt;/p&gt;</summary></entry></feed>
