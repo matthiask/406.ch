@@ -24,7 +24,7 @@ forwards in months.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.5&lt;/a&gt;: Better handling of templates and regions when a particular editor instance only shows a subset of configured templates. Disallowed adding plugins when in an unknown region. It&amp;rsquo;s funny how many edge cases exist in software as old as this.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;: See above.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.4&lt;/a&gt;: Fixed edge cases with whitespace handling when merging elements.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data&lt;/a&gt;: Allowed &lt;code&gt;./manage.py f3loaddata -&lt;/code&gt; to load JSON data from stdin.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.6.1&lt;/a&gt;: Allowed &lt;code&gt;./manage.py f3loaddata -&lt;/code&gt; to load JSON data from stdin.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2&gt;Google Summer of Code has begun&lt;/h2&gt;
 &lt;p&gt;We have a student helping out with adding async support to the &lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;Django Debug
 Toolbar&lt;/a&gt;. It&amp;rsquo;s great that
