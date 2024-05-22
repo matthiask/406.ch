@@ -7,6 +7,9 @@ Categories: Django, Programming
     This blog post consists of the [blacknoise
     README](https://github.com/matthiask/blacknoise) at the time of publishing.
 
+    I have released blacknoise 1.0 in the meantime and believe that it's
+    actually good.
+
 blacknoise is an [ASGI](https://asgi.readthedocs.io/en/latest/) app for static
 file serving inspired by [whitenoise](https://github.com/evansd/whitenoise/)
 and following the principles of [low maintenance
