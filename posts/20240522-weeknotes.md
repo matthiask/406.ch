@@ -32,4 +32,4 @@ I have written a longer post about it earlier this year
 - [django-content-editor 6.5](https://pypi.org/project/django-content-editor/): Better handling of templates and regions when a particular editor instance only shows a subset of configured templates. Disallowed adding plugins when in an unknown region. It's funny how many edge cases exist in software as old as this.
 - [blacknoise 1.0](https://pypi.org/project/blacknoise/): See above.
 - [html-sanitizer 2.4.4](https://pypi.org/project/html-sanitizer/): Fixed edge cases with whitespace handling when merging elements.
-- [feincms3-data](https://pypi.org/project/feincms3-data/): Allowed `./manage.py f3loaddata -` to load JSON data from stdin.
+- [feincms3-data 0.6.1](https://pypi.org/project/feincms3-data/): Allowed `./manage.py f3loaddata -` to load JSON data from stdin.
