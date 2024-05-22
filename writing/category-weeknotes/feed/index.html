@@ -1,5 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-05-03T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2&gt;Google Summer of Code has begun&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-05-22T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 21)&lt;/h1&gt;&lt;p&gt;There have been times when work has been more enjoyable than in the last few
+weeks. It feels more stressful than at other times, and this mostly has to do
+with particular projects. I hope I&amp;rsquo;ll be able to move on soon.&lt;/p&gt;
+&lt;h2&gt;blacknoise&lt;/h2&gt;
+&lt;p&gt;I have released &lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;. It&amp;rsquo;s an
+ASGI app for static file serving inspired by
+&lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The 1.0 version number is only a big step in versioning terms, not much has
+happened with the code. It&amp;rsquo;s a tiny little well working piece of software which
+has been running in production for some time without any hickups. The biggest
+recent change is that I have parallelized the gzip and brotli compression step;
+this makes building images using whitenoise more painful because there the wait
+is really really long sometimes. &lt;a href="https://github.com/evansd/whitenoise/pull/484"&gt;A pull request fixing this
+exists&lt;/a&gt;, but it hasn&amp;rsquo;t moved
+forwards in months.&lt;/p&gt;
+&lt;p&gt;I have written a longer post about it earlier this year
+&lt;a href="https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5&lt;/a&gt;: Code golfing. Added backwards compatibility with old Django versions so that I can use it for old projects. Also includes optional support for Google consent management.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_fast_export/"&gt;django-fast-export 0.1.1&lt;/a&gt;: This is basically a repackaging of the streaming CSV view from Django&amp;rsquo;s documentation as a reusable class. I have switched to using an iterator so that I can export even larger datasets.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.18&lt;/a&gt;: Still alpha versioned but used in production in various projects. I should really release an 1.0 version, but there are no integration tests at all. Mainly visual tweaks in this update.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.5&lt;/a&gt;: Better handling of templates and regions when a particular editor instance only shows a subset of configured templates. Disallowed adding plugins when in an unknown region. It&amp;rsquo;s funny how many edge cases exist in software as old as this.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.4&lt;/a&gt;: Fixed edge cases with whitespace handling when merging elements.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data&lt;/a&gt;: Allowed &lt;code&gt;./manage.py f3loaddata -&lt;/code&gt; to load JSON data from stdin.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2&gt;Google Summer of Code has begun&lt;/h2&gt;
 &lt;p&gt;We have a student helping out with adding async support to the &lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;Django Debug
 Toolbar&lt;/a&gt;. It&amp;rsquo;s great that
 someone can spend some concentrated time to work on this. Tim and others have
@@ -510,10 +536,4 @@ package I converted.&lt;/p&gt;
 &lt;h2&gt;CKEditor 5&amp;rsquo;s new license and django-ckeditor&lt;/h2&gt;
 &lt;p&gt;The pressure is on to maybe switch away from CKEditor 4 since it probably will not be supported after &lt;a href="https://support.ckeditor.com/hc/en-us/articles/115005281629-How-long-will-CKEditor-4-be-supported-"&gt;June 2023&lt;/a&gt;. It&amp;rsquo;s totally understandable that the CKEditor 5 license isn&amp;rsquo;t the same as before, but I&amp;rsquo;m not sure what that means for the Django integration &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/482"&gt;django-ckeditor&lt;/a&gt; which I&amp;rsquo;m maintaining since a few years. I don&amp;rsquo;t actually like the new capabilities of CKEditor all that much and don&amp;rsquo;t intend to use them; maybe it would be better to use a build of &lt;a href=""&gt;ProseMirror&lt;/a&gt; in the CMS since &lt;a href="https://django-content-editor.readthedocs.io/en/latest/#about-rich-text-editors"&gt;we&amp;rsquo;re intentionally only using a very small subset of the features most rich text editors offer&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Mountain biking.&lt;/h2&gt;
-&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 18 and 19)</title><link href="https://406.ch/writing/weeknotes-2023-week-18-and-19/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-18-and-19/</id><published>2023-05-12T12:00:00Z</published><updated>2023-05-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 18 and 19)&lt;/h1&gt;
-&lt;p&gt;Not much programming this week :-(&lt;/p&gt;
-&lt;h2&gt;oEmbed&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2023-week-17/"&gt;Still occupying myself with oEmbed.&lt;/a&gt; I have been looking at a few libraries and have rediscovered &lt;a href="https://github.com/coleifer/micawber/"&gt;micawber&lt;/a&gt; which probably does everything I need. Yay, another reinvented wheel avoided. I haven&amp;rsquo;t tested it yet but I&amp;rsquo;m quite sure that replacing the &lt;a href="https://github.com/matthiask/feincms3/blob/main/feincms3/plugins/external.py"&gt;oEmbed functionality in feincms3&amp;rsquo;s external plugin&lt;/a&gt; with micawber would be a good idea.&lt;/p&gt;
-&lt;h2&gt;Vacation&lt;/h2&gt;
-&lt;p&gt;Vacation last week. Was nice. We went for a few hikes. I have learned that I&amp;rsquo;m
-not totally free from giddiness anymore. Oh well.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry></feed>

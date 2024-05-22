@@ -1,5 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-05-03T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2&gt;Google Summer of Code has begun&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-05-22T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 21)&lt;/h1&gt;&lt;p&gt;There have been times when work has been more enjoyable than in the last few
+weeks. It feels more stressful than at other times, and this mostly has to do
+with particular projects. I hope I&amp;rsquo;ll be able to move on soon.&lt;/p&gt;
+&lt;h2&gt;blacknoise&lt;/h2&gt;
+&lt;p&gt;I have released &lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;. It&amp;rsquo;s an
+ASGI app for static file serving inspired by
+&lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The 1.0 version number is only a big step in versioning terms, not much has
+happened with the code. It&amp;rsquo;s a tiny little well working piece of software which
+has been running in production for some time without any hickups. The biggest
+recent change is that I have parallelized the gzip and brotli compression step;
+this makes building images using whitenoise more painful because there the wait
+is really really long sometimes. &lt;a href="https://github.com/evansd/whitenoise/pull/484"&gt;A pull request fixing this
+exists&lt;/a&gt;, but it hasn&amp;rsquo;t moved
+forwards in months.&lt;/p&gt;
+&lt;p&gt;I have written a longer post about it earlier this year
+&lt;a href="https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5&lt;/a&gt;: Code golfing. Added backwards compatibility with old Django versions so that I can use it for old projects. Also includes optional support for Google consent management.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_fast_export/"&gt;django-fast-export 0.1.1&lt;/a&gt;: This is basically a repackaging of the streaming CSV view from Django&amp;rsquo;s documentation as a reusable class. I have switched to using an iterator so that I can export even larger datasets.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.18&lt;/a&gt;: Still alpha versioned but used in production in various projects. I should really release an 1.0 version, but there are no integration tests at all. Mainly visual tweaks in this update.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.5&lt;/a&gt;: Better handling of templates and regions when a particular editor instance only shows a subset of configured templates. Disallowed adding plugins when in an unknown region. It&amp;rsquo;s funny how many edge cases exist in software as old as this.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.4&lt;/a&gt;: Fixed edge cases with whitespace handling when merging elements.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data&lt;/a&gt;: Allowed &lt;code&gt;./manage.py f3loaddata -&lt;/code&gt; to load JSON data from stdin.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2&gt;Google Summer of Code has begun&lt;/h2&gt;
 &lt;p&gt;We have a student helping out with adding async support to the &lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;Django Debug
 Toolbar&lt;/a&gt;. It&amp;rsquo;s great that
 someone can spend some concentrated time to work on this. Tim and others have
@@ -236,6 +262,8 @@ website often is for example just a small part of a campaign.&lt;/p&gt;
 &lt;p class="admonition-title"&gt;Note&lt;/p&gt;
 &lt;p&gt;This blog post consists of the &lt;a href="https://github.com/matthiask/blacknoise"&gt;blacknoise
 README&lt;/a&gt; at the time of publishing.&lt;/p&gt;
+&lt;p&gt;I have released blacknoise 1.0 in the meantime and believe that it&amp;rsquo;s
+actually good.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;blacknoise is an &lt;a href="https://asgi.readthedocs.io/en/latest/"&gt;ASGI&lt;/a&gt; app for static
 file serving inspired by &lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt;
@@ -652,16 +680,4 @@ knows.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5&lt;/a&gt;, &lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20&lt;/a&gt; and &lt;a href="https://github.com/feincms/feincms3-language-sites"&gt;feincms3-language-sites 0.3&lt;/a&gt;: Fixed the check which only allows adding an application through the CMS to the page tree (yes, that&amp;rsquo;s right) once; feincms3 worked fine, feincms3-language-sites by accident but feincms3-sites didn&amp;rsquo;t.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/towel/"&gt;towel 0.31&lt;/a&gt;: Towel is one of my oldest packages which is still being used in real-world projects. Towel is a tool for building CRUD-type applications and is designed to keep you DRY while doing that. The project has been heavily inspired by a Django-based agency software I built many years back. The package even has &lt;a href="https://towel.readthedocs.io/en/latest/"&gt;docs&lt;/a&gt;! I&amp;rsquo;m still quite proud of the mostly transparent support for multitenancy, but apart from that I haven&amp;rsquo;t used it in many new projects.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 43)</title><link href="https://406.ch/writing/weeknotes-2023-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-43/</id><published>2023-10-27T12:00:00Z</published><updated>2023-10-27T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 43)&lt;/h1&gt;&lt;h2&gt;Switching to ruff format&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/astral-sh/ruff/releases/tag/v0.1.2"&gt;ruff v0.1.2&lt;/a&gt; includes
-the beta version of the ruff formatter. It formats the code almost the same way
-as black, but much much faster. I have started switching projects I&amp;rsquo;m working
-on and the experience has been nothing but great.&lt;/p&gt;
-&lt;h2&gt;100% test coverage&lt;/h2&gt;
-&lt;p&gt;I have again fixed a bad bug in code which had 100% test coverage. It&amp;rsquo;s not
-news that 100% test coverage isn&amp;rsquo;t a recipe for bug-free code, and it&amp;rsquo;s
-probably not even worth optimizing for that metric in code. It&amp;rsquo;s nothing more
-but a proxy for what you should really measure. Nevertheless it certainly does
-feel good to achieve high coverage values!&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;p&gt;No releases at all.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
