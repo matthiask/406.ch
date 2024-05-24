@@ -1,5 +1,33 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-05-22T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 21)&lt;/h1&gt;&lt;p&gt;There have been times when work has been more enjoyable than in the last few
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-05-24T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench: Coffee time!&lt;/h1&gt;
+&lt;p&gt;I have written about &lt;a href="https://406.ch/writing/workbench-the-django-based-agency-software/"&gt;the Workbench agency
+software&lt;/a&gt; a
+few weeks back.&lt;/p&gt;
+&lt;p&gt;Back when we were using Slack at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used a
+Donut bot to generate randomized invites for a coffee break. &lt;a href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/"&gt;We lost that bot
+when we switched to
+Discord&lt;/a&gt;.
+I searched some time for an equivalent bot for Discord but couldn&amp;rsquo;t find any,
+so like any self-respecting nerd, break lover and NIH-sufferer I reimplemented
+the functionality as a part of our agency software.&lt;/p&gt;
+&lt;p&gt;The first version generated totally random pairings without any history; I
+thought that maybe this would be good enough, but of course I received an
+invite for a coffee with the exact same person in the first two invitations.
+Even though I did enjoy the break both times this motivated me to put some
+effort into a better solution :-)&lt;/p&gt;
+&lt;p&gt;The result of this work is the &lt;a href="https://github.com/matthiask/workbench/blob/a14d8b9560def7a4e2bbf7531eb6108f734568db/workbench/accounts/tasks.py#L57"&gt;&lt;code&gt;coffee_invites()&lt;/code&gt; function&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There are two main parts to the generator:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It randomly generates twenty pairings from all participants; it prefers
+  groups of two except for the last group which may contain three people.&lt;/li&gt;
+&lt;li&gt;It loads old pairings from the database and gives higher penalties to equal
+  pairings depending on the time which has passed since the last time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, it&amp;rsquo;s not mathematically perfect, but all imbalances will cancel out over a
+long time. I experimented with the discounting factor and the number of random
+pairings it generates upfront. The values in the code seem to work fine.&lt;/p&gt;
+&lt;p&gt;Sometimes it&amp;rsquo;s simple stuff like this which gets me going and reignites the
+love for programming. Like a small puzzle.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 21)&lt;/h1&gt;&lt;p&gt;There have been times when work has been more enjoyable than in the last few
 weeks. It feels more stressful than at other times, and this mostly has to do
 with particular projects. I hope I&amp;rsquo;ll be able to move on soon.&lt;/p&gt;
 &lt;h2&gt;blacknoise&lt;/h2&gt;
@@ -686,39 +714,4 @@ deviates from the standard color scheme used everywhere else:&lt;/p&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
 &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 42)&lt;/h1&gt;&lt;h2&gt;Vacation in Italy&lt;/h2&gt;
-&lt;p&gt;We have spent a wonderful family week in Italy. The voyage by train was very
-comfortable and we had a great time there. I have lived close to lakes all my
-life but the sea is always something else. Now I enjoy the cold temperatures of
-fall.&lt;/p&gt;
-&lt;h2&gt;Going back (forward) to GitJournal&lt;/h2&gt;
-&lt;p&gt;I have tried several note taking apps but I&amp;rsquo;m now back using
-&lt;a href="https://gitjournal.io/"&gt;GitJournal&lt;/a&gt; with a Git repository filled with Markdown
-notes. It works well enough. I just wish that there was a way to make notes
-more distinguishable and I wish that the editor was more forgiving when
-encountering badly formatted checklists.&lt;/p&gt;
-&lt;h2&gt;Analog blogging&lt;/h2&gt;
-&lt;p&gt;I have long wanted to write about &lt;a href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/"&gt;our switch from Slack to
-Discord&lt;/a&gt;.
-I have started to write this post with pen and paper. I find that I think
-better when using pen and paper than when using the computer keyboard. One
-factor is certainly that the computer offers more distractions, but I suspect
-that another, more important factor is that as a fast typist the fingers and
-the thinking are always getting out of step, and this happens less when using a
-slower method of writing. This actually isn&amp;rsquo;t an idea I had myself, but I don&amp;rsquo;t
-remember where I got it from.&lt;/p&gt;
-&lt;h2&gt;Zero-based versioning: Good or bad?&lt;/h2&gt;
-&lt;p&gt;I discovered &lt;a href="https://0ver.org/"&gt;ZeroVer&lt;/a&gt; sometime in the last few days. I have
-many many Django packages with zero-based versions. Some of them have been used
-in production for years now. I sometimes wonder if staying with &lt;code&gt;0.&lt;/code&gt; is
-unprofessional and I should just release 1.0 and be done with it or if it
-doesn&amp;rsquo;t really matter at all.&lt;/p&gt;
-&lt;p&gt;If I evaluate software packages more often than not I don&amp;rsquo;t look at the version
-number or the version numbering scheme (except when a package is still using
-&lt;code&gt;0.0.&lt;/code&gt;) when deciding whether to rely on it or not. The documentation and the
-code itself are much more important to me.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;p&gt;I haven&amp;rsquo;t uploaded any releases in the last 14 days. That&amp;rsquo;s good: I&amp;rsquo;m one of
-those people who have made their passion their job (which is great) but that
-sometimes makes it hard to not work at all since I can always tell myself that
-I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
