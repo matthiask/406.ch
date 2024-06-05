@@ -42,4 +42,4 @@ There are a few things I could write about to make this into a series. I'm putti
 - Better time tracking
 - Patterns for creating recurring invoices
 - Feature switches and configurability
-- Coffee time
+- [Coffee time](https://406.ch/writing/workbench-coffee-time/)
