@@ -1,5 +1,48 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-05-24T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench: Coffee time!&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-06-07T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 23)</title><link href="https://406.ch/writing/weeknotes-2024-week-23/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-23/</id><published>2024-06-07T12:00:00Z</published><updated>2024-06-07T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 23)&lt;/h1&gt;&lt;h2&gt;Switching everything from pip to uv&lt;/h2&gt;
+&lt;p&gt;Enough said. I&amp;rsquo;m always astonished how fast computers can be.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering
+  0.18&lt;/a&gt;: Added a database
+  index to the ordering field since we&amp;rsquo;re always sorting by it.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.4&lt;/a&gt;:
+  Dropped the jQuery dependency making it possible to use the editor outside
+  the Django administration interface without annoying JavaScript errors.
+  Allowed additional heading levels and moved the block type buttons into a
+  popover.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.4.2&lt;/a&gt;:
+  I enjoy working on this important piece of software very much.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-email-hosts/"&gt;django-email-hosts 0.2.1&lt;/a&gt;:
+  Added a command analogous to &lt;code&gt;./manage.py sendtestemail&lt;/code&gt; so that it&amp;rsquo;s
+  possible to easily test the different configured email backends.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.0&lt;/a&gt;: I completely reworked the
+  move node action; previously it opened a new page where you could see all
+  possible targets; now you can cut a page and paste it somewhere else. The
+  advantages of the new interface is that you don&amp;rsquo;t leave the changelist and
+  can still profit from all its features while moving pages around.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.21&lt;/a&gt;: A new
+  release taking advantage of a new hook in feincms3 7.0 so that the new moving
+  interface works.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.5&lt;/a&gt;: authlib
+  now shows a welcome message when authenticating using admin OAuth2. It&amp;rsquo;s nice
+  and helps with debugging strange authentication failures.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.0&lt;/a&gt;:
+  I reworked the UI. The sidebar is gone, instead there are nice buttons in the
+  place where you can add new plugins; the plugins appear in a nice grid
+  instead of a list, which looks much better once you have more than just a few
+  plugin types available. Also, plugin type icons are now shown in the plugin
+  forms. I think it looks much better than before.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
+  1.5.2&lt;/a&gt;: I didn&amp;rsquo;t contribute
+  anything to this release which is also a nice experience for a change. The
+  Google consent mode integration has been improved and simplified.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor
+  0.0.22&lt;/a&gt;: Various
+  small-ish improvements. I should really start using higher version numbers,
+  but not having to commit to anything also feels great.  That being said, the
+  editor is in active use in several projects, so maybe I&amp;rsquo;m deceiving myself.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench: Coffee time!&lt;/h1&gt;
 &lt;p&gt;I have written about &lt;a href="https://406.ch/writing/workbench-the-django-based-agency-software/"&gt;the Workbench agency
 software&lt;/a&gt; a
 few weeks back.&lt;/p&gt;
@@ -662,41 +705,4 @@ surprise.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;PyPI&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 48)</title><link href="https://406.ch/writing/weeknotes-2023-week-48/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-48/</id><published>2023-11-30T12:00:00Z</published><updated>2023-11-30T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 48)&lt;/h1&gt;&lt;p&gt;A few weeks have passed since the last update. The whole family was repeatedly
-sick with different viruses etc&amp;hellip; I hope that the worst is over now. Who
-knows.&lt;/p&gt;
-&lt;h2&gt;12-factor Django storage configuration&lt;/h2&gt;
-&lt;p&gt;I should maybe write a longer and separate post about this, but &lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv&lt;/a&gt; has gained support for the Django &lt;code&gt;STORAGES&lt;/code&gt; setting. No documentation yet, but it supports two storage backends for now, the file system storage and &lt;a href="https://github.com/etianen/django-s3-storage/"&gt;django-s3-storage&lt;/a&gt;, my go-to library for S3-compatible services.&lt;/p&gt;
-&lt;p&gt;Using it looks something like this:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;speckenv&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;speckenv_django&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;django_storage_url&lt;/span&gt;
-
-&lt;span class="n"&gt;STORAGES&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;django_storage_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;STORAGE_URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file:./media/?base_url=/media/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;base_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;BASE_DIR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;staticfiles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;BACKEND&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;django.contrib.staticfiles.storage.ManifestStaticFilesStorage&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Then, if you want to use S3 you can put something like this in your &lt;code&gt;.env&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;STORAGE_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;secret&lt;/span&gt;&lt;span class="nv"&gt;@bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;central&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Or maybe something like this, if you want to serve media files without authentication:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;STORAGE_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;access&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;secret&lt;/span&gt;&lt;span class="nv"&gt;@bucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;central&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="n"&gt;aws_s3_public_auth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;False&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;aws_s3_max_age_seconds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;31536000&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv 6.1.1&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-meta/"&gt;feincms3-meta 4.6&lt;/a&gt;: York has contributed support for emitting structured data records. Looks nice. No documentation yet.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.16.1&lt;/a&gt;: &lt;code&gt;.values()&lt;/code&gt; and &lt;code&gt;.values_list()&lt;/code&gt; queries are now handled better and more consistently than before.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>

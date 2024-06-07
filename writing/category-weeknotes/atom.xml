@@ -1,5 +1,48 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-05-22T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 21)&lt;/h1&gt;&lt;p&gt;There have been times when work has been more enjoyable than in the last few
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-06-07T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 23)</title><link href="https://406.ch/writing/weeknotes-2024-week-23/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-23/</id><published>2024-06-07T12:00:00Z</published><updated>2024-06-07T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 23)&lt;/h1&gt;&lt;h2&gt;Switching everything from pip to uv&lt;/h2&gt;
+&lt;p&gt;Enough said. I&amp;rsquo;m always astonished how fast computers can be.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering
+  0.18&lt;/a&gt;: Added a database
+  index to the ordering field since we&amp;rsquo;re always sorting by it.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.4&lt;/a&gt;:
+  Dropped the jQuery dependency making it possible to use the editor outside
+  the Django administration interface without annoying JavaScript errors.
+  Allowed additional heading levels and moved the block type buttons into a
+  popover.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.4.2&lt;/a&gt;:
+  I enjoy working on this important piece of software very much.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-email-hosts/"&gt;django-email-hosts 0.2.1&lt;/a&gt;:
+  Added a command analogous to &lt;code&gt;./manage.py sendtestemail&lt;/code&gt; so that it&amp;rsquo;s
+  possible to easily test the different configured email backends.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.0&lt;/a&gt;: I completely reworked the
+  move node action; previously it opened a new page where you could see all
+  possible targets; now you can cut a page and paste it somewhere else. The
+  advantages of the new interface is that you don&amp;rsquo;t leave the changelist and
+  can still profit from all its features while moving pages around.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.21&lt;/a&gt;: A new
+  release taking advantage of a new hook in feincms3 7.0 so that the new moving
+  interface works.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.5&lt;/a&gt;: authlib
+  now shows a welcome message when authenticating using admin OAuth2. It&amp;rsquo;s nice
+  and helps with debugging strange authentication failures.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.0&lt;/a&gt;:
+  I reworked the UI. The sidebar is gone, instead there are nice buttons in the
+  place where you can add new plugins; the plugins appear in a nice grid
+  instead of a list, which looks much better once you have more than just a few
+  plugin types available. Also, plugin type icons are now shown in the plugin
+  forms. I think it looks much better than before.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
+  1.5.2&lt;/a&gt;: I didn&amp;rsquo;t contribute
+  anything to this release which is also a nice experience for a change. The
+  Google consent mode integration has been improved and simplified.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor
+  0.0.22&lt;/a&gt;: Various
+  small-ish improvements. I should really start using higher version numbers,
+  but not having to commit to anything also feels great.  That being said, the
+  editor is in active use in several projects, so maybe I&amp;rsquo;m deceiving myself.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 21)&lt;/h1&gt;&lt;p&gt;There have been times when work has been more enjoyable than in the last few
 weeks. It feels more stressful than at other times, and this mostly has to do
 with particular projects. I hope I&amp;rsquo;ll be able to move on soon.&lt;/p&gt;
 &lt;h2&gt;blacknoise&lt;/h2&gt;
@@ -517,23 +560,4 @@ writing too much code instead of reusing already existing functionality.&lt;/p&g
 &lt;p&gt;I notice that writing is the first thing I start skipping when I have to
 prioritize. Programming, biking, gardening come first. That&amp;rsquo;s fine, really. But
 I&amp;rsquo;m still a bit sad that I do not manage to at least put out a short weekly
-weeknotes entry.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 24)</title><link href="https://406.ch/writing/weeknotes-2023-week-24/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-24/</id><published>2023-06-16T12:00:00Z</published><updated>2023-06-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 24)&lt;/h1&gt;&lt;p&gt;Life happened and I missed a month of weeknotes. Oh well.&lt;/p&gt;
-&lt;h2&gt;django-debug-toolbar 4.1&lt;/h2&gt;
-&lt;p&gt;We have released &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar
-4.1&lt;/a&gt;. Another cycle where I
-mostly contributed reviews and not much else. Feels great :-)&lt;/p&gt;
-&lt;h2&gt;Going all in on hatch and hatchling&lt;/h2&gt;
-&lt;p&gt;I got to know hatch because django-debug-toolbar was converted to it. I was
-confused as probably anyone else with the new state of packaging in Python
-world. After listening to a few Podcasts (for example &lt;a href="https://talkpython.fm/episodes/show/408/hatch-a-modern-python-workflow"&gt;Hatch: A Modern Python
-Workflow&lt;/a&gt;)
-I did bite the bullet and started converting projects to hatch as mentioned
-&lt;a href="https://406.ch/writing/weeknotes-2023-week-13-and-14/"&gt;some time ago&lt;/a&gt;. I have
-converted a few other projects in the meantime because the development
-experience is nicer. Not much, but enough to make it worthwile.
-&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites&lt;/a&gt; is the latest
-package I converted.&lt;/p&gt;
-&lt;h2&gt;CKEditor 5&amp;rsquo;s new license and django-ckeditor&lt;/h2&gt;
-&lt;p&gt;The pressure is on to maybe switch away from CKEditor 4 since it probably will not be supported after &lt;a href="https://support.ckeditor.com/hc/en-us/articles/115005281629-How-long-will-CKEditor-4-be-supported-"&gt;June 2023&lt;/a&gt;. It&amp;rsquo;s totally understandable that the CKEditor 5 license isn&amp;rsquo;t the same as before, but I&amp;rsquo;m not sure what that means for the Django integration &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/482"&gt;django-ckeditor&lt;/a&gt; which I&amp;rsquo;m maintaining since a few years. I don&amp;rsquo;t actually like the new capabilities of CKEditor all that much and don&amp;rsquo;t intend to use them; maybe it would be better to use a build of &lt;a href=""&gt;ProseMirror&lt;/a&gt; in the CMS since &lt;a href="https://django-content-editor.readthedocs.io/en/latest/#about-rich-text-editors"&gt;we&amp;rsquo;re intentionally only using a very small subset of the features most rich text editors offer&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Mountain biking.&lt;/h2&gt;
-&lt;p&gt;My mountain bike is repaired, I&amp;rsquo;m back on the trail.&lt;/p&gt;</summary></entry></feed>
+weeknotes entry.&lt;/p&gt;</summary></entry></feed>

@@ -1,5 +1,48 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-05-24T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench: Coffee time!&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-06-07T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 23)</title><link href="https://406.ch/writing/weeknotes-2024-week-23/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-23/</id><published>2024-06-07T12:00:00Z</published><updated>2024-06-07T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 23)&lt;/h1&gt;&lt;h2&gt;Switching everything from pip to uv&lt;/h2&gt;
+&lt;p&gt;Enough said. I&amp;rsquo;m always astonished how fast computers can be.&lt;/p&gt;
+&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering
+  0.18&lt;/a&gt;: Added a database
+  index to the ordering field since we&amp;rsquo;re always sorting by it.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.4&lt;/a&gt;:
+  Dropped the jQuery dependency making it possible to use the editor outside
+  the Django administration interface without annoying JavaScript errors.
+  Allowed additional heading levels and moved the block type buttons into a
+  popover.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.4.2&lt;/a&gt;:
+  I enjoy working on this important piece of software very much.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-email-hosts/"&gt;django-email-hosts 0.2.1&lt;/a&gt;:
+  Added a command analogous to &lt;code&gt;./manage.py sendtestemail&lt;/code&gt; so that it&amp;rsquo;s
+  possible to easily test the different configured email backends.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.0&lt;/a&gt;: I completely reworked the
+  move node action; previously it opened a new page where you could see all
+  possible targets; now you can cut a page and paste it somewhere else. The
+  advantages of the new interface is that you don&amp;rsquo;t leave the changelist and
+  can still profit from all its features while moving pages around.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.21&lt;/a&gt;: A new
+  release taking advantage of a new hook in feincms3 7.0 so that the new moving
+  interface works.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.5&lt;/a&gt;: authlib
+  now shows a welcome message when authenticating using admin OAuth2. It&amp;rsquo;s nice
+  and helps with debugging strange authentication failures.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.0&lt;/a&gt;:
+  I reworked the UI. The sidebar is gone, instead there are nice buttons in the
+  place where you can add new plugins; the plugins appear in a nice grid
+  instead of a list, which looks much better once you have more than just a few
+  plugin types available. Also, plugin type icons are now shown in the plugin
+  forms. I think it looks much better than before.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
+  1.5.2&lt;/a&gt;: I didn&amp;rsquo;t contribute
+  anything to this release which is also a nice experience for a change. The
+  Google consent mode integration has been improved and simplified.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor
+  0.0.22&lt;/a&gt;: Various
+  small-ish improvements. I should really start using higher version numbers,
+  but not having to commit to anything also feels great.  That being said, the
+  editor is in active use in several projects, so maybe I&amp;rsquo;m deceiving myself.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench: Coffee time!&lt;/h1&gt;
 &lt;p&gt;I have written about &lt;a href="https://406.ch/writing/workbench-the-django-based-agency-software/"&gt;the Workbench agency
 software&lt;/a&gt; a
 few weeks back.&lt;/p&gt;
@@ -673,45 +716,4 @@ knows.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5&lt;/a&gt;, &lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20&lt;/a&gt; and &lt;a href="https://github.com/feincms/feincms3-language-sites"&gt;feincms3-language-sites 0.3&lt;/a&gt;: Fixed the check which only allows adding an application through the CMS to the page tree (yes, that&amp;rsquo;s right) once; feincms3 worked fine, feincms3-language-sites by accident but feincms3-sites didn&amp;rsquo;t.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/towel/"&gt;towel 0.31&lt;/a&gt;: Towel is one of my oldest packages which is still being used in real-world projects. Towel is a tool for building CRUD-type applications and is designed to keep you DRY while doing that. The project has been heavily inspired by a Django-based agency software I built many years back. The package even has &lt;a href="https://towel.readthedocs.io/en/latest/"&gt;docs&lt;/a&gt;! I&amp;rsquo;m still quite proud of the mostly transparent support for multitenancy, but apart from that I haven&amp;rsquo;t used it in many new projects.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Customize the Django admin to differentiate environments</title><link href="https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/" rel="alternate" /><id>https://406.ch/writing/customize-the-django-admin-to-differentiate-environments/</id><published>2023-10-19T12:00:00Z</published><updated>2023-10-19T12:00:00Z</updated><summary type="html">&lt;h1&gt;Customize the Django admin to differentiate environments&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="Four different themes" src="https://user-images.githubusercontent.com/2627/276531977-6787c55e-4e8c-448c-8ed4-c71cd98c9750.png" /&gt;&lt;/p&gt;
-&lt;p&gt;We often have the same website running in different configurations:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Once as a production site.&lt;/li&gt;
-&lt;li&gt;Once as a place where editors update and preview the content. The content is later automatically (and maybe &lt;a href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/"&gt;partially&lt;/a&gt;) transferred from this environment to the production environment.&lt;/li&gt;
-&lt;li&gt;Once as a stage environment to stabilize the code.&lt;/li&gt;
-&lt;li&gt;And maybe additional environments for local development.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The Django admin panel mainly uses CSS variables for styling since &lt;a href="https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#admin-theming"&gt;theming support was introduced in Django 3.2&lt;/a&gt; (by yours truly with a lot of help from others). This makes it simple and fun to customize the colors of all interface elements in a straightforward way without having to write loads of CSS.&lt;/p&gt;
-&lt;p&gt;If you have a &lt;code&gt;ENVIRONMENT&lt;/code&gt; context variable available (as we do) you could add
-the following template as &lt;code&gt;admin/base.html&lt;/code&gt; to your project, giving you a red
-color scheme for the production environment (to discourage people from updating
-content) and a nice scheme for the &lt;code&gt;preproduction&lt;/code&gt; environment which clearly
-deviates from the standard color scheme used everywhere else:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;extrahead&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
-  &lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nb"&gt;block&lt;/span&gt;&lt;span class="nv"&gt;.super&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;site-name&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; (&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;ENVIRONMENT&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="s2"&gt;)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;ENVIRONMENT&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;production&amp;#39;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--primary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#aa0000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--secondary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#810000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--accent&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;yellow&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="nv"&gt;ENVIRONMENT&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;preproduction&amp;#39;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--primary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#30b181&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--secondary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#1f7957&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nv"&gt;--accent&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;#cdffea&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
-&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
