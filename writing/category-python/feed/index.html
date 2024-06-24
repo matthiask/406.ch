@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Python</title><link href="https://406.ch/writing/category-python/atom.xml" rel="self" /><link href="https://406.ch/writing/category-python/" rel="alternate" /><id>https://406.ch/writing/category-python/</id><updated>2023-08-11T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Composition over inheritance: The case for function-based views</title><link href="https://406.ch/writing/composition-over-inheritance-the-case-for-function-based-views/" rel="alternate" /><id>https://406.ch/writing/composition-over-inheritance-the-case-for-function-based-views/</id><published>2023-08-11T12:00:00Z</published><updated>2023-08-11T12:00:00Z</updated><summary type="html">&lt;h1&gt;Composition over inheritance: The case for function-based views&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Python</title><link href="https://406.ch/writing/category-python/atom.xml" rel="self" /><link href="https://406.ch/writing/category-python/" rel="alternate" /><id>https://406.ch/writing/category-python/</id><updated>2023-08-11T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Composition over inheritance: The case for function-based views</title><link href="https://406.ch/writing/composition-over-inheritance-the-case-for-function-based-views/" rel="alternate" /><id>https://406.ch/writing/composition-over-inheritance-the-case-for-function-based-views/</id><published>2023-08-11T12:00:00Z</published><updated>2023-08-11T12:00:00Z</updated><summary type="html">&lt;h1&gt;Composition over inheritance: The case for function-based views&lt;/h1&gt;&lt;h1 id="composition-over-inheritance-the-case-for-function-based-views"&gt;&lt;a class="toclink" href="#composition-over-inheritance-the-case-for-function-based-views"&gt;Composition over inheritance: The case for function-based views&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://hachyderm.io/@matthiask/110814846128940975"&gt;A recent conversation with Carlton on Mastodon&lt;/a&gt; prompted me to write down some of my thoughts re. function- vs class-based views in Django.&lt;/p&gt;
-&lt;h2&gt;The early days&lt;/h2&gt;
+&lt;h2 id="the-early-days"&gt;&lt;a class="toclink" href="#the-early-days"&gt;The early days&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;When I started using Django some time after 0.96 and 1.0 all views were
 function based. Except when you added a class with a &lt;code&gt;def __call__()&lt;/code&gt; method
 yourself &amp;ndash; that was always possible but not really comparable to today&amp;rsquo;s
 class-based views.&lt;/p&gt;
-&lt;h2&gt;The introduction of class-based views&lt;/h2&gt;
+&lt;h2 id="the-introduction-of-class-based-views"&gt;&lt;a class="toclink" href="#the-introduction-of-class-based-views"&gt;The introduction of class-based views&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Class based views (both generic versions and the base &lt;code&gt;View&lt;/code&gt;) were introduced to Django in 2010. Judging from the &lt;a href="https://code.djangoproject.com/ticket/6735"&gt;ticket tracker&lt;/a&gt; the main motivation was to avoid adding yet another argument to the generic function-based views (GFBV) which were available in Django back then.&lt;/p&gt;
 &lt;p&gt;The GFBV&amp;rsquo;s argument count was impressive. Two examples follow:&lt;/p&gt;
 &lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;object_detail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;object_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -26,12 +26,12 @@ class-based views.&lt;/p&gt;
 &lt;p&gt;The GFBVs were immediately deprecated when GCBVs were introduced and later removed in 2012.&lt;/p&gt;
 &lt;p&gt;Class-based views have to be adapted by calling the &lt;code&gt;View.as_view()&lt;/code&gt; method; &lt;code&gt;as_view()&lt;/code&gt; returns arguably the thing which is viewed (sorry) as the view by Django, it&amp;rsquo;s the thing which gets called with a request and is expected to return a response. This thing in turn instantiates the view object once per request; this means that &lt;code&gt;self&lt;/code&gt; can be used to save request-specific data such as &lt;code&gt;self.request&lt;/code&gt;, &lt;code&gt;self.args&lt;/code&gt; but also custom attributes.&lt;/p&gt;
 &lt;p&gt;The GCBV code is extremely factored and decomposed. The &lt;a href="https://ccbv.co,ul/"&gt;Classy Class-Based Views&lt;/a&gt; site mentions that the &lt;code&gt;UpdateView&lt;/code&gt; has 10 separate ancestors and its code is spread across three files. But, the view code for instantiating a model object and handling a form really isn&amp;rsquo;t that complex. Most of the complexity is handled by Django itself, in the request handler and in the &lt;code&gt;django.forms&lt;/code&gt; package. So, what&amp;rsquo;s the reason for all this?&lt;/p&gt;
-&lt;h2&gt;Generic views could be simple&lt;/h2&gt;
+&lt;h2 id="generic-views-could-be-simple"&gt;&lt;a class="toclink" href="#generic-views-could-be-simple"&gt;Generic views could be simple&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I wish that the existing generic views had better building blocks instead of a big hierarchy of mixins and multiple inheritance which is probably not understood by anyone without checking and re-checking the documentation, the code, or the excellent &lt;a href="https://ccbv.co.uk/"&gt;Classy Class-Based Views&lt;/a&gt;. Certainly not by me.&lt;/p&gt;
 &lt;p&gt;In my ideal world, generic views would be composed of small reusable and composable functions which wuld cover 80% of use cases with 20% of the code. And if not, you could copy the whole code of the view, change or introduce a line or two and leave it at that. And since the functions do one thing (but do that well) you can immediately see what they are doing and why. You&amp;rsquo;d avoid the Hollywood Principle (Don&amp;rsquo;t call us, we&amp;rsquo;ll call you) in your code. Sure, your view is called by Django but you don&amp;rsquo;t have to introduce more and more layers of indirection.&lt;/p&gt;
 &lt;p&gt;The internet is full of advice that you should prefer composition over inheritance. Let&amp;rsquo;s try to outline what generic views could look like if they followed the composition paradigm. Note that the goal isn&amp;rsquo;t to gain points by showing that the resulting code is shorter. One important goal is maintainability by being easier to understand. Another important goal is showing a better path from a beginner&amp;rsquo;s use of views to an experts understanding of everything underneath it by bridging the gap using more powerful building blocks which don&amp;rsquo;t leave all the minutiae to you if the defaults don&amp;rsquo;t work.&lt;/p&gt;
 &lt;p&gt;Some repetition caused by copy pasting is fine. Not all identical three lines of code are the same. The &lt;a href="https://wiki.c2.com/?ThreeStrikesAndYouRefactor"&gt;Three Strikes And You Refactor&lt;/a&gt; rule&lt;sup id="fnref:wet"&gt;&lt;a class="footnote-ref" href="#fn:wet"&gt;1&lt;/a&gt;&lt;/sup&gt; leads to better and more maintainable code than following an extreme interpretation of the DRY (Don&amp;rsquo;t Repeat Yourself) principle.&lt;/p&gt;
-&lt;h3&gt;ListView and DetailView&lt;/h3&gt;
+&lt;h3 id="listview-and-detailview"&gt;&lt;a class="toclink" href="#listview-and-detailview"&gt;ListView and DetailView&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I&amp;rsquo;m going to profit from Django&amp;rsquo;s shortcuts module and also from &lt;a href="https://feincms3.readthedocs.io/en/latest/ref/shortcuts.html"&gt;feincms3&amp;rsquo;s shortcuts module&lt;/a&gt; which offers functions for rendering pages for single objects or lists of objects. The &lt;code&gt;render_list&lt;/code&gt; and &lt;code&gt;render_detail&lt;/code&gt; functions implement the same way of determining the template paths as the generic views use (for example &lt;code&gt;&amp;lt;app_name&amp;gt;/&amp;lt;model_name&amp;gt;_detail.html&lt;/code&gt;) and the same way of naming context variables (&lt;code&gt;object&lt;/code&gt; and &lt;code&gt;&amp;lt;model_name&amp;gt;&lt;/code&gt; for the object, &lt;code&gt;object_list&lt;/code&gt; and &lt;code&gt;&amp;lt;model_name&amp;gt;_list&lt;/code&gt; for the list) as well as pagination but nothing more.&lt;/p&gt;
 &lt;p&gt;Here&amp;rsquo;s a possible minimal implementation of a list and detail object generic view:&lt;/p&gt;
 &lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# _get_queryset runs ._default_manager.all() on models and returns&lt;/span&gt;
@@ -86,7 +86,7 @@ class-based views.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Did you know that &lt;code&gt;get_object()&lt;/code&gt; has an optional queryset argument? I certainly didn&amp;rsquo;t. It seems to be used by the date-based generic views but they also have their own &lt;code&gt;get_object()&lt;/code&gt; implementation so who knows, really.&lt;/p&gt;
-&lt;h2&gt;Detail view with additional behavior&lt;/h2&gt;
+&lt;h2 id="detail-view-with-additional-behavior"&gt;&lt;a class="toclink" href="#detail-view-with-additional-behavior"&gt;Detail view with additional behavior&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;article_detail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_object_or_404&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;published&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;slug&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;POST&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FILES&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;method&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
@@ -108,7 +108,7 @@ by &lt;code&gt;get_context_data()&lt;/code&gt;. It&amp;rsquo;s not hard but it c
 straightforward as the example above either.&lt;/p&gt;
 &lt;p&gt;The custom view is the most obvious way of keeping the form instantiation in
 one place.&lt;/p&gt;
-&lt;h2&gt;Form views&lt;/h2&gt;
+&lt;h2 id="form-views"&gt;&lt;a class="toclink" href="#form-views"&gt;Form views&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Generic create and update views could look something like this, again reusing the shortcuts mentioned above:&lt;/p&gt;
 &lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;save_and_redirect_to_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -177,7 +177,7 @@ one place.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Sure, forms probably shouldn&amp;rsquo;t know much about requests. But then, Django is a framework for perfectionists &lt;em&gt;with deadlines&lt;/em&gt; and sometimes practicality beats purity.&lt;/p&gt;
-&lt;h2&gt;Date-based generic views&lt;/h2&gt;
+&lt;h2 id="date-based-generic-views"&gt;&lt;a class="toclink" href="#date-based-generic-views"&gt;Date-based generic views&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I think I would want to offer a few analyzers which allow easily returning a
 data structure suitable for rendering links for yearly, monthly, weekly or even
 daily (who writes that much?) archives. The &lt;a href="https://docs.djangoproject.com/en/4.2/ref/models/querysets/#dates"&gt;&lt;code&gt;.dates()&lt;/code&gt; queryset
@@ -189,7 +189,7 @@ method should be a big help there.&lt;/p&gt;
 convinced that this is actually a hard problem and not just a problem of making
 basically arbitrary choices which people then adapt to and then think that this
 is the way things should be since it&amp;rsquo;s the way things are.&lt;/p&gt;
-&lt;h2&gt;Wrapping up&lt;/h2&gt;
+&lt;h2 id="wrapping-up"&gt;&lt;a class="toclink" href="#wrapping-up"&gt;Wrapping up&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Some points this post could have made or tried to make are made much better by
 Luke Plant in the guide &lt;a href="https://spookylukey.github.io/django-views-the-right-way/"&gt;Django Views - The Right
 Way&lt;/a&gt;. I don&amp;rsquo;t
@@ -201,7 +201,7 @@ request: HttpResponseRedirect(...)&lt;/code&gt; than with
 character count. The point is: Does the &lt;code&gt;RedirectView&lt;/code&gt; cause a permanent or a
 temporary redirect? I had to look it up for a long time, and then it changed.
 The former is completely obvious.&lt;/p&gt;
-&lt;h2&gt;Closing words&lt;/h2&gt;
+&lt;h2 id="closing-words"&gt;&lt;a class="toclink" href="#closing-words"&gt;Closing words&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I know that people have strong opinions. I&amp;rsquo;m not interested in all of them. I&amp;rsquo;m
 mostly interested in design critiques and arguments regarding the beginner to
 intermediate skills argument. It&amp;rsquo;s fine if CBVs work fine for you, and there&amp;rsquo;s
@@ -214,7 +214,7 @@ no need to feel challenged by this post.&lt;/p&gt;
 &lt;p&gt;Also called the WET rule (Write Everything Twice). (Not coined by me.)&amp;#160;&lt;a class="footnote-backref" href="#fnref:wet" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>How ruff changed my Python programming habits</title><link href="https://406.ch/writing/how-ruff-changed-my-python-programming-habits/" rel="alternate" /><id>https://406.ch/writing/how-ruff-changed-my-python-programming-habits/</id><published>2023-07-26T12:00:00Z</published><updated>2023-07-26T12:00:00Z</updated><summary type="html">&lt;h1&gt;How ruff changed my Python programming habits&lt;/h1&gt;
+&lt;/div&gt;</summary></entry><entry><title>How ruff changed my Python programming habits</title><link href="https://406.ch/writing/how-ruff-changed-my-python-programming-habits/" rel="alternate" /><id>https://406.ch/writing/how-ruff-changed-my-python-programming-habits/</id><published>2023-07-26T12:00:00Z</published><updated>2023-07-26T12:00:00Z</updated><summary type="html">&lt;h1&gt;How ruff changed my Python programming habits&lt;/h1&gt;&lt;h1 id="how-ruff-changed-my-python-programming-habits"&gt;&lt;a class="toclink" href="#how-ruff-changed-my-python-programming-habits"&gt;How ruff changed my Python programming habits&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://beta.ruff.rs/"&gt;ruff&lt;/a&gt; isn&amp;rsquo;t just a faster replacement for flake8, isort
 and friends.&lt;/p&gt;
 &lt;p&gt;With other Python-based formatters and linters there&amp;rsquo;s always a trade off
@@ -233,53 +233,53 @@ I&amp;rsquo;m not using currently are worthless. I didn&amp;rsquo;t even know mo
 before starting to use ruff, and ruff making them easy and painless to use
 (without a measureable performance penalty) has certainly lead to me annoying
 my coworkers with a growing set of enabled rules.&lt;/p&gt;
-&lt;h2&gt;Rules&lt;/h2&gt;
+&lt;h2 id="rules"&gt;&lt;a class="toclink" href="#rules"&gt;Rules&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The current ruleset and some justifications for it follows.&lt;/p&gt;
-&lt;h3&gt;pyflakes, pycodestyle&lt;/h3&gt;
+&lt;h3 id="pyflakes-pycodestyle"&gt;&lt;a class="toclink" href="#pyflakes-pycodestyle"&gt;pyflakes, pycodestyle&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;No justification necessary, really.&lt;/p&gt;
-&lt;h3&gt;mccabe&lt;/h3&gt;
+&lt;h3 id="mccabe"&gt;&lt;a class="toclink" href="#mccabe"&gt;mccabe&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I like the cyclomatic complexity checker, but I have relaxed it a bit. I find it very useful to avoid complex code, but some code is totally straightforward (e.g. building a queryset from a wide variety of query parameters) but still has many &lt;code&gt;if&lt;/code&gt; statements. I&amp;rsquo;d rather allow more complexity instead of sprinkling the code with &lt;code&gt;# noqa&lt;/code&gt; statements.&lt;/p&gt;
-&lt;h3&gt;isort&lt;/h3&gt;
+&lt;h3 id="isort"&gt;&lt;a class="toclink" href="#isort"&gt;isort&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Sorted imports are great.&lt;/p&gt;
-&lt;h3&gt;pep8-naming&lt;/h3&gt;
+&lt;h3 id="pep8-naming"&gt;&lt;a class="toclink" href="#pep8-naming"&gt;pep8-naming&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Mostly great except when it flags Django&amp;rsquo;s migration files. The filenames
 always start with numbers and that&amp;rsquo;s obviously not a valid Python module name,
 but it&amp;rsquo;s not supposed to be.&lt;/p&gt;
-&lt;h3&gt;pyupgrade&lt;/h3&gt;
+&lt;h3 id="pyupgrade"&gt;&lt;a class="toclink" href="#pyupgrade"&gt;pyupgrade&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;pyupgrade is totally awesome.&lt;/p&gt;
-&lt;h3&gt;flake-2020&lt;/h3&gt;
+&lt;h3 id="flake-2020"&gt;&lt;a class="toclink" href="#flake-2020"&gt;flake-2020&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Avoiding non future-proof uses of &lt;code&gt;sys.version&lt;/code&gt; and &lt;code&gt;sys.version_info&lt;/code&gt; is a good idea, no questions about that.&lt;/p&gt;
-&lt;h3&gt;flake8-boolean-trap&lt;/h3&gt;
+&lt;h3 id="flake8-boolean-trap"&gt;&lt;a class="toclink" href="#flake8-boolean-trap"&gt;flake8-boolean-trap&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Sometimes annoying, mostly useful. I don&amp;rsquo;t like that the plugin flags e.g. &lt;code&gt;with_tree_fields(True)&lt;/code&gt; or &lt;code&gt;with_tree_fields(False)&lt;/code&gt; because I don&amp;rsquo;t think this could be possibly misread. But, apart from these edge cases it really is a good idea, especially since keyword-only arguments exist and those aren&amp;rsquo;t flagged by this rule.&lt;/p&gt;
-&lt;h3&gt;flake8-bugbear&lt;/h3&gt;
+&lt;h3 id="flake8-bugbear"&gt;&lt;a class="toclink" href="#flake8-bugbear"&gt;flake8-bugbear&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Mostly useful. I have disabled the &lt;code&gt;zip()&lt;/code&gt; without &lt;code&gt;strict=&lt;/code&gt; warning.&lt;/p&gt;
-&lt;h3&gt;flake8-comprehensions&lt;/h3&gt;
+&lt;h3 id="flake8-comprehensions"&gt;&lt;a class="toclink" href="#flake8-comprehensions"&gt;flake8-comprehensions&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Checks for unnecessary conversions between generators and lists, sets, tuples or dicts.&lt;/p&gt;
-&lt;h3&gt;flake8-django&lt;/h3&gt;
+&lt;h3 id="flake8-django"&gt;&lt;a class="toclink" href="#flake8-django"&gt;flake8-django&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I actually like consistency. I also like flagging &lt;code&gt;fields = "__all__"&lt;/code&gt;, but this check shouldn&amp;rsquo;t trigger in admin &lt;code&gt;ModelForm&lt;/code&gt; classes, really. I probably have to add another entry to &lt;code&gt;[tool.ruff.per-file-ignores]&lt;/code&gt; for this.&lt;/p&gt;
-&lt;h3&gt;flake8-pie&lt;/h3&gt;
+&lt;h3 id="flake8-pie"&gt;&lt;a class="toclink" href="#flake8-pie"&gt;flake8-pie&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Quite a random assortment of rules. I like the &lt;code&gt;no-unnecessary-pass&lt;/code&gt; and &lt;code&gt;no-pointless-statements&lt;/code&gt; rules, among others.&lt;/p&gt;
-&lt;h3&gt;flake8-simplify&lt;/h3&gt;
+&lt;h3 id="flake8-simplify"&gt;&lt;a class="toclink" href="#flake8-simplify"&gt;flake8-simplify&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Nice simplifications. I&amp;rsquo;m not sure if ternary opeartors are always a plus, especially since they hide the branching from &lt;a href="https://pypi.org/project/coverage/"&gt;coverage&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;flake8-gettext&lt;/h3&gt;
+&lt;h3 id="flake8-gettext"&gt;&lt;a class="toclink" href="#flake8-gettext"&gt;flake8-gettext&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Enormously useful and important. I don&amp;rsquo;t know how many times I have encountered broken code like &lt;code&gt;gettext("Hello {name}".format(name=name))&lt;/code&gt; instead of &lt;code&gt;gettext("Hello {name}").format(name=name)&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;pygrep-hooks&lt;/h3&gt;
+&lt;h3 id="pygrep-hooks"&gt;&lt;a class="toclink" href="#pygrep-hooks"&gt;pygrep-hooks&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Avoids &lt;code&gt;eval()&lt;/code&gt;. Avoids blanket &lt;code&gt;# noqa&lt;/code&gt; rules (always be specific!)&lt;/p&gt;
-&lt;h3&gt;pylint&lt;/h3&gt;
+&lt;h3 id="pylint"&gt;&lt;a class="toclink" href="#pylint"&gt;pylint&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I have been using all pylint rules for some time. The pylint refactoring rules (&lt;code&gt;PLR&lt;/code&gt;) did prove to be very annoying so I have reverted to only enabling errors and warnings.&lt;/p&gt;
 &lt;p&gt;The two main offenders were PLR0913 (too many arguments) and PLR2004 (magic value comparison). The former would be fine if it would count keyword-only arguments differently; it&amp;rsquo;s certainly a good idea to avoid too many positional parameters, I don&amp;rsquo;t think keyword-only parameters are that bad. The latter is bad because often the magic value is really obvious. If you&amp;rsquo;re writing code for the web you shouldn&amp;rsquo;t have to use constants for the &lt;code&gt;200&lt;/code&gt; or &lt;code&gt;404&lt;/code&gt; status codes; one can assume that they are well known.&lt;/p&gt;
-&lt;h3&gt;RUF100&lt;/h3&gt;
+&lt;h3 id="ruf100"&gt;&lt;a class="toclink" href="#ruf100"&gt;RUF100&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Ruff is able to automatically remove &lt;code&gt;# noqa&lt;/code&gt; statements which don&amp;rsquo;t actually silence any warnings. That&amp;rsquo;s a great feature to have.&lt;/p&gt;
-&lt;h2&gt;Line length&lt;/h2&gt;
+&lt;h2 id="line-length"&gt;&lt;a class="toclink" href="#line-length"&gt;Line length&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Yes, let&amp;rsquo;s go there. I still don&amp;rsquo;t use longer lines than +/- 80 characters, but
 I have disabled all line length warnings these days. I don&amp;rsquo;t want to be warned
 because I didn&amp;rsquo;t break a string across lines.&lt;/p&gt;
-&lt;h2&gt;Rules I don&amp;rsquo;t like&lt;/h2&gt;
+&lt;h2 id="rules-i-dont-like"&gt;&lt;a class="toclink" href="#rules-i-dont-like"&gt;Rules I don&amp;rsquo;t like&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;flake8-builtins: Too many boring warnings. I didn&amp;rsquo;t even want to know that
   &lt;code&gt;copyright&lt;/code&gt; is a Python builtin.&lt;/li&gt;
 &lt;li&gt;flake8-logging-format: Not generally helpful. Avoiding different exception strings so that e.g. &lt;a href="https://sentry.io/welcome/"&gt;Sentry&lt;/a&gt; can group exceptions more easily is a good idea, but the rule generated so many false positives as to be not useful anymore.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Final words (for now)&lt;/h2&gt;
+&lt;h2 id="final-words-for-now"&gt;&lt;a class="toclink" href="#final-words-for-now"&gt;Final words (for now)&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I really hope that Black is integrated into ruff one day.&lt;/p&gt;
 &lt;p&gt;Also, I hope that ESLint and prettier will be replaced by a faster tool. I have my eyes on a few alternatives, but they are not there yet for my use cases.&lt;/p&gt;</summary></entry></feed>

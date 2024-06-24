@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-06-07T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 23)</title><link href="https://406.ch/writing/weeknotes-2024-week-23/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-23/</id><published>2024-06-07T12:00:00Z</published><updated>2024-06-07T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 23)&lt;/h1&gt;&lt;h2&gt;Switching everything from pip to uv&lt;/h2&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-06-07T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 23)</title><link href="https://406.ch/writing/weeknotes-2024-week-23/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-23/</id><published>2024-06-07T12:00:00Z</published><updated>2024-06-07T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 23)&lt;/h1&gt;&lt;h2 id="switching-everything-from-pip-to-uv"&gt;&lt;a class="toclink" href="#switching-everything-from-pip-to-uv"&gt;Switching everything from pip to uv&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Enough said. I&amp;rsquo;m always astonished how fast computers can be.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering
   0.18&lt;/a&gt;: Added a database
@@ -42,7 +42,7 @@
   small-ish improvements. I should really start using higher version numbers,
   but not having to commit to anything also feels great.  That being said, the
   editor is in active use in several projects, so maybe I&amp;rsquo;m deceiving myself.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench: Coffee time!&lt;/h1&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench: Coffee time!&lt;/h1&gt;&lt;h1 id="workbench-coffee-time"&gt;&lt;a class="toclink" href="#workbench-coffee-time"&gt;Workbench: Coffee time!&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have written about &lt;a href="https://406.ch/writing/workbench-the-django-based-agency-software/"&gt;the Workbench agency
 software&lt;/a&gt; a
 few weeks back.&lt;/p&gt;
@@ -73,7 +73,7 @@ pairings it generates upfront. The values in the code seem to work fine.&lt;/p&g
 love for programming. Like a small puzzle.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 21)&lt;/h1&gt;&lt;p&gt;There have been times when work has been more enjoyable than in the last few
 weeks. It feels more stressful than at other times, and this mostly has to do
 with particular projects. I hope I&amp;rsquo;ll be able to move on soon.&lt;/p&gt;
-&lt;h2&gt;blacknoise&lt;/h2&gt;
+&lt;h2 id="blacknoise"&gt;&lt;a class="toclink" href="#blacknoise"&gt;blacknoise&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have released &lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;. It&amp;rsquo;s an
 ASGI app for static file serving inspired by
 &lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt;.&lt;/p&gt;
@@ -87,7 +87,7 @@ exists&lt;/a&gt;, but it hasn&amp;rsquo;t moved
 forwards in months.&lt;/p&gt;
 &lt;p&gt;I have written a longer post about it earlier this year
 &lt;a href="https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5&lt;/a&gt;: Code golfing. Added backwards compatibility with old Django versions so that I can use it for old projects. Also includes optional support for Google consent management.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django_fast_export/"&gt;django-fast-export 0.1.1&lt;/a&gt;: This is basically a repackaging of the streaming CSV view from Django&amp;rsquo;s documentation as a reusable class. I have switched to using an iterator so that I can export even larger datasets.&lt;/li&gt;
@@ -96,20 +96,20 @@ forwards in months.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;: See above.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.4&lt;/a&gt;: Fixed edge cases with whitespace handling when merging elements.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.6.1&lt;/a&gt;: Allowed &lt;code&gt;./manage.py f3loaddata -&lt;/code&gt; to load JSON data from stdin.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2&gt;Google Summer of Code has begun&lt;/h2&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 18)</title><link href="https://406.ch/writing/weeknotes-2024-week-18/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-18/</id><published>2024-05-03T12:00:00Z</published><updated>2024-05-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 18)&lt;/h1&gt;&lt;h2 id="google-summer-of-code-has-begun"&gt;&lt;a class="toclink" href="#google-summer-of-code-has-begun"&gt;Google Summer of Code has begun&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We have a student helping out with adding async support to the &lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;Django Debug
 Toolbar&lt;/a&gt;. It&amp;rsquo;s great that
 someone can spend some concentrated time to work on this. Tim and others have
 done all the necessary preparation work, I&amp;rsquo;m only helping from the sidelines so
 don&amp;rsquo;t thank me.&lt;/p&gt;
-&lt;h2&gt;Bike to Work&lt;/h2&gt;
+&lt;h2 id="bike-to-work"&gt;&lt;a class="toclink" href="#bike-to-work"&gt;Bike to Work&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Two teams from my company are participating in the &lt;a href="https://www.biketowork.ch/"&gt;Bike to Work Challenge
 2024&lt;/a&gt;. It&amp;rsquo;s what I do anyway (if I&amp;rsquo;m not working
 from home) but maybe it helps build others some motivation to get on the
 bicycle once more. Public transports in the city where I live are great but
 I&amp;rsquo;ll always take the bike when I can. I also went on my first mountain bike
 ride in a few months yesterday, good fun.&lt;/p&gt;
-&lt;h2&gt;JSON blobs and referential integrity&lt;/h2&gt;
+&lt;h2 id="json-blobs-and-referential-integrity"&gt;&lt;a class="toclink" href="#json-blobs-and-referential-integrity"&gt;JSON blobs and referential integrity&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://github.com/matthiask/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt; has gained support for referencing Django models. Here&amp;rsquo;s an example schema excerpt:&lt;/p&gt;
 &lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
@@ -151,7 +151,7 @@ model with an &lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to a
 &lt;span class="n"&gt;register_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;Releases since the beginning of April&lt;/h2&gt;
+&lt;h2 id="releases-since-the-beginning-of-april"&gt;&lt;a class="toclink" href="#releases-since-the-beginning-of-april"&gt;Releases since the beginning of April&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.14&lt;/a&gt;: See above. Also, some styling work and a patch update to the vendorized json-editor.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.4.6&lt;/a&gt;: Many small stylistic fixes. The target indicator when dragging plugins is now also shown when plugins are collapsed. It&amp;rsquo;s now possible to directly drag a plugin to the end, and not just to the second to last position.&lt;/li&gt;
@@ -160,20 +160,20 @@ model with an &lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to a
 &lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.4.2&lt;/a&gt;: Added support for webp images. Fixed a few of the admin list filters to work with Django 5.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.3&lt;/a&gt;: Fixed the support for the &lt;code&gt;extra_context&lt;/code&gt; argument to our &lt;code&gt;changelist_view&lt;/code&gt; implementation.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry><entry><title>Workbench, the Django-based agency software</title><link href="https://406.ch/writing/workbench-the-django-based-agency-software/" rel="alternate" /><id>https://406.ch/writing/workbench-the-django-based-agency-software/</id><published>2024-04-24T12:00:00Z</published><updated>2024-04-24T12:00:00Z</updated><summary type="html">&lt;h1&gt;Workbench, the Django-based agency software&lt;/h1&gt;&lt;p&gt;I get the impression that there&amp;rsquo;s a lot of interesting but unknown software in Django land. I don&amp;rsquo;t know if there&amp;rsquo;s any interest in some of the packages I have been working on; if not this blog post is for myself only.&lt;/p&gt;
-&lt;h2&gt;(Hi)story time&lt;/h2&gt;
+&lt;h2 id="history-time"&gt;&lt;a class="toclink" href="#history-time"&gt;(Hi)story time&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;As people may know I work at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt;, an agency which specializes in digital communication services for SMEs, campaigns for referendums, and website and webapp development. At the time of writing we are a team of about 20-25 communication experts, graphic designers, programmers and project managers.&lt;/p&gt;
 &lt;p&gt;We have many different clients and are working on many different projects at the same time and are billing by the hour&lt;sup id="fnref:bythehour"&gt;&lt;a class="footnote-ref" href="#fn:bythehour"&gt;1&lt;/a&gt;&lt;/sup&gt;. Last year my own work has been billed to more than 50 different customers. In the early days we used a shared file server with spreadsheet files to track our working hours. Luckily we didn&amp;rsquo;t often overwrite the edits others made but that was definitely something which happened from time to time.&lt;/p&gt;
 &lt;p&gt;We knew of another agency who had the same problems and used a FileMaker-based software. Their solution had several problems, among them the fact that it became hard to evolve and that it got slower and slower as more and more data was entered into it over the years. They had the accounting know how and we had the software engineering know how so we wrote a webapp based on the Django framework. As always, it was much more work than the initial estimate, but if we as programmers didn&amp;rsquo;t underestimate the effort needed we wouldn&amp;rsquo;t have started many of the great projects we&amp;rsquo;re now getting much value and/or enjoyment from, hopefully both. The product of that work was &lt;a href="https://www.fineware.ch/"&gt;Metronom&lt;/a&gt;. The first release happened a little bit later than &lt;a href="https://www.getharvest.com/about"&gt;harvest&lt;/a&gt; but it already came with full time tracking including an annual working time calculator, absence management, offers, invoices including PDF generation etc, so it was quite a bit more versatile while still being easier to use than &amp;ldquo;real&amp;rdquo; business software solutions.&lt;/p&gt;
 &lt;p&gt;I personally was of the opinion that the product was good enough to try selling it, but for a variety of reasons (which I don&amp;rsquo;t want to go into here) this never happened and &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; decided that we didn&amp;rsquo;t want to be involved anymore.&lt;/p&gt;
 &lt;p&gt;However, this meant that we were dead-end street with a software that didn&amp;rsquo;t belong to us anymore, which wasn&amp;rsquo;t evolving to our changing requirements. I also didn&amp;rsquo;t enjoy working on it anymore. Over the years I have tried replacing it several times but that never came to pass until some time after the introduction of &lt;a href="https://www.holacracy.org/"&gt;Holacracy&lt;/a&gt; at our company. I noticed that I didn&amp;rsquo;t have to persuade everyone but that I, as the responsible person for this particular decision, could &amp;ldquo;just&amp;rdquo;&lt;sup id="fnref:just"&gt;&lt;a class="footnote-ref" href="#fn:just"&gt;2&lt;/a&gt;&lt;/sup&gt; move ahead with a broad interpretation of the purpose and accountabilities of one of my roles.&lt;/p&gt;
-&lt;h2&gt;&lt;a href="https://github.com/matthiask/workbench"&gt;Workbench&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="workbench"&gt;&lt;a class="toclink" href="#workbench"&gt;&lt;a href="https://github.com/matthiask/workbench"&gt;Workbench&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="Screenshot" src="https://406.ch/assets/20240424-workbench.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/matthiask/workbench"&gt;Workbench&lt;/a&gt; is the product of a few long nights of hacking. The project was started as an experiment in 2015 and was used for sending invoices but that wasn&amp;rsquo;t really the intended purpose. After long periods of lying dormant I have brought the project to a good enough state and switched Feinheit away from Metronom in 2019.&lt;/p&gt;
 &lt;p&gt;I have thought long and hard about switching to one of the off-the-shelf products and it could very well be that one of them would work well for us. Also, we wouldn&amp;rsquo;t have to pay (in form of working hours) for the maintenance and for enhancements ourselves. On the other hand, we can use a tool which is tailored to our needs. Is it worth the effort? That&amp;rsquo;s always hard to answer. The tool certainly works well for the few companies which are using it right now, so there&amp;rsquo;s no reason to agonize over that.&lt;/p&gt;
 &lt;p&gt;At the time of writing, Workbench offers projects and services, offers and invoices incl. PDF generation, recurring invoices, an address book, a logbook for rendered services, annual working time reports, an acquisition funnel, a stupid project planning and resource management tool and various reports. It has not only replaced Metronom but also a selection of SaaS (for example Pipedrive and TeamGantt) we were using previously.&lt;/p&gt;
 &lt;p&gt;The whole thing is open source because I don&amp;rsquo;t want to try making agency software into a business anymore, I only want to solve the problems &lt;em&gt;we&lt;/em&gt; have. That being said, if someone else finds it useful then that&amp;rsquo;s certainly alright as well.&lt;/p&gt;
 &lt;p&gt;The license has been MIT for the first few years but I have switched to the GPL because I wanted to integrate the excellent &lt;a href="https://pypi.org/project/qrbill/"&gt;qrbill&lt;/a&gt; module which is also licensed under the GPL. As I wrote elsewhere, I have released almost everything under the GPL in my first few open source years but have switched to BSD/MIT later when starting to work mainly with Python and Django because I thought that this license is a better fit&lt;sup id="fnref:license"&gt;&lt;a class="footnote-ref" href="#fn:license"&gt;3&lt;/a&gt;&lt;/sup&gt; for the ecosystem. That being said, for a product such as this the GPL is certainly an excellent fit.&lt;/p&gt;
-&lt;h2&gt;Final words?&lt;/h2&gt;
+&lt;h2 id="final-words"&gt;&lt;a class="toclink" href="#final-words"&gt;Final words?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;There are a few things I could write about to make this into a series. I&amp;rsquo;m putting a few ideas here, not as an announcement, just as a reminder for myself.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Better time tracking&lt;/li&gt;
@@ -194,10 +194,10 @@ model with an &lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to a
 &lt;p&gt;That&amp;rsquo;s not meant as a criticism in any way!&amp;#160;&lt;a class="footnote-backref" href="#fnref:license" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;
+&lt;/div&gt;</summary></entry><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1&gt;Building forms with the Django admin&lt;/h1&gt;&lt;h1 id="building-forms-with-the-django-admin"&gt;&lt;a class="toclink" href="#building-forms-with-the-django-admin"&gt;Building forms with the Django admin&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;The title of this post was shamelessly copied from &lt;a href="https://mastodon.social/@webology/112235938469045649"&gt;Jeff Triplett&amp;rsquo;s post on
 Mastodon&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Why?&lt;/h2&gt;
+&lt;h2 id="why"&gt;&lt;a class="toclink" href="#why"&gt;Why?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Many websites need a simple way of embedding forms, for example as a contact
 form or for simple surveys to collect some data or inputs from visitors.
 &lt;a href="https://docs.djangoproject.com/en/5.0/topics/forms/"&gt;Django&amp;rsquo;s forms library&lt;/a&gt;
@@ -214,15 +214,15 @@ locally.&lt;/p&gt;
 &lt;p&gt;If I wanted to use PHP and WordPress I could just use
 &lt;a href="https://wpforms.com/"&gt;WPForms&lt;/a&gt; and call it a day. Since I do not actually want
 that this blog post is a bit longer.&lt;/p&gt;
-&lt;h2&gt;The early days: form-designer&lt;/h2&gt;
+&lt;h2 id="the-early-days-form-designer"&gt;&lt;a class="toclink" href="#the-early-days-form-designer"&gt;The early days: form-designer&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;One of the first Django-based third party apps I published was the &lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;. The first version was uploaded to PyPI in 2012 but it had already been used in production for more than two years at that point in time. I had used &lt;a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;Git submodules&lt;/a&gt; for the deployment back then, before switching to &lt;a href="https://virtualenv.pypa.io/"&gt;Python virtualenvs&lt;/a&gt; some time later (and never looking back!)&lt;/p&gt;
 &lt;p&gt;The form-designer is still maintained actively. Because of Django&amp;rsquo;s stability and because of the fact that the app doesn&amp;rsquo;t do all that much it doesn&amp;rsquo;t require much development at all.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="A screenshot of the admin interface" src="https://406.ch/assets/20240410-form-designer.png" /&gt;&lt;/p&gt;
 &lt;p&gt;The form designer supports a selection of standard HTML5 input fields out of the box and also has an optional &lt;a href="https://github.com/django-recaptcha/django-recaptcha"&gt;django-recaptcha&lt;/a&gt; integration. All fields support some basic configuration such as setting a title, a help text, marking the field as required etc. Submissions can be sent to a configurable email address and can be saved in the database and later exported as an XLSX file. It&amp;rsquo;s also possible to define your own actions.&lt;/p&gt;
-&lt;h2&gt;More flexibility needed: feincms3-forms&lt;/h2&gt;
+&lt;h2 id="more-flexibility-needed-feincms3-forms"&gt;&lt;a class="toclink" href="#more-flexibility-needed-feincms3-forms"&gt;More flexibility needed: feincms3-forms&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A few years back I mentioned &lt;a href="https://406.ch/writing/weeknotes-2021-week-13-and-14/"&gt;feincms3-forms in a weeknotes entry&lt;/a&gt;. The reasons why form-designer wasn&amp;rsquo;t sufficient for a project back then are outlined in the blog post:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;h3&gt;feincms3-forms – A new forms builder for the Django admin interface&lt;/h3&gt;
+&lt;h3 id="feincms3-forms-a-new-forms-builder-for-the-django-admin-interface"&gt;&lt;a class="toclink" href="#feincms3-forms-a-new-forms-builder-for-the-django-admin-interface"&gt;feincms3-forms – A new forms builder for the Django admin interface&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;For a current project &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; needed a forms builder with the following constraints:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Simple fields (text, email, checkboxes, dropdowns etc.)&lt;/li&gt;
@@ -236,7 +236,7 @@ that this blog post is a bit longer.&lt;/p&gt;
 &lt;p&gt;It still doesn&amp;rsquo;t come close to WPForms in terms of included functionality; a big feature which is missing is conditional logic because I haven&amp;rsquo;t yet had a use for it.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="The feincms3-forms admin interface" src="https://406.ch/assets/20240410-feincms3-forms.png" /&gt;&lt;/p&gt;
 &lt;p&gt;The feincms3-forms forms support all types of content between form fields (basically everything &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; supports). Plugins for form fields are more flexible and can add as many input fields to the form as they want, you&amp;rsquo;re not restricted to single values or single input fields.&lt;/p&gt;
-&lt;h2&gt;Packages&lt;/h2&gt;
+&lt;h2 id="packages"&gt;&lt;a class="toclink" href="#packages"&gt;Packages&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt;&lt;/li&gt;
@@ -244,12 +244,12 @@ that this blog post is a bit longer.&lt;/p&gt;
 extraction. I&amp;rsquo;m recovering quite quickly it seems and I&amp;rsquo;m glad about it.&lt;/p&gt;
 &lt;p&gt;This weeknotes entry is short and quick. I&amp;rsquo;m trying to get back into the habit
 of writing them after a mediocre start this year.&lt;/p&gt;
-&lt;h2&gt;20th Anniversary Celebration of Young Greens Switzerland&lt;/h2&gt;
+&lt;h2 id="20th-anniversary-celebration-of-young-greens-switzerland"&gt;&lt;a class="toclink" href="#20th-anniversary-celebration-of-young-greens-switzerland"&gt;20th Anniversary Celebration of Young Greens Switzerland&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have attended the celebration of Young Greens Switzerland. I have been a
 founding member and have been active for close to ten years. A lot of time has
 passed since then. It has been great to reminisce about old times with friends
 and, more importantly, to see how the torch is carried on.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 0.0.5&lt;/a&gt;: blacknoise is an
   ASGI app for static file serving inspired by
@@ -344,7 +344,7 @@ software&lt;/a&gt;.&lt;/p&gt;
 sure if blacknoise should exist at all or if the energy wouldn&amp;rsquo;t be better
 spent improving whitenoise or other tools. Feedback and contributions are very
 welcome though!&lt;/strong&gt;&lt;/p&gt;
-&lt;h2&gt;Using blacknoise with Django to serve static files&lt;/h2&gt;
+&lt;h2 id="using-blacknoise-with-django-to-serve-static-files"&gt;&lt;a class="toclink" href="#using-blacknoise-with-django-to-serve-static-files"&gt;Using blacknoise with Django to serve static files&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Install blacknoise into your Python environment:&lt;/p&gt;
 &lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;pip install blacknoise&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -364,7 +364,7 @@ welcome though!&lt;/strong&gt;&lt;/p&gt;
 either return the files or return 404 errors if files do not exist. The files
 are added on server startup, which also means that &lt;code&gt;BlackNoise&lt;/code&gt; only knows
 about files which existed at that particular point in time.&lt;/p&gt;
-&lt;h2&gt;Improving performance&lt;/h2&gt;
+&lt;h2 id="improving-performance"&gt;&lt;a class="toclink" href="#improving-performance"&gt;Improving performance&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;BlackNoise&lt;/code&gt; has worse performance than when using an optimized webserver such
 as nginx and others. Sometimes it doesn&amp;rsquo;t matter much if the app is behind a
 caching reverse proxy or behind a content delivery network anyway. To further
@@ -393,12 +393,12 @@ callable to the &lt;code&gt;BlackNoise&lt;/code&gt; constructor:&lt;/p&gt;
 a hash based upon the contents of the static file. Such hashes can be added by
 Django&amp;rsquo;s &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt; or by appropriately configuring bundlers
 such as &lt;code&gt;webpack&lt;/code&gt; and others.&lt;/p&gt;
-&lt;h2&gt;License&lt;/h2&gt;
+&lt;h2 id="license"&gt;&lt;a class="toclink" href="#license"&gt;License&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;blacknoise&lt;/code&gt; is distributed under the terms of the &lt;a href="https://spdx.org/licenses/MIT.html"&gt;MIT&lt;/a&gt; license.&lt;/p&gt;</summary></entry><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1&gt;Podcasts I like listening to&lt;/h1&gt;&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
 why anyone would want to listen to people talk when they could listen to music
 or nothing, but that has changed a bit.&lt;/p&gt;
 &lt;p&gt;So, here&amp;rsquo;s a list of podcasts I&amp;rsquo;m currently listening to on a regular basis.&lt;/p&gt;
-&lt;h2&gt;&lt;a href="https://www.techwontsave.us/"&gt;Tech Won&amp;rsquo;t Save Us&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="tech-wont-save-us"&gt;&lt;a class="toclink" href="#tech-wont-save-us"&gt;&lt;a href="https://www.techwontsave.us/"&gt;Tech Won&amp;rsquo;t Save Us&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have recently stumbled over Tech Won&amp;rsquo;t Save Us, a Podcast which is critical
 of the technological &amp;ldquo;progress&amp;rdquo; offered by Silicon Valley elites. It&amp;rsquo;s a great
 antidote for the generative AI hype.&lt;/p&gt;
@@ -414,28 +414,28 @@ issues elsewhere.&lt;/p&gt;
 computer to generate code which I have to review and maintain when I still
 enjoy writing code myself. Maybe that will change at some point in the future.
 When that happens I&amp;rsquo;ll probably retire and become a gardener or something.&lt;/p&gt;
-&lt;h2&gt;&lt;a href="ttps://www.nytimes.com/column/ezra-klein-podcast"&gt;The Ezra Klein Show&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="the-ezra-klein-show"&gt;&lt;a class="toclink" href="#the-ezra-klein-show"&gt;&lt;a href="ttps://www.nytimes.com/column/ezra-klein-podcast"&gt;The Ezra Klein Show&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This show seems to be a favorite of many people. I joined for the (relatively)
 critical perspectives on AI and stayed for the insights into politics and into
 the near east conflict. I think it&amp;rsquo;s great that people from different sides get
 a voice on the show, even if Ezra doesn&amp;rsquo;t agree with them.&lt;/p&gt;
 &lt;p&gt;I sometimes wish the questions they ask on the show were a little bit more
 critical.&lt;/p&gt;
-&lt;h2&gt;&lt;a href="https://www.nytimes.com/column/hard-fork"&gt;Hard Fork&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="hard-fork"&gt;&lt;a class="toclink" href="#hard-fork"&gt;&lt;a href="https://www.nytimes.com/column/hard-fork"&gt;Hard Fork&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I like the perspectives and the bantering on this podcast. It&amp;rsquo;s a good way for
 me to stay informed about what&amp;rsquo;s going on in AI/ML land, among other things.
 It&amp;rsquo;s a lighthearted listen I often look forward to.&lt;/p&gt;
-&lt;h2&gt;&lt;a href="https://djangochat.com/"&gt;Django Chat&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="django-chat"&gt;&lt;a class="toclink" href="#django-chat"&gt;&lt;a href="https://djangochat.com/"&gt;Django Chat&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I work with Django all the time and Django Chat is a great way to learn more
 about Django, about the people involved and also about the surrounding
 ecosystem. A wholehearted recommendation!&lt;/p&gt;
-&lt;h2&gt;&lt;a href="https://talkpython.fm/"&gt;Talk Python To Me&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="talk-python-to-me"&gt;&lt;a class="toclink" href="#talk-python-to-me"&gt;&lt;a href="https://talkpython.fm/"&gt;Talk Python To Me&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Good interviews, interesting guests and topics. Just a great way to learn about
 libraries, tools etc. which I cannot wait to use in my own projects.&lt;/p&gt;
-&lt;h2&gt;&lt;a href="https://podcast.datenschutzpartner.ch/"&gt;Datenschutzplaudereien&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="datenschutzplaudereien"&gt;&lt;a class="toclink" href="#datenschutzplaudereien"&gt;&lt;a href="https://podcast.datenschutzpartner.ch/"&gt;Datenschutzplaudereien&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Required listening for people working with customer data in Switzerland. Swiss
 german knowledge required.&lt;/p&gt;
-&lt;h2&gt;Others&lt;/h2&gt;
+&lt;h2 id="others"&gt;&lt;a class="toclink" href="#others"&gt;Others&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A few other podcasts I&amp;rsquo;m listening to more or less regularly:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.publiceye.ch/de/wir-muessen-reden-public-eye-spricht-klartext"&gt;Wir müssen reden. Public Eye spricht
@@ -465,9 +465,9 @@ german knowledge required.&lt;/p&gt;
   Philosophie&lt;/a&gt;:
   It&amp;rsquo;s a bit slow and definitely more geared towards viewers than listeners,
   but definitely interesting.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 11)</title><link href="https://406.ch/writing/weeknotes-2024-week-11/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-11/</id><published>2024-03-16T12:00:00Z</published><updated>2024-03-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 11)&lt;/h1&gt;&lt;h2&gt;Estimates&lt;/h2&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 11)</title><link href="https://406.ch/writing/weeknotes-2024-week-11/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-11/</id><published>2024-03-16T12:00:00Z</published><updated>2024-03-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 11)&lt;/h1&gt;&lt;h2 id="estimates"&gt;&lt;a class="toclink" href="#estimates"&gt;Estimates&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://jacobian.org/2024/mar/11/breaking-down-tasks/"&gt;Jacob wrote an excellent post on breaking down tasks&lt;/a&gt;. I did like the post a lot. Maybe I&amp;rsquo;ll write a longer reply later, but for now just this. &lt;a href="https://hachyderm.io/@jacob@jacobian.org/112081126379604868"&gt;There definitely are good reasons for the pushback against estimation&lt;/a&gt;, and it&amp;rsquo;s really not just that some people lack professionalism.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.1&lt;/a&gt;: Mini
   release containing a Turkish translation. It&amp;rsquo;s always nice if software is
@@ -486,7 +486,7 @@ german knowledge required.&lt;/p&gt;
   height of an element. Also, the initialization in 6.4 was badly broken.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.2&lt;/a&gt;: &lt;a href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/"&gt;See the announcement blog post from Wednesday&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry><entry><title>Eleven months of static site generation</title><link href="https://406.ch/writing/eleven-months-of-static-site-generation/" rel="alternate" /><id>https://406.ch/writing/eleven-months-of-static-site-generation/</id><published>2024-03-15T12:00:00Z</published><updated>2024-03-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Eleven months of static site generation&lt;/h1&gt;&lt;p&gt;Almost eleven months have gone by since I &lt;a href="https://406.ch/writing/the-insides-of-my-static-site-generator/"&gt;last wrote&lt;/a&gt; about the &lt;a href="https://github.com/matthiask/406.ch/blob/main/generate.py"&gt;static site generator script&lt;/a&gt; I&amp;rsquo;m using for this website.&lt;/p&gt;
-&lt;h2&gt;What has changed in the meantime?&lt;/h2&gt;
+&lt;h2 id="what-has-changed-in-the-meantime"&gt;&lt;a class="toclink" href="#what-has-changed-in-the-meantime"&gt;What has changed in the meantime?&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The build script is 40 lines shorter.&lt;/li&gt;
 &lt;li&gt;Code snippets are now highlighted using pygments.&lt;/li&gt;
@@ -499,7 +499,7 @@ german knowledge required.&lt;/p&gt;
 &lt;li&gt;The script now supports scheduled publishing, mainly by leveraging GitHub
   action&amp;rsquo;s scheduling support.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Has it been worth it?&lt;/h2&gt;
+&lt;h2 id="has-it-been-worth-it"&gt;&lt;a class="toclink" href="#has-it-been-worth-it"&gt;Has it been worth it?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The general advice seems to not write your own static site generator because
 you&amp;rsquo;ll spend time tweaking the generator instead of actually writing posts.
 This definitely doesn&amp;rsquo;t have to be the case. Sometimes it&amp;rsquo;s good to hack on a
@@ -517,7 +517,7 @@ open &lt;a href="https://github.com/matthiask/django-prose-editor/"&gt;here on G
 version at the time of writing is 0.2, and it&amp;rsquo;s not yet used in production
 environments, only in staging/preview environments. That will soon change
 though.&lt;/p&gt;
-&lt;h2&gt;Researching alternatives to django-ckeditor&lt;/h2&gt;
+&lt;h2 id="researching-alternatives-to-django-ckeditor"&gt;&lt;a class="toclink" href="#researching-alternatives-to-django-ckeditor"&gt;Researching alternatives to django-ckeditor&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have spent a lot of time evaluating alternatives. All of them are great
 choices, and I don&amp;rsquo;t want to bash any of them. But, I didn&amp;rsquo;t feel good betting on any of the choices from the &lt;a href="https://djangopackages.org/grids/g/wysiwyg/"&gt;WYSIWYG editors grid on Django Packages&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;A few packages have potential licensing issues. CKEditor 5&amp;rsquo;s change to the GPL
@@ -538,7 +538,7 @@ syntax even if the editor helps out a bit.&lt;/p&gt;
 &lt;p&gt;Some of the remaining choices are using JavaScript widgets which haven&amp;rsquo;t been
 updated for a really long time or they are really code editors, not WYSIWYG
 editors, also a no go.&lt;/p&gt;
-&lt;h2&gt;Deciding on going with ProseMirror&lt;/h2&gt;
+&lt;h2 id="deciding-on-going-with-prosemirror"&gt;&lt;a class="toclink" href="#deciding-on-going-with-prosemirror"&gt;Deciding on going with ProseMirror&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have worked with &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt; on and off since
 October 2015, soon after the crowdfunding ended. It is used in a project where
 people can write their own book with a standardized pipeline and process, where
@@ -557,7 +557,7 @@ implementation definitely makes sense when it finally clicks.&lt;/p&gt;
 &lt;p&gt;As additional bonuses the ProseMirror community is nice and ProseMirror is used
 in a few large software projects which make me believe that the software has a
 non-zero probability of being maintained in the long run.&lt;/p&gt;
-&lt;h2&gt;Current plans&lt;/h2&gt;
+&lt;h2 id="current-plans"&gt;&lt;a class="toclink" href="#current-plans"&gt;Current plans&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The only thing which is configurable right now is the server-side sanitizing of
 submitted HTML content. I plan on allowing some configurability, for example to
 disable links when the content will only be used inside a card teaser which
@@ -566,24 +566,24 @@ my mind, so I&amp;rsquo;ll probably be slow to add features and rather keep comp
 low.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m definitely interested to hear from people who want to use the package but
 cannot do so right now or who would want some additional features. Issues and
-pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>My 2024 Development Setup</title><link href="https://406.ch/writing/my-2024-development-setup/" rel="alternate" /><id>https://406.ch/writing/my-2024-development-setup/</id><published>2024-02-28T12:00:00Z</published><updated>2024-02-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;My 2024 Development Setup&lt;/h1&gt;
+pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>My 2024 Development Setup</title><link href="https://406.ch/writing/my-2024-development-setup/" rel="alternate" /><id>https://406.ch/writing/my-2024-development-setup/</id><published>2024-02-28T12:00:00Z</published><updated>2024-02-28T12:00:00Z</updated><summary type="html">&lt;h1&gt;My 2024 Development Setup&lt;/h1&gt;&lt;h1 id="my-2024-development-setup"&gt;&lt;a class="toclink" href="#my-2024-development-setup"&gt;My 2024 Development Setup&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have been inspired by &lt;a href="https://micro.webology.dev/2024/02/18/my-development-setup.html"&gt;Jeff Triplett&amp;rsquo;s post&lt;/a&gt; to write this down. The main value &amp;ndash; if there&amp;rsquo;s value at all in this post &amp;ndash; lies in my ability to revisit it later and see if anything changed.&lt;/p&gt;
-&lt;h2&gt;Desk&lt;/h2&gt;
+&lt;h2 id="desk"&gt;&lt;a class="toclink" href="#desk"&gt;Desk&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;m using a standing desk since 2015 or 2016. I&amp;rsquo;m actually doing most of my work standing; when I&amp;rsquo;m tired or maybe after a sports session I sit down, but when I do that I mostly choose the sofa or a different table and get back to the standing desk as soon as possible. I have started using the standing desk when I was in therapy for severe back pain but I have come to like it a lot since then. I do have a chair but I don&amp;rsquo;t really use it all that often.&lt;/p&gt;
 &lt;p&gt;The greatest thing about a standing desk is that when I go to an event which involves a lot of standing around (or dancing!) I don&amp;rsquo;t get tired as fast as before :-)&lt;/p&gt;
-&lt;h2&gt;Hardware&lt;/h2&gt;
+&lt;h2 id="hardware"&gt;&lt;a class="toclink" href="#hardware"&gt;Hardware&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;My main machines are two Thinkpad notebooks, a Lenovo X1 carbon and a Lenovo X1 nano. I bought the latter because my previous notebook broke during a warranty repair by a technician and I really really had to have a notebook for the coming days and I already had ordered the former, but it wasn&amp;rsquo;t to be delivered for several weeks. That was annoying. The good thing about it is that I normally do not have to carry around anything when going to the office, since I leave one of them in the office most of the time. I&amp;rsquo;m using a 27&amp;rdquo; WQHD monitor when I work. I have used a 32&amp;rdquo; 4k monitor for some time, but I have noticed that I&amp;rsquo;m starting to spend time searching for windows. I don&amp;rsquo;t like curved or widescreens monitors at all (I have tried them). I thought I&amp;rsquo;d never reach the point when I would reduce the available screen size voluntarily, but here I am.&lt;/p&gt;
 &lt;p&gt;I also have a desktop machine at home, but I mostly use it for gaming, and only a little development on the side. It has a 11th gen i7, 32 GB ram and a GeForce RTX 30 series graphics card.&lt;/p&gt;
 &lt;p&gt;This also means that I&amp;rsquo;m switching computers all the time, and basically everything has to be synced to the cloud all the time. I&amp;rsquo;m using git since the spring of 2006 and push everything all the time anyway. And when I&amp;rsquo;m not, I&amp;rsquo;m mostly using web-based software. This means that I mostly don&amp;rsquo;t care about backing up my data, I let the cloud companies and the NSA do it.&lt;/p&gt;
-&lt;h2&gt;Software&lt;/h2&gt;
+&lt;h2 id="software"&gt;&lt;a class="toclink" href="#software"&gt;Software&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;After many years on macOS and a few years on Windows with WSL I am back to using Linux without a VM. I am using Fedora because I actually like the unmodified GNOME 3, and because I prefer flatpaks to snaps. RPM/DNF are alright, but I&amp;rsquo;m still more accustomed to DEB/APT.&lt;/p&gt;
 &lt;p&gt;I have left macOS because of the touch bar and the terrible keyboard, and Windows because I don&amp;rsquo;t want ads everywhere on &lt;em&gt;my&lt;/em&gt; computer.&lt;/p&gt;
-&lt;h2&gt;Development&lt;/h2&gt;
+&lt;h2 id="development"&gt;&lt;a class="toclink" href="#development"&gt;Development&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I use a terminal emulator (gnome-terminal on Linux, &lt;a href="https://alacritty.org/"&gt;alacritty&lt;/a&gt; on Windows/WSL) to run &lt;a href="https://github.com/tmux/tmux/"&gt;tmux&lt;/a&gt;, and start everything I need directly in there.&lt;/p&gt;
 &lt;p&gt;I have tried escaping vim many times but have always failed. (No, not &lt;em&gt;exiting&lt;/em&gt; vim, thanks for your help.) The various VIM modes in popular editors such as VisualStudio Code just do not cut it. I&amp;rsquo;m currently editing code in &lt;a href="https://neovim.io/"&gt;neovim&lt;/a&gt; with a few plugins. The only really important plugin is &lt;a href="https://github.com/ctrlpvim/ctrlp.vim"&gt;ctrlp.vim&lt;/a&gt;. Ctrl-P with fuzzy matching is a great way to open files. I like vi, and I tell people that I use it when I&amp;rsquo;m asked but I do not suggest to people that they should use it as well. The learning curve isn&amp;rsquo;t worth it except maybe if you do a lot of system administration, I don&amp;rsquo;t know.&lt;/p&gt;
 &lt;p&gt;I have a VisualStudio Code installation laying around for using Live Share. I think it&amp;rsquo;s a great way for helping others solve a particular problem in a project they are working on, much better than screen sharing and probably even better than sitting at a table together, just because having two keyboards and cursors is so nice.&lt;/p&gt;
 &lt;p&gt;I mostly only use virtualenvs created using &lt;code&gt;python3 -m venv venv&lt;/code&gt; for local development, no containers or anything. I definitely see the value of containers for deployment but I haven&amp;rsquo;t yet gotten around to setting things up for local development. This means that my machine always (also) runs a PostgreSQL and a redis server and maybe some other tools. Python 3 upgrades are mostly painless. NodeJS upgrades have sometimes been painful, but I avoid most of the pain by upgrading relatively late.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 07)&lt;/h1&gt;&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.23&lt;/a&gt;: Only small changes, mainly updated the package for current Django and Python versions.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.4.6&lt;/a&gt;: A minor change: Swallow exceptions which happen during startup when clobbering the scripts data fails. As an aside: I find it funny that I have discovered the &lt;code&gt;.f3cc&lt;/code&gt; class in some cookie banner blocklists. It feels good to be recognized even if this maybe isn&amp;rsquo;t the nicest way, but it works for me since I actually do not like cookie banners either. At least feincms3-cookiecontrol doesn&amp;rsquo;t inject anything without users&amp;rsquo; consent, and doesn&amp;rsquo;t require a third party service to run.&lt;/li&gt;
@@ -596,25 +596,25 @@ pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>My 2024 Deve
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.11&lt;/a&gt;: Fixed a crash which happened when not providing the optional (!) configuration. Shit happens. I should really have a test suite for this package.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5.2&lt;/a&gt;: Disables the CKEditor version check.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.4&lt;/a&gt;: The first release since December 2022! Very stable software. The editor now restores the collapsed state of inlines and the scroll position when using &amp;ldquo;Save and continue editing&amp;rdquo;. This is especially useful if editing an object with many content blocks.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>django-ckeditor</title><link href="https://406.ch/writing/django-ckeditor/" rel="alternate" /><id>https://406.ch/writing/django-ckeditor/</id><published>2024-02-14T12:00:00Z</published><updated>2024-02-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-ckeditor&lt;/h1&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-ckeditor</title><link href="https://406.ch/writing/django-ckeditor/" rel="alternate" /><id>https://406.ch/writing/django-ckeditor/</id><published>2024-02-14T12:00:00Z</published><updated>2024-02-14T12:00:00Z</updated><summary type="html">&lt;h1&gt;django-ckeditor&lt;/h1&gt;&lt;h1 id="django-ckeditor"&gt;&lt;a class="toclink" href="#django-ckeditor"&gt;django-ckeditor&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;It has finally happened. The open source version of CKEditor 4 does not contain fixes for known problems, see &lt;a href="https://ckeditor.com/cke4/release/CKEditor-4.24.0-LTS"&gt;the CKEditor 4.24.0 LTS announcement&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I totally get why the CKEditor developers did this and can only thank them for all the work that went into the editor.&lt;/p&gt;
 &lt;p&gt;I wish I didn&amp;rsquo;t have to do the migration work to move basically everything to a different editor. The CKEditor 4 LTS version is only expected to be supported until the end of 2026 and I have a few projects which will be around far longer than this (or at least I hope so). Therefore, buying the LTS package would only delay the inevitable. CKEditor 5 is a completely different editor and uses the GPL license, so that&amp;rsquo;s not really an option either. TinyMCE is well known and I have been using it much earlier in my career, but reimplementing plugins isn&amp;rsquo;t fun to do.&lt;/p&gt;
 &lt;p&gt;I would prefer moving everything to ProseMirror or some other structured editor, but we have so much legacy content contained in HTML blobs which do not use any schema at all that this isn&amp;rsquo;t workable unfortunately.&lt;/p&gt;
 &lt;p&gt;Stay tuned for updates &amp;ndash; they will come since I unfortunately cannot just ignore this problem.&lt;/p&gt;
 &lt;p&gt;Which brings me to &lt;a href="https://github.com/django-ckeditor/django-ckeditor"&gt;django-ckeditor&lt;/a&gt;. CKEditor shows a very annoying popup to users when it detects a newer version with security fixes, see &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/761"&gt;the GitHub issue&lt;/a&gt;. It&amp;rsquo;s not a bad idea but users cannot do much about it, so I opted to disable the version check (and warning) in django-ckeditor and replaced it with a Django system check which annoys developers instead.&lt;/p&gt;
-&lt;p&gt;The release containing these changes is available as &lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.1&lt;/a&gt; on PyPI.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 03)</title><link href="https://406.ch/writing/weeknotes-2024-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-03/</id><published>2024-01-17T12:00:00Z</published><updated>2024-01-17T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 03)&lt;/h1&gt;&lt;h2&gt;Djangonaut Space&lt;/h2&gt;
+&lt;p&gt;The release containing these changes is available as &lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.1&lt;/a&gt; on PyPI.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 03)</title><link href="https://406.ch/writing/weeknotes-2024-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-03/</id><published>2024-01-17T12:00:00Z</published><updated>2024-01-17T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 03)&lt;/h1&gt;&lt;h2 id="djangonaut-space"&gt;&lt;a class="toclink" href="#djangonaut-space"&gt;Djangonaut Space&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I wish all participants a good time and much success. I do not have anything to do with it really but I enjoy the idea a lot and maybe there will be a pull request or two to review.&lt;/p&gt;
-&lt;h2&gt;Kubernetes&lt;/h2&gt;
+&lt;h2 id="kubernetes"&gt;&lt;a class="toclink" href="#kubernetes"&gt;Kubernetes&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;After years and years of hosting all sites on VPS I have finally reached the point where the old setup is more annoying to work with than switching to a new one. I have searched long for a solution which wasn&amp;rsquo;t as limited as some PaaS and as complex as going full Kubernetes, and where I can still delegate the responsibility of actually keeping things up and running to other people. In the end I have now accepted that such a thing doesn&amp;rsquo;t exist; either you have the limitations of a ready made solution, the limitation of having to open many many support tickets or the problem of having to learn Kubernetes (or something similar) with its extremely steep learning curve.&lt;/p&gt;
 &lt;p&gt;After spending days with it I&amp;rsquo;m slowly getting to the point where setting up local development environments and deploying changes is fun again. I&amp;rsquo;m using the GitOps paradigm; while I&amp;rsquo;m still building and uploading Docker (podman) images from the local development environment everything else is automated and goes through a Git based process. That&amp;rsquo;s much nicer than clicking around in some interface or copy pasting obscure commands into the console.&lt;/p&gt;
 &lt;p&gt;The biggest problem I encountered was (perhaps unsurprisingly) managing secrets as a team. It seems to me that while &lt;a href="https://github.com/bitnami-labs/sealed-secrets/"&gt;sealed secrets&lt;/a&gt; work great as an individual developer they don&amp;rsquo;t really offer straightforward solutions to avoid different people overwriting and resetting each others secrets when updating them. I&amp;rsquo;m a happy user of the external secrets operator and using some cloud service to actually store those secrets.&lt;/p&gt;
 &lt;p&gt;I have started using &lt;a href="https://github.com/emmett-framework/granian/"&gt;granian&lt;/a&gt; in production. I like the idea of a Rust-based ASGI/WSGI server. Nothing mission critical yet. My idea is to build confidence in the software stack.&lt;/p&gt;
-&lt;h2&gt;Compulsory social measures&lt;/h2&gt;
+&lt;h2 id="compulsory-social-measures"&gt;&lt;a class="toclink" href="#compulsory-social-measures"&gt;Compulsory social measures&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The more I learn about how Switzerland treats its citizens the more I wonder about the ways in which humans can mistreat other humans in a so called civilized and peaceful society.&lt;/p&gt;
 &lt;p&gt;It&amp;rsquo;s not exactly a new topic for me, but working on platforms which help remember and which help introducing people to the history certainly causes a heightened awareness for issues such as these.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.bj.admin.ch/bj/en/home/gesellschaft/fszm.html"&gt;More on this&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20.2&lt;/a&gt;: It
   previously wasn&amp;rsquo;t possible to filter the list of sites to only show those
@@ -622,28 +622,28 @@ pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>My 2024 Deve
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.10&lt;/a&gt;: It&amp;rsquo;s now actually possible to use the JSON editor outside inlines! That was a fun bug&amp;hellip; not. Apart from the mentioned bug this new release mostly contains fixes to the styles. We&amp;rsquo;re slowly getting there.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.16&lt;/a&gt;: I didn&amp;rsquo;t do anything except for the changelog and the release. That&amp;rsquo;s alright. The release contains a few minor fixes.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 01)</title><link href="https://406.ch/writing/weeknotes-2024-week-01/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-01/</id><published>2024-01-03T12:00:00Z</published><updated>2024-01-03T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2024 week 01)&lt;/h1&gt;&lt;p&gt;First weeknotes post for 2024! Happy new year!&lt;/p&gt;
-&lt;h2&gt;Looking back on 2023&lt;/h2&gt;
-&lt;h3&gt;Writing&lt;/h3&gt;
+&lt;h2 id="looking-back-on-2023"&gt;&lt;a class="toclink" href="#looking-back-on-2023"&gt;Looking back on 2023&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="writing"&gt;&lt;a class="toclink" href="#writing"&gt;Writing&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I have published almost 40 posts last year. That&amp;rsquo;s almost as many posts as I published in the time period from 2014 to 2023. &lt;a href="https://jacobian.org/2021/mar/9/coworking-to-write-more/"&gt;Coworking to write more&lt;/a&gt; does work.&lt;/p&gt;
 &lt;p&gt;I already had a quite active blog from 2005 to 2008 with a few posts after that; everything before 2014 was in german and mainly concerned with green politics and climate change. I&amp;rsquo;m still very interested in these topics but I don&amp;rsquo;t feel as if I have much to add to the conversation, even though it&amp;rsquo;s the more important issue.&lt;/p&gt;
-&lt;h3&gt;Open Source&lt;/h3&gt;
+&lt;h3 id="open-source"&gt;&lt;a class="toclink" href="#open-source"&gt;Open Source&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Not much changed here. I enjoy basically everything I do in open source land, and co-maintaining the Django Debug Toolbar with Tim is a joy.&lt;/p&gt;
 &lt;p&gt;I still wish that some of my projects had more impact in Django land, especially those who augment the Django administration interface to be a lightweight CMS which requires very little maintenance and work in the long run. I think it&amp;rsquo;s great that one of the core components, &lt;a href="https://pypi.org/project/django-content-editor/#history"&gt;django-content-editor&lt;/a&gt;, hasn&amp;rsquo;t required a release in more than one year. It doesn&amp;rsquo;t have to be expanded because it just works. It would be great if there was a good way to &lt;a href="https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/"&gt;distinguish&lt;/a&gt; between software which basically doesn&amp;rsquo;t require any updates and software which is abandoned.&lt;/p&gt;
 &lt;p&gt;The only project which doesn&amp;rsquo;t bring me much joy is django-mptt. Most people accept that there are no guarantees, but some people are just rude in the way in which they expect others to do the work. The first reaction was to return the blow and I&amp;rsquo;m glad that I didn&amp;rsquo;t give in to the temptation to do that. It&amp;rsquo;s basically never worth it to do that in writing.&lt;/p&gt;
-&lt;h3&gt;Family&lt;/h3&gt;
+&lt;h3 id="family"&gt;&lt;a class="toclink" href="#family"&gt;Family&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;We had a good 2023 together and I&amp;rsquo;m very much looking forward to a just as good 2024.&lt;/p&gt;
-&lt;h2&gt;Plans for 2024&lt;/h2&gt;
+&lt;h2 id="plans-for-2024"&gt;&lt;a class="toclink" href="#plans-for-2024"&gt;Plans for 2024&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have bought a ticket for the &lt;a href="https://2024.djangocon.eu/"&gt;DjangoCon Europe 2024&lt;/a&gt; in Spain and I&amp;rsquo;m very much looking forward to that.&lt;/p&gt;
 &lt;p&gt;Maybe we&amp;rsquo;ll visit a music festival again this summer. After listening to a lot of metal music in the last ten or more years I rediscovered the dark side of D&amp;rsquo;n&amp;rsquo;B. Good times.&lt;/p&gt;
-&lt;h2&gt;Advent of Code&lt;/h2&gt;
+&lt;h2 id="advent-of-code"&gt;&lt;a class="toclink" href="#advent-of-code"&gt;Advent of Code&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have finished the Advent of Code with some help from the Subreddit. Almost all of the puzzles were fun to think about. I didn&amp;rsquo;t have fun solving each and everyone of them, especially not the second part of a few of the later days. I feel good checking out solutions from other people in the subreddit, and maybe adding newly gained ideas to my code or even running someone else&amp;rsquo;s code 1:1 on my data after studying the algorithms used and hopefully learning something.&lt;/p&gt;
 &lt;p&gt;I had a good time and enjoyed shutting down the computer after that.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 23.12&lt;/a&gt;: A few minor changes to
   the thumbnailing code. It&amp;rsquo;s always nice to hear from people who are still
   using this project.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 50)</title><link href="https://406.ch/writing/weeknotes-2023-week-50/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-50/</id><published>2023-12-15T12:00:00Z</published><updated>2023-12-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 50)&lt;/h1&gt;&lt;h2&gt;django-imagefield&lt;/h2&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 50)</title><link href="https://406.ch/writing/weeknotes-2023-week-50/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-50/</id><published>2023-12-15T12:00:00Z</published><updated>2023-12-15T12:00:00Z</updated><summary type="html">&lt;h1&gt;Weeknotes (2023 week 50)&lt;/h1&gt;&lt;h2 id="django-imagefield"&gt;&lt;a class="toclink" href="#django-imagefield"&gt;django-imagefield&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The path building scheme used by &lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield&lt;/a&gt; has proven problematic: It&amp;rsquo;s too likely that processed images will have the same path.&lt;/p&gt;
 &lt;p&gt;I have changed the strategy used for generating paths to use more data from the
 source; it&amp;rsquo;s now possible (and recommended!) to set &lt;code&gt;IMAGEFIELD_BIN_DEPTH&lt;/code&gt; to
@@ -651,7 +651,7 @@ a value greater than 1; 2 or 3 should be sufficient. The default value is 1
 which corresponds to the old default so that the change won&amp;rsquo;t be backwards
 incompatible. However, you&amp;rsquo;ll always get a deprecation warning if you don&amp;rsquo;t set
 a bigger value yourself. The default will probably change in the future.&lt;/p&gt;
-&lt;h2&gt;Advent of Code&lt;/h2&gt;
+&lt;h2 id="advent-of-code"&gt;&lt;a class="toclink" href="#advent-of-code"&gt;Advent of Code&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have always felt a bit as an imposter because I do not have any formal CS
 education; not so much in the last few years but certainly earlier in my
 career. I have enjoyed participating in the &lt;a href="https://adventofcode.com/"&gt;Advent of Code
@@ -660,18 +660,18 @@ when to use and how to use a few algorithms I didn&amp;rsquo;t even know before.
 again working through the puzzles in my own pace and have managed to solve
 almost all of them up to today this year. There still are some puzzles where I
 don&amp;rsquo;t even know how to start the second part 😅.&lt;/p&gt;
-&lt;h2&gt;Hosting&lt;/h2&gt;
+&lt;h2 id="hosting"&gt;&lt;a class="toclink" href="#hosting"&gt;Hosting&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We&amp;rsquo;re still hosting most sites on virtualized servers, without any containers
 or any of the new stuff. I&amp;rsquo;m finally reaching the point where the downsides of
 this approach start to drag new projects down and the workarounds start looking
 worse than maybe switching to containers or even Kubernetes. Wish me luck, I&amp;rsquo;m
 more confused than I&amp;rsquo;ve been in years.&lt;/p&gt;
-&lt;h2&gt;Health&lt;/h2&gt;
+&lt;h2 id="health"&gt;&lt;a class="toclink" href="#health"&gt;Health&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;To absolutely nobody&amp;rsquo;s surprise the family and myself have continued to be sick
 in the last two weeks. Nothing really bad happened, so we&amp;rsquo;re still lucky.&lt;/p&gt;
 &lt;p&gt;There&amp;rsquo;s unfortunately no way to solve a societal problem individually, so that
 will probably continue to be our life for now.&lt;/p&gt;
-&lt;h2&gt;Releases&lt;/h2&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.18&lt;/a&gt;: See
   above.&lt;/li&gt;
@@ -701,7 +701,7 @@ from a client&amp;rsquo;s project and released it as open source. It isn&amp;rsq
 &lt;p&gt;Within the first few days of having released the package it has already proven
 useful in several other projects. A pleasant (but not totally unexpected)
 surprise.&lt;/p&gt;
-&lt;h2&gt;Links:&lt;/h2&gt;
+&lt;h2 id="links"&gt;&lt;a class="toclink" href="#links"&gt;Links:&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;PyPI&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
