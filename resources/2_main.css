@@ -188,7 +188,7 @@ footer {
 
 header a,
 footer a,
-main .text a {
+main .text a:not(.toclink) {
   text-decoration: underline;
   color: #0c7575;
 }
@@ -215,7 +215,7 @@ main .text a {
 
   header a,
   footer a,
-  main .text a {
+  main .text a:not(.toclink) {
     color: #14b7b7;
   }
 

@@ -14,7 +14,7 @@ from xml.etree.ElementTree import Element, SubElement as SE, tostring as _ts
 from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
 from markdown import markdown
-from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions import codehilite, toc
 from minify_html import minify
 from rcssmin import cssmin
 
@@ -22,8 +22,9 @@ from rcssmin import cssmin
 DIR = Path(__file__).parent
 URL = "https://406.ch"
 TITLE = "Matthias Kestenholz"
-c = CodeHiliteExtension(linenums=False, css_class="chl")
-md_exts = ["smarty", "footnotes", "admonition", c]
+c = codehilite.CodeHiliteExtension(linenums=False, css_class="chl")
+t = toc.TocExtension(anchorlink=True)
+md_exts = ["smarty", "footnotes", "admonition", c, t]
 tostring = lambda el: _ts(el, encoding="utf-8", xml_declaration=True).decode("utf-8")
 
 
