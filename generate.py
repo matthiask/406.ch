@@ -69,9 +69,9 @@ def load_posts(dirs):
             props["date"] = post_date(md, props)
             props["slug"] = props.get("slug") or slugify(props["title"])
             props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
+            if "\n# " not in content and not content.startswith("# "):
+                content = f"# {props['title']}\n\n{content}"
             body = markdown(content, extensions=md_exts)
-            if "</h1>" not in body:
-                body = markdown(f"# {props['title']}", extensions=["smarty"]) + body
             props["excerpt"] = create_excerpt(body)
             c_titles = sorted(c for c in re.split(r",\s*", props["categories"]) if c)
             props["categories"] = [Category(slug=slugify(c), title=c) for c in c_titles]
