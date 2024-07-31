@@ -3,6 +3,12 @@ Categories: Django, Programming, Weeknotes
 Draft: remove-this-to-publish
 
 I have missed almost two months of weeknotes. I've got some catching up to do.
+I have tried writing a larger piece on my thoughts about CMS, but with
+everything going on in my personal and work life I haven't made much progress.
+
+This weeknotes entry is me trying to get back into the groove of writing (and
+publishing!) regularly.
+
 
 ## [django-prose-editor](https://github.com/matthiask/django-prose-editor/)
 
@@ -17,7 +23,22 @@ has become more well known and the project has even received a contribution by
 someone else. It's always a lovely moment when this happens.
 
 
+## [django-json-schema-editor](https://github.com/matthiask/django-json-schema-editor)
+
+![A screenshot of the JSON editor including the prose editor](https://406.ch/assets/20240731-json-editor.png)
+Still alpha. Updated the vendorized JSON editor and fixed the integration into
+Django to not throw errors with the newer version. Foreign key fields now
+support describing the referenced value similar to the raw ID fields
+functionality. Added optional support for using ``"format": "prose"`` to use
+the django-prose-editor to edit individual fields. JSON plugins for the content
+editor are now downcasted into their proxy models automatically. This is
+especially useful with the feincms3 changes mentioned above. (You do not have
+to use either django-content-editor or feincms3 to use this package!)
+
+
 ## [Traduire](https://github.com/matthiask/traduire)
+
+![A screenshot of the Traduire interface](https://406.ch/assets/20240731-traduire.png)
 
 Traduire (french for «translate») is a web-based platform for editing gettext
 translations.
@@ -85,4 +106,6 @@ etc. work just as well.
   because the folder dropdown slowed down the page a lot when used on a site
   with many folders. Using the raw ID fields popup isn't that bad.
 - [django-prose-editor 0.6.2](https://pypi.org/project/django-prose-editor/):
+  See above.
+- [django-json-schema-editor 0.0.28](https://pypi.org/project/django-json-schema-editor/):
   See above.
