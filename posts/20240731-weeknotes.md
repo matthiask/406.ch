@@ -1,6 +1,5 @@
 Title: Weeknotes (2024 week 31)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 I have missed almost two months of weeknotes. I've got some catching up to do.
 I have tried writing a larger piece on my thoughts about CMS, but with
@@ -25,20 +24,23 @@ someone else. It's always a lovely moment when this happens.
 
 ## [django-json-schema-editor](https://github.com/matthiask/django-json-schema-editor)
 
-![A screenshot of the JSON editor including the prose editor](https://406.ch/assets/20240731-json-editor.png)
 Still alpha. Updated the vendorized JSON editor and fixed the integration into
-Django to not throw errors with the newer version. Foreign key fields now
-support describing the referenced value similar to the raw ID fields
-functionality. Added optional support for using ``"format": "prose"`` to use
-the django-prose-editor to edit individual fields. JSON plugins for the content
-editor are now downcasted into their proxy models automatically. This is
-especially useful with the feincms3 changes mentioned above. (You do not have
-to use either django-content-editor or feincms3 to use this package!)
+Django to not throw errors with the newer version.
 
+Foreign key fields now support describing the referenced value similar to the
+raw ID fields functionality. Added optional support for using ``"format":
+"prose"`` to use the django-prose-editor to edit individual fields. JSON
+plugins for the content editor are now downcasted into their proxy models
+automatically. This is especially useful with the feincms3 changes mentioned
+below. (You do not have to use either django-content-editor or feincms3 to use
+this package!)
+
+The following screenshot shows the prose editor integration; the mentioned
+foreign key field description isn't visible yet here.
+
+![A screenshot of the JSON editor including the prose editor](https://406.ch/assets/20240731-json-editor.png)
 
 ## [Traduire](https://github.com/matthiask/traduire)
-
-![A screenshot of the Traduire interface](https://406.ch/assets/20240731-traduire.png)
 
 Traduire (french for «translate») is a web-based platform for editing gettext
 translations.
@@ -52,6 +54,8 @@ Traduire profits from the great work done on
 using Rosetta if it would work when used with a container orchestator such as
 Kubernetes. Since all application storage is ephemeral that doesn't work,
 translation editing and deployment have to be separated.
+
+![A screenshot of the Traduire interface](https://406.ch/assets/20240731-traduire.png)
 
 It is built using Django and relies on [polib](https://pypi.org/project/polib/)
 to do the heavy lifting.
