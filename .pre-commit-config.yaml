@@ -1,7 +1,7 @@
 exclude: ".yarn/|yarn.lock|codehilite"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-added-large-files
       - id: check-builtin-literals
@@ -18,7 +18,7 @@ repos:
     hooks:
       - id: absolufy-imports
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.3.2"
+    rev: "v0.5.5"
     hooks:
       - id: ruff
       - id: ruff-format
