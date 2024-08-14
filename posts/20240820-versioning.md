@@ -1,6 +1,5 @@
 Title: How I handle versioning
 Categories: Django, Programming
-Draft: remove-this-to-publish
 
 I have been reading up on versioning methods a bit, and I noticed that I never
 shared my a bit unorthodox versioning method. I previously wrote about my [rules for releasing open source software](https://406.ch/writing/my-rules-for-releasing-open-source-software/) but skipped everything related to versioning.
