@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-07-31T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 31)</title><link href="https://406.ch/writing/weeknotes-2024-week-31/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-31/</id><published>2024-07-31T12:00:00Z</published><updated>2024-07-31T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-31"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-31"&gt;Weeknotes (2024 week 31)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-08-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 33)</title><link href="https://406.ch/writing/weeknotes-2024-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-33/</id><published>2024-08-14T12:00:00Z</published><updated>2024-08-14T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-33"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-33"&gt;Weeknotes (2024 week 33)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="partying"&gt;&lt;a class="toclink" href="#partying"&gt;Partying&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s summer, it&amp;rsquo;s hot, and it&amp;rsquo;s dance week. &lt;a href="https://lethargy.ch/"&gt;Lethargy&lt;/a&gt; is over, &lt;a href="https://www.junglestreetgroove.ch/"&gt;Jungle Street Groove&lt;/a&gt; is coming up. Good times.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.1&lt;/a&gt;: I have finally left the alpha versioning. I&amp;rsquo;m still not committing to backwards compatibility, but I have started writing a CHANGELOG.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.7.1&lt;/a&gt;: Thanks to Carlton&amp;rsquo;s pull request I have finally cleaned up the CSS somewhat and made overriding the styles more agreeable when using the editor outside the Django administration. The confusing active state of menubar buttons has also been rectified. &lt;a href="https://django-prose-editor.readthedocs.io/"&gt;Docs are now available on Read the Docs.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.19&lt;/a&gt;: django-imagefield can now be used with proxy models. Previously, thumbnails weren&amp;rsquo;t generated or deleted when saving proxy models because the signal handlers would only be called if the &lt;code&gt;sender&lt;/code&gt; matches exactly. I have already debugged this before, but have forgotten about it again. The ticket is really old for this, and fixing it isn&amp;rsquo;t easy since it&amp;rsquo;s unclear what should happen (&lt;a href="https://code.djangoproject.com/ticket/9318"&gt;#9318&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_canonical_domain/"&gt;django-canonical-domain 0.11&lt;/a&gt;: django-canonical-domain has gained support for excluding additional domains from the canonical domain redirect. django-canonical-domain is used to redirect users to HTTPS (optionally) and to a particular canonical domain (as the name says). But sometimes you have auxiliary domains, e.g. for an API service, which shouldn&amp;rsquo;t be redirected. The package can now be used in these scenarios as well.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.8.2&lt;/a&gt;: The venerable FeinCMS, now more than 15 years old. The thumbnailing support had a bug where it tried saving JPEGs using RGBA (which obviously doesn&amp;rsquo;t work). This has been fixed.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 31)</title><link href="https://406.ch/writing/weeknotes-2024-week-31/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-31/</id><published>2024-07-31T12:00:00Z</published><updated>2024-07-31T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-31"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-31"&gt;Weeknotes (2024 week 31)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have missed almost two months of weeknotes. I&amp;rsquo;ve got some catching up to do.
 I have tried writing a larger piece on my thoughts about CMS, but with
 everything going on in my personal and work life I haven&amp;rsquo;t made much progress.&lt;/p&gt;
@@ -604,49 +614,4 @@ justify &lt;a href="https://406.ch/writing/serving-zip-files-using-django/"&gt;i
   tried finding other ways in the past but now that old compatibility code can
   be removed by a single run of &lt;code&gt;django-upgrade&lt;/code&gt; (respectively
   &lt;code&gt;pre-commit&lt;/code&gt;) there really is no point to doing it in a different way.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 28)</title><link href="https://406.ch/writing/weeknotes-2023-week-28/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-28/</id><published>2023-07-12T12:00:00Z</published><updated>2023-07-12T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-28"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-28"&gt;Weeknotes (2023 week 28)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.2&lt;/a&gt;: Made the
-  sanitizer&amp;rsquo;s configuration initialization more strict. Strings cannot be used
-  anymore in places where the sanitizer expects a set (resp. any iterable).
-  It&amp;rsquo;s useful that strings are iterable in Python and I wouldn&amp;rsquo;t want to change
-  that, but the fact that &lt;code&gt;("class")&lt;/code&gt; is a string and not a tuple makes me sad.
-  The fact that tuples are created by &lt;code&gt;,&lt;/code&gt; and not by &lt;code&gt;()&lt;/code&gt; will always trip up
-  people.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites
-  0.1&lt;/a&gt;: The version number
-  is wrong but whatever. I&amp;rsquo;m certainly happy with the state of things. The big
-  change in 0.1 is that &lt;code&gt;Page.get_absolute_url&lt;/code&gt; no longer generates
-  protocol-relative URLs. Depending on the value of &lt;code&gt;SECURE_SSL_REDIRECT&lt;/code&gt; it
-  automatically prepends either &lt;code&gt;http:&lt;/code&gt; or &lt;code&gt;https:&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.15&lt;/a&gt;:
-  django-authlib&amp;rsquo;s admin Single Sign On module now supports a hook to
-  automatically create staff users when a matching user doesn&amp;rsquo;t exist already.
-  I don&amp;rsquo;t plan to use this functionality myself and I have recommended people
-  to implement the functionality themselves using the tools in django-authlib
-  if they need it, but the change was so small and well-contained that adding
-  it to the core made sense to me.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="pipx-inject"&gt;&lt;a class="toclink" href="#pipx-inject"&gt;pipx inject&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We learned that &lt;a href="https://pypa.github.io/pipx/"&gt;pipx&lt;/a&gt; seems to remember injected
-packages even across &lt;code&gt;pipx reinstall&lt;/code&gt; invocations. Not too surprising now that
-we know it, but we certainly spent some time scratching our heads. &lt;code&gt;pipx
-uninject&lt;/code&gt; was the thing we needed to stop pipx from installing an old version
-of a dependency instead of the one being specified in &lt;code&gt;pyproject.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id="hatchling-and-data-files"&gt;&lt;a class="toclink" href="#hatchling-and-data-files"&gt;hatchling and data files&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m very confused by the way &lt;a href="https://hatch.pypa.io/"&gt;hatchling&lt;/a&gt; sometimes
-includes data files and sometimes it doesn&amp;rsquo;t. I had to add &lt;code&gt;[tool.hatch.build]
-include=["authlib/"]&lt;/code&gt; to &lt;a href="https://github.com/matthiask/django-authlib/commit/67d4673e4039eac277b5d2557c0736c1f01442ac"&gt;django-authlib&amp;rsquo;s &lt;code&gt;pyproject.toml&lt;/code&gt;
-file&lt;/a&gt;
-to make it include HTML files from subpackages. Maybe the subpackages are the
-reason, but I&amp;rsquo;m not sure.&lt;/p&gt;
-&lt;h2 id="payment-providers-that-must-not-be-named"&gt;&lt;a class="toclink" href="#payment-providers-that-must-not-be-named"&gt;Payment providers that must not be named&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have spent hours and hours battling with the badly documented, incomplete,
-inconsistent and confusing API of a (not that well known) payment provider
-based in Switzerland. I&amp;rsquo;m surprised that this still happens years and years
-after Stripe started offering a really well thought out and documented API
-geared towards programmers. It&amp;rsquo;s really sad because when the same structure is
-named with differing naming conventions (e.g. &lt;code&gt;snake_case&lt;/code&gt; vs. &lt;code&gt;camelCase&lt;/code&gt;) in
-different parts of the API you just know that somebody spent too much time
-writing too much code instead of reusing already existing functionality.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
