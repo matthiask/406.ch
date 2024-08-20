@@ -1,5 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-08-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 33)</title><link href="https://406.ch/writing/weeknotes-2024-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-33/</id><published>2024-08-14T12:00:00Z</published><updated>2024-08-14T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-33"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-33"&gt;Weeknotes (2024 week 33)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-08-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>How I handle versioning</title><link href="https://406.ch/writing/how-i-handle-versioning/" rel="alternate" /><id>https://406.ch/writing/how-i-handle-versioning/</id><published>2024-08-20T12:00:00Z</published><updated>2024-08-20T12:00:00Z</updated><summary type="html">&lt;h1 id="how-i-handle-versioning"&gt;&lt;a class="toclink" href="#how-i-handle-versioning"&gt;How I handle versioning&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have been reading up on versioning methods a bit, and I noticed that I never
+shared my a bit unorthodox versioning method. I previously wrote about my &lt;a href="https://406.ch/writing/my-rules-for-releasing-open-source-software/"&gt;rules for releasing open source software&lt;/a&gt; but skipped everything related to versioning.&lt;/p&gt;
+&lt;p&gt;I use something close to the ideas of &lt;a href="https://semver.org/"&gt;semantic versioning&lt;/a&gt; but it&amp;rsquo;s not quite that. Note that the versioning scheme has nothing to do with production readiness, it&amp;rsquo;s more about communicating the state of the project.&lt;/p&gt;
+&lt;h2 id="00x-everything-breaks"&gt;&lt;a class="toclink" href="#00x-everything-breaks"&gt;0.0.x &amp;ndash; Everything breaks&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I don&amp;rsquo;t trust my choices a lot. Everything may radically change, and I may also abandon the project with no hard feelings.&lt;/p&gt;
+&lt;h2 id="010-changelogging"&gt;&lt;a class="toclink" href="#010-changelogging"&gt;0.1.0 &amp;ndash; Changelogging&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I generally start writing release notes or rather a &lt;a href="https://en.wikipedia.org/wiki/Changelog"&gt;Changelog&lt;/a&gt;, since writing full release notes is much more work. You absolutely have to test the software and I do not guarantee anything related to backwards compatibility &amp;ndash; just that you&amp;rsquo;ll know about breaking changes when you read the CHANGELOG.&lt;/p&gt;
+&lt;h2 id="x-bugfixes-and-pure-additions"&gt;&lt;a class="toclink" href="#x-bugfixes-and-pure-additions"&gt;?.?.x &amp;ndash; Bugfixes and pure additions&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Strictly speaking, patch version increments are only for bugfixes. However, when I add new features which are purely additional to the package or if there&amp;rsquo;s no way (famous last words) that anything will break, I&amp;rsquo;ll upload a patch release.&lt;/p&gt;
+&lt;p&gt;Sometimes it might be better to increment the minor version, yes. But, being very lazy, I sometimes only want to add a line to the CHANGELOG instead of adding a new heading for the new release. Also, if I don&amp;rsquo;t quickly release new additions there&amp;rsquo;s a real danger that I&amp;rsquo;ll only come back to the project weeks or months later, and I don&amp;rsquo;t want anyone (myself included) waiting on these updates. Also, if I inadvertently introduced new bugs it&amp;rsquo;s better to fix them quickly instead of forgetting about it first and having to rediscover the buggy code later.&lt;/p&gt;
+&lt;h2 id="100-im-happy"&gt;&lt;a class="toclink" href="#100-im-happy"&gt;1.0.0 &amp;ndash; I&amp;rsquo;m happy&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m happy with the package and I commit to start using semver more properly. If I have to (or want to) break backwards compatibility you get a migration path, especially if I need it myself. Which is often the case since I&amp;rsquo;m maintaining dozens of Django-based websites and webapps, and I&amp;rsquo;m always &lt;a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food"&gt;dogfooding&lt;/a&gt; my stuff.&lt;/p&gt;
+&lt;p&gt;The pure additions case from the last section still applies, since slapping a 1.0 version on something doesn&amp;rsquo;t suddenly make me less lazy.&lt;/p&gt;
+&lt;h2 id="outliers"&gt;&lt;a class="toclink" href="#outliers"&gt;Outliers&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/feincms/feincms"&gt;FeinCMS&lt;/a&gt; uses a variant of &lt;a href="https://calver.org/"&gt;calendar versioning&lt;/a&gt;; the version at the time of writing is 24.8.2 which means the second release in August 2024.&lt;/p&gt;
+&lt;p&gt;There are probably other outliers I forgot about.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 33)</title><link href="https://406.ch/writing/weeknotes-2024-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-33/</id><published>2024-08-14T12:00:00Z</published><updated>2024-08-14T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-33"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-33"&gt;Weeknotes (2024 week 33)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="partying"&gt;&lt;a class="toclink" href="#partying"&gt;Partying&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;It&amp;rsquo;s summer, it&amp;rsquo;s hot, and it&amp;rsquo;s dance week. &lt;a href="https://lethargy.ch/"&gt;Lethargy&lt;/a&gt; is over, &lt;a href="https://www.junglestreetgroove.ch/"&gt;Jungle Street Groove&lt;/a&gt; is coming up. Good times.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
@@ -766,27 +782,4 @@ will probably continue to be our life for now.&lt;/p&gt;
   match. I actually like &lt;code&gt;django-js-asset&lt;/code&gt;&amp;rsquo;s Python module to be &lt;code&gt;js_asset&lt;/code&gt;
   but I&amp;rsquo;m beginning to rethink this decision.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.4&lt;/a&gt;: See &lt;a href="https://406.ch/writing/django-json-schema-editor/"&gt;the post from this week&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>django-json-schema-editor</title><link href="https://406.ch/writing/django-json-schema-editor/" rel="alternate" /><id>https://406.ch/writing/django-json-schema-editor/</id><published>2023-12-13T12:00:00Z</published><updated>2023-12-13T12:00:00Z</updated><summary type="html">&lt;h1 id="django-json-schema-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor"&gt;django-json-schema-editor&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have extracted a JSON editing component based on
-&lt;a href="https://www.npmjs.com/package/@json-editor/json-editor"&gt;@json-editor/json-editor&lt;/a&gt;
-from a client&amp;rsquo;s project and released it as open source. It isn&amp;rsquo;t the first JSON editing component by far but I like it a lot for the following reasons:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It works really well.&lt;/li&gt;
-&lt;li&gt;It supports editing arrays of objects using a tabular presentation. Tabular
-  isn&amp;rsquo;t always better, but stacked definitely isn&amp;rsquo;t always better as well.&lt;/li&gt;
-&lt;li&gt;The data structure is defined as &lt;a href="https://json-schema.org/"&gt;JSON schema&lt;/a&gt;,the
-  data which is being entered is validated on the server using the
-  &lt;a href="https://pypi.org/project/fastjsonschema/"&gt;fastjsonschema&lt;/a&gt; library. Having a
-  schema and schema-based validation fixes most problems I have with less
-  structured data than when using only Django model fields (without JSON).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Here&amp;rsquo;s a screenshot of the editing component used as a &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; plugin:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="django-json-schema-editor screenshot" src="/assets/20231313-json-schema-editor.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Within the first few days of having released the package it has already proven
-useful in several other projects. A pleasant (but not totally unexpected)
-surprise.&lt;/p&gt;
-&lt;h2 id="links"&gt;&lt;a class="toclink" href="#links"&gt;Links:&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;PyPI&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
