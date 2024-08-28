@@ -1,6 +1,5 @@
 Title: Weeknotes (2024 week 35)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 ## Getting deep into htmx and django-template-partials
 
