@@ -21,7 +21,7 @@ I have been following the development of those CMS more or less closely over the
 
 We're still using [feincms](https://github.com/feincms/feincms/) at [Feinheit](https://feinheit.ch/); or more often [django-content-editor and feincms3](https://406.ch/writing/the-other-future-of-feincms-django-content-editor-and-feincms3/), especially for new projects. Since the development of the feincms 1.x line has slowed down to maintenance mode and the community of feincms3 is really small you might ask why we're still sticking with those tools -- we're certainly asking it ourselves from time to time.
 
-![feincms3 / django-content-editor interface](https://406.ch/media/cabinet/2020/09/django-content-editor.png)
+![feincms3 / django-content-editor interface](https://406.ch/assets/20200917-django-content-editor.webp)
 
 Here's a list of reasons why feincms is still relevant:
 
