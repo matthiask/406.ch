@@ -1,6 +1,5 @@
 Title: Weeknotes (2024 week 37)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 ## django-debug-toolbar alpha with async support!
 
@@ -10,6 +9,13 @@ support to
 [Tim](https://github.com/tim-schilling) has released an alpha which contains
 all of the work up to a few days ago. Test it! Let's find the breakages before
 the final release.
+
+
+## Dropping Python 3.9 from my projects
+
+I have read [Carlton's post about the only green Python release](https://noumenal.es/posts/the-only-green-python/yLw/) and have started dropping Python 3.9 support from many of the packages I maintain. This is such a good point:
+
+> [...] I’m also thinking about it in terms of reducing the number of Python versions we support in CI. It feels like a lot of trees to support 5 full versions of Python for their entire life. 🌳
 
 ## Releases
 
@@ -27,3 +33,8 @@ the final release.
   page moving interface is no longer hidden by an expanded navigation sidebar.
   I almost always turn off the sidebar in my projects so I haven't noticed
   this.
+- [django-prose-editor 0.8.1](https://pypi.org/project/django-prose-editor/):
+  Contains the most recent ProseMirror updates and bugfixes.
+- [django-content-editor
+  7.0.10](https://pypi.org/project/django-content-editor/): Now supports
+  sections. Separate blog post coming up!
