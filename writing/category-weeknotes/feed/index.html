@@ -1,5 +1,39 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-08-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 35)</title><link href="https://406.ch/writing/weeknotes-2024-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-35/</id><published>2024-08-28T12:00:00Z</published><updated>2024-08-28T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-35"&gt;Weeknotes (2024 week 35)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-09-11T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 37)</title><link href="https://406.ch/writing/weeknotes-2024-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-37/</id><published>2024-09-11T12:00:00Z</published><updated>2024-09-11T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-37"&gt;Weeknotes (2024 week 37)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="django-debug-toolbar-alpha-with-async-support"&gt;&lt;a class="toclink" href="#django-debug-toolbar-alpha-with-async-support"&gt;django-debug-toolbar alpha with async support!&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have helped mentoring Aman Pandey who has worked all summer to add async
+support to
+&lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;django-debug-toolbar&lt;/a&gt;.
+&lt;a href="https://github.com/tim-schilling"&gt;Tim&lt;/a&gt; has released an alpha which contains
+all of the work up to a few days ago. Test it! Let&amp;rsquo;s find the breakages before
+the final release.&lt;/p&gt;
+&lt;h2 id="dropping-python-39-from-my-projects"&gt;&lt;a class="toclink" href="#dropping-python-39-from-my-projects"&gt;Dropping Python 3.9 from my projects&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have read &lt;a href="https://noumenal.es/posts/the-only-green-python/yLw/"&gt;Carlton&amp;rsquo;s post about the only green Python release&lt;/a&gt; and have started dropping Python 3.9 support from many of the packages I maintain. This is such a good point:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[&amp;hellip;] I’m also thinking about it in terms of reducing the number of Python versions we support in CI. It feels like a lot of trees to support 5 full versions of Python for their entire life. 🌳&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/5.0.0a0/"&gt;django-debug-toolbar 5.0.0a0&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.26.2&lt;/a&gt;: The values
+  of choice fields are now returned as-is when sending mails or exporting form
+  submissions instead of only returning the slugified version.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.17.1&lt;/a&gt;: The
+  &lt;a href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/"&gt;role-based permissions
+  backend&lt;/a&gt;
+  had a bug where it wouldn&amp;rsquo;t return all available permissions in all
+  circumstances, leading to empty navigation sidebars in the Django
+  administration. This has been fixed.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.2.3&lt;/a&gt;: Bugfix release, the
+  page moving interface is no longer hidden by an expanded navigation sidebar.
+  I almost always turn off the sidebar in my projects so I haven&amp;rsquo;t noticed
+  this.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.8.1&lt;/a&gt;:
+  Contains the most recent ProseMirror updates and bugfixes.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor
+  7.0.10&lt;/a&gt;: Now supports
+  sections. Separate blog post coming up!&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 35)</title><link href="https://406.ch/writing/weeknotes-2024-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-35/</id><published>2024-08-28T12:00:00Z</published><updated>2024-08-28T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-35"&gt;Weeknotes (2024 week 35)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="getting-deep-into-htmx-and-django-template-partials"&gt;&lt;a class="toclink" href="#getting-deep-into-htmx-and-django-template-partials"&gt;Getting deep into htmx and django-template-partials&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have been skeptical about &lt;a href="https://htmx.org/"&gt;htmx&lt;/a&gt; for some time because basically everything the library does is straightforward to do myself with a few lines of JavaScript. I am a convert now because, really, adding a few HTML attributes is nicer than copy pasting a few lines of JavaScript. Feels good.&lt;/p&gt;
 &lt;p&gt;The combination of htmx with &lt;a href="https://github.com/carltongibson/django-template-partials/"&gt;django-template-partials&lt;/a&gt; is great as well. I didn&amp;rsquo;t know I had been missing template partials until I started using them. Includes are still useful, but replacing some of them with partials makes working on the project much more enjoyable.&lt;/p&gt;
@@ -601,15 +635,4 @@ repositories into the organization.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.2&lt;/a&gt;: I didn&amp;rsquo;t do much work here again, mostly code reviews, some changes to the ruff configuration and general polishing. I also didn&amp;rsquo;t do the release itself, that was handled by Tim. Thanks!&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 23.8&lt;/a&gt;: Fixes for Pillow 10, and some feincms3 / django-content-editor interoperability improvements which make it easier to reuse plugins/content types.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.1&lt;/a&gt;: Some basic support for using the apps middleware with async Django. Not documented yet and not deployed anywhere but it basically works. Some documentation edits and changes to the inline CKEditor styling because of the recent changes to Django admin&amp;rsquo;s CSS.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 30)</title><link href="https://406.ch/writing/weeknotes-2023-week-30/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-30/</id><published>2023-07-28T12:00:00Z</published><updated>2023-07-28T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes"&gt;&lt;a class="toclink" href="#weeknotes"&gt;Weeknotes&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="async-django"&gt;&lt;a class="toclink" href="#async-django"&gt;Async Django&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have used &lt;a href="https://channels.readthedocs.io/"&gt;Django Channels&lt;/a&gt; successfully in a few projects from 2017 to 2019. A few months back I have worked with &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;. And now I have finally started digging into using Django itself with an ASGI server, and not just for one or two views but also including the middleware stack etc since I also need authentication, not just an endpoint forwarding requests to a remote server. I have looked at &lt;a href="https://github.com/emmett-framework/granian"&gt;Granian&lt;/a&gt;, an RSGI/ASGI server written in Rust. But for now I am using &lt;a href="https://www.uvicorn.org/"&gt;uvicorn&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Django truly has come a long way but there&amp;rsquo;s much left to do. Django 5.0 is looking great already, but 4.2 misses many pieces still. I am really really glad Django wants to stay backwards compatible but I wish I could wave a magic wand and upgrade everything to async. Adding &lt;code&gt;a&lt;/code&gt; prefixes everywhere for the async version is certainly a good compromise and probably the way to go but it&amp;rsquo;s just not that nice.&lt;/p&gt;
-&lt;p&gt;I have been playing around with making &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt;&amp;rsquo;s applications middleware async compatible because I want the full middleware stack to be async. The code is already released but undocumented and not even mentioned in the changelog. So, feel free to play around with it but it&amp;rsquo;s not supposed to be stable or supported yet.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.1&lt;/a&gt;: Switched to hatchling and ruff. Updated the feincms3-sites docs. Some async updates mentioned above. A Django 4.2 admin CSS update for the inline CKEditor.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms 0.4&lt;/a&gt;: Switched to hatchling and ruff. Started defining default icons for the form fields &lt;a href="https://django-content-editor.readthedocs.io/"&gt;content editor&lt;/a&gt; plugins.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7&lt;/a&gt;: I&amp;rsquo;m still maintaining the CKEditor 4 integration for Django even though CKEditor 4 itself isn&amp;rsquo;t supported anymore. Minor updates to the editor itself and Pillow compatibility updates.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.3.2&lt;/a&gt;: The cookie banner doesn&amp;rsquo;t generate an empty &lt;code&gt;&amp;lt;div class="f3cc"&amp;gt;&lt;/code&gt; element anymore if there&amp;rsquo;s nothing to add inside (e.g. if the user only accepted necessary cookies).&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
