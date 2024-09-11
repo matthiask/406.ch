@@ -17,5 +17,98 @@ a screenshot showing the nesting:
 ![django-content-editor with sections](https://406.ch/assets/20240911-content-editor-sections.png)
 
 
+## Simple patterns
+
+I previously already reacted to a blog post by Lincoln Loop here in my post [My reaction to the block-driven CMS blog post](https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/).
+
+The latest blog post, [Solving the Messy Middle: a Simple Block Pattern for Wagtail CMS](https://lincolnloop.com/insights/simple-block-pattern-wagtail-cms/) was interesting as well. It dives into the configuration of a [Wagtail](https://wagtail.org/) stream field which allows composing content out of reusable blocks of content ([sounds familiar!](https://406.ch/writing/i-just-learned-about-wagtail-s-streamfield/)). The result is saved in a JSON blob in the database with all the advantages and disadvantages that entails. Now, django-content-editor is a worthy competitor when you do not want to add another interface to your website besides the user-facing frontend and the Django administration interface.
+
+The example from the Lincoln Loop blog post can be replicated quite closely
+with django-content-editor by using sections. I'm using the
+[django-json-schema-editor](https://pypi.org/project/django-json-schema-editor/)
+package for the section plugin since it easily allows adding more fields if
+some section type needs it:
+
+    :::python
+    # Models
+    from content_editor.models import Region, create_plugin_base
+    from django_json_schema_editor.plugins import JSONPluginBase
+
+    class Page(models.Model):
+        # You have to define regions; each region gets a tab in the admin interface
+        regions = [Region(key="content", title="Content")]
+
+        # Additional fields for the page...
+
+    PagePlugin = create_plugin_base(Page)
+    # I'm omiting the Text and Image plugins here for brevity.
+
+    class Section(JSONPluginBase, PagePlugin):
+        pass
+
+    AccordionSection = Section.proxy(
+        "accordion",
+        schema={"type": "object", {"properties": {"title": {"type": "string"}}}},
+    )
+    CloseSection = Section.proxy(
+        "close",
+        schema={"type": "object", {"properties": {}}},
+    )
 
 
+    # Admin
+    from content_editor.admin import ContentEditor, ContentEditorInline
+    from django_json_schema_editor.plugins import JSONPluginInline
+
+    @admin.register(models.Page)
+    class PageAdmin(ContentEditor):
+        inlines = [
+            ContentEditorInline.create(models.Text),
+            ContentEditorInline.create(models.Image),
+            JSONPluginInline.create(models.AccordionSection, sections=1),
+            JSONPluginInline.create(models.CloseSection, sections=-1),
+        ]
+
+The somewhat cryptic ``sections=`` argument says how many levels of sections
+the individual blocks open or close.
+
+To render the content including accordions I'd probably use a [feincms3
+renderer](https://feincms3.readthedocs.io/en/latest/guides/rendering.html#using-marks):
+
+    :::python
+    from feincms3.renderer import RegionRenderer, render_in_context, template_renderer
+
+    class PageRenderer(RegionRenderer):
+        def handle(self, plugins, context):
+            plugins = deque(plugins)
+            yield from self._handle(plugins, context)
+
+        def _handle(self, plugins, context):
+            while plugins:
+                if isinstance(plugins[0], models.Section):
+                    section = plugins.popleft()
+                    if section.type == "close":
+                        return
+
+                    if section.type == "accordion":
+                        yield render_in_context("accordion.html", {
+                            "title": accordion.data["title"],
+                            "content": self._handle(plugins, context),
+                        })
+
+                else:
+                    yield self.render_plugin(plugin, context)
+
+    renderer = PageRenderer()
+    renderer.register(
+        models.RichText,
+        template_renderer("plugins/richtext.html"),
+    )
+    renderer.register(
+        models.Image,
+        template_renderer("plugins/image.html"),
+    )
+    renderer.register(
+        models.Section,
+        "",  # Load sections but do not show them
+    )
