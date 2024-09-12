@@ -16,6 +16,8 @@ a screenshot showing the nesting:
 
 ![django-content-editor with sections](https://406.ch/assets/20240911-content-editor-sections.png)
 
+The best part about it is that the content editor supports all Django admin widgets, as long as those widgets have support for the Django administration interface's [inline form events](https://docs.djangoproject.com/en/latest/ref/contrib/admin/javascript/)!
+
 
 ## Simple patterns
 
