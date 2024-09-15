@@ -1,3 +1,18 @@
+[project]
+name = "406-ch"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.12.3",
+    "jinja2>=3.1.4",
+    "markdown>=3.7",
+    "minify-html>=0.15.0",
+    "pygments>=2.18.0",
+    "rcssmin>=1.1.2",
+]
+
 [tool.ruff]
 extend-select = ["B", "E", "F", "W", "C90", "I", "UP", "FBT", "C4", "DJ", "PIE", "INT", "SIM", "YTT", "G"]
 extend-ignore = [
