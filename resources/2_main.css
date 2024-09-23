@@ -16,7 +16,9 @@ html {
 }
 
 body {
-  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
   color: #333;
   background: #e6e6e9;
 }
@@ -135,7 +137,7 @@ code {
 }
 
 pre {
-  margin: 2rem 0 2rem 2rem;
+  margin: 2rem 0;
   font-size: 0.8rem;
 }
 
@@ -202,6 +204,9 @@ main .text a:not(.toclink) {
 .chl .err {
   all: inherit;
   overflow-x: scroll;
+  background: #343947;
+  display: grid;
+  padding: 0 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -219,20 +224,10 @@ main .text a:not(.toclink) {
   main .text a:not(.toclink) {
     color: #14b7b7;
   }
-
-  .codehilite {
-    background: #fff;
-    color: #000;
-    padding: 1rem 2rem;
-    margin: 1rem 0;
-
-    pre {
-      margin: 0;
-    }
-  }
 }
 
-sup, sub {
+sup,
+sub {
   font-size: 0.7em;
   line-height: 1;
   padding-left: 2px;
