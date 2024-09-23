@@ -201,6 +201,7 @@ main .text a:not(.toclink) {
 .chl,
 .chl .err {
   all: inherit;
+  overflow-x: scroll;
 }
 
 @media (prefers-color-scheme: dark) {
