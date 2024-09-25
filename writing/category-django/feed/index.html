@@ -1,5 +1,37 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-09-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-content-editor now supports nested sections</title><link href="https://406.ch/writing/django-content-editor-now-supports-nested-sections/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-now-supports-nested-sections/</id><published>2024-09-13T12:00:00Z</published><updated>2024-09-13T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-nested-sections"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-nested-sections"&gt;django-content-editor now supports nested sections&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-09-25T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="css-for-django-forms"&gt;&lt;a class="toclink" href="#css-for-django-forms"&gt;CSS for Django forms&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Not much going on in OSS land. I have been somewhat active in the official
+Django forum, discussing ways to add Python-level hooks to allow adding CSS
+classes around form fields and their labels. The discussion on the
+&lt;a href="https://forum.djangoproject.com/t/proposal-make-it-easy-to-add-css-classes-to-a-boundfield/32022"&gt;forum&lt;/a&gt;
+and on the &lt;a href="https://github.com/django/django/pull/18266"&gt;pull request&lt;/a&gt; goes in
+the direction of allowing using custom &lt;code&gt;BoundField&lt;/code&gt; classes per form or even
+per project (instead of only per field as is already possible today). This
+would allow overriding &lt;code&gt;css_classes&lt;/code&gt;, e.g. to add a simple &lt;code&gt;class="field"&lt;/code&gt;.
+Together with &lt;code&gt;:has()&lt;/code&gt; this would probably allow me to skip using custom HTML
+templates in 99% of all cases.&lt;/p&gt;
+&lt;p&gt;I have also been lurking in the Discord, but more to help and less to promote
+my packages and ideas :-)&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_user_messages/"&gt;django-user-messages 1.1&lt;/a&gt;:
+  Added Django 5.0, 5.1 to the CI, and fixed the migrations to no longer
+  mention &lt;code&gt;index_together&lt;/code&gt; at all. It seems that squashing the migrations
+  wasn&amp;rsquo;t sufficient, I also had to actually delete the old migrations.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.1&lt;/a&gt;:
+  &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;&amp;rsquo;s &lt;code&gt;FileResponse&lt;/code&gt; has gained support
+  for the HTTP Range header, allowing me to remove my homegrown implementation
+  from the package. The blacknoise implementation is now half as long as it was
+  in 1.0.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_fhadmin/"&gt;django-fhadmin 2.3&lt;/a&gt;: No new
+  features, only tweaks to the styling and behavior prompted by updates to
+  Django&amp;rsquo;s admin interface.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.17&lt;/a&gt;: I have
+  pruned the CI matrix and accepted a pull request adding a ru translation. I
+  feel conflicted about that since I strongly believe that everything is
+  political, but I don&amp;rsquo;t know if rejecting translations helps anyone.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-content-editor now supports nested sections</title><link href="https://406.ch/writing/django-content-editor-now-supports-nested-sections/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-now-supports-nested-sections/</id><published>2024-09-13T12:00:00Z</published><updated>2024-09-13T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-nested-sections"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-nested-sections"&gt;django-content-editor now supports nested sections&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; (and
 it&amp;rsquo;s ancestor FeinCMS) has been the Django admin extension for editing content
 consisting of reusable blocks since 2009. In the last years we have more and
@@ -883,11 +915,4 @@ pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.11&lt;/a&gt;: Fixed a crash which happened when not providing the optional (!) configuration. Shit happens. I should really have a test suite for this package.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5.2&lt;/a&gt;: Disables the CKEditor version check.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.4&lt;/a&gt;: The first release since December 2022! Very stable software. The editor now restores the collapsed state of inlines and the scroll position when using &amp;ldquo;Save and continue editing&amp;rdquo;. This is especially useful if editing an object with many content blocks.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>django-ckeditor</title><link href="https://406.ch/writing/django-ckeditor/" rel="alternate" /><id>https://406.ch/writing/django-ckeditor/</id><published>2024-02-14T12:00:00Z</published><updated>2024-02-14T12:00:00Z</updated><summary type="html">&lt;h1 id="django-ckeditor"&gt;&lt;a class="toclink" href="#django-ckeditor"&gt;django-ckeditor&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;It has finally happened. The open source version of CKEditor 4 does not contain fixes for known problems, see &lt;a href="https://ckeditor.com/cke4/release/CKEditor-4.24.0-LTS"&gt;the CKEditor 4.24.0 LTS announcement&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I totally get why the CKEditor developers did this and can only thank them for all the work that went into the editor.&lt;/p&gt;
-&lt;p&gt;I wish I didn&amp;rsquo;t have to do the migration work to move basically everything to a different editor. The CKEditor 4 LTS version is only expected to be supported until the end of 2026 and I have a few projects which will be around far longer than this (or at least I hope so). Therefore, buying the LTS package would only delay the inevitable. CKEditor 5 is a completely different editor and uses the GPL license, so that&amp;rsquo;s not really an option either. TinyMCE is well known and I have been using it much earlier in my career, but reimplementing plugins isn&amp;rsquo;t fun to do.&lt;/p&gt;
-&lt;p&gt;I would prefer moving everything to ProseMirror or some other structured editor, but we have so much legacy content contained in HTML blobs which do not use any schema at all that this isn&amp;rsquo;t workable unfortunately.&lt;/p&gt;
-&lt;p&gt;Stay tuned for updates &amp;ndash; they will come since I unfortunately cannot just ignore this problem.&lt;/p&gt;
-&lt;p&gt;Which brings me to &lt;a href="https://github.com/django-ckeditor/django-ckeditor"&gt;django-ckeditor&lt;/a&gt;. CKEditor shows a very annoying popup to users when it detects a newer version with security fixes, see &lt;a href="https://github.com/django-ckeditor/django-ckeditor/issues/761"&gt;the GitHub issue&lt;/a&gt;. It&amp;rsquo;s not a bad idea but users cannot do much about it, so I opted to disable the version check (and warning) in django-ckeditor and replaced it with a Django system check which annoys developers instead.&lt;/p&gt;
-&lt;p&gt;The release containing these changes is available as &lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.1&lt;/a&gt; on PyPI.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>

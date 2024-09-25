@@ -1,5 +1,37 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-09-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-content-editor now supports nested sections</title><link href="https://406.ch/writing/django-content-editor-now-supports-nested-sections/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-now-supports-nested-sections/</id><published>2024-09-13T12:00:00Z</published><updated>2024-09-13T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-nested-sections"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-nested-sections"&gt;django-content-editor now supports nested sections&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2024-09-25T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="css-for-django-forms"&gt;&lt;a class="toclink" href="#css-for-django-forms"&gt;CSS for Django forms&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Not much going on in OSS land. I have been somewhat active in the official
+Django forum, discussing ways to add Python-level hooks to allow adding CSS
+classes around form fields and their labels. The discussion on the
+&lt;a href="https://forum.djangoproject.com/t/proposal-make-it-easy-to-add-css-classes-to-a-boundfield/32022"&gt;forum&lt;/a&gt;
+and on the &lt;a href="https://github.com/django/django/pull/18266"&gt;pull request&lt;/a&gt; goes in
+the direction of allowing using custom &lt;code&gt;BoundField&lt;/code&gt; classes per form or even
+per project (instead of only per field as is already possible today). This
+would allow overriding &lt;code&gt;css_classes&lt;/code&gt;, e.g. to add a simple &lt;code&gt;class="field"&lt;/code&gt;.
+Together with &lt;code&gt;:has()&lt;/code&gt; this would probably allow me to skip using custom HTML
+templates in 99% of all cases.&lt;/p&gt;
+&lt;p&gt;I have also been lurking in the Discord, but more to help and less to promote
+my packages and ideas :-)&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_user_messages/"&gt;django-user-messages 1.1&lt;/a&gt;:
+  Added Django 5.0, 5.1 to the CI, and fixed the migrations to no longer
+  mention &lt;code&gt;index_together&lt;/code&gt; at all. It seems that squashing the migrations
+  wasn&amp;rsquo;t sufficient, I also had to actually delete the old migrations.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.1&lt;/a&gt;:
+  &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;&amp;rsquo;s &lt;code&gt;FileResponse&lt;/code&gt; has gained support
+  for the HTTP Range header, allowing me to remove my homegrown implementation
+  from the package. The blacknoise implementation is now half as long as it was
+  in 1.0.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_fhadmin/"&gt;django-fhadmin 2.3&lt;/a&gt;: No new
+  features, only tweaks to the styling and behavior prompted by updates to
+  Django&amp;rsquo;s admin interface.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.17&lt;/a&gt;: I have
+  pruned the CI matrix and accepted a pull request adding a ru translation. I
+  feel conflicted about that since I strongly believe that everything is
+  political, but I don&amp;rsquo;t know if rejecting translations helps anyone.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-content-editor now supports nested sections</title><link href="https://406.ch/writing/django-content-editor-now-supports-nested-sections/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-now-supports-nested-sections/</id><published>2024-09-13T12:00:00Z</published><updated>2024-09-13T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-nested-sections"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-nested-sections"&gt;django-content-editor now supports nested sections&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; (and
 it&amp;rsquo;s ancestor FeinCMS) has been the Django admin extension for editing content
 consisting of reusable blocks since 2009. In the last years we have more and
@@ -888,20 +920,4 @@ my mind, so I&amp;rsquo;ll probably be slow to add features and rather keep comp
 low.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m definitely interested to hear from people who want to use the package but
 cannot do so right now or who would want some additional features. Issues and
-pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>My 2024 Development Setup</title><link href="https://406.ch/writing/my-2024-development-setup/" rel="alternate" /><id>https://406.ch/writing/my-2024-development-setup/</id><published>2024-02-28T12:00:00Z</published><updated>2024-02-28T12:00:00Z</updated><summary type="html">&lt;h1 id="my-2024-development-setup"&gt;&lt;a class="toclink" href="#my-2024-development-setup"&gt;My 2024 Development Setup&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have been inspired by &lt;a href="https://micro.webology.dev/2024/02/18/my-development-setup.html"&gt;Jeff Triplett&amp;rsquo;s post&lt;/a&gt; to write this down. The main value &amp;ndash; if there&amp;rsquo;s value at all in this post &amp;ndash; lies in my ability to revisit it later and see if anything changed.&lt;/p&gt;
-&lt;h2 id="desk"&gt;&lt;a class="toclink" href="#desk"&gt;Desk&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m using a standing desk since 2015 or 2016. I&amp;rsquo;m actually doing most of my work standing; when I&amp;rsquo;m tired or maybe after a sports session I sit down, but when I do that I mostly choose the sofa or a different table and get back to the standing desk as soon as possible. I have started using the standing desk when I was in therapy for severe back pain but I have come to like it a lot since then. I do have a chair but I don&amp;rsquo;t really use it all that often.&lt;/p&gt;
-&lt;p&gt;The greatest thing about a standing desk is that when I go to an event which involves a lot of standing around (or dancing!) I don&amp;rsquo;t get tired as fast as before :-)&lt;/p&gt;
-&lt;h2 id="hardware"&gt;&lt;a class="toclink" href="#hardware"&gt;Hardware&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;My main machines are two Thinkpad notebooks, a Lenovo X1 carbon and a Lenovo X1 nano. I bought the latter because my previous notebook broke during a warranty repair by a technician and I really really had to have a notebook for the coming days and I already had ordered the former, but it wasn&amp;rsquo;t to be delivered for several weeks. That was annoying. The good thing about it is that I normally do not have to carry around anything when going to the office, since I leave one of them in the office most of the time. I&amp;rsquo;m using a 27&amp;rdquo; WQHD monitor when I work. I have used a 32&amp;rdquo; 4k monitor for some time, but I have noticed that I&amp;rsquo;m starting to spend time searching for windows. I don&amp;rsquo;t like curved or widescreens monitors at all (I have tried them). I thought I&amp;rsquo;d never reach the point when I would reduce the available screen size voluntarily, but here I am.&lt;/p&gt;
-&lt;p&gt;I also have a desktop machine at home, but I mostly use it for gaming, and only a little development on the side. It has a 11th gen i7, 32 GB ram and a GeForce RTX 30 series graphics card.&lt;/p&gt;
-&lt;p&gt;This also means that I&amp;rsquo;m switching computers all the time, and basically everything has to be synced to the cloud all the time. I&amp;rsquo;m using git since the spring of 2006 and push everything all the time anyway. And when I&amp;rsquo;m not, I&amp;rsquo;m mostly using web-based software. This means that I mostly don&amp;rsquo;t care about backing up my data, I let the cloud companies and the NSA do it.&lt;/p&gt;
-&lt;h2 id="software"&gt;&lt;a class="toclink" href="#software"&gt;Software&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;After many years on macOS and a few years on Windows with WSL I am back to using Linux without a VM. I am using Fedora because I actually like the unmodified GNOME 3, and because I prefer flatpaks to snaps. RPM/DNF are alright, but I&amp;rsquo;m still more accustomed to DEB/APT.&lt;/p&gt;
-&lt;p&gt;I have left macOS because of the touch bar and the terrible keyboard, and Windows because I don&amp;rsquo;t want ads everywhere on &lt;em&gt;my&lt;/em&gt; computer.&lt;/p&gt;
-&lt;h2 id="development"&gt;&lt;a class="toclink" href="#development"&gt;Development&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I use a terminal emulator (gnome-terminal on Linux, &lt;a href="https://alacritty.org/"&gt;alacritty&lt;/a&gt; on Windows/WSL) to run &lt;a href="https://github.com/tmux/tmux/"&gt;tmux&lt;/a&gt;, and start everything I need directly in there.&lt;/p&gt;
-&lt;p&gt;I have tried escaping vim many times but have always failed. (No, not &lt;em&gt;exiting&lt;/em&gt; vim, thanks for your help.) The various VIM modes in popular editors such as VisualStudio Code just do not cut it. I&amp;rsquo;m currently editing code in &lt;a href="https://neovim.io/"&gt;neovim&lt;/a&gt; with a few plugins. The only really important plugin is &lt;a href="https://github.com/ctrlpvim/ctrlp.vim"&gt;ctrlp.vim&lt;/a&gt;. Ctrl-P with fuzzy matching is a great way to open files. I like vi, and I tell people that I use it when I&amp;rsquo;m asked but I do not suggest to people that they should use it as well. The learning curve isn&amp;rsquo;t worth it except maybe if you do a lot of system administration, I don&amp;rsquo;t know.&lt;/p&gt;
-&lt;p&gt;I have a VisualStudio Code installation laying around for using Live Share. I think it&amp;rsquo;s a great way for helping others solve a particular problem in a project they are working on, much better than screen sharing and probably even better than sitting at a table together, just because having two keyboards and cursors is so nice.&lt;/p&gt;
-&lt;p&gt;I mostly only use virtualenvs created using &lt;code&gt;python3 -m venv venv&lt;/code&gt; for local development, no containers or anything. I definitely see the value of containers for deployment but I haven&amp;rsquo;t yet gotten around to setting things up for local development. This means that my machine always (also) runs a PostgreSQL and a redis server and maybe some other tools. Python 3 upgrades are mostly painless. NodeJS upgrades have sometimes been painful, but I avoid most of the pain by upgrading relatively late.&lt;/p&gt;</summary></entry></feed>
+pull requests are welcome!&lt;/p&gt;</summary></entry></feed>
