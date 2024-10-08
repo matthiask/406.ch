@@ -13,5 +13,5 @@ Die anderen Länder würden sich kaum bei uns bedanken, wenn wir ihnen diejenige
 
 Weitere passende Texte:
 
-- [Massive Benachteiligung ausländischer Jugendlicher bei der Lehrstellensuche](http://spinlock.ch/blog/2007/10/08/massive-benachteiligung-auslandischer-jugendlicher-bei-der-lehrstellensuche/)
-- [Fremdsprachige Kinder beeinträchtigen Lernerfolg nicht](http://spinlock.ch/blog/2007/09/14/fremdsprachige-kinder-beeintrachtigen-lernerfolg-nicht/)
+- [Massive Benachteiligung ausländischer Jugendlicher bei der Lehrstellensuche](https://406.ch/writing/massive-benachteiligung-auslandischer-jugendlicher-bei-der-lehrstellensuche/)
+- [Fremdsprachige Kinder beeinträchtigen Lernerfolg nicht](https://406.ch/writing/fremdsprachige-kinder-beeintrachtigen-lernerfolg-nicht/)

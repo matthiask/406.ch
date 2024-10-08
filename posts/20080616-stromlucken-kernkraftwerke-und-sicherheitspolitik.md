@@ -10,4 +10,4 @@ Gefordert ist eine zukunftsträchtige Energieproduktionsform, welche auch in die
 
 Wer vor der Stromlücke warnt und die Kernkraft als Ausweg empfiehlt, dabei alle sicherheitspolitischen Bedenken und den Nachhaltigkeitsgedanken vernachlässigt, hat tatsächlich die relative Bedrohung der Möglichkeiten aus dem Auge verloren.
 
-PS: [Keine neuen AKWs im Namen des Klimaschutzes](http://spinlock.ch/blog/2007/06/21/keine-akws-mehr-auch-nicht-im-namen-des-klimaschutzes/), [sie sind auch nicht CO2-neutral](http://spinlock.ch/blog/2007/03/03/akws-sind-nicht-co2-neutral/).
+PS: [Keine neuen AKWs im Namen des Klimaschutzes](https://406.ch/writing/keine-akws-mehr-auch-nicht-im-namen-des-klimaschutzes/), [sie sind auch nicht CO2-neutral](https://406.ch/writing/akws-sind-nicht-co2-neutral/).

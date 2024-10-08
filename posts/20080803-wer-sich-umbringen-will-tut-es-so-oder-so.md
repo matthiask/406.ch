@@ -10,4 +10,4 @@ Categories:
 >
 > ([Tages-Anzeiger: Jugendliche greifen beim Suizid meist zur Waffe](http://www.tagesanzeiger.ch/dyn/news/schweiz/921172.html))
 
-Es ist ja schon schlimm genug, dass sich die Besitzer mit diesen Waffen selbst umbringen -- leider trifft es aber auch [immer](http://spinlock.ch/blog/2007/11/27/besserer-schutz-vor-waffengewalt/) [wieder](http://spinlock.ch/blog/2007/06/08/waffen-gehoren-ins-zeughaus-sofort/) unbeteiligte Dritte. Wenigstens bei den Armeewaffen gäbe es ein einfaches Rezept, die breite Verfügbarkeit einzuschränken: [Ins Zeughaus damit!](http://spinlock.ch/blog/2007/06/04/wichtiger-schritt-hin-zur-entmilitarisierung-der-gesellschaft-gemacht/)
+Es ist ja schon schlimm genug, dass sich die Besitzer mit diesen Waffen selbst umbringen -- leider trifft es aber auch [immer](https://406.ch/writing/besserer-schutz-vor-waffengewalt/) [wieder](https://406.ch/writing/waffen-gehoren-ins-zeughaus-sofort/) unbeteiligte Dritte. Wenigstens bei den Armeewaffen gäbe es ein einfaches Rezept, die breite Verfügbarkeit einzuschränken: [Ins Zeughaus damit!](https://406.ch/writing/wichtiger-schritt-hin-zur-entmilitarisierung-der-gesellschaft-gemacht/)

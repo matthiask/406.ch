@@ -8,6 +8,6 @@ Jugendliche mit ausländischen Wurzeln [werden bei der Lehrstellensuche systemat
 
 [Jugendgewalt und fehlende Lehrstellen hängen zusammen](http://www.rahel-imobersteg.ch/?p=145), ebenso gibt es einen Zusammenhang zwischen der "Ausländergewalt" und der Benachteiligung von Jugendlichen mit ausländischen Wurzeln.
 
-Nachdem bei der Schule gespart wurde mussten die Klassen massiv vergrössert werden, [was vor allem fremdsprachigen Kindern schadet](http://spinlock.ch/blog/2007/09/14/fremdsprachige-kinder-beeintrachtigen-lernerfolg-nicht/). Nun zeigt sich, dass diese Kinder und Jugendlichen nicht nur in der Volksschule benachteiligt werden, sondern auch später.
+Nachdem bei der Schule gespart wurde mussten die Klassen massiv vergrössert werden, [was vor allem fremdsprachigen Kindern schadet](https://406.ch/writing/fremdsprachige-kinder-beeintrachtigen-lernerfolg-nicht/). Nun zeigt sich, dass diese Kinder und Jugendlichen nicht nur in der Volksschule benachteiligt werden, sondern auch später.
 
 Wenigstens hat der kaufmännische Verband dieses Problem erkannt und will es in dem Pilotprojekt "Smart Selection" angehen, wie der Tages-Anzeiger schreibt. Bravo! Es geht ja nicht darum, Ausländer zu bevorzugen, wie uns die SVP und ähnlich gerichtete Ideologiegruppierungen weismachen wollen -- es geht darum, im Sinne der Achtung der Menschenwürde, und etwas weniger abstrakt, der Gewaltprävention, endlich Chancengleichheit herzustellen.

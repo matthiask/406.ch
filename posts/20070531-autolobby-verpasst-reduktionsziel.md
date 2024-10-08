@@ -4,7 +4,7 @@ Slug: autolobby-verpasst-reduktionsziel
 Date: 2007-05-31
 Categories:
 
-Die Autolobby versucht einmal mehr, den Bund dazu zu bewegen, keine verbindlichen Reduktionsziele festzuschreiben, [obwohl die freiwilligen Ziele bei weitem verfehlt werden](http://www.tagi.ch/dyn/news/schweiz/756838.html). Die Mutlosigkeit des Bundes hat dazu geführt, dass die im Kyoto-Protokoll festgeschriebenen Minimalforderungen für den Klimaschutz bei weitem nicht erreicht werden. Wie lange dauert es noch, bis klar wird, dass [freiwillige Massnahmen nichts nützen?](http://spinlock.ch/blog/2007/03/16/nzz-votum-schon-wieder-freiwillige-massnahmen-bringen-nichts/)
+Die Autolobby versucht einmal mehr, den Bund dazu zu bewegen, keine verbindlichen Reduktionsziele festzuschreiben, [obwohl die freiwilligen Ziele bei weitem verfehlt werden](http://www.tagi.ch/dyn/news/schweiz/756838.html). Die Mutlosigkeit des Bundes hat dazu geführt, dass die im Kyoto-Protokoll festgeschriebenen Minimalforderungen für den Klimaschutz bei weitem nicht erreicht werden. Wie lange dauert es noch, bis klar wird, dass [freiwillige Massnahmen nichts nützen?](https://406.ch/writing/nzz-votum-schon-wieder-freiwillige-massnahmen-bringen-nichts/)
 
 > Auto-Schweiz-Direktor Andreas Burgener wehrt sich gegen Vorwürfe, die Branche nehme die Vereinbarung zu wenig ernst.
 

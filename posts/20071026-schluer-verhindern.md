@@ -8,4 +8,4 @@ Categories:
 
 Jetzt geht es tatsächlich nur noch darum, das Nachrutschen von Ulrich Schlüer in den Nationalrat zu verhindern. Ich werde also die unmotivierte Verena Diener wählen, auch wenn es mir nicht passt.
 
-[Chantal Galladé](http://spinlock.ch/blog/2007/10/16/sp-und-links-grune-linksautonome/) hat mich zwar auch nicht überzeugt, aber immerhin wäre jemand jüngeres zum Zuge gekommen.
+[Chantal Galladé](https://406.ch/writing/sp-und-links-grune-linksautonome/) hat mich zwar auch nicht überzeugt, aber immerhin wäre jemand jüngeres zum Zuge gekommen.

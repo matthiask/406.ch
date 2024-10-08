@@ -8,7 +8,7 @@ Categories:
 >
 > Taser werden bei Polizeikräften immer beliebter. Die erste grosse Studie über den Einsatz im Alltag hat jetzt gezeigt, dass die Elektroschockwaffen statistisch betrachtet kaum jemanden ernsthaft verletzen. Kritiker befürchten, dass Polizisten gerade deshalb zu häufig Blitze schleudern.
 
-Die Polizei ist bekannt dafür, dass sie unverhältnismässige Mittel anwendet ([Taser-Einsatz bei Aussschaffungen neu erlaubt?](http://spinlock.ch/blog/2007/10/03/tasereinsatz-bei-aussschaffungen-neu-erlaubt/), [Bericht im Tages-Anzeiger Magazin](http://www.dasmagazin.ch/index.php/Die_Jungen_Gr%C3%BCnen)); wer noch etwas Bearbeitung braucht um zu erkennen, dass der Einsatz von Tasern nicht lustig ist und dass sie auch in Situationen angewendet werden, wo sie total unnötig sind, kann sich gerne die folgenden YouTube-Filme zu Gemüte führen...
+Die Polizei ist bekannt dafür, dass sie unverhältnismässige Mittel anwendet ([Taser-Einsatz bei Aussschaffungen neu erlaubt?](https://406.ch/writing/tasereinsatz-bei-aussschaffungen-neu-erlaubt/), [Bericht im Tages-Anzeiger Magazin](http://www.dasmagazin.ch/index.php/Die_Jungen_Gr%C3%BCnen)); wer noch etwas Bearbeitung braucht um zu erkennen, dass der Einsatz von Tasern nicht lustig ist und dass sie auch in Situationen angewendet werden, wo sie total unnötig sind, kann sich gerne die folgenden YouTube-Filme zu Gemüte führen...
 
 UF Student tasered at John Kerry Speech:
 

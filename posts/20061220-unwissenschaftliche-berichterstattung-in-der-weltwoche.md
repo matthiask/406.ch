@@ -24,5 +24,5 @@ Folgende Punkte sind mitterweile unter Klimawissenschaftern unbestritten:
 Folgende Punkte sind pure Augenwischerei:
 
 - Dass er die Medieval Warm Period und das Little Ice Age erwähnt beweist, dass er den Unterschied zwischen lokalen und globalen Phänomenen nicht verstanden hat.
-- _So etwas wie die Rekordhitze von 1998_ hat es wieder gegeben: [2005 war das wärmste Jahr seit Beginn der instrumentellen Messungen](http://spinlock.ch/blog/2005/12/18/2005-war-warmstes-jahr-seit-beginn-der-instrumentenmessungen/), und dies obwohl 1998 ein Jahr mit El Niño Event war, welches immer zu höheren Messwerten führt (dies, weil sich die Mehrzahl der Messstationen auf der nördlichen Hemisphäre befindet).
+- _So etwas wie die Rekordhitze von 1998_ hat es wieder gegeben: [2005 war das wärmste Jahr seit Beginn der instrumentellen Messungen](https://406.ch/writing/2005-war-warmstes-jahr-seit-beginn-der-instrumentenmessungen/), und dies obwohl 1998 ein Jahr mit El Niño Event war, welches immer zu höheren Messwerten führt (dies, weil sich die Mehrzahl der Messstationen auf der nördlichen Hemisphäre befindet).
 - Der Effekt des SO<sub>2</sub> ist tatsächlich nicht sehr gut verstanden, aber doch einiges besser als Nigel Lawson uns einreden will.

@@ -8,4 +8,4 @@ Ich bin liberal-links, nicht links-liberal (d.h. links ist bei mir ausgeprägter
 
 ![Ich bin liberallinks](/wp-content/upload/politicalcompassmk.gif)
 
-Update 7. Juni 2007: Leider ist das Bild abhanden gekommen. Ein aktuelleres Ergebnis befindet sich hier: [Political Compass zum Zweiten](http://spinlock.ch/blog/2007/06/07/political-compass-zum-zweiten/).
+Update 7. Juni 2007: Leider ist das Bild abhanden gekommen. Ein aktuelleres Ergebnis befindet sich hier: [Political Compass zum Zweiten](https://406.ch/writing/political-compass-zum-zweiten/).

@@ -15,8 +15,8 @@ Weitere Hiobs-Zukunftsprognosen:
 
 Vorherige Posts zu diesem Thema:
 
-- [Ein weiteres Rekordjahr](http://spinlock.ch/blog/2007/01/10/ein-weiteres-rekordjahr/)
-- [Das Klima fasst gute Vorsätze -- höher hinaus!](http://spinlock.ch/blog/2007/01/04/das-klima-fasst-sich-gute-vorsatze-hoher-hinaus/)
-- [2006 wiederum in der Rangliste der wärmsten Jahre seit 150 Jahren](http://spinlock.ch/blog/2007/01/02/2006-wiederum-in-der-rangliste-der-warmsten-jahre-seit-150-jahren/)
-- [5 wärmste Jahre seit Beginn der Aufzeichnungen](http://spinlock.ch/blog/2006/01/25/5-warmste-jahre-seit-beginn-der-aufzeichnungen/)
-- [2005 war wärmstes Jahr seit Beginn der Instrumentenmessungen](http://spinlock.ch/blog/2005/12/18/2005-war-warmstes-jahr-seit-beginn-der-instrumentenmessungen/)
+- [Ein weiteres Rekordjahr](https://406.ch/writing/ein-weiteres-rekordjahr/)
+- [Das Klima fasst gute Vorsätze -- höher hinaus!](https://406.ch/writing/das-klima-fasst-sich-gute-vorsatze-hoher-hinaus/)
+- [2006 wiederum in der Rangliste der wärmsten Jahre seit 150 Jahren](https://406.ch/writing/2006-wiederum-in-der-rangliste-der-warmsten-jahre-seit-150-jahren/)
+- [5 wärmste Jahre seit Beginn der Aufzeichnungen](https://406.ch/writing/5-warmste-jahre-seit-beginn-der-aufzeichnungen/)
+- [2005 war wärmstes Jahr seit Beginn der Instrumentenmessungen](https://406.ch/writing/2005-war-warmstes-jahr-seit-beginn-der-instrumentenmessungen/)

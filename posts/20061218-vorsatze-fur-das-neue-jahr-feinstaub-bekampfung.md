@@ -8,7 +8,7 @@ Die Tage werden schon bald wieder länger, der Winter kommt aber erst richtig. D
 
 Zur Erinnerung an letzten Winter diese Blog-Posts meinerseits:
 
-- [Feinstaub ist schon in kleinen Mengen schädlich](http://spinlock.ch/blog/2005/12/21/feinstaub-ist-schon-in-kleinen-mengen-schadlich/)
-- [Feinstaub: Die Politik kommt in Bewegung](http://spinlock.ch/blog/2006/01/16/feinstaub-die-politik-kommt-in-bewegung/)
-- [Feinstaub: Sind Holzfeuerungen wirklich schlimmer als die Autobahnen?](http://spinlock.ch/blog/2006/01/20/feinstaub-sind-holzfeuerungen-wirklich-schlimmer-als-die-autobahnen/)
-- [Feinstaub: Die Politik kommt in Bewegung Nr. 2](http://spinlock.ch/blog/2006/02/02/feinstaub-die-politik-kommt-in-bewegung-nr-2/)
+- [Feinstaub ist schon in kleinen Mengen schädlich](https://406.ch/writing/feinstaub-ist-schon-in-kleinen-mengen-schadlich/)
+- [Feinstaub: Die Politik kommt in Bewegung](https://406.ch/writing/feinstaub-die-politik-kommt-in-bewegung/)
+- [Feinstaub: Sind Holzfeuerungen wirklich schlimmer als die Autobahnen?](https://406.ch/writing/feinstaub-sind-holzfeuerungen-wirklich-schlimmer-als-die-autobahnen/)
+- [Feinstaub: Die Politik kommt in Bewegung Nr. 2](https://406.ch/writing/feinstaub-die-politik-kommt-in-bewegung-nr-2/)

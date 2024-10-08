@@ -7,5 +7,5 @@ Nun ist die Neuigkeit auch bis zum Spiegel durchgedrungen: [Eine neue Studie pro
 
 Also, bisher gab es wenig neues, diese Blogeinträge sind immer noch aktuell, auch wenn seither schon zweieinhalb Jahre verflossen sind:
 
-- [Studie belegt: Schwere Hurrikane werden dank Klimaerwärmung häufiger](http://spinlock.ch/blog/2005/09/04/mehr-tropische-wirbelsturme-durch-klimaerwarmung/)
-- [Mehr tropische Wirbelstürme durch Klimaerwärmung?](http://spinlock.ch/blog/2005/09/04/mehr-tropische-wirbelsturme-durch-klimaerwarmung/)
+- [Studie belegt: Schwere Hurrikane werden dank Klimaerwärmung häufiger](https://406.ch/writing/mehr-tropische-wirbelsturme-durch-klimaerwarmung/)
+- [Mehr tropische Wirbelstürme durch Klimaerwärmung?](https://406.ch/writing/mehr-tropische-wirbelsturme-durch-klimaerwarmung/)

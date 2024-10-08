@@ -6,7 +6,7 @@ Categories:
 
 > Das humanitäre Drama, das sich am Mittelmeer abspielt, muss beendet werden. Die Europäer antworten nur mit militärischen Mitteln auf das Problem. Hungerflüchtlinge sind nicht Wirtschaftsflüchtlinge. Sie kämpfen um ihr Leben.
 
-Uno-Sonderberichtserstatter Jean Ziegler anlässlich der Veröffentlichung seines Berichtes über [Bio-Treibstoffe](http://spinlock.ch/blog/2007/06/06/sag-nein-zu-bio-treibstoffen/) zu Handen der Vollversammlung der UNO.
+Uno-Sonderberichtserstatter Jean Ziegler anlässlich der Veröffentlichung seines Berichtes über [Bio-Treibstoffe](https://406.ch/writing/sag-nein-zu-bio-treibstoffen/) zu Handen der Vollversammlung der UNO.
 
 Dazu muss nichts weiteres gesagt werden. Aber gehandelt!
 
