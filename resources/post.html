@@ -9,6 +9,17 @@
     <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small>
     {{ post.body|safe }}
   </div>
+
+  <div class="text prevnext">
+    {% if index and posts[index-1] %}
+      <a href="{{ posts[index-1].url() }}">Previous post</a>
+    {% else %}<span>&nbsp;</span>
+    {% endif %}
+
+    {% if posts[index+1] %}
+      <a href="{{ posts[index+1].url() }}">Next post</a>
+    {% endif %}
+  </div>
 </div></main>
 
 <footer>

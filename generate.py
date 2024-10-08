@@ -138,8 +138,10 @@ def main(*, only_published=True):
     write_file("/index.html", archive(posts=posts))
     write_feed_with_posts("/writing/", posts[:20], title=TITLE, link=f"{URL}/")
     urlset = Element("urlset", {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"})
-    for post in posts:
-        write_file(f"{post.url()}index.html", detail(post=post))
+    for index, post in enumerate(posts):
+        write_file(
+            f"{post.url()}index.html", detail(post=post, posts=posts, index=index)
+        )
         SE(SE(urlset, "url"), "loc").text = f"{URL}{post.url()}"
     for category in sorted(counter):
         category_posts = [post for post in posts if category in post.categories]

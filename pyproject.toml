@@ -14,8 +14,8 @@ dependencies = [
 ]
 
 [tool.ruff]
-extend-select = ["B", "E", "F", "W", "C90", "I", "UP", "FBT", "C4", "DJ", "PIE", "INT", "SIM", "YTT", "G"]
-extend-ignore = [
+lint.extend-select = ["B", "E", "F", "W", "C90", "I", "UP", "FBT", "C4", "DJ", "PIE", "INT", "SIM", "YTT", "G"]
+lint.extend-ignore = [
   # No line length errors
   "E501",
   # Named lambdas are good for line golfing
@@ -24,11 +24,11 @@ extend-ignore = [
 fix = true
 target-version = "py310"
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 combine-as-imports = true
 lines-after-imports = 2
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.mccabe]
 max-complexity = 10
 
 [tool.coverage.run]
