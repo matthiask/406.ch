@@ -41,9 +41,9 @@ I have been switching themes in my preferred a few times per year in the past. T
     nnoremap <F12> :call FiatLux()<CR>
 
 I'm using the [Ptyxis](https://devsuite.app/ptyxis/) terminal emulator
-currently, I haven't investigated yet if there's a way to toggle dark and light
-mode for it as well. Using F10 to open the main menu works fine though, and
-using the mouse wouldn't be painful either.
+currently, I haven't investigated yet if there's a shortcut to toggle dark and
+light mode for it as well. Using F10 to open the main menu works fine though,
+and using the mouse wouldn't be painful either.
 
 
 ## Helping out in the Django forum and the Discord
