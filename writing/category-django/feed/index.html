@@ -1,5 +1,64 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-09-25T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2024-10-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I had some much needed time off, so this post isn&amp;rsquo;t that long even though &lt;a href="https://406.ch/writing/weeknotes-2024-week-39/"&gt;four weeks have passed since the last entry&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="from-webpack-to-rspack"&gt;&lt;a class="toclink" href="#from-webpack-to-rspack"&gt;From webpack to rspack&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve been really happy with &lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; lately. Converting
+webpack projects to rspack is straightforward since it mostly supports the same
+configuration, but it&amp;rsquo;s much much faster since it&amp;rsquo;s written in Rust. Rewriting
+things in Rust is a recurring theme, but in this case it really helps a lot.
+Building the frontend of a larger project of ours consisting of several admin
+tools and complete frontend implementations for different teaching materials
+only takes 10 seconds now instead of several minutes. That&amp;rsquo;s a big and relevant
+difference.&lt;/p&gt;
+&lt;p&gt;Newcomers should probably still either use &lt;a href="https://rsbuild.dev/"&gt;rsbuild&lt;/a&gt;,
+&lt;a href="https://vite.dev/"&gt;Vite&lt;/a&gt; or maybe no bundler at all. Vanilla JS and browser
+support for ES modules is great. That being said, I like cache busting,
+optimized bundling and far-future expiry headers in production and hot module
+reloading in development a lot, so learning to work with a frontend bundler is
+definitely still worth it.&lt;/p&gt;
+&lt;h2 id="dark-mode-and-light-mode"&gt;&lt;a class="toclink" href="#dark-mode-and-light-mode"&gt;Dark mode and light mode&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been switching themes in my preferred a few times per year in the past. The following ugly bit of vimscript helps switch me the theme each time the sun comes out when working outside:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;function&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;FiatLux&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;:&lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;light&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;:&lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;dark&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;endif&lt;/span&gt;
+&lt;span class="nv"&gt;endfunction&lt;/span&gt;
+&lt;span class="nv"&gt;nnoremap&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;F12&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;:&lt;span class="k"&gt;call&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;FiatLux&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;CR&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I&amp;rsquo;m using the &lt;a href="https://devsuite.app/ptyxis/"&gt;Ptyxis&lt;/a&gt; terminal emulator
+currently, I haven&amp;rsquo;t investigated yet if there&amp;rsquo;s a way to toggle dark and light
+mode for it as well. Using F10 to open the main menu works fine though, and
+using the mouse wouldn&amp;rsquo;t be painful either.&lt;/p&gt;
+&lt;h2 id="helping-out-in-the-django-forum-and-the-discord"&gt;&lt;a class="toclink" href="#helping-out-in-the-django-forum-and-the-discord"&gt;Helping out in the Django forum and the Discord&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have found some pleasure in helping out in the &lt;a href="https://forum.djangoproject.com/"&gt;Django
+Forum&lt;/a&gt; and in the official &lt;a href="https://discord.gg/xcRH6mN4fa"&gt;Django
+Discord&lt;/a&gt;. I sometimes wonder why more people
+aren&amp;rsquo;t reading the Django source code when they hit something which looks like
+a bug or something which they do not understand. I find Django&amp;rsquo;s source code
+very readable and I have found many nuggets within it. I&amp;rsquo;d always recommend
+checking the documentation or maybe official help channels first, but the code
+is also out there and that fact should be taken advantage of.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.1&lt;/a&gt;:
+  Fixed a bug where the ordering and region fields were handled incorrectly
+  when they appear on one line in the fieldset. Also improved the presentation
+  of inlines in unknown regions and clarified the meaning of the move to region
+  dropdown. Also, released the improvements from previous patch releases as a
+  new minor release because that&amp;rsquo;s what I should have been doing all along.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.27&lt;/a&gt;: A user has
+  been bitten by &lt;code&gt;slugify&lt;/code&gt; removing cyrillic characters because it only keeps
+  ASCII characters around. Here&amp;rsquo;s the wontfixed bug in the Django issue
+  tracker: &lt;a href="https://code.djangoproject.com/ticket/8391"&gt;#8391&lt;/a&gt;. I fixed the
+  issue by removing the slugification (is that even a word?) when generating
+  choices.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="css-for-django-forms"&gt;&lt;a class="toclink" href="#css-for-django-forms"&gt;CSS for Django forms&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Not much going on in OSS land. I have been somewhat active in the official
 Django forum, discussing ways to add Python-level hooks to allow adding CSS
@@ -900,19 +959,4 @@ my mind, so I&amp;rsquo;ll probably be slow to add features and rather keep comp
 low.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m definitely interested to hear from people who want to use the package but
 cannot do so right now or who would want some additional features. Issues and
-pull requests are welcome!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-07"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-07"&gt;Weeknotes (2024 week 07)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.23&lt;/a&gt;: Only small changes, mainly updated the package for current Django and Python versions.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.4.6&lt;/a&gt;: A minor change: Swallow exceptions which happen during startup when clobbering the scripts data fails. As an aside: I find it funny that I have discovered the &lt;code&gt;.f3cc&lt;/code&gt; class in some cookie banner blocklists. It feels good to be recognized even if this maybe isn&amp;rsquo;t the nicest way, but it works for me since I actually do not like cookie banners either. At least feincms3-cookiecontrol doesn&amp;rsquo;t inject anything without users&amp;rsquo; consent, and doesn&amp;rsquo;t require a third party service to run.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_simple_redirects/"&gt;django-simple-redirects 2.2.0&lt;/a&gt;: Minor release which adds a search field to the admin changelist. django-simple-redirects is a repackaged version of &lt;code&gt;django.contrib.redirects&lt;/code&gt; without the &lt;code&gt;django.contrib.sites&lt;/code&gt; dependency.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv 6.2&lt;/a&gt;: &lt;code&gt;django_cache_url&lt;/code&gt; now supports parsing redis configuration for a leader-replica redis installation with a read-write leader host and read-only replica hosts. I use the same configuration format as &lt;a href="https://github.com/epicserve/django-cache-url"&gt;django-cache-url&lt;/a&gt; does.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.3&lt;/a&gt;: I haven&amp;rsquo;t done much here, just some reviewing here and there. I enjoy the Djangonaut Space contributions a lot.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14&lt;/a&gt;: I have removed the constraint which enforces unique names for subfolders. Enforcing the uniqueness does make sense, but it also makes bulk-updating the media library using serialized data more painful than it should be. It&amp;rsquo;s a clear case of worse is better for me. If people want to confuse themselves I&amp;rsquo;m not going to stop them (anymore, in this case) but it makes the rest of the code so much easier to write that it&amp;rsquo;s not even funny.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.3&lt;/a&gt;: This release contains a nice contribution which removes some whitespace which has been added by the sanitizer when merging adjacent tags of the same type, e.g. &lt;code&gt;&amp;lt;strong&amp;gt;abc&amp;lt;/strong&amp;gt;&amp;lt;strong&amp;gt;def&amp;lt;/strong&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.1&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.11&lt;/a&gt;: Fixed a crash which happened when not providing the optional (!) configuration. Shit happens. I should really have a test suite for this package.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5.2&lt;/a&gt;: Disables the CKEditor version check.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.4&lt;/a&gt;: The first release since December 2022! Very stable software. The editor now restores the collapsed state of inlines and the scroll position when using &amp;ldquo;Save and continue editing&amp;rdquo;. This is especially useful if editing an object with many content blocks.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+pull requests are welcome!&lt;/p&gt;</summary></entry></feed>
