@@ -205,6 +205,7 @@ main .text a:not(.toclink) {
   all: inherit;
   overflow-x: scroll;
   background: #343947;
+  color: #f8f8f2;
   display: grid;
   padding: 0 1rem;
 }
