@@ -1,5 +1,52 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-10-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-11-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 47)</title><link href="https://406.ch/writing/weeknotes-2024-week-47/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-47/</id><published>2024-11-20T12:00:00Z</published><updated>2024-11-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-47"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-47"&gt;Weeknotes (2024 week 47)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I missed a single co-writing session and of course that lead to four weeks of no posts at all to the blog. Oh well.&lt;/p&gt;
+&lt;h2 id="debugging"&gt;&lt;a class="toclink" href="#debugging"&gt;Debugging&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I want to share a few debugging stories from the last weeks.&lt;/p&gt;
+&lt;h3 id="pillow-11-and-djangos-get_image_dimensions"&gt;&lt;a class="toclink" href="#pillow-11-and-djangos-get_image_dimensions"&gt;Pillow 11 and Django&amp;rsquo;s &lt;code&gt;get_image_dimensions&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The goal of &lt;a href="https://github.com/matthiask/django-imagefield"&gt;django-imagefield&lt;/a&gt;
+was to deeply verify that Django and Pillow are able to work with uploaded
+files; some files can be loaded, their dimensions can be inspected, but
+problems happen later when Pillow actually tries resizing or filtering files.
+Because of this django-imagefield does more work when images are added to the
+system instead of working around it later. (Django doesn&amp;rsquo;t do this on purpose
+because doing all this work up-front could be considered a DoS factor.)&lt;/p&gt;
+&lt;p&gt;In the last weeks I suddenly got recurring errors from saved files again,
+something which shouldn&amp;rsquo;t happen, but obviously did.&lt;/p&gt;
+&lt;p&gt;Django wants to read image dimensions when accessing or saving image files (by
+the way, always use &lt;code&gt;height_field&lt;/code&gt; and &lt;code&gt;width_field&lt;/code&gt;, otherwise Django will
+open and inspect image files even when you&amp;rsquo;re only loading Django models from
+the database&amp;hellip;!) and it uses a smart and wonderful&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="#fn:fn1"&gt;1&lt;/a&gt;&lt;/sup&gt; hack to do this: It reads a few hundred bytes from the image file, instructs Pillow to inspect the file and if an exception happens it reads more bytes and tries again. This process relies on the exact type of exceptions raised internally though, and the release of Pillow 11 changed the types&amp;hellip; for some file types only. Fun times.&lt;/p&gt;
+&lt;p&gt;The issue had already been reported as
+&lt;a href="https://code.djangoproject.com/ticket/33240"&gt;#33240&lt;/a&gt; and is now tracked as &lt;a href="https://github.com/python-pillow/Pillow/issues/8530"&gt;#8530&lt;/a&gt; on the Pillow issue tracker. Let&amp;rsquo;s see what happens.
+For now, django-imagefield declares itself to be incompatible with Pillow
+11.0.0 so that this error cannot happen.&lt;/p&gt;
+&lt;h3 id="rspack-and-lightningcss-shuffled-css-properties"&gt;&lt;a class="toclink" href="#rspack-and-lightningcss-shuffled-css-properties"&gt;rspack and lightningcss shuffled CSS properties&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; 1.0 started reordering CSS properties which of course lead to CSS properties overriding each other in the incorrect order. That was a fun one to debug. I tracked the issue down to the switch from the swc CSS minimizer to &lt;a href="https://github.com/parcel-bundler/lightningcss"&gt;lightningcss&lt;/a&gt; and submitted a reproduction to the &lt;a href="https://github.com/parcel-bundler/lightningcss/issues/805#issuecomment-2358219597"&gt;issue tracker&lt;/a&gt;. My rust knowledge wasn&amp;rsquo;t up to the task of attempting to submit a fix myself. Luckily, it has been fixed in the meantime.&lt;/p&gt;
+&lt;h3 id="rspack-problems"&gt;&lt;a class="toclink" href="#rspack-problems"&gt;rspack problems&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I have another problem with rspack where I haven&amp;rsquo;t yet tracked down the issue. rspack produces a broken bundle starting with &lt;a href="https://github.com/web-infra-dev/rspack/releases/tag/v1.0.0-beta.2"&gt;1.0.0-beta.2&lt;/a&gt; when compiling a particular project of mine. I have the suspicion that I have misconfigured some stuff related to import paths and yarn workspaces. I have no idea how anyone could have a complete understanding of these things&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Bundlers are complex beasts, and I&amp;rsquo;m happy that I mostly can just use them.&lt;/p&gt;
+&lt;h3 id="closing-thoughts"&gt;&lt;a class="toclink" href="#closing-thoughts"&gt;Closing thoughts&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Debugging is definitely a rewarding activity for me. I like tracking stuff down like this. Unfortunately, problems always tend to crop up when time is scarce already, but what can you do.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Quite a few releases, many of them verifying Python 3.13 and Django 5.1 support (if it hasn&amp;rsquo;t been added already in previous releases). The nicest part: If I remember correctly I didn&amp;rsquo;t have to change anything anywhere, everything just continues to work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.19&lt;/a&gt;: I added support for automatically renumbering objects on page load. This is mostly useful if you already have existing data which isn&amp;rsquo;t ordered yet.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.7&lt;/a&gt;: Made sure that objects are dumped in a deterministic order when dumping. I wanted to compare JSON dumps by hand before and after a big data migration in a customer project and differently ordered dumps made the comparison impossible.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.9&lt;/a&gt;: I updated the ProseMirror packages, and put the editor into read-only mode for &lt;code&gt;&amp;lt;textarea disabled&amp;gt;&lt;/code&gt; elements.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites 0.4&lt;/a&gt;: Finally released the update containing the necessary hook to validate page trees and their unique paths before moving produces integrity errors. Error messages are nicer than internal server errors.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.17.2&lt;/a&gt;: The value of the cookie which is used to save the URL where users should be redirected to after authentication wasn&amp;rsquo;t checked for validity when setting it, only when reading it. This meant that attackers could produce invalid header errors in application servers. No real security problem here when using authlib&amp;rsquo;s code.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.3&lt;/a&gt;: Minor update which mostly removes support for outdated Python and Django versions.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.20&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:fn1"&gt;
+&lt;p&gt;wonderfully ugly&amp;#160;&lt;a class="footnote-backref" href="#fnref:fn1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I had some much needed time off, so this post isn&amp;rsquo;t that long even though &lt;a href="https://406.ch/writing/weeknotes-2024-week-39/"&gt;four weeks have passed since the last entry&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="from-webpack-to-rspack"&gt;&lt;a class="toclink" href="#from-webpack-to-rspack"&gt;From webpack to rspack&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;ve been really happy with &lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; lately. Converting
@@ -622,62 +669,4 @@ code itself are much more important to me.&lt;/p&gt;
 &lt;p&gt;I haven&amp;rsquo;t uploaded any releases in the last 14 days. That&amp;rsquo;s good: I&amp;rsquo;m one of
 those people who have made their passion their job (which is great) but that
 sometimes makes it hard to not work at all since I can always tell myself that
-I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 40)</title><link href="https://406.ch/writing/weeknotes-2023-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-40/</id><published>2023-10-04T12:00:00Z</published><updated>2023-10-04T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-40"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-40"&gt;Weeknotes (2023 week 40)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="more-work-on-hosting-several-websites-from-a-single-django-application-server-using-feincms3-sites"&gt;&lt;a class="toclink" href="#more-work-on-hosting-several-websites-from-a-single-django-application-server-using-feincms3-sites"&gt;More work on hosting several websites from a single Django application server using feincms3-sites&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have mentioned feincms3-sites last week in my last weeknotes entry; I have
-again given this package a lot of attention in the last days, so another update
-is in order.&lt;/p&gt;
-&lt;p&gt;It is now possible to override the list of languages available on each site.
-That&amp;rsquo;s especially useful for an upcoming campaign site where the umbrella
-group&amp;rsquo;s site is available in three languages, but (most?) individual group
-sites (hosted on subdomains) will only have a subset of languages. Since I live
-in a country with four national languages (english isn&amp;rsquo;t one of them, but is
-spoken by many!) supporting more than one language, or even many languages is
-totally commonplace. It&amp;rsquo;s great that Django has good support for
-internationalization. For the sake of an example, I have the following sites:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;example.com&lt;/code&gt;: The default. The host has to match exactly.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;subdomain.example.com&lt;/code&gt;: One individual group&amp;rsquo;s site. The host has to match the regex &lt;code&gt;^subdomain\.&lt;/code&gt; (sorry, I actually do like regexes).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="overriding-configured-hosts-for-local-development"&gt;&lt;a class="toclink" href="#overriding-configured-hosts-for-local-development"&gt;Overriding configured hosts for local development&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;One thing which always annoyed me when using &lt;code&gt;django.contrib.sites&lt;/code&gt; was that
-&amp;ldquo;just&amp;rdquo; pulling the database from production to the local development
-environment always produced links pointing back to the remote host instead of
-working locally (when producing absolute URLs). This problem was shared by
-feincms3-sites as well. I have now found a very ugly but perfectly workable
-solution: Overwrite &lt;code&gt;Site.get_host()&lt;/code&gt; locally:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;domain&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;example.com&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Or whatever&lt;/span&gt;
-    &lt;span class="n"&gt;_get_host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;localhost:8000&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;FEINCMS3_SITES_SITE_GET_HOST&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;_get_host&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This works especially well when using &lt;code&gt;example.com&lt;/code&gt; and maybe subdomains of
-&lt;code&gt;example.com&lt;/code&gt;: All absolute links will point to &lt;code&gt;localhost:8000&lt;/code&gt; or
-&lt;code&gt;subdomain.localhost:8000&lt;/code&gt;. Since &lt;code&gt;*.localhost&lt;/code&gt; always resolves to the local IP
-the browser knows where it should connect to, and since
-&lt;code&gt;subdomain.localhost:8000&lt;/code&gt; also matches the &lt;code&gt;^subdomain\.&lt;/code&gt; regex mentioned
-above, the site selection logic works as well.&lt;/p&gt;
-&lt;p&gt;Of course if you have more domains, not just subdomains, you could adapt the
-&lt;code&gt;get_host&lt;/code&gt; override and the relevant regexes to those use cases.&lt;/p&gt;
-&lt;h3 id="closing-words"&gt;&lt;a class="toclink" href="#closing-words"&gt;Closing words&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;We&amp;rsquo;re at 100% code coverage now when running the test suite. That&amp;rsquo;s really nice.&lt;/p&gt;
-&lt;h2 id="logging-into-the-django-admin-using-your-google-account"&gt;&lt;a class="toclink" href="#logging-into-the-django-admin-using-your-google-account"&gt;Logging into the Django admin using your Google account&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;This functionality has long been provided by
-&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-admin-sso&lt;/a&gt;; however, as
-mentioned a long time ago this package still uses a deprecated OAuth2 library.
-&lt;a href="https://github.com/matthiask/django-authlib/"&gt;django-authlib&lt;/a&gt; supports using a
-Google account to authenticate with the Django admin since 2017. I have now
-fixed a small problem with it: If you are logged into a single Google account,
-and this account&amp;rsquo;s email address doesn&amp;rsquo;t match the configured admin login rule,
-you were out of luck: There was no way to add another account at that time
-because the library didn&amp;rsquo;t request the account selection. That has changed now,
-if the first login attempt doesn&amp;rsquo;t work, it now explicitly tells Google to let
-the user select their Google account. A small quality of life improvement for
-those using more than one Google account (voluntarily or not).&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.4.3&lt;/a&gt;: Polished the CKEditor integration a little bit. Re-enabled the source button now that we&amp;rsquo;re back to using the classic iframe-based editor again.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.19.3&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.4&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry></feed>

@@ -1,5 +1,52 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-10-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-11-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 47)</title><link href="https://406.ch/writing/weeknotes-2024-week-47/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-47/</id><published>2024-11-20T12:00:00Z</published><updated>2024-11-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-47"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-47"&gt;Weeknotes (2024 week 47)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I missed a single co-writing session and of course that lead to four weeks of no posts at all to the blog. Oh well.&lt;/p&gt;
+&lt;h2 id="debugging"&gt;&lt;a class="toclink" href="#debugging"&gt;Debugging&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I want to share a few debugging stories from the last weeks.&lt;/p&gt;
+&lt;h3 id="pillow-11-and-djangos-get_image_dimensions"&gt;&lt;a class="toclink" href="#pillow-11-and-djangos-get_image_dimensions"&gt;Pillow 11 and Django&amp;rsquo;s &lt;code&gt;get_image_dimensions&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The goal of &lt;a href="https://github.com/matthiask/django-imagefield"&gt;django-imagefield&lt;/a&gt;
+was to deeply verify that Django and Pillow are able to work with uploaded
+files; some files can be loaded, their dimensions can be inspected, but
+problems happen later when Pillow actually tries resizing or filtering files.
+Because of this django-imagefield does more work when images are added to the
+system instead of working around it later. (Django doesn&amp;rsquo;t do this on purpose
+because doing all this work up-front could be considered a DoS factor.)&lt;/p&gt;
+&lt;p&gt;In the last weeks I suddenly got recurring errors from saved files again,
+something which shouldn&amp;rsquo;t happen, but obviously did.&lt;/p&gt;
+&lt;p&gt;Django wants to read image dimensions when accessing or saving image files (by
+the way, always use &lt;code&gt;height_field&lt;/code&gt; and &lt;code&gt;width_field&lt;/code&gt;, otherwise Django will
+open and inspect image files even when you&amp;rsquo;re only loading Django models from
+the database&amp;hellip;!) and it uses a smart and wonderful&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="#fn:fn1"&gt;1&lt;/a&gt;&lt;/sup&gt; hack to do this: It reads a few hundred bytes from the image file, instructs Pillow to inspect the file and if an exception happens it reads more bytes and tries again. This process relies on the exact type of exceptions raised internally though, and the release of Pillow 11 changed the types&amp;hellip; for some file types only. Fun times.&lt;/p&gt;
+&lt;p&gt;The issue had already been reported as
+&lt;a href="https://code.djangoproject.com/ticket/33240"&gt;#33240&lt;/a&gt; and is now tracked as &lt;a href="https://github.com/python-pillow/Pillow/issues/8530"&gt;#8530&lt;/a&gt; on the Pillow issue tracker. Let&amp;rsquo;s see what happens.
+For now, django-imagefield declares itself to be incompatible with Pillow
+11.0.0 so that this error cannot happen.&lt;/p&gt;
+&lt;h3 id="rspack-and-lightningcss-shuffled-css-properties"&gt;&lt;a class="toclink" href="#rspack-and-lightningcss-shuffled-css-properties"&gt;rspack and lightningcss shuffled CSS properties&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; 1.0 started reordering CSS properties which of course lead to CSS properties overriding each other in the incorrect order. That was a fun one to debug. I tracked the issue down to the switch from the swc CSS minimizer to &lt;a href="https://github.com/parcel-bundler/lightningcss"&gt;lightningcss&lt;/a&gt; and submitted a reproduction to the &lt;a href="https://github.com/parcel-bundler/lightningcss/issues/805#issuecomment-2358219597"&gt;issue tracker&lt;/a&gt;. My rust knowledge wasn&amp;rsquo;t up to the task of attempting to submit a fix myself. Luckily, it has been fixed in the meantime.&lt;/p&gt;
+&lt;h3 id="rspack-problems"&gt;&lt;a class="toclink" href="#rspack-problems"&gt;rspack problems&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I have another problem with rspack where I haven&amp;rsquo;t yet tracked down the issue. rspack produces a broken bundle starting with &lt;a href="https://github.com/web-infra-dev/rspack/releases/tag/v1.0.0-beta.2"&gt;1.0.0-beta.2&lt;/a&gt; when compiling a particular project of mine. I have the suspicion that I have misconfigured some stuff related to import paths and yarn workspaces. I have no idea how anyone could have a complete understanding of these things&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Bundlers are complex beasts, and I&amp;rsquo;m happy that I mostly can just use them.&lt;/p&gt;
+&lt;h3 id="closing-thoughts"&gt;&lt;a class="toclink" href="#closing-thoughts"&gt;Closing thoughts&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Debugging is definitely a rewarding activity for me. I like tracking stuff down like this. Unfortunately, problems always tend to crop up when time is scarce already, but what can you do.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Quite a few releases, many of them verifying Python 3.13 and Django 5.1 support (if it hasn&amp;rsquo;t been added already in previous releases). The nicest part: If I remember correctly I didn&amp;rsquo;t have to change anything anywhere, everything just continues to work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.19&lt;/a&gt;: I added support for automatically renumbering objects on page load. This is mostly useful if you already have existing data which isn&amp;rsquo;t ordered yet.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.7&lt;/a&gt;: Made sure that objects are dumped in a deterministic order when dumping. I wanted to compare JSON dumps by hand before and after a big data migration in a customer project and differently ordered dumps made the comparison impossible.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.9&lt;/a&gt;: I updated the ProseMirror packages, and put the editor into read-only mode for &lt;code&gt;&amp;lt;textarea disabled&amp;gt;&lt;/code&gt; elements.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites 0.4&lt;/a&gt;: Finally released the update containing the necessary hook to validate page trees and their unique paths before moving produces integrity errors. Error messages are nicer than internal server errors.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.17.2&lt;/a&gt;: The value of the cookie which is used to save the URL where users should be redirected to after authentication wasn&amp;rsquo;t checked for validity when setting it, only when reading it. This meant that attackers could produce invalid header errors in application servers. No real security problem here when using authlib&amp;rsquo;s code.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.3&lt;/a&gt;: Minor update which mostly removes support for outdated Python and Django versions.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.20&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:fn1"&gt;
+&lt;p&gt;wonderfully ugly&amp;#160;&lt;a class="footnote-backref" href="#fnref:fn1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I had some much needed time off, so this post isn&amp;rsquo;t that long even though &lt;a href="https://406.ch/writing/weeknotes-2024-week-39/"&gt;four weeks have passed since the last entry&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="from-webpack-to-rspack"&gt;&lt;a class="toclink" href="#from-webpack-to-rspack"&gt;From webpack to rspack&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;ve been really happy with &lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; lately. Converting
@@ -896,24 +943,4 @@ german knowledge required.&lt;/p&gt;
   opening &lt;em&gt;and&lt;/em&gt; closing thanks to CSS grid&amp;rsquo;s ability to animate the maximum
   height of an element. Also, the initialization in 6.4 was badly broken.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.2&lt;/a&gt;: &lt;a href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/"&gt;See the announcement blog post from Wednesday&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Eleven months of static site generation</title><link href="https://406.ch/writing/eleven-months-of-static-site-generation/" rel="alternate" /><id>https://406.ch/writing/eleven-months-of-static-site-generation/</id><published>2024-03-15T12:00:00Z</published><updated>2024-03-15T12:00:00Z</updated><summary type="html">&lt;h1 id="eleven-months-of-static-site-generation"&gt;&lt;a class="toclink" href="#eleven-months-of-static-site-generation"&gt;Eleven months of static site generation&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;Almost eleven months have gone by since I &lt;a href="https://406.ch/writing/the-insides-of-my-static-site-generator/"&gt;last wrote&lt;/a&gt; about the &lt;a href="https://github.com/matthiask/406.ch/blob/main/generate.py"&gt;static site generator script&lt;/a&gt; I&amp;rsquo;m using for this website.&lt;/p&gt;
-&lt;h2 id="what-has-changed-in-the-meantime"&gt;&lt;a class="toclink" href="#what-has-changed-in-the-meantime"&gt;What has changed in the meantime?&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;The build script is 40 lines shorter.&lt;/li&gt;
-&lt;li&gt;Code snippets are now highlighted using pygments.&lt;/li&gt;
-&lt;li&gt;The script now not only reports how many files have been written but also the
-  categories and their post count.&lt;/li&gt;
-&lt;li&gt;The script now supports a folder with static assets so that images etc. do
-  not have to be hotlinked from elsewhere. Hotlinking images hosted in GitHub
-  issues doesn&amp;rsquo;t work anymore it seems.&lt;/li&gt;
-&lt;li&gt;The execution time isn&amp;rsquo;t reported anymore.&lt;/li&gt;
-&lt;li&gt;The script now supports scheduled publishing, mainly by leveraging GitHub
-  action&amp;rsquo;s scheduling support.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="has-it-been-worth-it"&gt;&lt;a class="toclink" href="#has-it-been-worth-it"&gt;Has it been worth it?&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The general advice seems to not write your own static site generator because
-you&amp;rsquo;ll spend time tweaking the generator instead of actually writing posts.
-This definitely doesn&amp;rsquo;t have to be the case. Sometimes it&amp;rsquo;s good to hack on a
-small projects just for the joy of it. I certainly enjoy the fact that my code
-(arguably 🙃) does something useful each time I publish a new post.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
