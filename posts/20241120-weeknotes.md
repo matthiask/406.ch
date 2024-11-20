@@ -1,6 +1,5 @@
 Title: Weeknotes (2024 week 47)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 
 I missed a single co-writing session and of course that lead to four weeks of no posts at all to the blog. Oh well.
@@ -30,7 +29,7 @@ open and inspect image files even when you're only loading Django models from
 the database...!) and it uses a smart and wonderful[^fn1] hack to do this: It reads a few hundred bytes from the image file, instructs Pillow to inspect the file and if an exception happens it reads more bytes and tries again. This process relies on the exact type of exceptions raised internally though, and the release of Pillow 11 changed the types... for some file types only. Fun times.
 
 The issue had already been reported as
-[#33240](https://code.djangoproject.com/ticket/33240). Let's see what happens.
+[#33240](https://code.djangoproject.com/ticket/33240) and is now tracked as [#8530](https://github.com/python-pillow/Pillow/issues/8530) on the Pillow issue tracker. Let's see what happens.
 For now, django-imagefield declares itself to be incompatible with Pillow
 11.0.0 so that this error cannot happen.
 
