@@ -45,6 +45,8 @@ For now, django-imagefield declares itself to be incompatible with Pillow
 
 I have another problem with rspack where I haven't yet tracked down the issue. rspack produces a broken bundle starting with [1.0.0-beta.2](https://github.com/web-infra-dev/rspack/releases/tag/v1.0.0-beta.2) when compiling a particular project of mine. I have the suspicion that I have misconfigured some stuff related to import paths and yarn workspaces. I have no idea how anyone could have a complete understanding of these things...
 
+**Update:** The problem was [#8027](https://github.com/web-infra-dev/rspack/issues/8027), `experiments.css` is quite broken for now.
+
 Bundlers are complex beasts, and I'm happy that I mostly can just use them.
 
 
