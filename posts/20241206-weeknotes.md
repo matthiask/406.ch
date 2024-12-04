@@ -1,6 +1,5 @@
 Title: Weeknotes (2024 week 49)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 ## Django Steering Council elections
 
@@ -17,4 +16,4 @@ Also, I have generally had a few bad months, and I my candidacy wouldn't help di
 
 - [feincms3-cookiecontrol 1.5.4](https://pypi.org/project/feincms3-cookiecontrol/): No functional changes, only code golfing. It's nice to have a working cookie banner with a solution for embedding third party content only when people consent in less than 4KiB of minified (not compressed!) JavaScript.
 - [django-admin-ordering 0.20](https://pypi.org/project/django-admin-ordering/): Objects can now be reordered using arrow buttons instead of drag drop or manually changing the ordering field's value. This should make the package more accessible. It's always a joy when people contribute such useful improvements.
-- [django-prose-editor 0.10a?](https://pypi.org/project/django-prose-editor/): See the recent blog post.
+- [django-prose-editor 0.10a?](https://pypi.org/project/django-prose-editor/): See [the recent blog post](https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/).
