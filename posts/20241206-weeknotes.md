@@ -9,7 +9,7 @@ An important point is that this has nothing to do with being nice (or not). Ever
 
 I'm not the only one who thinks that we [should improve the process somewhat](https://knowyourmeme.com/memes/we-should-improve-society-somewhat). So, I'm definitely going to look out for candidates who think this is important.
 
-Also, I have generally had a few bad months, and I my candidacy wouldn't help diversity at all. The same reasons hopefully do not hinder others from running, and maybe it it somewhat of a cop out. There are other ways I can continue to help, and I'm looking forward to be more involved int he community in other ways.
+There are a few reasons why I'm not running myself at this time. A somewhat important reason is that my candidacy wouldn't help diversity at all. This shouldn't discourage anyone else with the same background from running -- we cannot change the world all at once. More importantly, I have more personal reasons for being hesitant to accept new commitments. That being said, I'm looking forward to be more involved in the community in other ways. And also, it's not now or never.
 
 
 ## Releases
