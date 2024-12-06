@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-11-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 47)</title><link href="https://406.ch/writing/weeknotes-2024-week-47/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-47/</id><published>2024-11-20T12:00:00Z</published><updated>2024-11-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-47"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-47"&gt;Weeknotes (2024 week 47)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-12-06T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 49)</title><link href="https://406.ch/writing/weeknotes-2024-week-49/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-49/</id><published>2024-12-06T12:00:00Z</published><updated>2024-12-06T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-49"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-49"&gt;Weeknotes (2024 week 49)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="django-steering-council-elections"&gt;&lt;a class="toclink" href="#django-steering-council-elections"&gt;Django Steering Council elections&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been thinking long and hard about running for the Django Steering Council. I think there are a few things I could contribute since I&amp;rsquo;ve been using Django for 16 or more years, and have been working on, maintaining and publishing third-party apps almost all this time. I have also contributed a few small features to Django core itself, and contributed my fair share of tests and bugfixes. The reason why I haven&amp;rsquo;t been more involved was always that I feared the review process with what I perceive to be a too unrestrained perfectionism. Teaching people is good, but I fear that those who teach are self-selected survivors of the process, which come to appreciate the perfectionism a bit too much. It&amp;rsquo;s somewhat the same as with the Swiss naturalization process &amp;ndash; the hurdles are very high, and some of those who weather the process maybe are or grow to be too fond of it.&lt;/p&gt;
+&lt;p&gt;An important point is that this has nothing to do with being nice (or not). Everybody has always been great, maybe with the exception of myself back when I didn&amp;rsquo;t understand that the problem wasn&amp;rsquo;t the individuals but the way everyone has agreed things should be done.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not the only one who thinks that we &lt;a href="https://knowyourmeme.com/memes/we-should-improve-society-somewhat"&gt;should improve the process somewhat&lt;/a&gt;. So, I&amp;rsquo;m definitely going to look out for candidates who think this is important.&lt;/p&gt;
+&lt;p&gt;There are a few reasons why I&amp;rsquo;m not running myself at this time. A somewhat important reason is that my candidacy wouldn&amp;rsquo;t help diversity at all. This shouldn&amp;rsquo;t discourage anyone else with the same background from running &amp;ndash; we cannot change the world all at once. More importantly, I have more personal reasons for being hesitant to accept new commitments. That being said, I&amp;rsquo;m looking forward to be more involved in the community in other ways. And also, it&amp;rsquo;s not now or never.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5.4&lt;/a&gt;: No functional changes, only code golfing. It&amp;rsquo;s nice to have a working cookie banner with a solution for embedding third party content only when people consent in less than 4KiB of minified (not compressed!) JavaScript.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.20&lt;/a&gt;: Objects can now be reordered using arrow buttons instead of drag drop or manually changing the ordering field&amp;rsquo;s value. This should make the package more accessible. It&amp;rsquo;s always a joy when people contribute such useful improvements.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.10a?&lt;/a&gt;: See &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;the recent blog post&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 47)</title><link href="https://406.ch/writing/weeknotes-2024-week-47/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-47/</id><published>2024-11-20T12:00:00Z</published><updated>2024-11-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-47"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-47"&gt;Weeknotes (2024 week 47)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I missed a single co-writing session and of course that lead to four weeks of no posts at all to the blog. Oh well.&lt;/p&gt;
 &lt;h2 id="debugging"&gt;&lt;a class="toclink" href="#debugging"&gt;Debugging&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I want to share a few debugging stories from the last weeks.&lt;/p&gt;
@@ -634,40 +645,4 @@ probably not even worth optimizing for that metric in code. It&amp;rsquo;s nothi
 but a proxy for what you should really measure. Nevertheless it certainly does
 feel good to achieve high coverage values!&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;No releases at all.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-42"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-42"&gt;Weeknotes (2023 week 42)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="vacation-in-italy"&gt;&lt;a class="toclink" href="#vacation-in-italy"&gt;Vacation in Italy&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We have spent a wonderful family week in Italy. The voyage by train was very
-comfortable and we had a great time there. I have lived close to lakes all my
-life but the sea is always something else. Now I enjoy the cold temperatures of
-fall.&lt;/p&gt;
-&lt;h2 id="going-back-forward-to-gitjournal"&gt;&lt;a class="toclink" href="#going-back-forward-to-gitjournal"&gt;Going back (forward) to GitJournal&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have tried several note taking apps but I&amp;rsquo;m now back using
-&lt;a href="https://gitjournal.io/"&gt;GitJournal&lt;/a&gt; with a Git repository filled with Markdown
-notes. It works well enough. I just wish that there was a way to make notes
-more distinguishable and I wish that the editor was more forgiving when
-encountering badly formatted checklists.&lt;/p&gt;
-&lt;h2 id="analog-blogging"&gt;&lt;a class="toclink" href="#analog-blogging"&gt;Analog blogging&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have long wanted to write about &lt;a href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/"&gt;our switch from Slack to
-Discord&lt;/a&gt;.
-I have started to write this post with pen and paper. I find that I think
-better when using pen and paper than when using the computer keyboard. One
-factor is certainly that the computer offers more distractions, but I suspect
-that another, more important factor is that as a fast typist the fingers and
-the thinking are always getting out of step, and this happens less when using a
-slower method of writing. This actually isn&amp;rsquo;t an idea I had myself, but I don&amp;rsquo;t
-remember where I got it from.&lt;/p&gt;
-&lt;h2 id="zero-based-versioning-good-or-bad"&gt;&lt;a class="toclink" href="#zero-based-versioning-good-or-bad"&gt;Zero-based versioning: Good or bad?&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I discovered &lt;a href="https://0ver.org/"&gt;ZeroVer&lt;/a&gt; sometime in the last few days. I have
-many many Django packages with zero-based versions. Some of them have been used
-in production for years now. I sometimes wonder if staying with &lt;code&gt;0.&lt;/code&gt; is
-unprofessional and I should just release 1.0 and be done with it or if it
-doesn&amp;rsquo;t really matter at all.&lt;/p&gt;
-&lt;p&gt;If I evaluate software packages more often than not I don&amp;rsquo;t look at the version
-number or the version numbering scheme (except when a package is still using
-&lt;code&gt;0.0.&lt;/code&gt;) when deciding whether to rely on it or not. The documentation and the
-code itself are much more important to me.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I haven&amp;rsquo;t uploaded any releases in the last 14 days. That&amp;rsquo;s good: I&amp;rsquo;m one of
-those people who have made their passion their job (which is great) but that
-sometimes makes it hard to not work at all since I can always tell myself that
-I&amp;rsquo;m not working, that it&amp;rsquo;s just a hobby.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;No releases at all.&lt;/p&gt;</summary></entry></feed>

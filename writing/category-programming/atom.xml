@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-12-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Rebuilding django-prose-editor from the ground up</title><link href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/" rel="alternate" /><id>https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/</id><published>2024-12-04T12:00:00Z</published><updated>2024-12-04T12:00:00Z</updated><summary type="html">&lt;h1 id="rebuilding-django-prose-editor-from-the-ground-up"&gt;&lt;a class="toclink" href="#rebuilding-django-prose-editor-from-the-ground-up"&gt;Rebuilding django-prose-editor from the ground up&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2024-12-06T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 49)</title><link href="https://406.ch/writing/weeknotes-2024-week-49/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-49/</id><published>2024-12-06T12:00:00Z</published><updated>2024-12-06T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-49"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-49"&gt;Weeknotes (2024 week 49)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="django-steering-council-elections"&gt;&lt;a class="toclink" href="#django-steering-council-elections"&gt;Django Steering Council elections&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been thinking long and hard about running for the Django Steering Council. I think there are a few things I could contribute since I&amp;rsquo;ve been using Django for 16 or more years, and have been working on, maintaining and publishing third-party apps almost all this time. I have also contributed a few small features to Django core itself, and contributed my fair share of tests and bugfixes. The reason why I haven&amp;rsquo;t been more involved was always that I feared the review process with what I perceive to be a too unrestrained perfectionism. Teaching people is good, but I fear that those who teach are self-selected survivors of the process, which come to appreciate the perfectionism a bit too much. It&amp;rsquo;s somewhat the same as with the Swiss naturalization process &amp;ndash; the hurdles are very high, and some of those who weather the process maybe are or grow to be too fond of it.&lt;/p&gt;
+&lt;p&gt;An important point is that this has nothing to do with being nice (or not). Everybody has always been great, maybe with the exception of myself back when I didn&amp;rsquo;t understand that the problem wasn&amp;rsquo;t the individuals but the way everyone has agreed things should be done.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not the only one who thinks that we &lt;a href="https://knowyourmeme.com/memes/we-should-improve-society-somewhat"&gt;should improve the process somewhat&lt;/a&gt;. So, I&amp;rsquo;m definitely going to look out for candidates who think this is important.&lt;/p&gt;
+&lt;p&gt;There are a few reasons why I&amp;rsquo;m not running myself at this time. A somewhat important reason is that my candidacy wouldn&amp;rsquo;t help diversity at all. This shouldn&amp;rsquo;t discourage anyone else with the same background from running &amp;ndash; we cannot change the world all at once. More importantly, I have more personal reasons for being hesitant to accept new commitments. That being said, I&amp;rsquo;m looking forward to be more involved in the community in other ways. And also, it&amp;rsquo;s not now or never.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5.4&lt;/a&gt;: No functional changes, only code golfing. It&amp;rsquo;s nice to have a working cookie banner with a solution for embedding third party content only when people consent in less than 4KiB of minified (not compressed!) JavaScript.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.20&lt;/a&gt;: Objects can now be reordered using arrow buttons instead of drag drop or manually changing the ordering field&amp;rsquo;s value. This should make the package more accessible. It&amp;rsquo;s always a joy when people contribute such useful improvements.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.10a?&lt;/a&gt;: See &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;the recent blog post&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Rebuilding django-prose-editor from the ground up</title><link href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/" rel="alternate" /><id>https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/</id><published>2024-12-04T12:00:00Z</published><updated>2024-12-04T12:00:00Z</updated><summary type="html">&lt;h1 id="rebuilding-django-prose-editor-from-the-ground-up"&gt;&lt;a class="toclink" href="#rebuilding-django-prose-editor-from-the-ground-up"&gt;Rebuilding django-prose-editor from the ground up&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;The &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt; package provides a HTML editor based upon the &lt;a href="https://prosemirror.net/"&gt;ProseMirror toolkit&lt;/a&gt; for the Django administration interface and for the frontend.&lt;/p&gt;
 &lt;p&gt;The package has been extracted from a customer project and open sourced so that it could be used in other projects as well. It followed a very restricted view of how rich text editors should work, which I have initially added to the &lt;a href="https://github.com/feincms/feincms/commit/70cd7a1244438d2ba97852256f77daa2c870c345#diff-556c5559a716059d4fb714ad34de6a9845870e8d55bbd2cb9d77c732eb961388"&gt;FeinCMS repository when documenting the design decisions more than 15 years ago&lt;/a&gt; &lt;small&gt;(Note that I didn&amp;rsquo;t edit the paragraph, it&amp;rsquo;s reproduced here as it was back then, with all the errors and heedlessness.)&lt;/small&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -861,76 +872,4 @@ a hash based upon the contents of the static file. Such hashes can be added by
 Django&amp;rsquo;s &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt; or by appropriately configuring bundlers
 such as &lt;code&gt;webpack&lt;/code&gt; and others.&lt;/p&gt;
 &lt;h2 id="license"&gt;&lt;a class="toclink" href="#license"&gt;License&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;blacknoise&lt;/code&gt; is distributed under the terms of the &lt;a href="https://spdx.org/licenses/MIT.html"&gt;MIT&lt;/a&gt; license.&lt;/p&gt;</summary></entry><entry><title>Podcasts I like listening to</title><link href="https://406.ch/writing/podcasts-i-like-listening-to/" rel="alternate" /><id>https://406.ch/writing/podcasts-i-like-listening-to/</id><published>2024-03-18T12:00:00Z</published><updated>2024-03-18T12:00:00Z</updated><summary type="html">&lt;h1 id="podcasts-i-like-listening-to"&gt;&lt;a class="toclink" href="#podcasts-i-like-listening-to"&gt;Podcasts I like listening to&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I discovered listening to podcasts about one year ago. Previously, I never knew
-why anyone would want to listen to people talk when they could listen to music
-or nothing, but that has changed a bit.&lt;/p&gt;
-&lt;p&gt;So, here&amp;rsquo;s a list of podcasts I&amp;rsquo;m currently listening to on a regular basis.&lt;/p&gt;
-&lt;h2 id="tech-wont-save-us"&gt;&lt;a class="toclink" href="#tech-wont-save-us"&gt;&lt;a href="https://www.techwontsave.us/"&gt;Tech Won&amp;rsquo;t Save Us&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have recently stumbled over Tech Won&amp;rsquo;t Save Us, a Podcast which is critical
-of the technological &amp;ldquo;progress&amp;rdquo; offered by Silicon Valley elites. It&amp;rsquo;s a great
-antidote for the generative AI hype.&lt;/p&gt;
-&lt;p&gt;I still have some stupid hope that AGI will solve our problems because maybe
-people will trust a computer more than scientists that something has to be done
-about the combined crisis we&amp;rsquo;re facing as humans. Who knows. I do not want to
-be too negative about it though, there are positive news if you&amp;rsquo;re looking in
-the right places. I myself do not write about those bigger issues &lt;a href="https://406.ch/writing/category-climate/"&gt;as
-much&lt;/a&gt; &lt;a href="https://406.ch/writing/category-politik/"&gt;as I used
-to&lt;/a&gt;. I support those more important
-issues elsewhere.&lt;/p&gt;
-&lt;p&gt;Generative AI is certainly not helping &lt;em&gt;me&lt;/em&gt; in my work. I do not want a
-computer to generate code which I have to review and maintain when I still
-enjoy writing code myself. Maybe that will change at some point in the future.
-When that happens I&amp;rsquo;ll probably retire and become a gardener or something.&lt;/p&gt;
-&lt;h2 id="the-ezra-klein-show"&gt;&lt;a class="toclink" href="#the-ezra-klein-show"&gt;&lt;a href="ttps://www.nytimes.com/column/ezra-klein-podcast"&gt;The Ezra Klein Show&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;This show seems to be a favorite of many people. I joined for the (relatively)
-critical perspectives on AI and stayed for the insights into politics and into
-the near east conflict. I think it&amp;rsquo;s great that people from different sides get
-a voice on the show, even if Ezra doesn&amp;rsquo;t agree with them.&lt;/p&gt;
-&lt;p&gt;I sometimes wish the questions they ask on the show were a little bit more
-critical.&lt;/p&gt;
-&lt;h2 id="hard-fork"&gt;&lt;a class="toclink" href="#hard-fork"&gt;&lt;a href="https://www.nytimes.com/column/hard-fork"&gt;Hard Fork&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I like the perspectives and the bantering on this podcast. It&amp;rsquo;s a good way for
-me to stay informed about what&amp;rsquo;s going on in AI/ML land, among other things.
-It&amp;rsquo;s a lighthearted listen I often look forward to.&lt;/p&gt;
-&lt;h2 id="django-chat"&gt;&lt;a class="toclink" href="#django-chat"&gt;&lt;a href="https://djangochat.com/"&gt;Django Chat&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I work with Django all the time and Django Chat is a great way to learn more
-about Django, about the people involved and also about the surrounding
-ecosystem. A wholehearted recommendation!&lt;/p&gt;
-&lt;h2 id="talk-python-to-me"&gt;&lt;a class="toclink" href="#talk-python-to-me"&gt;&lt;a href="https://talkpython.fm/"&gt;Talk Python To Me&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Good interviews, interesting guests and topics. Just a great way to learn about
-libraries, tools etc. which I cannot wait to use in my own projects.&lt;/p&gt;
-&lt;h2 id="datenschutzplaudereien"&gt;&lt;a class="toclink" href="#datenschutzplaudereien"&gt;&lt;a href="https://podcast.datenschutzpartner.ch/"&gt;Datenschutzplaudereien&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Required listening for people working with customer data in Switzerland. Swiss
-german knowledge required.&lt;/p&gt;
-&lt;h2 id="others"&gt;&lt;a class="toclink" href="#others"&gt;Others&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;A few other podcasts I&amp;rsquo;m listening to more or less regularly:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.publiceye.ch/de/wir-muessen-reden-public-eye-spricht-klartext"&gt;Wir müssen reden. Public Eye spricht
-  Klartext&lt;/a&gt;:
-  The podcast from public eye, an organization which uncovers human right
-  violations perpetrated by Swiss companies around the globe. I&amp;rsquo;m not yet sure
-  if I like the podcast, but I like and support the organization very much.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://hanselminutes.com/"&gt;Hanselminutes&lt;/a&gt;: The more polifor the wide and
-  diverse array of guests.tical podcasts have displaced Hanselminutes in my
-  listening schedule, but I&amp;rsquo;d definitely recommend it to anyone who wants to
-  learn more about tech. Recommended because of the diverse array of guests,
-  among many other reasons.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://syntax.fm/"&gt;Syntax&lt;/a&gt;: At times very interesting, at times not much
-  new for me. I still recommend it.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.weirdstudies.com/"&gt;Weird Studies&lt;/a&gt;: Really weird. I liked the
-  discussion of Hellraiser and The Thing, and have listened to some of the
-  other episodes. Religiosity and spiritualism was always around me when I was
-  a child, and it&amp;rsquo;s interesting to revisit some of the ideas about reality from
-  a different angle after years and years of not engaging with these questions
-  at all. (Writing this down does sound a bit like a midlife crisis on the
-  horizon, but I don&amp;rsquo;t think that&amp;rsquo;s it. I have studied a little bit of
-  philosophy and ethics and have stayed interested in these topics ever since.)&lt;/li&gt;
-&lt;li&gt;I don&amp;rsquo;t think the german &amp;ldquo;Welt&amp;rdquo; is a good newspaper at all. I do like the
-  «Aha! History» and «Aha! Zehn Minuten Alltagswissen» podcasts because they
-  are short and often examine topics I don&amp;rsquo;t know much about.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.srf.ch/play/tv/sendung/sternstunde-philosophie?id=b7705a5d-4b68-4cb1-9404-03932cd8d569"&gt;Sternstude
-  Philosophie&lt;/a&gt;:
-  It&amp;rsquo;s a bit slow and definitely more geared towards viewers than listeners,
-  but definitely interesting.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;p&gt;&lt;code&gt;blacknoise&lt;/code&gt; is distributed under the terms of the &lt;a href="https://spdx.org/licenses/MIT.html"&gt;MIT&lt;/a&gt; license.&lt;/p&gt;</summary></entry></feed>
