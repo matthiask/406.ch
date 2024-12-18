@@ -14,8 +14,8 @@ I have been asking myself at times why I haven't proposed the change to Django
 myself despite having been a user of something like this for such a long time.
 After all, I have been happily contributing issue reports, bug fixes and tests
 to Django. The process of adding new features sometimes is terribly frustrating
-even when looking (and cheering) from the sidelines, it takes so much time and
-energy. It feels bad that adding another package to the [list of packages I
+though even when looking (and cheering) from the sidelines. It feels bad that
+adding another package to the [list of packages I
 maintain](https://pypi.org/user/matthiask/) so clearly seems to be the better
 way to **get things done** compared to proposing a new feature for Django
 itself. I hope [processes change
