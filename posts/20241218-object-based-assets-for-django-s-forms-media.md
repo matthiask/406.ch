@@ -15,13 +15,15 @@ myself despite having been a user of something like this for such a long time.
 After all, I have been happily contributing issue reports, bug fixes and tests
 to Django. The process of adding new features sometimes is terribly frustrating
 even when looking (and cheering) from the sidelines, it takes so much time and
-energy. The fact that adding another package to the [list of packages I
-maintain](https://pypi.org/user/matthiask/) so clearly seems to be the easy way
-out compared to proposing a new feature for Django itself shows the sad state
-of affairs. I seriously doubt it's just me and some of the people I interact
-with who feel that way.
+energy. It feels bad that adding another package to the [list of packages I
+maintain](https://pypi.org/user/matthiask/) so clearly seems to be the better
+way to **get things done** compared to proposing a new feature for Django
+itself. I hope [processes change
+somewhat](https://406.ch/writing/weeknotes-2024-week-49/).
 
-But I digress. The `ProseEditorWidget` in
+But I digress.
+
+The `ProseEditorWidget` in
 [django-prose-editor](https://github.com/matthiask/django-prose-editor/) wants
 to ship CSS, JavaScript and some JSON to the browser for the widget. So, of
 course I used object-based media assets for this instead of widget HTML
