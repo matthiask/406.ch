@@ -208,6 +208,8 @@ main .text a:not(.toclink) {
   color: #f8f8f2;
   display: grid;
   padding: 0 1rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
