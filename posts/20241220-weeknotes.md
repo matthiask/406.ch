@@ -10,4 +10,4 @@ I last wrote about this topic [in April](https://406.ch/writing/building-forms-w
 - [blacknoise 1.2](https://pypi.org/project/blacknoise/): No real changes, added support for Python 3.13 basically without changing anything. It's always nice when this happens.
 - [django-imagefield 0.21](https://pypi.org/project/django-imagefield/)
 - [django-prose-editor 0.10](https://pypi.org/project/django-prose-editor/): I rebuilt django-prose-editor from the ground up [and wrote about that two weeks ago](https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/). The 0.10 release marks the final point of this particular rewrite.
-- [django-js-asset 3.0](https://pypi.org/project/django-js-asset/): See the blog post from [this week](...)
+- [django-js-asset 3.0](https://pypi.org/project/django-js-asset/): See the blog post from [this week](https://406.ch/writing/object-based-assets-for-django-s-forms-media/)
