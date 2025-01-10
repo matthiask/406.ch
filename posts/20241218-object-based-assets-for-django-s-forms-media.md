@@ -75,6 +75,8 @@ The code which is proposed for Django supports the JavaScript use case but with
 a slightly different API:
 
     :::python
+    from django.forms import Script
+
     forms.Media(js=[
         Script("widget/script.js", type="module"),
     ])
@@ -83,6 +85,8 @@ This looks slightly nicer as long as you don't use e.g. data attributes,
 because then you have to do:
 
     :::python
+    from django.forms import Script
+
     forms.Media(js=[
         Script("widget/script.js", **{"data-cfg": ...}),
     ])
