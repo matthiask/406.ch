@@ -1,5 +1,51 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2024-12-20T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2024 week 51)</title><link href="https://406.ch/writing/weeknotes-2024-week-51/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-51/</id><published>2024-12-20T12:00:00Z</published><updated>2024-12-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-51"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-51"&gt;Weeknotes (2024 week 51)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-01-15T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 03)</title><link href="https://406.ch/writing/weeknotes-2025-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-03/</id><published>2025-01-15T12:00:00Z</published><updated>2025-01-15T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-03"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-03"&gt;Weeknotes (2025 week 03)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="claude-ai-helped-me-for-the-first-time"&gt;&lt;a class="toclink" href="#claude-ai-helped-me-for-the-first-time"&gt;Claude AI helped me for the first time&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/matthiask/django-imagefield"&gt;django-imagefield&lt;/a&gt; prefers
+processing thumbnails, cropped images etc. directly when saving the model and
+not later on demand; it&amp;rsquo;s faster and also you&amp;rsquo;ll know it immediately when an
+image couldn&amp;rsquo;t be processed for some reason instead of only later when people
+actually try browsing your site.&lt;/p&gt;
+&lt;p&gt;A consequence is that if you change formats you have to remember that you have
+to reprocess the images. The Django app comes with a management command
+&lt;code&gt;./manage.py process_imagefields&lt;/code&gt; to help with this. I have added parallel
+processing based on &lt;code&gt;concurrent.futures&lt;/code&gt; to it some time ago so that the
+command completes faster when it is being run on a system with several cores.&lt;/p&gt;
+&lt;p&gt;A work colleague is using macOS (many are, in fact), and he always got
+multiprocessing Python crashes. This is a well known issue and I remember
+reading about it a few years ago. I checked the docs and saw that the
+&lt;a href="https://docs.python.org/3/library/concurrent.futures.html"&gt;&lt;code&gt;concurrent.futures&lt;/code&gt;&lt;/a&gt;
+page doesn&amp;rsquo;t mention macOS, but
+&lt;a href="https://docs.python.org/3/library/multiprocessing.html"&gt;&lt;code&gt;multiprocessing&lt;/code&gt;&lt;/a&gt;
+does. So, I hoped that a simple rewrite of the management command using
+&lt;code&gt;multiprocessing&lt;/code&gt; might fix it.&lt;/p&gt;
+&lt;p&gt;Because I was in a rush and really didn&amp;rsquo;t want to do it I turned to an AI
+assistant for doing this boring work. To my surprise it immediately produced a
+version which I could easily fix by hand to produce a working version. Of
+course, the initial response was totally broken, removed code it wasn&amp;rsquo;t
+supposed to, and even the syntax was invalid. I didn&amp;rsquo;t expect more though, but
+what was surprising was that it actually felt like I had to do less work at
+this time.&lt;/p&gt;
+&lt;p&gt;The assistant also helped adding a &lt;code&gt;--no-parallel&lt;/code&gt; flag to the management
+command. The output was even more broken than the output of the change
+mentioned above, but again, I could easily fix it to achieve what I wanted.&lt;/p&gt;
+&lt;p&gt;The fact that I know the code and &lt;a href="https://git-scm.com/"&gt;git&lt;/a&gt; well certainly
+helped, the assistant would really have helped without that knowledge.&lt;/p&gt;
+&lt;p&gt;In the end, switching to &lt;code&gt;multiprocessing&lt;/code&gt; didn&amp;rsquo;t help, but adding the
+&lt;code&gt;--no-parallel&lt;/code&gt; flag allowed them to run the processing themselves by not
+spawning any additional threads or processes.&lt;/p&gt;
+&lt;p&gt;The energy use and the stealing of copyrighted material done by the AI
+companies is still really bad. It does feel somewhat OK to use an AI assistant
+in an area where I&amp;rsquo;m proficient as well and where I probably also supplied
+training material (without being asked if I wanted this) though. It&amp;rsquo;s making me
+slightly faster, and doesn&amp;rsquo;t allow me to do things I really couldn&amp;rsquo;t otherwise.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.12.3&lt;/a&gt;: I have added a TinyMCE
+  7 integration to FeinCMS.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.21.1&lt;/a&gt;: See
+  above.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 51)</title><link href="https://406.ch/writing/weeknotes-2024-week-51/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-51/</id><published>2024-12-20T12:00:00Z</published><updated>2024-12-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-51"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-51"&gt;Weeknotes (2024 week 51)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="building-forms-using-django"&gt;&lt;a class="toclink" href="#building-forms-using-django"&gt;Building forms using Django&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I last wrote about this topic &lt;a href="https://406.ch/writing/building-forms-with-the-django-admin/"&gt;in April&lt;/a&gt;. It has &lt;a href="https://mastodon.social/@webology/113669270531953652"&gt;resurfaced on Mastodon this week&lt;/a&gt;. I&amp;rsquo;m thinking about writing a &lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt; demo app, but I already have too much on my plate. I think composing a forms builder on top of &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is the way to go, instead of replacing the admin interface altogether &amp;ndash; sure, you can always do that, but it&amp;rsquo;s so much less composable&amp;hellip;&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
@@ -631,14 +677,4 @@ knows.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv 6.1.1&lt;/a&gt;: See above.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-meta/"&gt;feincms3-meta 4.6&lt;/a&gt;: York has contributed support for emitting structured data records. Looks nice. No documentation yet.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.16.1&lt;/a&gt;: &lt;code&gt;.values()&lt;/code&gt; and &lt;code&gt;.values_list()&lt;/code&gt; queries are now handled better and more consistently than before.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2023 week 44)</title><link href="https://406.ch/writing/weeknotes-2023-week-44/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-44/</id><published>2023-11-02T12:00:00Z</published><updated>2023-11-02T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-44"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-44"&gt;Weeknotes (2023 week 44)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="unmaintained-but-maintained-packages"&gt;&lt;a class="toclink" href="#unmaintained-but-maintained-packages"&gt;Unmaintained but maintained packages&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;There&amp;rsquo;s a discussion going on in the &lt;a href="https://github.com/django-mptt/django-mptt/issues/833"&gt;django-mptt issue tracker&lt;/a&gt; about the maintenance state of django-mptt. &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;I have marked the project as unmaintained in March 2021&lt;/a&gt; and haven&amp;rsquo;t regretted this decision at all. I haven&amp;rsquo;t had to fix &lt;a href="https://github.com/django-mptt/django-mptt/labels/Broken%20Tree"&gt;inconsistencies in the tree structure&lt;/a&gt; once since switching to &lt;a href="https://406.ch/writing/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;. And if that wasn&amp;rsquo;t enough, I get little but only warm and thankful feedback for the latter, so that&amp;rsquo;s extra nice.&lt;/p&gt;
-&lt;p&gt;Despite marking django-mptt as unmaintained I seem to be doing a little bit of maintenance still. I&amp;rsquo;m still using it in old paid projects and so the things I do to make the package work for me is paid work. I&amp;rsquo;m not personally invested in the package anymore, so I&amp;rsquo;m able to tell people that there are absolutely no guarantees about the maintenance, and that feels good.&lt;/p&gt;
-&lt;h2 id="read-the-docs"&gt;&lt;a class="toclink" href="#read-the-docs"&gt;Read the Docs&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I do understand why the &lt;code&gt;.readthedocs.yaml&lt;/code&gt; file is now necessary. I wish that I wouldn&amp;rsquo;t have to do all the busywork of adding one to projects. I have just resubscribed to the Read the Docs Gold Membership which probably has expired at some point in the past. Read the Docs is excellent and everybody who can should support them.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5&lt;/a&gt;, &lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.20&lt;/a&gt; and &lt;a href="https://github.com/feincms/feincms3-language-sites"&gt;feincms3-language-sites 0.3&lt;/a&gt;: Fixed the check which only allows adding an application through the CMS to the page tree (yes, that&amp;rsquo;s right) once; feincms3 worked fine, feincms3-language-sites by accident but feincms3-sites didn&amp;rsquo;t.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/towel/"&gt;towel 0.31&lt;/a&gt;: Towel is one of my oldest packages which is still being used in real-world projects. Towel is a tool for building CRUD-type applications and is designed to keep you DRY while doing that. The project has been heavily inspired by a Django-based agency software I built many years back. The package even has &lt;a href="https://towel.readthedocs.io/en/latest/"&gt;docs&lt;/a&gt;! I&amp;rsquo;m still quite proud of the mostly transparent support for multitenancy, but apart from that I haven&amp;rsquo;t used it in many new projects.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
