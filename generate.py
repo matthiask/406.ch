@@ -47,35 +47,32 @@ class Post:
     draft: str
     url = lambda self: f"/writing/{self.slug}/"
 
-
-def create_excerpt(body):
-    soup = BeautifulSoup(body, "html.parser")
-    return " ".join(tag.text for tag in soup.select("h2, h3, p, li"))
-
-
-def post_date(path, props):
-    if "date" in props:
-        return dt.strptime(props["date"], "%Y-%m-%d").date()
-    return dt.strptime(path.name[:8], "%Y%m%d").date()
+    @classmethod
+    def from_path(cls, path):
+        slugify = lambda v: re.sub(r"[^a-z0-9]+", "-", v.lower()).strip("-")
+        props, content = path.read_text().replace("\r", "").split("\n\n", 1)
+        props = [re.split(r":\s*", prop, maxsplit=1) for prop in props.split("\n")]
+        props = {"categories": ""} | {name.lower(): value for name, value in props}
+        if "date" in props:
+            props["date"] = dt.strptime(props["date"], "%Y-%m-%d").date()
+        else:
+            props["date"] = dt.strptime(path.name[:8], "%Y%m%d").date()
+        props["slug"] = props.get("slug") or slugify(props["title"])
+        props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
+        if "\n# " not in content and not content.startswith("# "):
+            content = f"# {props['title']}\n\n{content}"
+        body = markdown(content, extensions=md_exts)
+        soup = BeautifulSoup(body, "html.parser")
+        props["excerpt"] = " ".join(tag.text for tag in soup.select("h2, h3, p, li"))
+        c_titles = sorted(c for c in re.split(r",\s*", props["categories"]) if c)
+        props["categories"] = [Category(slug=slugify(c), title=c) for c in c_titles]
+        return cls(**{"body": body, "draft": ""} | props)
 
 
 def load_posts(dirs):
-    slugify = lambda v: re.sub(r"[^a-z0-9]+", "-", v.lower()).strip("-")
     for md in chain.from_iterable(DIR.glob(f"{dir}/*.md") for dir in dirs):
         try:
-            props, content = md.read_text().replace("\r", "").split("\n\n", 1)
-            props = [re.split(r":\s*", prop, maxsplit=1) for prop in props.split("\n")]
-            props = {"categories": ""} | {name.lower(): value for name, value in props}
-            props["date"] = post_date(md, props)
-            props["slug"] = props.get("slug") or slugify(props["title"])
-            props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
-            if "\n# " not in content and not content.startswith("# "):
-                content = f"# {props['title']}\n\n{content}"
-            body = markdown(content, extensions=md_exts)
-            props["excerpt"] = create_excerpt(body)
-            c_titles = sorted(c for c in re.split(r",\s*", props["categories"]) if c)
-            props["categories"] = [Category(slug=slugify(c), title=c) for c in c_titles]
-            yield Post(**{"body": body, "draft": ""} | props)
+            yield Post.from_path(md)
         except Exception as exc:
             print(f"{md.relative_to(DIR)} invalid, skipping: {exc!r}", file=sys.stderr)
 
