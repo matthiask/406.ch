@@ -1,5 +1,63 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-01-15T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 03)</title><link href="https://406.ch/writing/weeknotes-2025-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-03/</id><published>2025-01-15T12:00:00Z</published><updated>2025-01-15T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-03"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-03"&gt;Weeknotes (2025 week 03)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-01-17T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Django admin tip: Adding links to related objects in change forms</title><link href="https://406.ch/writing/django-admin-tip-adding-links-to-related-objects-in-change-forms/" rel="alternate" /><id>https://406.ch/writing/django-admin-tip-adding-links-to-related-objects-in-change-forms/</id><published>2025-01-17T12:00:00Z</published><updated>2025-01-17T12:00:00Z</updated><summary type="html">&lt;h1 id="django-admin-tip-adding-links-to-related-objects-in-change-forms"&gt;&lt;a class="toclink" href="#django-admin-tip-adding-links-to-related-objects-in-change-forms"&gt;Django admin tip: Adding links to related objects in change forms&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Any issue which came up on the Django Forum and Discord is how to add links to
+other objects to the Django administration interface. It&amp;rsquo;s something I&amp;rsquo;m doing
+often and I want to share the pattern I&amp;rsquo;m using.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s definitely not rocket science and there are probably better ways to do it,
+but this one works well for me.&lt;/p&gt;
+&lt;h2 id="method-1-override-the-change-form-template"&gt;&lt;a class="toclink" href="#method-1-override-the-change-form-template"&gt;Method 1: Override the change form template&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;In one project users can be the editor of exactly one organization. The link
+between organizations and users is achieved using a &lt;code&gt;Editor&lt;/code&gt; model with a
+&lt;code&gt;ForeignKey(Organization)&lt;/code&gt; and a &lt;code&gt;OneToOneField(User)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I wanted to add a link to the organization page at the bottom of the user form.
+An easy way to achieve this is to add a template at
+&lt;code&gt;templates/admin/auth/user/change_form.html&lt;/code&gt; (or something similar if you&amp;rsquo;re
+using a custom user model):&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;admin/change_form.html&amp;quot;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;after_related_objects&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nb"&gt;block&lt;/span&gt;&lt;span class="nv"&gt;.super&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;original.editor&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;fieldset&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;module aligned&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Organization&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;form-row&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;url&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;admin:organizations_organization_change&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;original.editor.organization.pk&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;original.editor.organization&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;fieldset&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="nv"&gt;after_related_objects&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;original&lt;/code&gt; context variable contains the object being edited. The &lt;code&gt;editor&lt;/code&gt;
+attribute is the reverse accessor for the &lt;code&gt;OneToOneField&lt;/code&gt; mentioned above.&lt;/p&gt;
+&lt;h2 id="method-2-add-a-method-to-the-model-admin-class-returning-a-html-blob"&gt;&lt;a class="toclink" href="#method-2-add-a-method-to-the-model-admin-class-returning-a-html-blob"&gt;Method 2: Add a method to the model admin class returning a HTML blob&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;A terrible but also nice way is to add a method to the &lt;code&gt;ModelAdmin&lt;/code&gt; class which
+returns the HTML containing the links you want, and adding the name of the
+method to &lt;code&gt;readonly_fields&lt;/code&gt;. This is even mentioned in &lt;a href="https://docs.djangoproject.com/en/stable/ref/contrib/admin/#django.contrib.admin.ModelAdmin.readonly_fields"&gt;the official
+&lt;code&gt;readonly_fields&lt;/code&gt;
+documentation&lt;/a&gt;
+but I discovered this by accident a few years back.&lt;/p&gt;
+&lt;p&gt;The method name doesn&amp;rsquo;t have to be added anywhere else, not to &lt;code&gt;fields&lt;/code&gt; nor do
+you have to define &lt;code&gt;fieldsets&lt;/code&gt; for this to work. Just adding it to
+&lt;code&gt;readonly_fields&lt;/code&gt; appends it to the end of the form, before any eventual
+inlines you&amp;rsquo;re using.&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.template.loader&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;render_to_string&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+
+&lt;span class="nd"&gt;@admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ClassAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelAdmin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;list_display&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;language_code&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;readonly_fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;admin_show_custom_districts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;districts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;admin_show_custom_districts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render_to_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;admin/admin_show_custom_districts.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;custom_districts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customdistrict_set&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()},&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2025 week 03)</title><link href="https://406.ch/writing/weeknotes-2025-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-03/</id><published>2025-01-15T12:00:00Z</published><updated>2025-01-15T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-03"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-03"&gt;Weeknotes (2025 week 03)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="claude-ai-helped-me-for-the-first-time"&gt;&lt;a class="toclink" href="#claude-ai-helped-me-for-the-first-time"&gt;Claude AI helped me for the first time&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/matthiask/django-imagefield"&gt;django-imagefield&lt;/a&gt; prefers
 processing thumbnails, cropped images etc. directly when saving the model and
@@ -812,50 +870,4 @@ model with an &lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to a
 &lt;p&gt;That&amp;rsquo;s not meant as a criticism in any way!&amp;#160;&lt;a class="footnote-backref" href="#fnref:license" title="Jump back to footnote 3 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Building forms with the Django admin</title><link href="https://406.ch/writing/building-forms-with-the-django-admin/" rel="alternate" /><id>https://406.ch/writing/building-forms-with-the-django-admin/</id><published>2024-04-12T12:00:00Z</published><updated>2024-04-12T12:00:00Z</updated><summary type="html">&lt;h1 id="building-forms-with-the-django-admin"&gt;&lt;a class="toclink" href="#building-forms-with-the-django-admin"&gt;Building forms with the Django admin&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;The title of this post was shamelessly copied from &lt;a href="https://mastodon.social/@webology/112235938469045649"&gt;Jeff Triplett&amp;rsquo;s post on
-Mastodon&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id="why"&gt;&lt;a class="toclink" href="#why"&gt;Why?&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Many websites need a simple way of embedding forms, for example as a contact
-form or for simple surveys to collect some data or inputs from visitors.
-&lt;a href="https://docs.djangoproject.com/en/5.0/topics/forms/"&gt;Django&amp;rsquo;s forms library&lt;/a&gt;
-makes building such forms straightforward but changing those forms requires
-programming skills and programmer time. Both of them may not be readily
-available. More importantly, sometimes it&amp;rsquo;s just nice to give more tools to web
-publishers.&lt;/p&gt;
-&lt;p&gt;The simple way to build something like this is to use a form builder such as
-Google Forms, Typeform, Paperform or anything of the sort. Those options work
-nicely. The downsides are that embedded forms using those services load slowly,
-look differently, cost a lot or collect a lot of data on users, or all of those
-options. Because of that there&amp;rsquo;s still a place for building such functionality
-locally.&lt;/p&gt;
-&lt;p&gt;If I wanted to use PHP and WordPress I could just use
-&lt;a href="https://wpforms.com/"&gt;WPForms&lt;/a&gt; and call it a day. Since I do not actually want
-that this blog post is a bit longer.&lt;/p&gt;
-&lt;h2 id="the-early-days-form-designer"&gt;&lt;a class="toclink" href="#the-early-days-form-designer"&gt;The early days: form-designer&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;One of the first Django-based third party apps I published was the &lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;. The first version was uploaded to PyPI in 2012 but it had already been used in production for more than two years at that point in time. I had used &lt;a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;Git submodules&lt;/a&gt; for the deployment back then, before switching to &lt;a href="https://virtualenv.pypa.io/"&gt;Python virtualenvs&lt;/a&gt; some time later (and never looking back!)&lt;/p&gt;
-&lt;p&gt;The form-designer is still maintained actively. Because of Django&amp;rsquo;s stability and because of the fact that the app doesn&amp;rsquo;t do all that much it doesn&amp;rsquo;t require much development at all.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A screenshot of the admin interface" src="https://406.ch/assets/20240410-form-designer.png" /&gt;&lt;/p&gt;
-&lt;p&gt;The form designer supports a selection of standard HTML5 input fields out of the box and also has an optional &lt;a href="https://github.com/django-recaptcha/django-recaptcha"&gt;django-recaptcha&lt;/a&gt; integration. All fields support some basic configuration such as setting a title, a help text, marking the field as required etc. Submissions can be sent to a configurable email address and can be saved in the database and later exported as an XLSX file. It&amp;rsquo;s also possible to define your own actions.&lt;/p&gt;
-&lt;h2 id="more-flexibility-needed-feincms3-forms"&gt;&lt;a class="toclink" href="#more-flexibility-needed-feincms3-forms"&gt;More flexibility needed: feincms3-forms&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;A few years back I mentioned &lt;a href="https://406.ch/writing/weeknotes-2021-week-13-and-14/"&gt;feincms3-forms in a weeknotes entry&lt;/a&gt;. The reasons why form-designer wasn&amp;rsquo;t sufficient for a project back then are outlined in the blog post:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id="feincms3-forms-a-new-forms-builder-for-the-django-admin-interface"&gt;&lt;a class="toclink" href="#feincms3-forms-a-new-forms-builder-for-the-django-admin-interface"&gt;feincms3-forms – A new forms builder for the Django admin interface&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;For a current project &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; needed a forms builder with the following constraints:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Simple fields (text, email, checkboxes, dropdowns etc.)&lt;/li&gt;
-&lt;li&gt;Custom validation and processing logic&lt;/li&gt;
-&lt;li&gt;It should be possible to add other content, e.g. headings and explanations between form fields&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The &lt;a href="https://github.com/feincms/form_designer"&gt;form_designer&lt;/a&gt; fulfilled a few of these requirements but not all. It still works well but I wanted a forms builder based on &lt;a href="https://github.com/matthiask/django-content-editor"&gt;django-content-editor&lt;/a&gt; for a long time already. Also, I really like the feincms3 pattern where the third party app only provides abstract models. Yeah, it is much more work to start with but the flexibility and configurability is worth it – especially since it&amp;rsquo;s possible to write straightforward code to handle special cases[^2] instead of configuring even more settings.&lt;/p&gt;
-&lt;p&gt;The humble beginnings are here in the &lt;a href="https://github.com/matthiask/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt; repository. The &lt;a href="https://github.com/matthiask/feincms3-forms/tree/main/tests/testapp"&gt;test suite already shows how things work together&lt;/a&gt; but as of now no documentation exists and no release has been made yet. I hope it will be ready for a first beta release in the next few weeks 😄&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Since then I have used feincms3-forms more often than form-designer, for building simple forms and also to build multi-step form wizards with custom fields, custom validation, configurable steps etc. The &lt;a href="https://github.com/feincms/feincms3-forms?tab=readme-ov-file#feincms3-forms"&gt;README&lt;/a&gt; now actually explains why the project exists and how it could be used.&lt;/p&gt;
-&lt;p&gt;It still doesn&amp;rsquo;t come close to WPForms in terms of included functionality; a big feature which is missing is conditional logic because I haven&amp;rsquo;t yet had a use for it.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="The feincms3-forms admin interface" src="https://406.ch/assets/20240410-feincms3-forms.png" /&gt;&lt;/p&gt;
-&lt;p&gt;The feincms3-forms forms support all types of content between form fields (basically everything &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; supports). Plugins for form fields are more flexible and can add as many input fields to the form as they want, you&amp;rsquo;re not restricted to single values or single input fields.&lt;/p&gt;
-&lt;h2 id="packages"&gt;&lt;a class="toclink" href="#packages"&gt;Packages&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/feincms/form-designer"&gt;form-designer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/div&gt;</summary></entry></feed>
