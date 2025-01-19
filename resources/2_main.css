@@ -5,6 +5,7 @@
 body {
   box-sizing: border-box;
 }
+
 *,
 *::before,
 *::after {
@@ -19,12 +20,12 @@ body {
   font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
-  color: #333;
-  background: #e6e6e9;
+  color: #f8f8f8;
+  background: #222;
 }
 
 main {
-  background: #f8f8ff;
+  background: #333;
 }
 
 .wrappy {
@@ -192,7 +193,7 @@ header a,
 footer a,
 main .text a:not(.toclink) {
   text-decoration: underline;
-  color: #0c7575;
+  color: #45cdcd;
 }
 
 .utterances {
@@ -210,23 +211,9 @@ main .text a:not(.toclink) {
   padding: 0 1rem;
   margin-top: -0.5rem;
   margin-bottom: 1rem;
-}
 
-@media (prefers-color-scheme: dark) {
-  body {
-    color: #fff;
-    background: #333;
-  }
-
-  main {
-    background: #555;
-  }
-
-  header a,
-  footer a,
-  main .text a:not(.toclink) {
-    color: #14b7b7;
-  }
+  scrollbar-color: #333;
+  scrollbar-width: thin;
 }
 
 sup,
