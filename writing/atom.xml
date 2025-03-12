@@ -1,5 +1,67 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-02-13T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>TIL: Tools exist which do not lowercase domain names when requesting websites over HTTP(S)</title><link href="https://406.ch/writing/til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-http-s/" rel="alternate" /><id>https://406.ch/writing/til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-http-s/</id><published>2025-02-13T12:00:00Z</published><updated>2025-02-13T12:00:00Z</updated><summary type="html">&lt;h1 id="til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-https"&gt;&lt;a class="toclink" href="#til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-https"&gt;TIL: Tools exist which do not lowercase domain names when requesting websites over HTTP(S)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-03-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Ungoogling my life</title><link href="https://406.ch/writing/ungoogling-my-life/" rel="alternate" /><id>https://406.ch/writing/ungoogling-my-life/</id><published>2025-03-12T12:00:00Z</published><updated>2025-03-12T12:00:00Z</updated><summary type="html">&lt;h1 id="ungoogling-my-life"&gt;&lt;a class="toclink" href="#ungoogling-my-life"&gt;Ungoogling my life&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I was dismayed (but unfortunately not really surprised) to see all the big tech
+CEOs kiss the ring during the inauguration a few weeks back. I decided then
+that I didn&amp;rsquo;t want to subscribe to any products of these companies with my
+personal money anymore. In my case, this meant only Google. I do have an iPhone
+(the first iPhone since the 3GS or something) but I&amp;rsquo;m not paying any
+subscriptions there either.&lt;/p&gt;
+&lt;p&gt;I have been a paying Google subscriber for years and years, starting in their
+&amp;ldquo;Don&amp;rsquo;t be evil&amp;rdquo; area and sticking with them as the product and the companies
+ethics got worse and worse.&lt;/p&gt;
+&lt;h2 id="gmail"&gt;&lt;a class="toclink" href="#gmail"&gt;GMail&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have switched my private mail to &lt;a href="https://www.fastmail.com/"&gt;Fastmail&lt;/a&gt; a few
+years ago, so I haven&amp;rsquo;t been really using GMail anymore.&lt;/p&gt;
+&lt;p&gt;GMail is still a really good email service. In the last few weeks the AI
+features have become hard to overlook and/or ignore though, and I&amp;rsquo;m not really
+happy about that. Fastmail shows more restraint in this area.&lt;/p&gt;
+&lt;h2 id="google-calendar"&gt;&lt;a class="toclink" href="#google-calendar"&gt;Google Calendar&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We have shared family calendars using Google Calendar. Now I do not have a
+private calendar anymore, and am using the Work calendar for everything. That&amp;rsquo;s
+a small setback. Fastmail also has a calendar functionality but sharing
+read/write calendars doesn&amp;rsquo;t seem to be easily possible except if others are in
+the same account group.&lt;/p&gt;
+&lt;h2 id="google-drive-and-google-photos"&gt;&lt;a class="toclink" href="#google-drive-and-google-photos"&gt;Google Drive and Google Photos&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I don&amp;rsquo;t miss the Drive all that much. The things I&amp;rsquo;m working on are versioned
+with &lt;a href="https://git-scm.com/"&gt;Git&lt;/a&gt;, and since I&amp;rsquo;m switching from desktop to
+notebook all the time anyway everything is already backuped and synced
+everywhere. For everything else I have started renting a &lt;a href="https://www.hetzner.com/de/storage/storage-box/"&gt;Storage Box at
+Hetzner&lt;/a&gt;. I&amp;rsquo;m paying a few
+euros per month for 1 TiB of storage which is accessible by several protocols.&lt;/p&gt;
+&lt;h2 id="docs-spreadsheets"&gt;&lt;a class="toclink" href="#docs-spreadsheets"&gt;Docs / Spreadsheets&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.libreoffice.org/"&gt;LibreOffice&lt;/a&gt; exists and fits my needs. Whenever
+possible I use pen and paper or flat text files anyway.&lt;/p&gt;
+&lt;h2 id="maps"&gt;&lt;a class="toclink" href="#maps"&gt;Maps&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been a happy &lt;a href="https://osmand.net/"&gt;OsmAnd&lt;/a&gt; subscriber anyway. I&amp;rsquo;m still
+paying for it but have been using &lt;a href="https://organicmaps.app/"&gt;Organic Maps&lt;/a&gt; more
+often now because the app feels faster and nicer.&lt;/p&gt;
+&lt;h2 id="youtube-and-youtube-music"&gt;&lt;a class="toclink" href="#youtube-and-youtube-music"&gt;YouTube and YouTube Music&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m very happy with &lt;a href="https://bandcamp.com/"&gt;Bandcamp&lt;/a&gt; and have been buying
+music there for years now. I don&amp;rsquo;t think the app is great though.&lt;/p&gt;
+&lt;p&gt;I have tried several apps, and have now settled on
+&lt;a href="https://apps.apple.com/us/app/foobar2000/id1072807669"&gt;foobar2000&lt;/a&gt;. It works
+well and includes an FTP server which I can use to push the library from the
+computer to the phone using a &lt;a href="https://lftp.yar.ru/"&gt;lftp&lt;/a&gt; script.&lt;/p&gt;
+&lt;p&gt;I looked into setting up by own streaming server but haven&amp;rsquo;t gotten anywhere
+with that project yet, and I&amp;rsquo;m not sure if I really want to pursue that.&lt;/p&gt;
+&lt;p&gt;On the computer I&amp;rsquo;m back to using
+&lt;a href="https://wiki.gnome.org/Apps/Rhythmbox"&gt;Rhythmbox&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Not having a YouTube subscription is great, because all the ads are so annoying
+that I&amp;rsquo;m spending less time on YouTube than I did in years. And if I really
+want to watch something &lt;a href="https://github.com/yt-dlp/yt-dlp"&gt;yt-dlp&lt;/a&gt; exists and
+does what it says on the tin.&lt;/p&gt;
+&lt;h2 id="other-things"&gt;&lt;a class="toclink" href="#other-things"&gt;Other things&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been playing &lt;a href="https://ingress.com/"&gt;Ingress&lt;/a&gt; for over 10 years. It
+didn&amp;rsquo;t immediately register that I also deleted that account with my Google
+account. I&amp;rsquo;m still a bit sad when thinking about all the badges I lost, but it
+has been definitely worth it.&lt;/p&gt;
+&lt;p&gt;Google Keep has worked well for me for small To Dos, reminders and notes. I
+haven&amp;rsquo;t found an acceptable replacement yet; Apple Notes works somewhat, but
+cannot be accessed on the web if you&amp;rsquo;re using their advanced data protection
+feature. Maybe I need a To Do app, but this space is so crowded that I don&amp;rsquo;t
+even want to start searching for something with fits my needs.&lt;/p&gt;
+&lt;p&gt;At work we&amp;rsquo;re still using Google Workspace. It would probably be in our
+interest to change that though.&lt;/p&gt;</summary></entry><entry><title>TIL: Tools exist which do not lowercase domain names when requesting websites over HTTP(S)</title><link href="https://406.ch/writing/til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-http-s/" rel="alternate" /><id>https://406.ch/writing/til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-http-s/</id><published>2025-02-13T12:00:00Z</published><updated>2025-02-13T12:00:00Z</updated><summary type="html">&lt;h1 id="til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-https"&gt;&lt;a class="toclink" href="#til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-https"&gt;TIL: Tools exist which do not lowercase domain names when requesting websites over HTTP(S)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;About a week ago I received error mails for a surprising behavior (to me!)
 where some tool requested an URL from one of our websites using
 &lt;a href="https://github.com/feincms/feincms3-language-sites/"&gt;feincms3-language-sites&lt;/a&gt;
@@ -783,31 +845,4 @@ effort into a better solution :-)&lt;/p&gt;
 long time. I experimented with the discounting factor and the number of random
 pairings it generates upfront. The values in the code seem to work fine.&lt;/p&gt;
 &lt;p&gt;Sometimes it&amp;rsquo;s simple stuff like this which gets me going and reignites the
-love for programming. Like a small puzzle.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 21)</title><link href="https://406.ch/writing/weeknotes-2024-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-21/</id><published>2024-05-22T12:00:00Z</published><updated>2024-05-22T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-21"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-21"&gt;Weeknotes (2024 week 21)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;There have been times when work has been more enjoyable than in the last few
-weeks. It feels more stressful than at other times, and this mostly has to do
-with particular projects. I hope I&amp;rsquo;ll be able to move on soon.&lt;/p&gt;
-&lt;h2 id="blacknoise"&gt;&lt;a class="toclink" href="#blacknoise"&gt;blacknoise&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have released &lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;. It&amp;rsquo;s an
-ASGI app for static file serving inspired by
-&lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The 1.0 version number is only a big step in versioning terms, not much has
-happened with the code. It&amp;rsquo;s a tiny little well working piece of software which
-has been running in production for some time without any hickups. The biggest
-recent change is that I have parallelized the gzip and brotli compression step;
-this makes building images using whitenoise more painful because there the wait
-is really really long sometimes. &lt;a href="https://github.com/evansd/whitenoise/pull/484"&gt;A pull request fixing this
-exists&lt;/a&gt;, but it hasn&amp;rsquo;t moved
-forwards in months.&lt;/p&gt;
-&lt;p&gt;I have written a longer post about it earlier this year
-&lt;a href="https://406.ch/writing/blacknoise-asgi-app-for-static-file-serving/"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5&lt;/a&gt;: Code golfing. Added backwards compatibility with old Django versions so that I can use it for old projects. Also includes optional support for Google consent management.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_fast_export/"&gt;django-fast-export 0.1.1&lt;/a&gt;: This is basically a repackaging of the streaming CSV view from Django&amp;rsquo;s documentation as a reusable class. I have switched to using an iterator so that I can export even larger datasets.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.18&lt;/a&gt;: Still alpha versioned but used in production in various projects. I should really release an 1.0 version, but there are no integration tests at all. Mainly visual tweaks in this update.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.5&lt;/a&gt;: Better handling of templates and regions when a particular editor instance only shows a subset of configured templates. Disallowed adding plugins when in an unknown region. It&amp;rsquo;s funny how many edge cases exist in software as old as this.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.4&lt;/a&gt;: Fixed edge cases with whitespace handling when merging elements.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.6.1&lt;/a&gt;: Allowed &lt;code&gt;./manage.py f3loaddata -&lt;/code&gt; to load JSON data from stdin.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+love for programming. Like a small puzzle.&lt;/p&gt;</summary></entry></feed>
