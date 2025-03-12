@@ -1,6 +1,5 @@
 Title: Ungoogling my life
 Categories:
-Draft: remove-this-to-publish
 
 
 I was dismayed (but unfortunately not really surprised) to see all the big tech
@@ -31,7 +30,7 @@ We have shared family calendars using Google Calendar. Now I do not have a
 private calendar anymore, and am using the Work calendar for everything. That's
 a small setback. Fastmail also has a calendar functionality but sharing
 read/write calendars doesn't seem to be easily possible except if others are in
-the same account.
+the same account group.
 
 
 ## Google Drive and Google Photos
@@ -54,7 +53,7 @@ possible I use pen and paper or flat text files anyway.
 
 I have been a happy [OsmAnd](https://osmand.net/) subscriber anyway. I'm still
 paying for it but have been using [Organic Maps](https://organicmaps.app/) more
-often now, because the app feels faster and nicer.
+often now because the app feels faster and nicer.
 
 
 ## YouTube and YouTube Music
@@ -65,7 +64,7 @@ music there for years now. I don't think the app is great though.
 I have tried several apps, and have now settled on
 [foobar2000](https://apps.apple.com/us/app/foobar2000/id1072807669). It works
 well and includes an FTP server which I can use to push the library from the
-computer to the phone.
+computer to the phone using a [lftp](https://lftp.yar.ru/) script.
 
 I looked into setting up by own streaming server but haven't gotten anywhere
 with that project yet, and I'm not sure if I really want to pursue that.
@@ -76,13 +75,13 @@ On the computer I'm back to using
 Not having a YouTube subscription is great, because all the ads are so annoying
 that I'm spending less time on YouTube than I did in years. And if I really
 want to watch something [yt-dlp](https://github.com/yt-dlp/yt-dlp) exists and
-works well.
+does what it says on the tin.
 
 
 ## Other things
 
 I have been playing [Ingress](https://ingress.com/) for over 10 years. It
-didn't immediately click that I also deleted that account with my Google
+didn't immediately register that I also deleted that account with my Google
 account. I'm still a bit sad when thinking about all the badges I lost, but it
 has been definitely worth it.
 
