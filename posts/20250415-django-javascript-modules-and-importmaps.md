@@ -120,7 +120,7 @@ While this approach works, there are several issues to address:
 
 However, it doesn't fully address the scenario where a third-party **Django** app (a Python package) ships JavaScript modules that need to be integrated into your application.
 
-I still use a bundler for most of my JavaScript from `node_modules`, so I don't need this specific functionality yet, but it may become more important as browser module support improves.
+I still use a bundler for most of my JavaScript from `node_modules`, so I don't need this specific functionality yet. That will probably change in the future.
 
 ## Using bundlers
 
