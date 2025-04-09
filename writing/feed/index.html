@@ -1,5 +1,90 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-03-12T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Ungoogling my life</title><link href="https://406.ch/writing/ungoogling-my-life/" rel="alternate" /><id>https://406.ch/writing/ungoogling-my-life/</id><published>2025-03-12T12:00:00Z</published><updated>2025-03-12T12:00:00Z</updated><summary type="html">&lt;h1 id="ungoogling-my-life"&gt;&lt;a class="toclink" href="#ungoogling-my-life"&gt;Ungoogling my life&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-04-09T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 15)</title><link href="https://406.ch/writing/weeknotes-2025-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-15/</id><published>2025-04-09T12:00:00Z</published><updated>2025-04-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-15"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-15"&gt;Weeknotes (2025 week 15)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="djangonaut-space"&gt;&lt;a class="toclink" href="#djangonaut-space"&gt;Djangonaut Space&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We have already reached the final week of the &lt;a href="https://djangonaut.space/"&gt;Djangonaut
+Space&lt;/a&gt; session 4. I had a great time as a navigator
+and am looking forward to participate more, but for now I&amp;rsquo;m also glad that I do
+not have the additional responsibility at least for the close future.&lt;/p&gt;
+&lt;p&gt;We have done great work on the
+&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar&lt;/a&gt; in our
+group, more is to come.&lt;/p&gt;
+&lt;h2 id="progress-on-the-prose-editor"&gt;&lt;a class="toclink" href="#progress-on-the-prose-editor"&gt;Progress on the prose editor&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have done much work on
+&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt; in the
+last few weeks and after a large list of alphas and betas I&amp;rsquo;m nearing a state
+which I want to release into the wild.&lt;/p&gt;
+&lt;p&gt;The integration has been completely rethought (again) and now uses JavaScript
+modules and importmaps. The ground work to support all of that in Django has
+been laid in &lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The nice thing about using JavaScript modules and importmaps is that we now
+have an easy way to combine the power of modern JavaScript customization with
+easy cache busting using Django&amp;rsquo;s &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt;. A longer post
+on this is brewing and I hope to have it ready soon-ish.&lt;/p&gt;
+&lt;p&gt;As a sneak peek, here&amp;rsquo;s the way it works:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django_prose_editor.fields&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ProseEditorField&lt;/span&gt;
+
+&lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ProseEditorField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Bold&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Italic&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;BulletList&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Link&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="c1"&gt;# sanitize=True is the default when using extensions&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The nice thing about it is that the sanitization allowlist for
+&lt;a href="https://github.com/messense/nh3"&gt;nh3&lt;/a&gt; only includes tags and attributes which
+are enabled via the &lt;code&gt;extensions&lt;/code&gt; dict. So, you don&amp;rsquo;t have to do anything else
+to be safe from XSS etc.&lt;/p&gt;
+&lt;p&gt;Check out the pre-releases on
+&lt;a href="https://pypi.org/project/django-prose-editor/#history"&gt;PyPI&lt;/a&gt; or have a look at
+the &lt;a href="https://django-prose-editor.readthedocs.io/"&gt;documentation&lt;/a&gt; to learn more
+about this project!&lt;/p&gt;
+&lt;h2 id="using-claude-code"&gt;&lt;a class="toclink" href="#using-claude-code"&gt;Using Claude Code&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been using Claude Code (without editor integrations, thank you very
+much) more and more. It&amp;rsquo;s a good coding companion when it comes to throwing
+around ideas, drafting docs and writing unit tests including integration tests.&lt;/p&gt;
+&lt;p&gt;Sometimes I&amp;rsquo;m really surprised at how good it is. Other times&amp;hellip; less so. The
+tool often finds a way to get tests passing, but when the editor integration
+tests directly manipulate &lt;code&gt;innerHTML&lt;/code&gt; and then Claude proclaims that
+interacting with the editor is now shown to work I have to chuckle a bit. And
+when I insist on doing what I mean and not just finding broken workarounds it
+doesn&amp;rsquo;t really change anything. After spinning more we&amp;rsquo;re always back where we
+started.&lt;/p&gt;
+&lt;p&gt;I am somewhat glad that this is where we&amp;rsquo;re at now. I&amp;rsquo;m not 100% sure if it&amp;rsquo;s
+progress. At least it&amp;rsquo;s surprisingly funny at times.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I haven&amp;rsquo;t written a regular weeknotes entry since the end of January, so
+naturally the list here is longer than usual.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms 0.5.1&lt;/a&gt;: I
+  inadvertently bumped the Django dependency without actually wanting that;
+  this patch release reverts that (while adding official support for new Django
+  and Python versions).&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.17&lt;/a&gt;: Mariusz has done
+  all the hard work for supporting newer versions of Django. I just had to
+  press the release button. That being said, four years after marking the
+  package as unmaintained I&amp;rsquo;m still maintaining it. At least I don&amp;rsquo;t get
+  complaints anymore&amp;hellip;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor
+  0.4&lt;/a&gt;: Added a dependency
+  on the pre-release of django-prose-editor and added a test suite including
+  integration tests so that we actually now when stuff breaks the next time!&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 5.1&lt;/a&gt;:
+  See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data&lt;/a&gt;: Added fixes to dump
+  distinct objects. Spent more time than useful on the Django change which
+  added a final newline to JSON-serialized data.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 3.1.2&lt;/a&gt;:
+  Importmaps support, added a &lt;code&gt;static_lazy&lt;/code&gt; helper which is useful to define
+  module-scoped static URLs. The later wouldn&amp;rsquo;t work with the
+  &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt; because the manifest doesn&amp;rsquo;t yet exist when
+  &lt;code&gt;collectstatic&lt;/code&gt; runs, so the actual evaluation of static URLs has to be
+  postponed. The lazy version solves this nicely.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.21.1&lt;/a&gt; and &lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites 0.4.1&lt;/a&gt;: See the relevant &lt;a href="https://406.ch/writing/til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-http-s/"&gt;TIL&lt;/a&gt; blogpost.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Ungoogling my life</title><link href="https://406.ch/writing/ungoogling-my-life/" rel="alternate" /><id>https://406.ch/writing/ungoogling-my-life/</id><published>2025-03-12T12:00:00Z</published><updated>2025-03-12T12:00:00Z</updated><summary type="html">&lt;h1 id="ungoogling-my-life"&gt;&lt;a class="toclink" href="#ungoogling-my-life"&gt;Ungoogling my life&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I was dismayed (but unfortunately not really surprised) to see all the big tech
 CEOs kiss the ring during the inauguration a few weeks back. I decided then
 that I didn&amp;rsquo;t want to subscribe to any products of these companies with my
@@ -817,32 +902,4 @@ etc. work just as well.&lt;/p&gt;
   small-ish improvements. I should really start using higher version numbers,
   but not having to commit to anything also feels great.  That being said, the
   editor is in active use in several projects, so maybe I&amp;rsquo;m deceiving myself.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Workbench: Coffee time!</title><link href="https://406.ch/writing/workbench-coffee-time/" rel="alternate" /><id>https://406.ch/writing/workbench-coffee-time/</id><published>2024-05-24T12:00:00Z</published><updated>2024-05-24T12:00:00Z</updated><summary type="html">&lt;h1 id="workbench-coffee-time"&gt;&lt;a class="toclink" href="#workbench-coffee-time"&gt;Workbench: Coffee time!&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have written about &lt;a href="https://406.ch/writing/workbench-the-django-based-agency-software/"&gt;the Workbench agency
-software&lt;/a&gt; a
-few weeks back.&lt;/p&gt;
-&lt;p&gt;Back when we were using Slack at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used a
-Donut bot to generate randomized invites for a coffee break. &lt;a href="https://406.ch/writing/why-we-switched-from-slack-to-discord-at-work/"&gt;We lost that bot
-when we switched to
-Discord&lt;/a&gt;.
-I searched some time for an equivalent bot for Discord but couldn&amp;rsquo;t find any,
-so like any self-respecting nerd, break lover and NIH-sufferer I reimplemented
-the functionality as a part of our agency software.&lt;/p&gt;
-&lt;p&gt;The first version generated totally random pairings without any history; I
-thought that maybe this would be good enough, but of course I received an
-invite for a coffee with the exact same person in the first two invitations.
-Even though I did enjoy the break both times this motivated me to put some
-effort into a better solution :-)&lt;/p&gt;
-&lt;p&gt;The result of this work is the &lt;a href="https://github.com/matthiask/workbench/blob/a14d8b9560def7a4e2bbf7531eb6108f734568db/workbench/accounts/tasks.py#L57"&gt;&lt;code&gt;coffee_invites()&lt;/code&gt; function&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;There are two main parts to the generator:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It randomly generates twenty pairings from all participants; it prefers
-  groups of two except for the last group which may contain three people.&lt;/li&gt;
-&lt;li&gt;It loads old pairings from the database and gives higher penalties to equal
-  pairings depending on the time which has passed since the last time.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So, it&amp;rsquo;s not mathematically perfect, but all imbalances will cancel out over a
-long time. I experimented with the discounting factor and the number of random
-pairings it generates upfront. The values in the code seem to work fine.&lt;/p&gt;
-&lt;p&gt;Sometimes it&amp;rsquo;s simple stuff like this which gets me going and reignites the
-love for programming. Like a small puzzle.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
