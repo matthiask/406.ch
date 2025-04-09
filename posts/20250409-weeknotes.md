@@ -1,6 +1,5 @@
 Title: Weeknotes (2025 week 15)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 
 ## Djangonaut Space
