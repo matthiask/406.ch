@@ -1,5 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-04-09T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 15)</title><link href="https://406.ch/writing/weeknotes-2025-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-15/</id><published>2025-04-09T12:00:00Z</published><updated>2025-04-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-15"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-15"&gt;Weeknotes (2025 week 15)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-04-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Customizing Django admin fieldsets without fearing forgotten fields</title><link href="https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/" rel="alternate" /><id>https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/</id><published>2025-04-14T12:00:00Z</published><updated>2025-04-14T12:00:00Z</updated><summary type="html">&lt;h1 id="customizing-django-admin-fieldsets-without-fearing-forgotten-fields"&gt;&lt;a class="toclink" href="#customizing-django-admin-fieldsets-without-fearing-forgotten-fields"&gt;Customizing Django admin fieldsets without fearing forgotten fields&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;When defining &lt;a href="https://docs.djangoproject.com/en/5.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets"&gt;fieldsets on Django modeladmin classes&lt;/a&gt; I always worry that I forget updating the fieldsets later when adding or removing new model fields, and not without reason: It has already happened to me several times. Forgetting to remove fields is mostly fine because system checks will complain about it, forgetting to add fields may be real bad. A recent example was a crashing website because a required field was missing from the admin and therefore was left empty when creating new instances!&lt;/p&gt;
+&lt;p&gt;I have now published another Django package which solves this by adding support for specifying the special &lt;code&gt;"__remaining__"&lt;/code&gt; field in a fieldsets definition. The &lt;code&gt;"__remaining__"&lt;/code&gt; placeholder is automatically replaced by all model fields which haven&amp;rsquo;t been explicitly added already or added to &lt;code&gt;exclude&lt;/code&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s a short example for a modeladmin definition using django-auto-admin-fieldsets:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;admin&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django_auto_admin_fieldsets.admin&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;AutoFieldsetsModelAdmin&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+
+&lt;span class="nd"&gt;@admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MyModel&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyModelAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;AutoFieldsetsModelAdmin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# Define fieldsets as usual with a placeholder&lt;/span&gt;
+    &lt;span class="n"&gt;fieldsets&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Basic Information&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;fields&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;slug&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]}),&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;fields&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;__remaining__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]}),&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I have used Claude Code a lot for the code and the package, and as always, I had to fix bugs and oversights. I hope it didn&amp;rsquo;t regurgitate the code of an existing package &amp;ndash; I searched for an existing solution first but didn&amp;rsquo;t find any.&lt;/p&gt;
+&lt;p&gt;The package is available on &lt;a href="https://pypi.org/project/django-auto-admin-fieldsets/"&gt;PyPI&lt;/a&gt; and is developed on &lt;a href="https://github.com/matthiask/django-auto-admin-fieldsets"&gt;GitHub&lt;/a&gt;, at least for the time being.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Autocreated fields such as surrogate primary keys or fields which aren&amp;rsquo;t editable are also excluded automatically of course.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2025 week 15)</title><link href="https://406.ch/writing/weeknotes-2025-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-15/</id><published>2025-04-09T12:00:00Z</published><updated>2025-04-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-15"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-15"&gt;Weeknotes (2025 week 15)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="djangonaut-space"&gt;&lt;a class="toclink" href="#djangonaut-space"&gt;Djangonaut Space&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We have already reached the final week of the &lt;a href="https://djangonaut.space/"&gt;Djangonaut
 Space&lt;/a&gt; session 4. I had a great time as a navigator
@@ -858,48 +884,4 @@ etc. work just as well.&lt;/p&gt;
   See above.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.28&lt;/a&gt;:
   See above.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 23)</title><link href="https://406.ch/writing/weeknotes-2024-week-23/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-23/</id><published>2024-06-07T12:00:00Z</published><updated>2024-06-07T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-23"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-23"&gt;Weeknotes (2024 week 23)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="switching-everything-from-pip-to-uv"&gt;&lt;a class="toclink" href="#switching-everything-from-pip-to-uv"&gt;Switching everything from pip to uv&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Enough said. I&amp;rsquo;m always astonished how fast computers can be.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering
-  0.18&lt;/a&gt;: Added a database
-  index to the ordering field since we&amp;rsquo;re always sorting by it.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.4&lt;/a&gt;:
-  Dropped the jQuery dependency making it possible to use the editor outside
-  the Django administration interface without annoying JavaScript errors.
-  Allowed additional heading levels and moved the block type buttons into a
-  popover.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.4.2&lt;/a&gt;:
-  I enjoy working on this important piece of software very much.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-email-hosts/"&gt;django-email-hosts 0.2.1&lt;/a&gt;:
-  Added a command analogous to &lt;code&gt;./manage.py sendtestemail&lt;/code&gt; so that it&amp;rsquo;s
-  possible to easily test the different configured email backends.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.0&lt;/a&gt;: I completely reworked the
-  move node action; previously it opened a new page where you could see all
-  possible targets; now you can cut a page and paste it somewhere else. The
-  advantages of the new interface is that you don&amp;rsquo;t leave the changelist and
-  can still profit from all its features while moving pages around.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.21&lt;/a&gt;: A new
-  release taking advantage of a new hook in feincms3 7.0 so that the new moving
-  interface works.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.16.5&lt;/a&gt;: authlib
-  now shows a welcome message when authenticating using admin OAuth2. It&amp;rsquo;s nice
-  and helps with debugging strange authentication failures.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.0&lt;/a&gt;:
-  I reworked the UI. The sidebar is gone, instead there are nice buttons in the
-  place where you can add new plugins; the plugins appear in a nice grid
-  instead of a list, which looks much better once you have more than just a few
-  plugin types available. Also, plugin type icons are now shown in the plugin
-  forms. I think it looks much better than before.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol
-  1.5.2&lt;/a&gt;: I didn&amp;rsquo;t contribute
-  anything to this release which is also a nice experience for a change. The
-  Google consent mode integration has been improved and simplified.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor
-  0.0.22&lt;/a&gt;: Various
-  small-ish improvements. I should really start using higher version numbers,
-  but not having to commit to anything also feels great.  That being said, the
-  editor is in active use in several projects, so maybe I&amp;rsquo;m deceiving myself.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
