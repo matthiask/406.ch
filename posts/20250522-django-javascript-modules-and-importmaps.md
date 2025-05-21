@@ -1,10 +1,9 @@
 Title: Django, JavaScript modules and importmaps
 Categories: Django, Programming
-Draft: remove-this-to-publish
 
 # How I'm using Django, JavaScript modules and importmaps together
 
-I have been spending a lot of time in the last few weeks working on
+I have been spending a lot of time in the last few months working on
 [django-prose-editor](https://github.com/matthiask/django-prose-editor/). First
 I've rebuilt the editor on top of
 [Tiptap](https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/)
@@ -28,41 +27,25 @@ Importmaps offer a cleaner solution that works with native browser modules, supp
 
 ## The history
 
-The conversation around better JavaScript handling in Django has been ongoing for years. A significant milestone was Thibaud Colas' DEP draft:
+The conversation around better JavaScript handling in Django has been ongoing for years. Thibaud Colas' [DEP draft](https://github.com/django/deps/pull/84) come to mind as does the [discussion about whether to improve or deprecate `forms.Media`](https://forum.djangoproject.com/t/rejuvenating-vs-deprecating-form-media/21285).
 
-https://github.com/django/deps/pull/84
+A few packages exist which are offering solutions in this space:
 
-There has also been lengthy discussion about whether to improve or deprecate `forms.Media`:
+- [django-esm](https://github.com/codingjoe/django-esm) provides a solution for using ES modules with Django without bundling.
+- [django-js-asset](https://github.com/matthiask/django-js-asset/) provides helpers for delivering JavaScript modules, importmaps, JSON blobs etc. to the browser through Django's `forms.Media`. The blog post [Object-based assets for Django's forms.Media](https://406.ch/writing/object-based-assets-for-django-s-forms-media/) explores this in more detail.
+- The article on [Content Security Policy compliance](https://406.ch/writing/django-admin-apps-and-content-security-policy-compliance/) explores better approaches to use JavaScript in the Django admin while avoiding inline JavaScript.
 
-https://forum.djangoproject.com/t/rejuvenating-vs-deprecating-form-media/21285
-
-These conversations highlight the tension between supporting modern JavaScript patterns while maintaining backward compatibility and avoiding over-engineering solutions.
-
-## Prior art
-
-Several approaches have been attempted to solve this problem:
-
-- [django-esm](https://github.com/codingjoe/django-esm) provides a solution for using ES modules with Django
-- [django-js-asset](https://github.com/matthiask/django-js-asset/) helps with dependency management and proper JavaScript loading
-- The article on [Content Security Policy compliance](https://406.ch/writing/django-admin-apps-and-content-security-policy-compliance/) explores better approaches to JavaScript in Django admin
-
-Django has made incremental improvements, such as:
-- Official support for object-based media CSS and JS paths: https://github.com/django/django/commit/4c76ffc2d6c77
-- Official support for `Script` tags: https://github.com/django/django/pull/18782
-
-I've previously written about [object-based assets for Django's forms.Media](https://406.ch/writing/object-based-assets-for-django-s-forms-media/), which was a step in the right direction.
+django-js-asset came before Django [added official support for object-based media CSS and JS paths](https://github.com/django/django/commit/4c76ffc2d6c77) but has since been changed to take advantage of that official support. It has enabled the removal of ugly hacks. In the meantime, Django has even added [official support for object-based `Script` tags](https://github.com/django/django/pull/18782).
 
 ## My DEP draft
 
-Building on these efforts, I've submitted my own DEP draft for importmap support:
-
-https://github.com/django/deps/pull/101
-
-This proposal aims to provide a clean, standardized way to handle JavaScript modules in Django applications, leveraging the native importmap specification that browsers now support.
+Building on these efforts, I've been thinking about [submitting my own DEP draft for importmap support](https://github.com/django/deps/pull/101). It hasn't yet come far though, and I'm still more occupied with verifying and using my existing solution, especially learning if it has limitations which would make the implemented approach unworkable for official inclusion.
 
 ## The current effort
 
-I've already implemented this approach in the alpha version of django-prose-editor. Here's how it works:
+As alluded to above, I already have a working solution for using importmaps (in
+django-js-asset) and I'm actively using it in django-prose-editor. Here's how
+it works:
 
     :::python
     importmap.update({
@@ -92,7 +75,7 @@ A minimal editor implementation using this:
 
 The importmap looks as follows when using Django's `ManifestStaticFilesStorage`
 which produces filenames containing the hash of the file's contents for cache
-busting:
+busting (edited for readability):
 
     :::html
     <script type="importmap">
@@ -107,8 +90,7 @@ This means that when your code has `import { ... } from "django-prose-editor/edi
 
 While this approach works, there are several issues to address:
 
-
-- Different modules may want to use their own importmaps. The discussion is ongoing and it isn't clear if this will happen at all. So for now we're stuck with managing a single importmap in the backend.
+- I don't really like global variables but there doesn't seem to be a way around it. Browsers want to use a single importmap only (even though the algorithm for merging importmaps exists in the spec!) and the importmap has to be included above all ES modules.
 
 - The importmap may be added twice to the HTML when using a widget that works in both the admin and frontend contexts. Currently, if you want to avoid this problem or ugliness you have to determine in your Django form field if the code is requesting an admin widget or another widget, either by inspecting the callstack (very ugly) or by checking if the `widget` argument to the form field constructor is set to an admin-specific widget (also somewhat ugly, since widgets can be classes, instances, or not provided at all).
 
@@ -151,8 +133,11 @@ Tools like django-compressor aren't well-suited for modern JavaScript modules as
 
 ## Conclusion
 
-Using importmaps with Django provides a clean solution for managing JavaScript modules in Django applications, especially for third-party apps that need to ship their own JavaScript. While there are still some rough edges to smooth out, this approach works well and offers a path forward that aligns with modern web standards.
+Using importmaps with Django provides a clean solution for managing JavaScript
+modules in Django applications, especially for third-party apps that need to
+ship their own JavaScript. While there are still some rough edges to smooth
+out, this approach works well and offers a path forward that aligns with modern
+web standards.
 
-I hope my DEP draft gains traction and we can build official support for importmaps into Django. In the meantime, this approach is working well for django-prose-editor and might be useful for other Django applications that need to ship JavaScript modules.
-
-Have you tried using importmaps with Django? I'd be interested to hear about your experiences and approaches.
+Have you tried using importmaps with Django? I'd be interested to hear about
+your experiences and approaches.
