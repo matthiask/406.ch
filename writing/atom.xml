@@ -1,5 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-04-14T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Customizing Django admin fieldsets without fearing forgotten fields</title><link href="https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/" rel="alternate" /><id>https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/</id><published>2025-04-14T12:00:00Z</published><updated>2025-04-14T12:00:00Z</updated><summary type="html">&lt;h1 id="customizing-django-admin-fieldsets-without-fearing-forgotten-fields"&gt;&lt;a class="toclink" href="#customizing-django-admin-fieldsets-without-fearing-forgotten-fields"&gt;Customizing Django admin fieldsets without fearing forgotten fields&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-05-21T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 21)</title><link href="https://406.ch/writing/weeknotes-2025-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-21/</id><published>2025-05-21T12:00:00Z</published><updated>2025-05-21T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-21"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-21"&gt;Weeknotes (2025 week 21)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have missed two co-writing sessions and didn&amp;rsquo;t manage to post much outside of that, but let&amp;rsquo;s get things back on track.&lt;/p&gt;
+&lt;h2 id="django-prose-editor-012"&gt;&lt;a class="toclink" href="#django-prose-editor-012"&gt;django-prose-editor 0.12&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://406.ch/writing/weeknotes-2025-week-15/#progress-on-the-prose-editor"&gt;last weeknotes
+entry&lt;/a&gt;
+contains more details about the work of really connecting Tiptap extensions
+with server-side sanitization. 0.12 includes many improvements and bugfixes
+which have been made during real-world use of the prose editor in
+customer-facing products.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not completely happy about the way we&amp;rsquo;re specifying the editor
+configuration and haven&amp;rsquo;t been able to settle on either &lt;code&gt;extensions&lt;/code&gt; or
+&lt;code&gt;config&lt;/code&gt; as a keyword argument. The field supports both ways, at least for
+now. It&amp;rsquo;s probably fine.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-auto-admin-fieldsets/"&gt;django-auto-admin-fieldsets 0.2&lt;/a&gt;: I wrote a blog post here: &lt;a href="https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/"&gt;Customizing Django admin fieldsets without fearing forgotten fields&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 5.2&lt;/a&gt;: This release contains the second half of improvements from &lt;a href="https://djangonaut.space/"&gt;Djangonaut Space&lt;/a&gt; session four where I helped out as a Navigator. The toolbar properly supports code highlighting in dark mode, sanitizes request variables better, allows customizing redirects, supports projects using &lt;a href="https://github.com/carltongibson/django-template-partials/"&gt;django-template-partials&lt;/a&gt; and more!&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 25.5.1&lt;/a&gt;: The first FeinCMS release of 2025. We&amp;rsquo;re still maintaining the project and fixing bugs!&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.12&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.4.1&lt;/a&gt;: Fixes much too small checkboxes when used inside tables.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Customizing Django admin fieldsets without fearing forgotten fields</title><link href="https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/" rel="alternate" /><id>https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/</id><published>2025-04-14T12:00:00Z</published><updated>2025-04-14T12:00:00Z</updated><summary type="html">&lt;h1 id="customizing-django-admin-fieldsets-without-fearing-forgotten-fields"&gt;&lt;a class="toclink" href="#customizing-django-admin-fieldsets-without-fearing-forgotten-fields"&gt;Customizing Django admin fieldsets without fearing forgotten fields&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;When defining &lt;a href="https://docs.djangoproject.com/en/5.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets"&gt;fieldsets on Django modeladmin classes&lt;/a&gt; I always worry that I forget updating the fieldsets later when adding or removing new model fields, and not without reason: It has already happened to me several times. Forgetting to remove fields is mostly fine because system checks will complain about it, forgetting to add fields may be real bad. A recent example was a crashing website because a required field was missing from the admin and therefore was left empty when creating new instances!&lt;/p&gt;
 &lt;p&gt;I have now published another Django package which solves this by adding support for specifying the special &lt;code&gt;"__remaining__"&lt;/code&gt; field in a fieldsets definition. The &lt;code&gt;"__remaining__"&lt;/code&gt; placeholder is automatically replaced by all model fields which haven&amp;rsquo;t been explicitly added already or added to &lt;code&gt;exclude&lt;/code&gt;&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;Here&amp;rsquo;s a short example for a modeladmin definition using django-auto-admin-fieldsets:&lt;/p&gt;
@@ -790,98 +810,4 @@ shared my a bit unorthodox versioning method. I previously wrote about my &lt;a 
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.19&lt;/a&gt;: django-imagefield can now be used with proxy models. Previously, thumbnails weren&amp;rsquo;t generated or deleted when saving proxy models because the signal handlers would only be called if the &lt;code&gt;sender&lt;/code&gt; matches exactly. I have already debugged this before, but have forgotten about it again. The ticket is really old for this, and fixing it isn&amp;rsquo;t easy since it&amp;rsquo;s unclear what should happen (&lt;a href="https://code.djangoproject.com/ticket/9318"&gt;#9318&lt;/a&gt;).&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django_canonical_domain/"&gt;django-canonical-domain 0.11&lt;/a&gt;: django-canonical-domain has gained support for excluding additional domains from the canonical domain redirect. django-canonical-domain is used to redirect users to HTTPS (optionally) and to a particular canonical domain (as the name says). But sometimes you have auxiliary domains, e.g. for an API service, which shouldn&amp;rsquo;t be redirected. The package can now be used in these scenarios as well.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.8.2&lt;/a&gt;: The venerable FeinCMS, now more than 15 years old. The thumbnailing support had a bug where it tried saving JPEGs using RGBA (which obviously doesn&amp;rsquo;t work). This has been fixed.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 31)</title><link href="https://406.ch/writing/weeknotes-2024-week-31/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-31/</id><published>2024-07-31T12:00:00Z</published><updated>2024-07-31T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-31"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-31"&gt;Weeknotes (2024 week 31)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have missed almost two months of weeknotes. I&amp;rsquo;ve got some catching up to do.
-I have tried writing a larger piece on my thoughts about CMS, but with
-everything going on in my personal and work life I haven&amp;rsquo;t made much progress.&lt;/p&gt;
-&lt;p&gt;This weeknotes entry is me trying to get back into the groove of writing (and
-publishing!) regularly.&lt;/p&gt;
-&lt;h2 id="django-prose-editor"&gt;&lt;a class="toclink" href="#django-prose-editor"&gt;&lt;a href="https://github.com/matthiask/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have previously written about the
-&lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt;-based editor for Django websites
-&lt;a href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/"&gt;here&lt;/a&gt;.
-I have continued working on the project in the meantime. Apart from bugfixes
-the big new feature is the support for showing typographic characters. For now
-the editor supports showing non-breaking spaces and soft hyphens. The project
-seems to get a little more interest after the deprecation of django-ckeditor
-has become more well known and the project has even received a contribution by
-someone else. It&amp;rsquo;s always a lovely moment when this happens.&lt;/p&gt;
-&lt;h2 id="django-json-schema-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor"&gt;&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;django-json-schema-editor&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Still alpha. Updated the vendorized JSON editor and fixed the integration into
-Django to not throw errors with the newer version.&lt;/p&gt;
-&lt;p&gt;Foreign key fields now support describing the referenced value similar to the
-raw ID fields functionality. Added optional support for using &lt;code&gt;"format":
-"prose"&lt;/code&gt; to use the django-prose-editor to edit individual fields. JSON
-plugins for the content editor are now downcasted into their proxy models
-automatically. This is especially useful with the feincms3 changes mentioned
-below. (You do not have to use either django-content-editor or feincms3 to use
-this package!)&lt;/p&gt;
-&lt;p&gt;The following screenshot shows the prose editor integration; the mentioned
-foreign key field description isn&amp;rsquo;t visible yet here.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A screenshot of the JSON editor including the prose editor" src="https://406.ch/assets/20240731-json-editor.png" /&gt;&lt;/p&gt;
-&lt;h2 id="traduire"&gt;&lt;a class="toclink" href="#traduire"&gt;&lt;a href="https://github.com/matthiask/traduire"&gt;Traduire&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Traduire (french for «translate») is a web-based platform for editing gettext
-translations.&lt;/p&gt;
-&lt;p&gt;It is intended as a replacement for Transifex, Weblate and comparable products.
-It is geared towards small teams or agencies which want to allow their
-customers and their less technical team members to update translations.&lt;/p&gt;
-&lt;p&gt;Traduire profits from the great work done on
-&lt;a href="https://github.com/mbi/django-rosetta/"&gt;django-rosetta&lt;/a&gt;. I would still be
-using Rosetta if it would work when used with a container orchestator such as
-Kubernetes. Since all application storage is ephemeral that doesn&amp;rsquo;t work,
-translation editing and deployment have to be separated.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A screenshot of the Traduire interface" src="https://406.ch/assets/20240731-traduire.png" /&gt;&lt;/p&gt;
-&lt;p&gt;It is built using Django and relies on &lt;a href="https://pypi.org/project/polib/"&gt;polib&lt;/a&gt;
-to do the heavy lifting.&lt;/p&gt;
-&lt;p&gt;This is a project which might also be interesting for others. I would
-especially appreciate it if someone could contribute an easier way to get it up
-and running, e.g. using a Docker Compose configuration or something. I am using
-Kubernetes and GitOps to host it, but that&amp;rsquo;s not straightforward at all.
-Really, all that&amp;rsquo;s needed to run it is a Django host with any database which is
-supported by Django. I prefer using PostgreSQL because I have it, but sqlite
-etc. work just as well.&lt;/p&gt;
-&lt;h2 id="releases-since-the-second-week-of-june"&gt;&lt;a class="toclink" href="#releases-since-the-second-week-of-june"&gt;Releases since the second week of June&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-translated-fields/"&gt;django-translated-fields 0.13&lt;/a&gt;:
-  Nothing much except for CI and pre-commit updates. The implementation
-  continues to be rock-solid and basically unchanged.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.0.6&lt;/a&gt;:
-  Tweaks and fixes to the new interface. Added better scrolling behavior when
-  dragging content around. The editor now also supports colorized icons which
-  helps quickly understanding the structure of some content when there are many
-  plugins.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.0.2&lt;/a&gt;:
-  Fixed a few bugs in the &lt;code&gt;blacknoise.compress&lt;/code&gt; utility and started running
-  the testsuite on GitHub actions.
-  &lt;a href="https://github.com/evansd/whitenoise/"&gt;whitenoise&lt;/a&gt; has been friendly-forked
-  as &lt;a href="https://github.com/Archmonger/ServeStatic"&gt;ServeStatic&lt;/a&gt; and I&amp;rsquo;m
-  definitely having a close look at this project as well, but blacknoise is
-  simple and works well, so I&amp;rsquo;m not convinced that switching back to the much
-  larger project (in terms of amounts of code) is an improvement now.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib&lt;/a&gt;:
-  Minor bugfixes.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;:
-  Allowed registering plugin models with the renderer which aren&amp;rsquo;t supposed to
-  be fetched from the database. This is especially useful when used together
-  with JSON plugins, where the individual JSON plugins are created as proxies
-  for the underlying Django model and fetched all at once. Disabled the version
-  check on our CKEditor plugin. Still, really stop using CKEditor 4 if you want
-  to use maintained software.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.7.1&lt;/a&gt;:
-  Small bugfixes, and made the Read the Docs build work correctly.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.4.x&lt;/a&gt;:
-  The toolbar continues to be a nice project to work on. Fixed a few edge cases
-  in the new alerts panel.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.18.2&lt;/a&gt;:
-  The value of &lt;code&gt;ordering_field&lt;/code&gt; now has additional sanity checks.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.16&lt;/a&gt;:
-  cabinet now supports exporting a folder as a ZIP file while preserving the
-  structure you see in the CMS instead of the structure on the file system. The
-  inline upload form has been dropped from the &lt;code&gt;CabinetForeignKey&lt;/code&gt; widget
-  because the folder dropdown slowed down the page a lot when used on a site
-  with many folders. Using the raw ID fields popup isn&amp;rsquo;t that bad.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.6.2&lt;/a&gt;:
-  See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.28&lt;/a&gt;:
-  See above.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>

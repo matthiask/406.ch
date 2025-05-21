@@ -1,5 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-04-09T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 15)</title><link href="https://406.ch/writing/weeknotes-2025-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-15/</id><published>2025-04-09T12:00:00Z</published><updated>2025-04-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-15"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-15"&gt;Weeknotes (2025 week 15)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-05-21T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 21)</title><link href="https://406.ch/writing/weeknotes-2025-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-21/</id><published>2025-05-21T12:00:00Z</published><updated>2025-05-21T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-21"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-21"&gt;Weeknotes (2025 week 21)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have missed two co-writing sessions and didn&amp;rsquo;t manage to post much outside of that, but let&amp;rsquo;s get things back on track.&lt;/p&gt;
+&lt;h2 id="django-prose-editor-012"&gt;&lt;a class="toclink" href="#django-prose-editor-012"&gt;django-prose-editor 0.12&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://406.ch/writing/weeknotes-2025-week-15/#progress-on-the-prose-editor"&gt;last weeknotes
+entry&lt;/a&gt;
+contains more details about the work of really connecting Tiptap extensions
+with server-side sanitization. 0.12 includes many improvements and bugfixes
+which have been made during real-world use of the prose editor in
+customer-facing products.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not completely happy about the way we&amp;rsquo;re specifying the editor
+configuration and haven&amp;rsquo;t been able to settle on either &lt;code&gt;extensions&lt;/code&gt; or
+&lt;code&gt;config&lt;/code&gt; as a keyword argument. The field supports both ways, at least for
+now. It&amp;rsquo;s probably fine.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-auto-admin-fieldsets/"&gt;django-auto-admin-fieldsets 0.2&lt;/a&gt;: I wrote a blog post here: &lt;a href="https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/"&gt;Customizing Django admin fieldsets without fearing forgotten fields&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 5.2&lt;/a&gt;: This release contains the second half of improvements from &lt;a href="https://djangonaut.space/"&gt;Djangonaut Space&lt;/a&gt; session four where I helped out as a Navigator. The toolbar properly supports code highlighting in dark mode, sanitizes request variables better, allows customizing redirects, supports projects using &lt;a href="https://github.com/carltongibson/django-template-partials/"&gt;django-template-partials&lt;/a&gt; and more!&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 25.5.1&lt;/a&gt;: The first FeinCMS release of 2025. We&amp;rsquo;re still maintaining the project and fixing bugs!&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.12&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.4.1&lt;/a&gt;: Fixes much too small checkboxes when used inside tables.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 15)</title><link href="https://406.ch/writing/weeknotes-2025-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-15/</id><published>2025-04-09T12:00:00Z</published><updated>2025-04-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-15"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-15"&gt;Weeknotes (2025 week 15)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="djangonaut-space"&gt;&lt;a class="toclink" href="#djangonaut-space"&gt;Djangonaut Space&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We have already reached the final week of the &lt;a href="https://djangonaut.space/"&gt;Djangonaut
 Space&lt;/a&gt; session 4. I had a great time as a navigator
@@ -677,27 +697,4 @@ and, more importantly, to see how the torch is carried on.&lt;/p&gt;
   sites which do &lt;em&gt;not&lt;/em&gt; have a default language. This has been fixed.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.10&lt;/a&gt;: It&amp;rsquo;s now actually possible to use the JSON editor outside inlines! That was a fun bug&amp;hellip; not. Apart from the mentioned bug this new release mostly contains fixes to the styles. We&amp;rsquo;re slowly getting there.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.16&lt;/a&gt;: I didn&amp;rsquo;t do anything except for the changelog and the release. That&amp;rsquo;s alright. The release contains a few minor fixes.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 01)</title><link href="https://406.ch/writing/weeknotes-2024-week-01/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-01/</id><published>2024-01-03T12:00:00Z</published><updated>2024-01-03T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-01"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-01"&gt;Weeknotes (2024 week 01)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;First weeknotes post for 2024! Happy new year!&lt;/p&gt;
-&lt;h2 id="looking-back-on-2023"&gt;&lt;a class="toclink" href="#looking-back-on-2023"&gt;Looking back on 2023&lt;/a&gt;&lt;/h2&gt;
-&lt;h3 id="writing"&gt;&lt;a class="toclink" href="#writing"&gt;Writing&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;I have published almost 40 posts last year. That&amp;rsquo;s almost as many posts as I published in the time period from 2014 to 2023. &lt;a href="https://jacobian.org/2021/mar/9/coworking-to-write-more/"&gt;Coworking to write more&lt;/a&gt; does work.&lt;/p&gt;
-&lt;p&gt;I already had a quite active blog from 2005 to 2008 with a few posts after that; everything before 2014 was in german and mainly concerned with green politics and climate change. I&amp;rsquo;m still very interested in these topics but I don&amp;rsquo;t feel as if I have much to add to the conversation, even though it&amp;rsquo;s the more important issue.&lt;/p&gt;
-&lt;h3 id="open-source"&gt;&lt;a class="toclink" href="#open-source"&gt;Open Source&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Not much changed here. I enjoy basically everything I do in open source land, and co-maintaining the Django Debug Toolbar with Tim is a joy.&lt;/p&gt;
-&lt;p&gt;I still wish that some of my projects had more impact in Django land, especially those who augment the Django administration interface to be a lightweight CMS which requires very little maintenance and work in the long run. I think it&amp;rsquo;s great that one of the core components, &lt;a href="https://pypi.org/project/django-content-editor/#history"&gt;django-content-editor&lt;/a&gt;, hasn&amp;rsquo;t required a release in more than one year. It doesn&amp;rsquo;t have to be expanded because it just works. It would be great if there was a good way to &lt;a href="https://406.ch/writing/managing-complexity-and-technical-debt-by-releasing-open-source-software/"&gt;distinguish&lt;/a&gt; between software which basically doesn&amp;rsquo;t require any updates and software which is abandoned.&lt;/p&gt;
-&lt;p&gt;The only project which doesn&amp;rsquo;t bring me much joy is django-mptt. Most people accept that there are no guarantees, but some people are just rude in the way in which they expect others to do the work. The first reaction was to return the blow and I&amp;rsquo;m glad that I didn&amp;rsquo;t give in to the temptation to do that. It&amp;rsquo;s basically never worth it to do that in writing.&lt;/p&gt;
-&lt;h3 id="family"&gt;&lt;a class="toclink" href="#family"&gt;Family&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;We had a good 2023 together and I&amp;rsquo;m very much looking forward to a just as good 2024.&lt;/p&gt;
-&lt;h2 id="plans-for-2024"&gt;&lt;a class="toclink" href="#plans-for-2024"&gt;Plans for 2024&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have bought a ticket for the &lt;a href="https://2024.djangocon.eu/"&gt;DjangoCon Europe 2024&lt;/a&gt; in Spain and I&amp;rsquo;m very much looking forward to that.&lt;/p&gt;
-&lt;p&gt;Maybe we&amp;rsquo;ll visit a music festival again this summer. After listening to a lot of metal music in the last ten or more years I rediscovered the dark side of D&amp;rsquo;n&amp;rsquo;B. Good times.&lt;/p&gt;
-&lt;h2 id="advent-of-code"&gt;&lt;a class="toclink" href="#advent-of-code"&gt;Advent of Code&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have finished the Advent of Code with some help from the Subreddit. Almost all of the puzzles were fun to think about. I didn&amp;rsquo;t have fun solving each and everyone of them, especially not the second part of a few of the later days. I feel good checking out solutions from other people in the subreddit, and maybe adding newly gained ideas to my code or even running someone else&amp;rsquo;s code 1:1 on my data after studying the algorithms used and hopefully learning something.&lt;/p&gt;
-&lt;p&gt;I had a good time and enjoyed shutting down the computer after that.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 23.12&lt;/a&gt;: A few minor changes to
-  the thumbnailing code. It&amp;rsquo;s always nice to hear from people who are still
-  using this project.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
