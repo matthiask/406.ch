@@ -1,29 +1,64 @@
-Title: How I'm bundling frontend assets these days
-Categories:
-Draft: remove-this-to-publish
+Title: How I'm bundling frontend assets using Django and rspack these days
+Categories: Django, Programming
 
-# How I'm bundling frontend assets these days
+I last wrote about configuring Django with bundlers in 2018: [Our approach to configuring Django, Webpack and ManifestStaticFilesStorage](https://406.ch/writing/our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage/). An update has been a long time coming. I wanted to write this down for a while already, but each time I started explaining how configuring rspack is actually nice I look at the files we're using and switch to writing about something else. This time I managed to get through -- it's not that bad, I promise.
 
-I last wrote about configuring Django with bundlers in 2018: [Our approach to configuring Django, Webpack and ManifestStaticFilesStorage](https://406.ch/writing/our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage/). An update has been a long time coming.
+This is quite a long post. A project where all of this can be seen in action is [Traduire](https://github.com/matthiask/traduire/), a platform for translating gettext catalogs. I announced it on the [Django forum](https://forum.djangoproject.com/t/traduire-a-platform-for-editing-gettext-translations-on-the-web/32687).
 
-[We](https://feinheit.ch/) have looked at many different bundlers or at not using a bundler at all. In the end, the flexibility, speed and trustworthiness of rspack won me over.
+## Our requirements
 
-Configuring rspack from scratch is no joke, that's why tools such as [rsbuild](https://rsbuild.dev/) exist. We already have a reusable library of configuration snippets for webpack and moving that library over to rspack was straightforward.
+The requirements were still basically the same:
+
+- Hot module reloading during development
+- A process which produces hashed filenames depending on their content so that
+  we can use far-future expiry headers to cache assets in browsers
+- While running Node.js in development is fine we do not want Node.js on the
+  server (in the general case)
+- We still want transpiling and bundling for now
+
+We have old projects using SASS. These days we're only using PostCSS
+(especially [autoprefixer](https://github.com/postcss/autoprefixer) and maybe
+[postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting).
+Rewriting everything is out of the question, so we needed a tool which handled
+all that as well.
+
+People in the frontend space seem to like tools like Vite or Next.js a lot. I
+have also looked at Parcel, esbuild, rsbuild and others. Either they didn't
+support our old projects, were too limited in scope (e.g. no HMR), too
+opinionated or I hit bugs or had questions about their maintenance. I'm sure
+all of them are great for some people, and I don't intend to talk badly about
+any of them!
+
+In the end, the flexibility, speed and trustworthiness of
+[rspack](https://rspack.dev/) won me over even though I have a love-hate
+relationship with the Webpack/rspack configuration. We already had a reusable
+library of configuration snippets for webpack though and moving that library
+over to rspack was straightforward.
+
+That being said, configuring rspack from scratch is no joke, that's why tools
+such as [rsbuild](https://rsbuild.dev/) exist. If you already know Webpack well
+or really need the flexibility, going low level can be good.
+
+
+## High-level project structure
 
 The high-level overview is:
 
 - Frontend assets live in their own folder, `frontend/`.
-- The `rspack.config.js` configuration is in the root folder of the project.
+- We're using [fabric](https://www.fabfile.org/) and
+  [rspack](https://rspack.dev/), their configuration resides in the root folder
+  of the project as does Django's `manage.py`.
 - The frontend is transpiled and bundled directly into `static/` for production and into `tmp/` during development.
-- We use the HTML plugin of rspack to emit snippets containing `<link>` and `<script>` tags. The HTML snippet is included as-is.
+- We use the HTML plugin of rspack to emit snippets containing `<link>` and `<script>` tags. The HTML snippet can be included as-is, without any postprocessing.
+- `frontend/` or `frontend/static` is optionally added to `STATICFILES_DIRS` so that some of the files from the frontend can easily be referenced in `{% static %}` tags.
 
 During development:
 
-- We use the dev server of rspack/node to handle `127.0.0.1:8000`. This server handles requests for frontend assets and the websocket for hot module reloading and proxies everything else to the Django backend running on a different (random) port.
+- We use the dev server of rspack/node to handle `127.0.0.1:8000`. This server handles requests for frontend assets and the websocket for hot module reloading and proxies everything else to the Django backend running on a different random port.
 
 During deployment:
 
-- The assets are added to `static/` and rsynced to the server or added to the container separately from the standard `./manage.py collectstatic --noinput`.
+- The assets are compiled to `static/` and either rsynced to the server or added to the container separately from the standard `./manage.py collectstatic --noinput`.
 
 In production:
 
@@ -34,6 +69,11 @@ In production:
 
 ## Example configuration
 
+Here's an example configuration which works well for us. What follows is the
+rspack configuration itself, building on our snippet library
+`rspack.library.js`. We mostly do not change anything in here except for the
+list of PostCSS plugins:
+
 rspack.config.js:
 
     :::javascript
@@ -41,7 +81,7 @@ rspack.config.js:
       const { base, devServer, assetRule, postcssRule, swcWithPreactRule } =
         require("./rspack.library.js")(argv.mode === "production")
 
-      const cfg = {
+      return {
         ...base,
         devServer: devServer({ backendPort: env.backend }),
         module: {
@@ -56,101 +96,59 @@ rspack.config.js:
             swcWithPreactRule(),
           ],
         },
-        experiments: { outputModule: true },
-        externals: {
-          "django-prose-editor/editor": "import django-prose-editor/editor",
-          "django-prose-editor/configurable":
-            "import django-prose-editor/configurable",
-        },
       }
-      console.debug(JSON.stringify(cfg))
     }
 
+The default entry point is `main` and loads `frontend/main.js`. The rest of the
+JavaScript and styles are loaded from there.
 
-settings.py:
+The HTML snippet loader works by adding `WEBPACK_ASSETS = BASE_DIR / "static"` to the Django settings and adding the following tags to the `<head>` of the website, most often in `base.html`:
 
-    WEBPACK_ASSETS = BASE_DIR / "static"
-
-base.html:
-
+    :::html+django
     {% load webpack_assets %}
-    {% if not TESTING %}{% webpack_assets 'main' %}{% endif %}
+    {% webpack_assets 'main' %}
 
+The corresponding template tag in `webpack_assets.py` follows:
 
-webpack_assets.py:
-
+    :::python
     from functools import cache
 
     from django import template
     from django.conf import settings
     from django.utils.html import mark_safe
 
-
     register = template.Library()
-
 
     def webpack_assets(entry):
         path = settings.BASE_DIR / ("tmp" if settings.DEBUG else "static") / f"{entry}.html"
         return mark_safe(path.read_text())
-
 
     if not settings.DEBUG:
         webpack_assets = cache(webpack_assets)
     register.simple_tag(webpack_assets)
 
 
+Last but not least, the fabfile contains the following task definition:
+
+    :::python
+    @task
+    def dev(ctx, host="127.0.0.1", port=8000):
+        backend = random.randint(50000, 60000)
+        jobs = [
+            f".venv/bin/python manage.py runserver {backend}",
+            f"HOST={host} PORT={port} yarn run rspack serve --mode=development --env backend={backend}",
+        ]
+        # Run these two jobs at the same time:
+        _concurrently(ctx, jobs)
+
+The fh-fablib repository contains the [`_concurrently`](https://github.com/feinheit/fh-fablib/blob/8109a76b63b37d3433356fabb4469263f8b18d66/fh_fablib/__init__.py#L194-L214) implementation we're using at this time.
+
+
 ## The library which enables the nice configuration above
 
-Of course, the whole ugly library has to be somewhere. Here is the current
-version at the time of writing:
-
-rspack.library.js:
+Of course, the whole library of snippets has to be somewhere. The fabfile automatically updates the library when we release a new version, and the library is the same in all the dozens of projects we're working on. Here's the current version of `rspack.library.js`:
 
     :::javascript
-    /*
-    Somewhat reusable webpack configuration chunks
-
-    A basic rspack file may looks as follows:
-
-        module.exports = (env, argv) => {
-          const {
-            base,
-            devServer,
-            assetRule,
-            postcssRule,
-            swcWithPreactRule,
-            resolvePreactAsReact,
-          } = require("./rspack.library.js")(argv.mode === "production")
-
-          return {
-            ...base,
-            ...resolvePreactAsReact(),
-            devServer: devServer({ backendPort: env.backend }),
-            module: {
-              rules: [
-                assetRule(),
-                postcssRule({
-                  plugins: [
-                    [
-                      "@csstools/postcss-global-data",
-                      { files: ["./frontend/styles/custom-media.css"] },
-                    ],
-                    "postcss-custom-media",
-                    "postcss-nesting",
-                    "autoprefixer",
-                  ],
-                }),
-                swcWithPreactRule(),
-              ],
-            },
-          }
-        }
-
-    NOTE: PLEASE DO NOT EVER UPDATE THIS FILE WITHOUT CONTRIBUTING THE CHANGES BACK
-    TO FH-FABLIB AT https://github.com/feinheit/fh-fablib
-
-    */
-
     const path = require("node:path")
     const HtmlWebpackPlugin = require("html-webpack-plugin")
     const rspack = require("@rspack/core")
@@ -168,7 +166,7 @@ rspack.library.js:
         return {
           test: /\.(j|t)sx?$/,
           loader: "builtin:swc-loader",
-          exclude: [/[\\/]node_modules[\\/]|foundation/],
+          exclude: [/node_modules/],
           options: {
             jsc: {
               parser: {
@@ -192,7 +190,7 @@ rspack.library.js:
         return {
           test: /\.(j|t)sx?$/,
           loader: "builtin:swc-loader",
-          exclude: [/[\\/]node_modules[\\/]|foundation/],
+          exclude: [/node_modules/],
           options: {
             jsc: {
               parser: {
@@ -244,8 +242,6 @@ rspack.library.js:
       return {
         truthy,
         base: {
-          // mode: PRODUCTION ? "production" : "development",
-          // bail: PRODUCTION,
           context: path.join(cwd, "frontend"),
           entry: { main: "./main.js" },
           output: {
@@ -340,3 +336,19 @@ rspack.library.js:
         cssExtractPlugin,
       }
     }
+
+## Closing thoughts
+
+Several utilities from this library aren't used in the example above, for
+example the `sassRule` or the HTML plugin utilities which are useful when you
+require several entry points on your website, e.g. an entry point for the
+public facing website and an entry point for a dashboard used by members of the
+staff.
+
+Most of the code in here is freely available in our
+[fh-fablib](https://github.com/feinheit/fh-fablib) repo under an open source
+license. Anything in this blog post can also be used under the
+[CC0](https://creativecommons.org/public-domain/cc0/) license, so feel free to
+steal everything. If you do, I'd be happy to hear your thoughts about this
+post, and please share your experiences and suggestions for improvement -- if
+you have any!
