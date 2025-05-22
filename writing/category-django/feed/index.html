@@ -106,6 +106,22 @@ here for convenience:&lt;/p&gt;
 &lt;p&gt;For browser compatibility, you can also include &lt;a href="https://github.com/guybedford/es-module-shims"&gt;es-module-shims&lt;/a&gt; to support browsers that don&amp;rsquo;t yet handle importmaps natively (around 5% at the time of writing according to &lt;a href="https://caniuse.com/import-maps"&gt;caniuse.com&lt;/a&gt;).&lt;/p&gt;
 &lt;h2 id="using-django-compressor-or-similar-packages"&gt;&lt;a class="toclink" href="#using-django-compressor-or-similar-packages"&gt;Using django-compressor or similar packages&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Tools like django-compressor aren&amp;rsquo;t well-suited for modern JavaScript modules as they typically produce old-style JavaScript files rather than ES modules. They&amp;rsquo;re designed for a different era of web development and don&amp;rsquo;t integrate well with the importmap approach.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;The problem is that django-compressor at this time emits non-module script
+files. Using import statements in these files isn&amp;rsquo;t possible, instead you
+have to use &lt;a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import"&gt;dynamic imports&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// Instead of&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Document&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;django-prose-editor/editor&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;// you need&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;django-prose-editor/editor&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;(({&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Document&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Both work fine. The bundle emitted by django-compressor will not contain
+the prose editor module itself though; including this module inside the
+bundle is not possible.&lt;/p&gt;
+&lt;/div&gt;
 &lt;h2 id="conclusion"&gt;&lt;a class="toclink" href="#conclusion"&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Using importmaps with Django provides a clean solution for managing JavaScript
 modules in Django applications, especially for third-party apps that need to
