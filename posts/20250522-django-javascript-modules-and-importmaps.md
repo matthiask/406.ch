@@ -131,6 +131,24 @@ For browser compatibility, you can also include [es-module-shims](https://github
 
 Tools like django-compressor aren't well-suited for modern JavaScript modules as they typically produce old-style JavaScript files rather than ES modules. They're designed for a different era of web development and don't integrate well with the importmap approach.
 
+!!! note
+    The problem is that django-compressor at this time emits non-module script
+    files. Using import statements in these files isn't possible, instead you
+    have to use [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import).
+
+        :::javascript
+        // Instead of
+        import { Document, ... } from "django-prose-editor/editor"
+        // you need
+        import("django-prose-editor/editor").then(({ Document, ... }) => {
+        })
+
+    Both work fine. The bundle emitted by django-compressor will not contain
+    the prose editor module itself though; including this module inside the
+    bundle is not possible.
+
+
+
 ## Conclusion
 
 Using importmaps with Django provides a clean solution for managing JavaScript
