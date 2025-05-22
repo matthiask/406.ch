@@ -92,6 +92,8 @@ While this approach works, there are several issues to address:
 
 - I don't really like global variables but there doesn't seem to be a way around it. Browsers want to use a single importmap only (even though the algorithm for merging importmaps exists in the spec!) and the importmap has to be included above all ES modules.
 
+- The fact that browsers only want a single importmap also means that when you use django-js-asset's importmap support you **cannot** use a different package offering its own solution for importmaps.
+
 - The importmap may be added twice to the HTML when using a widget that works in both the admin and frontend contexts. Currently, if you want to avoid this problem or ugliness you have to determine in your Django form field if the code is requesting an admin widget or another widget, either by inspecting the callstack (very ugly) or by checking if the `widget` argument to the form field constructor is set to an admin-specific widget (also somewhat ugly, since widgets can be classes, instances, or not provided at all).
 
 - It would be nice if we the installation of django-prose-editor didn't have more steps than what we have when installing any other Django widget integration. I'd like a more elegant solution, but haven't found one yet that doesn't introduce too much magic.
