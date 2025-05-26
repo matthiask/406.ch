@@ -1,0 +1,235 @@
+<!doctype html><html lang=en><meta charset=utf-8><meta content="width=device-width,initial-scale=1.0" name=viewport><title>How I'm bundling frontend assets using Django and rspack these days - Matthias Kestenholz</title><link href=/styles.7a4c5338b9f2.css rel=stylesheet><link title="Blog feed" href=/writing/atom.xml rel=alternate type=application/atom+xml><body><header><div class=wrappy><a class=title href=/>Hi, I'm Matthias</a><p class=subtitle>I am a founding partner of <a href=https://feinheit.ch>Feinheit AG</a> and <a href=https://diebruchpiloten.com>Die Bruchpiloten AG</a>. Find me on <a href=https://github.com/matthiask/>GitHub</a>, <a href=https://hachyderm.io/@matthiask rel=me>Mastodon</a>, <a href=https://bsky.app/profile/matthiask.406.ch rel=me>Bluesky</a>, <a rel="noopener noreferrer" title="if you must" href=https://www.linkedin.com/in/matthiaskestenholz target=_blank>LinkedIn</a> or by <a href=mailto:mk@406.ch>email</a>.<nav><a href=/writing/category-climate/>Climate</a><a href=/writing/category-django/>Django</a><a href=/writing/category-feincms/>feincms</a><a href=/writing/category-feincms3/>feincms3</a><a href=/writing/category-politik/>Politik</a><a href=/writing/category-programming/>Programming</a><a href=/writing/category-python/>Python</a><a href=/writing/category-til/>TIL</a><a href=/writing/category-weeknotes/>Weeknotes</a></nav></div></header><main><div class=wrappy><div class=text><small>2025-05-26 </small><h1 id=how-im-bundling-frontend-assets-using-django-and-rspack-these-days><a class=toclink href=#how-im-bundling-frontend-assets-using-django-and-rspack-these-days>How I’m bundling frontend assets using Django and rspack these days</a></h1><p>I last wrote about configuring Django with bundlers in 2018: <a href=https://406.ch/writing/our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage/>Our approach to configuring Django, Webpack and ManifestStaticFilesStorage</a>. An update has been a long time coming. I wanted to write this down for a while already, but each time I started explaining how configuring rspack is actually nice I look at the files we’re using and switch to writing about something else. This time I managed to get through – it’s not that bad, I promise.<p>This is quite a long post. A project where all of this can be seen in action is <a href=https://github.com/matthiask/traduire/>Traduire</a>, a platform for translating gettext catalogs. I announced it on the <a href=https://forum.djangoproject.com/t/traduire-a-platform-for-editing-gettext-translations-on-the-web/32687>Django forum</a>.<h2 id=our-requirements><a class=toclink href=#our-requirements>Our requirements</a></h2><p>The requirements were still basically the same:<ul><li>Hot module reloading during development<li>A process which produces hashed filenames depending on their content so that we can use far-future expiry headers to cache assets in browsers<li>While running Node.js in development is fine we do not want Node.js on the server (in the general case)<li>We still want transpiling and bundling for now</ul><p>We have old projects using SASS. These days we’re only using PostCSS (especially <a href=https://github.com/postcss/autoprefixer>autoprefixer</a> and maybe <a href=https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting>postcss-nesting</a>. Rewriting everything is out of the question, so we needed a tool which handled all that as well.<p>People in the frontend space seem to like tools like Vite or Next.js a lot. I have also looked at Parcel, esbuild, rsbuild and others. Either they didn’t support our old projects, were too limited in scope (e.g. no HMR), too opinionated or I hit bugs or had questions about their maintenance. I’m sure all of them are great for some people, and I don’t intend to talk badly about any of them!<p>In the end, the flexibility, speed and trustworthiness of <a href=https://rspack.dev/>rspack</a> won me over even though I have a love-hate relationship with the Webpack/rspack configuration. We already had a reusable library of configuration snippets for webpack though and moving that library over to rspack was straightforward.<p>That being said, configuring rspack from scratch is no joke, that’s why tools such as <a href=https://rsbuild.dev/>rsbuild</a> exist. If you already know Webpack well or really need the flexibility, going low level can be good.<h2 id=high-level-project-structure><a class=toclink href=#high-level-project-structure>High-level project structure</a></h2><p>The high-level overview is:<ul><li>Frontend assets live in their own folder, <code>frontend/</code>.<li>We’re using <a href=https://www.fabfile.org/>fabric</a> and <a href=https://rspack.dev/>rspack</a>, their configuration resides in the root folder of the project as does Django’s <code>manage.py</code>.<li>The frontend is transpiled and bundled directly into <code>static/</code> for production and into <code>tmp/</code> during development.<li>We use the HTML plugin of rspack to emit snippets containing <code>&lt;link></code> and <code>&lt;script></code> tags. The HTML snippet can be included as-is, without any postprocessing.<li><code>frontend/</code> or <code>frontend/static</code> is optionally added to <code>STATICFILES_DIRS</code> so that some of the files from the frontend can easily be referenced in <code>{% static %}</code> tags.</ul><p>During development:<ul><li>We use the dev server of rspack/node to handle <code>127.0.0.1:8000</code>. This server handles requests for frontend assets and the websocket for hot module reloading and proxies everything else to the Django backend running on a different random port.</ul><p>During deployment:<ul><li>The assets are compiled to <code>static/</code> and either rsynced to the server or added to the container separately from the standard <code>./manage.py collectstatic --noinput</code>.</ul><p>In production:<ul><li>Separate cache busting filenames from <code>ManifestStaticFilesStorage</code> and rspack allow us to set far-future expiry headers on all static assets.<li>I’m serving static assets from the same origin as the website itself. (rspack can be configured for different requirements!)<li>I don’t worry anymore about duplicating assets which are both referenced from frontend code and backend code. This doesn’t affect many assets after all.<li>The HTML snippet is loaded once only.</ul><h2 id=example-configuration><a class=toclink href=#example-configuration>Example configuration</a></h2><p>Here’s an example configuration which works well for us. What follows is the rspack configuration itself, building on our snippet library <code>rspack.library.js</code>. We mostly do not change anything in here except for the list of PostCSS plugins:<p>rspack.config.js:<div class=chl><pre><span></span><code><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=nx>env</span><span class=p>,</span><span class=w> </span><span class=nx>argv</span><span class=p>)</span><span class=w> </span><span class=p>=></span><span class=w> </span><span class=p>{</span>
+<span class=w>  </span><span class=kd>const</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>base</span><span class=p>,</span><span class=w> </span><span class=nx>devServer</span><span class=p>,</span><span class=w> </span><span class=nx>assetRule</span><span class=p>,</span><span class=w> </span><span class=nx>postcssRule</span><span class=p>,</span><span class=w> </span><span class=nx>swcWithPreactRule</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=o>=</span>
+<span class=w>    </span><span class=nx>require</span><span class=p>(</span><span class=s2>"./rspack.library.js"</span><span class=p>)(</span><span class=nx>argv</span><span class=p>.</span><span class=nx>mode</span><span class=w> </span><span class=o>===</span><span class=w> </span><span class=s2>"production"</span><span class=p>)</span>
+
+<span class=w>  </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=p>...</span><span class=nx>base</span><span class=p>,</span>
+<span class=w>    </span><span class=nx>devServer</span><span class=o>:</span><span class=w> </span><span class=nx>devServer</span><span class=p>({</span><span class=w> </span><span class=nx>backendPort</span><span class=o>:</span><span class=w> </span><span class=nx>env</span><span class=p>.</span><span class=nx>backend</span><span class=w> </span><span class=p>}),</span>
+<span class=w>    </span><span class=nx>module</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=nx>rules</span><span class=o>:</span><span class=w> </span><span class=p>[</span>
+<span class=w>        </span><span class=nx>assetRule</span><span class=p>(),</span>
+<span class=w>        </span><span class=nx>postcssRule</span><span class=p>({</span>
+<span class=w>          </span><span class=nx>plugins</span><span class=o>:</span><span class=w> </span><span class=p>[</span>
+<span class=w>            </span><span class=s2>"postcss-nesting"</span><span class=p>,</span>
+<span class=w>            </span><span class=s2>"autoprefixer"</span><span class=p>,</span>
+<span class=w>          </span><span class=p>],</span>
+<span class=w>        </span><span class=p>}),</span>
+<span class=w>        </span><span class=nx>swcWithPreactRule</span><span class=p>(),</span>
+<span class=w>      </span><span class=p>],</span>
+<span class=w>    </span><span class=p>},</span>
+<span class=w>  </span><span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>The default entry point is <code>main</code> and loads <code>frontend/main.js</code>. The rest of the JavaScript and styles are loaded from there.<p>The HTML snippet loader works by adding <code>WEBPACK_ASSETS = BASE_DIR / "static"</code> to the Django settings and adding the following tags to the <code>&lt;head></code> of the website, most often in <code>base.html</code>:<div class=chl><pre><span></span><code><span class=cp>{%</span> <span class=k>load</span> <span class=nv>webpack_assets</span> <span class=cp>%}</span>
+<span class=cp>{%</span> <span class=k>webpack_assets</span> <span class=s1>'main'</span> <span class=cp>%}</span>
+</code></pre></div><p>The corresponding template tag in <code>webpack_assets.py</code> follows:<div class=chl><pre><span></span><code><span class=kn>from</span><span class=w> </span><span class=nn>functools</span><span class=w> </span><span class=kn>import</span> <span class=n>cache</span>
+
+<span class=kn>from</span><span class=w> </span><span class=nn>django</span><span class=w> </span><span class=kn>import</span> <span class=n>template</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>django.conf</span><span class=w> </span><span class=kn>import</span> <span class=n>settings</span>
+<span class=kn>from</span><span class=w> </span><span class=nn>django.utils.html</span><span class=w> </span><span class=kn>import</span> <span class=n>mark_safe</span>
+
+<span class=n>register</span> <span class=o>=</span> <span class=n>template</span><span class=o>.</span><span class=n>Library</span><span class=p>()</span>
+
+<span class=k>def</span><span class=w> </span><span class=nf>webpack_assets</span><span class=p>(</span><span class=n>entry</span><span class=p>):</span>
+    <span class=n>path</span> <span class=o>=</span> <span class=n>settings</span><span class=o>.</span><span class=n>BASE_DIR</span> <span class=o>/</span> <span class=p>(</span><span class=s2>"tmp"</span> <span class=k>if</span> <span class=n>settings</span><span class=o>.</span><span class=n>DEBUG</span> <span class=k>else</span> <span class=s2>"static"</span><span class=p>)</span> <span class=o>/</span> <span class=sa>f</span><span class=s2>"</span><span class=si>{</span><span class=n>entry</span><span class=si>}</span><span class=s2>.html"</span>
+    <span class=k>return</span> <span class=n>mark_safe</span><span class=p>(</span><span class=n>path</span><span class=o>.</span><span class=n>read_text</span><span class=p>())</span>
+
+<span class=k>if</span> <span class=ow>not</span> <span class=n>settings</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>:</span>
+    <span class=n>webpack_assets</span> <span class=o>=</span> <span class=n>cache</span><span class=p>(</span><span class=n>webpack_assets</span><span class=p>)</span>
+<span class=n>register</span><span class=o>.</span><span class=n>simple_tag</span><span class=p>(</span><span class=n>webpack_assets</span><span class=p>)</span>
+</code></pre></div><p>Last but not least, the fabfile contains the following task definition:<div class=chl><pre><span></span><code><span class=nd>@task</span>
+<span class=k>def</span><span class=w> </span><span class=nf>dev</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=n>host</span><span class=o>=</span><span class=s2>"127.0.0.1"</span><span class=p>,</span> <span class=n>port</span><span class=o>=</span><span class=mi>8000</span><span class=p>):</span>
+    <span class=n>backend</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>randint</span><span class=p>(</span><span class=mi>50000</span><span class=p>,</span> <span class=mi>60000</span><span class=p>)</span>
+    <span class=n>jobs</span> <span class=o>=</span> <span class=p>[</span>
+        <span class=sa>f</span><span class=s2>".venv/bin/python manage.py runserver </span><span class=si>{</span><span class=n>backend</span><span class=si>}</span><span class=s2>"</span><span class=p>,</span>
+        <span class=sa>f</span><span class=s2>"HOST=</span><span class=si>{</span><span class=n>host</span><span class=si>}</span><span class=s2> PORT=</span><span class=si>{</span><span class=n>port</span><span class=si>}</span><span class=s2> yarn run rspack serve --mode=development --env backend=</span><span class=si>{</span><span class=n>backend</span><span class=si>}</span><span class=s2>"</span><span class=p>,</span>
+    <span class=p>]</span>
+    <span class=c1># Run these two jobs at the same time:</span>
+    <span class=n>_concurrently</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=n>jobs</span><span class=p>)</span>
+</code></pre></div><p>The fh-fablib repository contains the <a href=https://github.com/feinheit/fh-fablib/blob/8109a76b63b37d3433356fabb4469263f8b18d66/fh_fablib/__init__.py#L194-L214><code>_concurrently</code></a> implementation we’re using at this time.<h2 id=the-library-which-enables-the-nice-configuration-above><a class=toclink href=#the-library-which-enables-the-nice-configuration-above>The library which enables the nice configuration above</a></h2><p>Of course, the whole library of snippets has to be somewhere. The fabfile automatically updates the library when we release a new version, and the library is the same in all the dozens of projects we’re working on. Here’s the current version of <code>rspack.library.js</code>:<div class=chl><pre><span></span><code><span class=kd>const</span><span class=w> </span><span class=nx>path</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>"node:path"</span><span class=p>)</span>
+<span class=kd>const</span><span class=w> </span><span class=nx>HtmlWebpackPlugin</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>"html-webpack-plugin"</span><span class=p>)</span>
+<span class=kd>const</span><span class=w> </span><span class=nx>rspack</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>"@rspack/core"</span><span class=p>)</span>
+<span class=kd>const</span><span class=w> </span><span class=nx>assert</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>"node:assert/strict"</span><span class=p>)</span>
+<span class=kd>const</span><span class=w> </span><span class=nx>semver</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>"semver"</span><span class=p>)</span>
+
+<span class=nx>assert</span><span class=p>.</span><span class=nx>ok</span><span class=p>(</span><span class=nx>semver</span><span class=p>.</span><span class=nx>satisfies</span><span class=p>(</span><span class=nx>rspack</span><span class=p>.</span><span class=nx>rspackVersion</span><span class=p>,</span><span class=w> </span><span class=s2>">=1.1.3"</span><span class=p>),</span><span class=w> </span><span class=s2>"rspack outdated"</span><span class=p>)</span>
+
+<span class=kd>const</span><span class=w> </span><span class=nx>truthy</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(...</span><span class=nx>list</span><span class=p>)</span><span class=w> </span><span class=p>=></span><span class=w> </span><span class=nx>list</span><span class=p>.</span><span class=nx>filter</span><span class=p>((</span><span class=nx>el</span><span class=p>)</span><span class=w> </span><span class=p>=></span><span class=w> </span><span class=o>!!</span><span class=nx>el</span><span class=p>)</span>
+
+<span class=nx>module</span><span class=p>.</span><span class=nx>exports</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=nx>PRODUCTION</span><span class=p>)</span><span class=w> </span><span class=p>=></span><span class=w> </span><span class=p>{</span>
+<span class=w>  </span><span class=kd>const</span><span class=w> </span><span class=nx>cwd</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>process</span><span class=p>.</span><span class=nx>cwd</span><span class=p>()</span>
+
+<span class=w>  </span><span class=kd>function</span><span class=w> </span><span class=nx>swcWithPreactRule</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=nx>test</span><span class=o>:</span><span class=w> </span><span class=sr>/\.(j|t)sx?$/</span><span class=p>,</span>
+<span class=w>      </span><span class=nx>loader</span><span class=o>:</span><span class=w> </span><span class=s2>"builtin:swc-loader"</span><span class=p>,</span>
+<span class=w>      </span><span class=nx>exclude</span><span class=o>:</span><span class=w> </span><span class=p>[</span><span class=sr>/node_modules/</span><span class=p>],</span>
+<span class=w>      </span><span class=nx>options</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>jsc</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>          </span><span class=nx>parser</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>            </span><span class=nx>syntax</span><span class=o>:</span><span class=w> </span><span class=s2>"ecmascript"</span><span class=p>,</span>
+<span class=w>            </span><span class=nx>jsx</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>          </span><span class=p>},</span>
+<span class=w>          </span><span class=nx>transform</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>            </span><span class=nx>react</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>              </span><span class=nx>runtime</span><span class=o>:</span><span class=w> </span><span class=s2>"automatic"</span><span class=p>,</span>
+<span class=w>              </span><span class=nx>importSource</span><span class=o>:</span><span class=w> </span><span class=s2>"preact"</span><span class=p>,</span>
+<span class=w>            </span><span class=p>},</span>
+<span class=w>          </span><span class=p>},</span>
+<span class=w>          </span><span class=nx>externalHelpers</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>        </span><span class=p>},</span>
+<span class=w>      </span><span class=p>},</span>
+<span class=w>      </span><span class=nx>type</span><span class=o>:</span><span class=w> </span><span class=s2>"javascript/auto"</span><span class=p>,</span>
+<span class=w>    </span><span class=p>}</span>
+<span class=w>  </span><span class=p>}</span>
+
+<span class=w>  </span><span class=kd>function</span><span class=w> </span><span class=nx>swcWithReactRule</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=nx>test</span><span class=o>:</span><span class=w> </span><span class=sr>/\.(j|t)sx?$/</span><span class=p>,</span>
+<span class=w>      </span><span class=nx>loader</span><span class=o>:</span><span class=w> </span><span class=s2>"builtin:swc-loader"</span><span class=p>,</span>
+<span class=w>      </span><span class=nx>exclude</span><span class=o>:</span><span class=w> </span><span class=p>[</span><span class=sr>/node_modules/</span><span class=p>],</span>
+<span class=w>      </span><span class=nx>options</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>jsc</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>          </span><span class=nx>parser</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>            </span><span class=nx>syntax</span><span class=o>:</span><span class=w> </span><span class=s2>"ecmascript"</span><span class=p>,</span>
+<span class=w>            </span><span class=nx>jsx</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>          </span><span class=p>},</span>
+<span class=w>          </span><span class=nx>transform</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>            </span><span class=nx>react</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>              </span><span class=nx>runtime</span><span class=o>:</span><span class=w> </span><span class=s2>"automatic"</span><span class=p>,</span>
+<span class=w>              </span><span class=c1>// importSource: "preact",</span>
+<span class=w>            </span><span class=p>},</span>
+<span class=w>          </span><span class=p>},</span>
+<span class=w>          </span><span class=nx>externalHelpers</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>        </span><span class=p>},</span>
+<span class=w>      </span><span class=p>},</span>
+<span class=w>      </span><span class=nx>type</span><span class=o>:</span><span class=w> </span><span class=s2>"javascript/auto"</span><span class=p>,</span>
+<span class=w>    </span><span class=p>}</span>
+<span class=w>  </span><span class=p>}</span>
+
+<span class=w>  </span><span class=kd>function</span><span class=w> </span><span class=nx>htmlPlugin</span><span class=p>(</span><span class=nx>name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s2>""</span><span class=p>,</span><span class=w> </span><span class=nx>config</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{})</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=k>return</span><span class=w> </span><span class=ow>new</span><span class=w> </span><span class=nx>HtmlWebpackPlugin</span><span class=p>({</span>
+<span class=w>      </span><span class=nx>filename</span><span class=o>:</span><span class=w> </span><span class=nx>name</span><span class=w> </span><span class=o>?</span><span class=w> </span><span class=sb>`</span><span class=si>${</span><span class=nx>name</span><span class=si>}</span><span class=sb>.html`</span><span class=w> </span><span class=o>:</span><span class=w> </span><span class=s2>"[name].html"</span><span class=p>,</span>
+<span class=w>      </span><span class=nx>inject</span><span class=o>:</span><span class=w> </span><span class=kc>false</span><span class=p>,</span>
+<span class=w>      </span><span class=nx>templateContent</span><span class=o>:</span><span class=w> </span><span class=p>({</span><span class=w> </span><span class=nx>htmlWebpackPlugin</span><span class=w> </span><span class=p>})</span><span class=w> </span><span class=p>=></span>
+<span class=w>        </span><span class=sb>`</span><span class=si>${</span><span class=nx>htmlWebpackPlugin</span><span class=p>.</span><span class=nx>tags</span><span class=p>.</span><span class=nx>headTags</span><span class=si>}</span><span class=sb>`</span><span class=p>,</span>
+<span class=w>      </span><span class=p>...</span><span class=nx>config</span><span class=p>,</span>
+<span class=w>    </span><span class=p>})</span>
+<span class=w>  </span><span class=p>}</span>
+
+<span class=w>  </span><span class=kd>function</span><span class=w> </span><span class=nx>htmlSingleChunkPlugin</span><span class=p>(</span><span class=nx>chunk</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s2>""</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nx>htmlPlugin</span><span class=p>(</span><span class=nx>chunk</span><span class=p>,</span><span class=w> </span><span class=nx>chunk</span><span class=w> </span><span class=o>?</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>chunks</span><span class=o>:</span><span class=w> </span><span class=p>[</span><span class=nx>chunk</span><span class=p>]</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=o>:</span><span class=w> </span><span class=p>{})</span>
+<span class=w>  </span><span class=p>}</span>
+
+<span class=w>  </span><span class=kd>function</span><span class=w> </span><span class=nx>postcssLoaders</span><span class=p>(</span><span class=nx>plugins</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=k>return</span><span class=w> </span><span class=p>[</span>
+<span class=w>      </span><span class=p>{</span><span class=w> </span><span class=nx>loader</span><span class=o>:</span><span class=w> </span><span class=nx>rspack</span><span class=p>.</span><span class=nx>CssExtractRspackPlugin</span><span class=p>.</span><span class=nx>loader</span><span class=w> </span><span class=p>},</span>
+<span class=w>      </span><span class=p>{</span><span class=w> </span><span class=nx>loader</span><span class=o>:</span><span class=w> </span><span class=s2>"css-loader"</span><span class=w> </span><span class=p>},</span>
+<span class=w>      </span><span class=p>{</span><span class=w> </span><span class=nx>loader</span><span class=o>:</span><span class=w> </span><span class=s2>"postcss-loader"</span><span class=p>,</span><span class=w> </span><span class=nx>options</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>postcssOptions</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>plugins</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+<span class=w>    </span><span class=p>]</span>
+<span class=w>  </span><span class=p>}</span>
+
+<span class=w>  </span><span class=kd>function</span><span class=w> </span><span class=nx>cssExtractPlugin</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=k>return</span><span class=w> </span><span class=ow>new</span><span class=w> </span><span class=nx>rspack</span><span class=p>.</span><span class=nx>CssExtractRspackPlugin</span><span class=p>({</span>
+<span class=w>      </span><span class=nx>filename</span><span class=o>:</span><span class=w> </span><span class=nx>PRODUCTION</span><span class=w> </span><span class=o>?</span><span class=w> </span><span class=s2>"[name].[contenthash].css"</span><span class=w> </span><span class=o>:</span><span class=w> </span><span class=s2>"[name].css"</span><span class=p>,</span>
+<span class=w>      </span><span class=nx>chunkFilename</span><span class=o>:</span><span class=w> </span><span class=nx>PRODUCTION</span><span class=w> </span><span class=o>?</span><span class=w> </span><span class=s2>"[name].[contenthash].css"</span><span class=w> </span><span class=o>:</span><span class=w> </span><span class=s2>"[name].css"</span><span class=p>,</span>
+<span class=w>    </span><span class=p>})</span>
+<span class=w>  </span><span class=p>}</span>
+
+<span class=w>  </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>    </span><span class=nx>truthy</span><span class=p>,</span>
+<span class=w>    </span><span class=nx>base</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=nx>context</span><span class=o>:</span><span class=w> </span><span class=nx>path</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=nx>cwd</span><span class=p>,</span><span class=w> </span><span class=s2>"frontend"</span><span class=p>),</span>
+<span class=w>      </span><span class=nx>entry</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>main</span><span class=o>:</span><span class=w> </span><span class=s2>"./main.js"</span><span class=w> </span><span class=p>},</span>
+<span class=w>      </span><span class=nx>output</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>clean</span><span class=o>:</span><span class=w> </span><span class=nx>PRODUCTION</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>path</span><span class=o>:</span><span class=w> </span><span class=nx>path</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=nx>cwd</span><span class=p>,</span><span class=w> </span><span class=nx>PRODUCTION</span><span class=w> </span><span class=o>?</span><span class=w> </span><span class=s2>"static"</span><span class=w> </span><span class=o>:</span><span class=w> </span><span class=s2>"tmp"</span><span class=p>),</span>
+<span class=w>        </span><span class=nx>publicPath</span><span class=o>:</span><span class=w> </span><span class=s2>"/static/"</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>filename</span><span class=o>:</span><span class=w> </span><span class=nx>PRODUCTION</span><span class=w> </span><span class=o>?</span><span class=w> </span><span class=s2>"[name].[contenthash].js"</span><span class=w> </span><span class=o>:</span><span class=w> </span><span class=s2>"[name].js"</span><span class=p>,</span>
+<span class=w>        </span><span class=c1>// Same as the default but prefixed with "_/[name]."</span>
+<span class=w>        </span><span class=nx>assetModuleFilename</span><span class=o>:</span><span class=w> </span><span class=s2>"_/[name].[hash][ext][query][fragment]"</span><span class=p>,</span>
+<span class=w>      </span><span class=p>},</span>
+<span class=w>      </span><span class=nx>plugins</span><span class=o>:</span><span class=w> </span><span class=nx>truthy</span><span class=p>(</span><span class=nx>cssExtractPlugin</span><span class=p>(),</span><span class=w> </span><span class=nx>htmlSingleChunkPlugin</span><span class=p>()),</span>
+<span class=w>      </span><span class=nx>target</span><span class=o>:</span><span class=w> </span><span class=s2>"browserslist:defaults"</span><span class=p>,</span>
+<span class=w>    </span><span class=p>},</span>
+<span class=w>    </span><span class=nx>devServer</span><span class=p>(</span><span class=nx>proxySettings</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>host</span><span class=o>:</span><span class=w> </span><span class=s2>"0.0.0.0"</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>hot</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>port</span><span class=o>:</span><span class=w> </span><span class=nb>Number</span><span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>PORT</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=mf>4000</span><span class=p>),</span>
+<span class=w>        </span><span class=nx>allowedHosts</span><span class=o>:</span><span class=w> </span><span class=s2>"all"</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>client</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>          </span><span class=nx>overlay</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>            </span><span class=nx>errors</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>            </span><span class=nx>warnings</span><span class=o>:</span><span class=w> </span><span class=kc>false</span><span class=p>,</span>
+<span class=w>            </span><span class=nx>runtimeErrors</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>          </span><span class=p>},</span>
+<span class=w>        </span><span class=p>},</span>
+<span class=w>        </span><span class=nx>devMiddleware</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>          </span><span class=nx>headers</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>"Access-Control-Allow-Origin"</span><span class=o>:</span><span class=w> </span><span class=s2>"*"</span><span class=w> </span><span class=p>},</span>
+<span class=w>          </span><span class=nx>index</span><span class=o>:</span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>          </span><span class=nx>writeToDisk</span><span class=o>:</span><span class=w> </span><span class=p>(</span><span class=nx>path</span><span class=p>)</span><span class=w> </span><span class=p>=></span><span class=w> </span><span class=o>/</span><span class=err>\</span><span class=p>.</span><span class=nx>html$</span><span class=o>/</span><span class=p>.</span><span class=nx>test</span><span class=p>(</span><span class=nx>path</span><span class=p>),</span>
+<span class=w>        </span><span class=p>},</span>
+<span class=w>        </span><span class=nx>proxy</span><span class=o>:</span><span class=w> </span><span class=p>[</span>
+<span class=w>          </span><span class=nx>proxySettings</span>
+<span class=w>            </span><span class=o>?</span><span class=w> </span><span class=p>{</span>
+<span class=w>                </span><span class=nx>context</span><span class=o>:</span><span class=w> </span><span class=p>()</span><span class=w> </span><span class=p>=></span><span class=w> </span><span class=kc>true</span><span class=p>,</span>
+<span class=w>                </span><span class=nx>target</span><span class=o>:</span><span class=w> </span><span class=sb>`http://127.0.0.1:</span><span class=si>${</span><span class=nx>proxySettings</span><span class=p>.</span><span class=nx>backendPort</span><span class=si>}</span><span class=sb>`</span><span class=p>,</span>
+<span class=w>              </span><span class=p>}</span>
+<span class=w>            </span><span class=o>:</span><span class=w> </span><span class=p>{},</span>
+<span class=w>        </span><span class=p>],</span>
+<span class=w>      </span><span class=p>}</span>
+<span class=w>    </span><span class=p>},</span>
+<span class=w>    </span><span class=nx>assetRule</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>test</span><span class=o>:</span><span class=w> </span><span class=sr>/\.(png|webp|woff2?|svg|eot|ttf|otf|gif|jpe?g|mp3|wav)$/i</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>type</span><span class=o>:</span><span class=w> </span><span class=s2>"asset"</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>parser</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>dataUrlCondition</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>maxSize</span><span class=o>:</span><span class=w> </span><span class=mf>512</span><span class=w> </span><span class=cm>/* bytes */</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+<span class=w>      </span><span class=p>}</span>
+<span class=w>    </span><span class=p>},</span>
+<span class=w>    </span><span class=nx>postcssRule</span><span class=p>(</span><span class=nx>cfg</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>test</span><span class=o>:</span><span class=w> </span><span class=sr>/\.css$/i</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>type</span><span class=o>:</span><span class=w> </span><span class=s2>"javascript/auto"</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>use</span><span class=o>:</span><span class=w> </span><span class=nx>postcssLoaders</span><span class=p>(</span><span class=nx>cfg</span><span class=o>?</span><span class=p>.</span><span class=nx>plugins</span><span class=p>),</span>
+<span class=w>      </span><span class=p>}</span>
+<span class=w>    </span><span class=p>},</span>
+<span class=w>    </span><span class=nx>sassRule</span><span class=p>(</span><span class=nx>options</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{})</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=kd>let</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>cssLoaders</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>options</span>
+<span class=w>      </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=o>!</span><span class=nx>cssLoaders</span><span class=p>)</span><span class=w> </span><span class=nx>cssLoaders</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>postcssLoaders</span><span class=p>([</span><span class=s2>"autoprefixer"</span><span class=p>])</span>
+<span class=w>      </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>test</span><span class=o>:</span><span class=w> </span><span class=sr>/\.scss$/i</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>use</span><span class=o>:</span><span class=w> </span><span class=p>[</span>
+<span class=w>          </span><span class=p>...</span><span class=nx>cssLoaders</span><span class=p>,</span>
+<span class=w>          </span><span class=p>{</span>
+<span class=w>            </span><span class=nx>loader</span><span class=o>:</span><span class=w> </span><span class=s2>"sass-loader"</span><span class=p>,</span>
+<span class=w>            </span><span class=nx>options</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>              </span><span class=nx>sassOptions</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>                </span><span class=nx>includePaths</span><span class=o>:</span><span class=w> </span><span class=p>[</span><span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=nx>path</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=nx>cwd</span><span class=p>,</span><span class=w> </span><span class=s2>"node_modules"</span><span class=p>))],</span>
+<span class=w>              </span><span class=p>},</span>
+<span class=w>            </span><span class=p>},</span>
+<span class=w>          </span><span class=p>},</span>
+<span class=w>        </span><span class=p>],</span>
+<span class=w>        </span><span class=nx>type</span><span class=o>:</span><span class=w> </span><span class=s2>"javascript/auto"</span><span class=p>,</span>
+<span class=w>      </span><span class=p>}</span>
+<span class=w>    </span><span class=p>},</span>
+<span class=w>    </span><span class=nx>swcWithPreactRule</span><span class=p>,</span>
+<span class=w>    </span><span class=nx>swcWithReactRule</span><span class=p>,</span>
+<span class=w>    </span><span class=nx>resolvePreactAsReact</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+<span class=w>      </span><span class=k>return</span><span class=w> </span><span class=p>{</span>
+<span class=w>        </span><span class=nx>resolve</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>          </span><span class=nx>alias</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>            </span><span class=nx>react</span><span class=o>:</span><span class=w> </span><span class=s2>"preact/compat"</span><span class=p>,</span>
+<span class=w>            </span><span class=s2>"react-dom/test-utils"</span><span class=o>:</span><span class=w> </span><span class=s2>"preact/test-utils"</span><span class=p>,</span>
+<span class=w>            </span><span class=s2>"react-dom"</span><span class=o>:</span><span class=w> </span><span class=s2>"preact/compat"</span><span class=p>,</span><span class=w> </span><span class=c1>// Must be below test-utils</span>
+<span class=w>            </span><span class=s2>"react/jsx-runtime"</span><span class=o>:</span><span class=w> </span><span class=s2>"preact/jsx-runtime"</span><span class=p>,</span>
+<span class=w>          </span><span class=p>},</span>
+<span class=w>        </span><span class=p>},</span>
+<span class=w>      </span><span class=p>}</span>
+<span class=w>    </span><span class=p>},</span>
+<span class=w>    </span><span class=nx>htmlPlugin</span><span class=p>,</span>
+<span class=w>    </span><span class=nx>htmlSingleChunkPlugin</span><span class=p>,</span>
+<span class=w>    </span><span class=nx>postcssLoaders</span><span class=p>,</span>
+<span class=w>    </span><span class=nx>cssExtractPlugin</span><span class=p>,</span>
+<span class=w>  </span><span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=closing-thoughts><a class=toclink href=#closing-thoughts>Closing thoughts</a></h2><p>Several utilities from this library aren’t used in the example above, for example the <code>sassRule</code> or the HTML plugin utilities which are useful when you require several entry points on your website, e.g. an entry point for the public facing website and an entry point for a dashboard used by members of the staff.<p>Most of the code in here is freely available in our <a href=https://github.com/feinheit/fh-fablib>fh-fablib</a> repo under an open source license. Anything in this blog post can also be used under the <a href=https://creativecommons.org/public-domain/cc0/>CC0</a> license, so feel free to steal everything. If you do, I’d be happy to hear your thoughts about this post, and please share your experiences and suggestions for improvement – if you have any!</div><div class="text prevnext"><span> </span><a href=/writing/django-javascript-modules-and-importmaps/>Next post</a></div></div></main><footer><div class=wrappy><p><small> I like feedback! <a href="mailto:mk@406.ch?subject=How I'm bundling frontend assets using Django and rspack these days">Send me an email.</a> <br> <a rel="noopener noreferrer" href=https://ko-fi.com/matthiask target=_blank>☕ Buy me a coffee?</a> <br> Published on 2025-05-26 in <a href=/writing/category-django/>Django</a>, <a href=/writing/category-programming/>Programming</a> </small></p><script async crossorigin issue-term=pathname repo=matthiask/406-comments src=https://utteranc.es/client.js theme=github-dark></script></div></footer>
