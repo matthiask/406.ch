@@ -1,5 +1,104 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-05-26T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>How I'm bundling frontend assets using Django and rspack these days</title><link href="https://406.ch/writing/how-i-m-bundling-frontend-assets-using-django-and-rspack-these-days/" rel="alternate" /><id>https://406.ch/writing/how-i-m-bundling-frontend-assets-using-django-and-rspack-these-days/</id><published>2025-05-26T12:00:00Z</published><updated>2025-05-26T12:00:00Z</updated><summary type="html">&lt;h1 id="how-im-bundling-frontend-assets-using-django-and-rspack-these-days"&gt;&lt;a class="toclink" href="#how-im-bundling-frontend-assets-using-django-and-rspack-these-days"&gt;How I&amp;rsquo;m bundling frontend assets using Django and rspack these days&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-06-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Preserving referential integrity with JSON fields and Django</title><link href="https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/" rel="alternate" /><id>https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/</id><published>2025-06-04T12:00:00Z</published><updated>2025-06-04T12:00:00Z</updated><summary type="html">&lt;h1 id="preserving-referential-integrity-with-json-fields-and-django"&gt;&lt;a class="toclink" href="#preserving-referential-integrity-with-json-fields-and-django"&gt;Preserving referential integrity with JSON fields and Django&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="motivation"&gt;&lt;a class="toclink" href="#motivation"&gt;Motivation&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The great thing about using &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; and
+&lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is that
+CMS plugins are Django models &amp;ndash; if using them you immediately have access to
+the power of Django&amp;rsquo;s ORM and Django&amp;rsquo;s administration interface.&lt;/p&gt;
+&lt;p&gt;However, using one model per content type can be limiting on larger sites.
+Because of this &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; like using JSON plugins with
+schemas for more fringe use cases or for places where we have richer data but
+do not want to write a separate Django app for it. This works well as long as
+you only work with text, numbers etc. but gets a bit ugly once you start
+referencing Django models because you never know if those objects are still
+around when actually using the data stored in those JSON fields.&lt;/p&gt;
+&lt;p&gt;Django has a nice
+&lt;a href="https://docs.djangoproject.com/en/5.2/ref/models/fields/#django.db.models.ForeignKey.on_delete"&gt;&lt;code&gt;on_delete=models.PROTECT&lt;/code&gt;&lt;/a&gt;
+feature, but that of course only works when using real models. So, let&amp;rsquo;s bridge
+this gap and allow using foreign key protection with data stored in JSON
+fields!&lt;/p&gt;
+&lt;h2 id="models"&gt;&lt;a class="toclink" href="#models"&gt;Models&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;First, you have to start using the
+&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;django-json-schema-editor&lt;/a&gt;
+and specifically its &lt;code&gt;JSONField&lt;/code&gt; instead of the standard Django &lt;code&gt;JSONField&lt;/code&gt;. The most important difference between those two is that the schema editor&amp;rsquo;s field wants a JSON schema. So, for the sake of an example, let&amp;rsquo;s assume that we have a model with images and a model with galleries. Note that we&amp;rsquo;re omitting many of the fields actually making the interface nice such as titles etc.&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django.db&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor.fields&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ImageField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;gallery_schema&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;array&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;table&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;minItems&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;items&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;foreign_key&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;options&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                    &lt;span class="c1"&gt;# raw_id_fields URL:&lt;/span&gt;
+                    &lt;span class="s2"&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/admin/myapp/image/?_popup=1&amp;amp;_to_field=id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="p"&gt;},&lt;/span&gt;
+            &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Gallery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;JSONField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;gallery_schema&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, if we were to do it by hand, we&amp;rsquo;d define a &lt;code&gt;through&lt;/code&gt; model for a
+&lt;code&gt;ManyToManyField&lt;/code&gt; linking galleries to images, and adding a
+&lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to this through model&amp;rsquo;s &lt;code&gt;image&lt;/code&gt; foreign
+key and we would be updating this many to many table when the &lt;code&gt;Gallery&lt;/code&gt; object
+changes. Since that&amp;rsquo;s somewhat &lt;a href="https://github.com/matthiask/django-json-schema-editor/blob/4bc1ab0cf44eda4c0e824f96f2bd08cd94832c1c/django_json_schema_editor/fields.py#L9-L47"&gt;boring but also tricky code&lt;/a&gt; I have already written it (including unit tests of course) and all that&amp;rsquo;s left to do is define the linking:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register_data_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="c1"&gt;# The model we&amp;#39;re referencing:&lt;/span&gt;
+    &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# The name of the ManyToManyField:&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# The getter which returns a list of stringified primary key values or nothing:&lt;/span&gt;
+    &lt;span class="n"&gt;getter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, attempting to delete an image which is still used in a gallery somewhere will raise &lt;a href="https://docs.djangoproject.com/en/5.2/ref/exceptions/#django.db.models.ProtectedError"&gt;ProtectedError&lt;/a&gt; exceptions. That&amp;rsquo;s what we wanted to achieve.&lt;/p&gt;
+&lt;h2 id="using-a-gallery-instance"&gt;&lt;a class="toclink" href="#using-a-gallery-instance"&gt;Using a gallery instance&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When you have a gallery instance you can now use the &lt;code&gt;images&lt;/code&gt; field to fetch
+all images and use the order from the JSON data:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;gallery_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;images&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]],&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="jsonpluginbase-and-jsonplugininline"&gt;&lt;a class="toclink" href="#jsonpluginbase-and-jsonplugininline"&gt;JSONPluginBase and JSONPluginInline&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I would generally do the instantiation of models slightly differently and use
+&lt;code&gt;django-json-schema-editor&lt;/code&gt;&amp;rsquo;s &lt;code&gt;JSONPluginBase&lt;/code&gt; and &lt;code&gt;JSONPluginInline&lt;/code&gt; which
+offer additional niceties such as streamlined JSON models with only one backing database table (using &lt;a href="https://docs.djangoproject.com/en/5.2/topics/db/models/#proxy-models"&gt;proxy
+models&lt;/a&gt;) and supporting not just showing the primary key of referenced model instances but also their &lt;code&gt;__str__&lt;/code&gt; value.&lt;/p&gt;
+&lt;p&gt;The example above would have to be changed to look more like this:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;JSONPlugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register_data_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;Gallery&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gallery&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;gallery_schema&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, that&amp;rsquo;s not documented yet so for now you unfortunately have to read
+the &lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;code and the test
+suite&lt;/a&gt;, sorry for that.
+It&amp;rsquo;s used heavily in production though so if you start using it it won&amp;rsquo;t
+suddenly start breaking in the future.&lt;/p&gt;</summary></entry><entry><title>How I'm bundling frontend assets using Django and rspack these days</title><link href="https://406.ch/writing/how-i-m-bundling-frontend-assets-using-django-and-rspack-these-days/" rel="alternate" /><id>https://406.ch/writing/how-i-m-bundling-frontend-assets-using-django-and-rspack-these-days/</id><published>2025-05-26T12:00:00Z</published><updated>2025-05-26T12:00:00Z</updated><summary type="html">&lt;h1 id="how-im-bundling-frontend-assets-using-django-and-rspack-these-days"&gt;&lt;a class="toclink" href="#how-im-bundling-frontend-assets-using-django-and-rspack-these-days"&gt;How I&amp;rsquo;m bundling frontend assets using Django and rspack these days&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I last wrote about configuring Django with bundlers in 2018: &lt;a href="https://406.ch/writing/our-approach-to-configuring-django-webpack-and-manifeststaticfilesstorage/"&gt;Our approach to configuring Django, Webpack and ManifestStaticFilesStorage&lt;/a&gt;. An update has been a long time coming. I wanted to write this down for a while already, but each time I started explaining how configuring rspack is actually nice I look at the files we&amp;rsquo;re using and switch to writing about something else. This time I managed to get through &amp;ndash; it&amp;rsquo;s not that bad, I promise.&lt;/p&gt;
 &lt;p&gt;This is quite a long post. A project where all of this can be seen in action is &lt;a href="https://github.com/matthiask/traduire/"&gt;Traduire&lt;/a&gt;, a platform for translating gettext catalogs. I announced it on the &lt;a href="https://forum.djangoproject.com/t/traduire-a-platform-for-editing-gettext-translations-on-the-web/32687"&gt;Django forum&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="our-requirements"&gt;&lt;a class="toclink" href="#our-requirements"&gt;Our requirements&lt;/a&gt;&lt;/h2&gt;
@@ -1183,20 +1282,4 @@ the final release.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.25&lt;/a&gt;: Fixed the type of the author field for the send-to-author processing action.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.2.2&lt;/a&gt;: Added support for embedding &lt;a href="https://www.srf.ch/play/tv"&gt;SRF play&lt;/a&gt; external content. They do not support oEmbed unfortunately.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5.3&lt;/a&gt;: Added support for SRF play embeddings as well. The difference is that the feincms3-cookiecontrol embedding requires consent before embedding external content.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>How I handle versioning</title><link href="https://406.ch/writing/how-i-handle-versioning/" rel="alternate" /><id>https://406.ch/writing/how-i-handle-versioning/</id><published>2024-08-20T12:00:00Z</published><updated>2024-08-20T12:00:00Z</updated><summary type="html">&lt;h1 id="how-i-handle-versioning"&gt;&lt;a class="toclink" href="#how-i-handle-versioning"&gt;How I handle versioning&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have been reading up on versioning methods a bit, and I noticed that I never
-shared my a bit unorthodox versioning method. I previously wrote about my &lt;a href="https://406.ch/writing/my-rules-for-releasing-open-source-software/"&gt;rules for releasing open source software&lt;/a&gt; but skipped everything related to versioning.&lt;/p&gt;
-&lt;p&gt;I use something close to the ideas of &lt;a href="https://semver.org/"&gt;semantic versioning&lt;/a&gt; but it&amp;rsquo;s not quite that. Note that the versioning scheme has nothing to do with production readiness, it&amp;rsquo;s more about communicating the state of the project.&lt;/p&gt;
-&lt;h2 id="00x-everything-breaks"&gt;&lt;a class="toclink" href="#00x-everything-breaks"&gt;0.0.x &amp;ndash; Everything breaks&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I don&amp;rsquo;t trust my choices a lot. Everything may radically change, and I may also abandon the project with no hard feelings.&lt;/p&gt;
-&lt;h2 id="010-changelogging"&gt;&lt;a class="toclink" href="#010-changelogging"&gt;0.1.0 &amp;ndash; Changelogging&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I generally start writing release notes or rather a &lt;a href="https://en.wikipedia.org/wiki/Changelog"&gt;Changelog&lt;/a&gt;, since writing full release notes is much more work. You absolutely have to test the software and I do not guarantee anything related to backwards compatibility &amp;ndash; just that you&amp;rsquo;ll know about breaking changes when you read the CHANGELOG.&lt;/p&gt;
-&lt;h2 id="x-bugfixes-and-pure-additions"&gt;&lt;a class="toclink" href="#x-bugfixes-and-pure-additions"&gt;?.?.x &amp;ndash; Bugfixes and pure additions&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Strictly speaking, patch version increments are only for bugfixes. However, when I add new features which are purely additional to the package or if there&amp;rsquo;s no way (famous last words) that anything will break, I&amp;rsquo;ll upload a patch release.&lt;/p&gt;
-&lt;p&gt;Sometimes it might be better to increment the minor version, yes. But, being very lazy, I sometimes only want to add a line to the CHANGELOG instead of adding a new heading for the new release. Also, if I don&amp;rsquo;t quickly release new additions there&amp;rsquo;s a real danger that I&amp;rsquo;ll only come back to the project weeks or months later, and I don&amp;rsquo;t want anyone (myself included) waiting on these updates. Also, if I inadvertently introduced new bugs it&amp;rsquo;s better to fix them quickly instead of forgetting about it first and having to rediscover the buggy code later.&lt;/p&gt;
-&lt;h2 id="100-im-happy"&gt;&lt;a class="toclink" href="#100-im-happy"&gt;1.0.0 &amp;ndash; I&amp;rsquo;m happy&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m happy with the package and I commit to start using semver more properly. If I have to (or want to) break backwards compatibility you get a migration path, especially if I need it myself. Which is often the case since I&amp;rsquo;m maintaining dozens of Django-based websites and webapps, and I&amp;rsquo;m always &lt;a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food"&gt;dogfooding&lt;/a&gt; my stuff.&lt;/p&gt;
-&lt;p&gt;The pure additions case from the last section still applies, since slapping a 1.0 version on something doesn&amp;rsquo;t suddenly make me less lazy.&lt;/p&gt;
-&lt;h2 id="outliers"&gt;&lt;a class="toclink" href="#outliers"&gt;Outliers&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/feincms/feincms"&gt;FeinCMS&lt;/a&gt; uses a variant of &lt;a href="https://calver.org/"&gt;calendar versioning&lt;/a&gt;; the version at the time of writing is 24.8.2 which means the second release in August 2024.&lt;/p&gt;
-&lt;p&gt;There are probably other outliers I forgot about.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>

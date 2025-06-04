@@ -1,5 +1,246 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2023-10-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-42"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-42"&gt;Weeknotes (2023 week 42)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2025-06-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Preserving referential integrity with JSON fields and Django</title><link href="https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/" rel="alternate" /><id>https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/</id><published>2025-06-04T12:00:00Z</published><updated>2025-06-04T12:00:00Z</updated><summary type="html">&lt;h1 id="preserving-referential-integrity-with-json-fields-and-django"&gt;&lt;a class="toclink" href="#preserving-referential-integrity-with-json-fields-and-django"&gt;Preserving referential integrity with JSON fields and Django&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="motivation"&gt;&lt;a class="toclink" href="#motivation"&gt;Motivation&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The great thing about using &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; and
+&lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is that
+CMS plugins are Django models &amp;ndash; if using them you immediately have access to
+the power of Django&amp;rsquo;s ORM and Django&amp;rsquo;s administration interface.&lt;/p&gt;
+&lt;p&gt;However, using one model per content type can be limiting on larger sites.
+Because of this &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; like using JSON plugins with
+schemas for more fringe use cases or for places where we have richer data but
+do not want to write a separate Django app for it. This works well as long as
+you only work with text, numbers etc. but gets a bit ugly once you start
+referencing Django models because you never know if those objects are still
+around when actually using the data stored in those JSON fields.&lt;/p&gt;
+&lt;p&gt;Django has a nice
+&lt;a href="https://docs.djangoproject.com/en/5.2/ref/models/fields/#django.db.models.ForeignKey.on_delete"&gt;&lt;code&gt;on_delete=models.PROTECT&lt;/code&gt;&lt;/a&gt;
+feature, but that of course only works when using real models. So, let&amp;rsquo;s bridge
+this gap and allow using foreign key protection with data stored in JSON
+fields!&lt;/p&gt;
+&lt;h2 id="models"&gt;&lt;a class="toclink" href="#models"&gt;Models&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;First, you have to start using the
+&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;django-json-schema-editor&lt;/a&gt;
+and specifically its &lt;code&gt;JSONField&lt;/code&gt; instead of the standard Django &lt;code&gt;JSONField&lt;/code&gt;. The most important difference between those two is that the schema editor&amp;rsquo;s field wants a JSON schema. So, for the sake of an example, let&amp;rsquo;s assume that we have a model with images and a model with galleries. Note that we&amp;rsquo;re omitting many of the fields actually making the interface nice such as titles etc.&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django.db&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor.fields&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONField&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ImageField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;gallery_schema&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;array&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;table&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;minItems&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;items&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;foreign_key&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="s2"&gt;&amp;quot;options&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                    &lt;span class="c1"&gt;# raw_id_fields URL:&lt;/span&gt;
+                    &lt;span class="s2"&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/admin/myapp/image/?_popup=1&amp;amp;_to_field=id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="p"&gt;},&lt;/span&gt;
+            &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Gallery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;JSONField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;gallery_schema&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, if we were to do it by hand, we&amp;rsquo;d define a &lt;code&gt;through&lt;/code&gt; model for a
+&lt;code&gt;ManyToManyField&lt;/code&gt; linking galleries to images, and adding a
+&lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to this through model&amp;rsquo;s &lt;code&gt;image&lt;/code&gt; foreign
+key and we would be updating this many to many table when the &lt;code&gt;Gallery&lt;/code&gt; object
+changes. Since that&amp;rsquo;s somewhat &lt;a href="https://github.com/matthiask/django-json-schema-editor/blob/4bc1ab0cf44eda4c0e824f96f2bd08cd94832c1c/django_json_schema_editor/fields.py#L9-L47"&gt;boring but also tricky code&lt;/a&gt; I have already written it (including unit tests of course) and all that&amp;rsquo;s left to do is define the linking:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register_data_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="c1"&gt;# The model we&amp;#39;re referencing:&lt;/span&gt;
+    &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# The name of the ManyToManyField:&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# The getter which returns a list of stringified primary key values or nothing:&lt;/span&gt;
+    &lt;span class="n"&gt;getter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, attempting to delete an image which is still used in a gallery somewhere will raise &lt;a href="https://docs.djangoproject.com/en/5.2/ref/exceptions/#django.db.models.ProtectedError"&gt;ProtectedError&lt;/a&gt; exceptions. That&amp;rsquo;s what we wanted to achieve.&lt;/p&gt;
+&lt;h2 id="using-a-gallery-instance"&gt;&lt;a class="toclink" href="#using-a-gallery-instance"&gt;Using a gallery instance&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When you have a gallery instance you can now use the &lt;code&gt;images&lt;/code&gt; field to fetch
+all images and use the order from the JSON data:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;gallery_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;images&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]],&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="jsonpluginbase-and-jsonplugininline"&gt;&lt;a class="toclink" href="#jsonpluginbase-and-jsonplugininline"&gt;JSONPluginBase and JSONPluginInline&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I would generally do the instantiation of models slightly differently and use
+&lt;code&gt;django-json-schema-editor&lt;/code&gt;&amp;rsquo;s &lt;code&gt;JSONPluginBase&lt;/code&gt; and &lt;code&gt;JSONPluginInline&lt;/code&gt; which
+offer additional niceties such as streamlined JSON models with only one backing database table (using &lt;a href="https://docs.djangoproject.com/en/5.2/topics/db/models/#proxy-models"&gt;proxy
+models&lt;/a&gt;) and supporting not just showing the primary key of referenced model instances but also their &lt;code&gt;__str__&lt;/code&gt; value.&lt;/p&gt;
+&lt;p&gt;The example above would have to be changed to look more like this:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;JSONPlugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register_data_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;Gallery&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gallery&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;gallery_schema&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, that&amp;rsquo;s not documented yet so for now you unfortunately have to read
+the &lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;code and the test
+suite&lt;/a&gt;, sorry for that.
+It&amp;rsquo;s used heavily in production though so if you start using it it won&amp;rsquo;t
+suddenly start breaking in the future.&lt;/p&gt;</summary></entry><entry><title>django-content-editor now supports nested sections</title><link href="https://406.ch/writing/django-content-editor-now-supports-nested-sections/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-now-supports-nested-sections/</id><published>2024-09-13T12:00:00Z</published><updated>2024-09-13T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-nested-sections"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-nested-sections"&gt;django-content-editor now supports nested sections&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; (and
+it&amp;rsquo;s ancestor FeinCMS) has been the Django admin extension for editing content
+consisting of reusable blocks since 2009. In the last years we have more and
+more often started &lt;a href="https://feincms3.readthedocs.io/en/latest/guides/rendering.html#grouping-plugins-into-subregions"&gt;automatically grouping related
+items&lt;/a&gt;,
+e.g. for rendering a sequence of images as a gallery. But, sometimes it&amp;rsquo;s nice
+to give editors more control. This has been possible by using blocks which open
+a subsection and blocks which close a subsection for a long time, but it hasn&amp;rsquo;t
+been friendly to content managers, especially when using nested sections.&lt;/p&gt;
+&lt;p&gt;The content editor now has first-class support for such nested sections. Here&amp;rsquo;s
+a screenshot showing the nesting:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="django-content-editor with sections" src="https://406.ch/assets/20240911-content-editor-sections.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Finally it&amp;rsquo;s possible to visually group blocks into sections, collapse those
+sections as once and drag and drop whole sections into their place instead of
+having to select the involved blocks individually.&lt;/p&gt;
+&lt;p&gt;The best part about it is that the content editor still supports all Django
+admin widgets, as long as those widgets have support for the Django
+administration interface&amp;rsquo;s &lt;a href="https://docs.djangoproject.com/en/latest/ref/contrib/admin/javascript/"&gt;inline form
+events&lt;/a&gt;!
+Moving DOM nodes around breaks attached JavaScript behaviors, but we do not
+actually move DOM nodes around after the initialization &amp;ndash; instead, we use
+&lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Ordering_flex_items"&gt;Flexbox
+ordering&lt;/a&gt;
+to visually reorder blocks. It&amp;rsquo;s a bit more work than using a ready-made
+sortable plugin, but &amp;ndash; as mentioned &amp;ndash; the prize is that we don&amp;rsquo;t break any
+other Django admin extensions.&lt;/p&gt;
+&lt;h2 id="simple-patterns"&gt;&lt;a class="toclink" href="#simple-patterns"&gt;Simple patterns&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I previously already reacted to a blog post by Lincoln Loop here in my post &lt;a href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/"&gt;My
+reaction to the block-driven CMS blog
+post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The latest blog post, &lt;a href="https://lincolnloop.com/insights/simple-block-pattern-wagtail-cms/"&gt;Solving the Messy Middle: a Simple Block Pattern for
+Wagtail
+CMS&lt;/a&gt; was
+interesting as well. It dives into the configuration of a
+&lt;a href="https://wagtail.org/"&gt;Wagtail&lt;/a&gt; stream field which allows composing content out
+of reusable blocks of content (&lt;a href="https://406.ch/writing/i-just-learned-about-wagtail-s-streamfield/"&gt;sounds
+familiar!&lt;/a&gt;).
+The result is saved in a JSON blob in the database with all the advantages and
+disadvantages that entails.&lt;/p&gt;
+&lt;p&gt;Now, django-content-editor is a worthy competitor when you do not want to add
+another interface to your website besides the user-facing frontend and the
+Django administration interface.&lt;/p&gt;
+&lt;p&gt;The example from the Lincoln Loop blog post can be replicated quite closely
+with django-content-editor by using sections. I&amp;rsquo;m using the
+&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;
+package for the section plugin since it easily allows adding more fields if
+some section type needs it.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s an example model definition:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Models&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;content_editor.models&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Region&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;create_plugin_base&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor.plugins&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;feincms3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# You have to define regions; each region gets a tab in the admin interface&lt;/span&gt;
+    &lt;span class="n"&gt;regions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Region&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Additional fields for the page...&lt;/span&gt;
+
+&lt;span class="n"&gt;PagePlugin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_plugin_base&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Page&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;richtext&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PagePlugin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PagePlugin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Section&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PagePlugin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;AccordionSection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;accordion&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}}}},&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;CloseSection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;close&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{}}},&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the corresponding admin definition:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Admin&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;content_editor.admin&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ContentEditor&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor.plugins&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginInline&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;feincms3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;
+
+&lt;span class="nd"&gt;@admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Page&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;PageAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ContentEditor&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;inlines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;richtext&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichTextInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ImageInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;JSONPluginInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AccordionSection&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sections&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;JSONPluginInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CloseSection&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sections&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The somewhat cryptic &lt;code&gt;sections=&lt;/code&gt; argument says how many levels of sections
+the individual blocks open or close.&lt;/p&gt;
+&lt;p&gt;To render the content including accordions I&amp;rsquo;d probably use a &lt;a href="https://feincms3.readthedocs.io/en/latest/guides/rendering.html#using-marks"&gt;feincms3
+renderer&lt;/a&gt;.
+At the time of writing the renderer definition for sections is a bit tricky.&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;feincms3.renderer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RegionRenderer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;render_in_context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_renderer&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;PageRenderer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RegionRenderer&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;plugins&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;yield from&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;_handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;in_section&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;section&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;popleft&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;close&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;in_section&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                        &lt;span class="k"&gt;return&lt;/span&gt;
+                    &lt;span class="c1"&gt;# Ignore close section plugins when not inside section&lt;/span&gt;
+                    &lt;span class="k"&gt;continue&lt;/span&gt;
+
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;accordion&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;render_in_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;accordion.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                        &lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;accordion&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                        &lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;in_section&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                    &lt;span class="p"&gt;})&lt;/span&gt;
+
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render_plugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;renderer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PageRenderer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_renderer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;plugins/richtext.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_renderer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;plugins/image.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="closing-thoughts"&gt;&lt;a class="toclink" href="#closing-thoughts"&gt;Closing thoughts&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Sometimes, I think to myself, I&amp;rsquo;ll &amp;ldquo;just&amp;rdquo; write a &amp;ldquo;simple&amp;rdquo; blog post. I get
+what I deserve when using those forbidden words. This blog post is neither
+short or simple. That being said, the rendering code is a bit tricky, the rest
+is quite straightforward. The amount of code in django-content-editor and
+feincms3 is reasonable as well. Even though it may look like a lot you&amp;rsquo;ll still
+be &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;running less code in
+production&lt;/a&gt;
+than when using comparable solutions built using Django.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 42)</title><link href="https://406.ch/writing/weeknotes-2023-week-42/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-42/</id><published>2023-10-18T12:00:00Z</published><updated>2023-10-18T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-42"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-42"&gt;Weeknotes (2023 week 42)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="vacation-in-italy"&gt;&lt;a class="toclink" href="#vacation-in-italy"&gt;Vacation in Italy&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We have spent a wonderful family week in Italy. The voyage by train was very
 comfortable and we had a great time there. I have lived close to lakes all my
@@ -739,80 +980,4 @@ looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></e
 &lt;p&gt;feincms3-data now has an ugly workaround for this problem: It generates random data for a list of explicitly specified fields (which is very unlikely to cause collisions) and only updates the records with the correct data after the cleanup step. &lt;a href="https://github.com/matthiask/feincms3-data/commit/9324605dc8dcb32ee4118adca0668643597ec130"&gt;The code wasn&amp;rsquo;t that hairy to write&lt;/a&gt; and I was again very happy that unittesting is a thing.&lt;/p&gt;
 &lt;h2 id="prosemirror-hacking"&gt;&lt;a class="toclink" href="#prosemirror-hacking"&gt;ProseMirror hacking&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I&amp;rsquo;m back to hacking on &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt; plugins. I still feel really well about picking it as a basis for all those use cases when using the venerable &lt;a href="https://ckeditor.com/ckeditor-4/"&gt;CKEditor 4&lt;/a&gt; isn&amp;rsquo;t a good fit.&lt;/p&gt;
-&lt;p&gt;I did like the fact a lot that ProseMirror was written in JavaScript. Now that it has been rewritten in TypeScript I&amp;rsquo;m reevaluating my resistance against TypeScript, but I just don&amp;rsquo;t know if it&amp;rsquo;s worth it. Why write down all those annotations when the code also works without? I still don&amp;rsquo;t really see the point. Yes I know, catching bugs early and all that. But still.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 10)</title><link href="https://406.ch/writing/weeknotes-2023-week-10/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-10/</id><published>2023-03-10T12:00:00Z</published><updated>2023-03-10T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-10"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-10"&gt;Weeknotes (2023 week 10)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="feincms-bugs"&gt;&lt;a class="toclink" href="#feincms-bugs"&gt;FeinCMS bugs&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://github.com/feincms/feincms/"&gt;FeinCMS&lt;/a&gt; is really stable (since there isn&amp;rsquo;t much going on) but this week a Django upgrade surfaced bugs in the &lt;a href="https://github.com/feincms/feincms/blob/main/feincms/extensions/datepublisher.py"&gt;datepublisher&lt;/a&gt; extension. The extension uses a &lt;code&gt;granular_now&lt;/code&gt; utility to determine if a page should be shown or not; the time is rounded to a 5-minute boundary which makes some sorts of caching more effective.&lt;/p&gt;
-&lt;p&gt;On one hand it&amp;rsquo;s a bit sad that activity on the project has practically ground to a halt, on the other hand it&amp;rsquo;s great that the project requires practically no changes when a new version of Django is released. Stability is awesome.&lt;/p&gt;
-&lt;h2 id="15-years-of-using-github"&gt;&lt;a class="toclink" href="#15-years-of-using-github"&gt;15 years of using GitHub&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I used &lt;a href="https://subversion.apache.org/"&gt;Subversion&lt;/a&gt; and &lt;a href="http://darcs.net/"&gt;darcs&lt;/a&gt; for probably not much more than a year each before discovering &lt;a href="https://git-scm.com/"&gt;Git&lt;/a&gt; probably some time in spring 2006. It was a very archaic version with a much worse CLI than today. Everything was archaic, not just the CLI itself but also the repository browsers and the various web UIs. But everything was also very interesting to me. I especially found the emphasis on clean data structures instead of code very inspiring. And here we are, basically all the tools have been rewritten but the commits from back then are still around.&lt;/p&gt;
-&lt;p&gt;Yesterday marks the 15 anniversary of my GitHub account. I was invited to join the private beta. GitHub was probably the first Git-related tool I encountered which actually looked nice. Hard to believe that so much time has passed.&lt;/p&gt;
-&lt;p&gt;(No, I don&amp;rsquo;t find Git hard to use. And I have basically stopped losing work since I started using Git, something which has happened too often before.)&lt;/p&gt;
-&lt;h2 id="static-site-generation"&gt;&lt;a class="toclink" href="#static-site-generation"&gt;Static Site generation&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I played around with several static site generators to replace my blogging software. I checked out several generators:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://getpelican.com/"&gt;Pelican&lt;/a&gt; looks interesting because it uses Python and Jinja2 which should make it easier to reuse the Django templates (or so I thought)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt; seems to be very widely used and looks like a good idea to bet on&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This site runs on Django and I&amp;rsquo;m using a markdown editor based on &lt;a href="https://codemirror.net/"&gt;CodeMirror&lt;/a&gt; in the admin. I do like CodeMirror a lot but I would like it even more if I could use neovim in the console. I know that vim bindings for CodeMirror exist, but I didn&amp;rsquo;t have a good experience with the vim bindings for VisualStudio Code so I&amp;rsquo;m wary (and too lazy).&lt;/p&gt;
-&lt;p&gt;The problem with all those generators are that they have different ideas for how to structure the URLs and RSS/Atom feeds. &lt;a href="https://web.archive.org/web/20110514113830/http://diveintomark.org/archives/2004/05/28/howto-atom-id"&gt;I have since learned the reason why Pelican doesn&amp;rsquo;t use the permalink of posts as their Atom ID&lt;/a&gt; (from the &lt;code&gt;feedgenerator&lt;/code&gt; module) but I&amp;rsquo;m just not convinced that flooding aggregators with old posts is a net benefit to everyone. Yes, it&amp;rsquo;s only once but&amp;hellip;&lt;/p&gt;
-&lt;p&gt;Of course I&amp;rsquo;m now thinking about writing my own static site generator, for fun.&lt;/p&gt;
-&lt;h2 id="thanks-tim"&gt;&lt;a class="toclink" href="#thanks-tim"&gt;Thanks, Tim&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been coworking with &lt;a href="https://hachyderm.io/@CodenameTim@fosstodon.org/109807763335807167"&gt;Tim&lt;/a&gt; to write more. Tim and I have been maintaining the &lt;a href="https://jazzband.co/projects/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; together in the last few years and have been pairing up every one or two weeks to write together (mostly) in silence as described by &lt;a href="https://jacobian.org/2021/mar/9/coworking-to-write-more/"&gt;Jacob Kaplan-Moss in his blog entry&lt;/a&gt; a few times. Today I really needed the additional motivation brought by committing to work together. If not for this arrangement I would probably have skipped it and who knows if I had managed to restart the weeknotes streak next week on my own&amp;hellip;!&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 8 and 9)</title><link href="https://406.ch/writing/weeknotes-2023-week-8-and-9/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-8-and-9/</id><published>2023-03-03T12:00:00Z</published><updated>2023-03-03T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-8-and-9"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-8-and-9"&gt;Weeknotes (2023 week 8 and 9)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;Last week was a short work week. We spent a few nights in the mountains. Not much snow though. Enough for some skiing and sledging.&lt;/p&gt;
-&lt;p&gt;This work week was &amp;hellip; not normal. Many meetings, not enough time to work on projects. That shortens these week notes a lot.&lt;/p&gt;
-&lt;h2 id="django-software-foundation-membership"&gt;&lt;a class="toclink" href="#django-software-foundation-membership"&gt;Django Software Foundation membership&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I found out through Tim that I have been &lt;a href="https://www.djangoproject.com/foundation/minutes/2023/jan/12/dsf-board-monthly-meeting/"&gt;approved as an individual member of the Django Software Foundation&lt;/a&gt;. I&amp;rsquo;m honored and hope that this will be another way where I can give something back. It also feels good to be seen.&lt;/p&gt;
-&lt;p&gt;I didn&amp;rsquo;t even know that the Foundation&amp;rsquo;s &lt;a href="https://www.djangoproject.com/foundation/minutes/"&gt;meeting minutes&lt;/a&gt; were public. I still use RSS and can wholeheartedly recommend &lt;a href="https://theoldreader.com/"&gt;The Old Reader&lt;/a&gt; (no affiliation) and so I thought I&amp;rsquo;d try adding a RSS feed of meeting minutes to the website. &lt;a href="https://github.com/django/djangoproject.com/pull/1316"&gt;The pull request is still being reviewed.&lt;/a&gt; at the time of writing.&lt;/p&gt;
-&lt;h2 id="feincms3-forms-documentation"&gt;&lt;a class="toclink" href="#feincms3-forms-documentation"&gt;feincms3-forms documentation&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I worked on the &lt;a href="https://github.com/matthiask/feincms3-forms"&gt;feincms3-forms&lt;/a&gt; README a bit. The README hopefully clarifies the purpose and the components of the app a bit.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is an extremely flexible forms builder for the Django admin interface.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="migrating-from-bitbucket-to-github"&gt;&lt;a class="toclink" href="#migrating-from-bitbucket-to-github"&gt;Migrating from Bitbucket to GitHub&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been a long time Bitbucket user since GitHub used a pricing where many private repositories were very expensive and Bitbucket only charged a fee per user. This has changed long ago though. I wanted to consolidate the tools used at $work and have therefore taken the time to move all private repositores to GitHub. Determining the list of repositories in a Bitbucket Workspace was surprisingly annoying but I got there in the end with an app-specific password and curl.&lt;/p&gt;
-&lt;p&gt;Next, I converted the JSON into a list of Git/SSH cloning URLs:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;json&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;sys&lt;/span&gt;
-
-&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="nb"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;link&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;links&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;clone&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ssh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;values&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I used it as (I had to repeat the first command for every 100 repos):&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;python3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;filter&lt;/span&gt;.&lt;span class="nv"&gt;py&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;repos&lt;/span&gt;.&lt;span class="nv"&gt;json&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;clone&lt;/span&gt;.&lt;span class="nv"&gt;txt&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;url&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;cat&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;clone&lt;/span&gt;.&lt;span class="nv"&gt;txt&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="c1"&gt;; do (cd mirror; git clone --mirror $url) ; done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Then, I wrote another Python script to create the repositores and upload them all:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;subprocess&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;repo&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]:&lt;/span&gt;
-    &lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gh repo create --private feinheit-archive/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cd &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; &amp;amp;&amp;amp; git push git@github.com:feinheit-archive/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.git --all&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;rm -rf &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And ran ist as:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;mirror&lt;/span&gt;
-&lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;../&lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Funnily enough I learned that GitHub ratelimits repository creation. So I had to wait an hour after several dozen repos and start the command again afterwards. Of course the code wasn&amp;rsquo;t written defensively at first and deleted repos which weren&amp;rsquo;t uploaded yet so I had to work out the set of repos I have to re-download from Bitbucket&amp;hellip; I think it&amp;rsquo;s a bit surprising that &lt;code&gt;subprocess.run&lt;/code&gt; doesn&amp;rsquo;t raise an exception by default when a command fails. &lt;code&gt;check=True&lt;/code&gt; should definitely be the default.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not posting the code because I&amp;rsquo;m proud but because I&amp;rsquo;m not. Throwing such stuff together with Python feels great, and using &lt;code&gt;subprocess.run(..., shell=True)&lt;/code&gt; is more fun than writing bash scripts with &lt;code&gt;sed&lt;/code&gt; etc.&lt;/p&gt;
-&lt;h2 id="use-frontend-frameworks-to-kickstart-your-site-and-to-drag-you-down-later"&gt;&lt;a class="toclink" href="#use-frontend-frameworks-to-kickstart-your-site-and-to-drag-you-down-later"&gt;Use Frontend frameworks to kickstart your site and to drag you down later&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;A longer blog post is in the making as I&amp;rsquo;m trying to formulate my thoughts on this.&lt;/p&gt;
-&lt;p&gt;Frontend frameworks are a great help in getting a product out of the door quickly. But tools and needs evolve. Backwards incompatible versions&lt;sup id="fnref:semver"&gt;&lt;a class="footnote-ref" href="#fn:semver"&gt;1&lt;/a&gt;&lt;/sup&gt; of those Frameworks are published. And then it happens: Too many things break at once and you have to pick up the pieces. What has been an advantage in the beginning drags you down, because now you have to maintain not just your own code but also everything you used from $framework.&lt;/p&gt;
-&lt;p&gt;I wish I had been (even 😂) more cautious when selecting tools for potentially long running projects.&lt;/p&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:semver"&gt;
-&lt;p&gt;Sometimes stuff breaks even when updating patch versions.&amp;#160;&lt;a class="footnote-backref" href="#fnref:semver" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry></feed>
+&lt;p&gt;I did like the fact a lot that ProseMirror was written in JavaScript. Now that it has been rewritten in TypeScript I&amp;rsquo;m reevaluating my resistance against TypeScript, but I just don&amp;rsquo;t know if it&amp;rsquo;s worth it. Why write down all those annotations when the code also works without? I still don&amp;rsquo;t really see the point. Yes I know, catching bugs early and all that. But still.&lt;/p&gt;</summary></entry></feed>
