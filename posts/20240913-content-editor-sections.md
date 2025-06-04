@@ -1,5 +1,5 @@
 Title: django-content-editor now supports nested sections
-Categories: Django, Programming, feincms3
+Categories: Django, Programming, feincms
 
 
 [django-content-editor](https://django-content-editor.readthedocs.io/) (and
