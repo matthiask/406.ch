@@ -1,38 +1,65 @@
-Title: CMS thoughts
+Title: Thoughts about Django-based content management systems
 Categories: Django, Programming
 Draft: remove-this-to-publish
-
-# CMS thoughts
-
-I maybe want to write a series about implementing CMS nicely with Django and
-django-content-editor and friends.
 
 !!! Attention
     This article contains polemics.
 
+I have almost exclusively used Django for implementing content management
+systems since 2008. (I have also choosed Django most of the time for everything
+else related to backends.)
+
+In this time, content management systems have come and gone. The big three
+systems many years back were [django CMS](https://www.django-cms.org/),
+[Mezzanine](https://github.com/stephenmcd/mezzanine) and
+[our](https://feinheit.ch) own
+[FeinCMS](https://406.ch/writing/the-future-of-feincms/).
+
+During all this time I have always kept an eye open for other CMS than our own
+but have steadily continued working in my small corner of the Django space. I
+think it's time to write down why I have been doing this all this time, for
+myself and only incidentally for others to read.
+
 
 ## Why not use Wagtail, django CMS or any of those alternatives?
 
-- Stock admin is actually great. Immediately profit from all improvements!
-- Less maintenance is great.
-- Running less code is great.
-- The update cycle of basically everything which depends on Django itself is
-  slower than the update cycle of Django itself. Having more code to check
-  makes keeping up with Django harder. That means that django-content-editor
-  and friends are usable with the newest versions of Django before they are
-  even released while other projects are lagging behind even though there's
-  much more people power behind those projects.
+The Django administration interface is actually great. Even though some people
+suggest that it should be treated as a tool for developers only, recent
+improvements to the accessibility and the general usability suggest otherwise.
+I have written more about my views on this in [The Django admin is a
+CMS](https://406.ch/writing/the-django-admin-is-a-cms/). Using and building on
+top of the Django admin is a great way to immediately profit from all current
+and future improvements without having to reimplement anything.
 
-I'm always thinking about long term maintenance. I really don't want to
-maintain some of these larger projects, or even parts of them.
+So, I don't want to have to reimplement Django's features, I want to add new
+features on top.
 
-My situation is special: I cannot spend a lot of time on a single project. I
-spend little time on many many projects.
+Note that I don't want to dunk on anyone. But, I think it should be pointed out
+that other systems do make it hard to adopt new Django versions on release day:
 
-I know about someone who would have payed tens of thousands of francs just for
-a CMS upgrade. They'd rather reimplement it on top of a less capable but much
-more maintainable platform. And that's what the feincms family of tools is all
-about.
+- The update cycle of many large apps using Django lag behind Django. Wagtail
+  (in)famously declared an [upper version boundary for
+  Django](https://github.com/wagtail/wagtail/discussions/12574) which makes it
+  hard to adopt Django versions faster than Wagtail releases updates.
+- Some django CMS components such as django-filer have lagged behind in the
+  past. Looking at the CI matrix and the activity right now suggests that this
+  is not the case anymore. (I wanted to use django-filer and have used it in a
+  few projects, but have written
+  [django-cabinet](https://406.ch/writing/django-cabinet-a-media-library-for-django/)
+  after being discouraged by the complexity of the package.)
+
+These larger systems have many more (very talented) people working on them. I'm
+not saying I'm doing a better job. I'm saying that thinking about the code
+you're running in production and being conservative about features you might
+not need is a good thing. (See also [Run less code in production or you’ll end
+up paying the price
+later](https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/)
+and [Low maintenance
+software](https://406.ch/writing/low-maintenance-software/).) I'm always
+thinking about long term maintenance. I really don't want to maintain some of
+these larger projects, or even parts of them. So I'd rather not adopt them for
+projects which hopefully will be developed and maintained for a long time to
+come.
 
 
 ## The rule of least power
@@ -54,8 +81,7 @@ that and has done that since 2009.
 [When Wagtail introduced the StreamField in
 2015](https://torchbox.com/blog/rich-text-fields-and-faster-horses/) it was
 definitely a great update to an already great CMS but it wasn't a new idea
-generally and not a new thing in Django land. They didn't say it was, but still
-something.
+generally and not a new thing in Django land. They didn't say it was and [welcomed the fact that they also started using a better way to structure content](https://406.ch/writing/i-just-learned-about-wagtail-s-streamfield/).
 
 
 ## Why not put everything in one big rich text area?
