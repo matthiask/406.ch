@@ -223,8 +223,19 @@ sub {
   padding-left: 2px;
 }
 
+.month {
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--grey);
+  margin-bottom: 1rem;
+}
+
 .article {
   display: block;
+  margin-bottom: 3rem;
+}
+
+.article.weeknotes {
+  zoom: 0.75;
 }
 
 .prevnext {

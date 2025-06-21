@@ -7,10 +7,13 @@
 <main><div class="wrappy">
 
 {% for post in posts %}
-  <a href="{{ post.url() }}" class="article">
+  {% if loop.changed(post.date.month) %}
+    <div class="month">{{ post.date.strftime("%B %Y") }}</div>
+    {% endif %}
+  <a href="{{ post.url() }}" class="article {% for category in post.categories %} {{ category.slug }}{% endfor %}">
     <h2>
-      <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small><br>
       {{ post.title }}
+      {% if post.draft %}<small>(draft)</small>{% endif %}
     </h2>
     <p>{{ post.excerpt|truncate(240) }}</p>
   </a>
