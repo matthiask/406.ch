@@ -1,5 +1,35 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-06-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Preserving referential integrity with JSON fields and Django</title><link href="https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/" rel="alternate" /><id>https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/</id><published>2025-06-04T12:00:00Z</published><updated>2025-06-04T12:00:00Z</updated><summary type="html">&lt;h1 id="preserving-referential-integrity-with-json-fields-and-django"&gt;&lt;a class="toclink" href="#preserving-referential-integrity-with-json-fields-and-django"&gt;Preserving referential integrity with JSON fields and Django&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-07-05T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 27)</title><link href="https://406.ch/writing/weeknotes-2025-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-27/</id><published>2025-07-05T12:00:00Z</published><updated>2025-07-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-27"&gt;Weeknotes (2025 week 27)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have again missed a few weeks, so the releases section will be longer than usual since it covers six weeks.&lt;/p&gt;
+&lt;h2 id="django-prose-editor"&gt;&lt;a class="toclink" href="#django-prose-editor"&gt;django-prose-editor&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have totally restructured the documentation to make it clearer. The &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/configuration.html"&gt;configuration chapter&lt;/a&gt; is shorter and more focussed, and the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/custom_extensions.html"&gt;custom extensions chapter&lt;/a&gt; actually shows all required parts now.&lt;/p&gt;
+&lt;p&gt;The most visible change is probably the refactored menu system. Extensions now
+have an &lt;code&gt;addMenuItems&lt;/code&gt; method where they can add their own buttons to the menu
+bar. I wanted to do this for a long time but have only just this week found a
+way to achieve this which I actually like.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve reported a bug to Tiptap where a &lt;code&gt;.can()&lt;/code&gt; chain always succeeded even though the actual operation could fail (&lt;a href="https://github.com/ueberdosis/tiptap/issues/6306"&gt;#6306&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Finally, I have also switched from &lt;a href="https://esbuild.github.io/"&gt;esbuild&lt;/a&gt; to
+&lt;a href="https://rslib.rs/"&gt;rslib&lt;/a&gt;; I&amp;rsquo;m a heavy user of rspack anyway and am more at
+home with its configuration.&lt;/p&gt;
+&lt;h2 id="django-content-editor"&gt;&lt;a class="toclink" href="#django-content-editor"&gt;django-content-editor&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The 7.4 release mostly contains minor changes, one new feature is the
+&lt;code&gt;content_editor.admin.RefinedModelAdmin&lt;/code&gt; class. It includes tweaks to Django&amp;rsquo;s
+standard behavior such as supporting a &lt;code&gt;Ctrl-S&lt;/code&gt; shortcut for the &amp;ldquo;Save and
+continue editing&amp;rdquo; functionality and an additional warning when people want to
+delete inlines and instead delete the whole object. This seems to happen often
+even though people are shown the full list of objects which will be deleted.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.15&lt;/a&gt;: See above&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.4.1&lt;/a&gt;: See above.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.5.1&lt;/a&gt;: Now supports customizing the prose editor configuration (when using &lt;code&gt;format: "prose"&lt;/code&gt;) and also includes validation support for foreign key references in the JSON data.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.6&lt;/a&gt;: The sanitizer started crashing when used with &lt;code&gt;lxml&amp;gt;=6&lt;/code&gt; when being fed strings with control characters inside.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_recent_objects/"&gt;django-recent-objects 0.1.1&lt;/a&gt;: Changed the code to use &lt;code&gt;UNION ALL&lt;/code&gt; instead of &lt;code&gt;UNION&lt;/code&gt; when determining which objects to fetch from all tables.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.4.1&lt;/a&gt;: Added experimental support for rendering sections. Sections can be nested, so they are more powerful than subregions. Also, added warnings when registering plugin proxies for rendering &lt;em&gt;and&lt;/em&gt; fetching, since that will mostly likely lead to duplicated objects in the rendered output.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.20&lt;/a&gt;: Added &lt;code&gt;tree_info&lt;/code&gt; and &lt;code&gt;recursetree&lt;/code&gt; template tags. Optimized the performance by avoiding the rank table if easily possible. Added stronger recommendations to pre-filter the table using &lt;code&gt;.tree_filter()&lt;/code&gt; or &lt;code&gt;.tree_exclude()&lt;/code&gt; when working with small subsets of large datasets.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.3&lt;/a&gt;: Added a trove identifeir for recent Django versions. It still works fine, but it&amp;rsquo;s deprecated and shouldn&amp;rsquo;t be used since it still uses the unmaintained CKEditor 4 line (since we do not ship the commercial LTS version).&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.6.1&lt;/a&gt;: Golfed the generated CSS and JavaScript bundle down to below 4000 bytes again, including the YouTube/Vimeo/etc. wrapper which only loads external content when users consent.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Preserving referential integrity with JSON fields and Django</title><link href="https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/" rel="alternate" /><id>https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/</id><published>2025-06-04T12:00:00Z</published><updated>2025-06-04T12:00:00Z</updated><summary type="html">&lt;h1 id="preserving-referential-integrity-with-json-fields-and-django"&gt;&lt;a class="toclink" href="#preserving-referential-integrity-with-json-fields-and-django"&gt;Preserving referential integrity with JSON fields and Django&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="motivation"&gt;&lt;a class="toclink" href="#motivation"&gt;Motivation&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The great thing about using &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; and
 &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is that
@@ -1295,38 +1325,4 @@ is quite straightforward. The amount of code in django-content-editor and
 feincms3 is reasonable as well. Even though it may look like a lot you&amp;rsquo;ll still
 be &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;running less code in
 production&lt;/a&gt;
-than when using comparable solutions built using Django.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 37)</title><link href="https://406.ch/writing/weeknotes-2024-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-37/</id><published>2024-09-11T12:00:00Z</published><updated>2024-09-11T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-37"&gt;Weeknotes (2024 week 37)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="django-debug-toolbar-alpha-with-async-support"&gt;&lt;a class="toclink" href="#django-debug-toolbar-alpha-with-async-support"&gt;django-debug-toolbar alpha with async support!&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have helped mentoring Aman Pandey who has worked all summer to add async
-support to
-&lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;django-debug-toolbar&lt;/a&gt;.
-&lt;a href="https://github.com/tim-schilling"&gt;Tim&lt;/a&gt; has released an alpha which contains
-all of the work up to a few days ago. Test it! Let&amp;rsquo;s find the breakages before
-the final release.&lt;/p&gt;
-&lt;h2 id="dropping-python-39-from-my-projects"&gt;&lt;a class="toclink" href="#dropping-python-39-from-my-projects"&gt;Dropping Python 3.9 from my projects&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have read &lt;a href="https://noumenal.es/posts/the-only-green-python/yLw/"&gt;Carlton&amp;rsquo;s post about the only green Python release&lt;/a&gt; and have started dropping Python 3.9 support from many of the packages I maintain. This is such a good point:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[&amp;hellip;] I’m also thinking about it in terms of reducing the number of Python versions we support in CI. It feels like a lot of trees to support 5 full versions of Python for their entire life. 🌳&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/5.0.0a0/"&gt;django-debug-toolbar 5.0.0a0&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.26.2&lt;/a&gt;: The values
-  of choice fields are now returned as-is when sending mails or exporting form
-  submissions instead of only returning the slugified version.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.17.1&lt;/a&gt;: The
-  &lt;a href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/"&gt;role-based permissions
-  backend&lt;/a&gt;
-  had a bug where it wouldn&amp;rsquo;t return all available permissions in all
-  circumstances, leading to empty navigation sidebars in the Django
-  administration. This has been fixed.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.2.3&lt;/a&gt;: Bugfix release, the
-  page moving interface is no longer hidden by an expanded navigation sidebar.
-  I almost always turn off the sidebar in my projects so I haven&amp;rsquo;t noticed
-  this.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.8.1&lt;/a&gt;:
-  Contains the most recent ProseMirror updates and bugfixes.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor
-  7.0.10&lt;/a&gt;: Now supports
-  sections. Separate blog post coming up!&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+than when using comparable solutions built using Django.&lt;/p&gt;</summary></entry></feed>
