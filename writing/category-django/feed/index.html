@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-07-05T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 27)</title><link href="https://406.ch/writing/weeknotes-2025-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-27/</id><published>2025-07-05T12:00:00Z</published><updated>2025-07-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-27"&gt;Weeknotes (2025 week 27)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-08-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Menu improvements in django-prose-editor</title><link href="https://406.ch/writing/menu-improvements-in-django-prose-editor/" rel="alternate" /><id>https://406.ch/writing/menu-improvements-in-django-prose-editor/</id><published>2025-08-23T12:00:00Z</published><updated>2025-08-23T12:00:00Z</updated><summary type="html">&lt;h1 id="menu-improvements-in-django-prose-editor"&gt;&lt;a class="toclink" href="#menu-improvements-in-django-prose-editor"&gt;Menu improvements in django-prose-editor&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have repeatedly mentioned the &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt; project in my &lt;a href="https://406.ch/writing/category-weeknotes/"&gt;weeknotes&lt;/a&gt; but I haven&amp;rsquo;t written a proper post about it since &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;rebuilding it on top of Tiptap at the end of 2024&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Much has happened in the meantime. A lot of work went into the menu system (as alluded to in the title of this post), but by no means does that cover all the work. As always, the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt; is the authoritative source.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0.11&lt;/strong&gt; introduced HTML sanitization which only allows HTML tags and attributes which can be added through the editor interface. Previously, we used &lt;a href="https://nh3.readthedocs.io/"&gt;nh3&lt;/a&gt; to clean up HTML and protect against XSS, but now we can be much more strict and use a restrictive allowlist.&lt;/p&gt;
+&lt;p&gt;We also switched to using &lt;a href="https://406.ch/writing/django-javascript-modules-and-importmaps/"&gt;ES modules and importmaps&lt;/a&gt; in the browser.&lt;/p&gt;
+&lt;p&gt;Last but not least 0.11 also introduced end-to-end testing using &lt;a href="https://playwright.dev/"&gt;Playwright&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The main feature in &lt;strong&gt;0.12&lt;/strong&gt; was the switch to Tiptap 3.0 which fixed problems with shared extension storage when using several prose editors on the same page.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;0.13&lt;/strong&gt; we switched from &lt;a href="https://esbuild.github.io/"&gt;esbuild&lt;/a&gt; to &lt;a href="https://lib.rsbuild.dev/"&gt;rslib&lt;/a&gt;. Esbuild&amp;rsquo;s configuration is nicer to look at, but rslib is built on the very powerful &lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; which I&amp;rsquo;m using everywhere.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;0.14&lt;/strong&gt;, &lt;strong&gt;0.15&lt;/strong&gt; and &lt;strong&gt;0.16&lt;/strong&gt; the &lt;code&gt;Menu&lt;/code&gt; extension was made more reusable and the way extension can register their own menu items was reworked.&lt;/p&gt;
+&lt;p&gt;The upcoming &lt;strong&gt;0.17&lt;/strong&gt; release (alpha releases are available and I&amp;rsquo;m using them in production right now!) is a larger release again and introduces a completely reworked menu system. The menu now not only supports button groups and dialogs but also dropdowns directly in the toolbar. This allows for example showing a dropdown for block types:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot showing prose editor dropdowns" src="/assets/20250823-prose-editor-dropdowns.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The styles are the same as those used in the editor interface.&lt;/p&gt;
+&lt;p&gt;The same interface can not only be used for HTML elements, but also for HTML
+classes. Tiptap has a
+&lt;a href="https://tiptap.dev/docs/editor/extensions/functionality/text-style-kit"&gt;TextStyle&lt;/a&gt;
+extension which allows using inline styles; I&amp;rsquo;d rather have a more restricted
+way of styling spans, and the prose editor &lt;code&gt;TextClass&lt;/code&gt; extension does just
+that: It allows applying a list of predefined CSS classes to &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; elements. Of course the dropdown also shows the resulting presentation if you provide the necessary CSS to the admin interface.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2025 week 27)</title><link href="https://406.ch/writing/weeknotes-2025-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-27/</id><published>2025-07-05T12:00:00Z</published><updated>2025-07-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-27"&gt;Weeknotes (2025 week 27)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have again missed a few weeks, so the releases section will be longer than usual since it covers six weeks.&lt;/p&gt;
 &lt;h2 id="django-prose-editor"&gt;&lt;a class="toclink" href="#django-prose-editor"&gt;django-prose-editor&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have totally restructured the documentation to make it clearer. The &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/configuration.html"&gt;configuration chapter&lt;/a&gt; is shorter and more focussed, and the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/custom_extensions.html"&gt;custom extensions chapter&lt;/a&gt; actually shows all required parts now.&lt;/p&gt;
@@ -1263,38 +1280,4 @@ is quite straightforward. The amount of code in django-content-editor and
 feincms3 is reasonable as well. Even though it may look like a lot you&amp;rsquo;ll still
 be &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;running less code in
 production&lt;/a&gt;
-than when using comparable solutions built using Django.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2024 week 37)</title><link href="https://406.ch/writing/weeknotes-2024-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-37/</id><published>2024-09-11T12:00:00Z</published><updated>2024-09-11T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-37"&gt;Weeknotes (2024 week 37)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="django-debug-toolbar-alpha-with-async-support"&gt;&lt;a class="toclink" href="#django-debug-toolbar-alpha-with-async-support"&gt;django-debug-toolbar alpha with async support!&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have helped mentoring Aman Pandey who has worked all summer to add async
-support to
-&lt;a href="https://github.com/jazzband/django-debug-toolbar/"&gt;django-debug-toolbar&lt;/a&gt;.
-&lt;a href="https://github.com/tim-schilling"&gt;Tim&lt;/a&gt; has released an alpha which contains
-all of the work up to a few days ago. Test it! Let&amp;rsquo;s find the breakages before
-the final release.&lt;/p&gt;
-&lt;h2 id="dropping-python-39-from-my-projects"&gt;&lt;a class="toclink" href="#dropping-python-39-from-my-projects"&gt;Dropping Python 3.9 from my projects&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have read &lt;a href="https://noumenal.es/posts/the-only-green-python/yLw/"&gt;Carlton&amp;rsquo;s post about the only green Python release&lt;/a&gt; and have started dropping Python 3.9 support from many of the packages I maintain. This is such a good point:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[&amp;hellip;] I’m also thinking about it in terms of reducing the number of Python versions we support in CI. It feels like a lot of trees to support 5 full versions of Python for their entire life. 🌳&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/5.0.0a0/"&gt;django-debug-toolbar 5.0.0a0&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.26.2&lt;/a&gt;: The values
-  of choice fields are now returned as-is when sending mails or exporting form
-  submissions instead of only returning the slugified version.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.17.1&lt;/a&gt;: The
-  &lt;a href="https://406.ch/writing/keep-content-managers-admin-access-up-to-date-with-role-based-permissions/"&gt;role-based permissions
-  backend&lt;/a&gt;
-  had a bug where it wouldn&amp;rsquo;t return all available permissions in all
-  circumstances, leading to empty navigation sidebars in the Django
-  administration. This has been fixed.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.2.3&lt;/a&gt;: Bugfix release, the
-  page moving interface is no longer hidden by an expanded navigation sidebar.
-  I almost always turn off the sidebar in my projects so I haven&amp;rsquo;t noticed
-  this.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.8.1&lt;/a&gt;:
-  Contains the most recent ProseMirror updates and bugfixes.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor
-  7.0.10&lt;/a&gt;: Now supports
-  sections. Separate blog post coming up!&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+than when using comparable solutions built using Django.&lt;/p&gt;</summary></entry></feed>
