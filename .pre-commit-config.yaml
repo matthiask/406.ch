@@ -22,6 +22,6 @@ repos:
     hooks:
       - id: prettier
         name: prettier
-        entry: npx prettier@3.3.3 --no-semi --write
+        entry: npx prettier@3.6.2 --no-semi --write
         language: system
-        types_or: [css, javascript]
+        types_or: [css, javascript, markdown]
