@@ -9,6 +9,7 @@ from datetime import date, datetime as dt
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 from xml.etree.ElementTree import Element, SubElement as SE, tostring as _ts
 
 from bs4 import BeautifulSoup
@@ -26,6 +27,20 @@ c = codehilite.CodeHiliteExtension(linenums=False, css_class="chl")
 t = toc.TocExtension(anchorlink=True)
 md_exts = ["smarty", "footnotes", "admonition", c, t]
 tostring = lambda el: _ts(el, encoding="utf-8", xml_declaration=True).decode("utf-8")
+
+
+def absolufy(html_content, base_url=URL):
+    soup = BeautifulSoup(html_content, "html.parser")
+    url_attributes = {"a": ["href"], "img": ["src"]}
+    for tag_name, attributes in url_attributes.items():
+        for tag in soup.find_all(tag_name):
+            for attr in attributes:
+                if tag.get(attr):
+                    url = tag[attr]
+                    if url and not urlparse(url).scheme and not url.startswith("#"):
+                        absolute_url = urljoin(base_url, url)
+                        tag[attr] = absolute_url
+    return str(soup)
 
 
 @dataclass(kw_only=True, frozen=True, order=True)
@@ -74,14 +89,16 @@ class Post:
             print(f"{path.relative_to(DIR)} invalid, skipping: {e!r}", file=sys.stderr)
 
 
-def jinja_templates(context):
+def jinja_templates(context, base_url):
     styles = cssmin("".join(f.read_text() for f in sorted(DIR.glob("resources/*.css"))))
     style_file = f"/styles.{md5(styles.encode('utf-8')).hexdigest()[:12]}.css"
     write_file(style_file, styles)
 
     env = Environment(loader=FileSystemLoader([DIR / "resources"]), autoescape=True)
     env.globals.update({"year": date.today().year, "styles": style_file} | context)
-    r = lambda template: lambda **ctx: minify(template.render(**ctx))
+    r = lambda template: lambda **ctx: minify(
+        absolufy(template.render(**ctx), base_url)
+    )
     return [r(env.get_template(f"{t}.html")) for t in ["archive", "post", "404"]]
 
 
@@ -112,7 +129,7 @@ def write_file(path, content):
     write_file.count = getattr(write_file, "count", 0) + 1
 
 
-def main(*, only_published=True):
+def main(*, only_published=True, base_url=URL):
     posts = (Post.from_path(p) for p in DIR.glob("posts/*.md"))
     posts = sorted(filter(None, posts), reverse=True)
     if only_published:
@@ -126,7 +143,9 @@ def main(*, only_published=True):
 
     shutil.rmtree(DIR / "htdocs", ignore_errors=True)
     shutil.copytree(DIR / "assets", DIR / "htdocs" / "assets", dirs_exist_ok=True)
-    archive, detail, not_found = jinja_templates({"categories": sorted(counter)})
+    archive, detail, not_found = jinja_templates(
+        {"categories": sorted(counter)}, base_url
+    )
     write_file("/writing/index.html", f'<meta content="0;url={URL}"http-equiv=refresh>')
     write_file("/robots.txt", f"User-agent: *\nSitemap: {URL}/sitemap.xml\n")
     write_file("/404.html", not_found())
