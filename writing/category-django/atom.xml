@@ -1,5 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-08-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Menu improvements in django-prose-editor</title><link href="https://406.ch/writing/menu-improvements-in-django-prose-editor/" rel="alternate" /><id>https://406.ch/writing/menu-improvements-in-django-prose-editor/</id><published>2025-08-23T12:00:00Z</published><updated>2025-08-23T12:00:00Z</updated><summary type="html">&lt;h1 id="menu-improvements-in-django-prose-editor"&gt;&lt;a class="toclink" href="#menu-improvements-in-django-prose-editor"&gt;Menu improvements in django-prose-editor&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-08-27T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-content-editor now supports cloning of content</title><link href="https://406.ch/writing/django-content-editor-cloning/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-cloning/</id><published>2025-08-27T12:00:00Z</published><updated>2025-08-27T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-cloning-of-content"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-cloning-of-content"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="what-is-the-content-editor"&gt;&lt;a class="toclink" href="#what-is-the-content-editor"&gt;What is the content editor?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Django’s builtin admin application provides a really good and usable
+administration interface for creating and updating content.
+&lt;code&gt;django-content-editor&lt;/code&gt; extends Django&amp;rsquo;s inlines mechanism with an interface
+and tools for managing and rendering heterogenous collections of content as are
+often necessary for content management systems.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://feinheit.ch"&gt;We&lt;/a&gt; are using &lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor&lt;/a&gt; in basically all projects, as a part of &lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;. The content editor is used not only for building page content, but also for blog entries, for &lt;a href="https://github.com/feincms/feincms3-forms"&gt;building multi-step intelligent form wizards&lt;/a&gt;, for &lt;a href="https://feinheit.ch/projekte/finance-mission-world/"&gt;learning units&lt;/a&gt; and even to digitize teaching materials for schools, including static and interactive content.&lt;/p&gt;
+&lt;p&gt;The great thing about it is that it enables us to edit complex content inside Django&amp;rsquo;s administration interface without trying to replace it with a completely separate interface, as some other more well-known Django-based CMS want to do.&lt;/p&gt;
+&lt;h2 id="cloning-content"&gt;&lt;a class="toclink" href="#cloning-content"&gt;Cloning content&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The complexity of managed content has grown a bit, especially since we introduced support for &lt;a href="https://406.ch/writing/django-content-editor-now-supports-nested-sections/"&gt;nesting sections&lt;/a&gt;. Teaching materials are often available in several learning levels, with only minor differences between them. Unfortunately, the differences aren&amp;rsquo;t purely additive: It&amp;rsquo;s not the case that higher levels just have more materials available. Otherwise, we&amp;rsquo;d probably have used a level on content items to hide content which shouldn&amp;rsquo;t be shown to students. Content is sometimes totally different. Because of this we&amp;rsquo;re using content editor&amp;rsquo;s &lt;strong&gt;regions&lt;/strong&gt; for the learning level, one region per level.&lt;/p&gt;
+&lt;p&gt;Even then, the basic structure is often the same and building that manually for all levels is annoying at best. That&amp;rsquo;s why I finally got the occasion to add support for cloning content between regions to the editor.&lt;/p&gt;
+&lt;p&gt;Of course, cloning should also take the other features into account and allow selecting sections as a whole instead of having to select individual items. Here&amp;rsquo;s a screenshot of the current interface:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot showing the content cloning interface" src="/assets/20250827-content-editor-cloning.png" /&gt;&lt;/p&gt;
+&lt;h2 id="closing-thoughts"&gt;&lt;a class="toclink" href="#closing-thoughts"&gt;Closing thoughts&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m still really happy with the content editor; I wish the Django admin would look a little bit nicer because then people would probably be more encouraged to actually learn how powerful it is. The first impression is unfortunately that it looks old and a bit too technical, but in my experience working with many many customers it&amp;rsquo;s not really the case. Most people are immediately able to work with it and find the interface well structured and appreciate the no bullshit attitude, because working with it really is efficient.&lt;/p&gt;</summary></entry><entry><title>Menu improvements in django-prose-editor</title><link href="https://406.ch/writing/menu-improvements-in-django-prose-editor/" rel="alternate" /><id>https://406.ch/writing/menu-improvements-in-django-prose-editor/</id><published>2025-08-23T12:00:00Z</published><updated>2025-08-23T12:00:00Z</updated><summary type="html">&lt;h1 id="menu-improvements-in-django-prose-editor"&gt;&lt;a class="toclink" href="#menu-improvements-in-django-prose-editor"&gt;Menu improvements in django-prose-editor&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have repeatedly mentioned the &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt; project in my &lt;a href="https://406.ch/writing/category-weeknotes/"&gt;weeknotes&lt;/a&gt; but I haven&amp;rsquo;t written a proper post about it since &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;rebuilding it on top of Tiptap at the end of 2024&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Much has happened in the meantime. A lot of work went into the menu system (as alluded to in the title of this post), but by no means does that cover all the work. As always, the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt; is the authoritative source.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;0.11&lt;/strong&gt; introduced HTML sanitization which only allows HTML tags and attributes which can be added through the editor interface. Previously, we used &lt;a href="https://nh3.readthedocs.io/"&gt;nh3&lt;/a&gt; to clean up HTML and protect against XSS, but now we can be much more strict and use a restrictive allowlist.&lt;/p&gt;
@@ -1138,146 +1153,4 @@ my packages and ideas :-)&lt;/p&gt;
   pruned the CI matrix and accepted a pull request adding a ru translation. I
   feel conflicted about that since I strongly believe that everything is
   political, but I don&amp;rsquo;t know if rejecting translations helps anyone.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>django-content-editor now supports nested sections</title><link href="https://406.ch/writing/django-content-editor-now-supports-nested-sections/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-now-supports-nested-sections/</id><published>2024-09-13T12:00:00Z</published><updated>2024-09-13T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-nested-sections"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-nested-sections"&gt;django-content-editor now supports nested sections&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; (and
-it&amp;rsquo;s ancestor FeinCMS) has been the Django admin extension for editing content
-consisting of reusable blocks since 2009. In the last years we have more and
-more often started &lt;a href="https://feincms3.readthedocs.io/en/latest/guides/rendering.html#grouping-plugins-into-subregions"&gt;automatically grouping related
-items&lt;/a&gt;,
-e.g. for rendering a sequence of images as a gallery. But, sometimes it&amp;rsquo;s nice
-to give editors more control. This has been possible by using blocks which open
-a subsection and blocks which close a subsection for a long time, but it hasn&amp;rsquo;t
-been friendly to content managers, especially when using nested sections.&lt;/p&gt;
-&lt;p&gt;The content editor now has first-class support for such nested sections. Here&amp;rsquo;s
-a screenshot showing the nesting:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="django-content-editor with sections" src="https://406.ch/assets/20240911-content-editor-sections.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Finally it&amp;rsquo;s possible to visually group blocks into sections, collapse those
-sections as once and drag and drop whole sections into their place instead of
-having to select the involved blocks individually.&lt;/p&gt;
-&lt;p&gt;The best part about it is that the content editor still supports all Django
-admin widgets, as long as those widgets have support for the Django
-administration interface&amp;rsquo;s &lt;a href="https://docs.djangoproject.com/en/latest/ref/contrib/admin/javascript/"&gt;inline form
-events&lt;/a&gt;!
-Moving DOM nodes around breaks attached JavaScript behaviors, but we do not
-actually move DOM nodes around after the initialization &amp;ndash; instead, we use
-&lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Ordering_flex_items"&gt;Flexbox
-ordering&lt;/a&gt;
-to visually reorder blocks. It&amp;rsquo;s a bit more work than using a ready-made
-sortable plugin, but &amp;ndash; as mentioned &amp;ndash; the prize is that we don&amp;rsquo;t break any
-other Django admin extensions.&lt;/p&gt;
-&lt;h2 id="simple-patterns"&gt;&lt;a class="toclink" href="#simple-patterns"&gt;Simple patterns&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I previously already reacted to a blog post by Lincoln Loop here in my post &lt;a href="https://406.ch/writing/my-reaction-to-the-block-driven-cms-blog-post/"&gt;My
-reaction to the block-driven CMS blog
-post&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The latest blog post, &lt;a href="https://lincolnloop.com/insights/simple-block-pattern-wagtail-cms/"&gt;Solving the Messy Middle: a Simple Block Pattern for
-Wagtail
-CMS&lt;/a&gt; was
-interesting as well. It dives into the configuration of a
-&lt;a href="https://wagtail.org/"&gt;Wagtail&lt;/a&gt; stream field which allows composing content out
-of reusable blocks of content (&lt;a href="https://406.ch/writing/i-just-learned-about-wagtail-s-streamfield/"&gt;sounds
-familiar!&lt;/a&gt;).
-The result is saved in a JSON blob in the database with all the advantages and
-disadvantages that entails.&lt;/p&gt;
-&lt;p&gt;Now, django-content-editor is a worthy competitor when you do not want to add
-another interface to your website besides the user-facing frontend and the
-Django administration interface.&lt;/p&gt;
-&lt;p&gt;The example from the Lincoln Loop blog post can be replicated quite closely
-with django-content-editor by using sections. I&amp;rsquo;m using the
-&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;
-package for the section plugin since it easily allows adding more fields if
-some section type needs it.&lt;/p&gt;
-&lt;p&gt;Here&amp;rsquo;s an example model definition:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;content_editor.models&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Region&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;create_plugin_base&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor.plugins&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;feincms3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="c1"&gt;# You have to define regions; each region gets a tab in the admin interface&lt;/span&gt;
-    &lt;span class="n"&gt;regions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Region&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# Additional fields for the page...&lt;/span&gt;
-
-&lt;span class="n"&gt;PagePlugin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_plugin_base&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Page&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;richtext&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PagePlugin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;pass&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PagePlugin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;pass&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Section&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PagePlugin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;pass&lt;/span&gt;
-
-&lt;span class="n"&gt;AccordionSection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;accordion&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}}}},&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;CloseSection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;close&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{}}},&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here&amp;rsquo;s the corresponding admin definition:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Admin&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;content_editor.admin&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ContentEditor&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor.plugins&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginInline&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;feincms3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;
-
-&lt;span class="nd"&gt;@admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Page&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;PageAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ContentEditor&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;inlines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;richtext&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichTextInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-        &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ImageInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-        &lt;span class="n"&gt;JSONPluginInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AccordionSection&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sections&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-        &lt;span class="n"&gt;JSONPluginInline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CloseSection&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sections&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The somewhat cryptic &lt;code&gt;sections=&lt;/code&gt; argument says how many levels of sections
-the individual blocks open or close.&lt;/p&gt;
-&lt;p&gt;To render the content including accordions I&amp;rsquo;d probably use a &lt;a href="https://feincms3.readthedocs.io/en/latest/guides/rendering.html#using-marks"&gt;feincms3
-renderer&lt;/a&gt;.
-At the time of writing the renderer definition for sections is a bit tricky.&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;feincms3.renderer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RegionRenderer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;render_in_context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_renderer&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;PageRenderer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RegionRenderer&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;plugins&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="k"&gt;yield from&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;_handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;in_section&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-                &lt;span class="n"&gt;section&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;popleft&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;close&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;in_section&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                        &lt;span class="k"&gt;return&lt;/span&gt;
-                    &lt;span class="c1"&gt;# Ignore close section plugins when not inside section&lt;/span&gt;
-                    &lt;span class="k"&gt;continue&lt;/span&gt;
-
-                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;section&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;accordion&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                    &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;render_in_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;accordion.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                        &lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;accordion&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-                        &lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;in_section&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-                    &lt;span class="p"&gt;})&lt;/span&gt;
-
-            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-                &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render_plugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plugin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;renderer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PageRenderer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_renderer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;plugins/richtext.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;template_renderer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;plugins/image.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;renderer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Section&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id="closing-thoughts"&gt;&lt;a class="toclink" href="#closing-thoughts"&gt;Closing thoughts&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Sometimes, I think to myself, I&amp;rsquo;ll &amp;ldquo;just&amp;rdquo; write a &amp;ldquo;simple&amp;rdquo; blog post. I get
-what I deserve when using those forbidden words. This blog post is neither
-short or simple. That being said, the rendering code is a bit tricky, the rest
-is quite straightforward. The amount of code in django-content-editor and
-feincms3 is reasonable as well. Even though it may look like a lot you&amp;rsquo;ll still
-be &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;running less code in
-production&lt;/a&gt;
-than when using comparable solutions built using Django.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
