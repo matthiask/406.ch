@@ -25,4 +25,6 @@ I did some longer-form writing about two of the releases here: [Menu improvement
 - [django-content-editor 8.0](https://pypi.org/project/django-content-editor/):
   Added support for cloning content. Made the region tabs stick to the top of
   the browser window.
+- [django-cabinet 0.18](https://pypi.org/project/django-cabinet/): Improved the
+  folder deletion interface slightly.
 - [django-mptt 0.18](https://pypi.org/project/django-mptt/): I still seem to be maintaining the project even though I officially marked the project as unmaintained [more than 4 years ago](https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6).
