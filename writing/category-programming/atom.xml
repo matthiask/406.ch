@@ -1,5 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2025-08-27T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-content-editor now supports cloning of content</title><link href="https://406.ch/writing/django-content-editor-cloning/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-cloning/</id><published>2025-08-27T12:00:00Z</published><updated>2025-08-27T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-cloning-of-content"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-cloning-of-content"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2025-08-29T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Summer was and is nice. The hot days seem to be over (for now), but in the last
+years summer hasn&amp;rsquo;t really left until the end of September, so we&amp;rsquo;ll see. I
+personally like the warm weather but I really hoped that our leaders were
+smarter. The &lt;a href="https://406.ch/writing/category-climate/"&gt;climate emergency&lt;/a&gt;
+could be seen from far away. The pigheadedness is hard to stomach. And of
+course it&amp;rsquo;s not the only problem we&amp;rsquo;re facing as humanity at all.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I did some longer-form writing about two of the releases here: &lt;a href="https://406.ch/writing/menu-improvements-in-django-prose-editor/"&gt;Menu improvements in django-prose-editor&lt;/a&gt; and &lt;a href="https://406.ch/writing/django-content-editor-cloning/"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.0&lt;/a&gt;:
+  We have released a new version of the toolbar which supports persisting
+  debugging data to the database. This is especially useful when using ASGI,
+  because we cannot use threadlocal storage for this data then.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18&lt;/a&gt;:
+  Reworked the menu system to support dropdowns, not just button groups. Added
+  a custom &lt;code&gt;TextClass&lt;/code&gt; extension which allows adding classes to spans and a
+  &lt;code&gt;NodeClass&lt;/code&gt; extension which allows adding classes to nodes. Tiptap supports
+  adding arbitrary styles, I&amp;rsquo;d rather limit this a bit more and only offer
+  predefined CSS classes.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0&lt;/a&gt;:
+  Added support for cloning content. Made the region tabs stick to the top of
+  the browser window.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18&lt;/a&gt;: Improved the
+  folder deletion interface slightly.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.18&lt;/a&gt;: I still seem to be maintaining the project even though I officially marked the project as unmaintained &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;more than 4 years ago&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-content-editor now supports cloning of content</title><link href="https://406.ch/writing/django-content-editor-cloning/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-cloning/</id><published>2025-08-27T12:00:00Z</published><updated>2025-08-27T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-cloning-of-content"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-cloning-of-content"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="what-is-the-content-editor"&gt;&lt;a class="toclink" href="#what-is-the-content-editor"&gt;What is the content editor?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Django’s builtin admin application provides a really good and usable
 administration interface for creating and updating content.
@@ -1121,36 +1147,4 @@ is also out there and that fact should be taken advantage of.&lt;/p&gt;
   tracker: &lt;a href="https://code.djangoproject.com/ticket/8391"&gt;#8391&lt;/a&gt;. I fixed the
   issue by removing the slugification (is that even a word?) when generating
   choices.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="css-for-django-forms"&gt;&lt;a class="toclink" href="#css-for-django-forms"&gt;CSS for Django forms&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Not much going on in OSS land. I have been somewhat active in the official
-Django forum, discussing ways to add Python-level hooks to allow adding CSS
-classes around form fields and their labels. The discussion on the
-&lt;a href="https://forum.djangoproject.com/t/proposal-make-it-easy-to-add-css-classes-to-a-boundfield/32022"&gt;forum&lt;/a&gt;
-and on the &lt;a href="https://github.com/django/django/pull/18266"&gt;pull request&lt;/a&gt; goes in
-the direction of allowing using custom &lt;code&gt;BoundField&lt;/code&gt; classes per form or even
-per project (instead of only per field as is already possible today). This
-would allow overriding &lt;code&gt;css_classes&lt;/code&gt;, e.g. to add a simple &lt;code&gt;class="field"&lt;/code&gt;.
-Together with &lt;code&gt;:has()&lt;/code&gt; this would probably allow me to skip using custom HTML
-templates in 99% of all cases.&lt;/p&gt;
-&lt;p&gt;I have also been lurking in the Discord, but more to help and less to promote
-my packages and ideas :-)&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_user_messages/"&gt;django-user-messages 1.1&lt;/a&gt;:
-  Added Django 5.0, 5.1 to the CI, and fixed the migrations to no longer
-  mention &lt;code&gt;index_together&lt;/code&gt; at all. It seems that squashing the migrations
-  wasn&amp;rsquo;t sufficient, I also had to actually delete the old migrations.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.1&lt;/a&gt;:
-  &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;&amp;rsquo;s &lt;code&gt;FileResponse&lt;/code&gt; has gained support
-  for the HTTP Range header, allowing me to remove my homegrown implementation
-  from the package. The blacknoise implementation is now half as long as it was
-  in 1.0.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_fhadmin/"&gt;django-fhadmin 2.3&lt;/a&gt;: No new
-  features, only tweaks to the styling and behavior prompted by updates to
-  Django&amp;rsquo;s admin interface.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.17&lt;/a&gt;: I have
-  pruned the CI matrix and accepted a pull request adding a ru translation. I
-  feel conflicted about that since I strongly believe that everything is
-  political, but I don&amp;rsquo;t know if rejecting translations helps anyone.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>

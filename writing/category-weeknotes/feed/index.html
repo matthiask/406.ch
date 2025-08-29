@@ -1,5 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-07-05T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 27)</title><link href="https://406.ch/writing/weeknotes-2025-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-27/</id><published>2025-07-05T12:00:00Z</published><updated>2025-07-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-27"&gt;Weeknotes (2025 week 27)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-08-29T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Summer was and is nice. The hot days seem to be over (for now), but in the last
+years summer hasn&amp;rsquo;t really left until the end of September, so we&amp;rsquo;ll see. I
+personally like the warm weather but I really hoped that our leaders were
+smarter. The &lt;a href="https://406.ch/writing/category-climate/"&gt;climate emergency&lt;/a&gt;
+could be seen from far away. The pigheadedness is hard to stomach. And of
+course it&amp;rsquo;s not the only problem we&amp;rsquo;re facing as humanity at all.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I did some longer-form writing about two of the releases here: &lt;a href="https://406.ch/writing/menu-improvements-in-django-prose-editor/"&gt;Menu improvements in django-prose-editor&lt;/a&gt; and &lt;a href="https://406.ch/writing/django-content-editor-cloning/"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.0&lt;/a&gt;:
+  We have released a new version of the toolbar which supports persisting
+  debugging data to the database. This is especially useful when using ASGI,
+  because we cannot use threadlocal storage for this data then.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18&lt;/a&gt;:
+  Reworked the menu system to support dropdowns, not just button groups. Added
+  a custom &lt;code&gt;TextClass&lt;/code&gt; extension which allows adding classes to spans and a
+  &lt;code&gt;NodeClass&lt;/code&gt; extension which allows adding classes to nodes. Tiptap supports
+  adding arbitrary styles, I&amp;rsquo;d rather limit this a bit more and only offer
+  predefined CSS classes.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0&lt;/a&gt;:
+  Added support for cloning content. Made the region tabs stick to the top of
+  the browser window.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18&lt;/a&gt;: Improved the
+  folder deletion interface slightly.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.18&lt;/a&gt;: I still seem to be maintaining the project even though I officially marked the project as unmaintained &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;more than 4 years ago&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 27)</title><link href="https://406.ch/writing/weeknotes-2025-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-27/</id><published>2025-07-05T12:00:00Z</published><updated>2025-07-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-27"&gt;Weeknotes (2025 week 27)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have again missed a few weeks, so the releases section will be longer than usual since it covers six weeks.&lt;/p&gt;
 &lt;h2 id="django-prose-editor"&gt;&lt;a class="toclink" href="#django-prose-editor"&gt;django-prose-editor&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have totally restructured the documentation to make it clearer. The &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/configuration.html"&gt;configuration chapter&lt;/a&gt; is shorter and more focussed, and the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/custom_extensions.html"&gt;custom extensions chapter&lt;/a&gt; actually shows all required parts now.&lt;/p&gt;
@@ -693,19 +719,4 @@ and, more importantly, to see how the torch is carried on.&lt;/p&gt;
   opening &lt;em&gt;and&lt;/em&gt; closing thanks to CSS grid&amp;rsquo;s ability to animate the maximum
   height of an element. Also, the initialization in 6.4 was badly broken.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.2&lt;/a&gt;: &lt;a href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/"&gt;See the announcement blog post from Wednesday&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 07)</title><link href="https://406.ch/writing/weeknotes-2024-week-07/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-07/</id><published>2024-02-16T12:00:00Z</published><updated>2024-02-16T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-07"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-07"&gt;Weeknotes (2024 week 07)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;This is a short weeknotes entry which mainly contains a large list of releases. The reason for the large list is that I haven&amp;rsquo;t published a weeknotes entry in weeks.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.23&lt;/a&gt;: Only small changes, mainly updated the package for current Django and Python versions.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.4.6&lt;/a&gt;: A minor change: Swallow exceptions which happen during startup when clobbering the scripts data fails. As an aside: I find it funny that I have discovered the &lt;code&gt;.f3cc&lt;/code&gt; class in some cookie banner blocklists. It feels good to be recognized even if this maybe isn&amp;rsquo;t the nicest way, but it works for me since I actually do not like cookie banners either. At least feincms3-cookiecontrol doesn&amp;rsquo;t inject anything without users&amp;rsquo; consent, and doesn&amp;rsquo;t require a third party service to run.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_simple_redirects/"&gt;django-simple-redirects 2.2.0&lt;/a&gt;: Minor release which adds a search field to the admin changelist. django-simple-redirects is a repackaged version of &lt;code&gt;django.contrib.redirects&lt;/code&gt; without the &lt;code&gt;django.contrib.sites&lt;/code&gt; dependency.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv 6.2&lt;/a&gt;: &lt;code&gt;django_cache_url&lt;/code&gt; now supports parsing redis configuration for a leader-replica redis installation with a read-write leader host and read-only replica hosts. I use the same configuration format as &lt;a href="https://github.com/epicserve/django-cache-url"&gt;django-cache-url&lt;/a&gt; does.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 4.3&lt;/a&gt;: I haven&amp;rsquo;t done much here, just some reviewing here and there. I enjoy the Djangonaut Space contributions a lot.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14&lt;/a&gt;: I have removed the constraint which enforces unique names for subfolders. Enforcing the uniqueness does make sense, but it also makes bulk-updating the media library using serialized data more painful than it should be. It&amp;rsquo;s a clear case of worse is better for me. If people want to confuse themselves I&amp;rsquo;m not going to stop them (anymore, in this case) but it makes the rest of the code so much easier to write that it&amp;rsquo;s not even funny.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.3&lt;/a&gt;: This release contains a nice contribution which removes some whitespace which has been added by the sanitizer when merging adjacent tags of the same type, e.g. &lt;code&gt;&amp;lt;strong&amp;gt;abc&amp;lt;/strong&amp;gt;&amp;lt;strong&amp;gt;def&amp;lt;/strong&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.1&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.0.11&lt;/a&gt;: Fixed a crash which happened when not providing the optional (!) configuration. Shit happens. I should really have a test suite for this package.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.5.2&lt;/a&gt;: Disables the CKEditor version check.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 6.4&lt;/a&gt;: The first release since December 2022! Very stable software. The editor now restores the collapsed state of inlines and the scroll position when using &amp;ldquo;Save and continue editing&amp;rdquo;. This is especially useful if editing an object with many content blocks.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>

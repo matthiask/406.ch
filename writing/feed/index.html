@@ -1,5 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-08-27T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>django-content-editor now supports cloning of content</title><link href="https://406.ch/writing/django-content-editor-cloning/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-cloning/</id><published>2025-08-27T12:00:00Z</published><updated>2025-08-27T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-cloning-of-content"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-cloning-of-content"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-08-29T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Summer was and is nice. The hot days seem to be over (for now), but in the last
+years summer hasn&amp;rsquo;t really left until the end of September, so we&amp;rsquo;ll see. I
+personally like the warm weather but I really hoped that our leaders were
+smarter. The &lt;a href="https://406.ch/writing/category-climate/"&gt;climate emergency&lt;/a&gt;
+could be seen from far away. The pigheadedness is hard to stomach. And of
+course it&amp;rsquo;s not the only problem we&amp;rsquo;re facing as humanity at all.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I did some longer-form writing about two of the releases here: &lt;a href="https://406.ch/writing/menu-improvements-in-django-prose-editor/"&gt;Menu improvements in django-prose-editor&lt;/a&gt; and &lt;a href="https://406.ch/writing/django-content-editor-cloning/"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.0&lt;/a&gt;:
+  We have released a new version of the toolbar which supports persisting
+  debugging data to the database. This is especially useful when using ASGI,
+  because we cannot use threadlocal storage for this data then.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18&lt;/a&gt;:
+  Reworked the menu system to support dropdowns, not just button groups. Added
+  a custom &lt;code&gt;TextClass&lt;/code&gt; extension which allows adding classes to spans and a
+  &lt;code&gt;NodeClass&lt;/code&gt; extension which allows adding classes to nodes. Tiptap supports
+  adding arbitrary styles, I&amp;rsquo;d rather limit this a bit more and only offer
+  predefined CSS classes.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0&lt;/a&gt;:
+  Added support for cloning content. Made the region tabs stick to the top of
+  the browser window.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18&lt;/a&gt;: Improved the
+  folder deletion interface slightly.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.18&lt;/a&gt;: I still seem to be maintaining the project even though I officially marked the project as unmaintained &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;more than 4 years ago&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>django-content-editor now supports cloning of content</title><link href="https://406.ch/writing/django-content-editor-cloning/" rel="alternate" /><id>https://406.ch/writing/django-content-editor-cloning/</id><published>2025-08-27T12:00:00Z</published><updated>2025-08-27T12:00:00Z</updated><summary type="html">&lt;h1 id="django-content-editor-now-supports-cloning-of-content"&gt;&lt;a class="toclink" href="#django-content-editor-now-supports-cloning-of-content"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="what-is-the-content-editor"&gt;&lt;a class="toclink" href="#what-is-the-content-editor"&gt;What is the content editor?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Django’s builtin admin application provides a really good and usable
 administration interface for creating and updating content.
@@ -1124,63 +1150,4 @@ For now, django-imagefield declares itself to be incompatible with Pillow
 &lt;p&gt;wonderfully ugly&amp;#160;&lt;a class="footnote-backref" href="#fnref:fn1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I had some much needed time off, so this post isn&amp;rsquo;t that long even though &lt;a href="https://406.ch/writing/weeknotes-2024-week-39/"&gt;four weeks have passed since the last entry&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id="from-webpack-to-rspack"&gt;&lt;a class="toclink" href="#from-webpack-to-rspack"&gt;From webpack to rspack&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been really happy with &lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; lately. Converting
-webpack projects to rspack is straightforward since it mostly supports the same
-configuration, but it&amp;rsquo;s much much faster since it&amp;rsquo;s written in Rust. Rewriting
-things in Rust is a recurring theme, but in this case it really helps a lot.
-Building the frontend of a larger project of ours consisting of several admin
-tools and complete frontend implementations for different teaching materials
-only takes 10 seconds now instead of several minutes. That&amp;rsquo;s a big and relevant
-difference.&lt;/p&gt;
-&lt;p&gt;Newcomers should probably still either use &lt;a href="https://rsbuild.dev/"&gt;rsbuild&lt;/a&gt;,
-&lt;a href="https://vite.dev/"&gt;Vite&lt;/a&gt; or maybe no bundler at all. Vanilla JS and browser
-support for ES modules is great. That being said, I like cache busting,
-optimized bundling and far-future expiry headers in production and hot module
-reloading in development a lot, so learning to work with a frontend bundler is
-definitely still worth it.&lt;/p&gt;
-&lt;h2 id="dark-mode-and-light-mode"&gt;&lt;a class="toclink" href="#dark-mode-and-light-mode"&gt;Dark mode and light mode&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been switching themes in my preferred a few times per year in the past. The following ugly bit of vimscript helps switch me the theme each time the sun comes out when working outside:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="nv"&gt;function&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;FiatLux&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;:&lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;light&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;:&lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;dark&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;endif&lt;/span&gt;
-&lt;span class="nv"&gt;endfunction&lt;/span&gt;
-&lt;span class="nv"&gt;nnoremap&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;F12&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;:&lt;span class="k"&gt;call&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;FiatLux&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;CR&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I&amp;rsquo;m using the &lt;a href="https://devsuite.app/ptyxis/"&gt;Ptyxis&lt;/a&gt; terminal emulator
-currently, I haven&amp;rsquo;t investigated yet if there&amp;rsquo;s a shortcut to toggle dark and
-light mode for it as well. Using F10 to open the main menu works fine though,
-and using the mouse wouldn&amp;rsquo;t be painful either.&lt;/p&gt;
-&lt;h2 id="helping-out-in-the-django-forum-and-the-discord"&gt;&lt;a class="toclink" href="#helping-out-in-the-django-forum-and-the-discord"&gt;Helping out in the Django forum and the Discord&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have found some pleasure in helping out in the &lt;a href="https://forum.djangoproject.com/"&gt;Django
-Forum&lt;/a&gt; and in the official &lt;a href="https://discord.gg/xcRH6mN4fa"&gt;Django
-Discord&lt;/a&gt;. I sometimes wonder why more people
-aren&amp;rsquo;t reading the Django source code when they hit something which looks like
-a bug or something which they do not understand. I find Django&amp;rsquo;s source code
-very readable and I have found many nuggets within it. I&amp;rsquo;d always recommend
-checking the documentation or maybe official help channels first, but the code
-is also out there and that fact should be taken advantage of.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.1&lt;/a&gt;:
-  Fixed a bug where the ordering and region fields were handled incorrectly
-  when they appear on one line in the fieldset. Also improved the presentation
-  of inlines in unknown regions and clarified the meaning of the move to region
-  dropdown. Also, released the improvements from previous patch releases as a
-  new minor release because that&amp;rsquo;s what I should have been doing all along.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.27&lt;/a&gt;: A user has
-  been bitten by &lt;code&gt;slugify&lt;/code&gt; removing cyrillic characters because it only keeps
-  ASCII characters around. Here&amp;rsquo;s the wontfixed bug in the Django issue
-  tracker: &lt;a href="https://code.djangoproject.com/ticket/8391"&gt;#8391&lt;/a&gt;. I fixed the
-  issue by removing the slugification (is that even a word?) when generating
-  choices.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/div&gt;</summary></entry></feed>
