@@ -5,11 +5,13 @@ I'm still undecided what the value of LLMs is for programming. Sometimes they ar
 
 They do help me get started, and help me be more ambitious. That's not a new idea. [Simon Willison wrote a post about this in 2023](https://simonwillison.net/2023/Mar/27/ai-enhanced-development/) and the more I think about it or work with AI the more I think he's right about that.
 
-A recent example which comes to mind is writing end to end tests. I can't say I had a love-hate relationship with end to end testing, it was mostly a hate-hate relationship. I hate writing them because it's so tedious and I hate debugging them because of all the timing issues and the general flakyness of end to end testing.
+A recent example which comes to mind is writing end to end tests. I can't say I had a love-hate relationship with end to end testing, it was mostly a hate-hate relationship. I hate writing them because it's so tedious and I hate debugging them because of all the timing issues and the general flakyness of end to end testing. And I especially hate the fact that those tests break all the time when changing the code, even when changes are mostly unrelated.
 
-When I discovered that I could just use Claude Code to write those end to end tests I was ecstatic. Finally a way to add relevant tests to some of my open source projects without having to do all this annoying work myself! I quickly discovered that Claude Code decided (ha!) it's more important to make tests pass than actually exercising the functionality in question. When some HTML/JavaScript widget wouldn't initialize, why not just manipulate `innerHTML` so that the DOM looks as if the JavaScript actually ran? Of course, that's a completely useless test. The amount of prodding and instructing the LLM agent required to stop adding workarounds and fallbacks everywhere was mindboggling. Also, since tests are also code which has to be maintained in the future, does generating a whole lot of code actually help or not?
+When I discovered that I could just use Claude Code to write those end to end tests I was ecstatic. Finally a way to add relevant tests to some of my open source projects without having to do all this annoying work myself! Unfortunately, I quickly discovered that Claude Code decided (ha!) it's more important to make tests pass than actually exercising the functionality in question. When some HTML/JavaScript widget wouldn't initialize, why not just manipulate `innerHTML` so that the DOM looks as if the JavaScript actually ran? Of course, that's a completely useless test. The amount of prodding and instructing the LLM agent required to stop adding workarounds and fallbacks everywhere was mindboggling. Also, since tests are also code which has to be maintained in the future, does generating a whole lot of code actually help or not? Of course, the amount of code involved wasn't exactly a big help when I really had to dig into the code to debug a gnarly issue, and the way the test was written didn't exactly help!
 
-## Playwright to the rescue
+I didn't want to go back to the previous state of things when I had only backend tests though, so I had to find a better way.
+
+## Playwright codegen to the rescue
 
 I already had some experience with [Playwright codegen](https://playwright.dev/docs/codegen-intro), having used it for testing some complex onboarding code for a client project I worked on a few years back, so I was already aware of the fact that I could run the browser, click through the interface myself, and playwright would actually generate some of the required Python code for the test itself.
 
@@ -25,4 +27,8 @@ If your test uses the [`LiveServerTestCase`](https://docs.djangoproject.com/en/5
 
 Or of course the equivalent invocation using `live_server.url` when using the `live_server` fixture from [pytest-django](https://pytest-django.readthedocs.io/en/latest/helpers.html#live-server).
 
-Of course Tim [pointed me towards `page.pause()`](https://mastodon.social/@CodenameTim/115096138737981083) which I didn't know. For now I don't know which method is preferrable. `page.pause()` is probably better but I still thought writing the process down made sense.
+Of course Tim [pointed me towards `page.pause()`](https://mastodon.social/@CodenameTim/115096138737981083). I didn't know about it; I think it's even better than what I discovered, so I'm probably going to use that one instead. I still think writing down the discovery process makes sense.
+
+## TLDR
+
+Claude Code helped getting me to get of the ground with adding end to end tests to my projects. Now, my tests are better because -- at least for now -- I'm not using AI tools anymore.
