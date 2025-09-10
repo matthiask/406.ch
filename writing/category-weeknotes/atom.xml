@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-08-29T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-09-10T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 37)</title><link href="https://406.ch/writing/weeknotes-2025-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-37/</id><published>2025-09-10T12:00:00Z</published><updated>2025-09-10T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-37"&gt;Weeknotes (2025 week 37)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I&amp;rsquo;m having a slow week after the last wisdom tooth extraction. Finally! I&amp;rsquo;m slowly recuperating from that.&lt;/p&gt;
+&lt;p&gt;Also, I&amp;rsquo;m trying to split up the blog posts a bit and writing more standalone pieces instead of putting everything into weeknotes. This seems like a good idea to publish more, and should also help me when I try to find a particular piece of writing later.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0.2&lt;/a&gt;: I fixed the ordering calculation in the cloning functionality; the tests are a bit too forgiving for my taste now but I just can&amp;rsquo;t figure out why the gap for inserting cloned items is sometimes larger than it should be. It doesn&amp;rsquo;t matter though, since ordering values do not have any significance, they only have to provide a definite ordering for content items.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.2&lt;/a&gt;: Cleaned up the documentation after the 0.18 cleanup (where automatic dependency management has been removed), fixed table styles when using dark mode.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Summer was and is nice. The hot days seem to be over (for now), but in the last
 years summer hasn&amp;rsquo;t really left until the end of September, so we&amp;rsquo;ll see. I
 personally like the warm weather but I really hoped that our leaders were
@@ -698,25 +705,4 @@ and, more importantly, to see how the torch is carried on.&lt;/p&gt;
   even allows descending orderings.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.2&lt;/a&gt;: This
   release fixes the CKEditor 4 filebrowser popup when using Django 5 or better.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 11)</title><link href="https://406.ch/writing/weeknotes-2024-week-11/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-11/</id><published>2024-03-16T12:00:00Z</published><updated>2024-03-16T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-11"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-11"&gt;Weeknotes (2024 week 11)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="estimates"&gt;&lt;a class="toclink" href="#estimates"&gt;Estimates&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://jacobian.org/2024/mar/11/breaking-down-tasks/"&gt;Jacob wrote an excellent post on breaking down tasks&lt;/a&gt;. I did like the post a lot. Maybe I&amp;rsquo;ll write a longer reply later, but for now just this. &lt;a href="https://hachyderm.io/@jacob@jacobian.org/112081126379604868"&gt;There definitely are good reasons for the pushback against estimation&lt;/a&gt;, and it&amp;rsquo;s really not just that some people lack professionalism.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.1&lt;/a&gt;: Mini
-  release containing a Turkish translation. It&amp;rsquo;s always nice if software is
-  used.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 4.6&lt;/a&gt;: Fixed a bug where the
-  move form wouldn&amp;rsquo;t use a potentially overridden &lt;code&gt;ModelAdmin.get_queryset&lt;/code&gt;
-  method.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.24&lt;/a&gt;: Updated the
-  package for django-recaptcha 4.0.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.3.1&lt;/a&gt;: Fixed an
-  edge case sanitization bug (luckily without security implications).&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor
-  6.4.2&lt;/a&gt;:
-  django-content-editor now again supports transitioning plugin fieldsets when
-  opening &lt;em&gt;and&lt;/em&gt; closing thanks to CSS grid&amp;rsquo;s ability to animate the maximum
-  height of an element. Also, the initialization in 6.4 was badly broken.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.2&lt;/a&gt;: &lt;a href="https://406.ch/writing/django-prose-editor-prose-editing-component-for-the-django-admin/"&gt;See the announcement blog post from Wednesday&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
