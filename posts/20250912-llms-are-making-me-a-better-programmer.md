@@ -1,6 +1,5 @@
 Title: LLMs are making me a better programmer...
 Categories: Django, Programming
-Draft: remove-this-to-publish
 
 I'm still undecided about LLMs for programming. Sometimes they are very useful, especially when working on a clearly stated problem within a delimited area. Cleaning the code up afterwards is painful and takes a long time though. Even for small changes I'm unsure if using LLMs is a way to save (any) resources, be it time, water, energy or whatever.
 
