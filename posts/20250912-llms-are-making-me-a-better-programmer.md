@@ -1,9 +1,10 @@
 Title: LLMs are making me a better programmer...
 Categories: Django, Programming
+Draft: remove-this-to-publish
 
-I'm still undecided what the value of LLMs is for programming. Sometimes they are very useful, especially when working on a clearly stated problem within a delimited area. Cleaning the code up afterwards is painful and takes a long time though. Even for small changes I'm unsure
+I'm still undecided about LLMs for programming. Sometimes they are very useful, especially when working on a clearly stated problem within a delimited area. Cleaning the code up afterwards is painful and takes a long time though. Even for small changes I'm unsure if using LLMs is a way to save (any) resources, be it time, water, energy or whatever.
 
-They do help me get started, and help me be more ambitious. That's not a new idea. [Simon Willison wrote a post about this in 2023](https://simonwillison.net/2023/Mar/27/ai-enhanced-development/) and the more I think about it or work with AI the more I think he's right about that.
+They do help me get started, and help me be more ambitious. That's not a new idea. [Simon Willison wrote a post about this in 2023](https://simonwillison.net/2023/Mar/27/ai-enhanced-development/) and the more I think about it or work with AI the more I think it's a good way to look at it.
 
 A recent example which comes to mind is writing end to end tests. I can't say I had a love-hate relationship with end to end testing, it was mostly a hate-hate relationship. I hate writing them because it's so tedious and I hate debugging them because of all the timing issues and the general flakyness of end to end testing. And I especially hate the fact that those tests break all the time when changing the code, even when changes are mostly unrelated.
 

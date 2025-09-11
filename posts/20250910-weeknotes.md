@@ -3,7 +3,7 @@ Categories: Django, Programming, Weeknotes
 
 I'm having a slow week after the last wisdom tooth extraction. Finally! I'm slowly recuperating from that.
 
-Also, I'm trying to split up the blog posts a bit and writing more standalone pieces instead of putting everything into weeknotes. This seems like a good idea to publish more, and should also help me when I try to find a particular piece of writing later.
+I'm trying to split up the blog posts a bit and writing more standalone pieces instead of putting everything into weeknotes. Publishing more focussed pieces sounds like a good thing and should also help me with finding my own writing later.
 
 ## Releases
 
