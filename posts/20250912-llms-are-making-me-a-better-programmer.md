@@ -29,6 +29,12 @@ Or of course the equivalent invocation using `live_server.url` when using the `l
 
 Of course Tim [pointed me towards `page.pause()`](https://mastodon.social/@CodenameTim/115096138737981083). I didn't know about it; I think it's even better than what I discovered, so I'm probably going to use that one instead. I still think writing down the discovery process makes sense.
 
+So now, when `LiveServerTestCase` is already set up and I already have a sync Playwright context lying around, I can just do:
+
+    :::python
+    page = context.new_page()
+    page.pause()
+
 ## TLDR
 
 Claude Code helped getting me to get of the ground with adding end to end tests to my projects. Now, my tests are better because -- at least for now -- I'm not using AI tools anymore.
