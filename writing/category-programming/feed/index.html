@@ -17,6 +17,11 @@
 
 &lt;p&gt;Or of course the equivalent invocation using &lt;code&gt;live_server.url&lt;/code&gt; when using the &lt;code&gt;live_server&lt;/code&gt; fixture from &lt;a href="https://pytest-django.readthedocs.io/en/latest/helpers.html#live-server"&gt;pytest-django&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Of course Tim &lt;a href="https://mastodon.social/@CodenameTim/115096138737981083"&gt;pointed me towards &lt;code&gt;page.pause()&lt;/code&gt;&lt;/a&gt;. I didn&amp;rsquo;t know about it; I think it&amp;rsquo;s even better than what I discovered, so I&amp;rsquo;m probably going to use that one instead. I still think writing down the discovery process makes sense.&lt;/p&gt;
+&lt;p&gt;So now, when &lt;code&gt;LiveServerTestCase&lt;/code&gt; is already set up and I already have a sync Playwright context lying around, I can just do:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;new_page&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pause&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h2 id="tldr"&gt;&lt;a class="toclink" href="#tldr"&gt;TLDR&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Claude Code helped getting me to get of the ground with adding end to end tests to my projects. Now, my tests are better because &amp;ndash; at least for now &amp;ndash; I&amp;rsquo;m not using AI tools anymore.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2025 week 37)</title><link href="https://406.ch/writing/weeknotes-2025-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-37/</id><published>2025-09-10T12:00:00Z</published><updated>2025-09-10T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-37"&gt;Weeknotes (2025 week 37)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I&amp;rsquo;m having a slow week after the last wisdom tooth extraction. Finally! I&amp;rsquo;m slowly recuperating from that.&lt;/p&gt;
