@@ -37,4 +37,4 @@ So now, when `LiveServerTestCase` is already set up and I already have a sync Pl
 
 ## TLDR
 
-Claude Code helped getting me to get of the ground with adding end to end tests to my projects. Now, my tests are better because -- at least for now -- I'm not using AI tools anymore.
+Claude Code helped getting me to get off the ground with adding end to end tests to my projects. Now, my tests are better because -- at least for now -- I'm not using AI tools anymore.
