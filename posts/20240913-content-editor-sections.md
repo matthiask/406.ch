@@ -151,6 +151,10 @@ At the time of writing the renderer definition for sections is a bit tricky.
     renderer.register(models.Image, template_renderer("plugins/image.html"))
     renderer.register(models.Section, "")
 
+!!! note
+    A better way to to this is documented in the API docs, specifically [`RegionRenderer.render_section_plugins`](https://feincms3.readthedocs.io/en/latest/ref/renderer.html#feincms3.renderer.RegionRenderer.render_section_plugins).
+
+    (Note added in Oct 2025.)
 
 ## Closing thoughts
 
