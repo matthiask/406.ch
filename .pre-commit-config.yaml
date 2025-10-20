@@ -14,7 +14,7 @@ repos:
         args: [--ignore-case, --unique]
         files: requirements.*.txt
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.12.10"
+    rev: v0.14.1
     hooks:
       - id: ruff
       - id: ruff-format

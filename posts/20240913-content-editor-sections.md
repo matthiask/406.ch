@@ -1,7 +1,6 @@
 Title: django-content-editor now supports nested sections
 Categories: Django, Programming, feincms
 
-
 [django-content-editor](https://django-content-editor.readthedocs.io/) (and
 it's ancestor FeinCMS) has been the Django admin extension for editing content
 consisting of reusable blocks since 2009. In the last years we have more and
@@ -32,7 +31,6 @@ ordering](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layo
 to visually reorder blocks. It's a bit more work than using a ready-made
 sortable plugin, but -- as mentioned -- the prize is that we don't break any
 other Django admin extensions.
-
 
 ## Simple patterns
 
@@ -94,7 +92,6 @@ Here's an example model definition:
         schema={"type": "object", {"properties": {}}},
     )
 
-
 Here's the corresponding admin definition:
 
     :::python
@@ -112,7 +109,7 @@ Here's the corresponding admin definition:
             JSONPluginInline.create(models.CloseSection, sections=-1),
         ]
 
-The somewhat cryptic ``sections=`` argument says how many levels of sections
+The somewhat cryptic `sections=` argument says how many levels of sections
 the individual blocks open or close.
 
 To render the content including accordions I'd probably use a [feincms3
@@ -152,6 +149,7 @@ At the time of writing the renderer definition for sections is a bit tricky.
     renderer.register(models.Section, "")
 
 !!! note
+
     A better way to to this is documented in the API docs, specifically [`RegionRenderer.render_section_plugins`](https://feincms3.readthedocs.io/en/latest/ref/renderer.html#feincms3.renderer.RegionRenderer.render_section_plugins).
 
     (Note added in Oct 2025.)
