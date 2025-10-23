@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-10-22T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>My favorite Django packages</title><link href="https://406.ch/writing/my-favorite-django-packages/" rel="alternate" /><id>https://406.ch/writing/my-favorite-django-packages/</id><published>2025-10-22T12:00:00Z</published><updated>2025-10-22T12:00:00Z</updated><summary type="html">&lt;h1 id="my-favorite-django-packages"&gt;&lt;a class="toclink" href="#my-favorite-django-packages"&gt;My favorite Django packages&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2025-10-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 43)</title><link href="https://406.ch/writing/weeknotes-2025-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-43/</id><published>2025-10-23T12:00:00Z</published><updated>2025-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-43"&gt;Weeknotes (2025 week 43)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I published the last weeknotes entry in the first half of September.&lt;/p&gt;
+&lt;h2 id="drama-in-oss"&gt;&lt;a class="toclink" href="#drama-in-oss"&gt;Drama in OSS&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been following the Ruby gems debacle a bit. Initially at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used our own PHP-based framework &lt;a href="https://github.com/matthiask/swisdk2"&gt;swisdk2&lt;/a&gt; to build websites. This obviously didn&amp;rsquo;t scale and I was very annoyed with PHP, so I was looking for alternatives.&lt;/p&gt;
+&lt;p&gt;I remember comparing Ruby on Rails and Django, and decided to switch from PHP/swisdk2 to Python/Django for two reasons: The automatically generated admin interface and the fact that Ruby source code just had too much punctuation characters for my taste. It&amp;rsquo;s a very whimsical reason and I do not put any weight on that. That being said, given how some of the exponents in Ruby/Rails land behave I&amp;rsquo;m very very glad to have chosen Python and Django. While not everything is perfect (it never is) at least those communities agree that trying to behave nicely to each other is something to be cheered and not something to be sneered at.&lt;/p&gt;
+&lt;h2 id="copilot"&gt;&lt;a class="toclink" href="#copilot"&gt;Copilot&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I assigned some GitHub issues to Copilot. The result wasn&amp;rsquo;t very useful. I don&amp;rsquo;t know if I want to repeat it, local tools work fine for when I really need them.&lt;/p&gt;
+&lt;h2 id="python-and-django-compatibility"&gt;&lt;a class="toclink" href="#python-and-django-compatibility"&gt;Python and Django compatibility&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s the time again to update the GitHub actions matrix and Trove identifiers. I do not like doing it. You can expect all maintained packages to be compatible with the latest and best versions, no upper bounds necessary. Man, if only AI could automate &lt;em&gt;those&lt;/em&gt; tasks&amp;hellip;&lt;/p&gt;
+&lt;h2 id="updated-packages-since-2025-09-10"&gt;&lt;a class="toclink" href="#updated-packages-since-2025-09-10"&gt;Updated packages since 2025-09-10&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;: We use &lt;code&gt;hashlib.md5&lt;/code&gt;, but not for security.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.21.2&lt;/a&gt;: django-tree-queries now bundles an admin interface for trees.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0.3&lt;/a&gt;: Minor CSS fix so that the editor looks nicer with Django 6.0.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.8.1&lt;/a&gt;: Fixes for multiple JSON editors in the same window, better &lt;code&gt;JSONPlugin.__str__&lt;/code&gt; default implementation.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18.1&lt;/a&gt;: Fix a minor bug around the selected folder handling. Invalid folder ID values could crash the backend under some circumstances.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.5&lt;/a&gt;: No large changes, mainly Tiptap updates.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>My favorite Django packages</title><link href="https://406.ch/writing/my-favorite-django-packages/" rel="alternate" /><id>https://406.ch/writing/my-favorite-django-packages/</id><published>2025-10-22T12:00:00Z</published><updated>2025-10-22T12:00:00Z</updated><summary type="html">&lt;h1 id="my-favorite-django-packages"&gt;&lt;a class="toclink" href="#my-favorite-django-packages"&gt;My favorite Django packages&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Inspired by other posts I also wanted to write up a list of my favorite Django
 packages. Since I&amp;rsquo;ve been working in this space for so long and since I&amp;rsquo;m
 maintaining quite a large list of packages I worry a bit about tooting my own
@@ -1076,92 +1093,4 @@ slightly faster, and doesn&amp;rsquo;t allow me to do things I really couldn&amp
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.21&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.10&lt;/a&gt;: I rebuilt django-prose-editor from the ground up &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;and wrote about that two weeks ago&lt;/a&gt;. The 0.10 release marks the final point of this particular rewrite.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 3.0&lt;/a&gt;: See the blog post from &lt;a href="https://406.ch/writing/object-based-assets-for-django-s-forms-media/"&gt;this week&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Object-based assets for Django's forms.Media</title><link href="https://406.ch/writing/object-based-assets-for-django-s-forms-media/" rel="alternate" /><id>https://406.ch/writing/object-based-assets-for-django-s-forms-media/</id><published>2024-12-18T12:00:00Z</published><updated>2024-12-18T12:00:00Z</updated><summary type="html">&lt;h1 id="object-based-assets-for-djangos-formsmedia"&gt;&lt;a class="toclink" href="#object-based-assets-for-djangos-formsmedia"&gt;Object-based assets for Django&amp;rsquo;s forms.Media&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;The pull request for adding &lt;a href="https://github.com/django/django/pull/18782"&gt;object-based script media assets into
-Django&lt;/a&gt; is in a good state and I
-hope it will be merged soon. I have been using object-based assets long before
-&lt;a href="https://github.com/django/django/commit/4c76ffc2d6c77"&gt;Django actually added support for them in
-4.1&lt;/a&gt; (&lt;a href="https://github.com/feincms/django-content-editor/commit/82ac91ea7af2409bb3672e11c18871002ddc9753"&gt;since
-2016&lt;/a&gt;,
-that&amp;rsquo;s before Django 1.10!) by using a gross hack. Luckily I have been able to
-clean up the code when Django 4.1 landed.&lt;/p&gt;
-&lt;p&gt;I have been asking myself at times why I haven&amp;rsquo;t proposed the change to Django
-myself despite having been a user of something like this for such a long time.
-After all, I have been happily contributing issue reports, bug fixes and tests
-to Django. The process of adding new features sometimes is terribly frustrating
-though even when looking (and cheering) from the sidelines. It feels bad that
-adding another package to the &lt;a href="https://pypi.org/user/matthiask/"&gt;list of packages I
-maintain&lt;/a&gt; so clearly seems to be the better
-way to &lt;strong&gt;get things done&lt;/strong&gt; compared to proposing a new feature for Django
-itself. I hope &lt;a href="https://406.ch/writing/weeknotes-2024-week-49/"&gt;processes change
-somewhat&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;But I digress.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;ProseEditorWidget&lt;/code&gt; in
-&lt;a href="https://github.com/matthiask/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt; wants
-to ship CSS, JavaScript and some JSON to the browser for the widget. So, of
-course I used object-based media assets for this instead of widget HTML
-templates. Media assets are deduplicated and sorted by Django. If different
-editor presets use differing lists of assets they are smartly merged by
-&lt;code&gt;forms.Media&lt;/code&gt; using a topological sort. You get those niceties for free when
-using &lt;code&gt;forms.Media&lt;/code&gt; and everything just works, so what&amp;rsquo;s not to like?&lt;/p&gt;
-&lt;p&gt;The only thing which isn&amp;rsquo;t to like is that Django, at the time of writing,
-doesn&amp;rsquo;t provide any classes helping with this. You can put strings into
-&lt;code&gt;forms.Media&lt;/code&gt; or you can put objects with a &lt;code&gt;__html__()&lt;/code&gt; method in there. The
-latter of course is all that&amp;rsquo;s needed to support more advanced use cases &amp;ndash; and
-that&amp;rsquo;s exactly what
-&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt; now provides, and
-what django-prose-editor uses.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt; has long supported
-a &lt;code&gt;JS&lt;/code&gt; class with support for additional
-attributes, for example:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;js_asset&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JS&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;asset.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;asset-script&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;data-answer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;42&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Since 3.0 the package also comes with a &lt;code&gt;CSS&lt;/code&gt; and &lt;code&gt;JSON&lt;/code&gt; class:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;js_asset&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CSS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;JSON&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cfg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget-cfg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="n"&gt;CSS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/style.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="n"&gt;CSS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;p{color:red;}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/script.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This produces the following HTML:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;widget-cfg&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;application/json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cfg&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;42&lt;/span&gt;&lt;span class="p"&gt;}&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/static/widget/style.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="kc"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;}&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/static/widget/script.js&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The code which is proposed for Django supports the JavaScript use case but with
-a slightly different API:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django.forms&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Script&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/script.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This looks slightly nicer as long as you don&amp;rsquo;t use e.g. data attributes,
-because then you have to do:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django.forms&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Script&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/script.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data-cfg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I always forget that Python supports passing keyword arguments names which
-aren&amp;rsquo;t valid Python identifiers (but only when using &lt;code&gt;**kwargs&lt;/code&gt;). I personally
-don&amp;rsquo;t care much either way, and when my packages can finally drop compatibility
-with Django versions which do not support all these functionalities yet I&amp;rsquo;ll
-finally be able to retire
-&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt;. That won&amp;rsquo;t happen
-any time soon though, if only because I like supporting old versions of Django
-because I have so many Django-based websites running somewhere.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>

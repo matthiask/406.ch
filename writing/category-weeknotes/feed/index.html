@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-09-10T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 37)</title><link href="https://406.ch/writing/weeknotes-2025-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-37/</id><published>2025-09-10T12:00:00Z</published><updated>2025-09-10T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-37"&gt;Weeknotes (2025 week 37)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2025-10-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 43)</title><link href="https://406.ch/writing/weeknotes-2025-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-43/</id><published>2025-10-23T12:00:00Z</published><updated>2025-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-43"&gt;Weeknotes (2025 week 43)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I published the last weeknotes entry in the first half of September.&lt;/p&gt;
+&lt;h2 id="drama-in-oss"&gt;&lt;a class="toclink" href="#drama-in-oss"&gt;Drama in OSS&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I have been following the Ruby gems debacle a bit. Initially at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used our own PHP-based framework &lt;a href="https://github.com/matthiask/swisdk2"&gt;swisdk2&lt;/a&gt; to build websites. This obviously didn&amp;rsquo;t scale and I was very annoyed with PHP, so I was looking for alternatives.&lt;/p&gt;
+&lt;p&gt;I remember comparing Ruby on Rails and Django, and decided to switch from PHP/swisdk2 to Python/Django for two reasons: The automatically generated admin interface and the fact that Ruby source code just had too much punctuation characters for my taste. It&amp;rsquo;s a very whimsical reason and I do not put any weight on that. That being said, given how some of the exponents in Ruby/Rails land behave I&amp;rsquo;m very very glad to have chosen Python and Django. While not everything is perfect (it never is) at least those communities agree that trying to behave nicely to each other is something to be cheered and not something to be sneered at.&lt;/p&gt;
+&lt;h2 id="copilot"&gt;&lt;a class="toclink" href="#copilot"&gt;Copilot&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I assigned some GitHub issues to Copilot. The result wasn&amp;rsquo;t very useful. I don&amp;rsquo;t know if I want to repeat it, local tools work fine for when I really need them.&lt;/p&gt;
+&lt;h2 id="python-and-django-compatibility"&gt;&lt;a class="toclink" href="#python-and-django-compatibility"&gt;Python and Django compatibility&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s the time again to update the GitHub actions matrix and Trove identifiers. I do not like doing it. You can expect all maintained packages to be compatible with the latest and best versions, no upper bounds necessary. Man, if only AI could automate &lt;em&gt;those&lt;/em&gt; tasks&amp;hellip;&lt;/p&gt;
+&lt;h2 id="updated-packages-since-2025-09-10"&gt;&lt;a class="toclink" href="#updated-packages-since-2025-09-10"&gt;Updated packages since 2025-09-10&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;: We use &lt;code&gt;hashlib.md5&lt;/code&gt;, but not for security.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.21.2&lt;/a&gt;: django-tree-queries now bundles an admin interface for trees.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0.3&lt;/a&gt;: Minor CSS fix so that the editor looks nicer with Django 6.0.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.8.1&lt;/a&gt;: Fixes for multiple JSON editors in the same window, better &lt;code&gt;JSONPlugin.__str__&lt;/code&gt; default implementation.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18.1&lt;/a&gt;: Fix a minor bug around the selected folder handling. Invalid folder ID values could crash the backend under some circumstances.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.5&lt;/a&gt;: No large changes, mainly Tiptap updates.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 37)</title><link href="https://406.ch/writing/weeknotes-2025-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-37/</id><published>2025-09-10T12:00:00Z</published><updated>2025-09-10T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-37"&gt;Weeknotes (2025 week 37)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I&amp;rsquo;m having a slow week after the last wisdom tooth extraction. Finally! I&amp;rsquo;m slowly recuperating from that.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m trying to split up the blog posts a bit and writing more standalone pieces instead of putting everything into weeknotes. Publishing more focussed pieces sounds like a good thing and should also help me with finding my own writing later.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
@@ -677,32 +694,4 @@ model with an &lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to a
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.19&lt;/a&gt;: Added support for pre-filtering the tree (much more efficient when only querying a part of the tree). Added support for adding additional fields to the CTE so that you can collect values from ancestors for other fields than the default fields too.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.4.2&lt;/a&gt;: Added support for webp images. Fixed a few of the admin list filters to work with Django 5.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.3&lt;/a&gt;: Fixed the support for the &lt;code&gt;extra_context&lt;/code&gt; argument to our &lt;code&gt;changelist_view&lt;/code&gt; implementation.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 14)</title><link href="https://406.ch/writing/weeknotes-2024-week-14/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-14/</id><published>2024-04-06T12:00:00Z</published><updated>2024-04-06T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-14"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-14"&gt;Weeknotes (2024 week 14)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I&amp;rsquo;m having a bit of a slow week with the easter weekend and a wisdom tooth
-extraction. I&amp;rsquo;m recovering quite quickly it seems and I&amp;rsquo;m glad about it.&lt;/p&gt;
-&lt;p&gt;This weeknotes entry is short and quick. I&amp;rsquo;m trying to get back into the habit
-of writing them after a mediocre start this year.&lt;/p&gt;
-&lt;h2 id="20th-anniversary-celebration-of-young-greens-switzerland"&gt;&lt;a class="toclink" href="#20th-anniversary-celebration-of-young-greens-switzerland"&gt;20th Anniversary Celebration of Young Greens Switzerland&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have attended the celebration of Young Greens Switzerland. I have been a
-founding member and have been active for close to ten years. A lot of time has
-passed since then. It has been great to reminisce about old times with friends
-and, more importantly, to see how the torch is carried on.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 0.0.5&lt;/a&gt;: blacknoise is an
-  ASGI app for static file serving inspired by
-  &lt;a href="https://whitenoise.readthedocs.io/en/latest/"&gt;whitenoise&lt;/a&gt;. It only supports
-  a very limited subset of whitenoise&amp;rsquo;s functionality, but it supports async.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer 2.4.1&lt;/a&gt;: The lxml
-  library moved the HTML cleaner into its own package,
-  &lt;a href="https://pypi.org/project/lxml-html-clean/"&gt;lxml-html-clean&lt;/a&gt;; this release
-  adds support for that. I didn&amp;rsquo;t know that the HTML cleaner is viewed as being
-  problematic by the lxml maintainers. I&amp;rsquo;m having another look at
-  &lt;a href="https://github.com/messense/nh3"&gt;nh3&lt;/a&gt; and will maybe switch html-sanitizer&amp;rsquo;s
-  guts from lxml to nh3 in the future.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.18&lt;/a&gt;:
-  django-tree-queries now supports ordering siblings by multiple fields and
-  even allows descending orderings.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.14.2&lt;/a&gt;: This
-  release fixes the CKEditor 4 filebrowser popup when using Django 5 or better.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
