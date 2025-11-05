@@ -1,5 +1,96 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-10-23T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2025 week 43)</title><link href="https://406.ch/writing/weeknotes-2025-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-43/</id><published>2025-10-23T12:00:00Z</published><updated>2025-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-43"&gt;Weeknotes (2025 week 43)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2025-11-05T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Thoughts about Django-based content management systems</title><link href="https://406.ch/writing/thoughts-about-django-based-content-management-systems/" rel="alternate" /><id>https://406.ch/writing/thoughts-about-django-based-content-management-systems/</id><published>2025-11-05T12:00:00Z</published><updated>2025-11-05T12:00:00Z</updated><summary type="html">&lt;h1 id="thoughts-about-django-based-content-management-systems"&gt;&lt;a class="toclink" href="#thoughts-about-django-based-content-management-systems"&gt;Thoughts about Django-based content management systems&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have almost exclusively used Django for implementing content management
+systems (and other backends) since 2008.&lt;/p&gt;
+&lt;p&gt;In this time, content management systems have come and gone. The big three
+systems many years back were &lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt;,
+&lt;a href="https://github.com/stephenmcd/mezzanine"&gt;Mezzanine&lt;/a&gt; and
+&lt;a href="https://feinheit.ch"&gt;our&lt;/a&gt; own
+&lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;During all this time I have always kept an eye open for other CMS than our own
+but have steadily continued working in my small corner of the Django space. I
+think it&amp;rsquo;s time to write down why I have been doing this all this time, for
+myself and possibly also for other interested parties.&lt;/p&gt;
+&lt;h2 id="why-not-use-wagtail-django-cms-or-any-of-those-alternatives"&gt;&lt;a class="toclink" href="#why-not-use-wagtail-django-cms-or-any-of-those-alternatives"&gt;Why not use Wagtail, django CMS or any of those alternatives?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s start with the big one. Why not use Wagtail?&lt;/p&gt;
+&lt;p&gt;The Django administration interface is actually great. Even though some people
+say that it should be treated as a tool for developers only, recent
+improvements to the accessibility and the general usability suggest otherwise.
+I have written more about my views on this in &lt;a href="https://406.ch/writing/the-django-admin-is-a-cms/"&gt;The Django admin is a
+CMS&lt;/a&gt;. Using and building on
+top of the Django admin is a great way to immediately profit from all current
+and future improvements without having to reimplement anything.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t want to have to reimplement Django&amp;rsquo;s features, I want to add what I
+need on top.&lt;/p&gt;
+&lt;h2 id="faster-updates"&gt;&lt;a class="toclink" href="#faster-updates"&gt;Faster updates&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Everyone implementing and maintaining other CMS is doing a great job and I
+don&amp;rsquo;t want to throw any shade. I still feel that it&amp;rsquo;s important to point out
+that systems can make it hard to adopt new Django versions on release day:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The update cycle of many large apps using Django lag behind Django. Wagtail
+  declares an &lt;a href="https://github.com/wagtail/wagtail/discussions/12574"&gt;upper version boundary for
+  Django&lt;/a&gt; which makes it
+  hard to adopt Django versions faster than Wagtail releases updates.&lt;/li&gt;
+&lt;li&gt;Some django CMS components such as
+  &lt;a href="https://github.com/django-cms/django-filer"&gt;django-filer&lt;/a&gt; have lagged behind
+  in the past. Looking at the project&amp;rsquo;s CI matrix and activity suggests that
+  this is not the case anymore. That said, a &lt;a href="https://406.ch/writing/django-cabinet-a-media-library-for-django/"&gt;simpler alternative
+  exists&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These larger systems have many more (very talented) people working on them. I&amp;rsquo;m
+not saying I&amp;rsquo;m doing a better job. I&amp;rsquo;m only pointing out that I&amp;rsquo;m following a
+different philosophy where I&amp;rsquo;m &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;conservative about running code in
+production&lt;/a&gt;
+and I&amp;rsquo;d rather &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;have less features when the price is a lot of maintenance
+later&lt;/a&gt;. I&amp;rsquo;m always thinking
+about long term maintenance. I really don&amp;rsquo;t want to maintain some of these
+larger projects, or even parts of them. So I&amp;rsquo;d rather not adopt them for
+projects which hopefully will be developed and maintained for a long time to
+come. By the way: This experience has been earned the hard way.&lt;/p&gt;
+&lt;h2 id="the-rule-of-least-power"&gt;&lt;a class="toclink" href="#the-rule-of-least-power"&gt;The rule of least power&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;From &lt;a href="https://en.wikipedia.org/wiki/Rule_of_least_power"&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In programming, the rule of least power is a design principle that &amp;ldquo;suggests choosing the least powerful [computer] language suitable for a given purpose&amp;rdquo;. Stated alternatively, given a choice among computer languages, classes of which range from descriptive (or declarative) to procedural, the less procedural, more descriptive the language one chooses, the more one can do with the data stored in that language.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Django itself already provides lots and lots of power. I&amp;rsquo;d argue that a very
+powerful platform on top of Django may be too much of a good thing. I&amp;rsquo;d rather
+keep it simple and stupid.&lt;/p&gt;
+&lt;h2 id="editing-heterogenous-collections-of-content"&gt;&lt;a class="toclink" href="#editing-heterogenous-collections-of-content"&gt;Editing heterogenous collections of content&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Django admin&amp;rsquo;s inlines are great, but they are not sufficient for building a
+CMS. You need something to manage different types. django-content-editor does
+that and has done that since 2009.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://torchbox.com/blog/rich-text-fields-and-faster-horses/"&gt;When Wagtail introduced the StreamField in
+2015&lt;/a&gt; it was
+definitely a great update to an already great CMS but it wasn&amp;rsquo;t a new idea
+generally and not a new thing in Django land. They didn&amp;rsquo;t say it was and
+&lt;a href="https://406.ch/writing/i-just-learned-about-wagtail-s-streamfield/"&gt;welcomed the fact that they also started using a better way to structure
+content&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Structured content is great. Putting everything into one large rich text area
+isn&amp;rsquo;t what I want. Django&amp;rsquo;s ORM and admin interface are great for actually
+modelling the data in a reusable way. And when you need more flexibility than
+what&amp;rsquo;s offered by Django&amp;rsquo;s forms, the community offers many projects extending
+the admin. These days, I really like working with the
+&lt;a href="https://406.ch/writing/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;
+component; I even reference other model instances in the database and let the
+JSON editor handle the referential integrity transparently for me (so that
+referenced model instances do not silently disappear).&lt;/p&gt;
+&lt;h2 id="more-reading"&gt;&lt;a class="toclink" href="#more-reading"&gt;More reading&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;The future of FeinCMS&lt;/a&gt; and the &lt;a href="https://406.ch/writing/category-feincms/"&gt;feincms category&lt;/a&gt; may be interesting. Also, I&amp;rsquo;d love to talk about these thoughts, either by email or on Mastodon.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2025 week 45)</title><link href="https://406.ch/writing/weeknotes-2025-week-45/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-45/</id><published>2025-11-04T12:00:00Z</published><updated>2025-11-04T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-45"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-45"&gt;Weeknotes (2025 week 45)&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id="autumn-is-nice"&gt;&lt;a class="toclink" href="#autumn-is-nice"&gt;Autumn is nice&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I love walking through the forest with all the colors and the rustling when you walk through the leaves on the ground.&lt;/p&gt;
+&lt;h2 id="updated-packages-since-2025-10-23"&gt;&lt;a class="toclink" href="#updated-packages-since-2025-10-23"&gt;Updated packages since 2025-10-23&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.4.3&lt;/a&gt;: Small fix for the
+  YouTube IFRAME; it seems that the &lt;code&gt;referrerpolicy&lt;/code&gt; attribute is now necessary
+  for the embed to work everywhere.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.8.2&lt;/a&gt;:
+  Allowed forwarding more options to the prose editor component; specifically,
+  not just &lt;code&gt;extensions&lt;/code&gt; but also the undocumented &lt;code&gt;js_modules&lt;/code&gt; entry. This
+  means that custom extensions are now also supported inside the JSON editor
+  component.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.20&lt;/a&gt;:
+  I reworked the menu extension to be customizable more easily (you can now specify &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/menu.html#defining-button-groups-and-dropdowns"&gt;button groups and dropdowns&lt;/a&gt; directly without using JavaScript code) and I also extended the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/nodeclass.html"&gt;&lt;code&gt;NodeClass&lt;/code&gt; extension&lt;/a&gt; to allow assigning predefined CSS classes not only to nodes but also to marks.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 43)</title><link href="https://406.ch/writing/weeknotes-2025-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-43/</id><published>2025-10-23T12:00:00Z</published><updated>2025-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-43"&gt;Weeknotes (2025 week 43)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I published the last weeknotes entry in the first half of September.&lt;/p&gt;
 &lt;h2 id="drama-in-oss"&gt;&lt;a class="toclink" href="#drama-in-oss"&gt;Drama in OSS&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have been following the Ruby gems debacle a bit. Initially at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used our own PHP-based framework &lt;a href="https://github.com/matthiask/swisdk2"&gt;swisdk2&lt;/a&gt; to build websites. This obviously didn&amp;rsquo;t scale and I was very annoyed with PHP, so I was looking for alternatives.&lt;/p&gt;
@@ -1022,101 +1113,4 @@ slightly faster, and doesn&amp;rsquo;t allow me to do things I really couldn&amp
   7 integration to FeinCMS.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.21.1&lt;/a&gt;: See
   above.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 51)</title><link href="https://406.ch/writing/weeknotes-2024-week-51/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-51/</id><published>2024-12-20T12:00:00Z</published><updated>2024-12-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-51"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-51"&gt;Weeknotes (2024 week 51)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="building-forms-using-django"&gt;&lt;a class="toclink" href="#building-forms-using-django"&gt;Building forms using Django&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I last wrote about this topic &lt;a href="https://406.ch/writing/building-forms-with-the-django-admin/"&gt;in April&lt;/a&gt;. It has &lt;a href="https://mastodon.social/@webology/113669270531953652"&gt;resurfaced on Mastodon this week&lt;/a&gt;. I&amp;rsquo;m thinking about writing a &lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt; demo app, but I already have too much on my plate. I think composing a forms builder on top of &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is the way to go, instead of replacing the admin interface altogether &amp;ndash; sure, you can always do that, but it&amp;rsquo;s so much less composable&amp;hellip;&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.2&lt;/a&gt;: No real changes, added support for Python 3.13 basically without changing anything. It&amp;rsquo;s always nice when this happens.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.21&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.10&lt;/a&gt;: I rebuilt django-prose-editor from the ground up &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;and wrote about that two weeks ago&lt;/a&gt;. The 0.10 release marks the final point of this particular rewrite.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 3.0&lt;/a&gt;: See the blog post from &lt;a href="https://406.ch/writing/object-based-assets-for-django-s-forms-media/"&gt;this week&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Object-based assets for Django's forms.Media</title><link href="https://406.ch/writing/object-based-assets-for-django-s-forms-media/" rel="alternate" /><id>https://406.ch/writing/object-based-assets-for-django-s-forms-media/</id><published>2024-12-18T12:00:00Z</published><updated>2024-12-18T12:00:00Z</updated><summary type="html">&lt;h1 id="object-based-assets-for-djangos-formsmedia"&gt;&lt;a class="toclink" href="#object-based-assets-for-djangos-formsmedia"&gt;Object-based assets for Django&amp;rsquo;s forms.Media&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;The pull request for adding &lt;a href="https://github.com/django/django/pull/18782"&gt;object-based script media assets into
-Django&lt;/a&gt; is in a good state and I
-hope it will be merged soon. I have been using object-based assets long before
-&lt;a href="https://github.com/django/django/commit/4c76ffc2d6c77"&gt;Django actually added support for them in
-4.1&lt;/a&gt; (&lt;a href="https://github.com/feincms/django-content-editor/commit/82ac91ea7af2409bb3672e11c18871002ddc9753"&gt;since
-2016&lt;/a&gt;,
-that&amp;rsquo;s before Django 1.10!) by using a gross hack. Luckily I have been able to
-clean up the code when Django 4.1 landed.&lt;/p&gt;
-&lt;p&gt;I have been asking myself at times why I haven&amp;rsquo;t proposed the change to Django
-myself despite having been a user of something like this for such a long time.
-After all, I have been happily contributing issue reports, bug fixes and tests
-to Django. The process of adding new features sometimes is terribly frustrating
-though even when looking (and cheering) from the sidelines. It feels bad that
-adding another package to the &lt;a href="https://pypi.org/user/matthiask/"&gt;list of packages I
-maintain&lt;/a&gt; so clearly seems to be the better
-way to &lt;strong&gt;get things done&lt;/strong&gt; compared to proposing a new feature for Django
-itself. I hope &lt;a href="https://406.ch/writing/weeknotes-2024-week-49/"&gt;processes change
-somewhat&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;But I digress.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;ProseEditorWidget&lt;/code&gt; in
-&lt;a href="https://github.com/matthiask/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt; wants
-to ship CSS, JavaScript and some JSON to the browser for the widget. So, of
-course I used object-based media assets for this instead of widget HTML
-templates. Media assets are deduplicated and sorted by Django. If different
-editor presets use differing lists of assets they are smartly merged by
-&lt;code&gt;forms.Media&lt;/code&gt; using a topological sort. You get those niceties for free when
-using &lt;code&gt;forms.Media&lt;/code&gt; and everything just works, so what&amp;rsquo;s not to like?&lt;/p&gt;
-&lt;p&gt;The only thing which isn&amp;rsquo;t to like is that Django, at the time of writing,
-doesn&amp;rsquo;t provide any classes helping with this. You can put strings into
-&lt;code&gt;forms.Media&lt;/code&gt; or you can put objects with a &lt;code&gt;__html__()&lt;/code&gt; method in there. The
-latter of course is all that&amp;rsquo;s needed to support more advanced use cases &amp;ndash; and
-that&amp;rsquo;s exactly what
-&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt; now provides, and
-what django-prose-editor uses.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt; has long supported
-a &lt;code&gt;JS&lt;/code&gt; class with support for additional
-attributes, for example:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;js_asset&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JS&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;asset.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;asset-script&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;data-answer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;42&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Since 3.0 the package also comes with a &lt;code&gt;CSS&lt;/code&gt; and &lt;code&gt;JSON&lt;/code&gt; class:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;js_asset&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CSS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;JSON&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cfg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget-cfg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="n"&gt;CSS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/style.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="n"&gt;CSS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;p{color:red;}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="n"&gt;JS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/script.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This produces the following HTML:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;widget-cfg&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;application/json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;cfg&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;42&lt;/span&gt;&lt;span class="p"&gt;}&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/static/widget/style.css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="kc"&gt;red&lt;/span&gt;&lt;span class="p"&gt;;}&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/static/widget/script.js&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The code which is proposed for Django supports the JavaScript use case but with
-a slightly different API:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django.forms&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Script&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/script.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;module&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This looks slightly nicer as long as you don&amp;rsquo;t use e.g. data attributes,
-because then you have to do:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django.forms&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Script&lt;/span&gt;
-
-&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-    &lt;span class="n"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;widget/script.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data-cfg&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
-&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I always forget that Python supports passing keyword arguments names which
-aren&amp;rsquo;t valid Python identifiers (but only when using &lt;code&gt;**kwargs&lt;/code&gt;). I personally
-don&amp;rsquo;t care much either way, and when my packages can finally drop compatibility
-with Django versions which do not support all these functionalities yet I&amp;rsquo;ll
-finally be able to retire
-&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt;. That won&amp;rsquo;t happen
-any time soon though, if only because I like supporting old versions of Django
-because I have so many Django-based websites running somewhere.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>

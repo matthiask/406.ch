@@ -1,5 +1,81 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2025-06-04T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Preserving referential integrity with JSON fields and Django</title><link href="https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/" rel="alternate" /><id>https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/</id><published>2025-06-04T12:00:00Z</published><updated>2025-06-04T12:00:00Z</updated><summary type="html">&lt;h1 id="preserving-referential-integrity-with-json-fields-and-django"&gt;&lt;a class="toclink" href="#preserving-referential-integrity-with-json-fields-and-django"&gt;Preserving referential integrity with JSON fields and Django&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about feincms</title><link href="https://406.ch/writing/category-feincms/atom.xml" rel="self" /><link href="https://406.ch/writing/category-feincms/" rel="alternate" /><id>https://406.ch/writing/category-feincms/</id><updated>2025-11-05T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Thoughts about Django-based content management systems</title><link href="https://406.ch/writing/thoughts-about-django-based-content-management-systems/" rel="alternate" /><id>https://406.ch/writing/thoughts-about-django-based-content-management-systems/</id><published>2025-11-05T12:00:00Z</published><updated>2025-11-05T12:00:00Z</updated><summary type="html">&lt;h1 id="thoughts-about-django-based-content-management-systems"&gt;&lt;a class="toclink" href="#thoughts-about-django-based-content-management-systems"&gt;Thoughts about Django-based content management systems&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have almost exclusively used Django for implementing content management
+systems (and other backends) since 2008.&lt;/p&gt;
+&lt;p&gt;In this time, content management systems have come and gone. The big three
+systems many years back were &lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt;,
+&lt;a href="https://github.com/stephenmcd/mezzanine"&gt;Mezzanine&lt;/a&gt; and
+&lt;a href="https://feinheit.ch"&gt;our&lt;/a&gt; own
+&lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;During all this time I have always kept an eye open for other CMS than our own
+but have steadily continued working in my small corner of the Django space. I
+think it&amp;rsquo;s time to write down why I have been doing this all this time, for
+myself and possibly also for other interested parties.&lt;/p&gt;
+&lt;h2 id="why-not-use-wagtail-django-cms-or-any-of-those-alternatives"&gt;&lt;a class="toclink" href="#why-not-use-wagtail-django-cms-or-any-of-those-alternatives"&gt;Why not use Wagtail, django CMS or any of those alternatives?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s start with the big one. Why not use Wagtail?&lt;/p&gt;
+&lt;p&gt;The Django administration interface is actually great. Even though some people
+say that it should be treated as a tool for developers only, recent
+improvements to the accessibility and the general usability suggest otherwise.
+I have written more about my views on this in &lt;a href="https://406.ch/writing/the-django-admin-is-a-cms/"&gt;The Django admin is a
+CMS&lt;/a&gt;. Using and building on
+top of the Django admin is a great way to immediately profit from all current
+and future improvements without having to reimplement anything.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t want to have to reimplement Django&amp;rsquo;s features, I want to add what I
+need on top.&lt;/p&gt;
+&lt;h2 id="faster-updates"&gt;&lt;a class="toclink" href="#faster-updates"&gt;Faster updates&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Everyone implementing and maintaining other CMS is doing a great job and I
+don&amp;rsquo;t want to throw any shade. I still feel that it&amp;rsquo;s important to point out
+that systems can make it hard to adopt new Django versions on release day:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The update cycle of many large apps using Django lag behind Django. Wagtail
+  declares an &lt;a href="https://github.com/wagtail/wagtail/discussions/12574"&gt;upper version boundary for
+  Django&lt;/a&gt; which makes it
+  hard to adopt Django versions faster than Wagtail releases updates.&lt;/li&gt;
+&lt;li&gt;Some django CMS components such as
+  &lt;a href="https://github.com/django-cms/django-filer"&gt;django-filer&lt;/a&gt; have lagged behind
+  in the past. Looking at the project&amp;rsquo;s CI matrix and activity suggests that
+  this is not the case anymore. That said, a &lt;a href="https://406.ch/writing/django-cabinet-a-media-library-for-django/"&gt;simpler alternative
+  exists&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These larger systems have many more (very talented) people working on them. I&amp;rsquo;m
+not saying I&amp;rsquo;m doing a better job. I&amp;rsquo;m only pointing out that I&amp;rsquo;m following a
+different philosophy where I&amp;rsquo;m &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;conservative about running code in
+production&lt;/a&gt;
+and I&amp;rsquo;d rather &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;have less features when the price is a lot of maintenance
+later&lt;/a&gt;. I&amp;rsquo;m always thinking
+about long term maintenance. I really don&amp;rsquo;t want to maintain some of these
+larger projects, or even parts of them. So I&amp;rsquo;d rather not adopt them for
+projects which hopefully will be developed and maintained for a long time to
+come. By the way: This experience has been earned the hard way.&lt;/p&gt;
+&lt;h2 id="the-rule-of-least-power"&gt;&lt;a class="toclink" href="#the-rule-of-least-power"&gt;The rule of least power&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;From &lt;a href="https://en.wikipedia.org/wiki/Rule_of_least_power"&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In programming, the rule of least power is a design principle that &amp;ldquo;suggests choosing the least powerful [computer] language suitable for a given purpose&amp;rdquo;. Stated alternatively, given a choice among computer languages, classes of which range from descriptive (or declarative) to procedural, the less procedural, more descriptive the language one chooses, the more one can do with the data stored in that language.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Django itself already provides lots and lots of power. I&amp;rsquo;d argue that a very
+powerful platform on top of Django may be too much of a good thing. I&amp;rsquo;d rather
+keep it simple and stupid.&lt;/p&gt;
+&lt;h2 id="editing-heterogenous-collections-of-content"&gt;&lt;a class="toclink" href="#editing-heterogenous-collections-of-content"&gt;Editing heterogenous collections of content&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Django admin&amp;rsquo;s inlines are great, but they are not sufficient for building a
+CMS. You need something to manage different types. django-content-editor does
+that and has done that since 2009.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://torchbox.com/blog/rich-text-fields-and-faster-horses/"&gt;When Wagtail introduced the StreamField in
+2015&lt;/a&gt; it was
+definitely a great update to an already great CMS but it wasn&amp;rsquo;t a new idea
+generally and not a new thing in Django land. They didn&amp;rsquo;t say it was and
+&lt;a href="https://406.ch/writing/i-just-learned-about-wagtail-s-streamfield/"&gt;welcomed the fact that they also started using a better way to structure
+content&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Structured content is great. Putting everything into one large rich text area
+isn&amp;rsquo;t what I want. Django&amp;rsquo;s ORM and admin interface are great for actually
+modelling the data in a reusable way. And when you need more flexibility than
+what&amp;rsquo;s offered by Django&amp;rsquo;s forms, the community offers many projects extending
+the admin. These days, I really like working with the
+&lt;a href="https://406.ch/writing/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;
+component; I even reference other model instances in the database and let the
+JSON editor handle the referential integrity transparently for me (so that
+referenced model instances do not silently disappear).&lt;/p&gt;
+&lt;h2 id="more-reading"&gt;&lt;a class="toclink" href="#more-reading"&gt;More reading&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;The future of FeinCMS&lt;/a&gt; and the &lt;a href="https://406.ch/writing/category-feincms/"&gt;feincms category&lt;/a&gt; may be interesting. Also, I&amp;rsquo;d love to talk about these thoughts, either by email or on Mastodon.&lt;/p&gt;</summary></entry><entry><title>Preserving referential integrity with JSON fields and Django</title><link href="https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/" rel="alternate" /><id>https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/</id><published>2025-06-04T12:00:00Z</published><updated>2025-06-04T12:00:00Z</updated><summary type="html">&lt;h1 id="preserving-referential-integrity-with-json-fields-and-django"&gt;&lt;a class="toclink" href="#preserving-referential-integrity-with-json-fields-and-django"&gt;Preserving referential integrity with JSON fields and Django&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="motivation"&gt;&lt;a class="toclink" href="#motivation"&gt;Motivation&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The great thing about using &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; and
 &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is that
@@ -971,18 +1047,4 @@ looks nice, I hope I get a chance to play around with it.&lt;/p&gt;</summary></e
 &lt;p&gt;I started learning Rust during the last &lt;a href="https://adventofcode.com/"&gt;Advent of Code&lt;/a&gt;; it&amp;rsquo;s a nice language. &lt;a href="https://beta.ruff.rs/"&gt;ruff&lt;/a&gt; is a linter and (more and more) formatter for Python code written in Rust. After years of working with Python and Python-based tools it&amp;rsquo;s surprisingly fast, almost worryingly so. It&amp;rsquo;s true what they say: ruff finishes so fast that I&amp;rsquo;m always left wondering if it even did anything at all.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m configuring ruff through &lt;code&gt;pyproject.toml&lt;/code&gt;, so switching from setuptools to hatch (see above) also helped in this regard. The main trouble I had was that I&amp;rsquo;m running Python 3.11 locally but Python 3.10 in the server environment (no dev-prod parity&amp;hellip;), and rebuilding &lt;code&gt;requirements.txt&lt;/code&gt; locally of course didn&amp;rsquo;t add TOML support because it&amp;rsquo;s built into Python 3.11, but Python 3.10 needs an external package. So of course I broke the build. That&amp;rsquo;s not all bad though: If stuff broke it definitely helps with remembering the reasons later.&lt;/p&gt;
 &lt;h2 id="meta"&gt;&lt;a class="toclink" href="#meta"&gt;Meta&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Co-writing still works really well for me. Expressed differently: I seem to be unable to write without the (slight) pressure of writing together.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2023 week 11 and 12)</title><link href="https://406.ch/writing/weeknotes-2023-week-11-and-12/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2023-week-11-and-12/</id><published>2023-03-24T12:00:00Z</published><updated>2023-03-24T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2023-week-11-and-12"&gt;&lt;a class="toclink" href="#weeknotes-2023-week-11-and-12"&gt;Weeknotes (2023 week 11 and 12)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="mail-user-agents-being-mail-user-agents"&gt;&lt;a class="toclink" href="#mail-user-agents-being-mail-user-agents"&gt;Mail user agents being mail user agents&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib&lt;/a&gt; is my collection of utilities for implementing passwordless authentication, either using OAuth2 or by sending magic links by email.&lt;/p&gt;
-&lt;p&gt;The latter functionality has existed for a long time in &lt;a href="https://pypi.org/project/django-registration/"&gt;django-registration&lt;/a&gt; (which is great!) but I wanted a way to generate links without the need for a storage somewhere. Django has utilities for &lt;a href="https://docs.djangoproject.com/en/4.1/topics/signing/"&gt;Cryptographic signing&lt;/a&gt; built-in as the &lt;code&gt;django.core.signing&lt;/code&gt; module. I&amp;rsquo;m using this module to send a signed version of the email address to users, and when I&amp;rsquo;m able to successfully verify the email addresses signature I can be sure (enough) that those links have actually been generated by my code.&lt;/p&gt;
-&lt;p&gt;The form of the generated verification URL is as follows: &lt;code&gt;https://example.com/.../test@example.com:1pXJtx:aypKOlb5zaCg.../&lt;/code&gt;; the part before the first colon contains the data-to-be-verified, the short string between colons is the timestamp and the rest is the signature, everything generated by &lt;code&gt;django.core.signing&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;So far so boring.&lt;/p&gt;
-&lt;p&gt;But then mail user agents happened. Some MUAs insist to butcher the URL in various ways, e.g. by removing the signature or by making only the embedded email address clickable. This is &amp;ldquo;interesting&amp;rdquo; behavior and certainly unexpected.&lt;/p&gt;
-&lt;p&gt;Last week I implemented a change where I&amp;rsquo;m now also base64 encoding the email address itself. So, the URL is even longer and even more opaque now but it seems to work well. I also added a HTML version of the mail to hopefully prevent mail programs from creating their own worse version. I could have done that a long time ago but I really like &lt;code&gt;text/plain&lt;/code&gt; mails so I did hold off on that as long as I could. Oh well.&lt;/p&gt;
-&lt;h2 id="feincms3-data-and-unique-fields"&gt;&lt;a class="toclink" href="#feincms3-data-and-unique-fields"&gt;feincms3-data and unique fields&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I did a longer post on &lt;a href="https://406.ch/writing/moving-data-including-deletions-between-the-same-django-app-running-in-different-environments/"&gt;feincms3-data&lt;/a&gt; some time ago which explains what it is for.&lt;/p&gt;
-&lt;p&gt;A recurring problem was dumping and loading data in the presence of unique constraints. For example, website managers deleted data with a specific (unique) slug and created new data with the same slug. feincms3-data and also Django itself were unable to handle this. The former because it loads new data before deleting old data, the latter because it doesn&amp;rsquo;t even have a concept of data which should be deleted.&lt;/p&gt;
-&lt;p&gt;feincms3-data now has an ugly workaround for this problem: It generates random data for a list of explicitly specified fields (which is very unlikely to cause collisions) and only updates the records with the correct data after the cleanup step. &lt;a href="https://github.com/matthiask/feincms3-data/commit/9324605dc8dcb32ee4118adca0668643597ec130"&gt;The code wasn&amp;rsquo;t that hairy to write&lt;/a&gt; and I was again very happy that unittesting is a thing.&lt;/p&gt;
-&lt;h2 id="prosemirror-hacking"&gt;&lt;a class="toclink" href="#prosemirror-hacking"&gt;ProseMirror hacking&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m back to hacking on &lt;a href="https://prosemirror.net/"&gt;ProseMirror&lt;/a&gt; plugins. I still feel really well about picking it as a basis for all those use cases when using the venerable &lt;a href="https://ckeditor.com/ckeditor-4/"&gt;CKEditor 4&lt;/a&gt; isn&amp;rsquo;t a good fit.&lt;/p&gt;
-&lt;p&gt;I did like the fact a lot that ProseMirror was written in JavaScript. Now that it has been rewritten in TypeScript I&amp;rsquo;m reevaluating my resistance against TypeScript, but I just don&amp;rsquo;t know if it&amp;rsquo;s worth it. Why write down all those annotations when the code also works without? I still don&amp;rsquo;t really see the point. Yes I know, catching bugs early and all that. But still.&lt;/p&gt;</summary></entry></feed>
+&lt;p&gt;Co-writing still works really well for me. Expressed differently: I seem to be unable to write without the (slight) pressure of writing together.&lt;/p&gt;</summary></entry></feed>
