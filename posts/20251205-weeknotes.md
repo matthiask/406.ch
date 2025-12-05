@@ -1,6 +1,5 @@
 Title: Weeknotes (2025 week 49)
 Categories: Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 I seem to be publishing weeknotes monthly, so I'm now thinking about renaming the category :-)
 
