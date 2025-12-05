@@ -1,4 +1,3 @@
-Draft: remove-this-to-publish
 Title: Der Golfstrom ist langsamer geworden (Update)
 Slug: der-golfstrom-ist-langsamer-geworden
 Date: 2005-12-01

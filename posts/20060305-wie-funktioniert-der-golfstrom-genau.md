@@ -1,4 +1,3 @@
-Draft: remove-this-to-publish
 Title: Wie funktioniert der Golfstrom genau?
 Slug: wie-funktioniert-der-golfstrom-genau
 Date: 2006-03-05
