@@ -1,4 +1,3 @@
-Draft: remove-this-to-publish
 Title: NZZ: Couchepin- oder Blocherliberalismus?
 Slug: nzz-couchepin-oder-blocherliberalismus
 Date: 2007-12-31
