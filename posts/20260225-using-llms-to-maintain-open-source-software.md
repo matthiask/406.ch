@@ -1,4 +1,4 @@
-Title: Should we use LLMs to maintain Open Source software?
+Title: LLMs for Open Source maintenance: a cautious case
 Categories: Django, Programming
 Draft: remove-this-to-publish
 
