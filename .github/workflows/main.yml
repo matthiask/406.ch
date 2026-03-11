@@ -18,7 +18,7 @@ jobs:
         version: latest
         enable-cache: true
     - name: Build site
-      run: uv run --python=python3.12 generate.py
+      run: uv run generate.py
     - name: Deploy
       uses: peaceiris/actions-gh-pages@47f197a2200bb9de68ba5f48fad1c088eb1c4a32 # v4.0.0
       with:
