@@ -17,3 +17,7 @@ So, we can produce more code, more features faster than before. Contrary to what
 Regarding resource usage: It's certainly the case that we have coding agents which can be run locally with reasonable requirements (at least during inference, certainly not during training) and which do help close tickets faster, answer user inquiries faster and produce prototypes quicker.
 
 Speaking as someone who has put more into the training set than they've taken out so far, I don't feel all that bad using the tools. Maybe that's rationalization. But contribution and profit needing to stay in some rough balance feels like the right frame — and total abstinence isn't the only ethical choice we have.
+
+Additional points to be made:
+
+- Django seems to have a negative stance towards AI, where AI usage shouldn't even be disclosed because people should try to understand the code themselves. Will they really do that though or wont they either not even try to contribute or just hide that they used LLMs?
