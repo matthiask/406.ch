@@ -14,7 +14,7 @@ from xml.etree.ElementTree import Element, SubElement as SE, tostring as _ts
 
 from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
-from markdown import markdown
+from markdown import Markdown
 from markdown.extensions import codehilite, toc
 from minify_html import minify
 from rcssmin import cssmin
@@ -26,6 +26,14 @@ TITLE = "Matthias Kestenholz"
 c = codehilite.CodeHiliteExtension(linenums=False, css_class="chl")
 t = toc.TocExtension(anchorlink=True)
 md_exts = ["smarty", "footnotes", "admonition", c, t]
+
+
+def md(content):
+    m = Markdown(extensions=md_exts)
+    m.parser.blockprocessors["olist"].LAZY_OL = False
+    return m.convert(content)
+
+
 tostring = lambda el: _ts(el, encoding="utf-8", xml_declaration=True).decode("utf-8")
 
 
@@ -77,7 +85,7 @@ class Post:
             props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
             if "\n# " not in content and not content.startswith("# "):
                 content = f"# {props['title']}\n\n{content}"
-            body = markdown(content, extensions=md_exts)
+            body = md(content)
             soup = BeautifulSoup(body, "html.parser")
             props["excerpt"] = " ".join(
                 tag.text for tag in soup.select("h2, h3, p, li")
@@ -96,8 +104,8 @@ def jinja_templates(context, base_url):
 
     env = Environment(loader=FileSystemLoader([DIR / "resources"]), autoescape=True)
     env.globals.update({"year": date.today().year, "styles": style_file} | context)
-    r = lambda template: lambda **ctx: minify(
-        absolufy(template.render(**ctx), base_url)
+    r = lambda template: (
+        lambda **ctx: minify(absolufy(template.render(**ctx), base_url))
     )
     return [r(env.get_template(f"{t}.html")) for t in ["archive", "post", "404"]]
 

@@ -18,10 +18,3 @@ repos:
     hooks:
       - id: ruff
       - id: ruff-format
-  - repo: local
-    hooks:
-      - id: prettier
-        name: prettier
-        entry: mise x -- npx prettier@3.6.2 --no-semi --write
-        language: system
-        types_or: [css, javascript, markdown]
