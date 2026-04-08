@@ -1,6 +1,5 @@
 Title: Switching all of my Python packages to PyPI trusted publishing
 Categories: Django, Programming
-Draft: remove-this-to-publish
 
 As I have teased on [Mastodon](https://hachyderm.io/@matthiask/116300209761371116), I'm switching all of my packages to PyPI trusted publishing. I have been using it to release the [django-debug-toolbar](github.com/django-commons/django-debug-toolbar) a few times but never set it up myself. The process seemed tedious.
 
