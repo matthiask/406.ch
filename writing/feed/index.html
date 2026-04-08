@@ -1,5 +1,40 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-03-25T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>LLMs for Open Source maintenance: a cautious case</title><link href="https://406.ch/writing/llms-for-open-source-maintenance-a-cautious-case/" rel="alternate" /><id>https://406.ch/writing/llms-for-open-source-maintenance-a-cautious-case/</id><published>2026-03-25T12:00:00Z</published><updated>2026-03-25T12:00:00Z</updated><summary type="html">&lt;h1 id="llms-for-open-source-maintenance-a-cautious-case"&gt;&lt;a class="toclink" href="#llms-for-open-source-maintenance-a-cautious-case"&gt;LLMs for Open Source maintenance: a cautious case&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-04-08T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Switching all of my Python packages to PyPI trusted publishing</title><link href="https://406.ch/writing/switching-all-of-my-python-packages-to-pypi-trusted-publishing/" rel="alternate" /><id>https://406.ch/writing/switching-all-of-my-python-packages-to-pypi-trusted-publishing/</id><published>2026-04-08T12:00:00Z</published><updated>2026-04-08T12:00:00Z</updated><summary type="html">&lt;h1 id="switching-all-of-my-python-packages-to-pypi-trusted-publishing"&gt;&lt;a class="toclink" href="#switching-all-of-my-python-packages-to-pypi-trusted-publishing"&gt;Switching all of my Python packages to PyPI trusted publishing&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;As I have teased on &lt;a href="https://hachyderm.io/@matthiask/116300209761371116"&gt;Mastodon&lt;/a&gt;, I&amp;rsquo;m switching all of my packages to PyPI trusted publishing. I have been using it to release the &lt;a href="github.com/django-commons/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; a few times but never set it up myself. The process seemed tedious.&lt;/p&gt;
+&lt;p&gt;The malicious releases uploaded to PyPI two weeks ago and the blog post about &lt;a href="https://snarky.ca/why-pylock-toml-includes-digital-attestations/"&gt;digital attestations in &lt;code&gt;pylock.toml&lt;/code&gt;&lt;/a&gt; finally pushed me to make the switch. All of my PyPI tokens have been revoked so there is no quick shortcut.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m also looking at other code hosting platforms. I have been using git before GitHub existed and I&amp;rsquo;ll probably still use git when GitHub has completed its enshittification. For now the cost/benefit ratio of staying on GitHub is still positive for me. Trusted publishing isn&amp;rsquo;t available everywhere, so for now it is GitHub anyway.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;In the end, switching an existing project was easier than expected. I have completed the process for &lt;a href="https://github.com/feincms/django-prose-editor"&gt;django-prose-editor&lt;/a&gt; and &lt;a href="https://github.com/feincms/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For my future benefit, here are the step by step instructions I have to follow:&lt;/p&gt;
+&lt;ol start="0"&gt;
+&lt;li&gt;
+&lt;p&gt;Have a package which is buildable using e.g. &lt;code&gt;uvx build&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On PyPI add a trusted publisher in the project&amp;rsquo;s publishing settings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Owner: &lt;code&gt;matthiask&lt;/code&gt;, &lt;code&gt;feincms&lt;/code&gt;, &lt;code&gt;feinheit&lt;/code&gt;, whatever the user or organization&amp;rsquo;s name is.&lt;/li&gt;
+&lt;li&gt;Repository: &lt;code&gt;django-prose-editor&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Workflow name: &lt;code&gt;publish.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Environment: &lt;code&gt;release&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the GitHub repository, create a &lt;code&gt;release&lt;/code&gt; environment in Settings / Environments. Add myself and potentially also other releasers as a required reviewer. I allow self-review and disallow administrators to bypass the protection rules.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;code&gt;git tag x.y.z&lt;/code&gt; and &lt;code&gt;git push&lt;/code&gt;, no more &lt;code&gt;uvx twine&lt;/code&gt; or &lt;code&gt;hatch publish&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Approve the release in the actions tab on the repository.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Either enjoy or swear and repeat the steps.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I&amp;rsquo;m happy with testing the release process in production. The older I get the less I care if people think I&amp;rsquo;m stupid. That&amp;rsquo;s also why feincms3-cookiecontrol 1.7.0 doesn&amp;rsquo;t exist, only 1.7.1 &amp;ndash; the process failed and I had to bump the patch version and try again. Copy the &lt;code&gt;publish.yml&lt;/code&gt; from a known good place, for example from the &lt;a href="https://github.com/feincms/django-prose-editor/blob/main/.github/workflows/publish.yml"&gt;django-prose-editor repository&lt;/a&gt;. I have added the &lt;code&gt;if: github.repository == 'feincms/django-prose-editor'&lt;/code&gt; statement which ensures that the workflow only runs in the main repository, but that&amp;rsquo;s optional if you don&amp;rsquo;t care about failing workflows.&lt;/p&gt;</summary></entry><entry><title>LLMs for Open Source maintenance: a cautious case</title><link href="https://406.ch/writing/llms-for-open-source-maintenance-a-cautious-case/" rel="alternate" /><id>https://406.ch/writing/llms-for-open-source-maintenance-a-cautious-case/</id><published>2026-03-25T12:00:00Z</published><updated>2026-03-25T12:00:00Z</updated><summary type="html">&lt;h1 id="llms-for-open-source-maintenance-a-cautious-case"&gt;&lt;a class="toclink" href="#llms-for-open-source-maintenance-a-cautious-case"&gt;LLMs for Open Source maintenance: a cautious case&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;When ChatGPT appeared on the scene I was very annoyed at all the hype surrounding it. Since I&amp;rsquo;m working in the fast moving and low margin business of communication and campaigning agencies I&amp;rsquo;m surrounded by people eager to jump on the hype train when a tool promises to lessen the workload and take stuff from everyone&amp;rsquo;s plate.&lt;/p&gt;
 &lt;p&gt;These discussions coupled with the fact that the training of these tools required unfathomable amounts of &lt;strong&gt;stealing&lt;/strong&gt; were the reason for a big reluctance on my part when trying them out. I&amp;rsquo;m using the word stealing here on purpose, since that&amp;rsquo;s exactly the crime &lt;a href="https://en.wikipedia.org/wiki/Aaron_Swartz"&gt;Aaron Swartz&lt;/a&gt; &lt;a href="https://web.archive.org/web/20120526080523/http://www.justice.gov/usao/ma/news/2011/July/SwartzAaronPR.html"&gt;was accused of by the attorney&amp;rsquo;s office of the district of Massachusetts&lt;/a&gt;. It&amp;rsquo;s frustrating that some people can get away with the same crime when it is so much bigger. For example, OpenAI and Anthropic downloaded much more data than Aaron ever did.&lt;/p&gt;
 &lt;p&gt;A somewhat related thing happened with the too-big-to-fail banks: There, the people at the top were even compensated with &lt;a href="https://en.wikipedia.org/wiki/Golden_parachute"&gt;golden parachutes&lt;/a&gt; at the end. LLM companies seem to be above accountability too.&lt;/p&gt;
@@ -1134,24 +1169,4 @@ ship their own JavaScript. While there are still some rough edges to smooth
 out, this approach works well and offers a path forward that aligns with modern
 web standards.&lt;/p&gt;
 &lt;p&gt;Have you tried using importmaps with Django? I&amp;rsquo;d be interested to hear about
-your experiences and approaches.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2025 week 21)</title><link href="https://406.ch/writing/weeknotes-2025-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-21/</id><published>2025-05-21T12:00:00Z</published><updated>2025-05-21T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-21"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-21"&gt;Weeknotes (2025 week 21)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have missed two co-writing sessions and didn&amp;rsquo;t manage to post much outside of that, but let&amp;rsquo;s get things back on track.&lt;/p&gt;
-&lt;h2 id="django-prose-editor-012"&gt;&lt;a class="toclink" href="#django-prose-editor-012"&gt;django-prose-editor 0.12&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The &lt;a href="https://406.ch/writing/weeknotes-2025-week-15/#progress-on-the-prose-editor"&gt;last weeknotes
-entry&lt;/a&gt;
-contains more details about the work of really connecting Tiptap extensions
-with server-side sanitization. 0.12 includes many improvements and bugfixes
-which have been made during real-world use of the prose editor in
-customer-facing products.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not completely happy about the way we&amp;rsquo;re specifying the editor
-configuration and haven&amp;rsquo;t been able to settle on either &lt;code&gt;extensions&lt;/code&gt; or
-&lt;code&gt;config&lt;/code&gt; as a keyword argument. The field supports both ways, at least for
-now. It&amp;rsquo;s probably fine.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-auto-admin-fieldsets/"&gt;django-auto-admin-fieldsets 0.2&lt;/a&gt;: I wrote a blog post here: &lt;a href="https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/"&gt;Customizing Django admin fieldsets without fearing forgotten fields&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 5.2&lt;/a&gt;: This release contains the second half of improvements from &lt;a href="https://djangonaut.space/"&gt;Djangonaut Space&lt;/a&gt; session four where I helped out as a Navigator. The toolbar properly supports code highlighting in dark mode, sanitizes request variables better, allows customizing redirects, supports projects using &lt;a href="https://github.com/carltongibson/django-template-partials/"&gt;django-template-partials&lt;/a&gt; and more!&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 25.5.1&lt;/a&gt;: The first FeinCMS release of 2025. We&amp;rsquo;re still maintaining the project and fixing bugs!&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.12&lt;/a&gt;: See above.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.4.1&lt;/a&gt;: Fixes much too small checkboxes when used inside tables.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+your experiences and approaches.&lt;/p&gt;</summary></entry></feed>
