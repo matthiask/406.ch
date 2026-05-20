@@ -1,0 +1,23 @@
+name: Blog reminder
+on:
+  schedule:
+  - cron: 0 9 20-31 * *
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Check for published post this month
+      run: |
+        month=$(date +%Y%m)
+        count=0
+        for f in posts/${month}*.md; do
+          [ -f "$f" ] || continue
+          grep -q "^Draft:" "$f" || count=$((count + 1))
+        done
+        if [ "$count" -eq 0 ]; then
+          echo "No blog posts published in $(date '+%B %Y') yet!"
+          exit 1
+        fi
+        echo "Found $count published post(s) for $(date '+%B %Y')."
