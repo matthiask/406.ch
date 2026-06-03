@@ -1,6 +1,5 @@
 Title: Anything new?
 Categories: Django, Programming
-Draft: remove-this-to-publish
 
 # Anything new?
 
