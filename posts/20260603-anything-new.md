@@ -1,7 +1,7 @@
-Title: Anything new?
+Title: «Anything new?»
 Categories: Django, Programming
 
-# Anything new?
+# «Anything new?»
 
 A lot of time has passed since I officially announced that I want to [step down from maintaining django-mptt](https://406.ch/writing/weeknotes-2021-week-10/#django-mptt-is-not-maintained-anymore). I started contributing around 2009, tagged the [0.3 release in April 2010](https://github.com/django-mptt/django-mptt/tree/0.3.0), and have been the sole active maintainer since somewhere around 2019. The post about [django-tree-queries](https://406.ch/writing/django-tree-queries/) has more background, but that's not today's topic.
 
