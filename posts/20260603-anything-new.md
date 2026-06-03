@@ -33,3 +33,18 @@ I wish but of course this is hard in written communication.
 [Mona Eltahawy about refusing to be civil](https://youtu.be/Amj3QG2s1BI?t=226)
 
 Of course I am very aware that I am writing this as a white man. But instead of trying to find my own critique of what's happening here I'm trying to give a platform to a woman who -- for a different topic -- said it much better than I ever could.
+
+
+## Doing it with AI
+
+No post or podcast episode can go live without containing some comment on the new fad of the day.
+
+It's somewhat topical. I fixed and/or closed almost all django-mptt issues in a 2h claude session. I have previously written about using [LLMs for open source maintenance](https://406.ch/writing/llms-for-open-source-maintenance-a-cautious-case/).
+
+[rsync and outrage](https://medium.com/@tridge60/rsync-and-outrage-d9849599e5a0) via [@Migueldeicaza](https://mastodon.social/@Migueldeicaza/116686099182972994).
+
+We can't win when we're not putting out uncountable hours of free work.
+
+It's what Immanuel Kant said. The only moral acts are those performed out of a sense of duty, motivated by a good will rather than by desires, inclinations or consequences such as compensation or whatever else you may think of.
+
+It's bleak.
