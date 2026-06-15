@@ -20,7 +20,7 @@ For my future benefit, here are the step by step instructions I have to follow:
     - Workflow name: `publish.yml`
     - Environment: `release`
 
-2. In the GitHub repository, create a `release` environment in Settings / Environments. Add myself and potentially also other releasers as a required reviewer. I allow self-review and disallow administrators to bypass the protection rules.
+2. In the GitHub repository, create a `release` environment in Settings / Environments. If I want to manually approve releases I'll add myself and potentially also other releasers as required reviewers.
 
 3. Run `git tag x.y.z` and `git push`, no more `uvx twine` or `hatch publish`.
 
