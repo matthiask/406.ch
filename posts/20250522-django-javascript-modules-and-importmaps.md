@@ -3,6 +3,10 @@ Categories: Django, Programming
 
 # How I'm using Django, JavaScript modules and importmaps together
 
+!!! note
+
+    Be sure to check out the [2026 edition of this post](/writing/the-2026-way-of-using-importmaps-in-django/).
+
 I have been spending a lot of time in the last few months working on
 [django-prose-editor](https://github.com/matthiask/django-prose-editor/). First
 I've rebuilt the editor on top of
