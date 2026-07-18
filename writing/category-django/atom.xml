@@ -1,5 +1,60 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2026-07-01T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 27)</title><link href="https://406.ch/writing/weeknotes-2026-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-27/</id><published>2026-07-01T12:00:00Z</published><updated>2026-07-01T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-27"&gt;Weeknotes (2026 week 27)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2026-07-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Migrating from FeinCMS to feincms3</title><link href="https://406.ch/writing/migrating-from-feincms-to-feincms3/" rel="alternate" /><id>https://406.ch/writing/migrating-from-feincms-to-feincms3/</id><published>2026-07-18T12:00:00Z</published><updated>2026-07-18T12:00:00Z</updated><summary type="html">&lt;h1 id="migrating-from-feincms-to-feincms3"&gt;&lt;a class="toclink" href="#migrating-from-feincms-to-feincms3"&gt;Migrating from FeinCMS to feincms3&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://github.com/feincms/feincms"&gt;FeinCMS&lt;/a&gt; is still actively maintained, but development, bugfixes and new features mostly land on &lt;a href="https://github.com/feincms/feincms3"&gt;feincms3&lt;/a&gt; and &lt;a href="https://github.com/feincms/django-content-editor"&gt;django-content-editor&lt;/a&gt; these days, not on FeinCMS itself. That&amp;rsquo;s reason enough to eventually move a project over.&lt;/p&gt;
+&lt;p&gt;Someone &lt;a href="https://github.com/feincms/feincms3/issues/59"&gt;asked on the feincms3 issue tracker&lt;/a&gt; whether there&amp;rsquo;s a guide for making that move. There isn&amp;rsquo;t one yet, so I thought I&amp;rsquo;d expand on my comment in the issue tracker and post it here too in the hope that it&amp;rsquo;s useful to others. The post is based on a gradual migration &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; did in a large, long-lived Django project &amp;ndash; a textbook publishing platform with years of content. Unfortunately I can&amp;rsquo;t show more details since it&amp;rsquo;s a commercial, closed source project. During the migration, the platform stayed in production the whole time, aside from the inevitable bug here and there.&lt;/p&gt;
+&lt;p&gt;The most important insight is that FeinCMS 1 content types and feincms3 plugins are close enough that we could keep using the same underlying database tables. An export/import step isn&amp;rsquo;t required at all.&lt;/p&gt;
+&lt;h2 id="the-overall-shape-of-the-migration"&gt;&lt;a class="toclink" href="#the-overall-shape-of-the-migration"&gt;The overall shape of the migration&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;FeinCMS keeps managing the plugin tables as usual, for now.&lt;/li&gt;
+&lt;li&gt;New feincms3 plugin models get added alongside the old ones, with &lt;code&gt;managed = False&lt;/code&gt; in their &lt;code&gt;Meta&lt;/code&gt; and &lt;code&gt;db_table&lt;/code&gt; pointing at the exact table FeinCMS already created. Django doesn&amp;rsquo;t think these are new or different tables, it just uses the ones that already exist.&lt;/li&gt;
+&lt;li&gt;The admin gets migrated from &lt;code&gt;ItemEditor&lt;/code&gt; to &lt;code&gt;django-content-editor&lt;/code&gt;&amp;rsquo;s &lt;code&gt;ContentEditor&lt;/code&gt;. If your project has more than one independent hierarchy (in our case, one per book series instead of a single global page tree) you can migrate them independently instead of having to do it all in one step.&lt;/li&gt;
+&lt;li&gt;Rendering moves over from FeinCMS&amp;rsquo;s rendering machinery to feincms3&amp;rsquo;s, again piece by piece: the HTML generation for the frontend, any full text search indexers, anything else that touches the content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The examples below use &lt;code&gt;Chapter&lt;/code&gt; and &lt;code&gt;ChapterPlugin&lt;/code&gt; because that&amp;rsquo;s the hierarchy in this particular project, one tree per book series rather than one global page tree. Most feincms3 projects center on a single &lt;code&gt;Page&lt;/code&gt; model instead, so read &lt;code&gt;Page&lt;/code&gt; wherever you see &lt;code&gt;Chapter&lt;/code&gt;; the rest still applies.&lt;/p&gt;
+&lt;h2 id="getting-the-migration-state-right"&gt;&lt;a class="toclink" href="#getting-the-migration-state-right"&gt;Getting the migration state right&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s a concrete proxy model from that migration, simplified. &lt;code&gt;RichTextContent&lt;/code&gt; is our own abstract mixin, holding nothing but the actual &lt;code&gt;text&lt;/code&gt; field, shared between the FeinCMS and feincms3 sides of the code base. The same role is played by &lt;a href="https://github.com/feincms/feincms3/blob/main/feincms3/plugins/richtext.py"&gt;&lt;code&gt;feincms3.plugins.richtext.RichText&lt;/code&gt;&lt;/a&gt; if you use feincms3&amp;rsquo;s bundled plugin instead of your own. &lt;code&gt;ChapterPlugin&lt;/code&gt; in turn only wires up the boilerplate that&amp;rsquo;s specific to being a plugin content type of our &lt;code&gt;Chapter&lt;/code&gt; model:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;RichTextContent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RichTextField&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;abstract&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;RichText&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ChapterPlugin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RichTextContent&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;db_table&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;textbooks_chapter_richtextcontent&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;managed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;  &lt;span class="c1"&gt;# Proxy for the real model still owned by FeinCMS&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The exact table name depends on how FeinCMS auto-generated it for your project (a mix of the app label, the base model and the content type name), so look it up rather than guessing. &lt;code&gt;./manage.py sqlmigrate&lt;/code&gt; or just inspecting the database will tell you.&lt;/p&gt;
+&lt;p&gt;For the very last step, once a plugin has been converted and &lt;code&gt;managed = False&lt;/code&gt; can go away, use Django&amp;rsquo;s &lt;a href="https://docs.djangoproject.com/en/stable/ref/migration-operations/#separatedatabaseandstate"&gt;&lt;code&gt;migrations.SeparateDatabaseAndState&lt;/code&gt;&lt;/a&gt;. It lets you change the migration &lt;em&gt;state&lt;/em&gt; without touching the database at all. That&amp;rsquo;s exactly what you need here since the table already exists and already has the right shape; only Django&amp;rsquo;s idea of what the schema is needs to catch up.&lt;/p&gt;
+&lt;p&gt;You don&amp;rsquo;t even have to write these migrations by hand. Remove &lt;code&gt;managed = False&lt;/code&gt;, run &lt;code&gt;./manage.py makemigrations&lt;/code&gt; as usual, and Django writes out the normal operations it would generate for any new model. The only manual step is moving that generated list of operations into the &lt;code&gt;state_operations&lt;/code&gt; argument of a single &lt;code&gt;SeparateDatabaseAndState&lt;/code&gt; operation, redacted and shortened here:&lt;/p&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Migration&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;migrations&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Migration&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;dependencies&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;textbooks&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;0096_remove_richtextcontent_managed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="n"&gt;operations&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="n"&gt;migrations&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SeparateDatabaseAndState&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;state_operations&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+                &lt;span class="n"&gt;migrations&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CreateModel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;RichText&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="n"&gt;fields&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AutoField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;primary_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;serialize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextField&lt;/span&gt;&lt;span class="p"&gt;()),&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;chapter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;textbooks.Chapter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+                    &lt;span class="p"&gt;],&lt;/span&gt;
+                    &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;db_table&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;textbooks_chapter_richtextcontent&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+                &lt;span class="p"&gt;),&lt;/span&gt;
+            &lt;span class="p"&gt;],&lt;/span&gt;
+            &lt;span class="c1"&gt;# No database_operations -- the table is already exactly like this.&lt;/span&gt;
+        &lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As always, test this on a copy of the database first and make sure you have backups. Hand-editing migrations isn&amp;rsquo;t generally recommended, but it&amp;rsquo;s safe if you know exactly what you&amp;rsquo;re doing. Treat it with the same care as any other schema change.&lt;/p&gt;
+&lt;h2 id="the-page-tree-mptt-vs-tree-queries"&gt;&lt;a class="toclink" href="#the-page-tree-mptt-vs-tree-queries"&gt;The page tree: mptt vs. tree-queries&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;FeinCMS 1&amp;rsquo;s bundled &lt;code&gt;Page&lt;/code&gt; model uses &lt;a href="https://github.com/django-mptt/django-mptt"&gt;django-mptt&lt;/a&gt; for the page hierarchy, while feincms3&amp;rsquo;s page comes with &lt;a href="https://github.com/feincms/django-tree-queries"&gt;django-tree-queries&lt;/a&gt; instead. If you&amp;rsquo;re using FeinCMS&amp;rsquo;s own &lt;code&gt;Page&lt;/code&gt; model and migrating to feincms3&amp;rsquo;s, this can be a little bit painful since the database schema is different. There&amp;rsquo;s a &lt;a href="https://django-tree-queries.readthedocs.io/en/latest/#migrating-from-django-mptt"&gt;dedicated guide for migrating from django-mptt&lt;/a&gt; in the django-tree-queries documentation.&lt;/p&gt;
+&lt;p&gt;Once the last plugin has switched over, FeinCMS can be dropped from the project entirely, including from the requirements. The models end up exactly where they would have been if you&amp;rsquo;d started the project with feincms3 in the first place &amp;ndash; and you never had to export or import a single row to get there.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2026 week 27)</title><link href="https://406.ch/writing/weeknotes-2026-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-27/</id><published>2026-07-01T12:00:00Z</published><updated>2026-07-01T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-27"&gt;Weeknotes (2026 week 27)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;The &lt;a href="https://406.ch/writing/weeknotes-2026-week-17/"&gt;last entry in this series&lt;/a&gt; was published 10 weeks ago so it really is time for another review of the releases I did during this time.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="feincms3-forms"&gt;&lt;a class="toclink" href="#feincms3-forms"&gt;feincms3-forms&lt;/a&gt;&lt;/h3&gt;
@@ -549,103 +604,4 @@ even though people are shown the full list of objects which will be deleted.&lt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.20&lt;/a&gt;: Added &lt;code&gt;tree_info&lt;/code&gt; and &lt;code&gt;recursetree&lt;/code&gt; template tags. Optimized the performance by avoiding the rank table if easily possible. Added stronger recommendations to pre-filter the table using &lt;code&gt;.tree_filter()&lt;/code&gt; or &lt;code&gt;.tree_exclude()&lt;/code&gt; when working with small subsets of large datasets.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.3&lt;/a&gt;: Added a trove identifeir for recent Django versions. It still works fine, but it&amp;rsquo;s deprecated and shouldn&amp;rsquo;t be used since it still uses the unmaintained CKEditor 4 line (since we do not ship the commercial LTS version).&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.6.1&lt;/a&gt;: Golfed the generated CSS and JavaScript bundle down to below 4000 bytes again, including the YouTube/Vimeo/etc. wrapper which only loads external content when users consent.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Preserving referential integrity with JSON fields and Django</title><link href="https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/" rel="alternate" /><id>https://406.ch/writing/preserving-referential-integrity-with-json-fields-and-django/</id><published>2025-06-04T12:00:00Z</published><updated>2025-06-04T12:00:00Z</updated><summary type="html">&lt;h1 id="preserving-referential-integrity-with-json-fields-and-django"&gt;&lt;a class="toclink" href="#preserving-referential-integrity-with-json-fields-and-django"&gt;Preserving referential integrity with JSON fields and Django&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="motivation"&gt;&lt;a class="toclink" href="#motivation"&gt;Motivation&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The great thing about using &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; and
-&lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is that
-CMS plugins are Django models &amp;ndash; if using them you immediately have access to
-the power of Django&amp;rsquo;s ORM and Django&amp;rsquo;s administration interface.&lt;/p&gt;
-&lt;p&gt;However, using one model per content type can be limiting on larger sites.
-Because of this &lt;a href="https://feinheit.ch/"&gt;we&lt;/a&gt; like using JSON plugins with
-schemas for more fringe use cases or for places where we have richer data but
-do not want to write a separate Django app for it. This works well as long as
-you only work with text, numbers etc. but gets a bit ugly once you start
-referencing Django models because you never know if those objects are still
-around when actually using the data stored in those JSON fields.&lt;/p&gt;
-&lt;p&gt;Django has a nice
-&lt;a href="https://docs.djangoproject.com/en/5.2/ref/models/fields/#django.db.models.ForeignKey.on_delete"&gt;&lt;code&gt;on_delete=models.PROTECT&lt;/code&gt;&lt;/a&gt;
-feature, but that of course only works when using real models. So, let&amp;rsquo;s bridge
-this gap and allow using foreign key protection with data stored in JSON
-fields!&lt;/p&gt;
-&lt;h2 id="models"&gt;&lt;a class="toclink" href="#models"&gt;Models&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;First, you have to start using the
-&lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;django-json-schema-editor&lt;/a&gt;
-and specifically its &lt;code&gt;JSONField&lt;/code&gt; instead of the standard Django &lt;code&gt;JSONField&lt;/code&gt;. The most important difference between those two is that the schema editor&amp;rsquo;s field wants a JSON schema. So, for the sake of an example, let&amp;rsquo;s assume that we have a model with images and a model with galleries. Note that we&amp;rsquo;re omitting many of the fields actually making the interface nice such as titles etc.&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django.db&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor.fields&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONField&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ImageField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;gallery_schema&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;object&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;array&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;table&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;minItems&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-            &lt;span class="s2"&gt;&amp;quot;items&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="s2"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;string&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="s2"&gt;&amp;quot;format&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;foreign_key&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="s2"&gt;&amp;quot;options&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                    &lt;span class="c1"&gt;# raw_id_fields URL:&lt;/span&gt;
-                    &lt;span class="s2"&gt;&amp;quot;url&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/admin/myapp/image/?_popup=1&amp;amp;_to_field=id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                &lt;span class="p"&gt;},&lt;/span&gt;
-            &lt;span class="p"&gt;},&lt;/span&gt;
-        &lt;span class="p"&gt;},&lt;/span&gt;
-    &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Gallery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;JSONField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;gallery_schema&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now, if we were to do it by hand, we&amp;rsquo;d define a &lt;code&gt;through&lt;/code&gt; model for a
-&lt;code&gt;ManyToManyField&lt;/code&gt; linking galleries to images, and adding a
-&lt;code&gt;on_delete=models.PROTECT&lt;/code&gt; foreign key to this through model&amp;rsquo;s &lt;code&gt;image&lt;/code&gt; foreign
-key and we would be updating this many to many table when the &lt;code&gt;Gallery&lt;/code&gt; object
-changes. Since that&amp;rsquo;s somewhat &lt;a href="https://github.com/matthiask/django-json-schema-editor/blob/4bc1ab0cf44eda4c0e824f96f2bd08cd94832c1c/django_json_schema_editor/fields.py#L9-L47"&gt;boring but also tricky code&lt;/a&gt; I have already written it (including unit tests of course) and all that&amp;rsquo;s left to do is define the linking:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register_data_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="c1"&gt;# The model we&amp;#39;re referencing:&lt;/span&gt;
-    &lt;span class="n"&gt;Image&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="c1"&gt;# The name of the ManyToManyField:&lt;/span&gt;
-    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="c1"&gt;# The getter which returns a list of stringified primary key values or nothing:&lt;/span&gt;
-    &lt;span class="n"&gt;getter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now, attempting to delete an image which is still used in a gallery somewhere will raise &lt;a href="https://docs.djangoproject.com/en/5.2/ref/exceptions/#django.db.models.ProtectedError"&gt;ProtectedError&lt;/a&gt; exceptions. That&amp;rsquo;s what we wanted to achieve.&lt;/p&gt;
-&lt;h2 id="using-a-gallery-instance"&gt;&lt;a class="toclink" href="#using-a-gallery-instance"&gt;Using a gallery instance&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;When you have a gallery instance you can now use the &lt;code&gt;images&lt;/code&gt; field to fetch
-all images and use the order from the JSON data:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;gallery_context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;images&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()}&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;caption&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;images&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;gallery&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]],&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id="jsonpluginbase-and-jsonplugininline"&gt;&lt;a class="toclink" href="#jsonpluginbase-and-jsonplugininline"&gt;JSONPluginBase and JSONPluginInline&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I would generally do the instantiation of models slightly differently and use
-&lt;code&gt;django-json-schema-editor&lt;/code&gt;&amp;rsquo;s &lt;code&gt;JSONPluginBase&lt;/code&gt; and &lt;code&gt;JSONPluginInline&lt;/code&gt; which
-offer additional niceties such as streamlined JSON models with only one backing database table (using &lt;a href="https://docs.djangoproject.com/en/5.2/topics/db/models/#proxy-models"&gt;proxy
-models&lt;/a&gt;) and supporting not just showing the primary key of referenced model instances but also their &lt;code&gt;__str__&lt;/code&gt; value.&lt;/p&gt;
-&lt;p&gt;The example above would have to be changed to look more like this:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_json_schema_editor&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;JSONPlugin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONPluginBase&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;pass&lt;/span&gt;
-
-&lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register_data_reference&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;Gallery&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;JSONPlugin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gallery&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;gallery_schema&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;However, that&amp;rsquo;s not documented yet so for now you unfortunately have to read
-the &lt;a href="https://github.com/matthiask/django-json-schema-editor"&gt;code and the test
-suite&lt;/a&gt;, sorry for that.
-It&amp;rsquo;s used heavily in production though so if you start using it it won&amp;rsquo;t
-suddenly start breaking in the future.&lt;/p&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary></entry></feed>
