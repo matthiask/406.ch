@@ -1,11 +1,11 @@
 # Licensed under the MIT License -- do whatever you want with it but don't complain to me.
 
+import datetime as dt
 import re
 import shutil
 import sys
 from collections import Counter
 from dataclasses import dataclass
-from datetime import date, datetime as dt
 from hashlib import md5
 from itertools import chain
 from pathlib import Path
@@ -26,6 +26,7 @@ TITLE = "Matthias Kestenholz"
 c = codehilite.CodeHiliteExtension(linenums=False, css_class="chl")
 t = toc.TocExtension(anchorlink=True)
 md_exts = ["smarty", "footnotes", "admonition", c, t]
+today = dt.date.today()
 
 
 def md(content):
@@ -60,7 +61,7 @@ class Category:
 
 @dataclass(kw_only=True, frozen=True, order=True)
 class Post:
-    date: date
+    date: dt.date
     slug: str
     title: str
     updated: str
@@ -78,9 +79,9 @@ class Post:
             props = [re.split(r":\s*", prop, maxsplit=1) for prop in props.split("\n")]
             props = {"categories": ""} | {name.lower(): value for name, value in props}
             if "date" in props:
-                props["date"] = dt.strptime(props["date"], "%Y-%m-%d").date()
+                props["date"] = dt.datetime.strptime(props["date"], "%Y-%m-%d").date()
             else:
-                props["date"] = dt.strptime(path.name[:8], "%Y%m%d").date()
+                props["date"] = dt.datetime.strptime(path.name[:8], "%Y%m%d").date()
             props["slug"] = props.get("slug") or slugify(props["title"])
             props["updated"] = f"{props['date'].isoformat()}T12:00:00Z"
             if "\n# " not in content and not content.startswith("# "):
@@ -103,7 +104,7 @@ def jinja_templates(context, base_url):
     write_file(style_file, styles)
 
     env = Environment(loader=FileSystemLoader([DIR / "resources"]), autoescape=True)
-    env.globals.update({"year": date.today().year, "styles": style_file} | context)
+    env.globals.update({"year": today.year, "styles": style_file} | context)
     r = lambda template: (
         lambda **ctx: minify(absolufy(template.render(**ctx), base_url))
     )
@@ -141,7 +142,7 @@ def main(*, only_published=True, base_url=URL):
     posts = (Post.from_path(p) for p in DIR.glob("posts/*.md"))
     posts = sorted(filter(None, posts), reverse=True)
     if only_published:
-        posts = [post for post in posts if post.date <= date.today() and not post.draft]
+        posts = [post for post in posts if post.date <= today and not post.draft]
     slugs = Counter(post.slug for post in posts).items()
     if dup := [slug for slug, count in slugs if count > 1]:
         print(f"Duplicated slugs: {', '.join(map(repr, dup))}", file=sys.stderr)
