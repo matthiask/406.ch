@@ -4,44 +4,42 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13,<3.14"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+]
 dependencies = [
-    "beautifulsoup4>=4.12.3",
-    "jinja2>=3.1.4",
-    "markdown>=3.7",
-    "minify-html>=0.15.0",
-    "pygments>=2.18.0",
-    "rcssmin>=1.1.2",
+  "beautifulsoup4>=4.12.3",
+  "jinja2>=3.1.4",
+  "markdown>=3.7",
+  "minify-html>=0.15",
+  "pygments>=2.18",
+  "rcssmin>=1.1.2",
 ]
 
 [tool.ruff]
-lint.extend-select = ["B", "E", "F", "W", "C90", "I", "UP", "FBT", "C4", "DJ", "PIE", "INT", "SIM", "YTT", "G"]
+target-version = "py313"
+fix = true
+lint.extend-select = [ "B", "C4", "C90", "DJ", "E", "F", "FBT", "G", "I", "INT", "PIE", "SIM", "UP", "W", "YTT" ]
 lint.extend-ignore = [
-"BLE001",
-"DTZ007",
-"DTZ011",
+  "BLE001",
+  "DTZ007",
+  "DTZ011",
   # No line length errors
   "E501",
   # Named lambdas are good for line golfing
   "E731",
 ]
-fix = true
-target-version = "py313"
+lint.isort.combine-as-imports = true
+lint.isort.lines-after-imports = 2
+lint.mccabe.max-complexity = 10
 
-[tool.ruff.lint.isort]
-combine-as-imports = true
-lines-after-imports = 2
-
-[tool.ruff.lint.mccabe]
-max-complexity = 10
-
-[tool.coverage.run]
-branch = true
-omit = [
-    "*migrate*",
-    "*migrations*",
-    "*venv*",
+[tool.coverage]
+run.branch = true
+run.omit = [
+  "*migrate*",
+  "*migrations*",
+  "*venv*",
 ]
-
-[tool.coverage.report]
-skip_covered = true
-show_missing = true
+report.show_missing = true
+report.skip_covered = true
