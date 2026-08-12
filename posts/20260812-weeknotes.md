@@ -1,6 +1,5 @@
 Title: Weeknotes (2026 week 33)
 Categories: Climate, Django, Programming, Weeknotes
-Draft: remove-this-to-publish
 
 ## Holidays and the heat wave
 
