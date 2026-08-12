@@ -16,6 +16,9 @@ dependencies = [
 [tool.ruff]
 lint.extend-select = ["B", "E", "F", "W", "C90", "I", "UP", "FBT", "C4", "DJ", "PIE", "INT", "SIM", "YTT", "G"]
 lint.extend-ignore = [
+"BLE001",
+"DTZ007",
+"DTZ011",
   # No line length errors
   "E501",
   # Named lambdas are good for line golfing
