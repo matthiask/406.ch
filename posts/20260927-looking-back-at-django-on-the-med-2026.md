@@ -86,6 +86,8 @@ In the evening we went to an excellent vegan restaurant. I was happy that I wasn
 
 Almost everybody had either left or had to leave on Saturday morning so I didn't expect to meet with others anymore. I finally went for some long walks, explored other parts of the town and went to see the long bridge/walkway/passegio/whatever and some parks. I also took some time to note down both what we did and what I thought of finally going back to a conference.
 
+In the evening I ran into Mark and Becky twice and we decided to have a beer together before saying goodbye again and for the final time for this sprint.
+
 Having an additional day in Pescara was a win. I had less time to during the sprints to visit the city itself and really did appreciate the additional day I allowed myself to have.
 
 
