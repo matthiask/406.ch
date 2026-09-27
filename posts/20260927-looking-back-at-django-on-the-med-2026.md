@@ -62,7 +62,7 @@ I continued working on the DEP and started tweaking [django-js-asset](https://gi
 
 I only ate a small lunch since we were promised a bus tour with a lot of great food in the afternoon and evening. It still proved to be too much as we will learn later.
 
-In the afternoon we took a bus to a local vineyard. We were shown around and had a look at the machines and learned a few things about the winemaking process. That was followed by a wine tasting and some bread and appetizers (XXX is that the correct word? Maybe antipasti would be more fitting?)
+In the afternoon we took a bus to a local vineyard. We were shown around and had a look at the machines and learned a few things about the winemaking process. That was followed by a wine tasting and some bread and appetizers (XXX is that the correct word? Maybe antipasti would be more fitting? We had bread, thinly cut meat, a sauce made from cut up peppers in oil and some cheese)
 
 Next, we went to Penne and were shown the city and were told a little bit of the local history. Everything's build from bricks. Brick buildings and earthquakes are not a great fit it seems to me -- the last larger earthquake hit th eregion less than 10 years ago. It's interesting that people are always rebuilding the houses anyway. From Penne we had a really nice view over the region, from the hill we were standing on all the way to Pescara and to the Adria.
 
