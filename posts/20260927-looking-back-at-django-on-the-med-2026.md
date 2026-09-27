@@ -75,7 +75,7 @@ Back in the hotel I couldn't sleep immediately so I addressed some of the feedba
 
 The night wasn't very restorative but I was awake anyway in the morning so I got up and started the day again on time. I finished applying the feedback to the DEP and to django-js-asset and continued refining it and filling in holes. I also modified some of the packages I'm developing to use the new way of defining media using import maps just to get a feeling if the API is nice or not.
 
-During the coffee break I asked around if the changes to the way import maps are defined would break uses of the code. Luckily it seems that django-prose-editor seems to be "just used" and people weren't relying on being able to define import maps themselves yet. Or, if so, I don't know about it. Maybe [django-probes](https://djangoprobe.org/) (XXX spelling?) could help with that, but we obviously aren't there yet.
+During the coffee break I asked around if the changes to the way import maps are defined would break uses of the code. Luckily it seems that django-prose-editor seems to be "just used" and people weren't relying on being able to define import maps themselves yet. Or, if so, I don't know about it. Maybe [django-probe](https://djangoprobe.org/) could help with that, but we obviously aren't there yet.
 
 We finished the sprint with a group picture and closed off the official part of the sprint. Most of us went out for lunch together. Some people had to leave after that; I drank an espresson in a nice coffee bar said goodbye to the people having to leave and went to the beach afterwards.
 
