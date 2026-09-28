@@ -53,7 +53,7 @@ As already alluded to above I restarted my work on the DEP. It basically needed 
 
 We went back to Lido Aurora for lunch. In the afternoon, almost everyone went for a bike ride along an old railway track which has been converted into a bike lane along the sea. I already knew a similar thing from Liguria near Levanto/Bonassola but it was nice encountering the same idea near Pescara. (The new railway track has been built further inland.) We also had some nice Spritz abruzzese. Generally, Spritz isn't really my thing but those were a bit more bitter and earthy and less sweet and therefore we soon ordered a second round.
 
-In the evening Žan, Annabelle, Simon, Carlton and I went to Fruity Burger (or something like that) for some vegan food. As expected it was really tasty. While vegan options in restaurants can unfortunately sometimes be quite bland, vegan restaurants in my experience are often some of the best: You really have to know your ingredients and can't just add bacon to everything. (Nothing against bacon, but still.)
+In the evening Žan, Annabelle, Simon, Carlton and I went to Flower Burger for some vegan food. As expected it was really tasty. While vegan options in restaurants can unfortunately sometimes be quite bland, vegan restaurants in my experience are often some of the best: You really have to know your ingredients and can't just add bacon to everything. (Nothing against bacon, but still.)
 
 
 ### Thursday
@@ -81,7 +81,7 @@ During the coffee break I asked around if the changes to the way import maps are
 
 We finished the sprint with a group picture and closed off the official part. Most of us went out for lunch together. Some people had to leave after that; I drank an espresso in a nice coffee bar, said goodbye to them and went to the beach afterwards.
 
-In the evening we went to an excellent vegan restaurant. I was happy that I wasn't the only one who was surprised to learn that the restaurant wasn't that close after all.
+In the evening we went to the excellent Sesamo Nero restaurant. I was happy that I wasn't the only one who was surprised to learn that the restaurant wasn't that close after all and arrived a little bit later than expected.
 
 
 ### Saturday
