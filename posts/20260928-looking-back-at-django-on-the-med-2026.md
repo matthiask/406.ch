@@ -2,7 +2,10 @@ Title: Looking back at Django on the Med 🏖️  2026
 Slug: looking-back-at-django-on-the-med-2026
 Categories: Django, Programming
 
-I haven't been to a programming conference in a really long time. That was mostly due to laziness, wanting to stay at home and decision fatigue because I didn't know how to travel sustainably and didn't know where to stay during the conference.
+I haven't been to a programming conference in a really long time. That was
+mostly due to laziness, wanting to stay at home and decision fatigue because I
+didn't know how to travel sustainably and didn't know where to stay during the
+conference.
 
 I had been talking online to Carlton for some time and when Django on the Med
 🏖️  2026 was announced I knew I had to go. What's not to like about a
@@ -21,7 +24,7 @@ The forum discussion about [rejuvenating Django's `forms.Media`](https://forum.d
 
 For those who don't know import maps: ES modules import each other by URL. When static file storages add hashes to file names for cache busting, those URLs change on every deployment. Import maps solve this using a web standard: Modules import stable identifiers such as `my-library`, and the import map tells the browser which file to actually load.
 
-If all browsers were to support multiple import maps the DEP would maybe not be necessary. People could just ship an `ImportMap` media object and include it in `forms.Media(js=[...])` before the ES modules actually using it and things would just work. At the time of writing this post Chromium and Safari support multiple import maps but Firefox still doesn't. So, if we want to use this feature without having import map merging we will have to wait several years for browser support to be widespread enough. And since third-party Django apps and Django websites which want to use import maps have to agree on a common implementation it makes most sense to me to propose adding this to Django core. The proposal lives in the [DEP pull request](https://github.com/django/deps/pull/101) and the accompanying [new feature ticket](https://github.com/django/new-features/issues/214).
+If all browsers were to support multiple import maps, the DEP would maybe not be necessary. People could just ship an `ImportMap` media object and include it in `forms.Media(js=[...])` before the ES modules actually using it and things would just work. At the time of writing this post Chromium and Safari support multiple import maps but Firefox still doesn't. So, if we want to use this feature without having import map merging we will have to wait several years for browser support to be widespread enough. And since third-party Django apps and Django websites which want to use import maps have to agree on a common implementation it makes most sense to me to propose adding this to Django core. The proposal lives in the [DEP pull request](https://github.com/django/deps/pull/101) and the accompanying [new feature ticket](https://github.com/django/new-features/issues/214).
 
 As an aside: Django has been famous for not having a frontend story for the longest time. I think this is mostly a strength, because Django has therefore allowed everyone to use the frontend technologies they want and hasn't decided on a particular technology, library or framework which, in the meantime, would have become obsolete or not really state of the art. ES modules and import maps aren't opinionated in the same way that, for example, jQuery, htmx, React or Svelte are; they really are a basic implementation of modules, namespaces and a specification of how those modules should be loaded in the browser. So, I don't think it would be fair to reject adding better support for these things on the grounds that Django wants to be agnostic to the frontend. I'm not saying here that the DEP has to be accepted or that there cannot be good reasons to reject or modify it further -- I'm sure there are. I'm just proposing that we cannot just use the old arguments to argue against it.
 
@@ -68,7 +71,7 @@ In the afternoon we took a bus to a local vineyard. We were shown around and had
 
 Next, we went to Penne and were shown the city and were told a little bit of the local history. Everything's built from bricks. Brick buildings and earthquakes are not a great fit it seems to me -- the last larger earthquake hit the region less than 10 years ago. It's interesting that people are always rebuilding the houses anyway. From Penne we had a really nice view over the region, from the hill we were standing on all the way to Pescara and to the Adriatic.
 
-We took the bus again to the restaurant and ate until 11 in the evening. At a certain point I couldn't go on anymore. No matter how great the food, there comes a moment when eating more seems impossible, and in my case that moment came before i secondi. The secondi were arrosticini. I could only eat one so now I'm wondering if I am a persona non grata in Pescara 🤣. Also, I was in pain from too much sitting -- sitting isn't good since I'm still recovering from a disc hernia and the associated follow-up issues in the hip. Still, I had a great day and wouldn't have wanted to miss any of it.
+We took the bus again to the restaurant and ate until 11 in the evening. At a certain point I couldn't go on anymore. No matter how great the food, there comes a moment when eating more seems impossible, and in my case that moment came before i secondi. The secondi were arrosticini. I could only eat one so now I'm wondering if I am a persona non grata in Pescara 🤣. Also, I was in pain from too much sitting -- sitting isn't good since I'm still recovering from a herniated disc and the associated follow-up issues in the hip. Still, I had a great day and wouldn't have wanted to miss any of it.
 
 Back in the hotel I couldn't sleep immediately so I addressed some of the feedback I got earlier in the day and then went to sleep.
 
