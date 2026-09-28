@@ -45,7 +45,7 @@ After a long day I slept surprisingly well. That's not saying much, but it certa
 
 ### Wednesday
 
-The sprint officially started on Wednesday with a warm-up session led by Carlton. The three questions asked (paraphrased because I don't remember the exact wording) were "What is great about Django?", "What are the risks, or what could be better?" and "What are you planning to work on?"
+The sprint officially started on Wednesday with a warm-up session. The three questions asked (paraphrased because I don't remember the exact wording) were "What is great about Django?", "What are the risks, or what could be better?" and "What are you planning to work on?"
 
 I discussed ways of adding import maps with Joe, the author of [django-esm](https://github.com/codingjoe/django-esm) and [esimport](https://github.com/codingjoe/esimport). I thought we had completely different and conflicting ways of thinking about and using import maps. After talking it over it became clear quite quickly that, while we don't have to use them the same way, our ways of using them do not have to be in conflict. I think this is one of the big advantages of events like this: The same discussion would have taken weeks or months in an issue tracker, if it ever happened, and in person it was a question of sitting together for an hour, hashing it out, and then you potentially have a basic agreement and an idea for which direction to go.
 
@@ -53,7 +53,7 @@ As already alluded to above I restarted my work on the DEP. It basically needed 
 
 We went back to Lido Aurora for lunch. In the afternoon, almost everyone went for a bike ride along an old railway track which has been converted into a bike lane along the sea. I already knew a similar thing from Liguria near Levanto/Bonassola but it was nice encountering the same idea near Pescara. (The new railway track has been built further inland.) We also had some nice Spritz abruzzese. Generally, Spritz isn't really my thing but those were a bit more bitter and earthy and less sweet and therefore we soon ordered a second round.
 
-In the evening Žan, Annabelle, Simon, Carlton and I went to Flower Burger for some vegan food. As expected it was really tasty. While vegan options in restaurants can unfortunately sometimes be quite bland, vegan restaurants in my experience are often some of the best: You really have to know your ingredients and can't just add bacon to everything. (Nothing against bacon, but still.)
+In the evening a small group went to Flower Burger for some vegan food. As expected it was really tasty. While vegan options in restaurants can unfortunately sometimes be quite bland, vegan restaurants in my experience are often some of the best: You really have to know your ingredients and can't just add bacon to everything. (Nothing against bacon, but still.)
 
 
 ### Thursday
