@@ -1,6 +1,5 @@
 Title: I don't care about traffic numbers on my website
 Categories: Programming
-Draft: remove-this-to-publish
 
 In the early days of this website I had a Google Analytics script embedded and
 I also sometimes analyzed the server logs to look at visitor counts and where
