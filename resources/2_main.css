@@ -170,19 +170,20 @@ hr {
   font-weight: bold;
 }
 
-.admonition {
+.markdown-alert-note {
   border: 1px solid var(--grey);
   padding: 0.25rem 0.5rem 0 0.5rem;
   margin: 0.5rem 0 0.75rem 0;
 }
 
-.admonition > *:last-child {
+.markdown-alert-note > *:last-child {
   margin-bottom: 0.5rem;
 }
 
-.admonition-title {
+.markdown-alert-note::before {
+  content: "Note";
+  display: block;
   font-weight: bold;
-  margin-bottom: 0;
 }
 
 footer {
@@ -202,8 +203,7 @@ main .text a:not(.toclink) {
 }
 
 /* CodeHilite overrides */
-.chl,
-.chl .err {
+.chl {
   all: inherit;
   overflow-x: scroll;
   background: #343947;

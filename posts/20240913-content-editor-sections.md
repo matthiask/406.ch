@@ -60,54 +60,56 @@ some section type needs it.
 
 Here's an example model definition:
 
-    :::python
-    # Models
-    from content_editor.models import Region, create_plugin_base
-    from django_json_schema_editor.plugins import JSONPluginBase
-    from feincms3 import plugins
+```python
+# Models
+from content_editor.models import Region, create_plugin_base
+from django_json_schema_editor.plugins import JSONPluginBase
+from feincms3 import plugins
 
-    class Page(models.Model):
-        # You have to define regions; each region gets a tab in the admin interface
-        regions = [Region(key="content", title="Content")]
+class Page(models.Model):
+    # You have to define regions; each region gets a tab in the admin interface
+    regions = [Region(key="content", title="Content")]
 
-        # Additional fields for the page...
+    # Additional fields for the page...
 
-    PagePlugin = create_plugin_base(Page)
+PagePlugin = create_plugin_base(Page)
 
-    class RichText(plugins.richtext.RichText, PagePlugin):
-        pass
+class RichText(plugins.richtext.RichText, PagePlugin):
+    pass
 
-    class Image(plugins.image.Image, PagePlugin):
-        pass
+class Image(plugins.image.Image, PagePlugin):
+    pass
 
-    class Section(JSONPluginBase, PagePlugin):
-        pass
+class Section(JSONPluginBase, PagePlugin):
+    pass
 
-    AccordionSection = Section.proxy(
-        "accordion",
-        schema={"type": "object", {"properties": {"title": {"type": "string"}}}},
-    )
-    CloseSection = Section.proxy(
-        "close",
-        schema={"type": "object", {"properties": {}}},
-    )
+AccordionSection = Section.proxy(
+    "accordion",
+    schema={"type": "object", {"properties": {"title": {"type": "string"}}}},
+)
+CloseSection = Section.proxy(
+    "close",
+    schema={"type": "object", {"properties": {}}},
+)
+```
 
 Here's the corresponding admin definition:
 
-    :::python
-    # Admin
-    from content_editor.admin import ContentEditor
-    from django_json_schema_editor.plugins import JSONPluginInline
-    from feincms3 import plugins
+```python
+# Admin
+from content_editor.admin import ContentEditor
+from django_json_schema_editor.plugins import JSONPluginInline
+from feincms3 import plugins
 
-    @admin.register(models.Page)
-    class PageAdmin(ContentEditor):
-        inlines = [
-            plugins.richtext.RichTextInline.create(models.RichText),
-            plugins.image.ImageInline.create(models.Image),
-            JSONPluginInline.create(models.AccordionSection, sections=1),
-            JSONPluginInline.create(models.CloseSection, sections=-1),
-        ]
+@admin.register(models.Page)
+class PageAdmin(ContentEditor):
+    inlines = [
+        plugins.richtext.RichTextInline.create(models.RichText),
+        plugins.image.ImageInline.create(models.Image),
+        JSONPluginInline.create(models.AccordionSection, sections=1),
+        JSONPluginInline.create(models.CloseSection, sections=-1),
+    ]
+```
 
 The somewhat cryptic `sections=` argument says how many levels of sections
 the individual blocks open or close.
@@ -116,43 +118,44 @@ To render the content including accordions I'd probably use a [feincms3
 renderer](https://feincms3.readthedocs.io/en/latest/guides/rendering.html#using-marks).
 At the time of writing the renderer definition for sections is a bit tricky.
 
-    :::python
-    from feincms3.renderer import RegionRenderer, render_in_context, template_renderer
+```python
+from feincms3.renderer import RegionRenderer, render_in_context, template_renderer
 
-    class PageRenderer(RegionRenderer):
-        def handle(self, plugins, context):
-            plugins = deque(plugins)
-            yield from self._handle(plugins, context)
+class PageRenderer(RegionRenderer):
+    def handle(self, plugins, context):
+        plugins = deque(plugins)
+        yield from self._handle(plugins, context)
 
-        def _handle(self, plugins, context, *, in_section=False):
-            while plugins:
-                if isinstance(plugins[0], models.Section):
-                    section = plugins.popleft()
-                    if section.type == "close":
-                        if in_section:
-                            return
-                        # Ignore close section plugins when not inside section
-                        continue
+    def _handle(self, plugins, context, *, in_section=False):
+        while plugins:
+            if isinstance(plugins[0], models.Section):
+                section = plugins.popleft()
+                if section.type == "close":
+                    if in_section:
+                        return
+                    # Ignore close section plugins when not inside section
+                    continue
 
-                    if section.type == "accordion":
-                        yield render_in_context("accordion.html", {
-                            "title": accordion.data["title"],
-                            "content": self._handle(plugins, context, in_section=True),
-                        })
+                if section.type == "accordion":
+                    yield render_in_context("accordion.html", {
+                        "title": accordion.data["title"],
+                        "content": self._handle(plugins, context, in_section=True),
+                    })
 
-                else:
-                    yield self.render_plugin(plugin, context)
+            else:
+                yield self.render_plugin(plugin, context)
 
-    renderer = PageRenderer()
-    renderer.register(models.RichText, template_renderer("plugins/richtext.html"))
-    renderer.register(models.Image, template_renderer("plugins/image.html"))
-    renderer.register(models.Section, "")
+renderer = PageRenderer()
+renderer.register(models.RichText, template_renderer("plugins/richtext.html"))
+renderer.register(models.Image, template_renderer("plugins/image.html"))
+renderer.register(models.Section, "")
+```
 
-!!! note
-
-    A better way to to this is documented in the API docs, specifically [`RegionRenderer.render_section_plugins`](https://feincms3.readthedocs.io/en/latest/ref/renderer.html#feincms3.renderer.RegionRenderer.render_section_plugins).
-
-    (Note added in Oct 2025.)
+> [!NOTE]
+>
+> A better way to to this is documented in the API docs, specifically [`RegionRenderer.render_section_plugins`](https://feincms3.readthedocs.io/en/latest/ref/renderer.html#feincms3.renderer.RegionRenderer.render_section_plugins).
+>
+> (Note added in Oct 2025.)
 
 ## Closing thoughts
 

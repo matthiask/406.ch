@@ -19,19 +19,20 @@ Class based views (both generic versions and the base `View`) were introduced to
 
 The GFBV's argument count was impressive. Two examples follow:
 
-    :::python
-    def object_detail(request, queryset, object_id=None, slug=None,
-        slug_field='slug', template_name=None, template_name_field=None,
-        template_loader=loader, extra_context=None,
-        context_processors=None, template_object_name='object',
-        mimetype=None):
-        ...
+```python
+def object_detail(request, queryset, object_id=None, slug=None,
+    slug_field='slug', template_name=None, template_name_field=None,
+    template_loader=loader, extra_context=None,
+    context_processors=None, template_object_name='object',
+    mimetype=None):
+    ...
 
-    def archive_month(request, year, month, queryset, date_field,
-        month_format='%b', template_name=None, template_loader=loader,
-        extra_context=None, allow_empty=False, context_processors=None,
-        template_object_name='object', mimetype=None, allow_future=False):
-        ...
+def archive_month(request, year, month, queryset, date_field,
+    month_format='%b', template_name=None, template_loader=loader,
+    extra_context=None, allow_empty=False, context_processors=None,
+    template_object_name='object', mimetype=None, allow_future=False):
+    ...
+```
 
 The GFBVs were immediately deprecated when GCBVs were introduced and later removed in 2012.
 
@@ -57,48 +58,51 @@ I'm going to profit from Django's shortcuts module and also from [feincms3's sho
 
 Here's a possible minimal implementation of a list and detail object generic view:
 
-    :::python
-    # _get_queryset runs ._default_manager.all() on models and returns
-    # everything else as-is. It's the secret sauce which allows using models,
-    # managers or querysets with get_object_or_404 and friends.
-    from django.shortcuts import get_object_or_404, _get_queryset
-    from feincms3.shortcuts import render_list, render_detail
+```python
+# _get_queryset runs ._default_manager.all() on models and returns
+# everything else as-is. It's the secret sauce which allows using models,
+# managers or querysets with get_object_or_404 and friends.
+from django.shortcuts import get_object_or_404, _get_queryset
+from feincms3.shortcuts import render_list, render_detail
 
-    def object_list(request, *, model, paginate_by=None):
-        return render_list(request, _get_queryset(model), paginate_by=paginate_by)
+def object_list(request, *, model, paginate_by=None):
+    return render_list(request, _get_queryset(model), paginate_by=paginate_by)
 
-    def object_detail(request, *, model, slug, slug_field="slug"):
-        object = get_object_or_404(model, **{slug_field: slug})
-        return render_detail(request, object)
+def object_detail(request, *, model, slug, slug_field="slug"):
+    object = get_object_or_404(model, **{slug_field: slug})
+    return render_detail(request, object)
+```
 
 You want to change the way a single object is retrieved? You could do that easily but not by adding configuration-adjacent values in your URLconf but rather by adding a view yourself:
 
-    :::python
-    def article_detail(request, year, slug):
-        object = get_object_or_404(Article.objects.published(), year=year, slug=slug)
-        return render_detail(request, object)
+```python
+def article_detail(request, year, slug):
+    object = get_object_or_404(Article.objects.published(), year=year, slug=slug)
+    return render_detail(request, object)
 
-    urlpatterns = [
-        ...
-        path("articles/<year:int>/<slug:slug>/", article_detail, name=...),
-        ...
-    ]
+urlpatterns = [
+    ...
+    path("articles/<year:int>/<slug:slug>/", article_detail, name=...),
+    ...
+]
+```
 
 I don't think that was much harder than a hypothetical alternative:
 
-    :::python
-    urlpatterns = [
-        ...
-        path(
-            "articles/<year:int>/<slug:slug>/",
-            object_detail,
-            {
-                "model": Article.objects.published(),
-                "object_kwargs": ["year", "slug"],
-            },
-        ),
-        ...
-    ]
+```python
+urlpatterns = [
+    ...
+    path(
+        "articles/<year:int>/<slug:slug>/",
+        object_detail,
+        {
+            "model": Article.objects.published(),
+            "object_kwargs": ["year", "slug"],
+        },
+    ),
+    ...
+]
+```
 
 And think about the internal implementation of the `object_detail` view. Viewed one additional feature at a time it may be fine but when adding up everything it would probably be quite gross.
 
@@ -106,27 +110,29 @@ The additional benefit is that it shows beginners the way to intermediate skills
 
 Finally, the official way of overriding `DetailView.get_object()` (I think!) doesn't look that good compared to the `def article_detail()` view above:
 
-    :::python
-    class ArticleDetailView(generic.DetailView):
-        def get_object(self, queryset=None):
-            if queryset is None:
-                queryset = self.get_queryset()
-            return get_object_or_404(queryset, year=self.kwargs["year"], slug=self.kwargs["slug"])
+```python
+class ArticleDetailView(generic.DetailView):
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+        return get_object_or_404(queryset, year=self.kwargs["year"], slug=self.kwargs["slug"])
+```
 
 Did you know that `get_object()` has an optional queryset argument? I certainly didn't. It seems to be used by the date-based generic views but they also have their own `get_object()` implementation so who knows, really.
 
 ## Detail view with additional behavior
 
-    :::python
-    def article_detail(request, year, slug):
-        object = get_object_or_404(Article.objects.published(), year=year, slug=slug)
-        data = (request.POST, request.FILES) if request.method == "POST" else ()
-        form = CommentForm(*data)
-        if form.is_valid():
-            form.instance.article = object
-            form.save()
-            return HttpResponseRedirect(".#comments")
-        return render_detail(request, object, {"comment_form": form})
+```python
+def article_detail(request, year, slug):
+    object = get_object_or_404(Article.objects.published(), year=year, slug=slug)
+    data = (request.POST, request.FILES) if request.method == "POST" else ()
+    form = CommentForm(*data)
+    if form.is_valid():
+        form.instance.article = object
+        form.save()
+        return HttpResponseRedirect(".#comments")
+    return render_detail(request, object, {"comment_form": form})
+```
 
 A counterexample would be to move the endpoint which accepts a comment POST
 request somewhere else. But then you'd also have to keep the different
@@ -145,74 +151,79 @@ one place.
 
 Generic create and update views could look something like this, again reusing the shortcuts mentioned above:
 
-    :::python
-    def save_and_redirect_to_object(request, form):
-        object = form.save()
-        return redirect(object)
+```python
+def save_and_redirect_to_object(request, form):
+    object = form.save()
+    return redirect(object)
 
-    def get_form_instance(request, *, model, form_class, instance=None):
-        assert model or form_class, "Provide at least one of model and form_class"
-        if form_class is None:
-            form_class = modelform_factory(model)
-        data = (request.POST, request.FILES) if request.method == "POST" else ()
-        return form_class(*data)
+def get_form_instance(request, *, model, form_class, instance=None):
+    assert model or form_class, "Provide at least one of model and form_class"
+    if form_class is None:
+        form_class = modelform_factory(model)
+    data = (request.POST, request.FILES) if request.method == "POST" else ()
+    return form_class(*data)
 
-    def object_create(request, *, model=None, form_class=None, form_valid=save_and_redirect_to_object):
-        form = get_form_instance(request, model=model, form_class=form_class)
-        if form.is_valid():
-            return form_valid(request, form)
-        return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
+def object_create(request, *, model=None, form_class=None, form_valid=save_and_redirect_to_object):
+    form = get_form_instance(request, model=model, form_class=form_class)
+    if form.is_valid():
+        return form_valid(request, form)
+    return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
 
-    def object_update(request, *, model, slug, slug_field="slug", form_class=None, form_valid=save_and_redirect_to_object):
-        object = get_object_or_404(model, **{slug_field: slug})
-        form = get_form_instance(request, model=object.__class__, form_class=form_class, instance=object)
-        if form.is_valid():
-            return form_valid(request, form)
-        return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
+def object_update(request, *, model, slug, slug_field="slug", form_class=None, form_valid=save_and_redirect_to_object):
+    object = get_object_or_404(model, **{slug_field: slug})
+    form = get_form_instance(request, model=object.__class__, form_class=form_class, instance=object)
+    if form.is_valid():
+        return form_valid(request, form)
+    return render_detail(request, form.instance, {"form": form}, template_name_suffix="_form")
+```
 
 You want to redirect to a different URL and maybe emit a success message? Easy:
 
-    :::python
-    def article_form_valid(request, form):
-        form.save()
-        messages.success(request, _("Successfully updated the article."))
-        return redirect("articles:list")
+```python
+def article_form_valid(request, form):
+    form.save()
+    messages.success(request, _("Successfully updated the article."))
+    return redirect("articles:list")
 
-    urlpatterns = [
-        ...
-        path(
-            "<slug:slug>/update/",
-            object_update,
-            {"model": Article, "form_valid": article_form_valid},
-            name=...
-        ),
-        ...
-    ]
+urlpatterns = [
+    ...
+    path(
+        "<slug:slug>/update/",
+        object_update,
+        {"model": Article, "form_valid": article_form_valid},
+        name=...
+    ),
+    ...
+]
+```
 
 Yes, these generic views wouldn't allow overriding the case when a form was invalid. But, I'd assume that displaying the form with error messages is the right thing to do in 90% of the cases. And if not, write your own specific or generic view? After all, with the mentioned tools it won't take up more than a few lines of straightforward code. (If the code was tricky it would be different. But views shouldn't be tricky.)
 
 Adding more `form_valid` handlers should be mostly painless. A few examples inspired by [Django's generic editing documentation](https://docs.djangoproject.com/en/4.2/topics/class-based-views/generic-editing/):
 
-    :::python
-    def save_and_redirect_to(url):
-        def fn(request, form):
-            form.save()
-            return redirect(url)
-        return fn
+```python
+def save_and_redirect_to(url):
+    def fn(request, form):
+        form.save()
+        return redirect(url)
+    return fn
 
-    def send_mail(request, form):
-        form.send_email()
-        return HttpResponseRedirect("/thanks/")
+def send_mail(request, form):
+    form.send_email()
+    return HttpResponseRedirect("/thanks/")
 
-    def set_author_and_save(request, form):
-        form.instance.created_by = request.user
-        object = form.save()
-        return redirect(object)
+def set_author_and_save(request, form):
+    form.instance.created_by = request.user
+    object = form.save()
+    return redirect(object)
+```
 
 You could also couple the form a bit to the request and do something like:
 
-    def process_form(request, form):
-        return form.process(request)
+```python
+def process_form(request, form):
+    return form.process(request)
+```
 
 Sure, forms probably shouldn't know much about requests. But then, Django is a framework for perfectionists _with deadlines_ and sometimes practicality beats purity.
 

@@ -12,30 +12,36 @@ I should maybe write a longer and separate post about this, but [speckenv](https
 
 Using it looks something like this:
 
-    from speckenv import env
-    from speckenv_django import django_storage_url
+```python
+from speckenv import env
+from speckenv_django import django_storage_url
 
-    STORAGES = {
-        "default": django_storage_url(
-            env(
-                "STORAGE_URL",
-                default="file:./media/?base_url=/media/",
-                warn=True,
-            ),
-            base_dir=BASE_DIR,
+STORAGES = {
+    "default": django_storage_url(
+        env(
+            "STORAGE_URL",
+            default="file:./media/?base_url=/media/",
+            warn=True,
         ),
-        "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
-        },
-    }
+        base_dir=BASE_DIR,
+    ),
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    },
+}
+```
 
 Then, if you want to use S3 you can put something like this in your `.env` file:
 
-    STORAGE_URL=s3://access-key:secret@bucket.name.s3.eu-central-1.amazonaws.com/media/
+```shell
+STORAGE_URL=s3://access-key:secret@bucket.name.s3.eu-central-1.amazonaws.com/media/
+```
 
 Or maybe something like this, if you want to serve media files without authentication:
 
-    STORAGE_URL=s3://access-key:secret@bucket.name.s3.eu-central-1.amazonaws.com/media/?aws_s3_public_auth=False&aws_s3_max_age_seconds=31536000
+```shell
+STORAGE_URL=s3://access-key:secret@bucket.name.s3.eu-central-1.amazonaws.com/media/?aws_s3_public_auth=False&aws_s3_max_age_seconds=31536000
+```
 
 ## Releases
 

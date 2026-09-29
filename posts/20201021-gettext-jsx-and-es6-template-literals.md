@@ -15,34 +15,36 @@ I'm certain the code will break too with strange error messages in the near futu
 
 Here's the initial version of the code (hopefully) for your enjoyment:
 
-    #!/usr/bin/env python3
+```python3
+#!/usr/bin/env python3
 
-    import re
-    import subprocess
-
-
-    def js_files():
-        res = subprocess.run(
-            ["git", "ls-files", "*js", "*mjs"],
-            capture_output=True,
-            encoding="utf-8",
-        )
-        return res.stdout.splitlines()
+import re
+import subprocess
 
 
-    def gettext_calls(file):
-        with open(file, encoding="utf-8") as f:
-            return [
-                f"{match[0]}({match[1]})"
-                for match in re.findall(
-                    r"""\b(\w*gettext)\(\s*((['"]).+?\3)\s*\)""",
-                    f.read(),
-                )
-            ]
+def js_files():
+    res = subprocess.run(
+        ["git", "ls-files", "*js", "*mjs"],
+        capture_output=True,
+        encoding="utf-8",
+    )
+    return res.stdout.splitlines()
 
 
-    if __name__ == "__main__":
-        calls = []
-        for file in js_files():
-            calls.extend(gettext_calls(file))
-        print("\n".join(sorted(set(calls))))
+def gettext_calls(file):
+    with open(file, encoding="utf-8") as f:
+        return [
+            f"{match[0]}({match[1]})"
+            for match in re.findall(
+                r"""\b(\w*gettext)\(\s*((['"]).+?\3)\s*\)""",
+                f.read(),
+            )
+        ]
+
+
+if __name__ == "__main__":
+    calls = []
+    for file in js_files():
+        calls.extend(gettext_calls(file))
+    print("\n".join(sorted(set(calls))))
+```

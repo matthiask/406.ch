@@ -10,13 +10,14 @@ I converted [speckenv](https://github.com/matthiask/speckenv/) and [django-sitem
 
 The relevant part is including the files in the build:
 
-    :::toml
-    [tool.hatch.build]
-    include = [
-      "speckenv.py",
-      "speckenv_django.py",
-      "speckenv_django_patch.py",
-    ]
+```toml
+[tool.hatch.build]
+include = [
+  "speckenv.py",
+  "speckenv_django.py",
+  "speckenv_django_patch.py",
+]
+```
 
 That's all.
 

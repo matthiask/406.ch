@@ -44,52 +44,57 @@ what django-prose-editor uses.
 a `JS` class with support for additional
 attributes, for example:
 
-    :::python
-    from js_asset import JS
+```python
+from js_asset import JS
 
-    forms.Media(js=[
-        JS("asset.js", {"id": "asset-script", "data-answer": "42"}),
-    ])
+forms.Media(js=[
+    JS("asset.js", {"id": "asset-script", "data-answer": "42"}),
+])
+```
 
 Since 3.0 the package also comes with a `CSS` and `JSON` class:
 
-    :::python
-    from js_asset import CSS, JS, JSON
+```python
+from js_asset import CSS, JS, JSON
 
-    forms.Media(js=[
-        JSON({"cfg": 42}, id="widget-cfg"),
-        CSS("widget/style.css"),
-        CSS("p{color:red;}", inline=True),
-        JS("widget/script.js", {"type": "module"}),
-    ])
+forms.Media(js=[
+    JSON({"cfg": 42}, id="widget-cfg"),
+    CSS("widget/style.css"),
+    CSS("p{color:red;}", inline=True),
+    JS("widget/script.js", {"type": "module"}),
+])
+```
 
 This produces the following HTML:
 
-    :::html
-    <script id="widget-cfg" type="application/json">{"cfg": 42}</script>
-    <link rel="stylesheet" href="/static/widget/style.css">
-    <style>p{color:red;}</style>
-    <script src="/static/widget/script.js" type="module"></script>
+```html
+<script id="widget-cfg" type="application/json">{"cfg": 42}</script>
+<link rel="stylesheet" href="/static/widget/style.css">
+<style>p{color:red;}</style>
+<script src="/static/widget/script.js" type="module"></script>
+```
 
 The code which is proposed for Django supports the JavaScript use case but with
 a slightly different API:
 
-    :::python
-    from django.forms import Script
+```python
+from django.forms import Script
 
-    forms.Media(js=[
-        Script("widget/script.js", type="module"),
-    ])
+forms.Media(js=[
+    Script("widget/script.js", type="module"),
+])
+```
 
 This looks slightly nicer as long as you don't use e.g. data attributes,
 because then you have to do:
 
-    :::python
-    from django.forms import Script
+```python
+from django.forms import Script
 
-    forms.Media(js=[
-        Script("widget/script.js", **{"data-cfg": ...}),
-    ])
+forms.Media(js=[
+    Script("widget/script.js", **{"data-cfg": ...}),
+])
+```
 
 I always forget that Python supports passing keyword arguments names which
 aren't valid Python identifiers (but only when using `**kwargs`). I personally

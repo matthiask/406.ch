@@ -28,11 +28,18 @@ Categories: Climate, Django, Programming, Weeknotes
 - Optional: `Date:` (overrides the filename date), `Slug:`, `Draft:` (any value hides
   the post from production builds).
 - Don't add an `# H1` — the title is prepended automatically. Body sections use `##`.
+  (Some old posts have an explicit H1 that differs from their `Title:`; leave those.)
+- Markdown is CommonMark via pyromark (pulldown-cmark), not Python-Markdown:
+  - Code blocks are fenced with a language: ` ```python `. Unlabeled blocks are not
+    highlighted (no language guessing). No `:::lang` headers.
+  - Notes use GFM alerts: `> [!NOTE]` followed by `> ` lines (styled via `.markdown-alert-note`).
+  - Footnotes: `[^name]` and `[^name]: text`.
+  - Inch marks after digits need `&rdquo;` (`27&rdquo;`); a plain `"` becomes an opening quote.
 - Parse errors are printed and the post is silently skipped, so check the build output.
 
 ## Writing conventions
 
-- Write plain ASCII punctuation: the `smarty` extension turns `"` and `'` into curly
+- Write plain ASCII punctuation: smart punctuation turns `"` and `'` into curly
   quotes and `--` into an en dash (`--` is the dash style used throughout the site).
 - `30°C` — no space before the degree sign.
 - Weeknotes: prose sections first, then a `## Releases` section with one `###` per

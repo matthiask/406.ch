@@ -13,18 +13,24 @@ However, since Bliss wants to inject itself into the global namespace and isn't 
 
 Install the newest and best version of bliss:
 
-    yarn add https://github.com/LeaVerou/bliss/
+```shell
+yarn add https://github.com/LeaVerou/bliss/
+```
 
 Import Bliss near the top into your main JavaScript file (the file which is your webpack entrypoint). Since we're using a source checkout, there is no combined `bliss.js` file. Let's import the two parts of `bliss.js` directly instead:
 
-    import 'blissfuljs/bliss.shy.js'
-    import 'blissfuljs/bliss._.js'
+```javascript
+import 'blissfuljs/bliss.shy.js'
+import 'blissfuljs/bliss._.js'
+```
 
 (I'm fine with Bliss taking the `window.$` and `window.$$` (resp. `s/window/self/`) variables, and with Bliss being available outside the webpack build.)
 
 In all files where you want to use write blissful JavaScript, add the following line so that [ESLint](https://eslint.org/) does not complain:
 
-    const {$, $$} = window  // eslint-disable-line
+```javascript
+const {$, $$} = window  // eslint-disable-line
+```
 
 The `eslint-disable-line` avoids unused variable warnings. I wouldn't recommend disabling ESLint (or other code linters) too much, but in this case, it's fine.
 

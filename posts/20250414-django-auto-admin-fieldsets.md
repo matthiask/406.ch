@@ -7,18 +7,19 @@ I have now published another Django package which solves this by adding support 
 
 Here's a short example for a modeladmin definition using django-auto-admin-fieldsets:
 
-    :::python
-    from django.contrib import admin
-    from django_auto_admin_fieldsets.admin import AutoFieldsetsModelAdmin
-    from app import models
+```python
+from django.contrib import admin
+from django_auto_admin_fieldsets.admin import AutoFieldsetsModelAdmin
+from app import models
 
-    @admin.register(models.MyModel)
-    class MyModelAdmin(AutoFieldsetsModelAdmin):
-        # Define fieldsets as usual with a placeholder
-        fieldsets = [
-            ("Basic Information", {"fields": ["title", "slug"]}),
-            ("Content", {"fields": ["__remaining__"]}),
-        ]
+@admin.register(models.MyModel)
+class MyModelAdmin(AutoFieldsetsModelAdmin):
+    # Define fieldsets as usual with a placeholder
+    fieldsets = [
+        ("Basic Information", {"fields": ["title", "slug"]}),
+        ("Content", {"fields": ["__remaining__"]}),
+    ]
+```
 
 I have used Claude Code a lot for the code and the package, and as always, I had to fix bugs and oversights. I hope it didn't regurgitate the code of an existing package -- I searched for an existing solution first but didn't find any.
 

@@ -26,24 +26,26 @@ Let's assume we're working with the question and choice models from [Django's tu
 
 The following datasets configuration would work for the use case outlined above:
 
-    from feincms3_data.data import specs_for_models
-    from polls import models
+```python
+from feincms3_data.data import specs_for_models
+from polls import models
 
-    def questions(args):
-        pks = [int(pk) for pk in args.split(",") if pk]
-        return [
-            *specs_for_models(
-                [models.Question],
-                {"filter": {"pk__in": pks}},
-            ),
-            *specs_for_models(
-                [models.Answer],
-                {"filter": {"question__pk__in": pks}, "delete_missing": True},
-            ),
-        ]
+def questions(args):
+    pks = [int(pk) for pk in args.split(",") if pk]
+    return [
+        *specs_for_models(
+            [models.Question],
+            {"filter": {"pk__in": pks}},
+        ),
+        *specs_for_models(
+            [models.Answer],
+            {"filter": {"question__pk__in": pks}, "delete_missing": True},
+        ),
+    ]
 
-    def datasets():
-        return {"default": {"specs": questions}}
+def datasets():
+    return {"default": {"specs": questions}}
+```
 
 Now, you have to point the `FEINCMS3_DATA_DATASETS` setting at the `datasets()` function above and now you could use `./manage.py f3dumpdata default:3,4` to dump the questions with ID 3 and 4 including their choices. The JSON can be loaded in a different instance. The questions with ID 3 and 4 will be created or updated, and choices which match the `questions__pk__in=[3,4]` filter _but aren't included in the JSON_ will be removed from the database.
 

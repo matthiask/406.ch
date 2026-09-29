@@ -27,38 +27,41 @@ breakpoint. You could go the fully fluid route with `clamp()`, `max()`, `min()`
 and viewport-relative units. It's simpler to keep the complexity lower and use
 breakpoints, certainly for me.
 
-    :::css
-    :root {
-      --space: 1rem;
-    }
+```css
+:root {
+  --space: 1rem;
+}
 
-    @media (min-width: 800px) {
-      :root {
-        --space: 2rem;
-      }
-    }
+@media (min-width: 800px) {
+  :root {
+    --space: 2rem;
+  }
+}
+```
 
 Now you can use `var(--space)` everywhere:
 
-    :::css
-    .box {
-      margin-bottom: var(--space);
-    }
+```css
+.box {
+  margin-bottom: var(--space);
+}
+```
 
 The equivalent SCSS would probably look something like this, with a fitting
 `breakpoint()` mixin:
 
-    :::scss
-    $space-sm: 1rem;
-    $space-md: 2rem;
+```scss
+$space-sm: 1rem;
+$space-md: 2rem;
 
-    .box {
-      margin-bottom: $space-sm;
+.box {
+  margin-bottom: $space-sm;
 
-      @include breakpoint(md) {
-        margin-bottom: $space-md;
-      }
-    }
+  @include breakpoint(md) {
+    margin-bottom: $space-md;
+  }
+}
+```
 
 That doesn't look too bad until you have to repeat the breakpoint in all your
 components. That's when SCSS gets boring while CSS is staying awesome.
@@ -70,16 +73,17 @@ You could also use
 and [postcss-custom-media](https://www.npmjs.com/package/postcss-custom-media)
 and write:
 
-    :::css
-    @custom-media --media-md (min-width: 800px);
+```css
+@custom-media --media-md (min-width: 800px);
 
-    :root {
-      --space: 1rem;
+:root {
+  --space: 1rem;
 
-      @media (--media-md) {
-        --space: 2rem;
-      }
-    }
+  @media (--media-md) {
+    --space: 2rem;
+  }
+}
+```
 
 Nesting is definitely a two-edged sword though. CSS methodologies such as BEM
 (Block Element Modifier) should generally fix the need to use nesting at all.

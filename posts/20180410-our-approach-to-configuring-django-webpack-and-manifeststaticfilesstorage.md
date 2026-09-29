@@ -28,71 +28,73 @@ The best way I found for solving 1. is [django-webpack-loader](https://github.co
 
 The following `webpack.config.js` snippet helps solve 2. It is by no means complete -- uninteresting parts and development settings have been removed.
 
-    /* global __dirname, process */
-    var path = require('path')
-    var webpack = require('webpack')
-    var BundleTracker = require('webpack-bundle-tracker')
+```javascript
+/* global __dirname, process */
+var path = require('path')
+var webpack = require('webpack')
+var BundleTracker = require('webpack-bundle-tracker')
 
-    module.exports = {
-      context: path.join(__dirname, 'app', 'static', 'app'),
-      entry: {
-        main: './main.js',
-      },
-      output: {
-        path: path.resolve('./static/app/'),
-        publicPath: '/static/app/',
-        filename: '[name]-[chunkhash].js',
-      },
-      module: {
-        rules: [
+module.exports = {
+  context: path.join(__dirname, 'app', 'static', 'app'),
+  entry: {
+    main: './main.js',
+  },
+  output: {
+    path: path.resolve('./static/app/'),
+    publicPath: '/static/app/',
+    filename: '[name]-[chunkhash].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [
           {
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            use: [
-              {
-                loader: 'babel-loader',
-                options: {},  // babel-preset-env etc...
-              },
-            ],
-          },
-          {
-            test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: 'css-loader',
-            }),
-          },
-          {
-            test: /\.(png|woff|woff2|svg|eot|ttf|gif|jpe?g)$/,
-            use: [
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 1000,
-                  // ManifestStaticFilesStorage reuse.
-                  name: '[path][name].[md5:hash:hex:12].[ext]',
-                },
-              },
-            ],
+            loader: 'babel-loader',
+            options: {},  // babel-preset-env etc...
           },
         ],
       },
-      resolve: {
-        extensions: ['.js', '.jsx'],
-        modules: ['app/static/app/', 'node_modules'],
-        alias: {},
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader',
+        }),
       },
-      plugins: [
-        new ExtractTextPlugin({
-          filename: '[name]-[contenthash].css',
-          allChunks: true,
-        }),
-        new BundleTracker({
-          filename: './static/webpack-stats-prod.json',
-        }),
-        new webpack.HashedModuleIdsPlugin(),
-      ],
-    }
+      {
+        test: /\.(png|woff|woff2|svg|eot|ttf|gif|jpe?g)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1000,
+              // ManifestStaticFilesStorage reuse.
+              name: '[path][name].[md5:hash:hex:12].[ext]',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['app/static/app/', 'node_modules'],
+    alias: {},
+  },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: '[name]-[contenthash].css',
+      allChunks: true,
+    }),
+    new BundleTracker({
+      filename: './static/webpack-stats-prod.json',
+    }),
+    new webpack.HashedModuleIdsPlugin(),
+  ],
+}
+```
 
 - Put this configuration into `webpack.config.js`
 - Configure the `url-loader` to use the same naming schema `ManifestStaticFilesStorage` uses (see above)

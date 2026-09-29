@@ -22,22 +22,23 @@ An easy way to achieve this is to add a template at
 `templates/admin/auth/user/change_form.html` (or something similar if you're
 using a custom user model):
 
-    :::html+django
-    {% extends "admin/change_form.html" %}
+```html+django
+{% extends "admin/change_form.html" %}
 
-    {% block after_related_objects %}
-    {{ block.super }}
+{% block after_related_objects %}
+{{ block.super }}
 
-    {% if original.editor %}
-    <fieldset class="module aligned">
-    <h2>Organization</h2>
-    <div class="form-row">
-      <a href="{% url 'admin:organizations_organization_change' original.editor.organization.pk %}">{{ original.editor.organization }}</a>
-    </div>
-    </fieldset>
-    {% endif %}
+{% if original.editor %}
+<fieldset class="module aligned">
+<h2>Organization</h2>
+<div class="form-row">
+  <a href="{% url 'admin:organizations_organization_change' original.editor.organization.pk %}">{{ original.editor.organization }}</a>
+</div>
+</fieldset>
+{% endif %}
 
-    {% endblock after_related_objects %}
+{% endblock after_related_objects %}
+```
 
 The `original` context variable contains the object being edited. The `editor`
 attribute is the reverse accessor for the `OneToOneField` mentioned above.
@@ -57,18 +58,19 @@ you have to define `fieldsets` for this to work. Just adding it to
 `readonly_fields` appends it to the end of the form, before any eventual
 inlines you're using.
 
-    :::python
-    from django.template.loader import render_to_string
-    from app import models
+```python
+from django.template.loader import render_to_string
+from app import models
 
-    @admin.register(models.Class)
-    class ClassAdmin(admin.ModelAdmin):
-        list_display = ["name", "language_code"]
-        readonly_fields = ["admin_show_custom_districts"]
+@admin.register(models.Class)
+class ClassAdmin(admin.ModelAdmin):
+    list_display = ["name", "language_code"]
+    readonly_fields = ["admin_show_custom_districts"]
 
-        @admin.display(description=_("districts")
-        def admin_show_custom_districts(self, obj):
-            return render_to_string(
-                "admin/admin_show_custom_districts.html",
-                {"custom_districts": obj.customdistrict_set.all()},
-            )
+    @admin.display(description=_("districts")
+    def admin_show_custom_districts(self, obj):
+        return render_to_string(
+            "admin/admin_show_custom_districts.html",
+            {"custom_districts": obj.customdistrict_set.all()},
+        )
+```

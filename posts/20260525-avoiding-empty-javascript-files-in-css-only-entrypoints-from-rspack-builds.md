@@ -19,44 +19,46 @@ Poking around in rspack's compiler hooks isn't documented all that well, so I'm 
 
 When using a CSS-only entrypoint or when listing CSS files in `entry`, rspack sometimes decides it wants to generate an empty JavaScript file. This wouldn't be a problem in and of itself, but since we're also letting rspack generate the associated script tag, we will make the browser download this empty script file unnecessarily. I didn't find a good way to avoid these empty files, and the `RemoveEmptyScriptsPlugin` for Webpack doesn't work with rspack anymore. The [discussion](https://github.com/web-infra-dev/rspack/discussions/6189) hasn't gone anywhere yet. So, I had to use my own plugin. Since I'm already copying the `rspack.library.js` file into each project, adding a plugin there is no headache.
 
-    :::javascript
-    class RemoveEmptyJsAssetsPlugin {
-      apply(compiler) {
-        compiler.hooks.emit.tap(this.constructor.name, (compilation) => {
-          const emptyJsFiles = new Set(
-            Object.entries(compilation.assets)
-              .filter(([name, asset]) => /\.js$/.test(name) && asset.size() === 0)
-              .map(([name]) => name),
-          )
+```javascript
+class RemoveEmptyJsAssetsPlugin {
+  apply(compiler) {
+    compiler.hooks.emit.tap(this.constructor.name, (compilation) => {
+      const emptyJsFiles = new Set(
+        Object.entries(compilation.assets)
+          .filter(([name, asset]) => /\.js$/.test(name) && asset.size() === 0)
+          .map(([name]) => name),
+      )
 
-          for (const file of emptyJsFiles) {
-            delete compilation.assets[file]
-          }
-
-          for (const filename of Object.keys(compilation.assets)) {
-            if (!filename.endsWith(".html")) continue
-            let html = compilation.assets[filename].source()
-            for (const jsFile of emptyJsFiles) {
-              const idx = html.indexOf(jsFile)
-              if (idx < 0) continue
-              const start = html.lastIndexOf("<script", idx)
-              const end = html.indexOf("</script>", idx) + "</script>".length
-              html = html.slice(0, start) + html.slice(end)
-            }
-            compilation.assets[filename] = new rspack.sources.RawSource(html)
-          }
-        })
+      for (const file of emptyJsFiles) {
+        delete compilation.assets[file]
       }
-    }
+
+      for (const filename of Object.keys(compilation.assets)) {
+        if (!filename.endsWith(".html")) continue
+        let html = compilation.assets[filename].source()
+        for (const jsFile of emptyJsFiles) {
+          const idx = html.indexOf(jsFile)
+          if (idx < 0) continue
+          const start = html.lastIndexOf("<script", idx)
+          const end = html.indexOf("</script>", idx) + "</script>".length
+          html = html.slice(0, start) + html.slice(end)
+        }
+        compilation.assets[filename] = new rspack.sources.RawSource(html)
+      }
+    })
+  }
+}
+```
 
 The plugin has to be added to the plugins list:
 
-    :::javascript
+```javascript
 
-    plugins: [
-      new RemoveEmptyJsAssetsPlugin(),
-      // ...
-    ],
+plugins: [
+  new RemoveEmptyJsAssetsPlugin(),
+  // ...
+],
+```
 
 And presto, no more empty JavaScript files!
 

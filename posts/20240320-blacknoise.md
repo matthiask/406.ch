@@ -2,13 +2,13 @@ Title: blacknoise – ASGI app for static file serving
 Date: 2024-03-20
 Categories: Django, Programming
 
-!!! note
-
-    This blog post consists of the [blacknoise
-    README](https://github.com/matthiask/blacknoise) at the time of publishing.
-
-    I have released blacknoise 1.0 in the meantime and believe that it's
-    actually good.
+> [!NOTE]
+>
+> This blog post consists of the [blacknoise
+> README](https://github.com/matthiask/blacknoise) at the time of publishing.
+>
+> I have released blacknoise 1.0 in the meantime and believe that it's
+> actually good.
 
 blacknoise is an [ASGI](https://asgi.readthedocs.io/en/latest/) app for static
 file serving inspired by [whitenoise](https://github.com/evansd/whitenoise/)
@@ -25,20 +25,22 @@ welcome though!**
 
 Install blacknoise into your Python environment:
 
-    :::console
-    pip install blacknoise
+```console
+pip install blacknoise
+```
 
 Wrap your ASGI application with the `BlackNoise` app:
 
-    :::python
-    from blacknoise import BlackNoise
-    from django.core.asgi import get_asgi_application
-    from pathlib import Path
+```python
+from blacknoise import BlackNoise
+from django.core.asgi import get_asgi_application
+from pathlib import Path
 
-    BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).parent
 
-    application = BlackNoise(get_asgi_application())
-    application.add(BASE_DIR / "static", "/static")
+application = BlackNoise(get_asgi_application())
+application.add(BASE_DIR / "static", "/static")
+```
 
 `BlackNoise` will automatically handle all paths below the prefixes added, and
 either return the files or return 404 errors if files do not exist. The files
@@ -55,8 +57,9 @@ far-future expiry headers and has support for serving compressed assets.
 
 Compressing is possible by running:
 
-    :::console
-    python -m blacknoise.compress static/
+```console
+python -m blacknoise.compress static/
+```
 
 `BlackNoise` will try compress non-binary files using gzip or brotli (if the
 [Brotli](ttps://pypi.org/project/Brotli/) library is available), and will serve
@@ -66,14 +69,15 @@ smaller files and if the client also supports it.
 Far-future expiry headers can be enabled by passing the `immutable_file_test`
 callable to the `BlackNoise` constructor:
 
-    :::python
-    def immutable_file_test(path):
-        return True  # Enable far-future expiry headers for all files
+```python
+def immutable_file_test(path):
+    return True  # Enable far-future expiry headers for all files
 
-    application = BlackNoise(
-        get_asgi_application(),
-        immutable_file_test=immutable_file_test,
-    )
+application = BlackNoise(
+    get_asgi_application(),
+    immutable_file_test=immutable_file_test,
+)
+```
 
 Maybe you want to add some other logic, for example check if the path contains
 a hash based upon the contents of the static file. Such hashes can be added by

@@ -18,24 +18,30 @@ Those data attributes only contain JSON which (according to my understanding of 
 
 Instead of this:
 
-    forms.Media(js=["admin_ordering/admin_ordering.js"])
+```python
+forms.Media(js=["admin_ordering/admin_ordering.js"])
+```
 
 ... we do this:
 
-    from js_asset import JS
-    forms.Media(js=[
-        JS(
-            "admin_ordering/admin_ordering.js",
-            {
-                "data-admin-ordering": json.dumps(…).
-            },
-        )
-    ])
+```python
+from js_asset import JS
+forms.Media(js=[
+    JS(
+        "admin_ordering/admin_ordering.js",
+        {
+            "data-admin-ordering": json.dumps(…).
+        },
+    )
+])
+```
 
 And in the JavaScript code itself we can access the data using:
 
-    let el = document.querySelector("[data-admin-ordering]"),
-    	ctx = JSON.parse(el.dataset.adminOrdering)
+```javascript
+let el = document.querySelector("[data-admin-ordering]"),
+    ctx = JSON.parse(el.dataset.adminOrdering)
+```
 
 The django-js-asset package is available on [Github](https://github.com/matthiask/django-js-asset/) and [PyPI](https://pypi.python.org/pypi/django-js-asset).
 

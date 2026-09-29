@@ -11,6 +11,8 @@ For some time we had a utility function which automatically added all detected n
 
 Once I took a step back I saw a different, but much simpler solution. `INTERNAL_IPS` can be replaced with an object which simply answers `True` to all `__contains__`-type questions:
 
-    if DEBUG:
-        # `debug` is only True in templates if the vistor IP is in INTERNAL_IPS.
-        INTERNAL_IPS = type(str('c'), (), {'__contains__': lambda *a: True})()
+```python
+if DEBUG:
+    # `debug` is only True in templates if the vistor IP is in INTERNAL_IPS.
+    INTERNAL_IPS = type(str('c'), (), {'__contains__': lambda *a: True})()
+```

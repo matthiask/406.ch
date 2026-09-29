@@ -16,17 +16,19 @@ A better solution was needed. I'm a big fan of using [`forms.Media`](https://doc
 
 A quick refresher on why this matters at all. Django's `ManifestStaticFilesStorage` hashes the contents of each file into its name for cache busting, but out of the box it doesn't rewrite the `import` statements inside JavaScript modules. Importmaps bridge the gap: your code imports a stable name:
 
-    :::javascript
-    import { initializeEditors } from "django-prose-editor/editor"
+```javascript
+import { initializeEditors } from "django-prose-editor/editor"
+```
 
 and the importmap tells the browser where that name actually lives:
 
-    :::html
-    <script type="importmap">
-    {"imports": {
-      "django-prose-editor/editor": "/static/django_prose_editor/editor.6e8dd4c12e2e.js"
-    }}
-    </script>
+```html
+<script type="importmap">
+{"imports": {
+  "django-prose-editor/editor": "/static/django_prose_editor/editor.6e8dd4c12e2e.js"
+}}
+</script>
+```
 
 So the import stays clean and constant while the file behind it can get a new hash on every deploy.
 
@@ -46,61 +48,65 @@ If you're using a package such as [django-prose-editor](https://github.com/feinc
 If you're using such a package outside the admin, you have to remove `"js_asset.context_processors.importmap"` from your list of context processors. On one particular website the prose editor is the only package with importmap entries outside the admin, so I have to add the `importmap` to the template context myself:
 
 
-    :::python
-    from django_prose_editor.widgets import importmap
+```python
+from django_prose_editor.widgets import importmap
 
-    def view(request, ...):
-        return render(request, "template.html", {
-            # ...
-            "importmap": importmap,
-        })
+def view(request, ...):
+    return render(request, "template.html", {
+        # ...
+        "importmap": importmap,
+    })
+```
 
 The template then just renders it in the `<head>`:
 
-    :::html
-    ... {{ importmap }}</head>
+```html
+... {{ importmap }}</head>
+```
 
 On a different site, I have a slightly more involved scenario where I previously used `importmap.update(...)` to add my own entries to the importmap. There, I'm using a custom context processor to always add these entries to the importmap too:
 
-    :::python
-    from django_prose_editor.widgets import importmap as dpe_importmap
-    from js_asset import ImportMap, static_lazy
+```python
+from django_prose_editor.widgets import importmap as dpe_importmap
+from js_asset import ImportMap, static_lazy
 
-    _site_importmap = ImportMap({
-        "imports": {
-            "my-module": static_lazy("my-module.js"),
-        }
-    })
-    _importmap = dpe_importmap | _site_importmap
+_site_importmap = ImportMap({
+    "imports": {
+        "my-module": static_lazy("my-module.js"),
+    }
+})
+_importmap = dpe_importmap | _site_importmap
 
-    def importmap(request):
-        return {"importmap": _importmap}
+def importmap(request):
+    return {"importmap": _importmap}
+```
 
 This importmap is merged once at server startup and then served repeatedly to the client. Because we use the lazy version of the `static` function we can do this during startup and not worry about files not yet collected by `collectstatic` -- we'll get the correct paths later.
 
 On the same site as the previous example, I also have an admin inline which requires some JavaScript and also an importmap:
 
-    :::python
-    from django.contrib import admin
-    from django.forms import Script
-    from js_asset import Media, ImportMap
+```python
+from django.contrib import admin
+from django.forms import Script
+from js_asset import Media, ImportMap
 
-    # Initializing this once. Not necessary but I like it better that way.
-    _importmap = ImportMap({
-        "imports": {
-            # ...
-        }
-    })
+# Initializing this once. Not necessary but I like it better that way.
+_importmap = ImportMap({
+    "imports": {
+        # ...
+    }
+})
 
-    class ModelInline(admin.StackedInline):
-        @property
-        def media(self):
-            return Media(
-                js=[
-                    _importmap,
-                    Script("module.js", type="module"),
-                ]
-            )
+class ModelInline(admin.StackedInline):
+    @property
+    def media(self):
+        return Media(
+            js=[
+                _importmap,
+                Script("module.js", type="module"),
+            ]
+        )
+```
 
 As of 4.0, `JS` and `CSS` produce Django's own `Script` and `Stylesheet` objects, so you can import and use `Script` directly from `django.forms` as shown above (on Django 4.2–5.1, import it from `js_asset` instead, which backports it). The familiar `JS("module.js", {"type": "module"})` wrapper still works unchanged if you prefer it — it just takes a positional dict instead of keyword arguments.
 

@@ -28,17 +28,19 @@ definitely still worth it.
 
 I have been switching themes in my preferred a few times per year in the past. The following ugly bit of vimscript helps switch me the theme each time the sun comes out when working outside:
 
-    let t:light = 0
-    function! FiatLux()
-        if t:light == 0
-            :set background=light
-            let t:light = 1
-        else
-            :set background=dark
-            let t:light = 0
-        endif
-    endfunction
-    nnoremap <F12> :call FiatLux()<CR>
+```vim
+let t:light = 0
+function! FiatLux()
+    if t:light == 0
+        :set background=light
+        let t:light = 1
+    else
+        :set background=dark
+        let t:light = 0
+    endif
+endfunction
+nnoremap <F12> :call FiatLux()<CR>
+```
 
 I'm using the [Ptyxis](https://devsuite.app/ptyxis/) terminal emulator
 currently, I haven't investigated yet if there's a shortcut to toggle dark and

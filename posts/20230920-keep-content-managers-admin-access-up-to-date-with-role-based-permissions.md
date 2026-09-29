@@ -60,54 +60,58 @@ Deny overrides allow as is probably expected.
 
 Specify the available roles in your settings and add the authentication backend:
 
-    :::python
-    from functools import partial
-    from authlib.roles import allow_deny_globs
-    from django.utils.translation import gettext_lazy as _
+```python
+from functools import partial
+from authlib.roles import allow_deny_globs
+from django.utils.translation import gettext_lazy as _
 
-    AUTHLIB_ROLES = {
-        "default": {"title": _("default")},
-        "staff": {
-            "title": _("editorial staff"),
-            "callback": partial(
-                allow_deny_globs,
-                allow={
-                    "pages.*",
-                    "articles.*",
-                },
-            ),
-        },
-    }
+AUTHLIB_ROLES = {
+    "default": {"title": _("default")},
+    "staff": {
+        "title": _("editorial staff"),
+        "callback": partial(
+            allow_deny_globs,
+            allow={
+                "pages.*",
+                "articles.*",
+            },
+        ),
+    },
+}
 
-    AUTHENTICATION_BACKENDS = (
-        # This is the necessary additional backend
-        "authlib.backends.PermissionsBackend",
-        # Maybe you want to use authlib's email authentication ...
-        "authlib.backends.EmailBackend",
-        # ... or the standard username & password combination:
-        "django.contrib.auth.backends.ModelBackend",
-    )
+AUTHENTICATION_BACKENDS = (
+    # This is the necessary additional backend
+    "authlib.backends.PermissionsBackend",
+    # Maybe you want to use authlib's email authentication ...
+    "authlib.backends.EmailBackend",
+    # ... or the standard username & password combination:
+    "django.contrib.auth.backends.ModelBackend",
+)
+```
 
 You have to extend your user model (you have to use [a custom user model](https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#specifying-custom-user-model) if you're not using django-authlib's `little_user.User`):
 
-    :::python
-    from authlib.roles import RoleField
+```python
+from authlib.roles import RoleField
 
-    class User(AbstractUser):
-        # ...
-        role = RoleField()
+class User(AbstractUser):
+    # ...
+    role = RoleField()
+```
 
 And that's basically it.
 
 Of course the globbing is flexible, you could also allow users to view all objects:
 
-    :::python
-    partial(allow_deny_globs, allow={"*.view_*"})
+```python
+partial(allow_deny_globs, allow={"*.view_*"})
+```
 
 Or you could block users from deleting anything:
 
-    :::python
-    partial(allow_deny_globs, deny={"*.delete_*"})
+```python
+partial(allow_deny_globs, deny={"*.delete_*"})
+```
 
 And as mentioned above, you can also combine `allow` and `deny` (`deny` wins
 over `allow`) or even provide your own callables. If you provide your own
@@ -118,9 +122,10 @@ initially expected because only implementing `.has_perm` isn't sufficient if
 you want to see any apps and models in the admin index page. The current
 `allow_deny_globs` implementation is nice and short:
 
-    :::python
-    def allow_deny_globs(user, perm, obj, allow=(), deny=()):
-        for rule in deny:
-            if fnmatch(perm, rule):
-                raise PermissionDenied
-        return any(fnmatch(perm, rule) for rule in allow)
+```python
+def allow_deny_globs(user, perm, obj, allow=(), deny=()):
+    for rule in deny:
+        if fnmatch(perm, rule):
+            raise PermissionDenied
+    return any(fnmatch(perm, rule) for rule in allow)
+```

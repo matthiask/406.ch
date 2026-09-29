@@ -11,33 +11,37 @@ Django's own [sitemaps](https://docs.djangoproject.com/en/2.0/ref/contrib/sitema
 
 Therefore, a year ago I set out to build a sitemaps app for Django which supports Django's sitemaps, but also allows adding entries with additional attributes. The result of this work was [django-sitemaps](https://github.com/matthiask/django-sitemaps).
 
-    from django_sitemaps import Sitemap
+```python
+from django_sitemaps import Sitemap
 
-    def sitemap(request):
-    	sitemap = Sitemap(build_absolute_uri=request.build_absolute_uri)
-        sitemap.add_django_sitemap(SomeSitemap, request=request)
-        sitemap.add(
-      	   url,
-           changefreq='weekly',
-           priority=0.5,
-           lastmod=datetime.now(),
-           alternates={
-               'en': '...',
-               'en-ch': '...',
-               'en-gb': '...',
-               'de': '...',
-               ...
-           },
-       )
-       return sitemap.response(pretty_print=True)
+def sitemap(request):
+    sitemap = Sitemap(build_absolute_uri=request.build_absolute_uri)
+    sitemap.add_django_sitemap(SomeSitemap, request=request)
+    sitemap.add(
+       url,
+       changefreq='weekly',
+       priority=0.5,
+       lastmod=datetime.now(),
+       alternates={
+           'en': '...',
+           'en-ch': '...',
+           'en-gb': '...',
+           'de': '...',
+           ...
+       },
+   )
+   return sitemap.response(pretty_print=True)
+```
 
 Today, I also added support for generating the most simple `robots.txt` files possible: All user agents, and only `Sitemap: <absolute url>` entries. The recommended usage is now (still using `url()` instead of `path()` because I'm old and rusty):
 
-    from django_sitemaps import robots_txt
-    from app.views import sitemap
+```python
+from django_sitemaps import robots_txt
+from app.views import sitemap
 
-    urlpatterns = [
-        url(r'^sitemap\.xml$', sitemap),
-        url(r'^robots\.txt$', robots_txt(timeout=86400)),
-        ...
-    ]
+urlpatterns = [
+    url(r'^sitemap\.xml$', sitemap),
+    url(r'^robots\.txt$', robots_txt(timeout=86400)),
+    ...
+]
+```

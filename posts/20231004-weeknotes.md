@@ -29,11 +29,12 @@ working locally (when producing absolute URLs). This problem was shared by
 feincms3-sites as well. I have now found a very ugly but perfectly workable
 solution: Overwrite `Site.get_host()` locally:
 
-    :::python
-    if DEBUG:
-        domain = "example.com"  # Or whatever
-        _get_host = lambda site: site.host.replace(domain, "localhost:8000")
-        FEINCMS3_SITES_SITE_GET_HOST = _get_host
+```python
+if DEBUG:
+    domain = "example.com"  # Or whatever
+    _get_host = lambda site: site.host.replace(domain, "localhost:8000")
+    FEINCMS3_SITES_SITE_GET_HOST = _get_host
+```
 
 This works especially well when using `example.com` and maybe subdomains of
 `example.com`: All absolute links will point to `localhost:8000` or

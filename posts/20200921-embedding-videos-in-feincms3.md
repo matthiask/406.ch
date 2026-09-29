@@ -13,7 +13,9 @@ However, the requirement to fetch data from a different service always bothered 
 
 Since I really like writing code[^nih] here's my solution to embedding YouTube and Vimeo videos as a part of feincms3, [feincms3.embedding](https://github.com/matthiask/feincms3/blob/main/feincms3/embedding.py). Since it doesn't depend on an external service (except the obvious ones) it is [never gonna give you up](https://www.youtube.com/watch?v=dQw4w9WgXcQ) if you just call:
 
-    from feincms3.embedding import embed
-    html = embed("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+```python
+from feincms3.embedding import embed
+html = embed("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+```
 
 [^nih]: Maybe it's just a really strong [NIH syndrome](https://en.wikipedia.org/wiki/Not_invented_here). Either way, since most other content providers are sadly/luckily irrelevant for the sites I help create and maintain it should be fine.

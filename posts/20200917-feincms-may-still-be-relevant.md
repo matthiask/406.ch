@@ -5,9 +5,9 @@ Categories: Django, feincms, Programming
 
 # feincms may still be relevant
 
-!!! note
-    In the following text "feincms" denotes the feincms-family of tools. Just to reiterate, new
-    projects should use [feincms3](https://feincms3.readthedocs.io/en/latest/).
+> [!NOTE]
+> In the following text "feincms" denotes the feincms-family of tools. Just to reiterate, new
+> projects should use [feincms3](https://feincms3.readthedocs.io/en/latest/).
 
 About 10 years ago there existed a few Django-based CMS. If someone didn't already know which to choose, the following three systems were seen as reasonable choices[^choices]:
 

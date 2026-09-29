@@ -21,30 +21,31 @@ color scheme for the production environment (to discourage people from updating
 content) and a nice scheme for the `preproduction` environment which clearly
 deviates from the standard color scheme used everywhere else:
 
-    :::html+django
-    {% block extrahead %}
-      {{ block.super }}
-      <style>
-    #site-name::after {
-      content: " ({{ ENVIRONMENT }})";
-      font-size: 60%;
-    }
-      </style>
-      {% if ENVIRONMENT == 'production' %}
-        <style>
-    :root {
-      --primary: #aa0000;
-      --secondary: #810000;
-      --accent: yellow;
-    }
-        </style>
-      {% elif ENVIRONMENT == 'preproduction' %}
-        <style>
-    :root {
-      --primary: #30b181;
-      --secondary: #1f7957;
-      --accent: #cdffea;
-    }
-        </style>
-      {% endif %}
-    {% endblock %}
+```html+django
+{% block extrahead %}
+  {{ block.super }}
+  <style>
+#site-name::after {
+  content: " ({{ ENVIRONMENT }})";
+  font-size: 60%;
+}
+  </style>
+  {% if ENVIRONMENT == 'production' %}
+    <style>
+:root {
+  --primary: #aa0000;
+  --secondary: #810000;
+  --accent: yellow;
+}
+    </style>
+  {% elif ENVIRONMENT == 'preproduction' %}
+    <style>
+:root {
+  --primary: #30b181;
+  --secondary: #1f7957;
+  --accent: #cdffea;
+}
+    </style>
+  {% endif %}
+{% endblock %}
+```

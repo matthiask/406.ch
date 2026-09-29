@@ -32,18 +32,19 @@ on this is brewing and I hope to have it ready soon-ish.
 
 As a sneak peek, here's the way it works:
 
-    :::python
-    from django_prose_editor.fields import ProseEditorField
+```python
+from django_prose_editor.fields import ProseEditorField
 
-    content = ProseEditorField(
-        extensions={
-            "Bold": True,
-            "Italic": True,
-            "BulletList": True,
-            "Link": True,
-        },
-        # sanitize=True is the default when using extensions
-    )
+content = ProseEditorField(
+    extensions={
+        "Bold": True,
+        "Italic": True,
+        "BulletList": True,
+        "Link": True,
+    },
+    # sanitize=True is the default when using extensions
+)
+```
 
 The nice thing about it is that the sanitization allowlist for
 [nh3](https://github.com/messense/nh3) only includes tags and attributes which

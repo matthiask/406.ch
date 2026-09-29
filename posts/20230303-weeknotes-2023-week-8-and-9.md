@@ -27,35 +27,43 @@ I have been a long time Bitbucket user since GitHub used a pricing where many pr
 
 Next, I converted the JSON into a list of Git/SSH cloning URLs:
 
-    import json, sys
+```python
+import json, sys
 
-    d = json.loads(sys.stdin.read())
-    print(
-        "\n".join(
-            next(link["href"] for link in rec["links"]["clone"] if link["name"] == "ssh")
-            for rec in d["values"]
-        )
+d = json.loads(sys.stdin.read())
+print(
+    "\n".join(
+        next(link["href"] for link in rec["links"]["clone"] if link["name"] == "ssh")
+        for rec in d["values"]
     )
+)
+```
 
 I used it as (I had to repeat the first command for every 100 repos):
 
-    python3 filter.py < repos.json >> clone.txt
-    for url in $(cat clone.txt); do (cd mirror; git clone --mirror $url) ; done
+```shell
+python3 filter.py < repos.json >> clone.txt
+for url in $(cat clone.txt); do (cd mirror; git clone --mirror $url) ; done
+```
 
 Then, I wrote another Python script to create the repositores and upload them all:
 
-    import sys
-    from subprocess import run
+```python
+import sys
+from subprocess import run
 
-    for repo in sys.argv[1:]:
-        run(f"gh repo create --private feinheit-archive/{repo[:-4]}", shell=True, check=True)
-        run(f"cd {repo} && git push git@github.com:feinheit-archive/{repo[:-4]}.git --all", shell=True, check=True)
-        run(f"rm -rf {repo}", shell=True, check=True)
+for repo in sys.argv[1:]:
+    run(f"gh repo create --private feinheit-archive/{repo[:-4]}", shell=True, check=True)
+    run(f"cd {repo} && git push git@github.com:feinheit-archive/{repo[:-4]}.git --all", shell=True, check=True)
+    run(f"rm -rf {repo}", shell=True, check=True)
+```
 
 And ran ist as:
 
-    cd mirror
-    python3 ../upload.py *
+```shell
+cd mirror
+python3 ../upload.py *
+```
 
 Funnily enough I learned that GitHub ratelimits repository creation. So I had to wait an hour after several dozen repos and start the command again afterwards. Of course the code wasn't written defensively at first and deleted repos which weren't uploaded yet so I had to work out the set of repos I have to re-download from Bitbucket... I think it's a bit surprising that `subprocess.run` doesn't raise an exception by default when a command fails. `check=True` should definitely be the default.
 

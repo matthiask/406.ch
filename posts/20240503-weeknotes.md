@@ -24,25 +24,27 @@ ride in a few months yesterday, good fun.
 
 The [django-json-schema-editor](https://github.com/matthiask/django-json-schema-editor/) has gained support for referencing Django models. Here's an example schema excerpt:
 
-    {
-        ...
-        "articles": {
-            "type": "array",
-            "format": "table",
-            "title": _("articles"),
-            "minItems": 1,
-            "maxItems": 3,
-            "items": {
-                "type": "string",
-                "title": _("article"),
-                "format": "foreign_key",
-                "options": {
-                    "url": "/admin/articles/article/?_popup=1&_to_field=id",
-                },
+```json
+{
+    ...
+    "articles": {
+        "type": "array",
+        "format": "table",
+        "title": _("articles"),
+        "minItems": 1,
+        "maxItems": 3,
+        "items": {
+            "type": "string",
+            "title": _("article"),
+            "format": "foreign_key",
+            "options": {
+                "url": "/admin/articles/article/?_popup=1&_to_field=id",
             },
         },
-        ...
-    }
+    },
+    ...
+}
+```
 
 The ID field is stringly typed; using an integer directly wouldn't work because
 the empty string isn't a valid integer.
@@ -56,13 +58,15 @@ protects articles from deletion as long as they are referenced from a
 model with an `on_delete=models.PROTECT` foreign key to articles and a
 `post_save` handler which updates said references.
 
-    from django_json_schema_editor.plugins import JSONPluginBase, register_reference
-    from articles.models import Article
+```python
+from django_json_schema_editor.plugins import JSONPluginBase, register_reference
+from articles.models import Article
 
-    class JSONPlugin(JSONPluginBase, ...):
-        pass
+class JSONPlugin(JSONPluginBase, ...):
+    pass
 
-    register_reference(JSONPlugin, "articles", Article)
+register_reference(JSONPlugin, "articles", Article)
+```
 
 
 ## Releases since the beginning of April

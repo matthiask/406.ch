@@ -31,11 +31,12 @@ fallback (the example is intentionally bad but inspired by real world
 experiences when developing
 [feincms3-cookiecontrol](https://github.com/feinheit/feincms3-cookiecontrol)):
 
-    :::css
-    .box {
-      background: var(--box-background, #222);
-      color: var(--box-foreground, #fff);
-    }
+```css
+.box {
+  background: var(--box-background, #222);
+  color: var(--box-foreground, #fff);
+}
+```
 
 ## Less repetition (but trouble awaits)
 
@@ -44,47 +45,51 @@ argument, `#222`. Repeating this value over and over gets annoying quickly, so
 you define a few defaults on the `:root` element and use those variables in the
 code, without specifying the default again:
 
-    :::css
-    :root {
-      --box-background: #222;
-      --box-foreground: #fff;
-    }
+```css
+:root {
+  --box-background: #222;
+  --box-foreground: #fff;
+}
 
-    .box {
-      background: var(--box-background);
-      color: var(--box-foreground);
-    }
+.box {
+  background: var(--box-background);
+  color: var(--box-foreground);
+}
+```
 
 The project can now override the default background color using:
 
-    :::css
-    :root {
-      --box-background: #444;
-      --box-foreground: #ccc;
-    }
+```css
+:root {
+  --box-background: #444;
+  --box-foreground: #ccc;
+}
+```
 
 Of course now you're back at the mercy of CSS loading order. If the app's CSS
 is loaded first, everything works. If not, your custom value is immediately
 overwritten. You could avoid this by overwriting the default lower in the cascade:
 
-    :::css
-    .box {
-      --box-background: #444;
-      --box-foreground: #ccc;
-    }
+```css
+.box {
+  --box-background: #444;
+  --box-foreground: #ccc;
+}
+```
 
 Great, everything works again!
 
 Later, the box also contains a button which uses a different background but the
 same foreground, so of course we add more variables in the package:
 
-    :::css
-    :root {
-      --box-background: #222;
-      --box-foreground: #fff;
-      --box-button-background: #333;
-      --box-button-foreground: var(--box-foreground);
-    }
+```css
+:root {
+  --box-background: #222;
+  --box-foreground: #fff;
+  --box-button-background: #333;
+  --box-button-foreground: var(--box-foreground);
+}
+```
 
 What happens now when overwriting the `--box-foreground` variable just for the
 `.box` element?
@@ -99,27 +104,29 @@ If values are supposed to be overridden and only used inside components, a
 better way is to define local CSS for components by following a convention
 (underscore prefix for local/private variables):
 
-    :::css
-    /* Defined on .box, not :root */
-    .box {
-      --_background: var(--box-background, #222);
-      --_foreground: var(--box-foreground, #fff);
-      --_button-background: var(--box-button-background, #333);
-      --_button-foreground: var(--box-button-foreground, var(--_foreground));
-    }
+```css
+/* Defined on .box, not :root */
+.box {
+  --_background: var(--box-background, #222);
+  --_foreground: var(--box-foreground, #fff);
+  --_button-background: var(--box-button-background, #333);
+  --_button-foreground: var(--box-button-foreground, var(--_foreground));
+}
+```
 
 And then you only use the prefixed versions inside the component:
 
-    :::css
-    .box {
-      background: var(--_background);
-      color: var(--_foreground);
-    }
+```css
+.box {
+  background: var(--_background);
+  color: var(--_foreground);
+}
 
-    .box__button {
-      background: var(--_button-background);
-      color: var(--_button-foreground);
-    }
+.box__button {
+  background: var(--_button-background);
+  color: var(--_button-foreground);
+}
+```
 
 The `--box-*` variables are undefined by default; the only time when they are
 set is when the user of the package wants to override those values. If you only

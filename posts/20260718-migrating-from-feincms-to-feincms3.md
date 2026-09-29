@@ -20,17 +20,18 @@ The examples below use `Chapter` and `ChapterPlugin` because that's the hierarch
 
 Here's a concrete proxy model from that migration, simplified. `RichTextContent` is our own abstract mixin, holding nothing but the actual `text` field, shared between the FeinCMS and feincms3 sides of the code base. The same role is played by [`feincms3.plugins.richtext.RichText`](https://github.com/feincms/feincms3/blob/main/feincms3/plugins/richtext.py) if you use feincms3's bundled plugin instead of your own. `ChapterPlugin` in turn only wires up the boilerplate that's specific to being a plugin content type of our `Chapter` model:
 
-    :::python
-    class RichTextContent(models.Model):
-        text = RichTextField()
+```python
+class RichTextContent(models.Model):
+    text = RichTextField()
 
-        class Meta:
-            abstract = True
+    class Meta:
+        abstract = True
 
-    class RichText(ChapterPlugin, RichTextContent):
-        class Meta:
-            db_table = "textbooks_chapter_richtextcontent"
-            managed = False  # Proxy for the real model still owned by FeinCMS
+class RichText(ChapterPlugin, RichTextContent):
+    class Meta:
+        db_table = "textbooks_chapter_richtextcontent"
+        managed = False  # Proxy for the real model still owned by FeinCMS
+```
 
 The exact table name depends on how FeinCMS auto-generated it for your project (a mix of the app label, the base model and the content type name), so look it up rather than guessing. `./manage.py sqlmigrate` or just inspecting the database will tell you.
 
@@ -38,28 +39,29 @@ For the very last step, once a plugin has been converted and `managed = False` c
 
 You don't even have to write these migrations by hand. Remove `managed = False`, run `./manage.py makemigrations` as usual, and Django writes out the normal operations it would generate for any new model. The only manual step is moving that generated list of operations into the `state_operations` argument of a single `SeparateDatabaseAndState` operation, redacted and shortened here:
 
-    :::python
-    class Migration(migrations.Migration):
-        dependencies = [
-            ("textbooks", "0096_remove_richtextcontent_managed"),
-        ]
+```python
+class Migration(migrations.Migration):
+    dependencies = [
+        ("textbooks", "0096_remove_richtextcontent_managed"),
+    ]
 
-        operations = [
-            migrations.SeparateDatabaseAndState(
-                state_operations=[
-                    migrations.CreateModel(
-                        name="RichText",
-                        fields=[
-                            ("id", models.AutoField(primary_key=True, serialize=False)),
-                            ("text", models.TextField()),
-                            ("chapter", models.ForeignKey(to="textbooks.Chapter", ...)),
-                        ],
-                        options={"db_table": "textbooks_chapter_richtextcontent"},
-                    ),
-                ],
-                # No database_operations -- the table is already exactly like this.
-            ),
-        ]
+    operations = [
+        migrations.SeparateDatabaseAndState(
+            state_operations=[
+                migrations.CreateModel(
+                    name="RichText",
+                    fields=[
+                        ("id", models.AutoField(primary_key=True, serialize=False)),
+                        ("text", models.TextField()),
+                        ("chapter", models.ForeignKey(to="textbooks.Chapter", ...)),
+                    ],
+                    options={"db_table": "textbooks_chapter_richtextcontent"},
+                ),
+            ],
+            # No database_operations -- the table is already exactly like this.
+        ),
+    ]
+```
 
 As always, test this on a copy of the database first and make sure you have backups. Hand-editing migrations isn't generally recommended, but it's safe if you know exactly what you're doing. Treat it with the same care as any other schema change.
 

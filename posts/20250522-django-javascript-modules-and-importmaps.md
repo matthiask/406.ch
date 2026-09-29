@@ -3,9 +3,9 @@ Categories: Django, Programming
 
 # How I'm using Django, JavaScript modules and importmaps together
 
-!!! note
-
-    Be sure to check out the [2026 edition of this post](/writing/the-2026-way-of-using-importmaps-in-django/).
+> [!NOTE]
+>
+> Be sure to check out the [2026 edition of this post](/writing/the-2026-way-of-using-importmaps-in-django/).
 
 I have been spending a lot of time in the last few months working on
 [django-prose-editor](https://github.com/matthiask/django-prose-editor/). First
@@ -51,42 +51,45 @@ As alluded to above, I already have a working solution for using importmaps (in
 django-js-asset) and I'm actively using it in django-prose-editor. Here's how
 it works:
 
-    :::python
-    importmap.update({
-        "imports": {
-            "django-prose-editor/editor": static_lazy("django_prose_editor/editor.js"),
-        }
-    })
+```python
+importmap.update({
+    "imports": {
+        "django-prose-editor/editor": static_lazy("django_prose_editor/editor.js"),
+    }
+})
+```
 
 A minimal editor implementation using this:
 
-    :::javascript
-    import {
-      // Tiptap extensions
-      Document, Paragraph, HardBreak, Text, Bold, Italic,
+```javascript
+import {
+  // Tiptap extensions
+  Document, Paragraph, HardBreak, Text, Bold, Italic,
 
-      // Prose editor utilities
-      Menu, createTextareaEditor, initializeEditors,
-    } from "django-prose-editor/editor"
+  // Prose editor utilities
+  Menu, createTextareaEditor, initializeEditors,
+} from "django-prose-editor/editor"
 
-    const extensions = [
-      Document, Paragraph, HardBreak, Text, Bold, Italic, Menu,
-    ]
+const extensions = [
+  Document, Paragraph, HardBreak, Text, Bold, Italic, Menu,
+]
 
-    initializeEditors((textarea) => {
-      createTextareaEditor(textarea, extensions)
-    })
+initializeEditors((textarea) => {
+  createTextareaEditor(textarea, extensions)
+})
+```
 
 The importmap looks as follows when using Django's `ManifestStaticFilesStorage`
 which produces filenames containing the hash of the file's contents for cache
 busting (edited for readability):
 
-    :::html
-    <script type="importmap">
-    {"imports": {
-      "django-prose-editor/editor": "/static/django_prose_editor/editor.6e8dd4c12e2e.js"
-    }}
-    </script>
+```html
+<script type="importmap">
+{"imports": {
+  "django-prose-editor/editor": "/static/django_prose_editor/editor.6e8dd4c12e2e.js"
+}}
+</script>
+```
 
 This means that when your code has `import { ... } from "django-prose-editor/editor"`, the browser automatically loads the file from `/static/django_prose_editor/editor.6e8dd4c12e2e.js`. The hashed filename provides cache busting while the import statement remains clean and consistent.
 
@@ -118,16 +121,17 @@ as-is. The [rspack](https://rspack.dev/) configuration I'm using at the moment
 is also documented in the django-prose-editor README but I'm duplicating it
 here for convenience:
 
-    :::javascript
-    module.exports = {
-      // ...
-      experiments: { outputModule: true },
-      externals: {
-        "django-prose-editor/editor": "module django-prose-editor/editor",
-        // Or the following, I'm never sure.
-        "django-prose-editor/editor": "import django-prose-editor/editor",
-      },
-    }
+```javascript
+module.exports = {
+  // ...
+  experiments: { outputModule: true },
+  externals: {
+    "django-prose-editor/editor": "module django-prose-editor/editor",
+    // Or the following, I'm never sure.
+    "django-prose-editor/editor": "import django-prose-editor/editor",
+  },
+}
+```
 
 This configuration marks the dependency as "external" (so it won't be bundled) and specifies that it should be loaded as a module using a static `import` statement.
 
@@ -137,21 +141,22 @@ For browser compatibility, you can also include [es-module-shims](https://github
 
 Tools like django-compressor aren't well-suited for modern JavaScript modules as they typically produce old-style JavaScript files rather than ES modules. They're designed for a different era of web development and don't integrate well with the importmap approach.
 
-!!! note
-    The problem is that django-compressor at this time emits non-module script
-    files. Using import statements in these files isn't possible, instead you
-    have to use [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import).
-
-        :::javascript
-        // Instead of
-        import { Document, ... } from "django-prose-editor/editor"
-        // you need
-        import("django-prose-editor/editor").then(({ Document, ... }) => {
-        })
-
-    Both work fine. The bundle emitted by django-compressor will not contain
-    the prose editor module itself though; including this module inside the
-    bundle is not possible.
+> [!NOTE]
+> The problem is that django-compressor at this time emits non-module script
+> files. Using import statements in these files isn't possible, instead you
+> have to use [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import).
+>
+> ```javascript
+> // Instead of
+> import { Document, ... } from "django-prose-editor/editor"
+> // you need
+> import("django-prose-editor/editor").then(({ Document, ... }) => {
+> })
+> ```
+>
+> Both work fine. The bundle emitted by django-compressor will not contain
+> the prose editor module itself though; including this module inside the
+> bundle is not possible.
 
 
 

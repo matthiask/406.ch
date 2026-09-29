@@ -19,11 +19,12 @@ This worked fine for a project, but what about libraries? There, I generally do 
 
 If your test uses the [`LiveServerTestCase`](https://docs.djangoproject.com/en/5.2/topics/testing/tools/#django.test.LiveServerTestCase) all you have to do is insert the following lines into the body of your test, directly after creating the necessary data in the database (using fixtures, or probably better yet using something like [factory-boy](https://pypi.org/project/factory-boy/)):
 
-    :::python
-    import subprocess
-    print(f"Live server URL: {live_server.url}")
-    subprocess.Popen(["playwright", "codegen", f"{self.live_server_url}/admin/"])
-    input("Press Enter when done with codegen...")
+```python
+import subprocess
+print(f"Live server URL: {live_server.url}")
+subprocess.Popen(["playwright", "codegen", f"{self.live_server_url}/admin/"])
+input("Press Enter when done with codegen...")
+```
 
 Or of course the equivalent invocation using `live_server.url` when using the `live_server` fixture from [pytest-django](https://pytest-django.readthedocs.io/en/latest/helpers.html#live-server).
 
@@ -31,9 +32,10 @@ Of course Tim [pointed me towards `page.pause()`](https://mastodon.social/@Coden
 
 So now, when `LiveServerTestCase` is already set up and I already have a sync Playwright context lying around, I can just do:
 
-    :::python
-    page = context.new_page()
-    page.pause()
+```python
+page = context.new_page()
+page.pause()
+```
 
 ## TLDR
 

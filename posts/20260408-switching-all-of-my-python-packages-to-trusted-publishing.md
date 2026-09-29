@@ -5,8 +5,8 @@ As I have teased on [Mastodon](https://hachyderm.io/@matthiask/11630020976137111
 
 The malicious releases uploaded to PyPI two weeks ago and the blog post about [digital attestations in `pylock.toml`](https://snarky.ca/why-pylock-toml-includes-digital-attestations/) finally pushed me to make the switch. All of my PyPI tokens have been revoked so there is no quick shortcut.
 
-!!! Note
-    I'm also looking at other code hosting platforms. I have been using git before GitHub existed and I'll probably still use git when GitHub has completed its enshittification. For now the cost/benefit ratio of staying on GitHub is still positive for me. Trusted publishing isn't available everywhere, so for now it is GitHub anyway.
+> [!NOTE]
+> I'm also looking at other code hosting platforms. I have been using git before GitHub existed and I'll probably still use git when GitHub has completed its enshittification. For now the cost/benefit ratio of staying on GitHub is still positive for me. Trusted publishing isn't available everywhere, so for now it is GitHub anyway.
 
 In the end, switching an existing project was easier than expected. I have completed the process for [django-prose-editor](https://github.com/feincms/django-prose-editor) and [feincms3-cookiecontrol](https://github.com/feincms/feincms3-cookiecontrol/).
 
