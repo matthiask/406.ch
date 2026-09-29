@@ -1,76 +1,79 @@
 <?xml version='1.0' encoding='utf-8'?>
 <feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2026-09-09T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 37)</title><link href="https://406.ch/writing/weeknotes-2026-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-37/</id><published>2026-09-09T12:00:00Z</published><updated>2026-09-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-37"&gt;Weeknotes (2026 week 37)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;Tonight the temperature will drop to 10°C. I like it when it&amp;rsquo;s hot, but now I really enjoy the slightly cooler temperatures in Europe. The &lt;a href="/writing/weeknotes-2026-week-33/#holidays-and-the-heat-wave"&gt;last post&lt;/a&gt; was written in the middle of the heat wave. Yesterday we still had temperatures of over 30°C, which is a lot for September. But it will be the new normal. &lt;a href="https://en.wikipedia.org/wiki/El_Ni%C3%B1o%E2%80%93Southern_Oscillation"&gt;Next year probably won&amp;rsquo;t be cooler&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Tonight the temperature will drop to 10°C. I like it when it’s hot, but now I really enjoy the slightly cooler temperatures in Europe. The &lt;a href="/writing/weeknotes-2026-week-33/#holidays-and-the-heat-wave"&gt;last post&lt;/a&gt; was written in the middle of the heat wave. Yesterday we still had temperatures of over 30°C, which is a lot for September. But it will be the new normal. &lt;a href="https://en.wikipedia.org/wiki/El_Ni%C3%B1o%E2%80%93Southern_Oscillation"&gt;Next year probably won’t be cooler&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="releases-from-the-last-four-weeks"&gt;&lt;a class="toclink" href="#releases-from-the-last-four-weeks"&gt;Releases from the last four weeks&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Lots of activity!&lt;/p&gt;
 &lt;h3 id="django-authlib"&gt;&lt;a class="toclink" href="#django-authlib"&gt;django-authlib&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.19&lt;/a&gt; hardens the OAuth2 implementation a bit against replay attacks, provides utilities for removing password logins from the Django administration interface, and removes some of the confusion around role-based permissions. Upgrading is recommended.&lt;/p&gt;
 &lt;h3 id="django-content-editor"&gt;&lt;a class="toclink" href="#django-content-editor"&gt;django-content-editor&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 9.0.2&lt;/a&gt; fixes a bug in the function which allows cloning plugins from other regions. The bug was most visible when using something like &lt;a href="https://django-json-schema-editor.readthedocs.io/"&gt;django-json-schema-editor&lt;/a&gt;&amp;rsquo;s plugins which are only &lt;a href="https://docs.djangoproject.com/en/6.1/topics/db/models/#proxy-models"&gt;proxy models&lt;/a&gt;. Their type was lost because I was using &lt;code&gt;_base_manager&lt;/code&gt;, which didn&amp;rsquo;t do the downcasting properly. (Sorry for the word salad.)&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 9.0.2&lt;/a&gt; fixes a bug in the function which allows cloning plugins from other regions. The bug was most visible when using something like &lt;a href="https://django-json-schema-editor.readthedocs.io/"&gt;django-json-schema-editor&lt;/a&gt;’s plugins which are only &lt;a href="https://docs.djangoproject.com/en/6.1/topics/db/models/#proxy-models"&gt;proxy models&lt;/a&gt;. Their type was lost because I was using &lt;code&gt;_base_manager&lt;/code&gt;, which didn’t do the downcasting properly. (Sorry for the word salad.)&lt;/p&gt;
 &lt;h3 id="django-tree-queries"&gt;&lt;a class="toclink" href="#django-tree-queries"&gt;django-tree-queries&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.26.1&lt;/a&gt; now uses annotations instead of &lt;code&gt;.extra()&lt;/code&gt; to add the &lt;code&gt;tree_path&lt;/code&gt; and &lt;code&gt;tree_depth&lt;/code&gt; fields. This is great because the ORM knows these fields properly and we can now use e.g. &lt;code&gt;.filter(tree_depth=1)&lt;/code&gt; instead of &lt;code&gt;.extra(where=["..."])&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This change was mainly motivated by the renewed interest in deprecating &lt;code&gt;.extra()&lt;/code&gt; at some unknown future point in time.&lt;/p&gt;
 &lt;h3 id="django-debug-toolbar"&gt;&lt;a class="toclink" href="#django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 8.0&lt;/a&gt; ships a new design! I again didn&amp;rsquo;t contribute a lot, but I&amp;rsquo;m very proud that we were able to ship this as a team.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 8.0&lt;/a&gt; ships a new design! I again didn’t contribute a lot, but I’m very proud that we were able to ship this as a team.&lt;/p&gt;
 &lt;h3 id="feincms3"&gt;&lt;a class="toclink" href="#feincms3"&gt;feincms3&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 6.0.2&lt;/a&gt; ships new utilities and, most importantly, fixes crashes when passing &lt;code&gt;%00&lt;/code&gt; to the root middleware. Using null bytes when comparing text field values on PostgreSQL leads to crashes. These are mostly an annoyance without data exposure, but definitely worth fixing.&lt;/p&gt;
-&lt;p&gt;The reason for the major version bump is that we finally dropped support for Django 3.2. That&amp;rsquo;s the only breaking change, so upgrading should be easy for everyone.&lt;/p&gt;
+&lt;p&gt;The reason for the major version bump is that we finally dropped support for Django 3.2. That’s the only breaking change, so upgrading should be easy for everyone.&lt;/p&gt;
 &lt;h3 id="django-js-asset"&gt;&lt;a class="toclink" href="#django-js-asset"&gt;django-js-asset&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 4.1&lt;/a&gt; fixes issues around lazy CSP nonce handling as well as the same issue Django itself had around &lt;a href="https://code.djangoproject.com/ticket/37262"&gt;rendering HTML-safe strings&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id="django-prose-editor"&gt;&lt;a class="toclink" href="#django-prose-editor"&gt;django-prose-editor&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.27.2&lt;/a&gt; adds a default menu item for the code block extension and updates ProseMirror and Tiptap. It also adapts to the changed CSS of the Django 6.1 administration interface.&lt;/p&gt;
 &lt;h3 id="django-json-schema-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor"&gt;django-json-schema-editor&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.14.1&lt;/a&gt; includes a fix for saving JSON schema fields when the schema doesn&amp;rsquo;t contain any properties, plus fixes for the Django 6.1 admin CSS.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.14.1&lt;/a&gt; includes a fix for saving JSON schema fields when the schema doesn’t contain any properties, plus fixes for the Django 6.1 admin CSS.&lt;/p&gt;
 &lt;h3 id="django-admin-ordering"&gt;&lt;a class="toclink" href="#django-admin-ordering"&gt;django-admin-ordering&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.21&lt;/a&gt; now activates orderables properly when the same model was orderable both in the change list and in the change form. I developed the fix for this in early 2025 but never released it. It&amp;rsquo;s what happens.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.21&lt;/a&gt; now activates orderables properly when the same model was orderable both in the change list and in the change form. I developed the fix for this in early 2025 but never released it. It’s what happens.&lt;/p&gt;
 &lt;h3 id="feincms3-cookiecontrol"&gt;&lt;a class="toclink" href="#feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.7.2&lt;/a&gt; includes bugfixes for edge cases while bringing down the byte count for the cookie banner and media embedding script from 3961 (in 1.7.1) to 3909 bytes.&lt;/p&gt;
 &lt;h3 id="feincms3-data"&gt;&lt;a class="toclink" href="#feincms3-data"&gt;feincms3-data&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.11.1&lt;/a&gt; brings fixes for handling unique fields when the same unique value is removed and then re-added with a different primary key.&lt;/p&gt;
 &lt;h3 id="django-translated-fields"&gt;&lt;a class="toclink" href="#django-translated-fields"&gt;django-translated-fields&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-translated-fields/"&gt;django-translated-fields 0.14&lt;/a&gt; contains no relevant code changes to the module itself at all. It was just time to release a new version more than two years after the last release to show that the project is still active and update the Trove classifiers.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2026 week 33)</title><link href="https://406.ch/writing/weeknotes-2026-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-33/</id><published>2026-08-12T12:00:00Z</published><updated>2026-08-12T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-33"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-33"&gt;Weeknotes (2026 week 33)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-translated-fields/"&gt;django-translated-fields 0.14&lt;/a&gt; contains no relevant code changes to the module itself at all. It was just time to release a new version more than two years after the last release to show that the project is still active and update the Trove classifiers.&lt;/p&gt;
+</summary></entry><entry><title>Weeknotes (2026 week 33)</title><link href="https://406.ch/writing/weeknotes-2026-week-33/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-33/</id><published>2026-08-12T12:00:00Z</published><updated>2026-08-12T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-33"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-33"&gt;Weeknotes (2026 week 33)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="holidays-and-the-heat-wave"&gt;&lt;a class="toclink" href="#holidays-and-the-heat-wave"&gt;Holidays and the heat wave&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I had four weeks of holidays this summer. The timing couldn&amp;rsquo;t have been much better with the heat wave &amp;ndash; doing much thinking seems to be impossible anyway. I organized a multi-day feast with a few friends and with much help from others. We built up the site and installations over the course of multiple days and spent some days tearing most of it down afterwards. I started back to the office job physically tired but mentally rested. That&amp;rsquo;s good. I&amp;rsquo;m really looking forward to seeing the pictures people took.&lt;/p&gt;
-&lt;p&gt;What&amp;rsquo;s less good is that we&amp;rsquo;re living through the &lt;a href="https://www.ipcc.ch/report/ar1/wg1/"&gt;projections&lt;/a&gt; which climate scientists warned us about decades ago. Or worse, even, since Switzerland is one of the regions where the temperature increased more than the global average. The member of Switzerland&amp;rsquo;s &lt;a href="https://www.admin.ch/en/the-federal-council"&gt;Federal Council&lt;/a&gt; heading the Federal Department of the Environment, Transport, Energy and Communications reportedly said that he didn&amp;rsquo;t &lt;a href="https://www.tagesanzeiger.ch/albert-roesti-diese-hitze-haette-ich-nicht-erwartet-276779425825"&gt;expect such intense heat&lt;/a&gt;. Of course, it was reported earlier in the same week that the same member was responsible for &lt;a href="https://www.srf.ch/news/schweiz/hitzeresistente-baeume-bundesrat-roesti-streicht-mittel-fuer-klimatauglichen-wald"&gt;removing funding for a more resilient forest&lt;/a&gt; from the budget for the next fiscal year. This is unfortunately to be expected: he has long been connected to the fossil energy industry. After all, he was also the president of &lt;a href="https://www.watson.ch/schweiz/klima/206672787-albert-roesti-laesst-swissoil-mandat-von-webseite-verschwinden"&gt;Swissoil&lt;/a&gt; and &lt;a href="https://de.wikipedia.org/wiki/Albert_R%C3%B6sti"&gt;Auto Schweiz&lt;/a&gt;. It&amp;rsquo;s really frustrating. None of this is news to climate scientists, and it hasn&amp;rsquo;t been news &lt;a href="/writing/category-climate/"&gt;here&lt;/a&gt; either &amp;ndash; these posts start in 2005, back when I was studying environmental sciences at ETH with a focus on atmospheric physics.&lt;/p&gt;
+&lt;p&gt;I had four weeks of holidays this summer. The timing couldn’t have been much better with the heat wave – doing much thinking seems to be impossible anyway. I organized a multi-day feast with a few friends and with much help from others. We built up the site and installations over the course of multiple days and spent some days tearing most of it down afterwards. I started back to the office job physically tired but mentally rested. That’s good. I’m really looking forward to seeing the pictures people took.&lt;/p&gt;
+&lt;p&gt;What’s less good is that we’re living through the &lt;a href="https://www.ipcc.ch/report/ar1/wg1/"&gt;projections&lt;/a&gt; which climate scientists warned us about decades ago. Or worse, even, since Switzerland is one of the regions where the temperature increased more than the global average. The member of Switzerland’s &lt;a href="https://www.admin.ch/en/the-federal-council"&gt;Federal Council&lt;/a&gt; heading the Federal Department of the Environment, Transport, Energy and Communications reportedly said that he didn’t &lt;a href="https://www.tagesanzeiger.ch/albert-roesti-diese-hitze-haette-ich-nicht-erwartet-276779425825"&gt;expect such intense heat&lt;/a&gt;. Of course, it was reported earlier in the same week that the same member was responsible for &lt;a href="https://www.srf.ch/news/schweiz/hitzeresistente-baeume-bundesrat-roesti-streicht-mittel-fuer-klimatauglichen-wald"&gt;removing funding for a more resilient forest&lt;/a&gt; from the budget for the next fiscal year. This is unfortunately to be expected: he has long been connected to the fossil energy industry. After all, he was also the president of &lt;a href="https://www.watson.ch/schweiz/klima/206672787-albert-roesti-laesst-swissoil-mandat-von-webseite-verschwinden"&gt;Swissoil&lt;/a&gt; and &lt;a href="https://de.wikipedia.org/wiki/Albert_R%C3%B6sti"&gt;Auto Schweiz&lt;/a&gt;. It’s really frustrating. None of this is news to climate scientists, and it hasn’t been news &lt;a href="/writing/category-climate/"&gt;here&lt;/a&gt; either – these posts start in 2005, back when I was studying environmental sciences at ETH with a focus on atmospheric physics.&lt;/p&gt;
 &lt;h2 id="scripts-for-auto-merging-dependabot-and-pre-commit-pull-requests"&gt;&lt;a class="toclink" href="#scripts-for-auto-merging-dependabot-and-pre-commit-pull-requests"&gt;Scripts for auto-merging dependabot and pre-commit pull requests&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I let Claude write some scripts for automatically merging pull requests created by various bots, &lt;a href="https://github.com/feincms/.github"&gt;see here&lt;/a&gt;. The script finds pull requests created by a predefined list of bots in a defined list of accounts (organizations or users) and squash-merges them if the CI run is green and there are no conflicts. It&amp;rsquo;s a dry run by default; &lt;code&gt;--apply&lt;/code&gt; is required to actually merge anything. It doesn&amp;rsquo;t look at reviews and doesn&amp;rsquo;t care whether a bump is major or minor &amp;ndash; I&amp;rsquo;m relying on the test suites for that.&lt;/p&gt;
+&lt;p&gt;I let Claude write some scripts for automatically merging pull requests created by various bots, &lt;a href="https://github.com/feincms/.github"&gt;see here&lt;/a&gt;. The script finds pull requests created by a predefined list of bots in a defined list of accounts (organizations or users) and squash-merges them if the CI run is green and there are no conflicts. It’s a dry run by default; &lt;code&gt;--apply&lt;/code&gt; is required to actually merge anything. It doesn’t look at reviews and doesn’t care whether a bump is major or minor – I’m relying on the test suites for that.&lt;/p&gt;
 &lt;p&gt;The &lt;a href="https://astral.sh/blog/ruff-v0.16.0"&gt;ruff 0.16&lt;/a&gt; update was a bit painful because ruff now enables 413 rules by default, up from 59. Recurring themes were warnings about mutable class variables (which are common when using Django), blind &lt;code&gt;except&lt;/code&gt; clauses and underspecified dates without time zones, but none of them in scenarios where they actually hurt.&lt;/p&gt;
 &lt;p&gt;So, instead of just running the merge script, I had to fix up dozens of &lt;code&gt;pyproject.toml&lt;/code&gt; files and projects. Oh well, next time will be smooth again.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Since I&amp;rsquo;ve been away from the computer for so long, the list of releases from the start of July onwards is quite short.&lt;/p&gt;
+&lt;p&gt;Since I’ve been away from the computer for so long, the list of releases from the start of July onwards is quite short.&lt;/p&gt;
 &lt;h3 id="django-authlib"&gt;&lt;a class="toclink" href="#django-authlib"&gt;django-authlib&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.18&lt;/a&gt; now also supports Microsoft Entra ID logins. The admin integration also has support for Microsoft accounts, not just for Google.&lt;/p&gt;
 &lt;h3 id="django-content-editor"&gt;&lt;a class="toclink" href="#django-content-editor"&gt;django-content-editor&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;The &lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 9.0.1&lt;/a&gt; just contains a small fix which avoids submitting the form that allows cloning content between regions when cancelling the dialog.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2026 week 27)</title><link href="https://406.ch/writing/weeknotes-2026-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-27/</id><published>2026-07-01T12:00:00Z</published><updated>2026-07-01T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-27"&gt;Weeknotes (2026 week 27)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;The &lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 9.0.1&lt;/a&gt; just contains a small fix which avoids submitting the form that allows cloning content between regions when cancelling the dialog.&lt;/p&gt;
+</summary></entry><entry><title>Weeknotes (2026 week 27)</title><link href="https://406.ch/writing/weeknotes-2026-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-27/</id><published>2026-07-01T12:00:00Z</published><updated>2026-07-01T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-27"&gt;Weeknotes (2026 week 27)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;The &lt;a href="https://406.ch/writing/weeknotes-2026-week-17/"&gt;last entry in this series&lt;/a&gt; was published 10 weeks ago so it really is time for another review of the releases I did during this time.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;h3 id="feincms3-forms"&gt;&lt;a class="toclink" href="#feincms3-forms"&gt;feincms3-forms&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;The &lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt; forms builder has gained a &lt;a href="https://feincms3-forms.readthedocs.io/"&gt;documentation page&lt;/a&gt; on the wonderful Read the Docs service. The 0.6.1 release doesn&amp;rsquo;t contain any code changes, just &lt;code&gt;pyproject.toml&lt;/code&gt; updates and the mentioned documentation rework.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt; forms builder has gained a &lt;a href="https://feincms3-forms.readthedocs.io/"&gt;documentation page&lt;/a&gt; on the wonderful Read the Docs service. The 0.6.1 release doesn’t contain any code changes, just &lt;code&gt;pyproject.toml&lt;/code&gt; updates and the mentioned documentation rework.&lt;/p&gt;
 &lt;h3 id="django-imagefield"&gt;&lt;a class="toclink" href="#django-imagefield"&gt;django-imagefield&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;django-imagefield 0.23 is still in alpha. The handling of image fields when using libvips is optimized to use less memory hopefully. We&amp;rsquo;ll see. I also added some tests to verify that &lt;code&gt;.mpo&lt;/code&gt; files are handled properly.&lt;/p&gt;
+&lt;p&gt;django-imagefield 0.23 is still in alpha. The handling of image fields when using libvips is optimized to use less memory hopefully. We’ll see. I also added some tests to verify that &lt;code&gt;.mpo&lt;/code&gt; files are handled properly.&lt;/p&gt;
 &lt;h3 id="feincms3"&gt;&lt;a class="toclink" href="#feincms3"&gt;feincms3&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The Vimeo embed now always sets the &lt;code&gt;dnt=1&lt;/code&gt; parameter on the &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt;, which asks Vimeo to not track the user.&lt;/p&gt;
 &lt;h3 id="django-mptt"&gt;&lt;a class="toclink" href="#django-mptt"&gt;django-mptt&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I wrote about the &lt;a href="https://406.ch/writing/anything-new/"&gt;somewhat annoying maintenance&lt;/a&gt; again. The library is still officially unmaintained, but I did a lot of work either just closing issues or also fixing them. The docs also contain many clarifications. I only released 0.19rc1 for now.&lt;/p&gt;
 &lt;h3 id="feincms3-sites-and-feincms3-language-sites"&gt;&lt;a class="toclink" href="#feincms3-sites-and-feincms3-language-sites"&gt;feincms3-sites and feincms3-language-sites&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2026-week-17/#feincms3-sites-and-feincms3-language-sites"&gt;Last time&lt;/a&gt; I mentioned that default HTTP/S ports are now stripped so that the host matching can determine the correct site. Now a new case appeared where trailing dots weren&amp;rsquo;t stripped. The normalization of hosts has been extended. I&amp;rsquo;m sure we&amp;rsquo;re still missing some exotic cases where we should do more normalization, but we&amp;rsquo;ll cross that bridge when we get there.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://406.ch/writing/weeknotes-2026-week-17/#feincms3-sites-and-feincms3-language-sites"&gt;Last time&lt;/a&gt; I mentioned that default HTTP/S ports are now stripped so that the host matching can determine the correct site. Now a new case appeared where trailing dots weren’t stripped. The normalization of hosts has been extended. I’m sure we’re still missing some exotic cases where we should do more normalization, but we’ll cross that bridge when we get there.&lt;/p&gt;
 &lt;h3 id="django-prose-editor-and-django-js-asset"&gt;&lt;a class="toclink" href="#django-prose-editor-and-django-js-asset"&gt;django-prose-editor and django-js-asset&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Various upgrades to the editor and especially the importmaps rework in both packages &amp;ndash; the importmap infrastructure should now be CSP-compatible! I wrote more about that in the last post &lt;a href="https://406.ch/writing/the-2026-way-of-using-importmaps-in-django/"&gt;The 2026 way of using importmaps in Django&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Various upgrades to the editor and especially the importmaps rework in both packages – the importmap infrastructure should now be CSP-compatible! I wrote more about that in the last post &lt;a href="https://406.ch/writing/the-2026-way-of-using-importmaps-in-django/"&gt;The 2026 way of using importmaps in Django&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id="django-content-editor"&gt;&lt;a class="toclink" href="#django-content-editor"&gt;django-content-editor&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Minor bugfixes and a major version bump because of the rework of the JavaScript code into multiple ES modules. The content editor now uses importmaps as well.&lt;/p&gt;
 &lt;h3 id="django-fhadmin"&gt;&lt;a class="toclink" href="#django-fhadmin"&gt;django-fhadmin&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Small bugfix so that links aren&amp;rsquo;t underlined in the app groups list when they shouldn&amp;rsquo;t be, matching how the Django admin itself behaves.&lt;/p&gt;
+&lt;p&gt;Small bugfix so that links aren’t underlined in the app groups list when they shouldn’t be, matching how the Django admin itself behaves.&lt;/p&gt;
 &lt;h3 id="django-cabinet"&gt;&lt;a class="toclink" href="#django-cabinet"&gt;django-cabinet&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The cabinet / prose editor integration for the file (or image) picker is final and released as a stable version.&lt;/p&gt;
 &lt;h3 id="django-json-schema-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor"&gt;django-json-schema-editor&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;This small release only contains more correct German translations of strings.&lt;/p&gt;
 &lt;h3 id="honorable-mention-django-debug-toolbar"&gt;&lt;a class="toclink" href="#honorable-mention-django-debug-toolbar"&gt;Honorable mention: django-debug-toolbar&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;I didn&amp;rsquo;t actually create this release, but I contributed various changes to it. The changelog for 7.0 is &lt;a href="https://django-debug-toolbar.readthedocs.io/en/latest/changes.html"&gt;here&lt;/a&gt;.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2026 week 17)</title><link href="https://406.ch/writing/weeknotes-2026-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-17/</id><published>2026-05-20T12:00:00Z</published><updated>2026-05-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-17"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-17"&gt;Weeknotes (2026 week 17)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I published the &lt;a href="https://406.ch/writing/weeknotes-2026-week-11/"&gt;last entry&lt;/a&gt; near the beginning of March. I&amp;rsquo;m really starting to see a theme in my Weeknotes publishing schedule.&lt;/p&gt;
+&lt;p&gt;I didn’t actually create this release, but I contributed various changes to it. The changelog for 7.0 is &lt;a href="https://django-debug-toolbar.readthedocs.io/en/latest/changes.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+</summary></entry><entry><title>Weeknotes (2026 week 17)</title><link href="https://406.ch/writing/weeknotes-2026-week-17/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-17/</id><published>2026-05-20T12:00:00Z</published><updated>2026-05-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-17"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-17"&gt;Weeknotes (2026 week 17)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I published the &lt;a href="https://406.ch/writing/weeknotes-2026-week-11/"&gt;last entry&lt;/a&gt; near the beginning of March. I’m really starting to see a theme in my Weeknotes publishing schedule.&lt;/p&gt;
 &lt;h2 id="releases-since-the-first-weeks-of-march"&gt;&lt;a class="toclink" href="#releases-since-the-first-weeks-of-march"&gt;Releases since the first weeks of March&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;m trying out a longer-form version of those notes here than in the past. I think it&amp;rsquo;s worth going into some detail and not just listing releases with half a sentence each.&lt;/p&gt;
+&lt;p&gt;I’m trying out a longer-form version of those notes here than in the past. I think it’s worth going into some detail and not just listing releases with half a sentence each.&lt;/p&gt;
 &lt;h3 id="feincms3-sites-and-feincms3-language-sites"&gt;&lt;a class="toclink" href="#feincms3-sites-and-feincms3-language-sites"&gt;feincms3-sites and feincms3-language-sites&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;I released updates to &lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites&lt;/a&gt; and &lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites&lt;/a&gt; fixing the same issue in both projects: When an HTTP client didn&amp;rsquo;t strip the default ports :80 (for HTTP) or :443 (for HTTPS) from a request, finding the correct site would fail. Browsers generally strip the port already, but some other HTTP clients do not.&lt;/p&gt;
+&lt;p&gt;I released updates to &lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites&lt;/a&gt; and &lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites&lt;/a&gt; fixing the same issue in both projects: When an HTTP client didn’t strip the default ports :80 (for HTTP) or :443 (for HTTPS) from a request, finding the correct site would fail. Browsers generally strip the port already, but some other HTTP clients do not.&lt;/p&gt;
 &lt;h3 id="django-tree-queries"&gt;&lt;a class="toclink" href="#django-tree-queries"&gt;django-tree-queries&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;As I wrote &lt;a href="/writing/llms-for-open-source-maintenance-a-cautious-case/"&gt;elsewhere&lt;/a&gt; I closed many issues in the repositories, mostly documentation issues but also some bugs. &lt;code&gt;{% recursetree %}&lt;/code&gt; should now work properly and not cache old data anymore, using the primary key in &lt;code&gt;.tree_fields()&lt;/code&gt; now raises an intelligible error, and I also fixed a bug with table quoting when using &lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt; with the not yet released Django 6.1+.&lt;/p&gt;
 &lt;h3 id="feincms3-cookiecontrol"&gt;&lt;a class="toclink" href="#feincms3-cookiecontrol"&gt;feincms3-cookiecontrol&lt;/a&gt;&lt;/h3&gt;
@@ -78,79 +81,83 @@
 &lt;p&gt;The privacy policies of these services are now linked inline instead of with an ugly extra link. This reduces content inside the embed which helps on small screens.&lt;/p&gt;
 &lt;p&gt;Version 1.7 used a buggy trusted publishing workflow so I immediately published 1.7.1.&lt;/p&gt;
 &lt;h3 id="django-cabinet-and-django-prose-editor"&gt;&lt;a class="toclink" href="#django-cabinet-and-django-prose-editor"&gt;django-cabinet and django-prose-editor&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet&lt;/a&gt; can now be used as a media library directly inside &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt;. I&amp;rsquo;m (ab)using the CKEditor 4 protocol for embedding, which uses &lt;code&gt;window.opener.CKEDITOR.callFunction&lt;/code&gt; to send data back from the file manager popup into the editor. It feels icky but works nicely. This is only available if you&amp;rsquo;re installing the alpha prereleases, but I&amp;rsquo;m already testing the functionality in production somewhere, so I feel quite good about it.&lt;/p&gt;
-&lt;p&gt;django-prose-editor now also ships brand new &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/classloom.html"&gt;&lt;code&gt;ClassLoom&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/styleloom.html"&gt;&lt;code&gt;StyleLoom&lt;/code&gt;&lt;/a&gt; extensions. Both extensions allow adding either classes or inline styles to text spans or nodes. In an ideal world we might not use something like this, but to make the editor more useful in the real world, editors need more flexibility. These two extensions provide that. I already mentioned &lt;code&gt;ClassLoom&lt;/code&gt; &lt;a href="/writing/rich-text-editors-how-restrictive-can-we-be/#combining-css-classes"&gt;in December&lt;/a&gt;, now it&amp;rsquo;s actually available. I&amp;rsquo;m not completely sold on how they work yet, but both of them are already solving real issues.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet&lt;/a&gt; can now be used as a media library directly inside &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt;. I’m (ab)using the CKEditor 4 protocol for embedding, which uses &lt;code&gt;window.opener.CKEDITOR.callFunction&lt;/code&gt; to send data back from the file manager popup into the editor. It feels icky but works nicely. This is only available if you’re installing the alpha prereleases, but I’m already testing the functionality in production somewhere, so I feel quite good about it.&lt;/p&gt;
+&lt;p&gt;django-prose-editor now also ships brand new &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/classloom.html"&gt;&lt;code&gt;ClassLoom&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/styleloom.html"&gt;&lt;code&gt;StyleLoom&lt;/code&gt;&lt;/a&gt; extensions. Both extensions allow adding either classes or inline styles to text spans or nodes. In an ideal world we might not use something like this, but to make the editor more useful in the real world, editors need more flexibility. These two extensions provide that. I already mentioned &lt;code&gt;ClassLoom&lt;/code&gt; &lt;a href="/writing/rich-text-editors-how-restrictive-can-we-be/#combining-css-classes"&gt;in December&lt;/a&gt;, now it’s actually available. I’m not completely sold on how they work yet, but both of them are already solving real issues.&lt;/p&gt;
 &lt;h3 id="honorable-mentions"&gt;&lt;a class="toclink" href="#honorable-mentions"&gt;Honorable mentions&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.3&lt;/a&gt; has been released, I only contributed reviews during this cycle.&lt;/p&gt;</summary></entry><entry><title>Weeknotes (2026 week 11)</title><link href="https://406.ch/writing/weeknotes-2026-week-11/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-11/</id><published>2026-03-11T12:00:00Z</published><updated>2026-03-11T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-11"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-11"&gt;Weeknotes (2026 week 11)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.3&lt;/a&gt; has been released, I only contributed reviews during this cycle.&lt;/p&gt;
+</summary></entry><entry><title>Weeknotes (2026 week 11)</title><link href="https://406.ch/writing/weeknotes-2026-week-11/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-11/</id><published>2026-03-11T12:00:00Z</published><updated>2026-03-11T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-11"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-11"&gt;Weeknotes (2026 week 11)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Last time I wrote that I seem to be publishing weeknotes monthly. Now, a quarter of a year has passed since the &lt;a href="https://406.ch/writing/weeknotes-2025-week-49/"&gt;last entry&lt;/a&gt;. I do enjoy the fact that I have published more posts focused on a single topic. That said, what has been going on in open source land is certainly interesting too.&lt;/p&gt;
 &lt;h2 id="llms-in-open-source"&gt;&lt;a class="toclink" href="#llms-in-open-source"&gt;LLMs in Open Source&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have started a longer piece to think about my stance regarding using LLMs in Open Source. The argument I&amp;rsquo;m thinking about is that there&amp;rsquo;s a balance between LLMs having ingested all of my published open source code and myself using them now to help myself and others again.&lt;/p&gt;
-&lt;p&gt;The happenings in the last two weeks (think Pentagon, Iran, and the bombings of schools) have again brought to the foreground the perils of using those tools. I therefore haven&amp;rsquo;t been motivated to pursue this train of thought for the moment. When the upsides are somewhat questionable and tentative and the downsides are so clear and impossible to miss, it&amp;rsquo;s hard to use my voice to speak in favor of these tools.&lt;/p&gt;
-&lt;p&gt;That said, all the shaming when someone uses an LLM that I see in my Mastodon feed also annoys me. I&amp;rsquo;ll quote part of a post here which I liked and leave it at that for the moment:&lt;/p&gt;
+&lt;p&gt;I have started a longer piece to think about my stance regarding using LLMs in Open Source. The argument I’m thinking about is that there’s a balance between LLMs having ingested all of my published open source code and myself using them now to help myself and others again.&lt;/p&gt;
+&lt;p&gt;The happenings in the last two weeks (think Pentagon, Iran, and the bombings of schools) have again brought to the foreground the perils of using those tools. I therefore haven’t been motivated to pursue this train of thought for the moment. When the upsides are somewhat questionable and tentative and the downsides are so clear and impossible to miss, it’s hard to use my voice to speak in favor of these tools.&lt;/p&gt;
+&lt;p&gt;That said, all the shaming when someone uses an LLM that I see in my Mastodon feed also annoys me. I’ll quote part of a post here which I liked and leave it at that for the moment:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;The AI hype-cyclone is bad, but so is the anti-AI witch hunt. Commits co-authored by Claude do not mean that a project has &amp;ldquo;abandoned engineering as a serious endeavor&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;[&amp;hellip;]&lt;/p&gt;
+&lt;p&gt;The AI hype-cyclone is bad, but so is the anti-AI witch hunt. Commits co-authored by Claude do not mean that a project has “abandoned engineering as a serious endeavor”&lt;/p&gt;
+&lt;p&gt;[…]&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&amp;ndash; &lt;a href="https://hachyderm.io/@nedbat/116133445557306539"&gt;@nedbat on Mastodon&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;– &lt;a href="https://hachyderm.io/@nedbat/116133445557306539"&gt;@nedbat on Mastodon&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="other-goings-on"&gt;&lt;a class="toclink" href="#other-goings-on"&gt;Other goings-on&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Health:&lt;/strong&gt; My back continues to improve. Some days are still bad, but the idea that the &lt;a href="https://406.ch/writing/my-2025-in-review/#sports-and-health"&gt;herniation&lt;/a&gt; may go away entirely doesn&amp;rsquo;t sound totally unreasonable anymore.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Gardening:&lt;/strong&gt; We started weeding the garden last week. Lots to do! Being outside is fun. Weeding isn&amp;rsquo;t the greatest part ever, but it&amp;rsquo;s meditative.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Health:&lt;/strong&gt; My back continues to improve. Some days are still bad, but the idea that the &lt;a href="https://406.ch/writing/my-2025-in-review/#sports-and-health"&gt;herniation&lt;/a&gt; may go away entirely doesn’t sound totally unreasonable anymore.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gardening:&lt;/strong&gt; We started weeding the garden last week. Lots to do! Being outside is fun. Weeding isn’t the greatest part ever, but it’s meditative.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="releases-since-december"&gt;&lt;a class="toclink" href="#releases-since-december"&gt;Releases since December&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.12.1&lt;/a&gt;: CSS fixes. I have again looked at other, more modern JSON schema editor implementations but all of them are more limited than is acceptable to act as a replacement.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.2&lt;/a&gt;: I haven&amp;rsquo;t done much work here! Just some reviewing.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.2&lt;/a&gt;: I haven’t done much work here! Just some reviewing.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.1&lt;/a&gt;: Started emitting warnings when using non-abstract base classes for plugins. Using multi table inheritance is mostly an accident and not intended in my experience when using django-content-editor, therefore we have started detecting this case and emitting system checks (warnings, not errors).&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.23.0a3&lt;/a&gt;: We have done some work on supporting &lt;a href="https://www.libvips.org/"&gt;libvips&lt;/a&gt; as an alternative backend to Pillow because I hoped that memory usage in Kubernetes pods might go down a bit. Results are not conclusive yet, and I&amp;rsquo;m not yet convinced the additional code complexity is worth it. Debugging and monitoring continues.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.23.0a3&lt;/a&gt;: We have done some work on supporting &lt;a href="https://www.libvips.org/"&gt;libvips&lt;/a&gt; as an alternative backend to Pillow because I hoped that memory usage in Kubernetes pods might go down a bit. Results are not conclusive yet, and I’m not yet convinced the additional code complexity is worth it. Debugging and monitoring continues.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 26.2.1&lt;/a&gt;: Released a few bugfixes. FeinCMS is still being maintained ~17 years later!&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-auto-admin-fieldsets/"&gt;django-auto-admin-fieldsets 0.3&lt;/a&gt;: Added a helper to remove fields from the fieldsets structure.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.23.1&lt;/a&gt;: Shipped a small bugfix for &lt;code&gt;{% recursetree %}&lt;/code&gt; which unintentionally cached children across invocations.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-downloads/"&gt;feincms3-downloads&lt;/a&gt;: Used &lt;code&gt;PATH&lt;/code&gt; from the environment instead of using a very restricted allowlist so that &lt;code&gt;convert&lt;/code&gt; and &lt;code&gt;pdftocairo&lt;/code&gt; are detected in more locations. This should help with local development for example on macOS.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.24.1&lt;/a&gt;: Read the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt;; there&amp;rsquo;s too much in there for a short notice.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.24.1&lt;/a&gt;: Read the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt;; there’s too much in there for a short notice.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.27.3&lt;/a&gt;: Mosparo captcha support, bugfixes and additional translations.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.5&lt;/a&gt;: Started using the &lt;code&gt;OrderableTreeNode&lt;/code&gt; from django-tree-queries.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 49)</title><link href="https://406.ch/writing/weeknotes-2025-week-49/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-49/</id><published>2025-12-05T12:00:00Z</published><updated>2025-12-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-49"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-49"&gt;Weeknotes (2025 week 49)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I seem to be publishing weeknotes monthly, so I&amp;rsquo;m now thinking about renaming the category :-)&lt;/p&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 49)</title><link href="https://406.ch/writing/weeknotes-2025-week-49/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-49/</id><published>2025-12-05T12:00:00Z</published><updated>2025-12-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-49"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-49"&gt;Weeknotes (2025 week 49)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I seem to be publishing weeknotes monthly, so I’m now thinking about renaming the category :-)&lt;/p&gt;
 &lt;h2 id="mosparo"&gt;&lt;a class="toclink" href="#mosparo"&gt;Mosparo&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have started using a self-hosted &lt;a href="https://mosparo.io/"&gt;mosparo&lt;/a&gt; instance for my captcha needs. It&amp;rsquo;s nicer than Google reCAPTCHA. Also, not sending data to Google and not training AI models on traffic signs feels better.&lt;/p&gt;
+&lt;p&gt;I have started using a self-hosted &lt;a href="https://mosparo.io/"&gt;mosparo&lt;/a&gt; instance for my captcha needs. It’s nicer than Google reCAPTCHA. Also, not sending data to Google and not training AI models on traffic signs feels better.&lt;/p&gt;
 &lt;h2 id="fixes-for-the-youtube-153-error"&gt;&lt;a class="toclink" href="#fixes-for-the-youtube-153-error"&gt;Fixes for the YouTube 153 error&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Simon Willison published a nice writeup about &lt;a href="https://simonwillison.net/2025/Dec/1/youtube-embed-153-error/"&gt;YouTube embeds failing with a 153 error&lt;/a&gt;. We have also encountered this problem in the wild and fixed the &lt;a href="https://feincms3.readthedocs.io/en/latest/ref/embedding.html"&gt;feincms3&lt;/a&gt; embedding code to &lt;a href="https://github.com/feincms/feincms3/commit/3f00e5d2a15991d52f9ae0118b49fe231ea328d0"&gt;also set the required referrerpolicy attribute&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="updated-packages-since-2025-11-04"&gt;&lt;a class="toclink" href="#updated-packages-since-2025-11-04"&gt;Updated packages since 2025-11-04&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-sitemaps/"&gt;django-sitemaps 2.0.2&lt;/a&gt;: Uploaded a new release which includes a wheel build. Rebuilding the wheel all the time when creating new container images was getting annoying. The code itself is unchanged.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_prune_uploads/"&gt;django-prune-uploads 0.3.1&lt;/a&gt;: The package now supports pruning a storage backed by django-s3-storage efficiently. I have also looked at &lt;a href="https://pypi.org/project/django-prune-media/"&gt;django-prune-media&lt;/a&gt; but since the package uses the storage API instead of enumerating files using boto3 directly it&amp;rsquo;s unusably slow for my use case.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django_prune_uploads/"&gt;django-prune-uploads 0.3.1&lt;/a&gt;: The package now supports pruning a storage backed by django-s3-storage efficiently. I have also looked at &lt;a href="https://pypi.org/project/django-prune-media/"&gt;django-prune-media&lt;/a&gt; but since the package uses the storage API instead of enumerating files using boto3 directly it’s unusably slow for my use case.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms 0.6&lt;/a&gt;: Much better docs and a new way to reference &lt;a href="https://github.com/feincms/feincms3-forms?tab=readme-ov-file#custom-templates-for-compound-fields"&gt;individual form fields in custom templates&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.11&lt;/a&gt;: Switched from JSON paths to &lt;code&gt;jmespath&lt;/code&gt; instances. Made the JSON model instance reference support easier and more fun to use. Added new ways of customizing the generated proxy model for individual JSON plugin instances.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.27.1&lt;/a&gt;: Added support for the &lt;a href="https://mosparo.io/"&gt;mosparo captcha&lt;/a&gt; to the default list of field types.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/asgi-plausible/"&gt;asgi-plausible 0.1.1&lt;/a&gt;: No code change really, just added required dependencies to the package metadata.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.23&lt;/a&gt;: The package now ships a &lt;code&gt;OrderableTreeNode&lt;/code&gt; base model which you can use when you want to order siblings manually. feincms3 already uses this base model for its pages model.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.10&lt;/a&gt;: This is quite a big one. I discovered issues with the way &lt;code&gt;save_as_new&lt;/code&gt; (to copy data) and &lt;code&gt;delete_missing&lt;/code&gt; interacted. First the code was cleaned up to delete less data, and then to delete enough data. I&amp;rsquo;m now somewhat confident that the code does what it should again.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.10&lt;/a&gt;: This is quite a big one. I discovered issues with the way &lt;code&gt;save_as_new&lt;/code&gt; (to copy data) and &lt;code&gt;delete_missing&lt;/code&gt; interacted. First the code was cleaned up to delete less data, and then to delete enough data. I’m now somewhat confident that the code does what it should again.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.22.3&lt;/a&gt;: Started returning an empty string for an empty document instead of &lt;code&gt;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;&lt;/code&gt; also when using the frontend integration; previously, this transformation was only implemented when using at least the form if not the model field. Also, &lt;code&gt;&amp;lt;ol&amp;gt;&lt;/code&gt; tags now have a &lt;code&gt;data-type&lt;/code&gt; attribute since Chrome cannot case-sensitively match e.g. &lt;code&gt;type="a"&lt;/code&gt; vs &lt;code&gt;type="A"&lt;/code&gt; for lowercase or uppercase letters. I previously only tested the code in Firefox and there it worked nicely.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 45)</title><link href="https://406.ch/writing/weeknotes-2025-week-45/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-45/</id><published>2025-11-04T12:00:00Z</published><updated>2025-11-04T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-45"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-45"&gt;Weeknotes (2025 week 45)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 45)</title><link href="https://406.ch/writing/weeknotes-2025-week-45/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-45/</id><published>2025-11-04T12:00:00Z</published><updated>2025-11-04T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-45"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-45"&gt;Weeknotes (2025 week 45)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="autumn-is-nice"&gt;&lt;a class="toclink" href="#autumn-is-nice"&gt;Autumn is nice&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I love walking through the forest with all the colors and the rustling when you walk through the leaves on the ground.&lt;/p&gt;
 &lt;h2 id="updated-packages-since-2025-10-23"&gt;&lt;a class="toclink" href="#updated-packages-since-2025-10-23"&gt;Updated packages since 2025-10-23&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.4.3&lt;/a&gt;: Small fix for the
-  YouTube IFRAME; it seems that the &lt;code&gt;referrerpolicy&lt;/code&gt; attribute is now necessary
-  for the embed to work everywhere.&lt;/li&gt;
+YouTube IFRAME; it seems that the &lt;code&gt;referrerpolicy&lt;/code&gt; attribute is now necessary
+for the embed to work everywhere.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.8.2&lt;/a&gt;:
-  Allowed forwarding more options to the prose editor component; specifically,
-  not just &lt;code&gt;extensions&lt;/code&gt; but also the undocumented &lt;code&gt;js_modules&lt;/code&gt; entry. This
-  means that custom extensions are now also supported inside the JSON editor
-  component.&lt;/li&gt;
+Allowed forwarding more options to the prose editor component; specifically,
+not just &lt;code&gt;extensions&lt;/code&gt; but also the undocumented &lt;code&gt;js_modules&lt;/code&gt; entry. This
+means that custom extensions are now also supported inside the JSON editor
+component.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.20&lt;/a&gt;:
-  I reworked the menu extension to be customizable more easily (you can now specify &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/menu.html#defining-button-groups-and-dropdowns"&gt;button groups and dropdowns&lt;/a&gt; directly without using JavaScript code) and I also extended the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/nodeclass.html"&gt;&lt;code&gt;NodeClass&lt;/code&gt; extension&lt;/a&gt; to allow assigning predefined CSS classes not only to nodes but also to marks.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 43)</title><link href="https://406.ch/writing/weeknotes-2025-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-43/</id><published>2025-10-23T12:00:00Z</published><updated>2025-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-43"&gt;Weeknotes (2025 week 43)&lt;/a&gt;&lt;/h1&gt;
+I reworked the menu extension to be customizable more easily (you can now specify &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/menu.html#defining-button-groups-and-dropdowns"&gt;button groups and dropdowns&lt;/a&gt; directly without using JavaScript code) and I also extended the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/nodeclass.html"&gt;&lt;code&gt;NodeClass&lt;/code&gt; extension&lt;/a&gt; to allow assigning predefined CSS classes not only to nodes but also to marks.&lt;/li&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 43)</title><link href="https://406.ch/writing/weeknotes-2025-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-43/</id><published>2025-10-23T12:00:00Z</published><updated>2025-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-43"&gt;Weeknotes (2025 week 43)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I published the last weeknotes entry in the first half of September.&lt;/p&gt;
 &lt;h2 id="drama-in-oss"&gt;&lt;a class="toclink" href="#drama-in-oss"&gt;Drama in OSS&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been following the Ruby gems debacle a bit. Initially at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used our own PHP-based framework &lt;a href="https://github.com/matthiask/swisdk2"&gt;swisdk2&lt;/a&gt; to build websites. This obviously didn&amp;rsquo;t scale and I was very annoyed with PHP, so I was looking for alternatives.&lt;/p&gt;
-&lt;p&gt;I remember comparing Ruby on Rails and Django, and decided to switch from PHP/swisdk2 to Python/Django for two reasons: The automatically generated admin interface and the fact that Ruby source code just had too much punctuation characters for my taste. It&amp;rsquo;s a very whimsical reason and I do not put any weight on that. That being said, given how some of the exponents in Ruby/Rails land behave I&amp;rsquo;m very very glad to have chosen Python and Django. While not everything is perfect (it never is) at least those communities agree that trying to behave nicely to each other is something to be cheered and not something to be sneered at.&lt;/p&gt;
+&lt;p&gt;I have been following the Ruby gems debacle a bit. Initially at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used our own PHP-based framework &lt;a href="https://github.com/matthiask/swisdk2"&gt;swisdk2&lt;/a&gt; to build websites. This obviously didn’t scale and I was very annoyed with PHP, so I was looking for alternatives.&lt;/p&gt;
+&lt;p&gt;I remember comparing Ruby on Rails and Django, and decided to switch from PHP/swisdk2 to Python/Django for two reasons: The automatically generated admin interface and the fact that Ruby source code just had too much punctuation characters for my taste. It’s a very whimsical reason and I do not put any weight on that. That being said, given how some of the exponents in Ruby/Rails land behave I’m very very glad to have chosen Python and Django. While not everything is perfect (it never is) at least those communities agree that trying to behave nicely to each other is something to be cheered and not something to be sneered at.&lt;/p&gt;
 &lt;h2 id="copilot"&gt;&lt;a class="toclink" href="#copilot"&gt;Copilot&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I assigned some GitHub issues to Copilot. The result wasn&amp;rsquo;t very useful. I don&amp;rsquo;t know if I want to repeat it, local tools work fine for when I really need them.&lt;/p&gt;
+&lt;p&gt;I assigned some GitHub issues to Copilot. The result wasn’t very useful. I don’t know if I want to repeat it, local tools work fine for when I really need them.&lt;/p&gt;
 &lt;h2 id="python-and-django-compatibility"&gt;&lt;a class="toclink" href="#python-and-django-compatibility"&gt;Python and Django compatibility&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;It&amp;rsquo;s the time again to update the GitHub actions matrix and Trove identifiers. I do not like doing it. You can expect all maintained packages to be compatible with the latest and best versions, no upper bounds necessary. Man, if only AI could automate &lt;em&gt;those&lt;/em&gt; tasks&amp;hellip;&lt;/p&gt;
+&lt;p&gt;It’s the time again to update the GitHub actions matrix and Trove identifiers. I do not like doing it. You can expect all maintained packages to be compatible with the latest and best versions, no upper bounds necessary. Man, if only AI could automate &lt;em&gt;those&lt;/em&gt; tasks…&lt;/p&gt;
 &lt;h2 id="updated-packages-since-2025-09-10"&gt;&lt;a class="toclink" href="#updated-packages-since-2025-09-10"&gt;Updated packages since 2025-09-10&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;: We use &lt;code&gt;hashlib.md5&lt;/code&gt;, but not for security.&lt;/li&gt;
@@ -159,40 +166,43 @@
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.8.1&lt;/a&gt;: Fixes for multiple JSON editors in the same window, better &lt;code&gt;JSONPlugin.__str__&lt;/code&gt; default implementation.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18.1&lt;/a&gt;: Fix a minor bug around the selected folder handling. Invalid folder ID values could crash the backend under some circumstances.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.5&lt;/a&gt;: No large changes, mainly Tiptap updates.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 37)</title><link href="https://406.ch/writing/weeknotes-2025-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-37/</id><published>2025-09-10T12:00:00Z</published><updated>2025-09-10T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-37"&gt;Weeknotes (2025 week 37)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I&amp;rsquo;m having a slow week after the last wisdom tooth extraction. Finally! I&amp;rsquo;m slowly recuperating from that.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m trying to split up the blog posts a bit and writing more standalone pieces instead of putting everything into weeknotes. Publishing more focussed pieces sounds like a good thing and should also help me with finding my own writing later.&lt;/p&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 37)</title><link href="https://406.ch/writing/weeknotes-2025-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-37/</id><published>2025-09-10T12:00:00Z</published><updated>2025-09-10T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-37"&gt;Weeknotes (2025 week 37)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I’m having a slow week after the last wisdom tooth extraction. Finally! I’m slowly recuperating from that.&lt;/p&gt;
+&lt;p&gt;I’m trying to split up the blog posts a bit and writing more standalone pieces instead of putting everything into weeknotes. Publishing more focussed pieces sounds like a good thing and should also help me with finding my own writing later.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0.2&lt;/a&gt;: I fixed the ordering calculation in the cloning functionality; the tests are a bit too forgiving for my taste now but I just can&amp;rsquo;t figure out why the gap for inserting cloned items is sometimes larger than it should be. It doesn&amp;rsquo;t matter though, since ordering values do not have any significance, they only have to provide a definite ordering for content items.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0.2&lt;/a&gt;: I fixed the ordering calculation in the cloning functionality; the tests are a bit too forgiving for my taste now but I just can’t figure out why the gap for inserting cloned items is sometimes larger than it should be. It doesn’t matter though, since ordering values do not have any significance, they only have to provide a definite ordering for content items.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.2&lt;/a&gt;: Cleaned up the documentation after the 0.18 cleanup (where automatic dependency management has been removed), fixed table styles when using dark mode.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Summer was and is nice. The hot days seem to be over (for now), but in the last
-years summer hasn&amp;rsquo;t really left until the end of September, so we&amp;rsquo;ll see. I
+years summer hasn’t really left until the end of September, so we’ll see. I
 personally like the warm weather but I really hoped that our leaders were
 smarter. The &lt;a href="https://406.ch/writing/category-climate/"&gt;climate emergency&lt;/a&gt;
 could be seen from far away. The pigheadedness is hard to stomach. And of
-course it&amp;rsquo;s not the only problem we&amp;rsquo;re facing as humanity at all.&lt;/p&gt;
+course it’s not the only problem we’re facing as humanity at all.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I did some longer-form writing about two of the releases here: &lt;a href="https://406.ch/writing/menu-improvements-in-django-prose-editor/"&gt;Menu improvements in django-prose-editor&lt;/a&gt; and &lt;a href="https://406.ch/writing/django-content-editor-cloning/"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.0&lt;/a&gt;:
-  We have released a new version of the toolbar which supports persisting
-  debugging data to the database. This is especially useful when using ASGI,
-  because we cannot use threadlocal storage for this data then.&lt;/li&gt;
+We have released a new version of the toolbar which supports persisting
+debugging data to the database. This is especially useful when using ASGI,
+because we cannot use threadlocal storage for this data then.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18&lt;/a&gt;:
-  Reworked the menu system to support dropdowns, not just button groups. Added
-  a custom &lt;code&gt;TextClass&lt;/code&gt; extension which allows adding classes to spans and a
-  &lt;code&gt;NodeClass&lt;/code&gt; extension which allows adding classes to nodes. Tiptap supports
-  adding arbitrary styles, I&amp;rsquo;d rather limit this a bit more and only offer
-  predefined CSS classes.&lt;/li&gt;
+Reworked the menu system to support dropdowns, not just button groups. Added
+a custom &lt;code&gt;TextClass&lt;/code&gt; extension which allows adding classes to spans and a
+&lt;code&gt;NodeClass&lt;/code&gt; extension which allows adding classes to nodes. Tiptap supports
+adding arbitrary styles, I’d rather limit this a bit more and only offer
+predefined CSS classes.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0&lt;/a&gt;:
-  Added support for cloning content. Made the region tabs stick to the top of
-  the browser window.&lt;/li&gt;
+Added support for cloning content. Made the region tabs stick to the top of
+the browser window.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18&lt;/a&gt;: Improved the
-  folder deletion interface slightly.&lt;/li&gt;
+folder deletion interface slightly.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.18&lt;/a&gt;: I still seem to be maintaining the project even though I officially marked the project as unmaintained &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;more than 4 years ago&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 27)</title><link href="https://406.ch/writing/weeknotes-2025-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-27/</id><published>2025-07-05T12:00:00Z</published><updated>2025-07-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-27"&gt;Weeknotes (2025 week 27)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 27)</title><link href="https://406.ch/writing/weeknotes-2025-week-27/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-27/</id><published>2025-07-05T12:00:00Z</published><updated>2025-07-05T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-27"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-27"&gt;Weeknotes (2025 week 27)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have again missed a few weeks, so the releases section will be longer than usual since it covers six weeks.&lt;/p&gt;
 &lt;h2 id="django-prose-editor"&gt;&lt;a class="toclink" href="#django-prose-editor"&gt;django-prose-editor&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have totally restructured the documentation to make it clearer. The &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/configuration.html"&gt;configuration chapter&lt;/a&gt; is shorter and more focussed, and the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/custom_extensions.html"&gt;custom extensions chapter&lt;/a&gt; actually shows all required parts now.&lt;/p&gt;
@@ -200,15 +210,15 @@ course it&amp;rsquo;s not the only problem we&amp;rsquo;re facing as humanity at
 have an &lt;code&gt;addMenuItems&lt;/code&gt; method where they can add their own buttons to the menu
 bar. I wanted to do this for a long time but have only just this week found a
 way to achieve this which I actually like.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;ve reported a bug to Tiptap where a &lt;code&gt;.can()&lt;/code&gt; chain always succeeded even though the actual operation could fail (&lt;a href="https://github.com/ueberdosis/tiptap/issues/6306"&gt;#6306&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;I’ve reported a bug to Tiptap where a &lt;code&gt;.can()&lt;/code&gt; chain always succeeded even though the actual operation could fail (&lt;a href="https://github.com/ueberdosis/tiptap/issues/6306"&gt;#6306&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Finally, I have also switched from &lt;a href="https://esbuild.github.io/"&gt;esbuild&lt;/a&gt; to
-&lt;a href="https://rslib.rs/"&gt;rslib&lt;/a&gt;; I&amp;rsquo;m a heavy user of rspack anyway and am more at
+&lt;a href="https://rslib.rs/"&gt;rslib&lt;/a&gt;; I’m a heavy user of rspack anyway and am more at
 home with its configuration.&lt;/p&gt;
 &lt;h2 id="django-content-editor"&gt;&lt;a class="toclink" href="#django-content-editor"&gt;django-content-editor&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The 7.4 release mostly contains minor changes, one new feature is the
-&lt;code&gt;content_editor.admin.RefinedModelAdmin&lt;/code&gt; class. It includes tweaks to Django&amp;rsquo;s
-standard behavior such as supporting a &lt;code&gt;Ctrl-S&lt;/code&gt; shortcut for the &amp;ldquo;Save and
-continue editing&amp;rdquo; functionality and an additional warning when people want to
+&lt;code&gt;content_editor.admin.RefinedModelAdmin&lt;/code&gt; class. It includes tweaks to Django’s
+standard behavior such as supporting a &lt;code&gt;Ctrl-S&lt;/code&gt; shortcut for the “Save and
+continue editing” functionality and an additional warning when people want to
 delete inlines and instead delete the whole object. This seems to happen often
 even though people are shown the full list of objects which will be deleted.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
@@ -220,10 +230,11 @@ even though people are shown the full list of objects which will be deleted.&lt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django_recent_objects/"&gt;django-recent-objects 0.1.1&lt;/a&gt;: Changed the code to use &lt;code&gt;UNION ALL&lt;/code&gt; instead of &lt;code&gt;UNION&lt;/code&gt; when determining which objects to fetch from all tables.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.4.1&lt;/a&gt;: Added experimental support for rendering sections. Sections can be nested, so they are more powerful than subregions. Also, added warnings when registering plugin proxies for rendering &lt;em&gt;and&lt;/em&gt; fetching, since that will mostly likely lead to duplicated objects in the rendered output.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.20&lt;/a&gt;: Added &lt;code&gt;tree_info&lt;/code&gt; and &lt;code&gt;recursetree&lt;/code&gt; template tags. Optimized the performance by avoiding the rank table if easily possible. Added stronger recommendations to pre-filter the table using &lt;code&gt;.tree_filter()&lt;/code&gt; or &lt;code&gt;.tree_exclude()&lt;/code&gt; when working with small subsets of large datasets.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.3&lt;/a&gt;: Added a trove identifeir for recent Django versions. It still works fine, but it&amp;rsquo;s deprecated and shouldn&amp;rsquo;t be used since it still uses the unmaintained CKEditor 4 line (since we do not ship the commercial LTS version).&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor 6.7.3&lt;/a&gt;: Added a trove identifeir for recent Django versions. It still works fine, but it’s deprecated and shouldn’t be used since it still uses the unmaintained CKEditor 4 line (since we do not ship the commercial LTS version).&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.6.1&lt;/a&gt;: Golfed the generated CSS and JavaScript bundle down to below 4000 bytes again, including the YouTube/Vimeo/etc. wrapper which only loads external content when users consent.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 21)</title><link href="https://406.ch/writing/weeknotes-2025-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-21/</id><published>2025-05-21T12:00:00Z</published><updated>2025-05-21T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-21"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-21"&gt;Weeknotes (2025 week 21)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have missed two co-writing sessions and didn&amp;rsquo;t manage to post much outside of that, but let&amp;rsquo;s get things back on track.&lt;/p&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 21)</title><link href="https://406.ch/writing/weeknotes-2025-week-21/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-21/</id><published>2025-05-21T12:00:00Z</published><updated>2025-05-21T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-21"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-21"&gt;Weeknotes (2025 week 21)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have missed two co-writing sessions and didn’t manage to post much outside of that, but let’s get things back on track.&lt;/p&gt;
 &lt;h2 id="django-prose-editor-012"&gt;&lt;a class="toclink" href="#django-prose-editor-012"&gt;django-prose-editor 0.12&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://406.ch/writing/weeknotes-2025-week-15/#progress-on-the-prose-editor"&gt;last weeknotes
 entry&lt;/a&gt;
@@ -231,22 +242,23 @@ contains more details about the work of really connecting Tiptap extensions
 with server-side sanitization. 0.12 includes many improvements and bugfixes
 which have been made during real-world use of the prose editor in
 customer-facing products.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not completely happy about the way we&amp;rsquo;re specifying the editor
-configuration and haven&amp;rsquo;t been able to settle on either &lt;code&gt;extensions&lt;/code&gt; or
+&lt;p&gt;I’m not completely happy about the way we’re specifying the editor
+configuration and haven’t been able to settle on either &lt;code&gt;extensions&lt;/code&gt; or
 &lt;code&gt;config&lt;/code&gt; as a keyword argument. The field supports both ways, at least for
-now. It&amp;rsquo;s probably fine.&lt;/p&gt;
+now. It’s probably fine.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-auto-admin-fieldsets/"&gt;django-auto-admin-fieldsets 0.2&lt;/a&gt;: I wrote a blog post here: &lt;a href="https://406.ch/writing/customizing-django-admin-fieldsets-without-fearing-forgotten-fields/"&gt;Customizing Django admin fieldsets without fearing forgotten fields&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 5.2&lt;/a&gt;: This release contains the second half of improvements from &lt;a href="https://djangonaut.space/"&gt;Djangonaut Space&lt;/a&gt; session four where I helped out as a Navigator. The toolbar properly supports code highlighting in dark mode, sanitizes request variables better, allows customizing redirects, supports projects using &lt;a href="https://github.com/carltongibson/django-template-partials/"&gt;django-template-partials&lt;/a&gt; and more!&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 25.5.1&lt;/a&gt;: The first FeinCMS release of 2025. We&amp;rsquo;re still maintaining the project and fixing bugs!&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 25.5.1&lt;/a&gt;: The first FeinCMS release of 2025. We’re still maintaining the project and fixing bugs!&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.12&lt;/a&gt;: See above.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.4.1&lt;/a&gt;: Fixes much too small checkboxes when used inside tables.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 15)</title><link href="https://406.ch/writing/weeknotes-2025-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-15/</id><published>2025-04-09T12:00:00Z</published><updated>2025-04-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-15"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-15"&gt;Weeknotes (2025 week 15)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 15)</title><link href="https://406.ch/writing/weeknotes-2025-week-15/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-15/</id><published>2025-04-09T12:00:00Z</published><updated>2025-04-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-15"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-15"&gt;Weeknotes (2025 week 15)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="djangonaut-space"&gt;&lt;a class="toclink" href="#djangonaut-space"&gt;Djangonaut Space&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We have already reached the final week of the &lt;a href="https://djangonaut.space/"&gt;Djangonaut
 Space&lt;/a&gt; session 4. I had a great time as a navigator
-and am looking forward to participate more, but for now I&amp;rsquo;m also glad that I do
+and am looking forward to participate more, but for now I’m also glad that I do
 not have the additional responsibility at least for the close future.&lt;/p&gt;
 &lt;p&gt;We have done great work on the
 &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar&lt;/a&gt; in our
@@ -254,32 +266,31 @@ group, more is to come.&lt;/p&gt;
 &lt;h2 id="progress-on-the-prose-editor"&gt;&lt;a class="toclink" href="#progress-on-the-prose-editor"&gt;Progress on the prose editor&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have done much work on
 &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt; in the
-last few weeks and after a large list of alphas and betas I&amp;rsquo;m nearing a state
+last few weeks and after a large list of alphas and betas I’m nearing a state
 which I want to release into the wild.&lt;/p&gt;
 &lt;p&gt;The integration has been completely rethought (again) and now uses JavaScript
 modules and importmaps. The ground work to support all of that in Django has
 been laid in &lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The nice thing about using JavaScript modules and importmaps is that we now
 have an easy way to combine the power of modern JavaScript customization with
-easy cache busting using Django&amp;rsquo;s &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt;. A longer post
+easy cache busting using Django’s &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt;. A longer post
 on this is brewing and I hope to have it ready soon-ish.&lt;/p&gt;
-&lt;p&gt;As a sneak peek, here&amp;rsquo;s the way it works:&lt;/p&gt;
+&lt;p&gt;As a sneak peek, here’s the way it works:&lt;/p&gt;
 &lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;django_prose_editor.fields&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ProseEditorField&lt;/span&gt;
 
 &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ProseEditorField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;Bold&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;Italic&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;BulletList&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="s2"&gt;&amp;quot;Link&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"Bold"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"Italic"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"BulletList"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"Link"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="p"&gt;},&lt;/span&gt;
     &lt;span class="c1"&gt;# sanitize=True is the default when using extensions&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 &lt;p&gt;The nice thing about it is that the sanitization allowlist for
 &lt;a href="https://github.com/messense/nh3"&gt;nh3&lt;/a&gt; only includes tags and attributes which
-are enabled via the &lt;code&gt;extensions&lt;/code&gt; dict. So, you don&amp;rsquo;t have to do anything else
+are enabled via the &lt;code&gt;extensions&lt;/code&gt; dict. So, you don’t have to do anything else
 to be safe from XSS etc.&lt;/p&gt;
 &lt;p&gt;Check out the pre-releases on
 &lt;a href="https://pypi.org/project/django-prose-editor/#history"&gt;PyPI&lt;/a&gt; or have a look at
@@ -287,69 +298,71 @@ the &lt;a href="https://django-prose-editor.readthedocs.io/"&gt;documentation&lt
 about this project!&lt;/p&gt;
 &lt;h2 id="using-claude-code"&gt;&lt;a class="toclink" href="#using-claude-code"&gt;Using Claude Code&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have been using Claude Code (without editor integrations, thank you very
-much) more and more. It&amp;rsquo;s a good coding companion when it comes to throwing
+much) more and more. It’s a good coding companion when it comes to throwing
 around ideas, drafting docs and writing unit tests including integration tests.&lt;/p&gt;
-&lt;p&gt;Sometimes I&amp;rsquo;m really surprised at how good it is. Other times&amp;hellip; less so. The
+&lt;p&gt;Sometimes I’m really surprised at how good it is. Other times… less so. The
 tool often finds a way to get tests passing, but when the editor integration
 tests directly manipulate &lt;code&gt;innerHTML&lt;/code&gt; and then Claude proclaims that
 interacting with the editor is now shown to work I have to chuckle a bit. And
 when I insist on doing what I mean and not just finding broken workarounds it
-doesn&amp;rsquo;t really change anything. After spinning more we&amp;rsquo;re always back where we
+doesn’t really change anything. After spinning more we’re always back where we
 started.&lt;/p&gt;
-&lt;p&gt;I am somewhat glad that this is where we&amp;rsquo;re at now. I&amp;rsquo;m not 100% sure if it&amp;rsquo;s
-progress. At least it&amp;rsquo;s surprisingly funny at times.&lt;/p&gt;
+&lt;p&gt;I am somewhat glad that this is where we’re at now. I’m not 100% sure if it’s
+progress. At least it’s surprisingly funny at times.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I haven&amp;rsquo;t written a regular weeknotes entry since the end of January, so
+&lt;p&gt;I haven’t written a regular weeknotes entry since the end of January, so
 naturally the list here is longer than usual.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms 0.5.1&lt;/a&gt;: I
-  inadvertently bumped the Django dependency without actually wanting that;
-  this patch release reverts that (while adding official support for new Django
-  and Python versions).&lt;/li&gt;
+inadvertently bumped the Django dependency without actually wanting that;
+this patch release reverts that (while adding official support for new Django
+and Python versions).&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.17&lt;/a&gt;: Mariusz has done
-  all the hard work for supporting newer versions of Django. I just had to
-  press the release button. That being said, four years after marking the
-  package as unmaintained I&amp;rsquo;m still maintaining it. At least I don&amp;rsquo;t get
-  complaints anymore&amp;hellip;&lt;/li&gt;
+all the hard work for supporting newer versions of Django. I just had to
+press the release button. That being said, four years after marking the
+package as unmaintained I’m still maintaining it. At least I don’t get
+complaints anymore…&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor
-  0.4&lt;/a&gt;: Added a dependency
-  on the pre-release of django-prose-editor and added a test suite including
-  integration tests so that we actually now when stuff breaks the next time!&lt;/li&gt;
+0.4&lt;/a&gt;: Added a dependency
+on the pre-release of django-prose-editor and added a test suite including
+integration tests so that we actually now when stuff breaks the next time!&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 5.1&lt;/a&gt;:
-  See above.&lt;/li&gt;
+See above.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data&lt;/a&gt;: Added fixes to dump
-  distinct objects. Spent more time than useful on the Django change which
-  added a final newline to JSON-serialized data.&lt;/li&gt;
+distinct objects. Spent more time than useful on the Django change which
+added a final newline to JSON-serialized data.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 3.1.2&lt;/a&gt;:
-  Importmaps support, added a &lt;code&gt;static_lazy&lt;/code&gt; helper which is useful to define
-  module-scoped static URLs. The later wouldn&amp;rsquo;t work with the
-  &lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt; because the manifest doesn&amp;rsquo;t yet exist when
-  &lt;code&gt;collectstatic&lt;/code&gt; runs, so the actual evaluation of static URLs has to be
-  postponed. The lazy version solves this nicely.&lt;/li&gt;
+Importmaps support, added a &lt;code&gt;static_lazy&lt;/code&gt; helper which is useful to define
+module-scoped static URLs. The later wouldn’t work with the
+&lt;code&gt;ManifestStaticFilesStorage&lt;/code&gt; because the manifest doesn’t yet exist when
+&lt;code&gt;collectstatic&lt;/code&gt; runs, so the actual evaluation of static URLs has to be
+postponed. The lazy version solves this nicely.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites 0.21.1&lt;/a&gt; and &lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites 0.4.1&lt;/a&gt;: See the relevant &lt;a href="https://406.ch/writing/til-tools-exist-which-do-not-lowercase-domain-names-when-requesting-websites-over-http-s/"&gt;TIL&lt;/a&gt; blogpost.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 05)</title><link href="https://406.ch/writing/weeknotes-2025-week-05/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-05/</id><published>2025-01-29T12:00:00Z</published><updated>2025-01-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-05"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-05"&gt;Weeknotes (2025 week 05)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 05)</title><link href="https://406.ch/writing/weeknotes-2025-week-05/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-05/</id><published>2025-01-29T12:00:00Z</published><updated>2025-01-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-05"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-05"&gt;Weeknotes (2025 week 05)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="djangonaut-space"&gt;&lt;a class="toclink" href="#djangonaut-space"&gt;Djangonaut Space&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;In December I wrote a few paragraphs about &lt;a href="https://406.ch/writing/weeknotes-2024-week-49/"&gt;my decision to not run for the
 Django Steering Council&lt;/a&gt;,
 mentioning that I want to contribute in different ways.&lt;/p&gt;
-&lt;p&gt;I have offered to contribute to Djangonaut Space to do some mentoring. I&amp;rsquo;m
-already a bit stressed, but that&amp;rsquo;s normal and to be expected. I&amp;rsquo;ll probably
+&lt;p&gt;I have offered to contribute to Djangonaut Space to do some mentoring. I’m
+already a bit stressed, but that’s normal and to be expected. I’ll probably
 have more to share about that in the close future!&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/feincms/feincms3-cookiecontrol/commits/main/"&gt;feincms-cookiecontrol 1.6&lt;/a&gt;: Removed the hardcoded dependency upon &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt; and some additional code golfing. The cookie banner JavaScript is now back to &amp;lt;4KiB.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-curtains/"&gt;django-curtains 0.7&lt;/a&gt;: Updated the CI job list and modernized the package somewhat, no code changes necessary. It&amp;rsquo;s good to release updated versions though just to show that it&amp;rsquo;s still actively maintained.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-curtains/"&gt;django-curtains 0.7&lt;/a&gt;: Updated the CI job list and modernized the package somewhat, no code changes necessary. It’s good to release updated versions though just to show that it’s still actively maintained.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.10.3&lt;/a&gt;: Small CSS fixes and mainly updated TipTap/ProseMirror.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.22&lt;/a&gt;: The updated version no longer autodeletes processed images; this wasn&amp;rsquo;t really a problem before but I was a little bit fearful that images are still referenced elsewhere and this change let&amp;rsquo;s me sleep better.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.22&lt;/a&gt;: The updated version no longer autodeletes processed images; this wasn’t really a problem before but I was a little bit fearful that images are still referenced elsewhere and this change let’s me sleep better.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms-oembed/"&gt;feincms-oembed 2.0&lt;/a&gt;: Oembed support for FeinCMS 1 without actually depending upon the FeinCMS package itself. Still works.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.2&lt;/a&gt;: The &lt;code&gt;Region&lt;/code&gt; type is now hashable; this may be useful, or not.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.3.1&lt;/a&gt;: I undeprecated the &lt;code&gt;TemplateMixin&lt;/code&gt; because even though &lt;code&gt;PageTypeMixin&lt;/code&gt; is nicer, sometimes all you need is a template selector.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2025 week 03)</title><link href="https://406.ch/writing/weeknotes-2025-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-03/</id><published>2025-01-15T12:00:00Z</published><updated>2025-01-15T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-03"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-03"&gt;Weeknotes (2025 week 03)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2025 week 03)</title><link href="https://406.ch/writing/weeknotes-2025-week-03/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-03/</id><published>2025-01-15T12:00:00Z</published><updated>2025-01-15T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-03"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-03"&gt;Weeknotes (2025 week 03)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="claude-ai-helped-me-for-the-first-time"&gt;&lt;a class="toclink" href="#claude-ai-helped-me-for-the-first-time"&gt;Claude AI helped me for the first time&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/matthiask/django-imagefield"&gt;django-imagefield&lt;/a&gt; prefers
 processing thumbnails, cropped images etc. directly when saving the model and
-not later on demand; it&amp;rsquo;s faster and also you&amp;rsquo;ll know it immediately when an
-image couldn&amp;rsquo;t be processed for some reason instead of only later when people
+not later on demand; it’s faster and also you’ll know it immediately when an
+image couldn’t be processed for some reason instead of only later when people
 actually try browsing your site.&lt;/p&gt;
 &lt;p&gt;A consequence is that if you change formats you have to remember that you have
 to reprocess the images. The Django app comes with a management command
@@ -360,15 +373,15 @@ command completes faster when it is being run on a system with several cores.&lt
 multiprocessing Python crashes. This is a well known issue and I remember
 reading about it a few years ago. I checked the docs and saw that the
 &lt;a href="https://docs.python.org/3/library/concurrent.futures.html"&gt;&lt;code&gt;concurrent.futures&lt;/code&gt;&lt;/a&gt;
-page doesn&amp;rsquo;t mention macOS, but
+page doesn’t mention macOS, but
 &lt;a href="https://docs.python.org/3/library/multiprocessing.html"&gt;&lt;code&gt;multiprocessing&lt;/code&gt;&lt;/a&gt;
 does. So, I hoped that a simple rewrite of the management command using
 &lt;code&gt;multiprocessing&lt;/code&gt; might fix it.&lt;/p&gt;
-&lt;p&gt;Because I was in a rush and really didn&amp;rsquo;t want to do it I turned to an AI
+&lt;p&gt;Because I was in a rush and really didn’t want to do it I turned to an AI
 assistant for doing this boring work. To my surprise it immediately produced a
 version which I could easily fix by hand to produce a working version. Of
-course, the initial response was totally broken, removed code it wasn&amp;rsquo;t
-supposed to, and even the syntax was invalid. I didn&amp;rsquo;t expect more though, but
+course, the initial response was totally broken, removed code it wasn’t
+supposed to, and even the syntax was invalid. I didn’t expect more though, but
 what was surprising was that it actually felt like I had to do less work at
 this time.&lt;/p&gt;
 &lt;p&gt;The assistant also helped adding a &lt;code&gt;--no-parallel&lt;/code&gt; flag to the management
@@ -376,98 +389,94 @@ command. The output was even more broken than the output of the change
 mentioned above, but again, I could easily fix it to achieve what I wanted.&lt;/p&gt;
 &lt;p&gt;The fact that I know the code and &lt;a href="https://git-scm.com/"&gt;git&lt;/a&gt; well certainly
 helped, the assistant would really have helped without that knowledge.&lt;/p&gt;
-&lt;p&gt;In the end, switching to &lt;code&gt;multiprocessing&lt;/code&gt; didn&amp;rsquo;t help, but adding the
+&lt;p&gt;In the end, switching to &lt;code&gt;multiprocessing&lt;/code&gt; didn’t help, but adding the
 &lt;code&gt;--no-parallel&lt;/code&gt; flag allowed them to run the processing themselves by not
 spawning any additional threads or processes.&lt;/p&gt;
 &lt;p&gt;The energy use and the stealing of copyrighted material done by the AI
 companies is still really bad. It does feel somewhat OK to use an AI assistant
-in an area where I&amp;rsquo;m proficient as well and where I probably also supplied
-training material (without being asked if I wanted this) though. It&amp;rsquo;s making me
-slightly faster, and doesn&amp;rsquo;t allow me to do things I really couldn&amp;rsquo;t otherwise.&lt;/p&gt;
+in an area where I’m proficient as well and where I probably also supplied
+training material (without being asked if I wanted this) though. It’s making me
+slightly faster, and doesn’t allow me to do things I really couldn’t otherwise.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS 24.12.3&lt;/a&gt;: I have added a TinyMCE
-  7 integration to FeinCMS.&lt;/li&gt;
+7 integration to FeinCMS.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.21.1&lt;/a&gt;: See
-  above.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 51)</title><link href="https://406.ch/writing/weeknotes-2024-week-51/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-51/</id><published>2024-12-20T12:00:00Z</published><updated>2024-12-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-51"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-51"&gt;Weeknotes (2024 week 51)&lt;/a&gt;&lt;/h1&gt;
+above.&lt;/li&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2024 week 51)</title><link href="https://406.ch/writing/weeknotes-2024-week-51/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-51/</id><published>2024-12-20T12:00:00Z</published><updated>2024-12-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-51"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-51"&gt;Weeknotes (2024 week 51)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="building-forms-using-django"&gt;&lt;a class="toclink" href="#building-forms-using-django"&gt;Building forms using Django&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I last wrote about this topic &lt;a href="https://406.ch/writing/building-forms-with-the-django-admin/"&gt;in April&lt;/a&gt;. It has &lt;a href="https://mastodon.social/@webology/113669270531953652"&gt;resurfaced on Mastodon this week&lt;/a&gt;. I&amp;rsquo;m thinking about writing a &lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt; demo app, but I already have too much on my plate. I think composing a forms builder on top of &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is the way to go, instead of replacing the admin interface altogether &amp;ndash; sure, you can always do that, but it&amp;rsquo;s so much less composable&amp;hellip;&lt;/p&gt;
+&lt;p&gt;I last wrote about this topic &lt;a href="https://406.ch/writing/building-forms-with-the-django-admin/"&gt;in April&lt;/a&gt;. It has &lt;a href="https://mastodon.social/@webology/113669270531953652"&gt;resurfaced on Mastodon this week&lt;/a&gt;. I’m thinking about writing a &lt;a href="https://github.com/feincms/feincms3-forms"&gt;feincms3-forms&lt;/a&gt; demo app, but I already have too much on my plate. I think composing a forms builder on top of &lt;a href="https://django-content-editor.readthedocs.io/"&gt;django-content-editor&lt;/a&gt; is the way to go, instead of replacing the admin interface altogether – sure, you can always do that, but it’s so much less composable…&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.2&lt;/a&gt;: No real changes, added support for Python 3.13 basically without changing anything. It&amp;rsquo;s always nice when this happens.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.2&lt;/a&gt;: No real changes, added support for Python 3.13 basically without changing anything. It’s always nice when this happens.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.21&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.10&lt;/a&gt;: I rebuilt django-prose-editor from the ground up &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;and wrote about that two weeks ago&lt;/a&gt;. The 0.10 release marks the final point of this particular rewrite.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 3.0&lt;/a&gt;: See the blog post from &lt;a href="https://406.ch/writing/object-based-assets-for-django-s-forms-media/"&gt;this week&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 49)</title><link href="https://406.ch/writing/weeknotes-2024-week-49/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-49/</id><published>2024-12-06T12:00:00Z</published><updated>2024-12-06T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-49"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-49"&gt;Weeknotes (2024 week 49)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2024 week 49)</title><link href="https://406.ch/writing/weeknotes-2024-week-49/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-49/</id><published>2024-12-06T12:00:00Z</published><updated>2024-12-06T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-49"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-49"&gt;Weeknotes (2024 week 49)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="django-steering-council-elections"&gt;&lt;a class="toclink" href="#django-steering-council-elections"&gt;Django Steering Council elections&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been thinking long and hard about running for the Django Steering Council. I think there are a few things I could contribute since I&amp;rsquo;ve been using Django for 16 or more years, and have been working on, maintaining and publishing third-party apps almost all this time. I have also contributed a few small features to Django core itself, and contributed my fair share of tests and bugfixes. The reason why I haven&amp;rsquo;t been more involved was always that I feared the review process with what I perceive to be a too unrestrained perfectionism. Teaching people is good, but I fear that those who teach are self-selected survivors of the process, which come to appreciate the perfectionism a bit too much. It&amp;rsquo;s somewhat the same as with the Swiss naturalization process &amp;ndash; the hurdles are very high, and some of those who weather the process maybe are or grow to be too fond of it.&lt;/p&gt;
-&lt;p&gt;An important point is that this has nothing to do with being nice (or not). Everybody has always been great, maybe with the exception of myself back when I didn&amp;rsquo;t understand that the problem wasn&amp;rsquo;t the individuals but the way everyone has agreed things should be done.&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m not the only one who thinks that we &lt;a href="https://knowyourmeme.com/memes/we-should-improve-society-somewhat"&gt;should improve the process somewhat&lt;/a&gt;. So, I&amp;rsquo;m definitely going to look out for candidates who think this is important.&lt;/p&gt;
-&lt;p&gt;There are a few reasons why I&amp;rsquo;m not running myself at this time. A somewhat important reason is that my candidacy wouldn&amp;rsquo;t help diversity at all. This shouldn&amp;rsquo;t discourage anyone else with the same background from running &amp;ndash; we cannot change the world all at once. More importantly, I have more personal reasons for being hesitant to accept new commitments. That being said, I&amp;rsquo;m looking forward to be more involved in the community in other ways. And also, it&amp;rsquo;s not now or never.&lt;/p&gt;
+&lt;p&gt;I have been thinking long and hard about running for the Django Steering Council. I think there are a few things I could contribute since I’ve been using Django for 16 or more years, and have been working on, maintaining and publishing third-party apps almost all this time. I have also contributed a few small features to Django core itself, and contributed my fair share of tests and bugfixes. The reason why I haven’t been more involved was always that I feared the review process with what I perceive to be a too unrestrained perfectionism. Teaching people is good, but I fear that those who teach are self-selected survivors of the process, which come to appreciate the perfectionism a bit too much. It’s somewhat the same as with the Swiss naturalization process – the hurdles are very high, and some of those who weather the process maybe are or grow to be too fond of it.&lt;/p&gt;
+&lt;p&gt;An important point is that this has nothing to do with being nice (or not). Everybody has always been great, maybe with the exception of myself back when I didn’t understand that the problem wasn’t the individuals but the way everyone has agreed things should be done.&lt;/p&gt;
+&lt;p&gt;I’m not the only one who thinks that we &lt;a href="https://knowyourmeme.com/memes/we-should-improve-society-somewhat"&gt;should improve the process somewhat&lt;/a&gt;. So, I’m definitely going to look out for candidates who think this is important.&lt;/p&gt;
+&lt;p&gt;There are a few reasons why I’m not running myself at this time. A somewhat important reason is that my candidacy wouldn’t help diversity at all. This shouldn’t discourage anyone else with the same background from running – we cannot change the world all at once. More importantly, I have more personal reasons for being hesitant to accept new commitments. That being said, I’m looking forward to be more involved in the community in other ways. And also, it’s not now or never.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5.4&lt;/a&gt;: No functional changes, only code golfing. It&amp;rsquo;s nice to have a working cookie banner with a solution for embedding third party content only when people consent in less than 4KiB of minified (not compressed!) JavaScript.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.20&lt;/a&gt;: Objects can now be reordered using arrow buttons instead of drag drop or manually changing the ordering field&amp;rsquo;s value. This should make the package more accessible. It&amp;rsquo;s always a joy when people contribute such useful improvements.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol 1.5.4&lt;/a&gt;: No functional changes, only code golfing. It’s nice to have a working cookie banner with a solution for embedding third party content only when people consent in less than 4KiB of minified (not compressed!) JavaScript.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.20&lt;/a&gt;: Objects can now be reordered using arrow buttons instead of drag drop or manually changing the ordering field’s value. This should make the package more accessible. It’s always a joy when people contribute such useful improvements.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.10a?&lt;/a&gt;: See &lt;a href="https://406.ch/writing/rebuilding-django-prose-editor-from-the-ground-up/"&gt;the recent blog post&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 47)</title><link href="https://406.ch/writing/weeknotes-2024-week-47/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-47/</id><published>2024-11-20T12:00:00Z</published><updated>2024-11-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-47"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-47"&gt;Weeknotes (2024 week 47)&lt;/a&gt;&lt;/h1&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2024 week 47)</title><link href="https://406.ch/writing/weeknotes-2024-week-47/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-47/</id><published>2024-11-20T12:00:00Z</published><updated>2024-11-20T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-47"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-47"&gt;Weeknotes (2024 week 47)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I missed a single co-writing session and of course that lead to four weeks of no posts at all to the blog. Oh well.&lt;/p&gt;
 &lt;h2 id="debugging"&gt;&lt;a class="toclink" href="#debugging"&gt;Debugging&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I want to share a few debugging stories from the last weeks.&lt;/p&gt;
-&lt;h3 id="pillow-11-and-djangos-get_image_dimensions"&gt;&lt;a class="toclink" href="#pillow-11-and-djangos-get_image_dimensions"&gt;Pillow 11 and Django&amp;rsquo;s &lt;code&gt;get_image_dimensions&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="pillow-11-and-djangos-get_image_dimensions"&gt;&lt;a class="toclink" href="#pillow-11-and-djangos-get_image_dimensions"&gt;Pillow 11 and Django’s &lt;code&gt;get_image_dimensions&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The goal of &lt;a href="https://github.com/matthiask/django-imagefield"&gt;django-imagefield&lt;/a&gt;
 was to deeply verify that Django and Pillow are able to work with uploaded
 files; some files can be loaded, their dimensions can be inspected, but
 problems happen later when Pillow actually tries resizing or filtering files.
 Because of this django-imagefield does more work when images are added to the
-system instead of working around it later. (Django doesn&amp;rsquo;t do this on purpose
+system instead of working around it later. (Django doesn’t do this on purpose
 because doing all this work up-front could be considered a DoS factor.)&lt;/p&gt;
 &lt;p&gt;In the last weeks I suddenly got recurring errors from saved files again,
-something which shouldn&amp;rsquo;t happen, but obviously did.&lt;/p&gt;
+something which shouldn’t happen, but obviously did.&lt;/p&gt;
 &lt;p&gt;Django wants to read image dimensions when accessing or saving image files (by
 the way, always use &lt;code&gt;height_field&lt;/code&gt; and &lt;code&gt;width_field&lt;/code&gt;, otherwise Django will
-open and inspect image files even when you&amp;rsquo;re only loading Django models from
-the database&amp;hellip;!) and it uses a smart and wonderful&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="#fn:fn1"&gt;1&lt;/a&gt;&lt;/sup&gt; hack to do this: It reads a few hundred bytes from the image file, instructs Pillow to inspect the file and if an exception happens it reads more bytes and tries again. This process relies on the exact type of exceptions raised internally though, and the release of Pillow 11 changed the types&amp;hellip; for some file types only. Fun times.&lt;/p&gt;
+open and inspect image files even when you’re only loading Django models from
+the database…!) and it uses a smart and wonderful&lt;sup id="fnref:fn1"&gt;&lt;a class="footnote-ref" href="#fn:fn1"&gt;1&lt;/a&gt;&lt;/sup&gt; hack to do this: It reads a few hundred bytes from the image file, instructs Pillow to inspect the file and if an exception happens it reads more bytes and tries again. This process relies on the exact type of exceptions raised internally though, and the release of Pillow 11 changed the types… for some file types only. Fun times.&lt;/p&gt;
 &lt;p&gt;The issue had already been reported as
-&lt;a href="https://code.djangoproject.com/ticket/33240"&gt;#33240&lt;/a&gt; and is now tracked as &lt;a href="https://github.com/python-pillow/Pillow/issues/8530"&gt;#8530&lt;/a&gt; on the Pillow issue tracker. Let&amp;rsquo;s see what happens.
+&lt;a href="https://code.djangoproject.com/ticket/33240"&gt;#33240&lt;/a&gt; and is now tracked as &lt;a href="https://github.com/python-pillow/Pillow/issues/8530"&gt;#8530&lt;/a&gt; on the Pillow issue tracker. Let’s see what happens.
 For now, django-imagefield declares itself to be incompatible with Pillow
 11.0.0 so that this error cannot happen.&lt;/p&gt;
 &lt;h3 id="rspack-and-lightningcss-shuffled-css-properties"&gt;&lt;a class="toclink" href="#rspack-and-lightningcss-shuffled-css-properties"&gt;rspack and lightningcss shuffled CSS properties&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; 1.0 started reordering CSS properties which of course lead to CSS properties overriding each other in the incorrect order. That was a fun one to debug. I tracked the issue down to the switch from the swc CSS minimizer to &lt;a href="https://github.com/parcel-bundler/lightningcss"&gt;lightningcss&lt;/a&gt; and submitted a reproduction to the &lt;a href="https://github.com/parcel-bundler/lightningcss/issues/805#issuecomment-2358219597"&gt;issue tracker&lt;/a&gt;. My rust knowledge wasn&amp;rsquo;t up to the task of attempting to submit a fix myself. Luckily, it has been fixed in the meantime.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; 1.0 started reordering CSS properties which of course lead to CSS properties overriding each other in the incorrect order. That was a fun one to debug. I tracked the issue down to the switch from the swc CSS minimizer to &lt;a href="https://github.com/parcel-bundler/lightningcss"&gt;lightningcss&lt;/a&gt; and submitted a reproduction to the &lt;a href="https://github.com/parcel-bundler/lightningcss/issues/805#issuecomment-2358219597"&gt;issue tracker&lt;/a&gt;. My rust knowledge wasn’t up to the task of attempting to submit a fix myself. Luckily, it has been fixed in the meantime.&lt;/p&gt;
 &lt;h3 id="rspack-problems"&gt;&lt;a class="toclink" href="#rspack-problems"&gt;rspack problems&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;I have another problem with rspack where I haven&amp;rsquo;t yet tracked down the issue. rspack produces a broken bundle starting with &lt;a href="https://github.com/web-infra-dev/rspack/releases/tag/v1.0.0-beta.2"&gt;1.0.0-beta.2&lt;/a&gt; when compiling a particular project of mine. I have the suspicion that I have misconfigured some stuff related to import paths and yarn workspaces. I have no idea how anyone could have a complete understanding of these things&amp;hellip;&lt;/p&gt;
+&lt;p&gt;I have another problem with rspack where I haven’t yet tracked down the issue. rspack produces a broken bundle starting with &lt;a href="https://github.com/web-infra-dev/rspack/releases/tag/v1.0.0-beta.2"&gt;1.0.0-beta.2&lt;/a&gt; when compiling a particular project of mine. I have the suspicion that I have misconfigured some stuff related to import paths and yarn workspaces. I have no idea how anyone could have a complete understanding of these things…&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; The problem was &lt;a href="https://github.com/web-infra-dev/rspack/issues/8027"&gt;#8027&lt;/a&gt;, &lt;code&gt;experiments.css&lt;/code&gt; is quite broken for now.&lt;/p&gt;
-&lt;p&gt;Bundlers are complex beasts, and I&amp;rsquo;m happy that I mostly can just use them.&lt;/p&gt;
+&lt;p&gt;Bundlers are complex beasts, and I’m happy that I mostly can just use them.&lt;/p&gt;
 &lt;h3 id="closing-thoughts"&gt;&lt;a class="toclink" href="#closing-thoughts"&gt;Closing thoughts&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Debugging is definitely a rewarding activity for me. I like tracking stuff down like this. Unfortunately, problems always tend to crop up when time is scarce already, but what can you do.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Quite a few releases, many of them verifying Python 3.13 and Django 5.1 support (if it hasn&amp;rsquo;t been added already in previous releases). The nicest part: If I remember correctly I didn&amp;rsquo;t have to change anything anywhere, everything just continues to work.&lt;/p&gt;
+&lt;p&gt;Quite a few releases, many of them verifying Python 3.13 and Django 5.1 support (if it hasn’t been added already in previous releases). The nicest part: If I remember correctly I didn’t have to change anything anywhere, everything just continues to work.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.19&lt;/a&gt;: I added support for automatically renumbering objects on page load. This is mostly useful if you already have existing data which isn&amp;rsquo;t ordered yet.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering 0.19&lt;/a&gt;: I added support for automatically renumbering objects on page load. This is mostly useful if you already have existing data which isn’t ordered yet.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.7&lt;/a&gt;: Made sure that objects are dumped in a deterministic order when dumping. I wanted to compare JSON dumps by hand before and after a big data migration in a customer project and differently ordered dumps made the comparison impossible.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.9&lt;/a&gt;: I updated the ProseMirror packages, and put the editor into read-only mode for &lt;code&gt;&amp;lt;textarea disabled&amp;gt;&lt;/code&gt; elements.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-language-sites/"&gt;feincms3-language-sites 0.4&lt;/a&gt;: Finally released the update containing the necessary hook to validate page trees and their unique paths before moving produces integrity errors. Error messages are nicer than internal server errors.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.17.2&lt;/a&gt;: The value of the cookie which is used to save the URL where users should be redirected to after authentication wasn&amp;rsquo;t checked for validity when setting it, only when reading it. This meant that attackers could produce invalid header errors in application servers. No real security problem here when using authlib&amp;rsquo;s code.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.17.2&lt;/a&gt;: The value of the cookie which is used to save the URL where users should be redirected to after authentication wasn’t checked for validity when setting it, only when reading it. This meant that attackers could produce invalid header errors in application servers. No real security problem here when using authlib’s code.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3 5.3&lt;/a&gt;: Minor update which mostly removes support for outdated Python and Django versions.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield 0.20&lt;/a&gt;: See above.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="footnote"&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id="fn:fn1"&gt;
-&lt;p&gt;wonderfully ugly&amp;#160;&lt;a class="footnote-backref" href="#fnref:fn1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I had some much needed time off, so this post isn&amp;rsquo;t that long even though &lt;a href="https://406.ch/writing/weeknotes-2024-week-39/"&gt;four weeks have passed since the last entry&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="footnote"&gt;&lt;hr&gt;&lt;ol&gt;&lt;li id="fn:fn1"&gt;&lt;p&gt;wonderfully ugly&amp;#160;&lt;a class="footnote-backref" href="#fnref:fn1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</summary></entry><entry><title>Weeknotes (2024 week 43)</title><link href="https://406.ch/writing/weeknotes-2024-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-43/</id><published>2024-10-23T12:00:00Z</published><updated>2024-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-43"&gt;Weeknotes (2024 week 43)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I had some much needed time off, so this post isn’t that long even though &lt;a href="https://406.ch/writing/weeknotes-2024-week-39/"&gt;four weeks have passed since the last entry&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="from-webpack-to-rspack"&gt;&lt;a class="toclink" href="#from-webpack-to-rspack"&gt;From webpack to rspack&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been really happy with &lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; lately. Converting
+&lt;p&gt;I’ve been really happy with &lt;a href="https://rspack.dev/"&gt;rspack&lt;/a&gt; lately. Converting
 webpack projects to rspack is straightforward since it mostly supports the same
-configuration, but it&amp;rsquo;s much much faster since it&amp;rsquo;s written in Rust. Rewriting
+configuration, but it’s much much faster since it’s written in Rust. Rewriting
 things in Rust is a recurring theme, but in this case it really helps a lot.
 Building the frontend of a larger project of ours consisting of several admin
 tools and complete frontend implementations for different teaching materials
-only takes 10 seconds now instead of several minutes. That&amp;rsquo;s a big and relevant
+only takes 10 seconds now instead of several minutes. That’s a big and relevant
 difference.&lt;/p&gt;
 &lt;p&gt;Newcomers should probably still either use &lt;a href="https://rsbuild.dev/"&gt;rsbuild&lt;/a&gt;,
 &lt;a href="https://vite.dev/"&gt;Vite&lt;/a&gt; or maybe no bundler at all. Vanilla JS and browser
@@ -477,47 +486,47 @@ reloading in development a lot, so learning to work with a frontend bundler is
 definitely still worth it.&lt;/p&gt;
 &lt;h2 id="dark-mode-and-light-mode"&gt;&lt;a class="toclink" href="#dark-mode-and-light-mode"&gt;Dark mode and light mode&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have been switching themes in my preferred a few times per year in the past. The following ugly bit of vimscript helps switch me the theme each time the sun comes out when working outside:&lt;/p&gt;
-&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="nv"&gt;function&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;FiatLux&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;:&lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;light&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;:&lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;background&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;dark&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nv"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;t&lt;/span&gt;:&lt;span class="nv"&gt;light&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;endif&lt;/span&gt;
-&lt;span class="nv"&gt;endfunction&lt;/span&gt;
-&lt;span class="nv"&gt;nnoremap&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;F12&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;:&lt;span class="k"&gt;call&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;FiatLux&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;CR&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;div class="chl"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;t&lt;/span&gt;:&lt;span class="nb"&gt;light&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; FiatLux&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="k"&gt;t&lt;/span&gt;:&lt;span class="nb"&gt;light&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+        :&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;background&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;light&lt;/span&gt;
+        &lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;t&lt;/span&gt;:&lt;span class="nb"&gt;light&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        :&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;background&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;dark&lt;/span&gt;
+        &lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;t&lt;/span&gt;:&lt;span class="nb"&gt;light&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;endif&lt;/span&gt;
+&lt;span class="k"&gt;endfunction&lt;/span&gt;
+&lt;span class="k"&gt;nnoremap&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;F12&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; :&lt;span class="k"&gt;call&lt;/span&gt; FiatLux&lt;span class="p"&gt;()&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I&amp;rsquo;m using the &lt;a href="https://devsuite.app/ptyxis/"&gt;Ptyxis&lt;/a&gt; terminal emulator
-currently, I haven&amp;rsquo;t investigated yet if there&amp;rsquo;s a shortcut to toggle dark and
+&lt;p&gt;I’m using the &lt;a href="https://devsuite.app/ptyxis/"&gt;Ptyxis&lt;/a&gt; terminal emulator
+currently, I haven’t investigated yet if there’s a shortcut to toggle dark and
 light mode for it as well. Using F10 to open the main menu works fine though,
-and using the mouse wouldn&amp;rsquo;t be painful either.&lt;/p&gt;
+and using the mouse wouldn’t be painful either.&lt;/p&gt;
 &lt;h2 id="helping-out-in-the-django-forum-and-the-discord"&gt;&lt;a class="toclink" href="#helping-out-in-the-django-forum-and-the-discord"&gt;Helping out in the Django forum and the Discord&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;I have found some pleasure in helping out in the &lt;a href="https://forum.djangoproject.com/"&gt;Django
 Forum&lt;/a&gt; and in the official &lt;a href="https://discord.gg/xcRH6mN4fa"&gt;Django
 Discord&lt;/a&gt;. I sometimes wonder why more people
-aren&amp;rsquo;t reading the Django source code when they hit something which looks like
-a bug or something which they do not understand. I find Django&amp;rsquo;s source code
-very readable and I have found many nuggets within it. I&amp;rsquo;d always recommend
+aren’t reading the Django source code when they hit something which looks like
+a bug or something which they do not understand. I find Django’s source code
+very readable and I have found many nuggets within it. I’d always recommend
 checking the documentation or maybe official help channels first, but the code
 is also out there and that fact should be taken advantage of.&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 7.1&lt;/a&gt;:
-  Fixed a bug where the ordering and region fields were handled incorrectly
-  when they appear on one line in the fieldset. Also improved the presentation
-  of inlines in unknown regions and clarified the meaning of the move to region
-  dropdown. Also, released the improvements from previous patch releases as a
-  new minor release because that&amp;rsquo;s what I should have been doing all along.&lt;/li&gt;
+Fixed a bug where the ordering and region fields were handled incorrectly
+when they appear on one line in the fieldset. Also improved the presentation
+of inlines in unknown regions and clarified the meaning of the move to region
+dropdown. Also, released the improvements from previous patch releases as a
+new minor release because that’s what I should have been doing all along.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer 0.27&lt;/a&gt;: A user has
-  been bitten by &lt;code&gt;slugify&lt;/code&gt; removing cyrillic characters because it only keeps
-  ASCII characters around. Here&amp;rsquo;s the wontfixed bug in the Django issue
-  tracker: &lt;a href="https://code.djangoproject.com/ticket/8391"&gt;#8391&lt;/a&gt;. I fixed the
-  issue by removing the slugification (is that even a word?) when generating
-  choices.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
+been bitten by &lt;code&gt;slugify&lt;/code&gt; removing cyrillic characters because it only keeps
+ASCII characters around. Here’s the wontfixed bug in the Django issue
+tracker: &lt;a href="https://code.djangoproject.com/ticket/8391"&gt;#8391&lt;/a&gt;. I fixed the
+issue by removing the slugification (is that even a word?) when generating
+choices.&lt;/li&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id="css-for-django-forms"&gt;&lt;a class="toclink" href="#css-for-django-forms"&gt;CSS for Django forms&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Not much going on in OSS land. I have been somewhat active in the official
 Django forum, discussing ways to add Python-level hooks to allow adding CSS
@@ -534,19 +543,20 @@ my packages and ideas :-)&lt;/p&gt;
 &lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django_user_messages/"&gt;django-user-messages 1.1&lt;/a&gt;:
-  Added Django 5.0, 5.1 to the CI, and fixed the migrations to no longer
-  mention &lt;code&gt;index_together&lt;/code&gt; at all. It seems that squashing the migrations
-  wasn&amp;rsquo;t sufficient, I also had to actually delete the old migrations.&lt;/li&gt;
+Added Django 5.0, 5.1 to the CI, and fixed the migrations to no longer
+mention &lt;code&gt;index_together&lt;/code&gt; at all. It seems that squashing the migrations
+wasn’t sufficient, I also had to actually delete the old migrations.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.1&lt;/a&gt;:
-  &lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;&amp;rsquo;s &lt;code&gt;FileResponse&lt;/code&gt; has gained support
-  for the HTTP Range header, allowing me to remove my homegrown implementation
-  from the package. The blacknoise implementation is now half as long as it was
-  in 1.0.&lt;/li&gt;
+&lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;’s &lt;code&gt;FileResponse&lt;/code&gt; has gained support
+for the HTTP Range header, allowing me to remove my homegrown implementation
+from the package. The blacknoise implementation is now half as long as it was
+in 1.0.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django_fhadmin/"&gt;django-fhadmin 2.3&lt;/a&gt;: No new
-  features, only tweaks to the styling and behavior prompted by updates to
-  Django&amp;rsquo;s admin interface.&lt;/li&gt;
+features, only tweaks to the styling and behavior prompted by updates to
+Django’s admin interface.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.17&lt;/a&gt;: I have
-  pruned the CI matrix and accepted a pull request adding a ru translation. I
-  feel conflicted about that since I strongly believe that everything is
-  political, but I don&amp;rsquo;t know if rejecting translations helps anyone.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+pruned the CI matrix and accepted a pull request adding a ru translation. I
+feel conflicted about that since I strongly believe that everything is
+political, but I don’t know if rejecting translations helps anyone.&lt;/li&gt;
+&lt;/ul&gt;
+</summary></entry></feed>

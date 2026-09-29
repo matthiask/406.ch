@@ -7,10 +7,10 @@ where some tool requested an URL from one of our websites using
 uppercase characters.&lt;/p&gt;
 &lt;p&gt;I knew that the domain part of all sorts of URLs is case sensitive, but what
 surprised me was that our server actually got a request with such a domain
-name, I hadn&amp;rsquo;t really seen that before.&lt;/p&gt;
+name, I hadn’t really seen that before.&lt;/p&gt;
 &lt;p&gt;After researching a bit I learned that for example &lt;a href="https://curl.se/"&gt;curl&lt;/a&gt;
 intentionally preserves the casing of domain names, but browsers generally do
-lowercase domains because it&amp;rsquo;s more consistent. It&amp;rsquo;s interesting that the
+lowercase domains because it’s more consistent. It’s interesting that the
 initial error was caused by a client with a proper Safari/macOS user agent, but
 further research showed that the request was probably sent by something called
 &lt;code&gt;go-social-activity-parser&lt;/code&gt;, whatever that is.&lt;/p&gt;
@@ -18,8 +18,9 @@ further research showed that the request was probably sent by something called
 &lt;a href="https://github.com/feincms/feincms3-language-sites/"&gt;feincms3-language-sites&lt;/a&gt;
 and also in &lt;a href="https://github.com/feincms/feincms3-sites/"&gt;feincms3-sites&lt;/a&gt; by
 switching to case-insensitive matching of domain names. I have not yet added
-punycode or IDNA equivalence to the code because I haven&amp;rsquo;t needed it yet and
-because I&amp;rsquo;m not 100% sure how to do it without breaking anything. Even though I
-often work on websites in languages with lots of accents and umlauts we don&amp;rsquo;t
-use such domain names too often, so it hasn&amp;rsquo;t been a problem yet. I&amp;rsquo;ll cross
-that bridge when I get there.&lt;/p&gt;</summary></entry></feed>
+punycode or IDNA equivalence to the code because I haven’t needed it yet and
+because I’m not 100% sure how to do it without breaking anything. Even though I
+often work on websites in languages with lots of accents and umlauts we don’t
+use such domain names too often, so it hasn’t been a problem yet. I’ll cross
+that bridge when I get there.&lt;/p&gt;
+</summary></entry></feed>
