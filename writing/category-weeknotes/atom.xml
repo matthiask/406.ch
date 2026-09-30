@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2026-09-09T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 37)</title><link href="https://406.ch/writing/weeknotes-2026-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-37/</id><published>2026-09-09T12:00:00Z</published><updated>2026-09-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-37"&gt;Weeknotes (2026 week 37)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Weeknotes</title><link href="https://406.ch/writing/category-weeknotes/atom.xml" rel="self" /><link href="https://406.ch/writing/category-weeknotes/" rel="alternate" /><id>https://406.ch/writing/category-weeknotes/</id><updated>2026-09-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 40)</title><link href="https://406.ch/writing/weeknotes-2026-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-40/</id><published>2026-09-30T12:00:00Z</published><updated>2026-09-30T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-40"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-40"&gt;Weeknotes (2026 week 40)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have been at &lt;a href="https://djangomed.eu/"&gt;Django on the Med 🏖️&lt;/a&gt; and already wrote a &lt;a href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/"&gt;lengthy post&lt;/a&gt; about that.&lt;/p&gt;
+&lt;p&gt;I did a lot of work on a &lt;a href="https://github.com/django/deps/pull/101"&gt;DEP for adding import map support to Django&lt;/a&gt; which is currently also being discussed on the &lt;a href="https://forum.djangoproject.com/t/integrate-importmap/35243"&gt;forum&lt;/a&gt;. Apart from that I’m not going to repeat anything from the post linked above, so check it out if you want to know more.&lt;/p&gt;
+&lt;p&gt;Motivated by a discussion I had at the sprint I also improved my release process. I now have a &lt;code&gt;make-release&lt;/code&gt; script in my dotfiles which updates the CHANGELOG with the version, bumps the version itself in the repo and commits and tags the release. The rest is handled by &lt;a href="https://406.ch/writing/switching-all-of-my-python-packages-to-pypi-trusted-publishing/"&gt;trusted publishing&lt;/a&gt;. I’m now finally also properly handling patch releases so that you don’t have to check the history to know what’s in a patch release. I already did that for minor and major version bumps, but was a bit too lazy. Now I can be even lazier and still more correct, and it feels great.&lt;/p&gt;
+&lt;p&gt;Next, I refactored the static site generator script for this blog to be much faster. I now do not have to wait when saving before refreshing the browser. Much nicer.&lt;/p&gt;
+&lt;h2 id="releases-from-the-last-three-weeks"&gt;&lt;a class="toclink" href="#releases-from-the-last-three-weeks"&gt;Releases from the last three weeks&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="django-js-asset"&gt;&lt;a class="toclink" href="#django-js-asset"&gt;django-js-asset&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 5.0a1&lt;/a&gt; implements the API proposed in the &lt;a href="https://github.com/django/deps/pull/101"&gt;DEP&lt;/a&gt;. This is an alpha release because the DEP is still being discussed and I don’t want to break people’s code again and again if, during discussion, it appears that the API should be different.&lt;/p&gt;
+&lt;h3 id="django-json-schema-editor-django-prose-editor-and-django-content-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor-django-prose-editor-and-django-content-editor"&gt;django-json-schema-editor, django-prose-editor and django-content-editor&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The three alpha releases &lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.15a1&lt;/a&gt;, &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.28a2&lt;/a&gt; and &lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 9.1a1&lt;/a&gt; depend on django-js-asset 5.0a1 mentioned above and implement the necessary changes for the new import map definition style.&lt;/p&gt;
+&lt;h3 id="django-authlib"&gt;&lt;a class="toclink" href="#django-authlib"&gt;django-authlib&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.20&lt;/a&gt; adds support for specifying the tenant when using Microsoft Entra ID.&lt;/p&gt;
+&lt;h3 id="feincms3-downloads"&gt;&lt;a class="toclink" href="#feincms3-downloads"&gt;feincms3-downloads&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/feincms3-downloads/"&gt;feincms3-downloads 0.6&lt;/a&gt; includes translation fixes, uses different error codes when &lt;code&gt;pdftocairo&lt;/code&gt; or &lt;code&gt;convert&lt;/code&gt; are missing, and changed the &lt;code&gt;PATH&lt;/code&gt; environment variable handling to be less annoying for local development.&lt;/p&gt;
+</summary></entry><entry><title>Weeknotes (2026 week 37)</title><link href="https://406.ch/writing/weeknotes-2026-week-37/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-37/</id><published>2026-09-09T12:00:00Z</published><updated>2026-09-09T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-37"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-37"&gt;Weeknotes (2026 week 37)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Tonight the temperature will drop to 10°C. I like it when it’s hot, but now I really enjoy the slightly cooler temperatures in Europe. The &lt;a href="/writing/weeknotes-2026-week-33/#holidays-and-the-heat-wave"&gt;last post&lt;/a&gt; was written in the middle of the heat wave. Yesterday we still had temperatures of over 30°C, which is a lot for September. But it will be the new normal. &lt;a href="https://en.wikipedia.org/wiki/El_Ni%C3%B1o%E2%80%93Southern_Oscillation"&gt;Next year probably won’t be cooler&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="releases-from-the-last-four-weeks"&gt;&lt;a class="toclink" href="#releases-from-the-last-four-weeks"&gt;Releases from the last four weeks&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Lots of activity!&lt;/p&gt;
@@ -525,38 +539,5 @@ ASCII characters around. Here’s the wontfixed bug in the Django issue
 tracker: &lt;a href="https://code.djangoproject.com/ticket/8391"&gt;#8391&lt;/a&gt;. I fixed the
 issue by removing the slugification (is that even a word?) when generating
 choices.&lt;/li&gt;
-&lt;/ul&gt;
-</summary></entry><entry><title>Weeknotes (2024 week 39)</title><link href="https://406.ch/writing/weeknotes-2024-week-39/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2024-week-39/</id><published>2024-09-25T12:00:00Z</published><updated>2024-09-25T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2024-week-39"&gt;&lt;a class="toclink" href="#weeknotes-2024-week-39"&gt;Weeknotes (2024 week 39)&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id="css-for-django-forms"&gt;&lt;a class="toclink" href="#css-for-django-forms"&gt;CSS for Django forms&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Not much going on in OSS land. I have been somewhat active in the official
-Django forum, discussing ways to add Python-level hooks to allow adding CSS
-classes around form fields and their labels. The discussion on the
-&lt;a href="https://forum.djangoproject.com/t/proposal-make-it-easy-to-add-css-classes-to-a-boundfield/32022"&gt;forum&lt;/a&gt;
-and on the &lt;a href="https://github.com/django/django/pull/18266"&gt;pull request&lt;/a&gt; goes in
-the direction of allowing using custom &lt;code&gt;BoundField&lt;/code&gt; classes per form or even
-per project (instead of only per field as is already possible today). This
-would allow overriding &lt;code&gt;css_classes&lt;/code&gt;, e.g. to add a simple &lt;code&gt;class="field"&lt;/code&gt;.
-Together with &lt;code&gt;:has()&lt;/code&gt; this would probably allow me to skip using custom HTML
-templates in 99% of all cases.&lt;/p&gt;
-&lt;p&gt;I have also been lurking in the Discord, but more to help and less to promote
-my packages and ideas :-)&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_user_messages/"&gt;django-user-messages 1.1&lt;/a&gt;:
-Added Django 5.0, 5.1 to the CI, and fixed the migrations to no longer
-mention &lt;code&gt;index_together&lt;/code&gt; at all. It seems that squashing the migrations
-wasn’t sufficient, I also had to actually delete the old migrations.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise 1.1&lt;/a&gt;:
-&lt;a href="https://www.starlette.io/"&gt;Starlette&lt;/a&gt;’s &lt;code&gt;FileResponse&lt;/code&gt; has gained support
-for the HTTP Range header, allowing me to remove my homegrown implementation
-from the package. The blacknoise implementation is now half as long as it was
-in 1.0.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django_fhadmin/"&gt;django-fhadmin 2.3&lt;/a&gt;: No new
-features, only tweaks to the styling and behavior prompted by updates to
-Django’s admin interface.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.17&lt;/a&gt;: I have
-pruned the CI matrix and accepted a pull request adding a ru translation. I
-feel conflicted about that since I strongly believe that everything is
-political, but I don’t know if rejecting translations helps anyone.&lt;/li&gt;
 &lt;/ul&gt;
 </summary></entry></feed>

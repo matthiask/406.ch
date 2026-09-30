@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-09-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Looking back at Django on the Med 🏖️  2026</title><link href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/" rel="alternate" /><id>https://406.ch/writing/looking-back-at-django-on-the-med-2026/</id><published>2026-09-28T12:00:00Z</published><updated>2026-09-28T12:00:00Z</updated><summary type="html">&lt;h1 id="looking-back-at-django-on-the-med-2026"&gt;&lt;a class="toclink" href="#looking-back-at-django-on-the-med-2026"&gt;Looking back at Django on the Med 🏖️  2026&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-09-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 40)</title><link href="https://406.ch/writing/weeknotes-2026-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-40/</id><published>2026-09-30T12:00:00Z</published><updated>2026-09-30T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-40"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-40"&gt;Weeknotes (2026 week 40)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have been at &lt;a href="https://djangomed.eu/"&gt;Django on the Med 🏖️&lt;/a&gt; and already wrote a &lt;a href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/"&gt;lengthy post&lt;/a&gt; about that.&lt;/p&gt;
+&lt;p&gt;I did a lot of work on a &lt;a href="https://github.com/django/deps/pull/101"&gt;DEP for adding import map support to Django&lt;/a&gt; which is currently also being discussed on the &lt;a href="https://forum.djangoproject.com/t/integrate-importmap/35243"&gt;forum&lt;/a&gt;. Apart from that I’m not going to repeat anything from the post linked above, so check it out if you want to know more.&lt;/p&gt;
+&lt;p&gt;Motivated by a discussion I had at the sprint I also improved my release process. I now have a &lt;code&gt;make-release&lt;/code&gt; script in my dotfiles which updates the CHANGELOG with the version, bumps the version itself in the repo and commits and tags the release. The rest is handled by &lt;a href="https://406.ch/writing/switching-all-of-my-python-packages-to-pypi-trusted-publishing/"&gt;trusted publishing&lt;/a&gt;. I’m now finally also properly handling patch releases so that you don’t have to check the history to know what’s in a patch release. I already did that for minor and major version bumps, but was a bit too lazy. Now I can be even lazier and still more correct, and it feels great.&lt;/p&gt;
+&lt;p&gt;Next, I refactored the static site generator script for this blog to be much faster. I now do not have to wait when saving before refreshing the browser. Much nicer.&lt;/p&gt;
+&lt;h2 id="releases-from-the-last-three-weeks"&gt;&lt;a class="toclink" href="#releases-from-the-last-three-weeks"&gt;Releases from the last three weeks&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="django-js-asset"&gt;&lt;a class="toclink" href="#django-js-asset"&gt;django-js-asset&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 5.0a1&lt;/a&gt; implements the API proposed in the &lt;a href="https://github.com/django/deps/pull/101"&gt;DEP&lt;/a&gt;. This is an alpha release because the DEP is still being discussed and I don’t want to break people’s code again and again if, during discussion, it appears that the API should be different.&lt;/p&gt;
+&lt;h3 id="django-json-schema-editor-django-prose-editor-and-django-content-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor-django-prose-editor-and-django-content-editor"&gt;django-json-schema-editor, django-prose-editor and django-content-editor&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The three alpha releases &lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.15a1&lt;/a&gt;, &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.28a2&lt;/a&gt; and &lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 9.1a1&lt;/a&gt; depend on django-js-asset 5.0a1 mentioned above and implement the necessary changes for the new import map definition style.&lt;/p&gt;
+&lt;h3 id="django-authlib"&gt;&lt;a class="toclink" href="#django-authlib"&gt;django-authlib&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.20&lt;/a&gt; adds support for specifying the tenant when using Microsoft Entra ID.&lt;/p&gt;
+&lt;h3 id="feincms3-downloads"&gt;&lt;a class="toclink" href="#feincms3-downloads"&gt;feincms3-downloads&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/feincms3-downloads/"&gt;feincms3-downloads 0.6&lt;/a&gt; includes translation fixes, uses different error codes when &lt;code&gt;pdftocairo&lt;/code&gt; or &lt;code&gt;convert&lt;/code&gt; are missing, and changed the &lt;code&gt;PATH&lt;/code&gt; environment variable handling to be less annoying for local development.&lt;/p&gt;
+</summary></entry><entry><title>Looking back at Django on the Med 🏖️  2026</title><link href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/" rel="alternate" /><id>https://406.ch/writing/looking-back-at-django-on-the-med-2026/</id><published>2026-09-28T12:00:00Z</published><updated>2026-09-28T12:00:00Z</updated><summary type="html">&lt;h1 id="looking-back-at-django-on-the-med-2026"&gt;&lt;a class="toclink" href="#looking-back-at-django-on-the-med-2026"&gt;Looking back at Django on the Med 🏖️  2026&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I haven’t been to a programming conference in a really long time. That was
 mostly due to laziness, wanting to stay at home and decision fatigue because I
 didn’t know how to travel sustainably and didn’t know where to stay during the
@@ -784,57 +798,4 @@ I reworked the menu extension to be customizable more easily (you can now specif
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18.1&lt;/a&gt;: Fix a minor bug around the selected folder handling. Invalid folder ID values could crash the backend under some circumstances.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.5&lt;/a&gt;: No large changes, mainly Tiptap updates.&lt;/li&gt;
 &lt;/ul&gt;
-</summary></entry><entry><title>My favorite Django packages</title><link href="https://406.ch/writing/my-favorite-django-packages/" rel="alternate" /><id>https://406.ch/writing/my-favorite-django-packages/</id><published>2025-10-22T12:00:00Z</published><updated>2025-10-22T12:00:00Z</updated><summary type="html">&lt;h1 id="my-favorite-django-packages"&gt;&lt;a class="toclink" href="#my-favorite-django-packages"&gt;My favorite Django packages&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;Inspired by other posts I also wanted to write up a list of my favorite Django
-packages. Since I’ve been working in this space for so long and since I’m
-maintaining quite a large list of packages I worry a bit about tooting my own
-horn too much here; that said, the reasons for choosing some packages hopefully
-speak for themselves.&lt;/p&gt;
-&lt;p&gt;Also, I’m sure I’m forgetting many many packages here. Sorry for that in advance.&lt;/p&gt;
-&lt;h2 id="core-django"&gt;&lt;a class="toclink" href="#core-django"&gt;Core Django&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv&lt;/a&gt;: Loads environment variables from &lt;code&gt;.env&lt;/code&gt; and automatically converts them to their Python equivalent if &lt;a href="https://docs.python.org/3/library/ast.html#ast.literal_eval"&gt;&lt;code&gt;ast.literal_eval&lt;/code&gt;&lt;/a&gt; understands it. Also contains implementations for loading database, cache, email and storage configuration from environment variables (similar to dj-database-url). I added this functionality to speckenv when some of the available environment configuration apps’ maintenance state was somewhat questionable.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cors-headers/"&gt;django-cors-headers&lt;/a&gt;: CORS header support for Django. This would be a nice addition to Django itself.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/sentry-sdk/"&gt;sentry-sdk&lt;/a&gt;: I’m using Sentry in almost all projects.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-template-partials/"&gt;django-template-partials&lt;/a&gt;: Template partials for Django! This has been added to the upcoming 6.0 release of Django. While the Django template language has always been evolving and improving, this feels like the first larger step in a long time. As I and others have said, the combination of &lt;a href="https://htmx.org/"&gt;htmx&lt;/a&gt; and django-template-partials is really really nice. It isn’t surprising at all that htmx is so well loved in the Django community.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-s3-storage/"&gt;django-s3-storage&lt;/a&gt;: Yes, django-storages exist, but I prefer django-s3-storage because of its focus and simplicity.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield&lt;/a&gt;: Image field which validates images deeply, and supports pre-rendering thumbnails etc. I understand why Django only superficially validates uploaded images because of the danger of denial of service attacks, but I’d rather not have files on the sites I manage which the great &lt;a href="https://pillow.readthedocs.io/"&gt;Pillow&lt;/a&gt; library doesn’t support.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/psycopg/"&gt;psycopg&lt;/a&gt;: Whenever I can I work with PostgreSQL, and psycopg is how I interface with the database.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="data-structures"&gt;&lt;a class="toclink" href="#data-structures"&gt;Data structures&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;: My
-favorite way to work with trees except when talking about real trees.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-translated-fields/"&gt;django-translated-fields&lt;/a&gt;: My preferred way to do model-level internationalization.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="cms-building"&gt;&lt;a class="toclink" href="#cms-building"&gt;CMS building&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been working on &lt;a href="https://github.com/feincms/feincms/"&gt;FeinCMS&lt;/a&gt; since 2009. So, it shouldn’t surprise anyone that this is still my favorite way to
-build CMS on top of Django. I like that it’s basically a thin layer on top of
-Django’s administration interface and doesn’t want to take over the whole admin
-interface or even the whole website.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;: The modern, focussed foundation replacing FeinCMS.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor&lt;/a&gt;: The admin interface extension providing core components to build content editing interfaces.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt;: A nice HTML editor by yours truly.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;: JSON schema-based editing using &lt;a href="https://www.npmjs.com/package/@json-editor/json-editor"&gt;@json-editor/json-editor&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="working-with-external-content"&gt;&lt;a class="toclink" href="#working-with-external-content"&gt;Working with external content&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/micawber/"&gt;micawber&lt;/a&gt;: Micawber is my favorite tool to embed third party content (YouTube, Vimeo, whatever) when feincms3’s own very limited embedding functionality is insufficient.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol&lt;/a&gt;: Everyone likes cookie banner (or not). feincms3-cookiecontrol implements not just an informative cookie banner, but actually supports not embedding tracking scripts and third party content unless the user consented, either a blanket or a per-provider consent for embedded media. It does NOT support the very annoying interface where you have to deselect each tracking service individually.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="pdf-generation"&gt;&lt;a class="toclink" href="#pdf-generation"&gt;PDF generation&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/reportlab/"&gt;Reportlab&lt;/a&gt;: Reportlab is nice if you need fine-grained control over PDF generation. Reportlab has created more than 10’000 invoices for the company I work at, so I’m definitely grateful for it :-)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://weasyprint.org/"&gt;Weasyprint&lt;/a&gt;: I have been using Weasyprint more and more for generating PDFs. Using HTML and CSS can be nicer than using Reportlab’s Platypus module. Weasyprint doesn’t instrument a webbrowser to produce PDFs but instead implements the rendering engine itself. It works really well.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="testing-and-development"&gt;&lt;a class="toclink" href="#testing-and-development"&gt;Testing and development&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;I actually do like unittest. I have started using &lt;a href="https://docs.pytest.org/en/stable/"&gt;pytest&lt;/a&gt; somewhat more often because using &lt;code&gt;-k keyword&lt;/code&gt; to filter tests to run is great.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/factory-boy/"&gt;factory-boy&lt;/a&gt;: This package has always treated me well when creating data for tests.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://playwright.dev/"&gt;playwright&lt;/a&gt;: Playwright is the end-to-end test browser automation library I prefer.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Last but not least, I really like &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar&lt;/a&gt;. So much, that I’m even helping with the maintenance since 2016.&lt;/p&gt;
-&lt;h2 id="serving"&gt;&lt;a class="toclink" href="#serving"&gt;Serving&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We mostly use Kubernetes to serve websites these days. Inside the pods, I’m working with the &lt;a href="https://pypi.org/project/granian/"&gt;granian&lt;/a&gt; RSGI/ASGI server and with &lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise&lt;/a&gt; for serving static files.&lt;/p&gt;
 </summary></entry></feed>

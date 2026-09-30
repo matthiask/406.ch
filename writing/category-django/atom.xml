@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2026-09-28T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Looking back at Django on the Med 🏖️  2026</title><link href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/" rel="alternate" /><id>https://406.ch/writing/looking-back-at-django-on-the-med-2026/</id><published>2026-09-28T12:00:00Z</published><updated>2026-09-28T12:00:00Z</updated><summary type="html">&lt;h1 id="looking-back-at-django-on-the-med-2026"&gt;&lt;a class="toclink" href="#looking-back-at-django-on-the-med-2026"&gt;Looking back at Django on the Med 🏖️  2026&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Django</title><link href="https://406.ch/writing/category-django/atom.xml" rel="self" /><link href="https://406.ch/writing/category-django/" rel="alternate" /><id>https://406.ch/writing/category-django/</id><updated>2026-09-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 40)</title><link href="https://406.ch/writing/weeknotes-2026-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-40/</id><published>2026-09-30T12:00:00Z</published><updated>2026-09-30T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-40"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-40"&gt;Weeknotes (2026 week 40)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I have been at &lt;a href="https://djangomed.eu/"&gt;Django on the Med 🏖️&lt;/a&gt; and already wrote a &lt;a href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/"&gt;lengthy post&lt;/a&gt; about that.&lt;/p&gt;
+&lt;p&gt;I did a lot of work on a &lt;a href="https://github.com/django/deps/pull/101"&gt;DEP for adding import map support to Django&lt;/a&gt; which is currently also being discussed on the &lt;a href="https://forum.djangoproject.com/t/integrate-importmap/35243"&gt;forum&lt;/a&gt;. Apart from that I’m not going to repeat anything from the post linked above, so check it out if you want to know more.&lt;/p&gt;
+&lt;p&gt;Motivated by a discussion I had at the sprint I also improved my release process. I now have a &lt;code&gt;make-release&lt;/code&gt; script in my dotfiles which updates the CHANGELOG with the version, bumps the version itself in the repo and commits and tags the release. The rest is handled by &lt;a href="https://406.ch/writing/switching-all-of-my-python-packages-to-pypi-trusted-publishing/"&gt;trusted publishing&lt;/a&gt;. I’m now finally also properly handling patch releases so that you don’t have to check the history to know what’s in a patch release. I already did that for minor and major version bumps, but was a bit too lazy. Now I can be even lazier and still more correct, and it feels great.&lt;/p&gt;
+&lt;p&gt;Next, I refactored the static site generator script for this blog to be much faster. I now do not have to wait when saving before refreshing the browser. Much nicer.&lt;/p&gt;
+&lt;h2 id="releases-from-the-last-three-weeks"&gt;&lt;a class="toclink" href="#releases-from-the-last-three-weeks"&gt;Releases from the last three weeks&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="django-js-asset"&gt;&lt;a class="toclink" href="#django-js-asset"&gt;django-js-asset&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset 5.0a1&lt;/a&gt; implements the API proposed in the &lt;a href="https://github.com/django/deps/pull/101"&gt;DEP&lt;/a&gt;. This is an alpha release because the DEP is still being discussed and I don’t want to break people’s code again and again if, during discussion, it appears that the API should be different.&lt;/p&gt;
+&lt;h3 id="django-json-schema-editor-django-prose-editor-and-django-content-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor-django-prose-editor-and-django-content-editor"&gt;django-json-schema-editor, django-prose-editor and django-content-editor&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The three alpha releases &lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.15a1&lt;/a&gt;, &lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.28a2&lt;/a&gt; and &lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 9.1a1&lt;/a&gt; depend on django-js-asset 5.0a1 mentioned above and implement the necessary changes for the new import map definition style.&lt;/p&gt;
+&lt;h3 id="django-authlib"&gt;&lt;a class="toclink" href="#django-authlib"&gt;django-authlib&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib 0.20&lt;/a&gt; adds support for specifying the tenant when using Microsoft Entra ID.&lt;/p&gt;
+&lt;h3 id="feincms3-downloads"&gt;&lt;a class="toclink" href="#feincms3-downloads"&gt;feincms3-downloads&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/feincms3-downloads/"&gt;feincms3-downloads 0.6&lt;/a&gt; includes translation fixes, uses different error codes when &lt;code&gt;pdftocairo&lt;/code&gt; or &lt;code&gt;convert&lt;/code&gt; are missing, and changed the &lt;code&gt;PATH&lt;/code&gt; environment variable handling to be less annoying for local development.&lt;/p&gt;
+</summary></entry><entry><title>Looking back at Django on the Med 🏖️  2026</title><link href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/" rel="alternate" /><id>https://406.ch/writing/looking-back-at-django-on-the-med-2026/</id><published>2026-09-28T12:00:00Z</published><updated>2026-09-28T12:00:00Z</updated><summary type="html">&lt;h1 id="looking-back-at-django-on-the-med-2026"&gt;&lt;a class="toclink" href="#looking-back-at-django-on-the-med-2026"&gt;Looking back at Django on the Med 🏖️  2026&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I haven’t been to a programming conference in a really long time. That was
 mostly due to laziness, wanting to stay at home and decision fatigue because I
 didn’t know how to travel sustainably and didn’t know where to stay during the
@@ -611,32 +625,5 @@ interface or even the whole website.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0.2&lt;/a&gt;: I fixed the ordering calculation in the cloning functionality; the tests are a bit too forgiving for my taste now but I just can’t figure out why the gap for inserting cloned items is sometimes larger than it should be. It doesn’t matter though, since ordering values do not have any significance, they only have to provide a definite ordering for content items.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.2&lt;/a&gt;: Cleaned up the documentation after the 0.18 cleanup (where automatic dependency management has been removed), fixed table styles when using dark mode.&lt;/li&gt;
-&lt;/ul&gt;
-</summary></entry><entry><title>Weeknotes (2025 week 35)</title><link href="https://406.ch/writing/weeknotes-2025-week-35/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-35/</id><published>2025-08-29T12:00:00Z</published><updated>2025-08-29T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-35"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-35"&gt;Weeknotes (2025 week 35)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;Summer was and is nice. The hot days seem to be over (for now), but in the last
-years summer hasn’t really left until the end of September, so we’ll see. I
-personally like the warm weather but I really hoped that our leaders were
-smarter. The &lt;a href="https://406.ch/writing/category-climate/"&gt;climate emergency&lt;/a&gt;
-could be seen from far away. The pigheadedness is hard to stomach. And of
-course it’s not the only problem we’re facing as humanity at all.&lt;/p&gt;
-&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I did some longer-form writing about two of the releases here: &lt;a href="https://406.ch/writing/menu-improvements-in-django-prose-editor/"&gt;Menu improvements in django-prose-editor&lt;/a&gt; and &lt;a href="https://406.ch/writing/django-content-editor-cloning/"&gt;django-content-editor now supports cloning of content&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar 6.0&lt;/a&gt;:
-We have released a new version of the toolbar which supports persisting
-debugging data to the database. This is especially useful when using ASGI,
-because we cannot use threadlocal storage for this data then.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18&lt;/a&gt;:
-Reworked the menu system to support dropdowns, not just button groups. Added
-a custom &lt;code&gt;TextClass&lt;/code&gt; extension which allows adding classes to spans and a
-&lt;code&gt;NodeClass&lt;/code&gt; extension which allows adding classes to nodes. Tiptap supports
-adding arbitrary styles, I’d rather limit this a bit more and only offer
-predefined CSS classes.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0&lt;/a&gt;:
-Added support for cloning content. Made the region tabs stick to the top of
-the browser window.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18&lt;/a&gt;: Improved the
-folder deletion interface slightly.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt 0.18&lt;/a&gt;: I still seem to be maintaining the project even though I officially marked the project as unmaintained &lt;a href="https://github.com/django-mptt/django-mptt/commit/6f6c1c485f3adc1d579f8d22e0279ce1d52334f6"&gt;more than 4 years ago&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 </summary></entry></feed>
