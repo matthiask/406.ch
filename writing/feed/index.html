@@ -1,5 +1,27 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-09-30T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 40)</title><link href="https://406.ch/writing/weeknotes-2026-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-40/</id><published>2026-09-30T12:00:00Z</published><updated>2026-09-30T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-40"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-40"&gt;Weeknotes (2026 week 40)&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-10-07T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>I don't care about traffic numbers on my website</title><link href="https://406.ch/writing/i-don-t-care-about-traffic-numbers-on-my-website/" rel="alternate" /><id>https://406.ch/writing/i-don-t-care-about-traffic-numbers-on-my-website/</id><published>2026-10-07T12:00:00Z</published><updated>2026-10-07T12:00:00Z</updated><summary type="html">&lt;h1 id="i-dont-care-about-traffic-numbers-on-my-website"&gt;&lt;a class="toclink" href="#i-dont-care-about-traffic-numbers-on-my-website"&gt;I don’t care about traffic numbers on my website&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;In the early days of this website I had a Google Analytics script embedded and
+I also sometimes analyzed the server logs to look at visitor counts and where
+they came from.&lt;/p&gt;
+&lt;p&gt;While that was interesting, I have completely stopped. There’s no analytics
+script anymore and I don’t have access to server logs at all.&lt;/p&gt;
+&lt;p&gt;I do care about human readers and I also do care whether people are
+appreciative of what I’m doing. There’s no way to programmatically measure
+that, though, so I’m not even going to try.&lt;/p&gt;
+&lt;p&gt;These days, the primary audience of my writing is myself, since writing helps
+formulate thoughts – when turning over ideas in your head it’s easy to delude
+yourself into thinking that you have a clear story and a coherent argument.
+Trying to write it down is really hard if it’s complete bullshit.
+Writing still isn’t the ultimate test of an idea of course, otherwise we’d have
+solved philosophy a long time ago.&lt;/p&gt;
+&lt;p&gt;I fear that caring about traffic numbers would make me care about the wrong
+thing: I would start writing about what people (or bots) want to read or what
+brings traffic instead of the things I actually want to think about. I want to
+write about the ideas I’m trying to get a clearer understanding of. Writing is
+thinking.&lt;/p&gt;
+&lt;p&gt;I like the calm internet of the blogging days. Those days might come back when
+people have had enough of algorithmic social media outrage.&lt;/p&gt;
+</summary></entry><entry><title>Weeknotes (2026 week 40)</title><link href="https://406.ch/writing/weeknotes-2026-week-40/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-40/</id><published>2026-09-30T12:00:00Z</published><updated>2026-09-30T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-40"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-40"&gt;Weeknotes (2026 week 40)&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;I have been at &lt;a href="https://djangomed.eu/"&gt;Django on the Med 🏖️&lt;/a&gt; and already wrote a &lt;a href="https://406.ch/writing/looking-back-at-django-on-the-med-2026/"&gt;lengthy post&lt;/a&gt; about that.&lt;/p&gt;
 &lt;p&gt;I did a lot of work on a &lt;a href="https://github.com/django/deps/pull/101"&gt;DEP for adding import map support to Django&lt;/a&gt; which is currently also being discussed on the &lt;a href="https://forum.djangoproject.com/t/integrate-importmap/35243"&gt;forum&lt;/a&gt;. Apart from that I’m not going to repeat anything from the post linked above, so check it out if you want to know more.&lt;/p&gt;
 &lt;p&gt;Motivated by a discussion I had at the sprint I also improved my release process. I now have a &lt;code&gt;make-release&lt;/code&gt; script in my dotfiles which updates the CHANGELOG with the version, bumps the version itself in the repo and commits and tags the release. The rest is handled by &lt;a href="https://406.ch/writing/switching-all-of-my-python-packages-to-pypi-trusted-publishing/"&gt;trusted publishing&lt;/a&gt;. I’m now finally also properly handling patch releases so that you don’t have to check the history to know what’s in a patch release. I already did that for minor and major version bumps, but was a bit too lazy. Now I can be even lazier and still more correct, and it feels great.&lt;/p&gt;
@@ -779,23 +801,5 @@ means that custom extensions are now also supported inside the JSON editor
 component.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.20&lt;/a&gt;:
 I reworked the menu extension to be customizable more easily (you can now specify &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/menu.html#defining-button-groups-and-dropdowns"&gt;button groups and dropdowns&lt;/a&gt; directly without using JavaScript code) and I also extended the &lt;a href="https://django-prose-editor.readthedocs.io/en/latest/nodeclass.html"&gt;&lt;code&gt;NodeClass&lt;/code&gt; extension&lt;/a&gt; to allow assigning predefined CSS classes not only to nodes but also to marks.&lt;/li&gt;
-&lt;/ul&gt;
-</summary></entry><entry><title>Weeknotes (2025 week 43)</title><link href="https://406.ch/writing/weeknotes-2025-week-43/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2025-week-43/</id><published>2025-10-23T12:00:00Z</published><updated>2025-10-23T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2025-week-43"&gt;&lt;a class="toclink" href="#weeknotes-2025-week-43"&gt;Weeknotes (2025 week 43)&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I published the last weeknotes entry in the first half of September.&lt;/p&gt;
-&lt;h2 id="drama-in-oss"&gt;&lt;a class="toclink" href="#drama-in-oss"&gt;Drama in OSS&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been following the Ruby gems debacle a bit. Initially at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt; we used our own PHP-based framework &lt;a href="https://github.com/matthiask/swisdk2"&gt;swisdk2&lt;/a&gt; to build websites. This obviously didn’t scale and I was very annoyed with PHP, so I was looking for alternatives.&lt;/p&gt;
-&lt;p&gt;I remember comparing Ruby on Rails and Django, and decided to switch from PHP/swisdk2 to Python/Django for two reasons: The automatically generated admin interface and the fact that Ruby source code just had too much punctuation characters for my taste. It’s a very whimsical reason and I do not put any weight on that. That being said, given how some of the exponents in Ruby/Rails land behave I’m very very glad to have chosen Python and Django. While not everything is perfect (it never is) at least those communities agree that trying to behave nicely to each other is something to be cheered and not something to be sneered at.&lt;/p&gt;
-&lt;h2 id="copilot"&gt;&lt;a class="toclink" href="#copilot"&gt;Copilot&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I assigned some GitHub issues to Copilot. The result wasn’t very useful. I don’t know if I want to repeat it, local tools work fine for when I really need them.&lt;/p&gt;
-&lt;h2 id="python-and-django-compatibility"&gt;&lt;a class="toclink" href="#python-and-django-compatibility"&gt;Python and Django compatibility&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;It’s the time again to update the GitHub actions matrix and Trove identifiers. I do not like doing it. You can expect all maintained packages to be compatible with the latest and best versions, no upper bounds necessary. Man, if only AI could automate &lt;em&gt;those&lt;/em&gt; tasks…&lt;/p&gt;
-&lt;h2 id="updated-packages-since-2025-09-10"&gt;&lt;a class="toclink" href="#updated-packages-since-2025-09-10"&gt;Updated packages since 2025-09-10&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;: We use &lt;code&gt;hashlib.md5&lt;/code&gt;, but not for security.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries 0.21.2&lt;/a&gt;: django-tree-queries now bundles an admin interface for trees.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor 8.0.3&lt;/a&gt;: Minor CSS fix so that the editor looks nicer with Django 6.0.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor 0.8.1&lt;/a&gt;: Fixes for multiple JSON editors in the same window, better &lt;code&gt;JSONPlugin.__str__&lt;/code&gt; default implementation.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18.1&lt;/a&gt;: Fix a minor bug around the selected folder handling. Invalid folder ID values could crash the backend under some circumstances.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.5&lt;/a&gt;: No large changes, mainly Tiptap updates.&lt;/li&gt;
 &lt;/ul&gt;
 </summary></entry></feed>
