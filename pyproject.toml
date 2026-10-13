@@ -3,10 +3,10 @@ name = "406-ch"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13,<3.14"
+requires-python = ">=3.14,<3.15"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
   "jinja2>=3.1.4",
@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py314"
 fix = true
 lint.extend-select = [ "B", "C4", "C90", "DJ", "E", "F", "FBT", "G", "I", "INT", "PIE", "SIM", "UP", "W", "YTT" ]
 lint.extend-ignore = [
