@@ -17,6 +17,11 @@ jobs:
       with:
         version: latest
         enable-cache: true
+    - name: Run tests
+      run: uv run python -m unittest -v
+      env:
+        # Put [allow-guid-changes] into the commit message for intentional changes
+        ALLOW_GUID_CHANGES: ${{ contains(github.event.head_commit.message, '[allow-guid-changes]') }}
     - name: Build site
       run: uv run generate.py
     - name: Deploy

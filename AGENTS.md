@@ -8,7 +8,12 @@ output goes to `htdocs/` (gitignored, wiped and rewritten on every build).
 - Build: `uv run python generate.py` — writes `htdocs/` with production URLs (`https://406.ch`).
 - Preview: `./watch.sh` — rebuilds on change (drafts and future posts included) and
   serves on http://localhost:8001. Note it overwrites `htdocs/` with localhost URLs.
-- No test suite.
+- Test: `uv run python -m unittest` — builds the site (production URLs, overwrites `htdocs/`),
+  fails on any post parse error or duplicated slug, and checks the Atom feed structure.
+  It also compares against the deployed feeds on `origin/gh-pages`: entry ids, links and dates
+  must not change (that floods feed readers). Deleting a post file or making it a draft again
+  is detected and allowed. Fix accidental changes with `Slug:`/`Date:`, or override with
+  `ALLOW_GUID_CHANGES=true` locally or `[allow-guid-changes]` in the commit message in CI.
 
 ## Post format
 
