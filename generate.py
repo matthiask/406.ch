@@ -9,7 +9,7 @@ import unicodedata
 from collections import Counter
 from dataclasses import dataclass
 from hashlib import md5
-from itertools import chain
+from itertools import chain, count
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 from xml.etree.ElementTree import Element, SubElement as SE, tostring as _ts
@@ -201,6 +201,12 @@ def main(*, only_published=True, base_url=URL):
     counter = Counter(chain.from_iterable(post.categories for post in posts))
     print(f"{len(posts)} posts in ", end="")
     print(", ".join(f"{c.title} ({count})" for c, count in sorted(counter.items())))
+    months = {post.date.year * 12 + post.date.month - 1 for post in posts}
+    month = today.year * 12 + today.month - 1
+    month -= month not in months  # The current month isn't over yet
+    streak = next(i for i in count() if month - i not in months)
+    since = dt.date((month - streak + 1) // 12, (month - streak + 1) % 12 + 1, 1)
+    print(f"Posting streak: {streak} months without a gap (since {since:%B %Y})")
 
     shutil.rmtree(DIR / "htdocs", ignore_errors=True)
     shutil.copytree(DIR / "assets", DIR / "htdocs" / "assets", dirs_exist_ok=True)
