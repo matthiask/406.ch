@@ -46,12 +46,22 @@
       </small>
     </p>
 
-    <script src="https://utteranc.es/client.js"
-            repo="matthiask/406-comments"
-            issue-term="pathname"
-            theme="preferred-color-scheme"
-            crossorigin="anonymous"
-            async>
+    <script>
+      (() => {
+        const utterancesTheme = () => `github-${effectiveTheme()}`
+        const script = document.createElement("script")
+        script.src = "https://utteranc.es/client.js"
+        script.async = true
+        script.crossOrigin = "anonymous"
+        script.setAttribute("repo", "matthiask/406-comments")
+        script.setAttribute("issue-term", "pathname")
+        script.setAttribute("theme", utterancesTheme())
+        document.currentScript.after(script)
+        document.addEventListener("themechange", () => {
+          const frame = document.querySelector(".utterances-frame")
+          frame?.contentWindow.postMessage({ type: "set-theme", theme: utterancesTheme() }, "https://utteranc.es")
+        })
+      })()
     </script>
 
   </div>

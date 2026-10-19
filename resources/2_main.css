@@ -7,14 +7,23 @@
   --link: #45cdcd;
 }
 
+/* Light mode follows the OS unless the theme toggle (data-theme) overrides it */
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme="dark"]) {
     color-scheme: light;
     --text: #222;
     --background: #eee;
     --main-background: #fff;
     --link: #08797a;
   }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --text: #222;
+  --background: #eee;
+  --main-background: #fff;
+  --link: #08797a;
 }
 
 body {
@@ -75,6 +84,26 @@ nav .active {
   text-decoration: none;
   color: inherit;
   font-weight: bold;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: -1.5rem;
+  right: 1rem;
+  padding: 0.25rem;
+  margin-right: -0.25rem;
+  color: var(--grey);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .subtitle {
