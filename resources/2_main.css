@@ -1,5 +1,20 @@
 :root {
+  color-scheme: dark;
   --grey: #999;
+  --text: #f8f8f8;
+  --background: #222;
+  --main-background: #333;
+  --link: #45cdcd;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --text: #222;
+    --background: #eee;
+    --main-background: #fff;
+    --link: #08797a;
+  }
 }
 
 body {
@@ -21,12 +36,12 @@ body {
     Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
-  color: #f8f8f8;
-  background: #222;
+  color: var(--text);
+  background: var(--background);
 }
 
 main {
-  background: #333;
+  background: var(--main-background);
 }
 
 .wrappy {
@@ -195,7 +210,7 @@ header a,
 footer a,
 main .text a:not(.toclink) {
   text-decoration: underline;
-  color: #45cdcd;
+  color: var(--link);
 }
 
 .utterances {
