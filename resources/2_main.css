@@ -235,8 +235,23 @@ sub {
   margin-bottom: 3rem;
 }
 
+/* Explicit sizes instead of zoom: 0.75, which iOS Safari drops when tapping the link */
 .article.weeknotes {
-  zoom: 0.75;
+  margin-bottom: 2.25rem;
+}
+
+.article.weeknotes h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.375rem;
+}
+
+.article.weeknotes h2 small {
+  font-size: 0.6rem;
+}
+
+.article.weeknotes p {
+  font-size: 0.75rem;
+  margin-bottom: 0.5625rem;
 }
 
 .prevnext {
