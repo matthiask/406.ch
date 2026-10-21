@@ -14,6 +14,10 @@ output goes to `htdocs/` (gitignored, wiped and rewritten on every build).
   must not change (that floods feed readers). Deleting a post file or making it a draft again
   is detected and allowed. Fix accidental changes with `Slug:`/`Date:`, or override with
   `ALLOW_GUID_CHANGES=true` locally or `[allow-guid-changes]` in the commit message in CI.
+- If `./watch.sh` is running (check `pgrep -af entr`), don't build: the watcher already
+  rebuilds on save. After running the tests or the production build, restore the preview
+  with `uv run python -c 'import generate as g; g.main(only_published=False, base_url="")'`,
+  otherwise drafts disappear from the preview.
 
 ## Post format
 
