@@ -14,7 +14,7 @@ set -ex
   # Run entr -d (exits when new files are added) in a loop while ignoring everything in htdocs and git
   while true; do
     find . -not -path './htdocs/*' -not -path './.git/*' -type f \
-        | entr -d uv run python -Wd -c 'import generate as g; g.main(only_published=False, base_url="http://localhost:8001")'
+        | entr -d uv run python -Wd -c 'import generate as g; g.main(only_published=False, base_url="")'
   done
 ) &
 

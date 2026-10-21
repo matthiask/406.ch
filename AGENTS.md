@@ -7,7 +7,7 @@ output goes to `htdocs/` (gitignored, wiped and rewritten on every build).
 
 - Build: `uv run python generate.py` — writes `htdocs/` with production URLs (`https://406.ch`).
 - Preview: `./watch.sh` — rebuilds on change (drafts and future posts included) and
-  serves on http://localhost:8001. Note it overwrites `htdocs/` with localhost URLs.
+  serves on http://localhost:8001. Note it overwrites `htdocs/` with root-relative URLs.
 - Test: `uv run python -m unittest` — builds the site (production URLs, overwrites `htdocs/`),
   fails on any post parse error or duplicated slug, and checks the Atom feed structure.
   It also compares against the deployed feeds on `origin/gh-pages`: entry ids, links and dates
