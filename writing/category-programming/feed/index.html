@@ -1,5 +1,47 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2026-10-07T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>I don't care about traffic numbers on my website</title><link href="https://406.ch/writing/i-don-t-care-about-traffic-numbers-on-my-website/" rel="alternate" /><id>https://406.ch/writing/i-don-t-care-about-traffic-numbers-on-my-website/</id><published>2026-10-07T12:00:00Z</published><updated>2026-10-07T12:00:00Z</updated><summary type="html">&lt;h1 id="i-dont-care-about-traffic-numbers-on-my-website"&gt;&lt;a class="toclink" href="#i-dont-care-about-traffic-numbers-on-my-website"&gt;I don’t care about traffic numbers on my website&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz: Posts about Programming</title><link href="https://406.ch/writing/category-programming/atom.xml" rel="self" /><link href="https://406.ch/writing/category-programming/" rel="alternate" /><id>https://406.ch/writing/category-programming/</id><updated>2026-10-21T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>How I decide which Python and Django versions I want to support</title><link href="https://406.ch/writing/how-i-decide-which-python-and-django-versions-i-want-to-support/" rel="alternate" /><id>https://406.ch/writing/how-i-decide-which-python-and-django-versions-i-want-to-support/</id><published>2026-10-21T12:00:00Z</published><updated>2026-10-21T12:00:00Z</updated><summary type="html">&lt;h1 id="how-i-decide-which-python-and-django-versions-i-want-to-support"&gt;&lt;a class="toclink" href="#how-i-decide-which-python-and-django-versions-i-want-to-support"&gt;How I decide which Python and Django versions I want to support&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;A recent post on Mastodon got me thinking about what my philosophy for dropping
+support for old versions of Python and Django is. Here’s the post:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🚨 Important Announcement 🚨&lt;/p&gt;
+&lt;p&gt;Going forward all my packages will only “officially” support maintained #Python versions. Meaning since October only 3.14 and now 3.15.&lt;/p&gt;
+&lt;p&gt;This has no effect on Django version support.&lt;/p&gt;
+&lt;p&gt;CVEs will be backported to older 🐍 releases.&lt;/p&gt;
+&lt;p&gt;– &lt;a href="https://fosstodon.org/@codingjoe/117418591209854460"&gt;@codingjoe&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I tend to support versions long past their &lt;a href="https://pypi.org/project/norwegianblue/"&gt;End of
+Life&lt;/a&gt; date. I jokingly said that I
+should spend time upgrading old websites instead of spending time writing a
+rationale why not. I don’t want to argue for my position, but maybe this post
+will serve as the place to point people towards when the question arises again
+in the future.&lt;/p&gt;
+&lt;p&gt;The short answer: it depends on whether I’m working on a project, on my own
+machine or on a library.&lt;/p&gt;
+&lt;h2 id="projects"&gt;&lt;a class="toclink" href="#projects"&gt;Projects&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When working on projects I’m always updating to the current stable version or even the bleeding edge. I want the projects to be as future-proof as possible and I also want to give &lt;a href="/writing/weeknotes-2023-week-39/#adding-scheduled-tests"&gt;early feedback when stuff breaks&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As long as the server software allows it, I’m just going to use &lt;a href="https://docs.astral.sh/uv/"&gt;uv&lt;/a&gt; to install the newest Python version that all the packages I’m using support (or at least ship binary wheels for), because I enjoy not compiling software when deploying too damn much.&lt;/p&gt;
+&lt;h2 id="developer-workstations"&gt;&lt;a class="toclink" href="#developer-workstations"&gt;Developer workstations&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When it comes to developer workstations I don’t really have the patience for outdated software. I don’t see a reason why developer tooling can’t be up to date. This came up recently in the &lt;a href="https://github.com/django-commons/django-debug-toolbar/issues/2506"&gt;django-debug-toolbar issue tracker&lt;/a&gt;. I’m totally fine with requiring an up-to-date version of Python for our pre-commit hooks, for example.&lt;/p&gt;
+&lt;h2 id="libraries"&gt;&lt;a class="toclink" href="#libraries"&gt;Libraries&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The more foundational and widely used a library (potentially) is, the more important it is to me that it supports basically everything which is reasonable.&lt;/p&gt;
+&lt;p&gt;I’m still using my libraries in older projects myself, so they have to work there. I want to use them in all environments, at least when I’m not paying a big price in terms of language features.&lt;/p&gt;
+&lt;p&gt;Other people may be stuck on older versions too. People can upgrade their software, but there may be situations (for example in managed hosting environments) where people cannot freely update the underlying managed server software. That isn’t necessarily a problem security-wise as long as there are other measures in place protecting those services.&lt;/p&gt;
+&lt;p&gt;When people use my libraries, I might get additional eyes on the code, and possibly even contributions.&lt;/p&gt;
+&lt;p&gt;Supporting a large range of Django versions, for example 3.2 (reached EOL on 2024-04-01) up to the current main development branch, can be surprisingly easy when you do not reach too much into Django’s internals or depend on features added only recently.&lt;/p&gt;
+&lt;p&gt;That said, when do I actually drop support for an old version of Python or Django? Generally speaking, I have two reasons:&lt;/p&gt;
+&lt;h3 id="keeping-ci-time-down"&gt;&lt;a class="toclink" href="#keeping-ci-time-down"&gt;🌳 Keeping CI time down 🌳&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I like pruning the CI matrix so as to not spend too much compute and energy. The exceptions are packages such as django-debug-toolbar and django-tree-queries: they are widely used and have to work on a wide range of Python and Django versions and database engines, so the additional CI runs are worth it.&lt;/p&gt;
+&lt;p&gt;When I remove a version from the CI matrix I mostly raise the minimum version in the package metadata as well. I almost never use upper bounds for version ranges, but lower bounds I definitely do use.&lt;/p&gt;
+&lt;h3 id="using-new-features-either-because-i-want-them-or-because-i-need-them"&gt;&lt;a class="toclink" href="#using-new-features-either-because-i-want-them-or-because-i-need-them"&gt;Using new features, either because I want them or because I need them&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Sometimes, I just really want to merge dictionaries using the nice &lt;a href="https://github.com/feincms/feincms3-forms/commit/2a758a4e4c34d1118d5e20f42a13c47ce601b029"&gt;&lt;code&gt;a | b&lt;/code&gt; syntax&lt;/a&gt;. If this reasoning sounds whimsical to you, it is, but only partially. Programming cannot just be a job, everybody needs to have fun sometimes.&lt;/p&gt;
+&lt;p&gt;Sometimes, I really need some API or behavior Django has only introduced recently, such as the way bound fields work in forms. For example, &lt;a href="https://github.com/mosparo/django-integration/pull/58"&gt;form validation didn’t go through bound fields before 4.0&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id="what-that-means-right-now"&gt;&lt;a class="toclink" href="#what-that-means-right-now"&gt;What that means right now&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Most of my packages currently require Python 3.10 or newer and Django 3.2 or 4.2 or newer. Some of the less actively developed ones still go back as far as Python 3.8, simply because I haven’t had a reason to touch them. Python and Django support are linked: Django 4.2 supports Python 3.8 to 3.12 while Django 6.0 requires Python 3.12, so the oldest Django version I support pretty much decides the oldest Python version worth testing.&lt;/p&gt;
+&lt;h2 id="what-is-the-downside"&gt;&lt;a class="toclink" href="#what-is-the-downside"&gt;What is the downside?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Supporting old versions makes it easier for people to put off upgrading. Some people just don’t want to upgrade at all, and my libraries continuing to work on old versions certainly doesn’t push them to do it. When they suddenly have to because all hell breaks loose (because of security problems or something like that) it’s so much harder: they have a long way to go until they reach supported versions. That said, in my experience that’s not a big problem with Django at all. On the other hand, when the projects still use npm packages from 2015… oh my.&lt;/p&gt;
+&lt;p&gt;The code is also less clean than it could be. Supporting old versions means compatibility shims, and it means not using some of the nicer features newer versions offer.&lt;/p&gt;
+&lt;p&gt;In the end, both approaches are reasonable, and both have their costs. You should do what brings you more joy.&lt;/p&gt;
+</summary></entry><entry><title>I don't care about traffic numbers on my website</title><link href="https://406.ch/writing/i-don-t-care-about-traffic-numbers-on-my-website/" rel="alternate" /><id>https://406.ch/writing/i-don-t-care-about-traffic-numbers-on-my-website/</id><published>2026-10-07T12:00:00Z</published><updated>2026-10-07T12:00:00Z</updated><summary type="html">&lt;h1 id="i-dont-care-about-traffic-numbers-on-my-website"&gt;&lt;a class="toclink" href="#i-dont-care-about-traffic-numbers-on-my-website"&gt;I don’t care about traffic numbers on my website&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;In the early days of this website I had a Google Analytics script embedded and
 I also sometimes analyzed the server logs to look at visitor counts and where
 they came from.&lt;/p&gt;
@@ -610,57 +652,4 @@ I reworked the menu extension to be customizable more easily (you can now specif
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet 0.18.1&lt;/a&gt;: Fix a minor bug around the selected folder handling. Invalid folder ID values could crash the backend under some circumstances.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.18.5&lt;/a&gt;: No large changes, mainly Tiptap updates.&lt;/li&gt;
 &lt;/ul&gt;
-</summary></entry><entry><title>My favorite Django packages</title><link href="https://406.ch/writing/my-favorite-django-packages/" rel="alternate" /><id>https://406.ch/writing/my-favorite-django-packages/</id><published>2025-10-22T12:00:00Z</published><updated>2025-10-22T12:00:00Z</updated><summary type="html">&lt;h1 id="my-favorite-django-packages"&gt;&lt;a class="toclink" href="#my-favorite-django-packages"&gt;My favorite Django packages&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;Inspired by other posts I also wanted to write up a list of my favorite Django
-packages. Since I’ve been working in this space for so long and since I’m
-maintaining quite a large list of packages I worry a bit about tooting my own
-horn too much here; that said, the reasons for choosing some packages hopefully
-speak for themselves.&lt;/p&gt;
-&lt;p&gt;Also, I’m sure I’m forgetting many many packages here. Sorry for that in advance.&lt;/p&gt;
-&lt;h2 id="core-django"&gt;&lt;a class="toclink" href="#core-django"&gt;Core Django&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv&lt;/a&gt;: Loads environment variables from &lt;code&gt;.env&lt;/code&gt; and automatically converts them to their Python equivalent if &lt;a href="https://docs.python.org/3/library/ast.html#ast.literal_eval"&gt;&lt;code&gt;ast.literal_eval&lt;/code&gt;&lt;/a&gt; understands it. Also contains implementations for loading database, cache, email and storage configuration from environment variables (similar to dj-database-url). I added this functionality to speckenv when some of the available environment configuration apps’ maintenance state was somewhat questionable.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-cors-headers/"&gt;django-cors-headers&lt;/a&gt;: CORS header support for Django. This would be a nice addition to Django itself.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/sentry-sdk/"&gt;sentry-sdk&lt;/a&gt;: I’m using Sentry in almost all projects.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-template-partials/"&gt;django-template-partials&lt;/a&gt;: Template partials for Django! This has been added to the upcoming 6.0 release of Django. While the Django template language has always been evolving and improving, this feels like the first larger step in a long time. As I and others have said, the combination of &lt;a href="https://htmx.org/"&gt;htmx&lt;/a&gt; and django-template-partials is really really nice. It isn’t surprising at all that htmx is so well loved in the Django community.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-s3-storage/"&gt;django-s3-storage&lt;/a&gt;: Yes, django-storages exist, but I prefer django-s3-storage because of its focus and simplicity.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield&lt;/a&gt;: Image field which validates images deeply, and supports pre-rendering thumbnails etc. I understand why Django only superficially validates uploaded images because of the danger of denial of service attacks, but I’d rather not have files on the sites I manage which the great &lt;a href="https://pillow.readthedocs.io/"&gt;Pillow&lt;/a&gt; library doesn’t support.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/psycopg/"&gt;psycopg&lt;/a&gt;: Whenever I can I work with PostgreSQL, and psycopg is how I interface with the database.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="data-structures"&gt;&lt;a class="toclink" href="#data-structures"&gt;Data structures&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;: My
-favorite way to work with trees except when talking about real trees.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-translated-fields/"&gt;django-translated-fields&lt;/a&gt;: My preferred way to do model-level internationalization.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="cms-building"&gt;&lt;a class="toclink" href="#cms-building"&gt;CMS building&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I have been working on &lt;a href="https://github.com/feincms/feincms/"&gt;FeinCMS&lt;/a&gt; since 2009. So, it shouldn’t surprise anyone that this is still my favorite way to
-build CMS on top of Django. I like that it’s basically a thin layer on top of
-Django’s administration interface and doesn’t want to take over the whole admin
-interface or even the whole website.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt;: The modern, focussed foundation replacing FeinCMS.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor&lt;/a&gt;: The admin interface extension providing core components to build content editing interfaces.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt;: A nice HTML editor by yours truly.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;: JSON schema-based editing using &lt;a href="https://www.npmjs.com/package/@json-editor/json-editor"&gt;@json-editor/json-editor&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="working-with-external-content"&gt;&lt;a class="toclink" href="#working-with-external-content"&gt;Working with external content&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/micawber/"&gt;micawber&lt;/a&gt;: Micawber is my favorite tool to embed third party content (YouTube, Vimeo, whatever) when feincms3’s own very limited embedding functionality is insufficient.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol&lt;/a&gt;: Everyone likes cookie banner (or not). feincms3-cookiecontrol implements not just an informative cookie banner, but actually supports not embedding tracking scripts and third party content unless the user consented, either a blanket or a per-provider consent for embedded media. It does NOT support the very annoying interface where you have to deselect each tracking service individually.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="pdf-generation"&gt;&lt;a class="toclink" href="#pdf-generation"&gt;PDF generation&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/reportlab/"&gt;Reportlab&lt;/a&gt;: Reportlab is nice if you need fine-grained control over PDF generation. Reportlab has created more than 10’000 invoices for the company I work at, so I’m definitely grateful for it :-)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://weasyprint.org/"&gt;Weasyprint&lt;/a&gt;: I have been using Weasyprint more and more for generating PDFs. Using HTML and CSS can be nicer than using Reportlab’s Platypus module. Weasyprint doesn’t instrument a webbrowser to produce PDFs but instead implements the rendering engine itself. It works really well.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="testing-and-development"&gt;&lt;a class="toclink" href="#testing-and-development"&gt;Testing and development&lt;/a&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;I actually do like unittest. I have started using &lt;a href="https://docs.pytest.org/en/stable/"&gt;pytest&lt;/a&gt; somewhat more often because using &lt;code&gt;-k keyword&lt;/code&gt; to filter tests to run is great.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://pypi.org/project/factory-boy/"&gt;factory-boy&lt;/a&gt;: This package has always treated me well when creating data for tests.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://playwright.dev/"&gt;playwright&lt;/a&gt;: Playwright is the end-to-end test browser automation library I prefer.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Last but not least, I really like &lt;a href="https://pypi.org/project/django-debug-toolbar/"&gt;django-debug-toolbar&lt;/a&gt;. So much, that I’m even helping with the maintenance since 2016.&lt;/p&gt;
-&lt;h2 id="serving"&gt;&lt;a class="toclink" href="#serving"&gt;Serving&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We mostly use Kubernetes to serve websites these days. Inside the pods, I’m working with the &lt;a href="https://pypi.org/project/granian/"&gt;granian&lt;/a&gt; RSGI/ASGI server and with &lt;a href="https://pypi.org/project/blacknoise/"&gt;blacknoise&lt;/a&gt; for serving static files.&lt;/p&gt;
 </summary></entry></feed>
