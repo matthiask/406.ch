@@ -1,6 +1,6 @@
 Title: Weeknotes (2023 week 39)
 Date: 2023-09-28
-Categories: Django, Programming, Weeknotes, feincms
+Categories: Django, Programming, Weeknotes, feincms, Maintenance
 
 Again a few weeks have passed since the last weeknotes entry :-)
 

@@ -1,5 +1,5 @@
 Title: «Anything new?»
-Categories: Django, Programming
+Categories: Django, Programming, Maintenance
 
 # «Anything new?»
 

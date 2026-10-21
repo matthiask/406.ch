@@ -1,7 +1,7 @@
 Title: Low maintenance software
 Slug: low-maintenance-software
 Date: 2017-06-05
-Categories: Django, Programming, feincms
+Categories: Django, Programming, feincms, Maintenance
 
 I'm passionate about writing low maintenance software.
 

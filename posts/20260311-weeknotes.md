@@ -1,5 +1,5 @@
 Title: Weeknotes (2026 week 11)
-Categories: Django, Programming, Weeknotes
+Categories: Django, Programming, Weeknotes, Maintenance
 
 Last time I wrote that I seem to be publishing weeknotes monthly. Now, a quarter of a year has passed since the [last entry](https://406.ch/writing/weeknotes-2025-week-49/). I do enjoy the fact that I have published more posts focused on a single topic. That said, what has been going on in open source land is certainly interesting too.
 

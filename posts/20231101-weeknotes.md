@@ -1,6 +1,6 @@
 Title: Weeknotes (2023 week 44)
 Date: 2023-11-02
-Categories: Django, Programming, Weeknotes
+Categories: Django, Programming, Weeknotes, Maintenance
 
 ## Unmaintained but maintained packages
 

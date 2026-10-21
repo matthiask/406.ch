@@ -1,5 +1,5 @@
 Title: LLMs for Open Source maintenance: a cautious case
-Categories: Django, Programming
+Categories: Django, Programming, Maintenance
 
 When ChatGPT appeared on the scene I was very annoyed at all the hype surrounding it. Since I'm working in the fast moving and low margin business of communication and campaigning agencies I'm surrounded by people eager to jump on the hype train when a tool promises to lessen the workload and take stuff from everyone's plate.
 

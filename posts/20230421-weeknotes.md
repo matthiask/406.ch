@@ -1,6 +1,6 @@
 Title: Weeknotes (2023 week 16)
 Date: 2023-04-21
-Categories: Politik, Django, Programming, Weeknotes
+Categories: Politik, Django, Programming, Weeknotes, Maintenance
 
 # Weeknotes (2023 week 16)
 
