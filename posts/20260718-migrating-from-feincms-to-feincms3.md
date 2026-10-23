@@ -1,6 +1,10 @@
 Title: Migrating from FeinCMS to feincms3
 Categories: Django, Programming, feincms
 
+> [!NOTE]
+>
+> The [migration guide in the feincms3 documentation](https://feincms3.readthedocs.io/en/latest/guides/migrating-from-feincms.html) is more up to date and complete than this post.
+
 [FeinCMS](https://github.com/feincms/feincms) is still actively maintained, but development, bugfixes and new features mostly land on [feincms3](https://github.com/feincms/feincms3) and [django-content-editor](https://github.com/feincms/django-content-editor) these days, not on FeinCMS itself. That's reason enough to eventually move a project over.
 
 Someone [asked on the feincms3 issue tracker](https://github.com/feincms/feincms3/issues/59) whether there's a guide for making that move. There isn't one yet, so I thought I'd expand on my comment in the issue tracker and post it here too in the hope that it's useful to others. The post is based on a gradual migration [we](https://feinheit.ch/) did in a large, long-lived Django project -- a textbook publishing platform with years of content. Unfortunately I can't show more details since it's a commercial, closed source project. During the migration, the platform stayed in production the whole time, aside from the inevitable bug here and there.
