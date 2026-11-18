@@ -1,5 +1,57 @@
 <?xml version='1.0' encoding='utf-8'?>
-<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-10-21T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>How I decide which Python and Django versions I want to support</title><link href="https://406.ch/writing/how-i-decide-which-python-and-django-versions-i-want-to-support/" rel="alternate" /><id>https://406.ch/writing/how-i-decide-which-python-and-django-versions-i-want-to-support/</id><published>2026-10-21T12:00:00Z</published><updated>2026-10-21T12:00:00Z</updated><summary type="html">&lt;h1 id="how-i-decide-which-python-and-django-versions-i-want-to-support"&gt;&lt;a class="toclink" href="#how-i-decide-which-python-and-django-versions-i-want-to-support"&gt;How I decide which Python and Django versions I want to support&lt;/a&gt;&lt;/h1&gt;
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom"><title>Matthias Kestenholz</title><link href="https://406.ch/writing/atom.xml" rel="self" /><link href="https://406.ch/" rel="alternate" /><id>https://406.ch/</id><updated>2026-11-18T12:00:00Z</updated><author><name>Matthias Kestenholz</name></author><entry><title>Weeknotes (2026 week 47)</title><link href="https://406.ch/writing/weeknotes-2026-week-47/" rel="alternate" /><id>https://406.ch/writing/weeknotes-2026-week-47/</id><published>2026-11-18T12:00:00Z</published><updated>2026-11-18T12:00:00Z</updated><summary type="html">&lt;h1 id="weeknotes-2026-week-47"&gt;&lt;a class="toclink" href="#weeknotes-2026-week-47"&gt;Weeknotes (2026 week 47)&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I haven’t done any blogging in the last 4 weeks. Instead, I’ve been writing a lot of code and have let the agent write even more code. I have finally managed to implement some tools I would have liked to implement a long time ago.&lt;/p&gt;
+&lt;h2 id="working-with-llm-agents"&gt;&lt;a class="toclink" href="#working-with-llm-agents"&gt;Working with LLM agents&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="/writing/llms-for-open-source-maintenance-a-cautious-case/"&gt;relationship with LLM agents&lt;/a&gt; doesn’t get any easier, I have to admit. That said, the quality argument against LLMs seems less and less plausible to me. Some people (especially on Mastodon) will say that’s because I’m losing view of what’s actually important. As I see it, human-written code was never perfect either (maybe apart from the &lt;a href="https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer)"&gt;Apollo Guidance Computer&lt;/a&gt;). I can actually do good and solve more problems for real users with more than acceptable code quality now and that seems like a net benefit to me.&lt;/p&gt;
+&lt;h2 id="governance-a-django-app-for-holacracy"&gt;&lt;a class="toclink" href="#governance-a-django-app-for-holacracy"&gt;&lt;a href="https://github.com/feinheit/governance"&gt;Governance&lt;/a&gt; – a Django app for Holacracy&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;As some people may know, we are using &lt;a href="https://www.holacracy.org/"&gt;Holacracy&lt;/a&gt; as our organizational model at &lt;a href="https://feinheit.ch/"&gt;Feinheit&lt;/a&gt;. Holacracy One, the company behind Holacracy, also offers a SaaS solution for managing the structure consisting of circles, roles, policies etc. The tool is unfortunately quite buggy and slow, and hasn’t improved in recent years – to the contrary.&lt;/p&gt;
+&lt;p&gt;I have reimplemented the parts we actually use using Django, Bootstrap and htmx while profiting from years and years of product engineering going into &lt;a href="/writing/workbench-the-django-based-agency-software/"&gt;the Workbench agency software&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It won’t surprise anyone that after the first rush of getting a half-functioning, half-assed prototype out of the agent it was a lot of work to actually make the tool somewhat consistent, usable and correct. The bar to replace the tool we’ve been using before wasn’t that high, so I was able to cross that in a few days of concentrated work.&lt;/p&gt;
+&lt;p&gt;I think that this project wouldn’t have been doable without the deep knowledge of the organizational model (the domain knowledge) and the product engineering and UX background.&lt;/p&gt;
+&lt;h2 id="an-experimental-api-and-cli-for-feincms3"&gt;&lt;a class="toclink" href="#an-experimental-api-and-cli-for-feincms3"&gt;An experimental API and CLI for &lt;a href="https://feincms3.readthedocs.io/"&gt;feincms3&lt;/a&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://pypi.org/project/feincms3-api/"&gt;feincms3-api&lt;/a&gt; and &lt;a href="https://pypi.org/project/feincms3-api-cli/"&gt;feincms3-api-cli&lt;/a&gt; allow interacting with a feincms3-managed site. The API allows reading and writing pages and other objects with their regions and plugins, django-json-schema-editor data and django-cabinet files. It’s meant for scripts, importers and agents, next to the Django admin, not instead of it. The CLI (&lt;code&gt;f3api&lt;/code&gt;) makes the API available from the command line. Writes can be tried as a dry run first, and changes show up in the admin’s history like any other edit.&lt;/p&gt;
+&lt;p&gt;Permissions, editable fields etc. are all handled by the Django admin. Since feincms3 and django-content-editor lean heavily on &lt;a href="/writing/the-django-admin-is-a-cms/"&gt;Django’s administration interface&lt;/a&gt; this was an easy decision to make. Plugins can be arbitrary models and we don’t have an obvious way to discover them, or even know what their structure is apart from introspection or manual work. The constraints of working in an agency are such that I cannot spend a lot of time on each individual project; I really need reusable tools which can be applied to many websites and projects at once. It can be acceptable for the result to not be perfect or a little awkward as long as it is &lt;a href="https://en.wikipedia.org/wiki/Leaky_abstraction"&gt;simple and understandable&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="releases"&gt;&lt;a class="toclink" href="#releases"&gt;Releases&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id="feincms3-and-django-content-editor"&gt;&lt;a class="toclink" href="#feincms3-and-django-content-editor"&gt;feincms3 and django-content-editor&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The rendering engine from &lt;a href="https://pypi.org/project/feincms3/"&gt;feincms3&lt;/a&gt; has been ported to &lt;a href="https://pypi.org/project/django-content-editor/"&gt;django-content-editor&lt;/a&gt; and lives there now. &lt;a href="/writing/django-content-editor-now-supports-nested-sections/"&gt;Nested sections&lt;/a&gt; stay in feincms3 as a backwards compatible implementation, the new implementation in django-content-editor is much nicer because it doesn’t require section closing plugins. Instead, all plugins have a &lt;code&gt;depth&lt;/code&gt; field and form a tree structure that way; a new level is opened by a plugin which is marked as a container. Many such container plugins can coexist.&lt;/p&gt;
+&lt;p&gt;Also, the new releases fully build on the &lt;a href="/writing/weeknotes-2026-week-40/"&gt;importmap DEP API&lt;/a&gt;, and include many bugfixes which will not be mentioned in detail here.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://pypi.org/project/feincms3-sites/"&gt;feincms3-sites&lt;/a&gt; has also received a small update and a few bugfixes.&lt;/p&gt;
+&lt;h3 id="django-cabinet"&gt;&lt;a class="toclink" href="#django-cabinet"&gt;&lt;a href="https://pypi.org/project/django-cabinet/"&gt;django-cabinet&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The media library now supports moving files with drag’n’drop and has a collapsible folder tree on the left for quicker navigation.&lt;/p&gt;
+&lt;h3 id="django-json-schema-editor"&gt;&lt;a class="toclink" href="#django-json-schema-editor"&gt;&lt;a href="https://pypi.org/project/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The proxy models created by &lt;code&gt;JSONPluginBase.proxy()&lt;/code&gt; are automatically injected into the Python module now; this allows Django’s model autoimporter in &lt;code&gt;./manage.py shell&lt;/code&gt; to discover those models, which avoids many, many warnings.&lt;/p&gt;
+&lt;h3 id="django-prose-editor"&gt;&lt;a class="toclink" href="#django-prose-editor"&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I am always tracking Tiptap and ProseMirror closely. The editor now has a deeper integration with django-cabinet – inserted files keep their ID around. Apart from that, mostly minor changes.&lt;/p&gt;
+&lt;h3 id="django-js-asset"&gt;&lt;a class="toclink" href="#django-js-asset"&gt;&lt;a href="https://pypi.org/project/django-js-asset/"&gt;django-js-asset&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I have released django-js-asset 5.0 implementing the &lt;code&gt;ImportMap&lt;/code&gt; specification which I’m still hoping to bring to Django core.&lt;/p&gt;
+&lt;h3 id="form-designer"&gt;&lt;a class="toclink" href="#form-designer"&gt;&lt;a href="https://pypi.org/project/form-designer/"&gt;form-designer&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Bugfixes, French, Catalan and Spanish translations, and a small security fix (don’t inadvertently add formulas to generated XLSX files, the fix is in xlsxdocument below).&lt;/p&gt;
+&lt;h3 id="django-authlib"&gt;&lt;a class="toclink" href="#django-authlib"&gt;&lt;a href="https://pypi.org/project/django-authlib/"&gt;django-authlib&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Hardened the Microsoft Entra ID adapter. Fixed a few bugs and improved docs.&lt;/p&gt;
+&lt;h3 id="django-imagefield"&gt;&lt;a class="toclink" href="#django-imagefield"&gt;&lt;a href="https://pypi.org/project/django-imagefield/"&gt;django-imagefield&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I did finally release a new stable release of django-imagefield containing the still experimental vips backend.&lt;/p&gt;
+&lt;h3 id="django-translated-fields"&gt;&lt;a class="toclink" href="#django-translated-fields"&gt;&lt;a href="https://pypi.org/project/django-translated-fields/"&gt;django-translated-fields&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;TranslatedField&lt;/code&gt; now handles model fields with broken^Wcustomized &lt;code&gt;deconstruct&lt;/code&gt; methods properly. For example, feincms3’s &lt;code&gt;ChoicesCharField&lt;/code&gt; hides the choices from Django’s migrations, so changing choices doesn’t create pointless migrations (they wouldn’t produce any SQL anyway). However, the previous implementation required that fields are reconstructible from the return value of &lt;code&gt;deconstruct&lt;/code&gt;, which means that such fields could not be used with &lt;code&gt;TranslatedField&lt;/code&gt;. Now they can.&lt;/p&gt;
+&lt;h3 id="django-tree-queries"&gt;&lt;a class="toclink" href="#django-tree-queries"&gt;&lt;a href="https://pypi.org/project/django-tree-queries/"&gt;django-tree-queries&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Fixed an edge case crash, allowed customizing the node moving machinery to reject targets and slightly modernized the code.&lt;/p&gt;
+&lt;h3 id="feincms3-cookiecontrol"&gt;&lt;a class="toclink" href="#feincms3-cookiecontrol"&gt;&lt;a href="https://pypi.org/project/feincms3-cookiecontrol/"&gt;feincms3-cookiecontrol&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The cookie banner now supports Google’s advanced consent mode out of the box, if you opt in to it as the one implementing it (not as a visitor to the website!). I think supporting that mode is good, because while the mode itself is very questionable, having a simple and straightforward implementation for it is better than having to choose one of the really, really complex and user-hostile consent management platforms.&lt;/p&gt;
+&lt;h3 id="feincms3-forms"&gt;&lt;a class="toclink" href="#feincms3-forms"&gt;&lt;a href="https://pypi.org/project/feincms3-forms/"&gt;feincms3-forms&lt;/a&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The proxy models created by the forms builder are now injected into their module. Same problem as above, in django-json-schema-editor.&lt;/p&gt;
+&lt;h3 id="other-releases"&gt;&lt;a class="toclink" href="#other-releases"&gt;Other releases&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;I still seem to be maintaining &lt;a href="https://pypi.org/project/django-mptt/"&gt;django-mptt&lt;/a&gt;, even though it has been marked as unmaintained for years. Fixed some tree corruption bugs and regressions.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/xlsxdocument/"&gt;xlsxdocument&lt;/a&gt; doesn’t insert formulas anymore except if they are tagged using a new &lt;code&gt;Formula&lt;/code&gt; object. form-designer uses it for its XLSX export.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/speckenv/"&gt;speckenv&lt;/a&gt; now supports configuring Django’s &lt;code&gt;MAILERS&lt;/code&gt; setting from the environment as well. The format is the same as the one used by &lt;code&gt;django_email_url&lt;/code&gt; and &lt;code&gt;dj-email-url&lt;/code&gt;. Also includes more fixes for configuration cases I hadn’t encountered before.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/towel/"&gt;towel&lt;/a&gt; and &lt;a href="https://pypi.org/project/towel-foundation/"&gt;towel-foundation&lt;/a&gt;, two packages from back in the day when I was a stronger believer in the DRY principle. Note that I have been moving away from that for years. I’d rather have some repetition than more indirection these days.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/html-sanitizer/"&gt;html-sanitizer&lt;/a&gt; now knows how to preserve whitespace within &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; tags.&lt;/li&gt;
+&lt;li&gt;The venerable &lt;a href="https://pypi.org/project/FeinCMS/"&gt;FeinCMS&lt;/a&gt; and &lt;a href="https://pypi.org/project/feincms-elephantblog/"&gt;feincms-elephantblog&lt;/a&gt; are in maintenance mode, but have received updates and releases.&lt;/li&gt;
+&lt;li&gt;Fixed a minor bug affecting &lt;a href="https://pypi.org/project/django-admin-ordering/"&gt;django-admin-ordering&lt;/a&gt; models which handled comparisons with unrelated objects incorrectly.&lt;/li&gt;
+&lt;li&gt;Updated the &lt;a href="https://pypi.org/project/django-sitemaps/"&gt;django-sitemaps&lt;/a&gt; README and published a new release, just because.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-ckeditor/"&gt;django-ckeditor&lt;/a&gt; now uses the new django-js-asset API.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/django-email-hosts/"&gt;django-email-hosts&lt;/a&gt; now supports &lt;code&gt;MAILERS&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>How I decide which Python and Django versions I want to support</title><link href="https://406.ch/writing/how-i-decide-which-python-and-django-versions-i-want-to-support/" rel="alternate" /><id>https://406.ch/writing/how-i-decide-which-python-and-django-versions-i-want-to-support/</id><published>2026-10-21T12:00:00Z</published><updated>2026-10-21T12:00:00Z</updated><summary type="html">&lt;h1 id="how-i-decide-which-python-and-django-versions-i-want-to-support"&gt;&lt;a class="toclink" href="#how-i-decide-which-python-and-django-versions-i-want-to-support"&gt;How I decide which Python and Django versions I want to support&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;A recent post on Mastodon got me thinking about what my philosophy for dropping
 support for old versions of Python and Django is. Here’s the post:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -754,81 +806,4 @@ do is continue trying to make a difference.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/feincms3-data/"&gt;feincms3-data 0.10&lt;/a&gt;: This is quite a big one. I discovered issues with the way &lt;code&gt;save_as_new&lt;/code&gt; (to copy data) and &lt;code&gt;delete_missing&lt;/code&gt; interacted. First the code was cleaned up to delete less data, and then to delete enough data. I’m now somewhat confident that the code does what it should again.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://pypi.org/project/django-prose-editor/"&gt;django-prose-editor 0.22.3&lt;/a&gt;: Started returning an empty string for an empty document instead of &lt;code&gt;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;&lt;/code&gt; also when using the frontend integration; previously, this transformation was only implemented when using at least the form if not the model field. Also, &lt;code&gt;&amp;lt;ol&amp;gt;&lt;/code&gt; tags now have a &lt;code&gt;data-type&lt;/code&gt; attribute since Chrome cannot case-sensitively match e.g. &lt;code&gt;type="a"&lt;/code&gt; vs &lt;code&gt;type="A"&lt;/code&gt; for lowercase or uppercase letters. I previously only tested the code in Firefox and there it worked nicely.&lt;/li&gt;
 &lt;/ul&gt;
-</summary></entry><entry><title>Thoughts about Django-based content management systems</title><link href="https://406.ch/writing/thoughts-about-django-based-content-management-systems/" rel="alternate" /><id>https://406.ch/writing/thoughts-about-django-based-content-management-systems/</id><published>2025-11-05T12:00:00Z</published><updated>2025-11-05T12:00:00Z</updated><summary type="html">&lt;h1 id="thoughts-about-django-based-content-management-systems"&gt;&lt;a class="toclink" href="#thoughts-about-django-based-content-management-systems"&gt;Thoughts about Django-based content management systems&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;I have almost exclusively used Django for implementing content management
-systems (and other backends) since 2008.&lt;/p&gt;
-&lt;p&gt;In this time, content management systems have come and gone. The big three
-systems many years back were &lt;a href="https://www.django-cms.org/"&gt;django CMS&lt;/a&gt;,
-&lt;a href="https://github.com/stephenmcd/mezzanine"&gt;Mezzanine&lt;/a&gt; and
-&lt;a href="https://feinheit.ch"&gt;our&lt;/a&gt; own
-&lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;FeinCMS&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;During all this time I have always kept an eye open for other CMS than our own
-but have steadily continued working in my small corner of the Django space. I
-think it’s time to write down why I have been doing this all this time, for
-myself and possibly also for other interested parties.&lt;/p&gt;
-&lt;h2 id="why-not-use-wagtail-django-cms-or-any-of-those-alternatives"&gt;&lt;a class="toclink" href="#why-not-use-wagtail-django-cms-or-any-of-those-alternatives"&gt;Why not use Wagtail, django CMS or any of those alternatives?&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Let’s start with the big one. Why not use Wagtail?&lt;/p&gt;
-&lt;p&gt;The Django administration interface is actually great. Even though some people
-say that it should be treated as a tool for developers only, recent
-improvements to the accessibility and the general usability suggest otherwise.
-I have written more about my views on this in &lt;a href="https://406.ch/writing/the-django-admin-is-a-cms/"&gt;The Django admin is a
-CMS&lt;/a&gt;. Using and building on
-top of the Django admin is a great way to immediately profit from all current
-and future improvements without having to reimplement anything.&lt;/p&gt;
-&lt;p&gt;I don’t want to have to reimplement Django’s features, I want to add what I
-need on top.&lt;/p&gt;
-&lt;h2 id="faster-updates"&gt;&lt;a class="toclink" href="#faster-updates"&gt;Faster updates&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Everyone implementing and maintaining other CMS is doing a great job and I
-don’t want to throw any shade. I still feel that it’s important to point out
-that systems can make it hard to adopt new Django versions on release day:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The update cycle of many large apps using Django lag behind Django. Wagtail
-declares an &lt;a href="https://github.com/wagtail/wagtail/discussions/12574"&gt;upper version boundary for
-Django&lt;/a&gt; which makes it
-hard to adopt Django versions faster than Wagtail releases updates.&lt;/li&gt;
-&lt;li&gt;Some django CMS components such as
-&lt;a href="https://github.com/django-cms/django-filer"&gt;django-filer&lt;/a&gt; have lagged behind
-in the past. Looking at the project’s CI matrix and activity suggests that
-this is not the case anymore. That said, a &lt;a href="https://406.ch/writing/django-cabinet-a-media-library-for-django/"&gt;simpler alternative
-exists&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These larger systems have many more (very talented) people working on them. I’m
-not saying I’m doing a better job. I’m only pointing out that I’m following a
-different philosophy where I’m &lt;a href="https://406.ch/writing/run-less-code-in-production-or-youll-end-up-paying-the-price-later/"&gt;conservative about running code in
-production&lt;/a&gt;
-and I’d rather &lt;a href="https://406.ch/writing/low-maintenance-software/"&gt;have less features when the price is a lot of maintenance
-later&lt;/a&gt;. I’m always thinking
-about long term maintenance. I really don’t want to maintain some of these
-larger projects, or even parts of them. So I’d rather not adopt them for
-projects which hopefully will be developed and maintained for a long time to
-come. By the way: This experience has been earned the hard way.&lt;/p&gt;
-&lt;h2 id="the-rule-of-least-power"&gt;&lt;a class="toclink" href="#the-rule-of-least-power"&gt;The rule of least power&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;From &lt;a href="https://en.wikipedia.org/wiki/Rule_of_least_power"&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;In programming, the rule of least power is a design principle that “suggests choosing the least powerful [computer] language suitable for a given purpose”. Stated alternatively, given a choice among computer languages, classes of which range from descriptive (or declarative) to procedural, the less procedural, more descriptive the language one chooses, the more one can do with the data stored in that language.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Django itself already provides lots and lots of power. I’d argue that a very
-powerful platform on top of Django may be too much of a good thing. I’d rather
-keep it simple and stupid.&lt;/p&gt;
-&lt;h2 id="editing-heterogenous-collections-of-content"&gt;&lt;a class="toclink" href="#editing-heterogenous-collections-of-content"&gt;Editing heterogenous collections of content&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Django admin’s inlines are great, but they are not sufficient for building a
-CMS. You need something to manage different types. django-content-editor does
-that and has done that since 2009.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://torchbox.com/blog/rich-text-fields-and-faster-horses/"&gt;When Wagtail introduced the StreamField in
-2015&lt;/a&gt; it was
-definitely a great update to an already great CMS but it wasn’t a new idea
-generally and not a new thing in Django land. They didn’t say it was and
-&lt;a href="https://406.ch/writing/i-just-learned-about-wagtail-s-streamfield/"&gt;welcomed the fact that they also started using a better way to structure
-content&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Structured content is great. Putting everything into one large rich text area
-isn’t what I want. Django’s ORM and admin interface are great for actually
-modelling the data in a reusable way. And when you need more flexibility than
-what’s offered by Django’s forms, the community offers many projects extending
-the admin. These days, I really like working with the
-&lt;a href="https://406.ch/writing/django-json-schema-editor/"&gt;django-json-schema-editor&lt;/a&gt;
-component; I even reference other model instances in the database and let the
-JSON editor handle the referential integrity transparently for me (so that
-referenced model instances do not silently disappear).&lt;/p&gt;
-&lt;h2 id="more-reading"&gt;&lt;a class="toclink" href="#more-reading"&gt;More reading&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://406.ch/writing/the-future-of-feincms/"&gt;The future of FeinCMS&lt;/a&gt; and the &lt;a href="https://406.ch/writing/category-feincms/"&gt;feincms category&lt;/a&gt; may be interesting. Also, I’d love to talk about these thoughts, either by email or on Mastodon.&lt;/p&gt;
 </summary></entry></feed>
