@@ -96,9 +96,9 @@
         or by <a href="mailto:mk@406.ch">email</a>.
       </p>
 
-      <nav>
+      <nav aria-label="Categories">
         {% for category in categories %}
-        <a {% if current == category %}class="active"{% endif %} href="{{ category.url() }}">{{ category.title }}</a>
+        <a {% if current == category %}class="active" aria-current="page"{% endif %} href="{{ category.url() }}">{{ category.title }}</a>
         {% endfor %}
       </nav>
     </div>

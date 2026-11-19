@@ -30,7 +30,7 @@
   <small>
     <strong>Categories:</strong>
     {% for category in categories %}
-    <a {% if current == category %}class="active"{% endif %} href="{{ category.url() }}">{{ category.title }}</a>{% if not loop.last %},{% endif %}
+    <a {% if current == category %}class="active" aria-current="page"{% endif %} href="{{ category.url() }}">{{ category.title }}</a>{% if not loop.last %},{% endif %}
     {% endfor %}
   </small>
 </p>
