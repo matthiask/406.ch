@@ -37,7 +37,12 @@ strong {
 a,
 button {
   color: inherit;
-  transition: 0.3s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  a,
+  button {
+    transition: 0.3s;
+  }
 }
 a {
   text-decoration: none;
