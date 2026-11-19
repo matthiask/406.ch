@@ -12,12 +12,12 @@
 
   <div class="text prevnext">
     {% if index and posts[index-1] %}
-      <a href="{{ posts[index-1].url() }}">Newer post</a>
+      <a href="{{ posts[index-1].url() }}">Newer post: {{ posts[index-1].title }}</a>
     {% else %}<span>&nbsp;</span>
     {% endif %}
 
     {% if posts[index+1] %}
-      <a href="{{ posts[index+1].url() }}">Older post</a>
+      <a class="older" href="{{ posts[index+1].url() }}">Older post: {{ posts[index+1].title }}</a>
     {% endif %}
   </div>
 </div></main>
