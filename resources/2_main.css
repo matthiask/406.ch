@@ -11,6 +11,7 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     color-scheme: light;
+    --grey: #767676;
     --text: #222;
     --background: #eee;
     --main-background: #fff;
@@ -20,6 +21,7 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
+  --grey: #767676;
   --text: #222;
   --background: #eee;
   --main-background: #fff;
