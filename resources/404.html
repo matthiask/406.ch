@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
+{% block title %}Page not found - {{ super() }}{% endblock %}
+
 {% block content %}
-<header>
-  <div class="wrappy">
-    <center>
-      <h1>404</h1>
-      <a href="/">Go back to the start</a>
-    </center>
+<main id="content">
+  <div class="wrappy text" style="text-align: center">
+    <h1>404</h1>
+    <p>This page doesn't exist. <a href="/">Go back to the start</a></p>
   </div>
-</header>
+</main>
 {% endblock %}
