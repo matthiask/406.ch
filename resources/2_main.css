@@ -184,16 +184,16 @@ img {
 }
 
 code {
-  font-size: 0.7rem;
+  font-size: 0.85rem;
 }
 
 pre {
   margin: 2rem 0;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
 }
 
 small {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 hr {
@@ -211,7 +211,7 @@ hr {
 .footnote p,
 .footnotes ol,
 .footnotes p {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   margin-bottom: 0;
 }
 
@@ -274,7 +274,7 @@ sub {
 }
 
 .month {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   border-bottom: 1px solid var(--grey);
   margin-bottom: 1rem;
 }
@@ -299,7 +299,7 @@ sub {
 }
 
 .article.weeknotes p {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   margin-bottom: 0.5625rem;
 }
 
