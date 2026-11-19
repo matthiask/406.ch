@@ -3,6 +3,7 @@ Title: Wirksame CO2-Abgabe statt Kilometersteuer!
 Slug: wirksame-co2-abgabe-statt-kilometersteuer
 Date: 2009-11-15
 Categories:
+Lang: de
 
 In den Niederlanden soll die [Autosteuer durch eine Kilometersteuer ersetzt werden](http://www.20min.ch/news/ausland/story/Kilometersteuer-stoesst-Hollaender-vor-den-Kopf-23774871). Dafür spreche, dass nicht mehr der Besitz, sondern nur noch die Nutzung des Autos besteuert werde.
 

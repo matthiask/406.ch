@@ -3,6 +3,7 @@ Title: Zweifelhafte Hilfsbereitschaft nach dem Erdbeben in der Kaschmir-Region
 Slug: zweifelhafte-hilfsbereitschaft-nach-dem-erdbeben-in-der-kaschmir-region
 Date: 2005-10-10
 Categories:
+Lang: de
 
 Das [Erdbeben in der Kaschmirregion](http://tagi.ch/dyn/news/ausland/548390.html) ist eine Katastrophe. Dementsprechend schnell haben mehrere Staaten in aller Welt Soforthilfe versprochen, darunter auch die USA.
 

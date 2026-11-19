@@ -3,6 +3,7 @@ Title: Katzen abschiessen oder Zivilisten töten?
 Slug: katzen-abschiessen-oder-zivilisten-toten
 Date: 2008-02-18
 Categories:
+Lang: de
 
 Politiker sind entsetzt: In der Schweiz darf man laut Jagdgesetz [Katzen abschiessen](http://www.blick.ch/news/schweiz/buesi-jagd-politiker-entsetzt-83651)! Mal ehrlich: Wie wichtig ist denn dieses Thema? Mir ist ja schon bewusst, dass manche Menschen Katzen niedlich finden oder zu Tieren allgemein ein näheres Verhältnis als zu ihren Mitmenschen aufbauen können. Aber was soll die Entrüstung über "barbarische Zustände in Feld und Flur" angesichts dessen, dass auf der Welt täglich Menschen durch Krieg und Hunger umkommen?<sup>1</sup>
 

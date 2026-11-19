@@ -3,6 +3,7 @@ Title: Vertrauen in Atomtechnologie nach Unfall schwer beschädigt
 Slug: vertrauen-in-atomtechnologie-nach-unfall-schwer-beschadigt
 Date: 2008-07-09
 Categories:
+Lang: de
 
 Was ist das bisherige Fazit des [Uranunfalls in der südfranzösischen Atomanlage Tricastin](http://www.20min.ch/news/ausland/story/19218753)?
 

@@ -3,6 +3,7 @@ Title: Nun bin ich also wieder im Organisationskomitee
 Slug: nun-bin-ich-also-wieder-im-organisationskomitee
 Date: 2006-01-15
 Categories:
+Lang: de
 
 An der gestrigen Mitgliederversammlung der [Jungen Grünen Schweiz](http://www.jungegruene.ch/) habe ich mich kurzentschlossen als Zürcher Vertretung in das Organisationskomitee wählen lassen. Dies war nicht geplant und auch mit niemandem abgesprochen; ich habe mich nur aus folgenden zwei Gründen zur Wahl gestellt:
 

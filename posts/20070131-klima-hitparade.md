@@ -3,6 +3,7 @@ Title: Klima-Hitparade
 Slug: klima-hitparade
 Date: 2007-01-31
 Categories: Climate
+Lang: de
 
 Es geht gleich weiter mit der Hitparade der wärmsten Jahre und Monate:
 

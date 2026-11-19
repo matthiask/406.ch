@@ -3,6 +3,7 @@ Title: JA! Veranstaltungsreihe gegen sexistische Werbung
 Slug: ja-veranstaltungsreihe-gegen-sexistische-werbung
 Date: 2006-02-23
 Categories:
+Lang: de
 
 Gerade passend zu [meinem ersten Blogeintrag von heute](http://blog.irregular.ch/2006/02/23/der-perfekte-korper/) erhielt ich folgende Ankündigung einer Veranstaltungsreihe gegen sexistische Werbung:
 

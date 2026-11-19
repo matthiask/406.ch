@@ -3,6 +3,7 @@ Title: Fremdsprachige Kinder beeinträchtigen Lernerfolg nicht
 Slug: fremdsprachige-kinder-beeintrachtigen-lernerfolg-nicht
 Date: 2007-09-14
 Categories:
+Lang: de
 
 "Zuviele fremdsprachige Kinder in einer Klasse beeinträchtigen den Lernerfolg der ganzen Klasse" -- klingt plausibel, oder? Es stimmt aber nicht, wie eine Studie zeigt, über welche gestern auf [Tages-Anzeiger online](http://www.tagi.ch/dyn/news/schweiz/790706.html) berichtet wurde.
 

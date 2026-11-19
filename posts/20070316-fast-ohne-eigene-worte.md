@@ -2,6 +2,7 @@ Title: (Fast) ohne (eigene) Worte
 Slug: fast-ohne-eigene-worte
 Date: 2007-03-16
 Categories: Climate
+Lang: de
 
 Spiegel.de: [Winter war der weltweit wärmste seit 1880](http://www.spiegel.de/wissenschaft/natur/0%2C1518%2C472060%2C00.html)
 

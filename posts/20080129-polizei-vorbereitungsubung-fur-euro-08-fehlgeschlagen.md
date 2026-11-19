@@ -3,6 +3,7 @@ Title: Polizei: Vorbereitungsübung für Euro 08 fehlgeschlagen
 Slug: polizei-vorbereitungsubung-fur-euro-08-fehlgeschlagen
 Date: 2008-01-29
 Categories:
+Lang: de
 
 > ## [Tages-Anzeiger: Organisatorische Mängel bei der Berner Polizei](http://www.tagesanzeiger.ch/dyn/news/schweiz/836764.html)
 >

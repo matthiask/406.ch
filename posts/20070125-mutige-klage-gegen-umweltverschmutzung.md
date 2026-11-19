@@ -3,6 +3,7 @@ Title: Mutige Klage gegen Umweltverschmutzung
 Slug: mutige-klage-gegen-umweltverschmutzung
 Date: 2007-01-25
 Categories: Climate
+Lang: de
 
 "Der Imageverlust der Schweiz wäre zu gross als dass wir uns eine Absage leisten könnten", hiess es im Vorfeld des Lauberhornrennens, und deshalb wurde mit massivem Kunstdüngereinsatz eine fahrbare Unterlage für das Weltcuprennen geschaffen. Dass dies nicht ohne Folgen für die Umwelt bleibt, hat man sich denken können aber offenbar in Kauf genommen.
 

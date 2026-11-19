@@ -2,6 +2,7 @@ Title: Methadonabgabe
 Slug: methadonabgabe
 Date: 2007-03-03
 Categories: Politik
+Lang: de
 
 Die SVP ist unfähig, mehr als eine Dimension zu sehen: Für sie ist der Erfolg der Heroinabgabe alleine darin zu messen, wie viele Drogenabstinenzler aus einer Therapie hervorkommen. Dabei vergisst sie die Problematik der Beschaffungskriminalität und der Krankheiten der Drogenkranken. Zum Glück ist ihr [Angriffversuch vom letzten Dezember gescheitert](http://tagi.ch/dyn/news/schweiz/700632.html).
 

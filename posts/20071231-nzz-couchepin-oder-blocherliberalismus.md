@@ -2,6 +2,7 @@ Title: NZZ: Couchepin- oder Blocherliberalismus?
 Slug: nzz-couchepin-oder-blocherliberalismus
 Date: 2007-12-31
 Categories:
+Lang: de
 
 Die NZZ, die letzte Zeitung, welche Kommentar und Nachricht sauber trennt und kennzeichnet. Die NZZ, die objektivste Zeitung, welche es in der Schweizer Medienlandschaft gibt. Die NZZ als Sprachrohr der wahren Liberalen.
 

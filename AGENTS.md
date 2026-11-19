@@ -35,7 +35,8 @@ Categories: Climate, Django, Programming, Weeknotes
 - `Categories:` is comma-separated. Reuse existing category names — each distinct
   value creates its own archive page and feed.
 - Optional: `Date:` (overrides the filename date), `Slug:`, `Draft:` (any value hides
-  the post from production builds).
+  the post from production builds), `Lang:` (language code, default `en`;
+  posts until 2011 are `Lang: de`).
 - Don't add an `# H1` — the title is prepended automatically. Body sections use `##`.
   (Some old posts have an explicit H1 that differs from their `Title:`; leave those.)
 - Markdown is CommonMark via pyromark (pulldown-cmark), not Python-Markdown:

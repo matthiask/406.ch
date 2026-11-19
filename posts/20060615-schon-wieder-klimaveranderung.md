@@ -3,6 +3,7 @@ Title: Schon wieder Klimaveränderung?
 Slug: schon-wieder-klimaveranderung
 Date: 2006-06-15
 Categories: Climate
+Lang: de
 
 Noch nicht lange ist es einigermassen warm -- und schon wieder schreibe ich über die Klimaveränderung?
 

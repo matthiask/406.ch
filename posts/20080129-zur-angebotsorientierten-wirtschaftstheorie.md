@@ -2,6 +2,7 @@ Title: Zur angebotsorientierten Wirtschaftstheorie
 Slug: zur-angebotsorientierten-wirtschaftstheorie
 Date: 2008-01-29
 Categories: Politik
+Lang: de
 
 [Robert Reich](http://www.robertreich.org/) zur Steuererleichterung, welche in den USA gewährt werden soll, um die Wirtschaft wieder anzukurbeln:
 

@@ -3,6 +3,7 @@ Title: Besserer Schutz vor Waffengewalt
 Slug: besserer-schutz-vor-waffengewalt
 Date: 2007-11-27
 Categories:
+Lang: de
 
 Ein gerade erst aus der Rekrutenschule entlassener Soldat bringt in Höngg [ein 16-jähriges Mädchen mit dem Sturmgewehr um](http://www.tagesanzeiger.ch/dyn/news/zuerich/817718.html). Ein Motiv ist nicht in Sicht.
 

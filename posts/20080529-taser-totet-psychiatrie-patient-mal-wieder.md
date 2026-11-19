@@ -3,6 +3,7 @@ Title: Taser tötet Psychiatrie-Patient (mal wieder)
 Slug: taser-totet-psychiatrie-patient-mal-wieder
 Date: 2008-05-29
 Categories:
+Lang: de
 
 Nach mehreren Elektroschocks, welche ihm durch Polizeibeamte verabreicht wurden, (ist mal wieder ein Mensch durch einen Taser gestorben](http://www.blick.ch/news/ausland/taser-toetet-patient-91909).
 

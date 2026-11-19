@@ -3,6 +3,7 @@ Title: Fazit zu den Nationalratswahlen 2007
 Slug: fazit-zu-den-nationalratswahlen-2007
 Date: 2007-10-22
 Categories:
+Lang: de
 
 Die Wahlen sind vorbei, einen Kommentar meinerseits halte ich extrem kurz:
 

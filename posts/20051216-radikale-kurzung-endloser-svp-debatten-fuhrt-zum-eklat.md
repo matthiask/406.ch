@@ -3,6 +3,7 @@ Title: Radikale Kürzung endloser SVP-Debatten führt zum Eklat
 Slug: radikale-kurzung-endloser-svp-debatten-fuhrt-zum-eklat
 Date: 2005-12-16
 Categories:
+Lang: de
 
 Nicht nur in der [nationalen Politik](http://blog.kuenzler.ch/index.php?/archives/51-SVP-taeubelet-und-uebt-sich-in-Gespraechsverweigerung.html), sondern auch in der Regionalpolitik hat die SVP Mühe mit der Gesprächs- und Streitkultur:
 

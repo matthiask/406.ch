@@ -3,6 +3,7 @@ Title: Das (un-)mündige Volk
 Slug: das-un-mundige-volk
 Date: 2008-06-06
 Categories:
+Lang: de
 
 Hat "das Volk" nun Recht oder nicht? Oder hat es nur dann Recht, [wenn das Ergebnis in das jeweilige Weltbild und die Wünsche des Schreibenden passen?](http://www.morgarten.info/das-volk-hat-entschieden/)
 

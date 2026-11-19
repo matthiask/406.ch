@@ -3,6 +3,7 @@ Title: Sonntagszeitung: Offroader gefährlicher für andere Verkehrsteilnehmer u
 Slug: sonntagszeitung-offroader-gefahrlicher-fur-andere-verkehrsteilnehmer-und-insassen
 Date: 2008-09-15
 Categories:
+Lang: de
 
 Drücken die Jungen Grünen mit der Offroader-Initiative nur auf die Tränendrüsen? Werden Ängste geschürt, welche aller Grundlage entbehren? Geht es nur um den Neid?
 

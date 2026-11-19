@@ -3,6 +3,7 @@ Title: Waffenexporte nach Pakistan stoppen!
 Slug: waffenexporte-nach-pakistan-stoppen
 Date: 2007-11-05
 Categories:
+Lang: de
 
 Was ist eigentlich mit der Schweiz los? Das Aussendepartement ist über die Eskalation der Lage in Pakistan "tief besorgt", die Schweiz will aber trotzdem weiterhin Waffen in das Krisengebiet exportieren. Waffenexporte als Realisierung der "humanitären Tradition der Schweiz"?
 

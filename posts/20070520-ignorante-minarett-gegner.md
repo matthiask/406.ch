@@ -3,6 +3,7 @@ Title: Ignorante Minarett-Gegner
 Slug: ignorante-minarett-gegner
 Date: 2007-05-20
 Categories:
+Lang: de
 
 Schon wieder passend zum [letzten Beitrag](https://406.ch/writing/krieg-gegen-terrorismus-erhoht-anschlaggefahr/): Eine ignorante und aggressive Haltung gegenüber fremden Kulturen führt nicht zum wirkungsvollen Schutze unserer selbst, sondern zur Gefährdung dessen, was wir als wertvoll empfinden. Die [Anti-Minarett-Initiative der SVP](http://www.antisvp.antifa.net/wordpress/2007/05/01/svp-ler-vs-muslime-wer-hat-den-laengeren/) ist ein weiterer Ausdruck der fehlenden Sensibilität gewisser Kreise in der schweizer Politiklandschaft, wie dies auch [Hisham Maizar festgestellt hat](http://www.tagesanzeiger.ch/dyn/news/schweiz/752683.html).
 

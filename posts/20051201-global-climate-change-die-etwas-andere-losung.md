@@ -2,6 +2,7 @@ Title: Global Climate Change: Die etwas andere Lösung
 Slug: global-climate-change-die-etwas-andere-losung
 Date: 2005-12-01
 Categories: Climate, Politik
+Lang: de
 
 The earth is self regulating:
 

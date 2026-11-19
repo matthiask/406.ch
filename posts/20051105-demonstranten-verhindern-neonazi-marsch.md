@@ -3,6 +3,7 @@ Title: Demonstranten verhindern Neonazi-Marsch
 Slug: demonstranten-verhindern-neonazi-marsch
 Date: 2005-11-05
 Categories:
+Lang: de
 
 Laut einem [Bericht in 20-Minuten](http://www.20min.ch/news/ausland/story/17137426) haben mehrere tausend Menschen in Potsdam einen Neonazi-Marsch durch die Innenstadt verhindert. Stundenlang blockierten sie eine Kreuzung auf der Demonstrationsstrecke und sorgten damit dafür, dass die etwa 250 Rechtsextremisten ihre Kundgebung nicht wie geplant abhalten konnten.
 

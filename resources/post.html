@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<main id="content"><div class="wrappy">
+<main id="content"{% if post.lang != "en" %} lang="{{ post.lang }}"{% endif %}><div class="wrappy">
   <div class="text">
     <small><time datetime="{{ post.date.isoformat() }}">{{ post.date.isoformat() }}</time> {% if post.draft %}(draft){% endif %}</small>
     {{ post.body|safe }}

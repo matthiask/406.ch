@@ -3,6 +3,7 @@ Title: SP und Links-Grüne = Linksautonome?
 Slug: sp-und-links-grune-linksautonome
 Date: 2007-10-16
 Categories:
+Lang: de
 
 Das Haus der Zürcher SP-Ständeratskandidatin Chantal Galladé [wurde letzte Nacht verschmiert](http://www.tagesanzeiger.ch/dyn/news/zuerich/803092.html), wobei die Parolen auf eine linksautonome Täterschaft hinweisen.
 

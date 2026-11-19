@@ -3,6 +3,7 @@ Title: Mineralwasser-Umweltschutz-Auswüchse
 Slug: mineralwasser-umweltschutz-auswuchse
 Date: 2008-07-07
 Categories:
+Lang: de
 
 [CVP-Nationalrat Jacques Neirynck will Mineralwasser in Flaschen verbieten.](http://www.blick.ch/news/schweiz/schnapsidee-der-cvp-94940) So lächerlich wie der Blick meint [ist diese Idee aber nicht ](http://de.indymedia.org/2007/11/198995.shtml).
 

@@ -3,6 +3,7 @@ Title: Natürliche Zyklen bei der arktischen Eisschmelze
 Slug: naturliche-zyklen-bei-der-arktischen-eisschmelze
 Date: 2008-01-03
 Categories: Climate
+Lang: de
 
 Laut einem Bericht auf Spiegel online haben [Forscher einen natürlichen Einfluss auf das Arktis-Tauwetter identifiziert](http://www.spiegel.de/wissenschaft/natur/0,1518,526344,00.html). Die Freude darüber muss ich den Klimaveränderungs-Skeptikern und den Apologeten einer den Einfluss des Menschen verneinenden Klimatheorie aber gleich wieder vermiesen:
 

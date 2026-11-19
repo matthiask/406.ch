@@ -3,6 +3,7 @@ Title: Wer sich umbringen will, tut es so oder so
 Slug: wer-sich-umbringen-will-tut-es-so-oder-so
 Date: 2008-08-03
 Categories:
+Lang: de
 
 ... hört man immer wieder von Waffennarren in der Schweiz und anderswo. Dem ist aber nicht so:
 

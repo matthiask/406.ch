@@ -3,6 +3,7 @@ Title: Unwissenschaftliche Berichterstattung in der Weltwoche
 Slug: unwissenschaftliche-berichterstattung-in-der-weltwoche
 Date: 2006-12-20
 Categories: Climate
+Lang: de
 
 Für alle die es noch nicht gemerkt haben -- die Weltwoche nimmt es mit der Wahrheit nicht mehr so genau wie auch schon. Auch die Qualität der Berichterstattung über die Wissenschaft hat in den letzten Jahren stark gelitten.
 

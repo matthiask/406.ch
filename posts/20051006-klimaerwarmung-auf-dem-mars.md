@@ -2,6 +2,7 @@ Title: Klimaerwärmung auf dem Mars?
 Slug: klimaerwarmung-auf-dem-mars
 Date: 2005-10-06
 Categories: Climate, Politik
+Lang: de
 
 In den letzten Wochen war auf mehreren Newsseiten zu lesen, dass sich auch auf dem Mars das Klima verändert. Die Klimaerwärmungsskeptiker waren natürlich schnell zur Stelle und bezeichneten die Wissenschaftsgemeinde sofort als Klimawandel-Lobby, welche die absolute Meinungsführerschaft des Klimawandels innehabe und eine neutrale, wissenschaftliche Diskussion gar nicht mehr zulasse.
 

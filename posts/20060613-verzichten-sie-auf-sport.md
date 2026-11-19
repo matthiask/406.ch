@@ -2,6 +2,7 @@ Title: Verzichten Sie auf Sport!
 Slug: verzichten-sie-auf-sport
 Date: 2006-06-13
 Categories: Politik
+Lang: de
 
 [Verzichten Sie auf Sport](http://www.blick.ch/news/schweiz/artikel38800), schreibt der Blick auf seiner Webseite.
 

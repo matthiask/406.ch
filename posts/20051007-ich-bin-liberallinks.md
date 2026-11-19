@@ -3,6 +3,7 @@ Title: Ich bin liberallinks
 Slug: ich-bin-liberallinks
 Date: 2005-10-07
 Categories:
+Lang: de
 
 Ich bin liberal-links, nicht links-liberal (d.h. links ist bei mir ausgeprägter als liberal verglichen mit [Sandro](http://wahlblog.freeflux.net/blog/archive/2005/10/07/ich-bin-linksliberal.html))
 

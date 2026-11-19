@@ -116,6 +116,7 @@ class Post:
     body: str
     excerpt: str
     draft: str
+    lang: str
     url = lambda self: f"/writing/{self.slug}/"
 
     @classmethod
@@ -146,7 +147,7 @@ class Post:
             props["excerpt"] = " ".join(strip_tags(text).split())
             c_titles = sorted(c for c in re.split(r",\s*", props["categories"]) if c)
             props["categories"] = [Category(slug=slugify(c), title=c) for c in c_titles]
-            return cls(**{"body": body, "draft": ""} | props)
+            return cls(**{"body": body, "draft": "", "lang": "en"} | props)
         except Exception as e:
             print(f"{path.relative_to(DIR)} invalid, skipping: {e!r}", file=sys.stderr)
 

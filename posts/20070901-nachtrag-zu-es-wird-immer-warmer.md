@@ -3,6 +3,7 @@ Title: Nachtrag zu “Es wird immer wärmer”
 Slug: nachtrag-zu-es-wird-immer-warmer
 Date: 2007-09-01
 Categories: Climate
+Lang: de
 
 Schon wieder ein Text über die Klimaveränderung? Hat nicht dieser kühle Sommer bewiesen, dass das Geschrei um die Klimaveränderung reine Hysterie ist?
 
