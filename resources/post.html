@@ -6,7 +6,7 @@
 
 <main id="content"><div class="wrappy">
   <div class="text">
-    <small>{{ post.date.isoformat() }} {% if post.draft %}(draft){% endif %}</small>
+    <small><time datetime="{{ post.date.isoformat() }}">{{ post.date.isoformat() }}</time> {% if post.draft %}(draft){% endif %}</small>
     {{ post.body|safe }}
   </div>
 
@@ -33,7 +33,7 @@
         <br>
 
         {% if post.date %}
-          Published on {{ post.date.isoformat() }}
+          Published on <time datetime="{{ post.date.isoformat() }}">{{ post.date.isoformat() }}</time>
         {% else %}
           Not published yet
         {% endif %}
