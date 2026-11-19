@@ -139,8 +139,17 @@ h2 {
   font-size: 1.4rem;
 }
 
-h2 small {
+h3 small {
   font-weight: normal;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 h3 {
@@ -277,13 +286,30 @@ sub {
 
 .month {
   font-size: 0.85rem;
+  font-weight: normal;
   border-bottom: 1px solid var(--grey);
-  margin-bottom: 1rem;
+  margin: 0 0 1rem 0;
 }
 
 .article {
-  display: block;
+  position: relative;
   margin-bottom: 3rem;
+}
+
+.article h3 {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem 0;
+}
+
+/* The whole card is clickable, but only the title is the link's name */
+.article a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.article:hover a {
+  text-decoration: underline;
 }
 
 /* Explicit sizes instead of zoom: 0.75, which iOS Safari drops when tapping the link */
@@ -291,12 +317,12 @@ sub {
   margin-bottom: 2.25rem;
 }
 
-.article.weeknotes h2 {
+.article.weeknotes h3 {
   font-size: 1.05rem;
   margin-bottom: 0.375rem;
 }
 
-.article.weeknotes h2 small {
+.article.weeknotes h3 small {
   font-size: 0.6rem;
 }
 

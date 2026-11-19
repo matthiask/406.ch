@@ -6,17 +6,19 @@
 
 <main><div class="wrappy">
 
+<h1 class="visually-hidden">{% if current %}Posts about {{ current.title }}{% else %}All posts{% endif %}</h1>
+
 {% for post in posts %}
   {% if loop.changed(post.date.month) %}
-    <div class="month">{{ post.date.strftime("%B %Y") }}</div>
+    <h2 class="month">{{ post.date.strftime("%B %Y") }}</h2>
     {% endif %}
-  <a href="{{ post.url() }}" class="article {% for category in post.categories %} {{ category.slug }}{% endfor %}">
-    <h2>
-      {{ post.title }}
+  <article class="article {% for category in post.categories %} {{ category.slug }}{% endfor %}">
+    <h3>
+      <a href="{{ post.url() }}">{{ post.title }}</a>
       {% if post.draft %}<small>(draft)</small>{% endif %}
-    </h2>
+    </h3>
     <p>{{ post.excerpt|truncate(240) }}</p>
-  </a>
+  </article>
 {% endfor %}
 
 </div></main>
