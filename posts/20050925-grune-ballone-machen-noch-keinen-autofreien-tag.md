@@ -8,19 +8,19 @@ Gross angekündigt kam der [Multimobiltag](http://www.multimobil.ch/) der Stadt 
 
 Wir von der [IG 22. September](http://www.22september.ch/) haben uns gedacht, dass wir die Freude des autofreien Lebensstils in den Rest der Stadt heraustragen können indem wir den Verkehrsfluss ums Central mit Pferdekutschen behindern. Impressionen von unserer Aktion anschliessend:
 
-![](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1832.jpg)
+![Pferdekutschen am Predigerplatz](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1832.jpg)
 
 Die Kutschen stehen am Predigerplatz zur Abfahrt bereit.
 
-![](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1865.jpg)
+![Stau hinter einer Kutsche](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1865.jpg)
 
 Autofreier Tag? Man merkt überhaupt nichts davon. Hinter der Kutsche gibt es einen über hundert Meter langen Stau.
 
-![](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1846.jpg)
+![Kutsche zwischen Autos](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1846.jpg)
 
 Eine der Kutschen, eingeklemmt zwischen Autos.
 
-![](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1871.jpg)
+![Kutsche auf dem Central](http://gallery.jungegruene.ch/albums/Multimobiltag-25-September-2005/__sized_imgp1871.jpg)
 
 Die Fahrt ums Central ist der Höhepunkt :-)
 

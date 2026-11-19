@@ -10,7 +10,7 @@ Ich frage mich wirklich, weshalb sich jeder Bürger imstande fühlt, qualifizier
 
 Tim Lambert, ein Wissenschaftler welcher etwas mehr von Klimaveränderung und Datenanalyse verstehen sollte als ein rechtsstehender russischer Think Tank, weist darauf hin, dass seit 1950 die Daten der russischen Stationen sehr gut mit dem übrigen Wissensstand übereinstimmen:
 
-![](http://scienceblogs.com/deltoid/wp-content/blogs.dir/443/files/2012/04/i-7151784fb35ffa013f2706b6a1319379-crutem3+russia.png)
+![Temperaturverlauf der russischen Stationen im Vergleich mit CRUTEM3](http://scienceblogs.com/deltoid/wp-content/blogs.dir/443/files/2012/04/i-7151784fb35ffa013f2706b6a1319379-crutem3+russia.png)
 
 Mehr dazu auf seinem Blog: [Russian analysis confirms 20th century CRU temperatures](http://scienceblogs.com/deltoid/2009/12/russian_analysis_confirms_20th.php)
 
