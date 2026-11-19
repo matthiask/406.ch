@@ -67,6 +67,21 @@ main {
   position: relative;
 }
 
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  padding: 0.5rem 0.75rem;
+  background: var(--main-background);
+  color: var(--link);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
 header {
   padding: 2rem 0;
   line-height: 1.25;
